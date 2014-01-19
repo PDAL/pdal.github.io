@@ -1,0 +1,493 @@
+<!DOCTYPE html><html>
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8"/>
+    
+        <title>Building Under Windows &mdash; pdal.io</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css"/>
+        <link rel="stylesheet" href="../_static/breathe.css" type="text/css"/>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+                URL_ROOT:'../',
+                VERSION:'0.9.9',
+                COLLAPSE_INDEX:false,
+                FILE_SUFFIX:'.html',
+                HAS_SOURCE:  true
+            };
+        </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <script type="text/javascript" src="../_static/bootstrap-dropdown.js"></script> 
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    
+        <!-- analytics -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-00000000-1']);
+            
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    
+</head>
+<body>
+
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <div class="container">
+                        <a href="../index.html">
+                            <img class="logo" src="../_static/pdal_logo.png"
+                            
+                            
+                            alt="PDAL" title="PDAL"/>
+                        </a>
+
+
+                <ul class="quick-links">
+                    <li>
+                        <a href="../docs.html" title="Documentation">Docs</a> 
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="https://github.com/PDAL/PDAL/">github</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="https://github.com/PDAL/PDAL/issues">Bugs</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="../faq.html" title="FAQ">FAQ</a> 
+                    </li>
+                    <li class="divider">&middot;</li>
+
+                    <li>
+                        <a href="../download.html" title="Home">Download</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+
+                    <li>
+                        <a href="../community.html" title="Mailing Lists">Mailing Lists</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+  
+    <div class="container">
+        <div class="content row">
+                <div class="span9">
+                    
+  <div class="section" id="building-under-windows">
+<span id="building-windows"></span><h1>Building Under Windows<a class="headerlink" href="#building-under-windows" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Michael Rosen</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">unknown at lizardtech dot com</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">3/19/2012</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="most-users">
+<h2>Most Users<a class="headerlink" href="#most-users" title="Permalink to this headline">¶</a></h2>
+<p>If you just want to build PDAL so you can</p>
+<ol class="loweralpha simple">
+<li>use the utilities or</li>
+<li>investigate PDAL integration</li>
+<li>test / fix / extend the library and</li>
+</ol>
+<p>you are OK with doing all this with a 32 bit compiler, check the
+<a class="reference internal" href="#prerequisites">Prerequisites</a> and follow the <a class="reference internal" href="#basic-build-steps">Basic Build Steps</a> below.</p>
+</div>
+<div class="section" id="advanced-users">
+<h2>Advanced Users<a class="headerlink" href="#advanced-users" title="Permalink to this headline">¶</a></h2>
+<p>If your needs go beyond this, then check the <a class="reference internal" href="#prerequisites">Prerequisites</a> and use the
+<a class="reference internal" href="#advanced-build-steps">Advanced Build Steps</a> below as a guide to configuring the library.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Ensure you have git. We used version 1.7.3.1.msysgit.0 from
+<a class="reference external" href="http://code.google.com/p/msysgit">http://code.google.com/p/msysgit</a></li>
+<li>Ensure you have a Visual Studio 2010 environment setup. We used VStudio 2010
+Premium.</li>
+<li>Ensure you have <a class="reference external" href="http://www.cmake.org">CMake</a>. We used version 2.8.4 from <a class="reference external" href="http://www.cmake.org">http://www.cmake.org</a></li>
+</ul>
+<p>The steps below assume that these tools are available from your command line.
+For Git and CMake, that&#8217;s just adding them to your %PATH%. For VStudio, you
+need to run <cite>vsvars32.bat</cite> (&#8220;Microsoft Visual Studio
+10.0\Common7\Tools\vsvars32.bat&#8221;)</p>
+</div>
+<div class="section" id="basic-build-steps">
+<h2>Basic Build Steps<a class="headerlink" href="#basic-build-steps" title="Permalink to this headline">¶</a></h2>
+<p>Most users can use this procedure to build PDAL on Windows. We satisfy all
+dependencies using OSGeo4W and use the Boost subset that is included with the
+library.</p>
+<p>0. If you plan to use LAZ support (compressed LAS), get the LASzip source code
+and build it (<a class="reference external" href="http://www.laszip.org">http://www.laszip.org</a>). Add the directory with laszip.dll to
+your %PATH% (or copy the laszip.* files into the bin directory of PDAL
+itself). Make sure it appears in your PATH before OSGeo4W (as per step 4
+below).</p>
+<p>While LASzip is included in the OSGeo4W distribution below (see step 1), the
+version there is compiled with Visual Studio 2008 and we have some suspicion
+that it is incompatible with the version of PDAL you are about to build with
+Visual Studio 2010. Building the LASzip library should be no more complicated
+than:</p>
+<div class="highlight-python"><pre>set G="Visual Studio 10"
+set BUILD_TYPE=Debug
+cmake -G %G% ^
+    -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ^
+    -DCMAKE_VERBOSE_MAKEFILE=OFF ^
+    .</pre>
+</div>
+<p>1. Install OSGeo4W (<a class="reference external" href="http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe">http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe</a>) using
+the &#8220;Advanced Install&#8221; option and include the following: gdal-dev, laszip,
+libxml2, iconv.</p>
+<blockquote>
+<div><blockquote>
+<div><div class="figure">
+<img alt="../_images/OSGeo4WInstallAdvanced.png" src="../_images/OSGeo4WInstallAdvanced.png" />
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt>Install from Internet</dt>
+<dd><div class="first last figure">
+<img alt="../_images/OSGeo4WInstallFromInternet.png" src="../_images/OSGeo4WInstallFromInternet.png" />
+</div>
+</dd>
+<dt>Leave the &#8220;Root Directory&#8221; for the installation unchanged.</dt>
+<dd><div class="first last figure">
+<img alt="../_images/OSGeo4WInstallRootDirectory.png" src="../_images/OSGeo4WInstallRootDirectory.png" />
+</div>
+</dd>
+<dt>You can leave the &#8220;Select Local Package Directory&#8221; and &#8220;Internet Connection Type&#8221; at the defaults. Under the &#8220;libs&#8221; tree, select &#8220;gdal-dev&#8221; for installation. (You should probably use the latest version, e.g. 1.8pre-6.)</dt>
+<dd><div class="first last figure">
+<img alt="../_images/OSGeo4WInstallGDALDev.png" src="../_images/OSGeo4WInstallGDALDev.png" />
+</div>
+</dd>
+<dt>Select &#8220;laszip&#8221; (this is not required currently &#8211; see step 0 above).</dt>
+<dd><div class="first last figure">
+<img alt="../_images/OSGeo4WInstallLASZip.png" src="../_images/OSGeo4WInstallLASZip.png" />
+</div>
+</dd>
+<dt>Select &#8220;libxml2&#8221;.</dt>
+<dd><div class="first last figure">
+<img alt="../_images/OSGeo4WInstallLibXML2.png" src="../_images/OSGeo4WInstallLibXML2.png" />
+</div>
+</dd>
+<dt>Select &#8220;iconv&#8221;.</dt>
+<dd><div class="first last figure">
+<img alt="compilation/media/OSGeo4WInstallIconv.png" src="compilation/media/OSGeo4WInstallIconv.png" />
+</div>
+</dd>
+<dt>Select &#8220;oci&#8221;.</dt>
+<dd><div class="first last figure">
+<img alt="../_images/OSGeo4WInstallOCI.png" src="../_images/OSGeo4WInstallOCI.png" />
+</div>
+</dd>
+</dl>
+<p>There are some other required dependencies (e.g. libtiff, libgeotiff) but
+they are installed by default.</p>
+<p>Select Next to continue on to install the packages.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Get the source code for PDAL:</li>
+</ol>
+<blockquote>
+<div><div class="highlight-python"><pre>c:\dev&gt; git clone https://github.com/PDAL/PDAL.git</pre>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>From the root of your PDAL tree, run &#8220;config.bat&#8221;. This will create the
+VStudio solution file and .vcxproj files.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-python"><pre>c:\dev\PDAL&gt; config.bat</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The config.bat file is set up to build PDAL in the &#8220;officially supported&#8221;
+configuration &#8211; that is, with Oracle, and GDAL, and LASzip, and such. If you
+followed the previous steps, you should be fine to use this default
+configuration. You may modify this file if you need to (such as to use a local
+copy of GDAL or to use NMake instead of Visual Studio); see the <a class="reference internal" href="#advanced-build-steps">Advanced Build Steps</a>
+below for more instructions.</p>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Verify your system environment variables are set properly:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>PATH should include %OSGeo4W%bin</li>
+<li>GDAL_DATA should be set to %OSGeo4W%shareepsg_csv</li>
+<li>PROJ_LIB should be set to %OSGeo4W%shareproj</li>
+</ul>
+</div></blockquote>
+<ol class="arabic" start="5">
+<li><p class="first">Start Visual Studio and open PDAL.sln.  Build the solution (F6).</p>
+</li>
+<li><p class="first">Set pdal_test as the startup project and run it (F5). You should see a
+console window startup, print something like &#8220;Running 158 test cases...&#8221;
+(exact number may vary), and then after a short period print something like
+&#8220;*** No errors detected&#8221;. If you do get errors, that means either something is
+broken on the version of PDAL you checked out OR something is wrong with your
+installation.</p>
+</li>
+<li><p class="first">PYTHON/PLANG NOTE: If you build WITH_PLANG=ON in Debug mode, the system will
+try to link against &#8220;python27d.lib&#8221;. You need to change .../Python27/include/pyconfig.h
+as follows:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>change the line #pragma comment(lib,&#8221;python27d.lib&#8221;) to refer to python27.lib instead</dt>
+<dd><ul class="first last simple">
+<li>comment out the line &#8220;#define Py_DEBUG&#8221;</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="advanced-build-steps">
+<h2>Advanced Build Steps<a class="headerlink" href="#advanced-build-steps" title="Permalink to this headline">¶</a></h2>
+<p>Advanced users can use this procedure to customize their PDAL build on
+Windows. This enables the use of custom-built external libraries to satisify
+situations (including x64 support) where using OSGeo4W is inadequate.</p>
+<ol class="arabic simple">
+<li>Acquire and stage the required dependent libraries. PDAL depends on the
+following external libraries. You&#8217;ll need to get them and build them (or
+perhaps, download prebuilt binary packages).</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Boost (get version 1.4.8 or later from <a class="reference external" href="http://boost.org">http://boost.org</a>) [ required ]</li>
+<li>GDAL (get version 1.6 or later from <a class="reference external" href="http://gdal.org">http://gdal.org</a>) [ optional ]</li>
+<li>LASZip (get version 1.0.1 or later from <a class="reference external" href="http://laszip.org">http://laszip.org</a>) [ optional ]</li>
+<li>libxml2 (<a class="reference external" href="http://libxml2.org">http://libxml2.org</a>) [ optional ]</li>
+<li>iconv (<a class="reference external" href="http://www.gnu.org/software/libiconv/">http://www.gnu.org/software/libiconv/</a>) [ optional (required by libxml2) ]</li>
+<li>oci (optional, <a class="reference external" href="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html">http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html</a>)</li>
+<li>libtiff (optional)</li>
+<li>libgeotiff (optional)</li>
+</ul>
+<p>One option for all dependencies except Boost is OSGeo4W (free, win32
+installer, no x64 &#8211; see &#8220;Basic Build Steps&#8221;_ above).</p>
+<p>Boost Build Notes</p>
+<p>Options for Boost include might include BoostPro (free win32 installer, no
+x64) or the internal &#8220;BCP&#8217;ed&#8221; extract in PDAL. We say &#8220;might&#8221; because PDAL
+requires Boost version 1.48 or later and at this writing that&#8217;s not supported
+by BoostPro. If you need to build Boost from source, the following notes will
+be helpful.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">-DPDAL_EMBED_BOOST=ON is the PDAL <a class="reference external" href="http://www.cmake.org">CMake</a> option for using the embedded
+Boost tree inside of the PDAL source tree. As of 3/19/2012, it should work
+in all configurations as a provider of Boost for PDAL. Also note that the
+embedded Boost build is namespaced such that it shouldn&#8217;t clash with any
+other Boost installations that might be used in a situation where PDAL is
+linked to another library.</p>
+</div>
+<p>Boost libraries include an &#8220;ABI&#8221; description as part of the name.
+For example</p>
+<div class="highlight-python"><pre>"libboost_filesystem-vc100-mt-gd-1_48.lib"
+                              ^^  This is the &lt;abi-tag&gt;</pre>
+</div>
+<p>&lt;abi-tag&gt; - This is a string of one or more characters. For us, the characters of interest are s, g, d.</p>
+<blockquote>
+<div><p>s - indicates that the library is statically linked to the C++ Standard Library and Runtime Library.</p>
+<p>g - indicates that the debug versions of the standard and runtime support libraries are linked against. On a typical Windows installation you will get a debug version of the runtime libraries to link against, but this need not be the case on Unix boxes.</p>
+<p>d - indicates all debug symbols are available in the library, no inlining and optimization has been done while building the code.</p>
+</div></blockquote>
+<p>This is particularly important on Windows. Unlike other platforms, CRT
+configuration (debug vs release and statically linked vs shared dll), needs to
+match you PDAL configuration.</p>
+<p>After you get the Boost archive (source) from <a class="reference external" href="http://www.boost.org">http://www.boost.org</a> from the
+root of the boost distribution run &#8220;bootstrap.bat&#8221; and then &#8220;b2&#8221; with the
+appropriate options.</p>
+<p>Our default release configuration uses /MD, so you want the release shared CRT, like &#8220;libboost_filesystem-vc100-mt-1_48.lib&#8221;:</p>
+<div class="highlight-python"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
+c:\utils\boost_1_48_0&gt;.\b2 variant=release link=static threading=multi runtime-link=shared stage</pre>
+</div>
+<p>Our default debug configuration uses /MDd, so you want the debug shared CRT, like &#8220;libboost_filesystem-vc100-mt-gd-1_48.lib&#8221;:</p>
+<div class="highlight-python"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
+c:\utils\boost_1_48_0&gt;.\b2 variant=debug link=static threading=multi runtime-link=shared stage</pre>
+</div>
+<p>Finally, we&#8217;ve seen problems with b2.exe if the path includes some paths that are quoted (&#8220;c:\Program Files (x86)\doxygen\bin&#8221;).  You can unquote or remove them from the %PATH% while building Boost.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Having staged the above libs, you need to specify where they are by editing
+the appropriate lines in the &#8220;config.bat&#8221; file. Each dependency has a short
+section of the config.bat file. Check these are specified correctly. For
+example</li>
+</ol>
+<blockquote>
+<div><div class="highlight-python"><pre>:: LASZIP
+set LASZIP_ENABLED=ON
+set LASZIP_LIBRARY=%DEV_DIR%\laszip\bin\Debug\laszip.lib
+set LASZIP_INCLUDE_DIR=%DEV_DIR%\laszip\include</pre>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>While you&#8217;re still in config.bat, configure the &#8220;Generator&#8221; for CMake.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-python"><pre>:: Pick your Generator.  NMake will pick up architecture (x32, x64) from your environment
+rem set GENERATOR="NMake Makefiles"
+rem set GENERATOR="Visual Studio 10 Win64"
+set GENERATOR="Visual Studio 10"
+
+set BUILD_TYPE=Release
+rem set BUILD_TYPE=Debug</pre>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Run &#8220;config.bat&#8221; in the PDAL directory. This will create the VStudio solution file and .vcxproj files.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-python"><pre>c:\dev\PDAL&gt; config.bat</pre>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Start Visual Studio and open PDAL.sln (or if you picked &#8220;NMake Makefiles&#8221;, run NMake).</li>
+</ol>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Set pdal_test as the default/startup application in Visual Studio
+Run with debug (F5)</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Missing liblas.dll - double check that <tt class="docutils literal"><span class="pre">C:\OSGeo4W\bin</span></tt> is on your system PATH variable</li>
+<li>libtiff.dll errors - double check that other versions of the lib are not on the path. For example, ArcGIS installs a version of libtiff that is not compatible.</li>
+<li>&#8220;ERROR 4: Unable to open EPSG support file gcs.csv&#8221; or GDAL_DATA variable errors - Set GDAL_DATA system variable to <tt class="docutils literal"><span class="pre">C:\OSGeo4W\share\gdal</span></tt></li>
+<li>PROJ errors - Set PROJ_LIB system variable to <tt class="docutils literal"><span class="pre">C:\OSGeo4W\share\proj</span></tt></li>
+<li>link failures due to _ITERATOR_DEBUG_LEVEL mismatches between (external) boost and PDAL.  Most likely problem is that you are mixing Release and Debug libs (e.g. PDAL is debug but Boost is release).  You can also set _ITERATOR_DEBUG_LEVEL=0 as in Project Pages / Configuration Properties / C,C++ / Preprocessor / Preprocessor Definitions.</li>
+</ul>
+</div>
+<div class="section" id="to-build-the-swig-bindings">
+<h2>To Build the SWIG Bindings<a class="headerlink" href="#to-build-the-swig-bindings" title="Permalink to this headline">¶</a></h2>
+<p>Follow the instructions in csharp/README.txt.  Be sure and follow the note
+about modifying std_basic_string.i and setting the <tt class="docutils literal"><span class="pre">PDAL_SWIG_BOOST_HOME</span></tt>
+environment variable.</p>
+</div>
+</div>
+
+
+                    
+                        <div id="disqus_thread"></div>
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    
+                </div>
+                <div class="span3">
+                    
+        <div class="sphinxsidebar">
+            <div class="sphinxsidebarwrapper">
+  <h3><a href="../docs.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Building Under Windows</a><ul>
+<li><a class="reference internal" href="#most-users">Most Users</a></li>
+<li><a class="reference internal" href="#advanced-users">Advanced Users</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#basic-build-steps">Basic Build Steps</a></li>
+<li><a class="reference internal" href="#advanced-build-steps">Advanced Build Steps</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li><a class="reference internal" href="#to-build-the-swig-bindings">To Build the SWIG Bindings</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="unix.html"
+                        title="previous chapter">Unix Compilation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dependencies.html"
+                        title="next chapter">Dependencies</a></p>
+            </div>
+        </div>
+                </div>
+            
+        </div>
+    </div>
+    <div class="footer">
+        
+        <div class="container">
+                    &copy;
+                        <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
+                        .
+                Last updated
+                    on Jan 19, 2014.
+        </div>
+    </div>
+
+
+    <!-- disqus -->
+    <script type="text/javascript">
+        var disqus_title = 'Building Under Windows &mdash; pdal.io';
+        var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
+    </script>
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = "pdal"; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+<script type="text/javascript">
+    $('.nav .active').on('click', function () {
+        e.preventDefault()
+        $(this).siblings().toggle()
+    });
+</script>
+
+<!-- plusone -->
+<script type="text/javascript">
+    (function () {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+    })();
+</script>
+
+<!-- twitter -->
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+
+</body>
+</html>

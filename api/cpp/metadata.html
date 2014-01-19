@@ -1,0 +1,628 @@
+<!DOCTYPE html><html>
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8"/>
+    
+        <title>pdal::Metadata &mdash; pdal.io</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css"/>
+        <link rel="stylesheet" href="../../_static/breathe.css" type="text/css"/>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+                URL_ROOT:'../../',
+                VERSION:'0.9.9',
+                COLLAPSE_INDEX:false,
+                FILE_SUFFIX:'.html',
+                HAS_SOURCE:  true
+            };
+        </script>
+            <script type="text/javascript" src="../../_static/jquery.js"></script>
+            <script type="text/javascript" src="../../_static/underscore.js"></script>
+            <script type="text/javascript" src="../../_static/doctools.js"></script>
+            <script type="text/javascript" src="../../_static/bootstrap-dropdown.js"></script> 
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    
+        <!-- analytics -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-00000000-1']);
+            
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    
+</head>
+<body>
+
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <div class="container">
+                        <a href="../../index.html">
+                            <img class="logo" src="../../_static/pdal_logo.png"
+                            
+                            
+                            alt="PDAL" title="PDAL"/>
+                        </a>
+
+
+                <ul class="quick-links">
+                    <li>
+                        <a href="../../docs.html" title="Documentation">Docs</a> 
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="https://github.com/PDAL/PDAL/">github</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="https://github.com/PDAL/PDAL/issues">Bugs</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="../../faq.html" title="FAQ">FAQ</a> 
+                    </li>
+                    <li class="divider">&middot;</li>
+
+                    <li>
+                        <a href="../../download.html" title="Home">Download</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+
+                    <li>
+                        <a href="../../community.html" title="Mailing Lists">Mailing Lists</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+  
+    <div class="container">
+        <div class="content row">
+                <div class="span9">
+                    
+  <div class="section" id="pdal-metadata">
+<span id="cpp-pdal-metadata"></span><h1>pdal::Metadata<a class="headerlink" href="#pdal-metadata" title="Permalink to this headline">¶</a></h1>
+<div class="line-block" id="project0classpdal_1_1Metadata">
+<span id="pdal::Metadata"></span><div class="line"><em>class</em> <strong>pdal::Metadata</strong></div>
+</div>
+<blockquote>
+<div><p><a class="reference internal" href="#project0classpdal_1_1Metadata"><em>pdal::Metadata</em></a> is a container for metadata entries that <a class="reference internal" href="stage.html#project0classpdal_1_1Stage"><em>pdal::Stage</em></a> and <a class="reference internal" href="pointbuffer.html#project0classpdal_1_1PointBuffer"><em>pdal::PointBuffer</em></a> carry around as part of their internal operations. </p>
+<p>Bits of information might come from a <a class="reference internal" href="reader.html#project0classpdal_1_1Reader"><em>pdal::Reader</em></a> that opens a file, or a pdal::Filter that processes as an intermediate stage, and <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>pdal::Metadata</em></a> is what is used to hold and pass those metadata around. </p>
+<em>Constructors</em><blockquote>
+<div><p><span class="target" id="pdal::Metadata::Metadata"></span><span class="target" id="project0classpdal_1_1Metadata_1a80e007032fcbd76437a6a0a365eb6e7d"></span><div class="line-block">
+<div class="line"> <strong>Metadata</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Base constructor The <a class="reference internal" href="#project0classpdal_1_1Metadata_1abef4f811fd63bf214c5284da9f429b07"><em>Metadata::getType</em></a> will be &#8220;blank&#8221; and the returned <a class="reference internal" href="#project0classpdal_1_1Metadata_1ad7c9e1f3aafcd999779d38ef28df689a"><em>Metadata::getValue</em></a> will be <tt class="docutils literal"><span class="pre">0</span></tt> instances made with this constructor. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::Metadata__ssCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a8ecacc380ddeec5fcb58f8bb4a33120c"></span><div class="line-block">
+<div class="line"> <strong>Metadata</strong>(std::string const &amp; name)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Defined name constructor. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>entry name to use for this metadata entry The <a class="reference internal" href="#project0classpdal_1_1Metadata_1abef4f811fd63bf214c5284da9f429b07"><em>Metadata::getType</em></a> will be &#8220;blank&#8221; and the returned <a class="reference internal" href="#project0classpdal_1_1Metadata_1ad7c9e1f3aafcd999779d38ef28df689a"><em>Metadata::getValue</em></a> will be <tt class="docutils literal"><span class="pre">0</span></tt> instances made with this constructor </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::Metadata__MetadataCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a5f271d723823193c20f18fd3618f3221"></span><div class="line-block">
+<div class="line"> <strong>Metadata</strong>(<a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a>  const &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Copy constructor. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::Metadata__boost::property_tree::ptreeCR"></span><span class="target" id="project0classpdal_1_1Metadata_1af3a835ba8b568e13d2aeaa828afaa943"></span><div class="line-block">
+<div class="line"> <strong>Metadata</strong>(boost::property_tree::ptree const &amp; tree)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Property constructor. </p>
+<p>The boost::property_tree::ptree should be in the same form and have the same nodes as those fetched from a <a class="reference internal" href="#project0classpdal_1_1Metadata_1a0a8d6eae49077f05b28c6fba3411f5eb"><em>Metadata::toPTree()</em></a> call. </p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::Metadata__ssCR.TCR.ssCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a21913105b4e39b6c599b42c3895d34bc"></span><div class="line-block">
+<div class="line">template &lt; typename T &gt;</div>
+<div class="line"> <strong>Metadata</strong>(std::string const &amp; name, const T &amp; value, std::string const &amp; description = &#8220;&#8221;)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><p>Convenience constructor</p>
+<p>Equivalent to manually calling <a class="reference internal" href="#project0classpdal_1_1Metadata_1aa818a31473f33d2ce6fda799c5b0ceba"><em>Metadata::setName</em></a>, <a class="reference internal" href="#project0classpdal_1_1Metadata_1acf9771c04589d3c9d55da69d9396d446"><em>Metadata::setDescription</em></a>, and <a class="reference internal" href="#project0classpdal_1_1Metadata_1a3aba20d41ede7ae9b0d67830c45441a2"><em>Metadata::setValue</em></a> individually for the instance. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>the name to use for this instance </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>the value to set for this instance. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">description</span></tt> - <p>the description to use for this <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> entry. <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method has a side effect of calling setType with an appropriate 
+value as determined by the type T.</p>
+</div>
+ </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Adding Metadata members</em><blockquote>
+<div><p><p>Convenience addition</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>the name to use for the new <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instance to be added to this instance. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>the value to set for the new <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instance to be added to this instance. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">description</span></tt> - <p>the description to set for the new <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instance to be added to this instance. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+<p><span class="target" id="pdal::Metadata::addMetadata__ssCR.TCR.ssCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a043c558e72cc6522e1e9c951cb8d09ad"></span><div class="line-block">
+<div class="line">template &lt; typename T &gt;</div>
+<div class="line">void <strong>addMetadata</strong>(std::string const &amp; name, const T &amp; value, std::string const &amp; description = &#8220;&#8221;)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::addMetadata__MetadataCR"></span><span class="target" id="project0classpdal_1_1Metadata_1ad67f01867e756b6e823f8dafa9e45d2f"></span><div class="line-block">
+<div class="line">void <strong>addMetadata</strong>(<a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a>  const &amp; m)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Add a new <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instance to this instance. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>, otherwise simply</em><blockquote>
+<div><p><p>Overwrites the existing metadata entry with the given adds a new one</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>the <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instance to overwrite. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+<p><span class="target" id="pdal::Metadata::setMetadata__MetadataCR"></span><span class="target" id="project0classpdal_1_1Metadata_1ae4d565161d894f6a4defd2546ceadea4"></span><div class="line-block">
+<div class="line">void <strong>setMetadata</strong>(<a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a>  const &amp; m)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Operators</em><blockquote>
+<div><p><span class="target" id="pdal::Metadata::add-operator__MetadataCRC"></span><span class="target" id="project0classpdal_1_1Metadata_1a2eeb0ed49462d1886b17627427374b7b"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> <strong>operator+</strong>(const  <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a new <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instance that is the sum of two <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instances together by placing each in their respective paths as defined by their dotted <a class="reference internal" href="#project0classpdal_1_1Metadata_1a7b620bca9bd6b70d965934e6bad59241"><em>Metadata::getName()</em></a> values </dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>entry type</em><blockquote>
+<div><p><span class="target" id="pdal::Metadata::getTypeC"></span><span class="target" id="project0classpdal_1_1Metadata_1abef4f811fd63bf214c5284da9f429b07"></span><div class="line-block">
+<div class="line">std::string <strong>getType</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the type for the metadata entry as a string. These types are roughly mapped to the XSD typenames like integer, nonNegativeInteger, etc </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::setType__ssCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a9aa9196b47e102cf21876804ed073b5a"></span><div class="line-block">
+<div class="line">void <strong>setType</strong>(std::string const &amp; t)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the type for the metadata entry as a string. </p>
+<p>These types are roughly mapped to the XSD typenames like integer, nonNegativeInteger, etc <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">t</span></tt> - <p>value for the type of the entry. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>value</em><blockquote>
+<div><p><span class="target" id="pdal::Metadata::setValue__TCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a3aba20d41ede7ae9b0d67830c45441a2"></span><div class="line-block">
+<div class="line">template &lt; class T &gt;</div>
+<div class="line">void <strong>setValue</strong>(T const &amp; v)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">v</span></tt> - <p>value to set for this entry <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The type T must have a std::ostream&lt;&lt; method and be 
+copy-constructable to meet the requirements if i/o&#8217;ing through a 
+boost::property_tree.</p>
+</div>
+ </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::getValueC"></span><span class="target" id="project0classpdal_1_1Metadata_1ad7c9e1f3aafcd999779d38ef28df689a"></span><div class="line-block">
+<div class="line">template &lt; class T &gt;</div>
+<div class="line">T <strong>getValue</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::getValue__ssCRC"></span><span class="target" id="project0classpdal_1_1Metadata_1af59eafcc2b255ea2dc1302e6a2173d0b"></span><div class="line-block">
+<div class="line">template &lt; class T &gt;</div>
+<div class="line">T <strong>getValue</strong>(std::string const &amp; path)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the value at the given sub-path. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">path</span></tt> - <p>The single-name sub-path to select the value <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The path given here is the sub-path inside of the <cite>metadata</cite> node 
+of the boost::property_tree::ptree.  It is not a full node path.</p>
+</div>
+ </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::getValueOptional__ssCRC"></span><span class="target" id="project0classpdal_1_1Metadata_1a1a84546068cc044cb3a911dabaf69d2e"></span><div class="line-block">
+<div class="line">template &lt; class T &gt;</div>
+<div class="line">boost::optional&lt; T &gt; <strong>getValueOptional</strong>(std::string const &amp; path)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a boost::optional-wrapped instance for the given sub-path. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">path</span></tt> - <p>The single-name sub-path to select the value <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The path given here is the sub-path inside of the <cite>metadata</cite> node 
+of the boost::property_tree::ptree.  It is not a full node path.</p>
+</div>
+ </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::getMetadata__ssCRC"></span><span class="target" id="project0classpdal_1_1Metadata_1a36c4db1f1a40c55c901e8d6d9be4abad"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> <strong>getMetadata</strong>(std::string const &amp; path)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> instance at a given path (in boost::property_tree::ptree parlance). </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::deleteMetadata__ssCR"></span><span class="target" id="project0classpdal_1_1Metadata_1ab02667e6ddc28fb6bee1bbd25a7801a5"></span><div class="line-block">
+<div class="line">bool <strong>deleteMetadata</strong>(std::string const &amp; path)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>name</em><blockquote>
+<div><p><span class="target" id="pdal::Metadata::getNameC"></span><span class="target" id="project0classpdal_1_1Metadata_1a7b620bca9bd6b70d965934e6bad59241"></span><div class="line-block">
+<div class="line">std::string <strong>getName</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the name for the metadata entry </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::setName__ssCR"></span><span class="target" id="project0classpdal_1_1Metadata_1aa818a31473f33d2ce6fda799c5b0ceba"></span><div class="line-block">
+<div class="line">void <strong>setName</strong>(std::string const &amp; name)</div>
+</div>
+</p>
+<blockquote>
+<div><p>resets the name for the metadata entry </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>value to use for new name </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>description</em><blockquote>
+<div><p><span class="target" id="pdal::Metadata::setDescription__ssCR"></span><span class="target" id="project0classpdal_1_1Metadata_1acf9771c04589d3c9d55da69d9396d446"></span><div class="line-block">
+<div class="line">void <strong>setDescription</strong>(const std::string &amp; description)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the description for the <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> entry </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">description</span></tt> - <p>new value to use for the description of the <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::getDescriptionC"></span><span class="target" id="project0classpdal_1_1Metadata_1a6d14cbbae91b9b99cc4272e39ebe3286"></span><div class="line-block">
+<div class="line">std::string <strong>getDescription</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the description of the <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>Metadata</em></a> entry </dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>boost::property_tree::ptree output</em><blockquote>
+<div><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the <a class="reference internal" href="#project0classpdal_1_1Metadata"><em>pdal::Metadata</em></a> instance as a boost::property_tree::ptree </dd>
+</dl>
+</p>
+<p><span class="target" id="project0classpdal_1_1Metadata_1abadb8156da02bf92da96120c25e564b8"></span>boost::property_tree::ptree <strong>m_tree</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::toPTreeC"></span><span class="target" id="project0classpdal_1_1Metadata_1a0a8d6eae49077f05b28c6fba3411f5eb"></span><div class="line-block">
+<div class="line">boost::property_tree::ptree const &amp; <strong>toPTree</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="pdal::Metadata::setValue__bCR"></span><span class="target" id="project0classpdal_1_1Metadata_1af9f6512b20b21f761839a6bffd794b40"></span><div class="line-block">
+<div class="line">template &lt;  &gt;</div>
+<div class="line">void <strong>setValue</strong>(bool const &amp; v)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::setValue__floatCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a47f2a09418a55e347a547120815650de"></span><div class="line-block">
+<div class="line">template &lt;  &gt;</div>
+<div class="line">void <strong>setValue</strong>(float const &amp; v)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Metadata::setValue__doubleCR"></span><span class="target" id="project0classpdal_1_1Metadata_1a573ef6967d6f3f27a7f21be1750b767d"></span><div class="line-block">
+<div class="line">template &lt;  &gt;</div>
+<div class="line">void <strong>setValue</strong>(double const &amp; v)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="line-block" id="project0classpdal_1_1ByteArray">
+<span id="pdal::ByteArray"></span><div class="line"><em>class</em> <strong>pdal::ByteArray</strong></div>
+</div>
+<blockquote>
+<div><p><a class="reference internal" href="#project0classpdal_1_1ByteArray"><em>ByteArray</em></a> simply wrapps a std::vector&lt;boost::uint8_t&gt; such that it can then be dumped to an ostream in a base64 encoding. </p>
+<p>For now, it makes a copy of the data it is given, and should not be used for slinging big data around. </p>
+<em>Constructors</em><blockquote>
+<div><p><span class="target" id="pdal::ByteArray::ByteArray__std::vector:boost::uint8_t:CR"></span><span class="target" id="project0classpdal_1_1ByteArray_1a8d66ffdeb09af85ebead3692b8e3dd45"></span><div class="line-block">
+<div class="line"> <strong>ByteArray</strong>(std::vector&lt; boost::uint8_t &gt; const &amp; data)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a <a class="reference internal" href="#project0classpdal_1_1ByteArray"><em>ByteArray</em></a> instance with the given array of data. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::ByteArray::ByteArray"></span><span class="target" id="project0classpdal_1_1ByteArray_1abdb5043080e574093021b31bec167a5f"></span><div class="line-block">
+<div class="line"> <strong>ByteArray</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::ByteArray::ByteArray__ByteArrayCR"></span><span class="target" id="project0classpdal_1_1ByteArray_1ac51681c3a0281efe5a14429bad56b4d3"></span><div class="line-block">
+<div class="line"> <strong>ByteArray</strong>(const  <a class="reference internal" href="#project0classpdal_1_1ByteArray"><em>ByteArray</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Copy constructor. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::ByteArray::assign-operator__ByteArrayCR"></span><span class="target" id="project0classpdal_1_1ByteArray_1a8e55cdeca5d2b1c285cd79ef1bd8a2ee"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#project0classpdal_1_1ByteArray"><em>ByteArray</em></a>  &amp; <strong>operator=</strong>(<a class="reference internal" href="#project0classpdal_1_1ByteArray"><em>ByteArray</em></a>  const &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Assignment operator. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Data manipulation</em><blockquote>
+<div><p><span class="target" id="pdal::ByteArray::set__std::vector:boost::uint8_t:CR"></span><span class="target" id="project0classpdal_1_1ByteArray_1a7e09096c8161afa246da3ed55b320bac"></span><div class="line-block">
+<div class="line">void <strong>set</strong>(std::vector&lt; boost::uint8_t &gt; const &amp; input)</div>
+</div>
+</p>
+<blockquote>
+<div><p>resets the array </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::ByteArray::getC"></span><span class="target" id="project0classpdal_1_1ByteArray_1a8cec4747d1394e9333532d1aa01e64e6"></span><div class="line-block">
+<div class="line">std::vector&lt; boost::uint8_t &gt; const &amp; <strong>get</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>fetches a reference to the array </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>private attributes</em><blockquote>
+<div><p><span class="target" id="project0classpdal_1_1ByteArray_1ac1f4da8eca7a876ce99006dfadcc77d3"></span>std::vector&lt; boost::uint8_t &gt; <strong>m_bytes</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div>
+
+
+                    
+                        <div id="disqus_thread"></div>
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    
+                </div>
+                <div class="span3">
+                    
+        <div class="sphinxsidebar">
+            <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="log.html"
+                        title="previous chapter">pdal::Log</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="option.html"
+                        title="next chapter">pdal::Option</a></p>
+            </div>
+        </div>
+                </div>
+            
+        </div>
+    </div>
+    <div class="footer">
+        
+        <div class="container">
+                    &copy;
+                        <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
+                        .
+                Last updated
+                    on Jan 19, 2014.
+        </div>
+    </div>
+
+
+    <!-- disqus -->
+    <script type="text/javascript">
+        var disqus_title = 'pdal::Metadata &mdash; pdal.io';
+        var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
+    </script>
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = "pdal"; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+<script type="text/javascript">
+    $('.nav .active').on('click', function () {
+        e.preventDefault()
+        $(this).siblings().toggle()
+    });
+</script>
+
+<!-- plusone -->
+<script type="text/javascript">
+    (function () {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+    })();
+</script>
+
+<!-- twitter -->
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+
+</body>
+</html>
