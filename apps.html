@@ -120,23 +120,25 @@ application currently contains four commands:</p>
 </ul>
 <p>Applications are run by invoking the <em>pdal</em> application along with the
 command name:</p>
-<div class="highlight-python"><pre>$ pdal info myfile.las
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info myfile.las
 $ pdal translate input.las output.las
-$ pdal pipeline --stdin &lt; myxml.xml</pre>
+$ pdal pipeline --stdin &lt; myxml.xml
+</pre></div>
 </div>
 <p>Help about each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch,
 and the <tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about
 particular drivers and their options</p>
-<div class="highlight-python"><pre>$ pdal info --help
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info --help
 $ pdal translate --drivers
-$ pdal pipeline --options drivers.las.writer</pre>
+$ pdal pipeline --options drivers.las.writer
+</pre></div>
 </div>
 <div class="section" id="translate-command">
 <span id="id1"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>translate</em> command is used for simple conversion of files based on their
 file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
 translation operations.</p>
-<div class="highlight-python"><pre>-i [ --input ] arg           input file name
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
 -o [ --output ] arg          output file name
 --a_srs arg                  Assign input coordinate system (if supported by
                            output format)
@@ -152,13 +154,14 @@ translation operations.</p>
 --scale arg                  A comma-separated or quoted, space-separated
                            list of scales to set on the output file:
                            --scale 0.1,0.1,0.00001
-                           --scale "0.1 0.1 0.00001"
+                           --scale &quot;0.1 0.1 0.00001&quot;
 --offset arg                 A comma-separated or quoted, space-separated
                            list of offsets to set on the output file:
                            --offset 0,0,0
-                           --offset "1234 5678 91011"
+                           --offset &quot;1234 5678 91011&quot;
 -m [ --metadata ] [=arg(=1)] Forward metadata (VLRs, header entries, etc)
-                           from previous stages</pre>
+                           from previous stages
+</pre></div>
 </div>
 </div>
 <div class="section" id="info-command">
@@ -172,7 +175,8 @@ translation operations.</p>
 <li>the plain text format should be reStructured text if possible to allow
 a user to retransform the output into whatever they want with ease</li>
 </ul>
-<div class="highlight-python"><pre>$ pdal info  test/data/1.2-with-color.las --count 3 --query "636601.87, 849018.59, 425.10"</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info  test/data/1.2-with-color.las --count 3 --query &quot;636601.87, 849018.59, 425.10&quot;
+</pre></div>
 </div>
 <p>Print the first 10 points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
 <dl class="docutils">
@@ -184,7 +188,7 @@ a user to retransform the output into whatever they want with ease</li>
 <dt>::</dt>
 <dd>$ pdal info test/data/1.2-with-color.las -p 4, 16, 28</dd>
 </dl>
-<div class="highlight-python"><pre>-p [ --point ] [=arg(=0)] point to dump
+<div class="highlight-python"><div class="highlight"><pre>-p [ --point ] [=arg(=0)] point to dump
 --query arg               A 2d or 3d point query point
 --distance arg            A query distance
 -a [ --stats ]            dump stats on all points (reads entire dataset)
@@ -196,19 +200,21 @@ a user to retransform the output into whatever they want with ease</li>
 -r [ --stage ]            dump the stage info
 --xml                     dump XML instead of JSON
 --seed arg (=0)           Seed value for random sample
---sample_size arg (=1000) Sample size for random sample</pre>
+--sample_size arg (=1000) Sample size for random sample
+</pre></div>
 </div>
 </div>
 <div class="section" id="pipeline-command">
 <span id="id3"></span><h2><tt class="docutils literal"><span class="pre">pipeline</span></tt> command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
 <p>The pipeline command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See <a class="reference internal" href="tutorial/reading.html#reading"><em>Reading with PDAL</em></a>
 or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> for more information.</p>
-<div class="highlight-python"><pre>-i [ --input ] arg           input file name
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
 --pipeline-serialization arg
 --validate                   Validate the pipeline (including serialization),
                            but do not execute writing of points
 --count arg (=0)             How many points should we write?
---skip arg (=0)              How many points should we skip?</pre>
+--skip arg (=0)              How many points should we skip?
+</pre></div>
 </div>
 </div>
 <div class="section" id="query-command">
@@ -216,7 +222,8 @@ or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em>
 <p>The <em>query</em> command is used to select a nearest point from a candidate file
 for each point in the source file. If the <tt class="docutils literal"><span class="pre">--2d</span></tt> option is used, the
 query only happens in XY coordinate space.</p>
-<div class="highlight-python"><pre>$ pdal query test/data/1.2-with-color.las test/data/1.2-with-color.las &gt; deltas</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal query test/data/1.2-with-color.las test/data/1.2-with-color.las &gt; deltas
+</pre></div>
 </div>
 <p>A simple CSV-style text is output with delta information:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;ID&quot;</span><span class="p">,</span><span class="s">&quot;DeltaX&quot;</span><span class="p">,</span><span class="s">&quot;DeltaY&quot;</span><span class="p">,</span><span class="s">&quot;DeltaZ&quot;</span>
@@ -228,10 +235,11 @@ query only happens in XY coordinate space.</p>
 <span class="mi">5</span><span class="p">,</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span>
 </pre></div>
 </div>
-<div class="highlight-python"><pre>--source arg          source file name
+<div class="highlight-python"><div class="highlight"><pre>--source arg          source file name
 --candidate arg       candidate file name
 --output arg          output file name
---2d                  only 2D comparisons/indexing</pre>
+--2d                  only 2D comparisons/indexing
+</pre></div>
 </div>
 </div>
 </div>

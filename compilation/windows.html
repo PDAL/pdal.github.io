@@ -155,12 +155,13 @@ version there is compiled with Visual Studio 2008 and we have some suspicion
 that it is incompatible with the version of PDAL you are about to build with
 Visual Studio 2010. Building the LASzip library should be no more complicated
 than:</p>
-<div class="highlight-python"><pre>set G="Visual Studio 10"
+<div class="highlight-python"><div class="highlight"><pre>set G=&quot;Visual Studio 10&quot;
 set BUILD_TYPE=Debug
 cmake -G %G% ^
     -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ^
     -DCMAKE_VERBOSE_MAKEFILE=OFF ^
-    .</pre>
+    .
+</pre></div>
 </div>
 <p>1. Install OSGeo4W (<a class="reference external" href="http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe">http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe</a>) using
 the &#8220;Advanced Install&#8221; option and include the following: gdal-dev, laszip,
@@ -216,7 +217,8 @@ they are installed by default.</p>
 <li>Get the source code for PDAL:</li>
 </ol>
 <blockquote>
-<div><div class="highlight-python"><pre>c:\dev&gt; git clone https://github.com/PDAL/PDAL.git</pre>
+<div><div class="highlight-python"><div class="highlight"><pre>c:\dev&gt; git clone https://github.com/PDAL/PDAL.git
+</pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="3">
@@ -224,7 +226,8 @@ they are installed by default.</p>
 VStudio solution file and .vcxproj files.</li>
 </ol>
 <blockquote>
-<div><div class="highlight-python"><pre>c:\dev\PDAL&gt; config.bat</pre>
+<div><div class="highlight-python"><div class="highlight"><pre>c:\dev\PDAL&gt; config.bat
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -314,8 +317,9 @@ linked to another library.</p>
 </div>
 <p>Boost libraries include an &#8220;ABI&#8221; description as part of the name.
 For example</p>
-<div class="highlight-python"><pre>"libboost_filesystem-vc100-mt-gd-1_48.lib"
-                              ^^  This is the &lt;abi-tag&gt;</pre>
+<div class="highlight-python"><div class="highlight"><pre>&quot;libboost_filesystem-vc100-mt-gd-1_48.lib&quot;
+                              ^^  This is the &lt;abi-tag&gt;
+</pre></div>
 </div>
 <p>&lt;abi-tag&gt; - This is a string of one or more characters. For us, the characters of interest are s, g, d.</p>
 <blockquote>
@@ -330,12 +334,14 @@ match you PDAL configuration.</p>
 root of the boost distribution run &#8220;bootstrap.bat&#8221; and then &#8220;b2&#8221; with the
 appropriate options.</p>
 <p>Our default release configuration uses /MD, so you want the release shared CRT, like &#8220;libboost_filesystem-vc100-mt-1_48.lib&#8221;:</p>
-<div class="highlight-python"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
-c:\utils\boost_1_48_0&gt;.\b2 variant=release link=static threading=multi runtime-link=shared stage</pre>
+<div class="highlight-python"><div class="highlight"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
+c:\utils\boost_1_48_0&gt;.\b2 variant=release link=static threading=multi runtime-link=shared stage
+</pre></div>
 </div>
 <p>Our default debug configuration uses /MDd, so you want the debug shared CRT, like &#8220;libboost_filesystem-vc100-mt-gd-1_48.lib&#8221;:</p>
-<div class="highlight-python"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
-c:\utils\boost_1_48_0&gt;.\b2 variant=debug link=static threading=multi runtime-link=shared stage</pre>
+<div class="highlight-python"><div class="highlight"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
+c:\utils\boost_1_48_0&gt;.\b2 variant=debug link=static threading=multi runtime-link=shared stage
+</pre></div>
 </div>
 <p>Finally, we&#8217;ve seen problems with b2.exe if the path includes some paths that are quoted (&#8220;c:\Program Files (x86)\doxygen\bin&#8221;).  You can unquote or remove them from the %PATH% while building Boost.</p>
 </div></blockquote>
@@ -346,30 +352,33 @@ section of the config.bat file. Check these are specified correctly. For
 example</li>
 </ol>
 <blockquote>
-<div><div class="highlight-python"><pre>:: LASZIP
+<div><div class="highlight-python"><div class="highlight"><pre>:: LASZIP
 set LASZIP_ENABLED=ON
 set LASZIP_LIBRARY=%DEV_DIR%\laszip\bin\Debug\laszip.lib
-set LASZIP_INCLUDE_DIR=%DEV_DIR%\laszip\include</pre>
+set LASZIP_INCLUDE_DIR=%DEV_DIR%\laszip\include
+</pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li>While you&#8217;re still in config.bat, configure the &#8220;Generator&#8221; for CMake.</li>
 </ol>
 <blockquote>
-<div><div class="highlight-python"><pre>:: Pick your Generator.  NMake will pick up architecture (x32, x64) from your environment
-rem set GENERATOR="NMake Makefiles"
-rem set GENERATOR="Visual Studio 10 Win64"
-set GENERATOR="Visual Studio 10"
+<div><div class="highlight-python"><div class="highlight"><pre>:: Pick your Generator.  NMake will pick up architecture (x32, x64) from your environment
+rem set GENERATOR=&quot;NMake Makefiles&quot;
+rem set GENERATOR=&quot;Visual Studio 10 Win64&quot;
+set GENERATOR=&quot;Visual Studio 10&quot;
 
 set BUILD_TYPE=Release
-rem set BUILD_TYPE=Debug</pre>
+rem set BUILD_TYPE=Debug
+</pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li>Run &#8220;config.bat&#8221; in the PDAL directory. This will create the VStudio solution file and .vcxproj files.</li>
 </ol>
 <blockquote>
-<div><div class="highlight-python"><pre>c:\dev\PDAL&gt; config.bat</pre>
+<div><div class="highlight-python"><div class="highlight"><pre>c:\dev\PDAL&gt; config.bat
+</pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="5">

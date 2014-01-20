@@ -185,19 +185,20 @@ complex pipeline construction.</li>
 </ul>
 </div></blockquote>
 <p>Let&#8217;s start with the following basic example:</p>
-<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Pipeline version="1.0"&gt;
-    &lt;Writer type="drivers.las.writer"&gt;
-        &lt;Option name="filename"&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;Pipeline version=&quot;1.0&quot;&gt;
+    &lt;Writer type=&quot;drivers.las.writer&quot;&gt;
+        &lt;Option name=&quot;filename&quot;&gt;
             output.las
         &lt;/Option&gt;
-        &lt;Reader type="drivers.las.reader"&gt;
-            &lt;Option name="filename"&gt;
+        &lt;Reader type=&quot;drivers.las.reader&quot;&gt;
+            &lt;Option name=&quot;filename&quot;&gt;
                 ./path/to/my/file.las
             &lt;/Option&gt;
         &lt;/Reader&gt;
     &lt;/Writer&gt;
-&lt;/Pipeline&gt;</pre>
+&lt;/Pipeline&gt;
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -250,32 +251,33 @@ entities how to process data. A stage option can itself have options, going
 on ad infinitum. The following example is one that describes how the
 <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::filters::Scaling</span></tt> filter defines its options to denote which
 dimensions it must operate on.</p>
-<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Pipeline version="1.0"&gt;
-    &lt;Filter type="filters.scaling"&gt;
-        &lt;Option name="dimension"&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;Pipeline version=&quot;1.0&quot;&gt;
+    &lt;Filter type=&quot;filters.scaling&quot;&gt;
+        &lt;Option name=&quot;dimension&quot;&gt;
             X
             &lt;Options&gt;
-                &lt;Option name="scale"&gt;0.1&lt;/Option&gt;
-                &lt;Option name="offset"&gt;1.0&lt;/Option&gt;
+                &lt;Option name=&quot;scale&quot;&gt;0.1&lt;/Option&gt;
+                &lt;Option name=&quot;offset&quot;&gt;1.0&lt;/Option&gt;
             &lt;/Options&gt;
         &lt;/Option&gt;
-        &lt;Option name="dimension"&gt;
+        &lt;Option name=&quot;dimension&quot;&gt;
             Y
             &lt;Options&gt;
-                &lt;Option name="scale"&gt;0.1&lt;/Option&gt;
-                &lt;Option name="offset"&gt;2.0&lt;/Option&gt;
+                &lt;Option name=&quot;scale&quot;&gt;0.1&lt;/Option&gt;
+                &lt;Option name=&quot;offset&quot;&gt;2.0&lt;/Option&gt;
             &lt;/Options&gt;
         &lt;/Option&gt;
-        &lt;!-- &lt;Option name="debug"&gt;true&lt;/Option&gt;
-        &lt;Option name="verbose"&gt;7&lt;/Option&gt;    --&gt;
-        &lt;Reader type="drivers.las.reader"&gt;
-            &lt;Option name="filename"&gt;
+        &lt;!-- &lt;Option name=&quot;debug&quot;&gt;true&lt;/Option&gt;
+        &lt;Option name=&quot;verbose&quot;&gt;7&lt;/Option&gt;    --&gt;
+        &lt;Reader type=&quot;drivers.las.reader&quot;&gt;
+            &lt;Option name=&quot;filename&quot;&gt;
                 ../1.2-with-color.las
             &lt;/Option&gt;
         &lt;/Reader&gt;
     &lt;/Filter&gt;
-&lt;/Pipeline&gt;</pre>
+&lt;/Pipeline&gt;
+</pre></div>
 </div>
 <p>Options need not be uniquely named. In this example, we have the dimension
 option added multiple times for both the <tt class="docutils literal"><span class="pre">X</span></tt> and <tt class="docutils literal"><span class="pre">Y</span></tt> dimensions. In this

@@ -151,9 +151,10 @@ data space.</p>
 <p>By default, PDAL outputs <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>. This makes it convenient for
 transforming the output into more pleasing formats like PDF (using <a class="reference external" href="https://code.google.com/p/rst2pdf/">rst2pdf</a>)
 or HTML (using <a class="reference external" href="http://docutils.sourceforge.net/docs/user/tools.html#rst2html-py">rst2html</a>) as part of a processing pipeline.</p>
-<div class="highlight-python"><pre>$ pdal info interesting.las -p 0</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info interesting.las -p 0
+</pre></div>
 </div>
-<div class="highlight-python"><pre>Point 0
+<div class="highlight-python"><div class="highlight"><pre>Point 0
 --------------------------------------------------------------------------------
 
 =================== ======================================= ===================
@@ -175,13 +176,15 @@ Time                                     245380.78254962614  drivers.las.reader
 Red                                                      68  drivers.las.reader
 Green                                                    77  drivers.las.reader
 Blue                                                     88  drivers.las.reader
-=================== ======================================= ===================</pre>
+=================== ======================================= ===================
+</pre></div>
 </div>
 </div>
 <div class="section" id="javascript-output">
 <h3>JavaScript output<a class="headerlink" href="#javascript-output" title="Permalink to this headline">¶</a></h3>
 <p>JavaScript <a class="reference external" href="http://www.json.org/">JSON</a> can also be output.</p>
-<div class="highlight-python"><pre>$ pdal info interesting.las -p 0 --json</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info interesting.las -p 0 --json
+</pre></div>
 </div>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
     <span class="s2">&quot;X&quot;</span><span class="o">:</span> <span class="s2">&quot;637012.23999999999&quot;</span><span class="p">,</span>
@@ -208,7 +211,8 @@ Blue                                                     88  drivers.las.reader
 <h3>XML output<a class="headerlink" href="#xml-output" title="Permalink to this headline">¶</a></h3>
 <p>XML output of this same point is as simple as adding the appropriate
 switch:</p>
-<div class="highlight-python"><pre>$ pdal info interesting.las -p 0 --xml</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info interesting.las -p 0 --xml
+</pre></div>
 </div>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;point&gt;</span>
@@ -250,7 +254,8 @@ terms of width or interpretation.</p>
 <p class="first admonition-title">See also</p>
 <p class="last">See <a class="reference internal" href="../api/cpp/dimension.html#pdal::Dimension" title="pdal::Dimension"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt></a> for details on PDAL dimensions.</p>
 </div>
-<div class="highlight-python"><pre>$ pdal translate interesting.las output.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate interesting.las output.txt
+</pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;X&quot;</span><span class="p">,</span><span class="s">&quot;Y&quot;</span><span class="p">,</span><span class="s">&quot;Z&quot;</span><span class="p">,</span><span class="s">&quot;Intensity&quot;</span><span class="p">,</span><span class="s">&quot;ReturnNumber&quot;</span><span class="p">,</span><span class="s">&quot;NumberOfReturns&quot;</span><span class="p">,</span><span class="s">&quot;ScanDirectionFlag&quot;</span><span class="p">,</span><span class="s">&quot;EdgeOfFlightLine&quot;</span><span class="p">,</span><span class="s">&quot;Classification&quot;</span><span class="p">,</span><span class="s">&quot;ScanAngleRank&quot;</span><span class="p">,</span><span class="s">&quot;UserData&quot;</span><span class="p">,</span><span class="s">&quot;PointSourceId&quot;</span><span class="p">,</span><span class="s">&quot;Time&quot;</span><span class="p">,</span><span class="s">&quot;Red&quot;</span><span class="p">,</span><span class="s">&quot;Green&quot;</span><span class="p">,</span><span class="s">&quot;Blue&quot;</span>
 <span class="mf">637012.24</span><span class="p">,</span><span class="mf">849028.31</span><span class="p">,</span><span class="mf">431.66</span><span class="p">,</span><span class="mi">143</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span><span class="mi">132</span><span class="p">,</span><span class="mi">7326</span><span class="p">,</span><span class="mi">245381</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">88</span>
@@ -272,7 +277,8 @@ your conversion to make it useful down the road.</p>
 <p>PDAL transmits this other information in the form of <a class="reference internal" href="../metadata.html#metadata"><em>Metadata</em></a> that is
 carried per-stage throughout the PDAL <a class="reference internal" href="../pipeline.html#pipeline"><em>processing pipeline</em></a>.
 We can capture this metadata using the <a class="reference internal" href="../apps.html#info-command"><em>info command</em></a> utility.</p>
-<div class="highlight-python"><pre>$ pdal info --metadata --xml interesting.las</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info --metadata --xml interesting.las
+</pre></div>
 </div>
 <p>This produces metadata that looks like <a class="reference internal" href="../metadata.html#metadataxml"><em>this</em></a>. You can use
 your favorite <a class="reference external" href="http://en.wikipedia.org/wiki/XML">XML</a> or <a class="reference external" href="http://www.json.org/">JSON</a> manipulation tools to extract this information
@@ -310,19 +316,20 @@ effects.</p>
 <h3>Simple conversion<a class="headerlink" href="#simple-conversion" title="Permalink to this headline">¶</a></h3>
 <p>The following XML document defines a <a class="reference internal" href="../pipeline.html#pipeline"><em>Pipeline</em></a> that takes the <tt class="docutils literal"><span class="pre">file.las</span></tt>
 <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">ASPRS LAS</a> file and converts it to a new file called <tt class="docutils literal"><span class="pre">output.las</span></tt>.</p>
-<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Pipeline version="1.0"&gt;
-    &lt;Writer type="drivers.las.writer"&gt;
-        &lt;Option name="filename"&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;Pipeline version=&quot;1.0&quot;&gt;
+    &lt;Writer type=&quot;drivers.las.writer&quot;&gt;
+        &lt;Option name=&quot;filename&quot;&gt;
             output.las
         &lt;/Option&gt;
-        &lt;Reader type="drivers.las.reader"&gt;
-            &lt;Option name="filename"&gt;
+        &lt;Reader type=&quot;drivers.las.reader&quot;&gt;
+            &lt;Option name=&quot;filename&quot;&gt;
                 ./path/to/my/file.las
             &lt;/Option&gt;
         &lt;/Reader&gt;
     &lt;/Writer&gt;
-&lt;/Pipeline&gt;</pre>
+&lt;/Pipeline&gt;
+</pre></div>
 </div>
 </div>
 </div>

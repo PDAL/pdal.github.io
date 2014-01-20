@@ -138,15 +138,16 @@ requirements and notes about building or acquiring them.</p>
 <p>CMake allows you to generate different builders for a project, and in this
 example, we are going to generate a &#8220;Unix Makefiles&#8221; builder
 for PDAL on Mac OS X.</p>
-<div class="highlight-python"><pre>$ cd PDAL
+<div class="highlight-python"><div class="highlight"><pre>$ cd PDAL
 $ mkdir makefiles
-$ cd makefiles</pre>
+$ cd makefiles
+</pre></div>
 </div>
 </div>
 <div class="section" id="configure-base-library">
 <h3>Configure base library<a class="headerlink" href="#configure-base-library" title="Permalink to this headline">¶</a></h3>
 <p>Configure the basic core library for the &#8220;Unix Makefiles&#8221; target:</p>
-<div class="highlight-python"><pre>$ cmake -G "Unix Makefiles" ../
+<div class="highlight-python"><div class="highlight"><pre>$ cmake -G &quot;Unix Makefiles&quot; ../
 -- The C compiler identification is GNU
 -- The CXX compiler identification is GNU
 -- Checking whether C compiler has -isysroot
@@ -164,7 +165,8 @@ $ cd makefiles</pre>
 -- Enable PDAL utilities to build - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/hobu/dev/git/PDAL-cmake/makefiles</pre>
+-- Build files have been written to: /Users/hobu/dev/git/PDAL-cmake/makefiles
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -279,7 +281,8 @@ software.  The main pieces that will be installed are:</p>
 <li>PDAL C (PDAL_c.a or PDAL_c.so) library</li>
 <li><a class="reference internal" href="../apps.html#apps"><em>Utility</em></a> programs</li>
 </ul>
-<div class="highlight-python"><pre>make install</pre>
+<div class="highlight-python"><div class="highlight"><pre>make install
+</pre></div>
 </div>
 </div>
 </div>
@@ -296,17 +299,18 @@ software.  The main pieces that will be installed are:</p>
 example, we are going to generate an &#8220;Xcode&#8221; builder for PDAL on Mac OS X.
 Additionally, we&#8217;re going to use an alternative compiler &#8211; <a class="reference external" href="http://llvm.org/">LLVM</a> &#8211; which
 under certain situations can produce much faster code on Mac OS X.</p>
-<div class="highlight-python"><pre>$ export CC=/usr/bin/llvm-gcc
+<div class="highlight-python"><div class="highlight"><pre>$ export CC=/usr/bin/llvm-gcc
 $ export CXX=/usr/bin/llvm-g++
 $ cd PDAL
 $ mkdir xcode
-$ cd xcode/</pre>
+$ cd xcode/
+</pre></div>
 </div>
 </div>
 <div class="section" id="id3">
 <h3>Configure base library<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Configure the basic core library for the Xcode build:</p>
-<div class="highlight-python"><pre>$ cmake -G "Xcode" ..
+<div class="highlight-python"><div class="highlight"><pre>$ cmake -G &quot;Xcode&quot; ..
 -- The C compiler identification is GNU
 -- The CXX compiler identification is GNU
 -- Checking whether C compiler has -isysroot
@@ -325,18 +329,21 @@ $ cd xcode/</pre>
 -- Enable PDAL unit tests to build - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/hobu/hg/PDAL-cmake/xcode</pre>
+-- Build files have been written to: /Users/hobu/hg/PDAL-cmake/xcode
+</pre></div>
 </div>
 <p>Alternatively, if you have <a class="reference external" href="http://www.kyngchaos.com/software/unixport">KyngChaos</a> frameworks for <a class="reference external" href="http://www.gdal.org">GDAL</a> and
 <a class="reference external" href="http://trac.osgeo.org/geotiff">GeoTIFF</a> installed, you can provide locations for those as part of your
 <tt class="docutils literal"><span class="pre">cmake</span></tt> invocation:</p>
-<div class="highlight-python"><pre>$ cmake -G "Xcode" \
+<div class="highlight-python"><div class="highlight"><pre>$ cmake -G &quot;Xcode&quot; \
   -D GDAL_CONFIG=/Library/Frameworks/GDAL.framework/Programs/gdal-config \
   -D GEOTIFF_INCLUDE_DIR=/Library/Frameworks/UnixImageIO.framework/unix/include \
   -D GEOTIFF_LIBRARY=/Library/Frameworks/UnixImageIO.framework/unix/lib/libgeotiff.dylib \
-  ..</pre>
+  ..
+</pre></div>
 </div>
-<div class="highlight-python"><pre>$ open PDAL.xcodeproj/</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ open PDAL.xcodeproj/
+</pre></div>
 </div>
 <div class="figure">
 <img alt="Building PDAL using the XCode project" src="../_images/xcode-start.png" />
