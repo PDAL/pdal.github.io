@@ -122,9 +122,23 @@ issue a compilation command something like the following:</p>
 </div>
 <div class="section" id="includes">
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
-<p>As of PDAL 1.0.0, there isn&#8217;t a single header file for PDAL.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/PointBuffer.hpp&gt;</span>
+<p>As of PDAL 1.0.0, there&#8217;s a couple of include files available for use.  The
+main one, <cite>&lt;pdal/pdal.hpp&gt;</cite>, brings in most of the utility and basic classes
+used throughout the PDAL system. Additionally, the following includes are
+available subject to having the required include directories pathed:</p>
+<ul class="simple">
+<li><cite>#include &lt;pdal/Drivers.hpp&gt;</cite></li>
+<li><cite>#include &lt;pdal/Filters.hpp&gt;</cite></li>
+<li><cite>#include &lt;pdal/Kernel.hpp&gt;</cite></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Drivers, Filters, and Kernel bring in <em>all</em> of the respective sub includes
+for those sections of the source tree. You are not required to include
+everything if you don&#8217;t need it, however, and it is still possible to
+selectively include the classes you need as shown in the example below.</p>
+</div>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/pdal.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/drivers/buffer/Reader.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/filters/Scaling.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/drivers/las/Writer.hpp&gt;</span>
@@ -329,7 +343,7 @@ issue a compilation command something like the following:</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jan 27, 2014.
+                    on Jan 28, 2014.
         </div>
     </div>
 
