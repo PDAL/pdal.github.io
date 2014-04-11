@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>drivers.faux.reader &mdash; pdal.io</title>
+        <title>drivers.sbet.reader &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,19 +96,19 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="drivers-faux-reader">
-<span id="id1"></span><h1>drivers.faux.reader<a class="headerlink" href="#drivers-faux-reader" title="Permalink to this headline">¶</a></h1>
-<p>The &#8220;<strong>faux reader</strong>&#8221; is used for testing pipelines. It does not read from a file or database, but generates synthetic data to feed into the pipeline.</p>
+  <div class="section" id="drivers-sbet-reader">
+<span id="id1"></span><h1>drivers.sbet.reader<a class="headerlink" href="#drivers-sbet-reader" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>SBET reader</strong> read from files in the SBET format, used for exchange data from interital measurement units (IMUs).</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.text.writer&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>outputfile.txt<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.faux.reader&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;bounds&quot;</span><span class="nt">&gt;</span>([0,1000000],[0,1000000],[0,100])<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;num_points&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;mode&quot;</span><span class="nt">&gt;</span>random<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.las.writer&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>output.las<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.sbet.reader&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+        sbetfile.sbet
+      <span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;/Reader&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
@@ -118,12 +118,8 @@
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>bounds</dt>
-<dd>What spatial extent should points be generated within? Text string of the form &#8220;([xmin,xmax],ymin,ymax],[zmin,zmax])&#8221; [Required]</dd>
-<dt>num_points</dt>
-<dd>How many synthetic points to generate before finishing? [Required]</dd>
-<dt>mode</dt>
-<dd>How to generate synthetic points. One of &#8220;constant&#8221; (repeat single value), &#8220;random&#8221; (random values within bounds), or &#8220;ramp&#8221; (steadily increasing values within the bounds). [Required]</dd>
+<dt>filename</dt>
+<dd>File to read from [Required]</dd>
 </dl>
 </div>
 </div>
@@ -140,7 +136,7 @@
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">drivers.faux.reader</a><ul>
+<li><a class="reference internal" href="#">drivers.sbet.reader</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
@@ -148,11 +144,11 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="drivers.pgpointcloud.writer.html"
-                        title="previous chapter">drivers.pgpointcloud.writer</a></p>
+  <p class="topless"><a href="drivers.qfit.reader.html"
+                        title="previous chapter">drivers.qfit.reader</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="drivers.faux.writer.html"
-                        title="next chapter">drivers.faux.writer</a></p>
+  <p class="topless"><a href="drivers.text.writer.html"
+                        title="next chapter">drivers.text.writer</a></p>
             </div>
         </div>
                 </div>
@@ -173,7 +169,7 @@
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'drivers.faux.reader &mdash; pdal.io';
+        var disqus_title = 'drivers.sbet.reader &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
