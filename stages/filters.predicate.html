@@ -132,47 +132,37 @@
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;function&quot;</span><span class="nt">&gt;</span>filter<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;module&quot;</span><span class="nt">&gt;</span>anything<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;source&quot;</span><span class="nt">&gt;</span>
+
+import numpy as np
+
+def filter(ins,outs):
+   cls = ins[&#39;Classification&#39;]
+
+   keep_classes = [1,2]
+
+   # Use the first test for our base array.
+   keep = np.equal(cls, keep_classes[0])
+
+   # For 1:n, test each predicate and join back
+   # to our existing predicate array
+   for k in range(1,len(keep_classes)):
+       t = np.equal(cls, keep_classes[k])
+       keep = keep + t
+
+   outs[&#39;Mask&#39;] = keep
+   return True
+
+        <span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.las.reader&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+            file-input.las
+          <span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;/Reader&gt;</span>
+      <span class="nt">&lt;/Filter&gt;</span>
+    <span class="nt">&lt;/Writer&gt;</span>
+  <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
-<p>import numpy as np</p>
-<p>import numpy as np</p>
-<dl class="docutils">
-<dt>def filter(ins,outs):</dt>
-<dd><blockquote class="first">
-<div><p>cls = ins[&#8216;Classification&#8217;]</p>
-<p>keep_classes = [1,2]</p>
-<p># Use the first test for our base array.
-keep = np.equal(cls, keep_classes[0])</p>
-<p># For 1:n, test each predicate and join back
-# to our existing predicate array
-for k in range(1,len(keep_classes)):</p>
-<blockquote>
-<div>t = np.equal(cls, keep_classes[k])
-keep = keep + t</div></blockquote>
-<p>outs[&#8216;Mask&#8217;] = keep
-return True</p>
-<blockquote>
-<div><blockquote>
-<div><blockquote>
-<div><p>&lt;/Option&gt;
-&lt;Reader type=&#8221;drivers.las.reader&#8221;&gt;</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>&lt;Option name=&#8221;filename&#8221;&gt;</dt>
-<dd>file-input.las</dd>
-</dl>
-<p>&lt;/Option&gt;</p>
-</div></blockquote>
-<p>&lt;/Reader&gt;</p>
-</div></blockquote>
-<p>&lt;/Filter&gt;</p>
-</div></blockquote>
-<p>&lt;/Writer&gt;</p>
-</div></blockquote>
-</div></blockquote>
-<p class="last">&lt;/Pipeline&gt;</p>
-</dd>
-</dl>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
@@ -225,7 +215,7 @@ return True</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Apr 29, 2014.
+                    on Apr 30, 2014.
         </div>
     </div>
 
