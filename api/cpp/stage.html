@@ -108,8 +108,8 @@ implement the reading API in a PDAL pipeline.</p>
 <div><p></p>
 <p></p>
 <em>Public Functions</em><blockquote>
-<div><p><span class="target" id="pdal::Stage::Stage__std::vector:StageBaseP:CR.OptionsCR"></span><span class="target" id="project0classpdal_1_1Stage_1ab39b58769a4ad2337f11d752dcf892c8"></span><div class="line-block">
-<div class="line"> <strong>Stage</strong>(const std::vector&lt;  StageBase  * &gt; &amp; prevs, const  <a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a>  &amp; options)</div>
+<div><p><span class="target" id="pdal::Stage::Stage__std::vector:StageP:CR.OptionsCR"></span><span class="target" id="project0classpdal_1_1Stage_1a15233a37fb283fdf11804df10873eca8"></span><div class="line-block">
+<div class="line"> <strong>Stage</strong>(const std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; &amp; prevs, const  <a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a>  &amp; options)</div>
 </div>
 </p>
 <blockquote>
@@ -129,8 +129,16 @@ implement the reading API in a PDAL pipeline.</p>
 </div>
 </p>
 <blockquote>
-<div><p>Initializes this object. </p>
-<p>It will recursively call <a class="reference internal" href="#project0classpdal_1_1Stage_1a5b422f842a6374b448439df99fe6e07e"><em>initialize()</em></a> on all previous stages. Users must call this after the last stage in the pipeline has been constructed. It is illegal to call this twice for a stage. Derived stages should feel free to provide their own implementations. Remember to call <a class="reference internal" href="#project0classpdal_1_1Stage_1a5b422f842a6374b448439df99fe6e07e"><em>initialize()</em></a> on the parent class before your own class-specific code. This function will throw when errors are found. </p>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::isInitializedC"></span><span class="target" id="project0classpdal_1_1Stage_1acdc30e89f77eb1701fcb86794f1636af"></span><div class="line-block">
+<div class="line">bool <strong>isInitialized</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
 </div></blockquote>
 <p><span class="target" id="pdal::Stage::getSchemaC"></span><span class="target" id="project0classpdal_1_1Stage_1a4ee79078d32c98019580281decc5ba97"></span><div class="line-block">
 <div class="line"><a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  const &amp; <strong>getSchema</strong>()</div>
@@ -164,6 +172,126 @@ implement the reading API in a PDAL pipeline.</p>
 <div><p></p>
 <p></p>
 </div></blockquote>
+<p><span class="target" id="pdal::Stage::getOptionsC"></span><span class="target" id="project0classpdal_1_1Stage_1a9ad91349d2c09741a1d152ee256a6168"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a>  &amp; <strong>getOptions</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::serializePipelineC"></span><span class="target" id="project0classpdal_1_1Stage_1af41aed4e4c377130aa50846c5bd38546"></span><div class="line-block">
+<div class="line">boost::property_tree::ptree <strong>serializePipeline</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::logC"></span><span class="target" id="project0classpdal_1_1Stage_1ae8c29817e14d7cda53fdcbb23102d872"></span><div class="line-block">
+<div class="line">LogPtr <strong>log</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::isDebugC"></span><span class="target" id="project0classpdal_1_1Stage_1aec4fb27c40bb4b032ff003a89a950dd4"></span><div class="line-block">
+<div class="line">bool <strong>isDebug</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::isVerboseC"></span><span class="target" id="project0classpdal_1_1Stage_1aaf07998e5dd4ec3bb421d2b89a4193c5"></span><div class="line-block">
+<div class="line">bool <strong>isVerbose</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getVerboseLevelC"></span><span class="target" id="project0classpdal_1_1Stage_1a6c16fc5a54682d1ffa89eaf6b4d5a64c"></span><div class="line-block">
+<div class="line">boost::uint32_t <strong>getVerboseLevel</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getNameC"></span><span class="target" id="project0classpdal_1_1Stage_1a6c81d6fbbac17ebe4cd63806916cc750"></span><div class="line-block">
+<div class="line">std::string <strong>getName</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getDescriptionC"></span><span class="target" id="project0classpdal_1_1Stage_1ac098609ac9d126de52a9d844b943d60f"></span><div class="line-block">
+<div class="line">std::string <strong>getDescription</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getIdC"></span><span class="target" id="project0classpdal_1_1Stage_1a83dd4a6597e8dda45623818bfc970534"></span><div class="line-block">
+<div class="line">boost::uint32_t <strong>getId</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getInputsC"></span><span class="target" id="project0classpdal_1_1Stage_1a4ee39511be9800f8042a24eb51eed67b"></span><div class="line-block">
+<div class="line">const std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; &amp; <strong>getInputs</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getOutputsC"></span><span class="target" id="project0classpdal_1_1Stage_1a16647d10b5df3eb988e63907da273b22"></span><div class="line-block">
+<div class="line">const std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; &amp; <strong>getOutputs</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getPrevStageC"></span><span class="target" id="project0classpdal_1_1Stage_1a1b2bd59802166550830fb9d65d9de1ed"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  &amp; <strong>getPrevStage</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getPrevStagesC"></span><span class="target" id="project0classpdal_1_1Stage_1a8cdb9186a4810c6c64d75b3b820023cc"></span><div class="line-block">
+<div class="line">std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; <strong>getPrevStages</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getMetadataC"></span><span class="target" id="project0classpdal_1_1Stage_1ae1bb63224dcb5649dd430684e20cea8f"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a> <strong>getMetadata</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::collectMetadataC"></span><span class="target" id="project0classpdal_1_1Stage_1a1ba7758a55f0523aa6ba73488d55ed4d"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a> <strong>collectMetadata</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
 <p><span class="target" id="pdal::Stage::createSequentialIterator__XC"></span><span class="target" id="project0classpdal_1_1Stage_1abd9c85ec0347cd6a2f7b8049458fa38c"></span><div class="line-block">
 <div class="line">StageSequentialIterator  * <strong>createSequentialIterator</strong>(<a class="reference internal" href="pointbuffer.html#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp;)</div>
 </div>
@@ -181,8 +309,42 @@ implement the reading API in a PDAL pipeline.</p>
 <p></p>
 </div></blockquote>
 </div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="pdal::Stage::getDefaultOptions"></span><span class="target" id="project0classpdal_1_1Stage_1afb11834c3966e0e5c5d9dacb779c1d09"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a> <strong>getDefaultOptions</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::getDefaultDimensions"></span><span class="target" id="project0classpdal_1_1Stage_1a54fb8d1278554f9e9cf7668dbdcc657a"></span><div class="line-block">
+<div class="line">std::vector&lt;  <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  &gt; <strong>getDefaultDimensions</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::s_getInfoLink"></span><span class="target" id="project0classpdal_1_1Stage_1a5e3c109b9fd39834cfc2e4356c11d748"></span><div class="line-block">
+<div class="line">std::string <strong>s_getInfoLink</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
 <em>Protected Functions</em><blockquote>
-<div><p><span class="target" id="pdal::Stage::setSchema__X"></span><span class="target" id="project0classpdal_1_1Stage_1a180fd022a54f03666c552724b7efe3ea"></span><div class="line-block">
+<div><p><span class="target" id="pdal::Stage::getDimensionOperationTypeC"></span><span class="target" id="project0classpdal_1_1Stage_1afcaea83f3faf7226e582013cc7ccbfc4"></span><div class="line-block">
+<div class="line">StageOperationType <strong>getDimensionOperationType</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::setSchema__X"></span><span class="target" id="project0classpdal_1_1Stage_1a180fd022a54f03666c552724b7efe3ea"></span><div class="line-block">
 <div class="line">void <strong>setSchema</strong>(<a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  const &amp;)</div>
 </div>
 </p>
@@ -214,6 +376,14 @@ implement the reading API in a PDAL pipeline.</p>
 <div><p></p>
 <p></p>
 </div></blockquote>
+<p><span class="target" id="pdal::Stage::getMetadataRef"></span><span class="target" id="project0classpdal_1_1Stage_1a52fed00307fd9e43da648c83725114df"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a>  &amp; <strong>getMetadataRef</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
 <p><span class="target" id="pdal::Stage::setCoreProperties__X"></span><span class="target" id="project0classpdal_1_1Stage_1a29f242d26372fc70dbcf0ed530a761cf"></span><div class="line-block">
 <div class="line">void <strong>setCoreProperties</strong>(const  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  &amp;)</div>
 </div>
@@ -225,6 +395,37 @@ implement the reading API in a PDAL pipeline.</p>
 </div></blockquote>
 <em>Protected Attributes</em><blockquote>
 <div><p><span class="target" id="project0classpdal_1_1Stage_1a760b43e57072bb92c254de9dcacb3785"></span><a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a> <strong>m_schema</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="project0classpdal_1_1Stage_1ad0558907863498f3391a44696714525d"></span><a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a> <strong>m_options</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Protected Static Functions</em><blockquote>
+<div><p><span class="target" id="pdal::Stage::makeVector"></span><span class="target" id="project0classpdal_1_1Stage_1a653eb9d02dd69cf10d37047cf466ce7f"></span><div class="line-block">
+<div class="line">std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; <strong>makeVector</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::makeVector__StageR"></span><span class="target" id="project0classpdal_1_1Stage_1a8493fdb359cc45af572444414c741516"></span><div class="line-block">
+<div class="line">std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; <strong>makeVector</strong>(<a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  &amp; src)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="pdal::Stage::makeVector__std::vector:StageP:CR"></span><span class="target" id="project0classpdal_1_1Stage_1a32745a64c3d42dfb30cadb2ba1129233"></span><div class="line-block">
+<div class="line">std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; <strong>makeVector</strong>(const std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; &amp; src)</div>
+</div>
+</p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -262,7 +463,7 @@ implement the reading API in a PDAL pipeline.</p>
                         <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on May 02, 2014.
+                    on May 03, 2014.
         </div>
     </div>
 
