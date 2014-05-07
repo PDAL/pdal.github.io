@@ -357,6 +357,35 @@ saturated.</p>
 </dl>
 </p>
 </div></blockquote>
+<p><span class="target" id="pdal::PointBuffer::setRawField__DimensionCR.boost::uint32_t.voidCP"></span><span class="target" id="project0classpdal_1_1PointBuffer_1af9b4010ee33590fb0ce7ff0fe81533c8"></span><div class="line-block">
+<div class="line">void <strong>setRawField</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; dim, boost::uint32_t pointIndex, const void * value)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p>set the value for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at the given point index, inferring the size of the value from the byteSize of the dimension. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dim</span></tt> - <p>The dimension to select. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">pointIndex</span></tt> - <p>The point index of the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> to select. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>The value to set, which must have a width of at least dim.byteSize(). <div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This operation performs a memcpy from input parameter &#8216;value&#8217;
+of length dim.getByteSize(), so &#8216;value&#8217; must be guaranteed by
+the caller to be at least as long as the dimension&#8217;s byte size.
+This operation will hammer the contents of the pdal::Dimension
+with the contents of parameter &#8216;value&#8217;, so their underlying
+types should be ensured to match via an accurate schema.</p>
+</div>
+ </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
 <p><span class="target" id="pdal::PointBuffer::copyPointFast__boost::uint32_t.boost::uint32_t.PointBufferCR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ae1414544bbd64e55b2dc429db8273306"></span><div class="line-block">
 <div class="line">void <strong>copyPointFast</strong>(boost::uint32_t destPointIndex, boost::uint32_t srcPointIndex, const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; srcPointBuffer)</div>
 </div>
@@ -789,7 +818,7 @@ method. Otherwise, an exception will be thrown.</p>
                         <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on May 06, 2014.
+                    on May 07, 2014.
         </div>
     </div>
 
