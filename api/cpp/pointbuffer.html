@@ -98,12 +98,11 @@
                     
   <div class="section" id="pdal-pointbuffer">
 <span id="cpp-pdal-pointbuffer"></span><h1>pdal::PointBuffer<a class="headerlink" href="#pdal-pointbuffer" title="Permalink to this headline">¶</a></h1>
-<div class="line-block" id="project0classpdal_1_1PointBuffer">
-<span id="pdal::PointBuffer"></span><div class="line"><em>class</em> <strong>pdal::PointBuffer</strong></div>
-</div>
-<blockquote>
-<div><p>A <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is the object that is passed through <a class="reference internal" href="stage.html#project0classpdal_1_1Stage"><em>pdal::Stage</em></a> instances to form a pipeline. </p>
-<p><p>A <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is composed of a <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>pdal::Schema</em></a> that determines the layout of the data contained within, along with a dictionary of <a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>pdal::Metadata</em></a> entries. The capacity of a <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is determined by the number of points it contains, and the number of points possible in a <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is limited to std::numeric_limits&lt;boost::uint32_t&gt;::max(). Underneath the covers, a <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is simply the composed array of bytes described in the <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>pdal::Schema</em></a>. You can operate on the raw bytes if you need to, but <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> provides a number of convienence methods to make things easier.</p>
+<dl class="pdal::PointBuffer">
+<dt>
+<span class="target" id="pdal::PointBuffer"></span><span class="target" id="project0classpdal_1_1PointBuffer"></span><em>class</em> <tt class="descname">pdal::PointBuffer</tt></dt>
+<dd><p>A <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is the object that is passed through <a class="reference internal" href="stage.html#project0classpdal_1_1Stage"><em>pdal::Stage</em></a> instances to form a pipeline. </p>
+<p>A <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is composed of a <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>pdal::Schema</em></a> that determines the layout of the data contained within, along with a dictionary of <a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>pdal::Metadata</em></a> entries. The capacity of a <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is determined by the number of points it contains, and the number of points possible in a <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is limited to std::numeric_limits&lt;boost::uint32_t&gt;::max(). Underneath the covers, a <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is simply the composed array of bytes described in the <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>pdal::Schema</em></a>. You can operate on the raw bytes if you need to, but <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> provides a number of convienence methods to make things easier.</p>
 <p><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The arrangement of PointBuffer&#8217;s bytes might either be
@@ -112,15 +111,13 @@ the default organization.  If you are directly modifying a PointBuffer&#8217;s
 bytes, you must respect the <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::pointbuffer::Orientation</span></tt>.</p>
 </div>
  </p>
-</p>
-<em>Constructors</em><blockquote>
-<div><p><span class="target" id="pdal::PointBuffer::PointBuffer__SchemaCR.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a09c135ad8eb3f9f5a15d7a1523665a02"></span><div class="line-block">
-<div class="line"> <strong>PointBuffer</strong>(const  <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  &amp; schema, boost::uint32_t capacity = 65536)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Base constructor for <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>pdal::PointBuffer</em></a>. <dl class="docutils">
+<dl class="user-defined">
+<dt>
+<em>Constructors</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::PointBuffer__SchemaCR.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a09c135ad8eb3f9f5a15d7a1523665a02"></span><tt class="descname">PointBuffer</tt><big>(</big>const  <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  &amp; <em>schema</em>, boost::uint32_t <em>capacity</em> = 65536<big>)</big></dt>
+<dd><p>Base constructor for <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>pdal::PointBuffer</em></a>. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">schema</span></tt> - <p><a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>pdal::Schema</em></a> instance to use to describe the layout. It is copied. </p>
@@ -131,40 +128,35 @@ bytes, you must respect the <tt class="xref cpp cpp-class docutils literal"><spa
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::PointBuffer__X"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa301e4d9395157c74f0a26eca8ba02f5"></span><div class="line-block">
-<div class="line"> <strong>PointBuffer</strong>(const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp;)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Copy constructor. The data array is simply memcpy&#8217;d. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::assign-operator__X"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a6695e6db3322a5597fc22fb8a544f219"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; <strong>operator=</strong>(const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp;)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Assignment constructor. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::~PointBuffer"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac915540f388d6dead9ccc808c256d215"></span><div class="line-block">
-<div class="line"> <strong>~PointBuffer</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Destructor. </p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-<em>Attribute access</em><blockquote>
-<div><p><span class="target" id="pdal::PointBuffer::getSpatialBoundsC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a66988cfd611ebdb44cd2c5734f3efe08"></span><div class="line-block">
-<div class="line">const  <a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>Bounds</em></a> &lt; double &gt; &amp; <strong>getSpatialBounds</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::PointBuffer__X"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa301e4d9395157c74f0a26eca8ba02f5"></span><tt class="descname">PointBuffer</tt><big>(</big>const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp;<big>)</big></dt>
+<dd><p>Copy constructor. The data array is simply memcpy&#8217;d. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::assign-operator__X"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a6695e6db3322a5597fc22fb8a544f219"></span><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; <tt class="descname">operator=</tt><big>(</big>const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp;<big>)</big></dt>
+<dd><p>Assignment constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::~PointBuffer"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac915540f388d6dead9ccc808c256d215"></span><tt class="descname">~PointBuffer</tt><big>(</big><big>)</big></dt>
+<dd><p>Destructor. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="user-defined">
+<dt>
+<em>Attribute access</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getSpatialBoundsC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a66988cfd611ebdb44cd2c5734f3efe08"></span>const  <a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>Bounds</em></a> &lt; double &gt; &amp; <tt class="descname">getSpatialBounds</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>the <a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>pdal::Bounds</em></a> instance associated with this <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>pdal::PointBuffer</em></a>. <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -174,13 +166,12 @@ up-to-date when operating on the PointBuffer.</p>
  </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::setSpatialBounds__Bounds:double:CR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa4a3f7c3f4e6e96f6d27213db36afe96"></span><div class="line-block">
-<div class="line">void <strong>setSpatialBounds</strong>(const  <a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>Bounds</em></a> &lt; double &gt; &amp; bounds)</div>
-</div>
-</p>
-<blockquote>
-<div><p>sets the <a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>pdal::Bounds</em></a> instance for this <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>pdal::PointBuffer</em></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::setSpatialBounds__Bounds:double:CR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa4a3f7c3f4e6e96f6d27213db36afe96"></span>void <tt class="descname">setSpatialBounds</tt><big>(</big>const  <a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>Bounds</em></a> &lt; double &gt; &amp; <em>bounds</em><big>)</big></dt>
+<dd><p>sets the <a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>pdal::Bounds</em></a> instance for this <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>pdal::PointBuffer</em></a> </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -190,25 +181,22 @@ up-to-date when operating on the PointBuffer.</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getNumPointsC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ab00014f41c4a9a0354e281ca9a6e32c6"></span><div class="line-block">
-<div class="line">boost::uint32_t <strong>getNumPoints</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getNumPointsC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ab00014f41c4a9a0354e281ca9a6e32c6"></span>boost::uint32_t <tt class="descname">getNumPoints</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>the number of points that are set for the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>. It is an arbitrary number that must be &lt;= <a class="reference internal" href="#project0classpdal_1_1PointBuffer_1a043d3f332fa5f1f54de8e9b41c7ad23f"><em>getCapacity()</em></a> is the number of active points for the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::setNumPoints__boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a923de0728606c22972613a4139faa453"></span><div class="line-block">
-<div class="line">void <strong>setNumPoints</strong>(boost::uint32_t v)</div>
-</div>
-</p>
-<blockquote>
-<div><p>sets the number of active points for the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::setNumPoints__boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a923de0728606c22972613a4139faa453"></span>void <tt class="descname">setNumPoints</tt><big>(</big>boost::uint32_t <em>v</em><big>)</big></dt>
+<dd><p>sets the number of active points for the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -218,14 +206,12 @@ up-to-date when operating on the PointBuffer.</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getCapacityC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a043d3f332fa5f1f54de8e9b41c7ad23f"></span><div class="line-block">
-<div class="line">boost::uint32_t <strong>getCapacity</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getCapacityC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a043d3f332fa5f1f54de8e9b41c7ad23f"></span>boost::uint32_t <tt class="descname">getCapacity</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>the maximum number of points the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> can hold. <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -237,49 +223,44 @@ changed by a call to <a class="reference internal" href="#pdal::PointBuffer::res
  </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getSchemaC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a076fcf801405fa33aa7f5b83da8b3fe7"></span><div class="line-block">
-<div class="line">const  <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  &amp; <strong>getSchema</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>A const reference to the internally copied <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>pdal::Schema</em></a> instance that was given at construction time. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getBufferByteLengthC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a105280a3fb45d45cf0b39db44f26bcc1"></span><div class="line-block">
-<div class="line">pointbuffer::PointBufferByteSize <strong>getBufferByteLength</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getSchemaC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a076fcf801405fa33aa7f5b83da8b3fe7"></span>const  <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  &amp; <tt class="descname">getSchema</tt><big>(</big><big>)</big></dt>
+<dd><p>A const reference to the internally copied <a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>pdal::Schema</em></a> instance that was given at construction time. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getBufferByteLengthC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a105280a3fb45d45cf0b39db44f26bcc1"></span>pointbuffer::PointBufferByteSize <tt class="descname">getBufferByteLength</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>the size of the currently allocated raw byte array </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getBufferByteCapacityC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a321cf82e49e53370949554f890a0fa05"></span><div class="line-block">
-<div class="line">pointbuffer::PointBufferByteSize <strong>getBufferByteCapacity</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getBufferByteCapacityC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a321cf82e49e53370949554f890a0fa05"></span>pointbuffer::PointBufferByteSize <tt class="descname">getBufferByteCapacity</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>the size of the theoretically filled raw byte array. </dd>
 </dl>
 </p>
-</div></blockquote>
-</div></blockquote>
-<em>Point data access</em><blockquote>
-<div><p><span class="target" id="pdal::PointBuffer::getField__DimensionCR.boost::uint32_tC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a00e0c870eba6e2abc39a9786102c7391"></span><div class="line-block">
-<div class="line">template &lt; class T &gt;</div>
-<div class="line">T <strong>getField</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; dim, boost::uint32_t pointIndex)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>fetch the value T for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at pointIndex <tt class="docutils literal"><span class="pre">i</span></tt>. <dl class="docutils">
+</dd></dl>
+
+</dd></dl>
+
+<dl class="user-defined">
+<dt>
+<em>Point data access</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getField__DimensionCR.boost::uint32_tC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a00e0c870eba6e2abc39a9786102c7391"></span><div class="line">template &lt;class T&gt; </div>
+T <tt class="descname">getField</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>dim</em>, boost::uint32_t <em>pointIndex</em><big>)</big></dt>
+<dd><p>fetch the value T for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at pointIndex <tt class="docutils literal"><span class="pre">i</span></tt>. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">dim</span></tt> - <p>The dimension to select </p>
@@ -299,15 +280,13 @@ saturated.</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getFieldAs__DimensionCR.boost::uint32_t.bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ad12891f6a5818b0e8142df9713921e57"></span><div class="line-block">
-<div class="line">template &lt; class T &gt;</div>
-<div class="line">T <strong>getFieldAs</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; dim, boost::uint32_t pointIndex, bool applyScaling = true)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>fetch the value T for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at pointIndex <tt class="docutils literal"><span class="pre">i</span></tt>. <dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getFieldAs__DimensionCR.boost::uint32_t.bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ad12891f6a5818b0e8142df9713921e57"></span><div class="line">template &lt;class T&gt; </div>
+T <tt class="descname">getFieldAs</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>dim</em>, boost::uint32_t <em>pointIndex</em>, bool <em>applyScaling</em> = true<big>)</big></dt>
+<dd><p>fetch the value T for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at pointIndex <tt class="docutils literal"><span class="pre">i</span></tt>. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">dim</span></tt> - <p>the dimension to select. </p>
@@ -326,15 +305,13 @@ is thrown.</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::setField__DimensionCR.boost::uint32_t.T"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a6c415debdb9386eb16dac6a8e2882aa6"></span><div class="line-block">
-<div class="line">template &lt; class T &gt;</div>
-<div class="line">void <strong>setField</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; dim, boost::uint32_t pointIndex, T value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>set the value T for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at pointIndex i. <dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::setField__DimensionCR.boost::uint32_t.T"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a6c415debdb9386eb16dac6a8e2882aa6"></span><div class="line">template &lt;class T&gt; </div>
+void <tt class="descname">setField</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>dim</em>, boost::uint32_t <em>pointIndex</em>, T <em>value</em><big>)</big></dt>
+<dd><p>set the value T for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at pointIndex i. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">dim</span></tt> - <p>The dimension to select. </p>
@@ -356,14 +333,12 @@ saturated.</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::setRawField__DimensionCR.boost::uint32_t.voidCP"></span><span class="target" id="project0classpdal_1_1PointBuffer_1af9b4010ee33590fb0ce7ff0fe81533c8"></span><div class="line-block">
-<div class="line">void <strong>setRawField</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; dim, boost::uint32_t pointIndex, const void * value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>set the value for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at the given point index, inferring the size of the value from the byteSize of the dimension. <dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::setRawField__DimensionCR.boost::uint32_t.voidCP"></span><span class="target" id="project0classpdal_1_1PointBuffer_1af9b4010ee33590fb0ce7ff0fe81533c8"></span>void <tt class="descname">setRawField</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>dim</em>, boost::uint32_t <em>pointIndex</em>, const void * <em>value</em><big>)</big></dt>
+<dd><p>set the value for a given :cpp:class:<tt class="docutils literal"><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em><span class="pre">pdal::Dimension</span></em></a></tt> dim at the given point index, inferring the size of the value from the byteSize of the dimension. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">dim</span></tt> - <p>The dimension to select. </p>
@@ -385,14 +360,12 @@ types should be ensured to match via an accurate schema.</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::copyPointFast__boost::uint32_t.boost::uint32_t.PointBufferCR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ae1414544bbd64e55b2dc429db8273306"></span><div class="line-block">
-<div class="line">void <strong>copyPointFast</strong>(boost::uint32_t destPointIndex, boost::uint32_t srcPointIndex, const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; srcPointBuffer)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>bulk copy all the fields from the given point into this object <dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::copyPointFast__boost::uint32_t.boost::uint32_t.PointBufferCR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ae1414544bbd64e55b2dc429db8273306"></span>void <tt class="descname">copyPointFast</tt><big>(</big>boost::uint32_t <em>destPointIndex</em>, boost::uint32_t <em>srcPointIndex</em>, const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; <em>srcPointBuffer</em><big>)</big></dt>
+<dd><p>bulk copy all the fields from the given point into this object <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">destPointIndex</span></tt> - <p>the destination point index to copy the data from srcPointBuffer at srcPointIndex. </p>
@@ -413,14 +386,12 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::copyPointsFast__boost::uint32_t.boost::uint32_t.PointBufferCR.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a3bd28aa7d0ccbfb65242c5b89ef8fb7f"></span><div class="line-block">
-<div class="line">void <strong>copyPointsFast</strong>(boost::uint32_t destPointIndex, boost::uint32_t srcPointIndex, const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; srcPointBuffer, boost::uint32_t numPoints)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>bulk copy all the fields from the given point into this object <dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::copyPointsFast__boost::uint32_t.boost::uint32_t.PointBufferCR.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a3bd28aa7d0ccbfb65242c5b89ef8fb7f"></span>void <tt class="descname">copyPointsFast</tt><big>(</big>boost::uint32_t <em>destPointIndex</em>, boost::uint32_t <em>srcPointIndex</em>, const  <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; <em>srcPointBuffer</em>, boost::uint32_t <em>numPoints</em><big>)</big></dt>
+<dd><p>bulk copy all the fields from the given point into this object <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">destPointIndex</span></tt> - <p>the destination point index to copy the data from srcPointBuffer at srcPointIndex. </p>
@@ -443,15 +414,17 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-</div></blockquote>
-<em>Raw Data Access</em><blockquote>
-<div><p><span class="target" id="pdal::PointBuffer::getData__boost::uint32_tC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a5d932029cbc32f65a00ac670181b57b3"></span><div class="line-block">
-<div class="line">boost::uint8_t * <strong>getData</strong>(boost::uint32_t pointIndex)</div>
-</div>
-</p>
-<blockquote>
-<div><p>access to the raw byte data at specified pointIndex </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="user-defined">
+<dt>
+<em>Raw Data Access</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getData__boost::uint32_tC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a5d932029cbc32f65a00ac670181b57b3"></span>boost::uint8_t * <tt class="descname">getData</tt><big>(</big>boost::uint32_t <em>pointIndex</em><big>)</big></dt>
+<dd><p>access to the raw byte data at specified pointIndex </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -461,21 +434,17 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getDataStart"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa16551b409ad2ed229cb6af0addb265d"></span><div class="line-block">
-<div class="line">boost::uint8_t * <strong>getDataStart</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getData__boost::uint8_tPP.boost::uint64_tPC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a927f17edd220e7c50f8a1b1f5882798f"></span><div class="line-block">
-<div class="line">void <strong>getData</strong>(boost::uint8_t ** data, boost::uint64_t * size)</div>
-</div>
-</p>
-<blockquote>
-<div><p>copies the raw data into your own byte array and sets the size </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getDataStart"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa16551b409ad2ed229cb6af0addb265d"></span>boost::uint8_t * <tt class="descname">getDataStart</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getData__boost::uint8_tPP.boost::uint64_tPC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a927f17edd220e7c50f8a1b1f5882798f"></span>void <tt class="descname">getData</tt><big>(</big>boost::uint8_t ** <em>data</em>, boost::uint64_t * <em>size</em><big>)</big></dt>
+<dd><p>copies the raw data into your own byte array and sets the size </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -487,13 +456,12 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::setData__boost::uint8_tP.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a37d03cd52ccf56b79a46285804245284"></span><div class="line-block">
-<div class="line">void <strong>setData</strong>(boost::uint8_t * data, boost::uint32_t pointIndex)</div>
-</div>
-</p>
-<blockquote>
-<div><p>set the data for a single point at given pointIndex from a raw byte array </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::setData__boost::uint8_tP.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a37d03cd52ccf56b79a46285804245284"></span>void <tt class="descname">setData</tt><big>(</big>boost::uint8_t * <em>data</em>, boost::uint32_t <em>pointIndex</em><big>)</big></dt>
+<dd><p>set the data for a single point at given pointIndex from a raw byte array </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -505,13 +473,12 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::setDataStride__boost::uint8_tP.boost::uint32_t.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a9de61635c94572d654687fd3644b7ed0"></span><div class="line-block">
-<div class="line">void <strong>setDataStride</strong>(boost::uint8_t * data, boost::uint32_t pointIndex, boost::uint32_t byteCount)</div>
-</div>
-</p>
-<blockquote>
-<div><p>overwrite raw data at a given pointIndex for a given number of byteCount </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::setDataStride__boost::uint8_tP.boost::uint32_t.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a9de61635c94572d654687fd3644b7ed0"></span>void <tt class="descname">setDataStride</tt><big>(</big>boost::uint8_t * <em>data</em>, boost::uint32_t <em>pointIndex</em>, boost::uint32_t <em>byteCount</em><big>)</big></dt>
+<dd><p>overwrite raw data at a given pointIndex for a given number of byteCount </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -525,37 +492,38 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-</div></blockquote>
-<em>Metadata</em><blockquote>
-<div><p><span class="target" id="pdal::PointBuffer::getMetadataC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aac0d7aa0fa438c6f52d5c427ba94a17f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a>  const &amp; <strong>getMetadata</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>return <a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a> const&amp; for the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::getMetadataRef"></span><span class="target" id="project0classpdal_1_1PointBuffer_1abc335bd45523aa309a1179afbe689566"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a>  &amp; <strong>getMetadataRef</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+</dd></dl>
+
+<dl class="user-defined">
+<dt>
+<em>Metadata</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getMetadataC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aac0d7aa0fa438c6f52d5c427ba94a17f"></span><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a>  const &amp; <tt class="descname">getMetadata</tt><big>(</big><big>)</big></dt>
+<dd><p>return <a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a> const&amp; for the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getMetadataRef"></span><span class="target" id="project0classpdal_1_1PointBuffer_1abc335bd45523aa309a1179afbe689566"></span><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a>  &amp; <tt class="descname">getMetadataRef</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a>&amp; for the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> </dd>
 </dl>
 </p>
-</div></blockquote>
-</div></blockquote>
-<em>Memory Operations</em><blockquote>
-<div><p><span class="target" id="pdal::PointBuffer::reset__SchemaCR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a0483aa7d26c92456f3d85fdc5d97bb05"></span><div class="line-block">
-<div class="line">void <strong>reset</strong>(<a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  const &amp; new_schema)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Reallocates a new data buffer with the given schema. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="user-defined">
+<dt>
+<em>Memory Operations</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::reset__SchemaCR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a0483aa7d26c92456f3d85fdc5d97bb05"></span>void <tt class="descname">reset</tt><big>(</big><a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a>  const &amp; <em>new_schema</em><big>)</big></dt>
+<dd><p>Reallocates a new data buffer with the given schema. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -565,13 +533,12 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::resize__boost::uint32_tCR.b"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a55e8cb82d2a1cf30360856416d224464"></span><div class="line-block">
-<div class="line">void <strong>resize</strong>(boost::uint32_t const &amp; capacity, bool bExact = false)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Resizes the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> to the given capacity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::resize__boost::uint32_tCR.b"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a55e8cb82d2a1cf30360856416d224464"></span>void <tt class="descname">resize</tt><big>(</big>boost::uint32_t const &amp; <em>capacity</em>, bool <em>bExact</em> = false<big>)</big></dt>
+<dd><p>Resizes the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> to the given capacity. </p>
 <p>If the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> is already big enough to hold all of the bytes, it is not reallocated unless bExact is true <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -583,40 +550,37 @@ compositions, congratulations :)</p>
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::pack__bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa509e4f13edf8d04923e8385c732ed61"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  * <strong>pack</strong>(bool bRemoveIgnoredDimensions = true)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::pack__bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa509e4f13edf8d04923e8385c732ed61"></span><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  * <tt class="descname">pack</tt><big>(</big>bool <em>bRemoveIgnoredDimensions</em> = true<big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>a new <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> with all ignored dimensions removed </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::flipOrientationC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1acfdb1f8dfb43b18552a8131616940b1c"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  * <strong>flipOrientation</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::flipOrientationC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1acfdb1f8dfb43b18552a8131616940b1c"></span><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  * <tt class="descname">flipOrientation</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>a new <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> with the opposite orientation </dd>
 </dl>
 </p>
-</div></blockquote>
-</div></blockquote>
-<em>Serialization</em><blockquote>
-<div><p><span class="target" id="pdal::PointBuffer::toPTreeC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ad33379e2cd0fe61d5bbf4367ccb0330b"></span><div class="line-block">
-<div class="line">boost::property_tree::ptree <strong>toPTree</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>returns a boost::property_tree containing the point records, which is useful for dumping and such. <div class="highlight-python"><div class="highlight"><pre>0:
+</dd></dl>
+
+</dd></dl>
+
+<dl class="user-defined">
+<dt>
+<em>Serialization</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::toPTreeC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ad33379e2cd0fe61d5bbf4367ccb0330b"></span>boost::property_tree::ptree <tt class="descname">toPTree</tt><big>(</big><big>)</big></dt>
+<dd><p>returns a boost::property_tree containing the point records, which is useful for dumping and such. <div class="highlight-python"><div class="highlight"><pre>0:
     X: 1.00
     Y: 2.00
     Z: 3.00
@@ -633,22 +597,17 @@ offset or the datatype, use the <tt class="xref cpp cpp-func docutils literal"><
 dumper.</p>
 </div>
  </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::toRST__osRC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a9d179d135f2d114ded85550795e29314"></span><div class="line-block">
-<div class="line">std::ostream &amp; <strong>toRST</strong>(std::ostream &amp; os)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::calculateBounds__bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ab2d6a0b06ed5738fbbc06534a43e6215"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>pdal::Bounds</em></a> &lt; double &gt; <strong>calculateBounds</strong>(bool bis3d = true)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::toRST__osRC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a9d179d135f2d114ded85550795e29314"></span>std::ostream &amp; <tt class="descname">toRST</tt><big>(</big>std::ostream &amp; <em>os</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::calculateBounds__bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ab2d6a0b06ed5738fbbc06534a43e6215"></span><a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>pdal::Bounds</em></a> &lt; double &gt; <tt class="descname">calculateBounds</tt><big>(</big>bool <em>bis3d</em> = true<big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>a cumulated bounds of all points in the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>. <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -660,133 +619,121 @@ method. Otherwise, an exception will be thrown.</p>
  </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::applyScaling__DimensionCR.std::sC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a90951ef795624c7241aabea4cda2e18d"></span><div class="line-block">
-<div class="line">double <strong>applyScaling</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; d, std::size_t pointIndex)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::extractIndices__PointBufferCR.PointBufferR.std::vector:i:"></span><span class="target" id="project0classpdal_1_1PointBuffer_1abe29fcda584716594e89deb43e5aaaf0"></span><div class="line-block">
-<div class="line">void <strong>extractIndices</strong>(<a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const &amp; source, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; destination, std::vector&lt; int &gt; indices)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::copyLikeDimensions__PointBufferCR.PointBufferR.schema::DimensionMapCR.boost::uint32_t.boost::uint32_t.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a06b4a4b3749faba56bc4ce0702b336db"></span><div class="line-block">
-<div class="line">void <strong>copyLikeDimensions</strong>(<a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const &amp; source, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; destination, schema::DimensionMap  const &amp; dimensions, boost::uint32_t source_starting_position, boost::uint32_t destination_starting_position, boost::uint32_t howMany)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Copies dimensions from the given <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> that have both similar names and data types. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::applyScaling__DimensionCR.std::sC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a90951ef795624c7241aabea4cda2e18d"></span>double <tt class="descname">applyScaling</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>d</em>, std::size_t <em>pointIndex</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::extractIndices__PointBufferCR.PointBufferR.std::vector:i:"></span><span class="target" id="project0classpdal_1_1PointBuffer_1abe29fcda584716594e89deb43e5aaaf0"></span>void <tt class="descname">extractIndices</tt><big>(</big><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const &amp; <em>source</em>, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; <em>destination</em>, std::vector&lt; int &gt; <em>indices</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::copyLikeDimensions__PointBufferCR.PointBufferR.schema::DimensionMapCR.boost::uint32_t.boost::uint32_t.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a06b4a4b3749faba56bc4ce0702b336db"></span>void <tt class="descname">copyLikeDimensions</tt><big>(</big><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const &amp; <em>source</em>, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; <em>destination</em>, schema::DimensionMap  const &amp; <em>dimensions</em>, boost::uint32_t <em>source_starting_position</em>, boost::uint32_t <em>destination_starting_position</em>, boost::uint32_t <em>howMany</em><big>)</big></dt>
+<dd><p>Copies dimensions from the given <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> that have both similar names and data types. </p>
 <p>Create a schema::DimensionMap and adjust as necessary before utilizing this method to copy dimensions from one <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> instance to another. </p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::scaleData__PointBufferCR.PointBufferR.DimensionCR.DimensionCR.boost::uint32_t.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a3af8720775674796dee57b63bb3c3b76"></span><div class="line-block">
-<div class="line">void <strong>scaleData</strong>(<a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const &amp; source_buffer, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; destination_buffer, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; source_dimension, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; destination_dimension, boost::uint32_t source_index, boost::uint32_t destination_index)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::pack__PointBufferCP.PointBufferP.b.b"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a4e878e247b0baf67b453633a5b226606"></span><div class="line-block">
-<div class="line">void <strong>pack</strong>(<a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const * input, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  * output, bool bRemoveIgnoredDimensions = true, bool bResetOutputSchema = false)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::scaleData__PointBufferCR.PointBufferR.DimensionCR.DimensionCR.boost::uint32_t.boost::uint32_t"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a3af8720775674796dee57b63bb3c3b76"></span>void <tt class="descname">scaleData</tt><big>(</big><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const &amp; <em>source_buffer</em>, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  &amp; <em>destination_buffer</em>, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>source_dimension</em>, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>destination_dimension</em>, boost::uint32_t <em>source_index</em>, boost::uint32_t <em>destination_index</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::pack__PointBufferCP.PointBufferP.b.b"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a4e878e247b0baf67b453633a5b226606"></span>void <tt class="descname">pack</tt><big>(</big><a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const * <em>input</em>, <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  * <em>output</em>, bool <em>bRemoveIgnoredDimensions</em> = true, bool <em>bResetOutputSchema</em> = false<big>)</big></dt>
+<dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>a new <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> with all ignored dimensions removed </dd>
 </dl>
 </p>
-</div></blockquote>
-</div></blockquote>
-<em>private attributes</em><blockquote>
-<div><p><span class="target" id="project0classpdal_1_1PointBuffer_1a403febf7cb344bcfa293d440705f4969"></span><a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a> <strong>m_schema</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1af0a092ef24f955268c9a61aad87ae66e"></span>pointbuffer::PointBufferByteSize <strong>m_data_size</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1a4466f694825966882b17deefa2cc2557"></span>boost::shared_array&lt; boost::uint8_t &gt; <strong>m_data</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1a8853b6741a3cf0c523fe64c41e0fdcca"></span>boost::uint32_t <strong>m_numPoints</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1a939fefb4d3d2de9cc1b743c3750a2d6c"></span>boost::uint32_t <strong>m_capacity</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1aaedffe1d514f9c7c653d8d0000d0635a"></span><a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>Bounds</em></a> &lt; double &gt; <strong>m_bounds</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1a9b84b26549bdd7738152b65cb76d5c65"></span>schema::size_type <strong>m_byteSize</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1a5d964362dde1728b2850d4127cdb2d73"></span><a class="reference internal" href="schema.html#project0namespacepdal_1_1schema_1aea1c8d2f364fd239010c3ba0ee8ffca1"><em>schema::Orientation</em></a> <strong>m_orientation</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1ab0ac2c2061ef8ac76da23ac1b5db4035"></span><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a> <strong>m_metadata</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classpdal_1_1PointBuffer_1a86f3876dd58068ab0ccf58da7405e032"></span>pointbuffer::id <strong>m_uuid</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::scale__DimensionCR.DimensionCR.TR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ab54c5d76b2911009b3059b510cfa6b78"></span><div class="line-block">
-<div class="line">template &lt; class T &gt;</div>
-<div class="line">void <strong>scale</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; source_dimension, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; destination_dimension, T &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="pdal::PointBuffer::printDimension__DimensionCR.boost::uint32_tC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac704c6cc275092aa7a4f750f7a82bc76"></span><div class="line-block">
-<div class="line">std::string <strong>printDimension</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; dimension, boost::uint32_t index)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-<em>Public Functions</em><blockquote>
-<div><p><span class="target" id="project0classpdal_1_1PointBuffer_1a50d102cc3ae8002cc921a7c44c4bbaab"></span><div class="line-block">
-<div class="line">template &lt; class T &gt;</div>
-<div class="line">void <strong>scale</strong>(<a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; source_dimension, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; destination_dimension, T &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="user-defined">
+<dt>
+<em>private attributes</em></dt>
+<dd><dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a403febf7cb344bcfa293d440705f4969"></span><a class="reference internal" href="schema.html#project0classpdal_1_1Schema"><em>Schema</em></a> <tt class="descname">m_schema</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1af0a092ef24f955268c9a61aad87ae66e"></span>pointbuffer::PointBufferByteSize <tt class="descname">m_data_size</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a4466f694825966882b17deefa2cc2557"></span>boost::shared_array&lt; boost::uint8_t &gt; <tt class="descname">m_data</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a8853b6741a3cf0c523fe64c41e0fdcca"></span>boost::uint32_t <tt class="descname">m_numPoints</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a939fefb4d3d2de9cc1b743c3750a2d6c"></span>boost::uint32_t <tt class="descname">m_capacity</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1aaedffe1d514f9c7c653d8d0000d0635a"></span><a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>Bounds</em></a> &lt; double &gt; <tt class="descname">m_bounds</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a9b84b26549bdd7738152b65cb76d5c65"></span>schema::size_type <tt class="descname">m_byteSize</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a5d964362dde1728b2850d4127cdb2d73"></span><a class="reference internal" href="schema.html#project0namespacepdal_1_1schema_1aea1c8d2f364fd239010c3ba0ee8ffca1"><em>schema::Orientation</em></a> <tt class="descname">m_orientation</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1ab0ac2c2061ef8ac76da23ac1b5db4035"></span><a class="reference internal" href="metadata.html#project0classpdal_1_1Metadata"><em>Metadata</em></a> <tt class="descname">m_metadata</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a86f3876dd58068ab0ccf58da7405e032"></span>pointbuffer::id <tt class="descname">m_uuid</tt></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::scale__DimensionCR.DimensionCR.TR"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ab54c5d76b2911009b3059b510cfa6b78"></span><div class="line">template &lt;class T&gt; </div>
+void <tt class="descname">scale</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>source_dimension</em>, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>destination_dimension</em>, T &amp; <em>value</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::printDimension__DimensionCR.boost::uint32_tC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac704c6cc275092aa7a4f750f7a82bc76"></span>std::string <tt class="descname">printDimension</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>dimension</em>, boost::uint32_t <em>index</em><big>)</big></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="public-func">
+<dt>
+<em>Public Functions</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="project0classpdal_1_1PointBuffer_1a50d102cc3ae8002cc921a7c44c4bbaab"></span><div class="line">template &lt;class T&gt; </div>
+void <tt class="descname">scale</tt><big>(</big><a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>source_dimension</em>, <a class="reference internal" href="dimension.html#project0classpdal_1_1Dimension"><em>Dimension</em></a>  const &amp; <em>destination_dimension</em>, T &amp; <em>value</em><big>)</big></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
