@@ -111,13 +111,14 @@
 </tbody>
 </table>
 <p>PDAL contains a single <a class="reference external" href="http://git-scm.com/">git</a>-style application, called <em>pdal</em>. The <cite>pdal</cite>
-application currently contains four commands:</p>
+application currently contains six commands:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
-<li><a class="reference internal" href="#info-command"><em>info</em></a></li>
-<li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
 <li><a class="reference internal" href="#delta-command"><em>delta</em></a></li>
 <li><a class="reference internal" href="#diff-command"><em>diff</em></a></li>
+<li><a class="reference internal" href="#info-command"><em>info</em></a></li>
+<li><a class="reference internal" href="#pcl-command"><em>pcl</em></a></li>
+<li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
+<li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
 </ul>
 <p>Applications are run by invoking the <em>pdal</em> application along with the
 command name:</p>
@@ -134,92 +135,8 @@ $ pdal translate --drivers
 $ pdal pipeline --options drivers.las.writer
 </pre></div>
 </div>
-<div class="section" id="translate-command">
-<span id="id1"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>translate</em> command is used for simple conversion of files based on their
-file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
-translation operations.</p>
-<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
--o [ --output ] arg          output file name
---a_srs arg                  Assign input coordinate system (if supported by
-                           output format)
---t_srs arg                  Transform to output coordinate system (if
-                           supported by output format)
--z [ --compress ]            Compress output data (if supported by output
-                           format)
---count arg (=0)             How many points should we write?
---skip arg (=0)              How many points should we skip?
---bounds arg                 Extent (in XYZ to clip output to)
---polygon arg                POLYGON WKT to use for precise crop of data (2d
-                           or 3d)
---scale arg                  A comma-separated or quoted, space-separated
-                           list of scales to set on the output file:
-                           --scale 0.1,0.1,0.00001
-                           --scale &quot;0.1 0.1 0.00001&quot;
---offset arg                 A comma-separated or quoted, space-separated
-                           list of offsets to set on the output file:
-                           --offset 0,0,0
-                           --offset &quot;1234 5678 91011&quot;
--m [ --metadata ] [=arg(=1)] Forward metadata (VLRs, header entries, etc)
-                           from previous stages
-</pre></div>
-</div>
-</div>
-<div class="section" id="info-command">
-<span id="id2"></span><h2><tt class="docutils literal"><span class="pre">info</span></tt> command<a class="headerlink" href="#info-command" title="Permalink to this headline">¶</a></h2>
-<p>Dumps information about a point cloud file, such as:</p>
-<ul class="simple">
-<li>basic properties (extents, number of points, point format)</li>
-<li>coordinate reference system</li>
-<li>additional metadata</li>
-<li>summary statistics about the points</li>
-<li>the plain text format should be reStructured text if possible to allow
-a user to retransform the output into whatever they want with ease</li>
-</ul>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal info  test/data/1.2-with-color.las --count 3 --query &quot;636601.87, 849018.59, 425.10&quot;
-</pre></div>
-</div>
-<p>Print the first 10 points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
-<dl class="docutils">
-<dt>::</dt>
-<dd>$ pdal info test/data/1.2-with-color.las -p 0-10</dd>
-</dl>
-<p>Print three selected points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
-<dl class="docutils">
-<dt>::</dt>
-<dd>$ pdal info test/data/1.2-with-color.las -p 4, 16, 28</dd>
-</dl>
-<div class="highlight-python"><div class="highlight"><pre>-p [ --point ] [=arg(=0)] point to dump
---query arg               A 2d or 3d point query point
---distance arg            A query distance
--a [ --stats ]            dump stats on all points (reads entire dataset)
---count arg (=0)          How many points should we write?
---dimensions arg          dump stats on all points (reads entire dataset)
--s [ --schema ]           dump the schema
--m [ --metadata ]         dump the metadata
---sdo_pc                  dump the SDO_PC Oracle Metadata
--r [ --stage ]            dump the stage info
---xml                     dump XML instead of JSON
---seed arg (=0)           Seed value for random sample
---sample_size arg (=1000) Sample size for random sample
-</pre></div>
-</div>
-</div>
-<div class="section" id="pipeline-command">
-<span id="id3"></span><h2><tt class="docutils literal"><span class="pre">pipeline</span></tt> command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
-<p>The pipeline command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See <a class="reference internal" href="tutorial/reading.html#reading"><em>Reading with PDAL</em></a>
-or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> for more information.</p>
-<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
---pipeline-serialization arg
---validate                   Validate the pipeline (including serialization),
-                           but do not execute writing of points
---count arg (=0)             How many points should we write?
---skip arg (=0)              How many points should we skip?
-</pre></div>
-</div>
-</div>
 <div class="section" id="delta-command">
-<span id="id4"></span><h2><tt class="docutils literal"><span class="pre">delta</span></tt> command<a class="headerlink" href="#delta-command" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2><tt class="docutils literal"><span class="pre">delta</span></tt> command<a class="headerlink" href="#delta-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>delta</em> command is used to select a nearest point from a candidate file
 for each point in the source file. If the <tt class="docutils literal"><span class="pre">--2d</span></tt> option is used, the
 query only happens in XY coordinate space.</p>
@@ -261,7 +178,7 @@ query only happens in XY coordinate space.</p>
 </div>
 </div>
 <div class="section" id="diff-command">
-<span id="id5"></span><h2><tt class="docutils literal"><span class="pre">diff</span></tt> command<a class="headerlink" href="#diff-command" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2><tt class="docutils literal"><span class="pre">diff</span></tt> command<a class="headerlink" href="#diff-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>diff</em> command is used for executing a simple contextual difference
 between two sources.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal diff test/data/1.2-with-color.las test/data/1.2-with-color-clipped.las
@@ -278,6 +195,102 @@ checking the following:</p>
 <li>Byte-by-byte point data</li>
 </ul>
 </div>
+<div class="section" id="info-command">
+<span id="id3"></span><h2><tt class="docutils literal"><span class="pre">info</span></tt> command<a class="headerlink" href="#info-command" title="Permalink to this headline">¶</a></h2>
+<p>Dumps information about a point cloud file, such as:</p>
+<ul class="simple">
+<li>basic properties (extents, number of points, point format)</li>
+<li>coordinate reference system</li>
+<li>additional metadata</li>
+<li>summary statistics about the points</li>
+<li>the plain text format should be reStructured text if possible to allow
+a user to retransform the output into whatever they want with ease</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info  test/data/1.2-with-color.las --count 3 --query &quot;636601.87, 849018.59, 425.10&quot;
+</pre></div>
+</div>
+<p>Print the first 10 points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>$ pdal info test/data/1.2-with-color.las -p 0-10</dd>
+</dl>
+<p>Print three selected points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>$ pdal info test/data/1.2-with-color.las -p 4, 16, 28</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre>-p [ --point ] [=arg(=0)] point to dump
+--query arg               A 2d or 3d point query point
+--distance arg            A query distance
+-a [ --stats ]            dump stats on all points (reads entire dataset)
+--count arg (=0)          How many points should we write?
+--dimensions arg          dump stats on all points (reads entire dataset)
+-s [ --schema ]           dump the schema
+-m [ --metadata ]         dump the metadata
+--sdo_pc                  dump the SDO_PC Oracle Metadata
+-r [ --stage ]            dump the stage info
+--xml                     dump XML instead of JSON
+--seed arg (=0)           Seed value for random sample
+--sample_size arg (=1000) Sample size for random sample
+</pre></div>
+</div>
+</div>
+<div class="section" id="pcl-command">
+<span id="id4"></span><h2><tt class="docutils literal"><span class="pre">pcl</span></tt> command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>pcl</em> command is used to invoke a PCL JSON pipeline. See
+<a class="reference internal" href="tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a> for more information.</p>
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg      input file name
+-o [ --output ] arg     output file name
+-p [ --pcl ] arg        pcl file name
+-z [ --compress ]       Compress output data (if supported by output format)
+</pre></div>
+</div>
+<p>The <em>pcl</em> command is only available when PDAL is build with PCL support.</p>
+</div>
+<div class="section" id="pipeline-command">
+<span id="id5"></span><h2><tt class="docutils literal"><span class="pre">pipeline</span></tt> command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>pipeline</em> command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See <a class="reference internal" href="tutorial/reading.html#reading"><em>Reading with PDAL</em></a>
+or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> for more information.</p>
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
+--pipeline-serialization arg
+--validate                   Validate the pipeline (including serialization),
+                           but do not execute writing of points
+--count arg (=0)             How many points should we write?
+--skip arg (=0)              How many points should we skip?
+</pre></div>
+</div>
+</div>
+<div class="section" id="translate-command">
+<span id="id6"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>translate</em> command is used for simple conversion of files based on their
+file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
+translation operations.</p>
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
+-o [ --output ] arg          output file name
+--a_srs arg                  Assign input coordinate system (if supported by
+                           output format)
+--t_srs arg                  Transform to output coordinate system (if
+                           supported by output format)
+-z [ --compress ]            Compress output data (if supported by output
+                           format)
+--count arg (=0)             How many points should we write?
+--skip arg (=0)              How many points should we skip?
+--bounds arg                 Extent (in XYZ to clip output to)
+--polygon arg                POLYGON WKT to use for precise crop of data (2d
+                           or 3d)
+--scale arg                  A comma-separated or quoted, space-separated
+                           list of scales to set on the output file:
+                           --scale 0.1,0.1,0.00001
+                           --scale &quot;0.1 0.1 0.00001&quot;
+--offset arg                 A comma-separated or quoted, space-separated
+                           list of offsets to set on the output file:
+                           --offset 0,0,0
+                           --offset &quot;1234 5678 91011&quot;
+-m [ --metadata ] [=arg(=1)] Forward metadata (VLRs, header entries, etc)
+                           from previous stages
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -293,11 +306,12 @@ checking the following:</p>
   <h3><a href="docs.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">PDAL Applications</a><ul>
-<li><a class="reference internal" href="#translate-command"><tt class="docutils literal"><span class="pre">translate</span></tt> command</a></li>
-<li><a class="reference internal" href="#info-command"><tt class="docutils literal"><span class="pre">info</span></tt> command</a></li>
-<li><a class="reference internal" href="#pipeline-command"><tt class="docutils literal"><span class="pre">pipeline</span></tt> command</a></li>
 <li><a class="reference internal" href="#delta-command"><tt class="docutils literal"><span class="pre">delta</span></tt> command</a></li>
 <li><a class="reference internal" href="#diff-command"><tt class="docutils literal"><span class="pre">diff</span></tt> command</a></li>
+<li><a class="reference internal" href="#info-command"><tt class="docutils literal"><span class="pre">info</span></tt> command</a></li>
+<li><a class="reference internal" href="#pcl-command"><tt class="docutils literal"><span class="pre">pcl</span></tt> command</a></li>
+<li><a class="reference internal" href="#pipeline-command"><tt class="docutils literal"><span class="pre">pipeline</span></tt> command</a></li>
+<li><a class="reference internal" href="#translate-command"><tt class="docutils literal"><span class="pre">translate</span></tt> command</a></li>
 </ul>
 </li>
 </ul>
@@ -321,7 +335,7 @@ checking the following:</p>
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on May 29, 2014.
+                    on May 30, 2014.
         </div>
     </div>
 
