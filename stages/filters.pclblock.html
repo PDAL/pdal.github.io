@@ -190,7 +190,38 @@ of this writing includes:</p>
 </dl>
 </div>
 <div class="section" id="progressivemorphologicalfilter">
-<h3>ProgressiveMorphologicalFilter<a class="headerlink" href="#progressivemorphologicalfilter" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>ProgressiveMorphologicalFilter<a class="headerlink" href="#progressivemorphologicalfilter" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>setMaxWindowSize</dt>
+<dd>The maximum window size for applying morphological operations. Objects larger
+than the specified window size will be retained, while objects that are
+smaller than the window size will be replaced by the minimum z value for the
+window. [Default: <strong>33.0</strong>]</dd>
+<dt>setSlope</dt>
+<dd>The terrain slope is used to compute the elevation difference threshold for a
+given iteration (i.e., window size). Slope is given as the ratio of rise over
+run, not degrees. Therefore, the default of 1 corresponds to a slope of 45
+degrees. [Default: <strong>1.0</strong>]</dd>
+<dt>setMaxDistance</dt>
+<dd>The maximum elevation difference threshold. For scenes with buildings, this
+should be the height of the lowest building. For more rural settings, this is
+commonly the largest elevation difference in the study area. [Default:
+<strong>2.5</strong>]</dd>
+<dt>setInitialDistance</dt>
+<dd>The initial elevation difference threshold. Points within this threshold of
+the estimated surface are classified as ground returns. [Default: <strong>0.15</strong>]</dd>
+<dt>setCellSize</dt>
+<dd>The cell size. [Default: <strong>1.0</strong>]</dd>
+<dt>setBase</dt>
+<dd>The base of an exponential function/initial cell size in computing
+progressive window size at each iteration. [Default: <strong>2.0</strong>]</dd>
+<dt>setExponential</dt>
+<dd>Whether or not to increase the window size exponentially, thus reducing the
+number of iterations. [Default: <strong>true</strong>]</dd>
+<dt>setNegative</dt>
+<dd>Whether to return non-ground (true) or ground (false) measurements. [Default:
+<strong>false</strong>]</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -241,7 +272,7 @@ of this writing includes:</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jul 08, 2014.
+                    on Jul 09, 2014.
         </div>
     </div>
 

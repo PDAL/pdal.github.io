@@ -98,21 +98,6 @@
                     
   <div class="section" id="filtering-data-with-pcl">
 <span id="pcl-block-tutorial"></span><h1>Filtering data with PCL<a class="headerlink" href="#filtering-data-with-pcl" title="Permalink to this headline">¶</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title first">Contents</p>
-<ul class="simple">
-<li><a class="reference internal" href="#filtering-data-with-pcl" id="id1">Filtering data with PCL</a><ul>
-<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
-<li><a class="reference internal" href="#pcl-block-as-a-stage-in-the-pdal-pipeline" id="id3">PCL Block as a stage in the PDAL Pipeline</a><ul>
-<li><a class="reference internal" href="#simple-point-cloud-cropping" id="id4">Simple point cloud cropping</a></li>
-<li><a class="reference internal" href="#point-cloud-cropping-with-outlier-removal" id="id5">Point cloud cropping with outlier removal</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#pcl-block-quick-start" id="id6">PCL Block Quick Start</a></li>
-</ul>
-</li>
-</ul>
-</div>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>PDAL is both a C++ library and a collection of command-line utilities for data
@@ -128,9 +113,55 @@ development of point cloud processing pipelines.</p>
 <p class="first admonition-title">See also</p>
 <p class="last">See <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><em>filters.pclblock</em></a> for details on PDAL&#8217;s PCL Block filter.</p>
 </div>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#filtering-data-with-pcl" id="id1">Filtering data with PCL</a><ul>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#quick-start" id="id3">Quick Start</a></li>
+<li><a class="reference internal" href="#pdal-pipeline-kernel" id="id4">PDAL Pipeline kernel</a></li>
+<li><a class="reference internal" href="#pdal-pcl-kernel" id="id5">PDAL PCL kernel</a></li>
+<li><a class="reference internal" href="#examples" id="id6">Examples</a><ul>
+<li><a class="reference internal" href="#simple-point-cloud-cropping" id="id7">Simple point cloud cropping</a></li>
+<li><a class="reference internal" href="#point-cloud-cropping-with-outlier-removal" id="id8">Point cloud cropping with outlier removal</a></li>
+<li><a class="reference internal" href="#ground-return-filtering" id="id9">Ground return filtering</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
-<div class="section" id="pcl-block-as-a-stage-in-the-pdal-pipeline">
-<h2>PCL Block as a stage in the PDAL Pipeline<a class="headerlink" href="#pcl-block-as-a-stage-in-the-pdal-pipeline" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Instructions for getting started with PDAL using Vagrant and VirtualBox
+can be found in the <a class="reference internal" href="../vagrant.html#vagrant"><em>Getting Started with PDAL using Vagrant and VirtualBox</em></a> document.</p>
+</div>
+<p>PDAL&#8217;s Vagrant configuration now includes the PCL Block and all necessary
+dependencies. Assuming you&#8217;ve got Vagrant all set up, once you checkout the
+PDAL source code, just do the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd pdal
+$ vagrant up
+$ vagrant ssh
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">vagrant</span> <span class="pre">up</span></tt> command will take a considerable amount of time, but once
+its completed you have a fully functional VM with both PCL and PDAL installed.
+Try entering</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline --version
+</pre></div>
+</div>
+<p>at the command line. You should see output similar to the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>------------------------------------------------------------------------------------------
+pdal pipeline (PDAL 0.9.9 (2c6aa8) with GeoTIFF 1.4.0 GDAL 1.9.2 LASzip 2.2.0 System )
+------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+</div>
+<div class="section" id="pdal-pipeline-kernel">
+<h2>PDAL Pipeline kernel<a class="headerlink" href="#pdal-pipeline-kernel" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">A full description of the PDAL pipeline concept is beyond the scope of this
@@ -167,6 +198,84 @@ is shown below.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline -i /path/to/xml
 </pre></div>
 </div>
+<p>This simple pipeline reads the input LAS (<tt class="docutils literal"><span class="pre">input_cloud.las</span></tt>), passes it
+through the PCL Block (<tt class="docutils literal"><span class="pre">block.json</span></tt>), and writes the output LAS
+(<tt class="docutils literal"><span class="pre">filtered_cloud.las</span></tt>).</p>
+<p>You can also try running the PassThrough PCL Block pipeline similar to our
+example above by typing</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline -i pdal/test/data/filters/pcl_passthrough.xml -v4
+</pre></div>
+</div>
+<p>which should produce</p>
+<div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
+Requested to write 106 points
+0
+Processing /home/vagrant/pdal/test/data/filters/pcl/passthrough.json
+
+--------------------------------------------------------------------------------
+NAME:   PassThroughExample ()
+HELP:
+AUTHOR:
+--------------------------------------------------------------------------------
+106 points copied
+
+   Step 1) PassThrough
+
+      Field name: z
+      Limits: 410.000000, 440.000000
+
+76(drivers.las.writer DEBUG: 3): Wrote 81 points to the LAS file
+.100
+</pre></div>
+</div>
+</div>
+<div class="section" id="pdal-pcl-kernel">
+<h2>PDAL PCL kernel<a class="headerlink" href="#pdal-pcl-kernel" title="Permalink to this headline">¶</a></h2>
+<p>For users that would like to bypass the creation (and subsequent modification)
+of the pipeline XML for every file they wish to process, there is another
+option&#8211;the <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></tt> command.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i /path/to/input/las -p /path/to/pcl/block/json -o /path/to/output/las
+</pre></div>
+</div>
+<p>This is functionally equivalent to the original pipeline, but does not afford
+the flexibility of constructing the pipeline (i.e., none the other PDAL filters
+are accessible).</p>
+<p>The same can be accomplished with the <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></tt> command. The basic syntax
+for the command is</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i &lt;input cloud&gt; -p &lt;PCL Block JSON&gt; -o &lt;output cloud&gt;
+</pre></div>
+</div>
+<p>where the JSON file specified with <tt class="docutils literal"><span class="pre">-p</span></tt> is the same file that would be
+embedded in the pipeline XML file. This can be useful when the pipeline
+does not change frequently, but the input/output filenames do.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i test/data/autzen-point-format-3.las -p test/data/filters/pcl/passthrough.json -o test/temp/foo.las -v4
+</pre></div>
+</div>
+<p>which should produce</p>
+<div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
+Requested to write 106 points
+0
+Processing /home/vagrant/pdal/test/data/filters/pcl/passthrough.json
+
+--------------------------------------------------------------------------------
+NAME:   PassThroughExample ()
+HELP:
+AUTHOR:
+--------------------------------------------------------------------------------
+106 points copied
+
+   Step 1) PassThrough
+
+      Field name: z
+      Limits: 410.000000, 440.000000
+
+76(drivers.las.writer DEBUG: 3): Wrote 81 points to the LAS file
+.100
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="simple-point-cloud-cropping">
 <h3>Simple point cloud cropping<a class="headerlink" href="#simple-point-cloud-cropping" title="Permalink to this headline">¶</a></h3>
 <p>The power of the PCL Block is really exposed through the JSON description. In
@@ -218,61 +327,46 @@ their public member functions by name.</p>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="pcl-block-quick-start">
-<h2>PCL Block Quick Start<a class="headerlink" href="#pcl-block-quick-start" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Instructions for getting started with PDAL using Vagrant and VirtualBox
-can be found in the <a class="reference internal" href="../vagrant.html#vagrant"><em>Getting Started with PDAL using Vagrant and VirtualBox</em></a> document.</p>
-</div>
-<p>PDAL&#8217;s Vagrant configuration now includes the PCL Block and all necessary
-dependencies. Assuming you&#8217;ve got Vagrant all set up, once you checkout the
-PDAL source code, just do the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ cd pdal
-$ vagrant up
-$ vagrant ssh
+<div class="section" id="ground-return-filtering">
+<h3>Ground return filtering<a class="headerlink" href="#ground-return-filtering" title="Permalink to this headline">¶</a></h3>
+<p>The Progressive Morphological Filter (PMF) is an openly published approach to
+identifying ground vs. non-ground returns in point cloud data. An
+implementation of PMF is included with PCL and accessible through the PDAL&#8217;s
+PCL Block filter.</p>
+<p>A complete description of the algorithm can be found in the article <a class="reference external" href="http://users.cis.fiu.edu/~chens/PDF/TGRS.pdf">&#8220;A
+Progressive Morphological Filter for Removing Nonground Measurements from
+Airborne LIDAR Data&#8221;</a> by K.
+Zhang, S.  Chen, D. Whitman, M. Shyu, J. Yan, and C. Zhang.</p>
+<p>To run the PMF with default settings, the PCL Block JSON is simply:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterDefaultExample&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span>
+    <span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">`vagrant</span> <span class="pre">up`</span></tt> command will take a considerable amount of time, but once
-its completed you have a fully functional VM with both PCL and PDAL installed.
-Try entering</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline --version
+<p>Additional parameters can be set by advanced users:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterAdvancedExample&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="nt">&quot;setSlope&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&quot;setInitialDistance&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="nt">&quot;setMaxDistance&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="nt">&quot;setExponential&quot;</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>at the command line. You should see</p>
-<div class="highlight-python"><div class="highlight"><pre>------------------------------------------------------------------------------------------
-pdal pipeline (PDAL 0.9.9 (2c6aa8) with GeoTIFF 1.4.0 GDAL 1.9.2 LASzip 2.2.0 System )
-------------------------------------------------------------------------------------------
-</pre></div>
-</div>
-<p>(though the versions may differ slightly).</p>
-<p>You can also try running the a PassThrough PCL Block pipeline similar to our
-example above by typing</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline -i pdal/test/data/filters/pcl_passthrough.xml -v4
-</pre></div>
-</div>
-<p>which should produce</p>
-<div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
-Requested to write 106 points
-0
-Processing /home/vagrant/pdal/test/data/filters/pcl/passthrough.json
-
---------------------------------------------------------------------------------
-NAME:   PassThroughExample ()
-HELP:
-AUTHOR:
---------------------------------------------------------------------------------
-106 points copied
-
-   Step 1) PassThrough
-
-      Field name: z
-      Limits: 410.000000, 440.000000
-
-76(drivers.las.writer DEBUG: 3): Wrote 81 points to the LAS file
-.100
-</pre></div>
+<p>See <a class="reference internal" href="../stages/filters.pclblock.html#progressivemorphologicalfilter"><em>here</em></a> for a more detailed
+explanation of the PMF parameters.</p>
 </div>
 </div>
 </div>
@@ -291,12 +385,15 @@ AUTHOR:
   <ul>
 <li><a class="reference internal" href="#">Filtering data with PCL</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#pcl-block-as-a-stage-in-the-pdal-pipeline">PCL Block as a stage in the PDAL Pipeline</a><ul>
+<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li><a class="reference internal" href="#pdal-pipeline-kernel">PDAL Pipeline kernel</a></li>
+<li><a class="reference internal" href="#pdal-pcl-kernel">PDAL PCL kernel</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
 <li><a class="reference internal" href="#simple-point-cloud-cropping">Simple point cloud cropping</a></li>
 <li><a class="reference internal" href="#point-cloud-cropping-with-outlier-removal">Point cloud cropping with outlier removal</a></li>
+<li><a class="reference internal" href="#ground-return-filtering">Ground return filtering</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#pcl-block-quick-start">PCL Block Quick Start</a></li>
 </ul>
 </li>
 </ul>
@@ -320,7 +417,7 @@ AUTHOR:
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jul 08, 2014.
+                    on Jul 09, 2014.
         </div>
     </div>
 
