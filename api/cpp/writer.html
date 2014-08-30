@@ -107,13 +107,11 @@
 <em>Public Functions</em></dt>
 <dd><dl class="function">
 <dt>
-<span class="target" id="pdal::Writer::Writer__StageR.OptionsCR"></span><span class="target" id="project0classpdal_1_1Writer_1a7b2dedfe3777cc9b1ebe5059525459c4"></span><tt class="descname">Writer</tt><big>(</big><a class="reference internal" href="stage.html#project0classpdal_1_1Stage"><em>Stage</em></a>  &amp; <em>prevStage</em>, <a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a>  const &amp; <em>options</em><big>)</big></dt>
+<span class="target" id="pdal::Writer::Writer__OptionsCR"></span><span class="target" id="project0classpdal_1_1Writer_1abd71a7730c4eb08d151b4a6cbbcce9a1"></span><tt class="descname">Writer</tt><big>(</big><a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a>  const &amp; <em>options</em><big>)</big></dt>
 <dd><p>Constructs an end-stage consumer of a pipeline of data  a writer. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">prevStage</span></tt> - <p>The non-Writer stage in the pipeline </p>
-</li>
 <li><tt class="first docutils literal"><span class="pre">options</span></tt> - <p>options to be passed into the writer. </p>
 </li>
 </ul>
@@ -124,36 +122,8 @@
 
 <dl class="function">
 <dt>
-<span class="target" id="pdal::Writer::~Writer"></span><span class="target" id="project0classpdal_1_1Writer_1aeca39bd390565d72f851efec97407708"></span><tt class="descname">~Writer</tt><big>(</big><big>)</big></dt>
-<dd><p>Virtual destructor for <a class="reference internal" href="#project0classpdal_1_1Writer"><em>Writer</em></a>. </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Writer::initialize"></span><span class="target" id="project0classpdal_1_1Writer_1a1df380d8309d55ae7c9586c816ff9c72"></span>void <tt class="descname">initialize</tt><big>(</big><big>)</big></dt>
-<dd><p>&#8220;Wakes up&#8221; the <a class="reference internal" href="#project0classpdal_1_1Writer"><em>Writer</em></a> and starts the process of walking down the pipeline to wake up all subsequent stages of the pipeline. </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Writer::write__boost::uint64_t.boost::uint64_t.boost::uint64_t"></span><span class="target" id="project0classpdal_1_1Writer_1abb4695cbd026291adcc0d5f27befb8a9"></span>boost::uint64_t <tt class="descname">write</tt><big>(</big>boost::uint64_t <em>targetNumPointsToWrite</em> = 0, boost::uint64_t <em>startingPosition</em> = 0, boost::uint64_t <em>chunkSize</em> = 0<big>)</big></dt>
-<dd><p>Read the given number of points (or less, if the reader runs out first), and then write them out to wherever. </p>
-<p>Returns total number of points actually written. <dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>The number of points that were written. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">targetNumPointsToWrite</span></tt> - <p>The number of points to write. If given number of points is 0, do as many points as the reader supplies to us. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">startingPosition</span></tt> - <p>The starting position to start reading from This position is arrived at by the prevStage&#8217;s seekImpl. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">chunkSize</span></tt> - <p>The chunk size, or size of the internal <a class="reference internal" href="#project0classpdal_1_1Writer"><em>Writer</em></a>&#8216;s buffer, to use. If no chunkSize is specified, a chunkSize that defaults to the <a class="reference internal" href="stage.html#project0classpdal_1_1Stage_1a4e1da7f50375babd7e94d876d188422a"><em>Stage::getNumPoints()</em></a> is used. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+<span class="target" id="pdal::Writer::Writer"></span><span class="target" id="project0classpdal_1_1Writer_1a0dbc19e30f1f2d24a4d39da23828edd2"></span><tt class="descname">Writer</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt>
@@ -168,55 +138,16 @@
 
 <dl class="function">
 <dt>
-<span class="target" id="pdal::Writer::getPointBufferC"></span><span class="target" id="project0classpdal_1_1Writer_1a003e89688f4f65bdef3468db332c57ea"></span><a class="reference internal" href="pointbuffer.html#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>  const * <tt class="descname">getPointBuffer</tt><big>(</big><big>)</big></dt>
-<dd><p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the internal working <a class="reference internal" href="pointbuffer.html#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a> of the <a class="reference internal" href="#project0classpdal_1_1Writer"><em>Writer</em></a> </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Writer::getSpatialReferenceC"></span><span class="target" id="project0classpdal_1_1Writer_1a38478470801c345eecf18898a574b9f2"></span>SpatialReference  const &amp; <tt class="descname">getSpatialReference</tt><big>(</big><big>)</big></dt>
-<dd><p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the SpatialReference for the <a class="reference internal" href="#project0classpdal_1_1Writer"><em>pdal::Writer</em></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Writer::setSpatialReference__X"></span><span class="target" id="project0classpdal_1_1Writer_1a478360d5475139650005d68b47b4e8a8"></span>void <tt class="descname">setSpatialReference</tt><big>(</big>SpatialReference  const &amp;<big>)</big></dt>
-<dd><p>Set this SpatialReference to assign the output SpatialReference of the written data. </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
 <span class="target" id="pdal::Writer::setUserCallback__UserCallbackP"></span><span class="target" id="project0classpdal_1_1Writer_1aab6d2db01d9053e29f1c0c61c97d1e82"></span>void <tt class="descname">setUserCallback</tt><big>(</big>UserCallback  * <em>userCallback</em><big>)</big></dt>
 <dd><p>Sets the UserCallback to manage progress/cancel operations. </p>
 </dd></dl>
 
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Writer::getUserCallbackC"></span><span class="target" id="project0classpdal_1_1Writer_1abb5da6eba2e628f5e126b976a5208dca"></span>UserCallback  * <tt class="descname">getUserCallback</tt><big>(</big><big>)</big></dt>
-<dd><p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the UserCallback that manages progress/cancel operations </dd>
-</dl>
-</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="protected-func">
+<dl class="protected-attrib">
 </dl>
 
 <dl class="private-func">
-</dl>
-
-<dl class="private-attrib">
 </dl>
 
 </dd></dl>
@@ -252,7 +183,7 @@
                         <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Aug 29, 2014.
+                    on Aug 30, 2014.
         </div>
     </div>
 

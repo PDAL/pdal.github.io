@@ -106,7 +106,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">hobu.inc at gmail dot com</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">10/21/2013</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">9/1/2014</td>
 </tr>
 </tbody>
 </table>
@@ -127,13 +127,32 @@ $ pdal translate input.las output.las
 $ pdal pipeline --stdin &lt; myxml.xml
 </pre></div>
 </div>
-<p>Help about each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch,
-and the <tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about
-particular drivers and their options</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em class="xref std std-ref">pcl</em> command is only available if PCL is linked.</p>
+</div>
+<p>Help about each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch.
+The <tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about
+particular drivers and their options:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info --help
 $ pdal translate --drivers
 $ pdal pipeline --options drivers.las.writer
 </pre></div>
+</div>
+<p>Additional, driver-specific options may be specified by using a
+namespace-prefixed option name. For example, it is possible to
+set the LAS day of year at translation time with the following
+option:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate \
+--drivers.las.writer.creation_doy=&quot;42&quot; \
+input.las
+output.las
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Driver specific options can be identified using the
+<tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></tt> invocation.</p>
 </div>
 <div class="section" id="delta-command">
 <span id="id1"></span><h2><tt class="docutils literal"><span class="pre">delta</span></tt> command<a class="headerlink" href="#delta-command" title="Permalink to this headline">¶</a></h2>
@@ -290,6 +309,20 @@ translation operations.</p>
                            from previous stages
 </pre></div>
 </div>
+<p>The translate command can be augmented by specifying full-path options at the
+command line invocation. For example, the following invocation will translate
+<cite>1.2-with-color.las</cite> to <cite>output.laz</cite> while doing the following:</p>
+<ul class="simple">
+<li>Setting the creation day of year to 42</li>
+<li>Setting the creation year to 2014</li>
+<li>Setting the LAS point format to 1</li>
+<li>Cropping the file with the given polygon</li>
+</ul>
+<p><a href="#id7"><span class="problematic" id="id8">``</span></a>`
+./bin/pdal translate </p>
+<blockquote>
+<div>&#8211;drivers.las.writer.creation_doy=&#8221;42&#8221; &#8211;drivers.las.writer.creation_year=&#8221;2014&#8221; &#8211;drivers.las.writer.format=&#8221;1&#8221; &#8211;filters.crop.polygon=&#8221;POLYGON ((636889.412951239268295 851528.512293258565478 422.7001953125,636899.14233423944097 851475.000686757150106 422.4697265625,636899.14233423944097 851475.000686757150106 422.4697265625,636928.33048324030824 851494.459452757611871 422.5400390625,636928.33048324030824 851494.459452757611871 422.5400390625,636928.33048324030824 851494.459452757611871 422.5400390625,636976.977398241520859 851513.918218758190051 424.150390625,636976.977398241520859 851513.918218758190051 424.150390625,637069.406536744092591 851475.000686757150106 438.7099609375,637132.647526245797053 851445.812537756282836 425.9501953125,637132.647526245797053 851445.812537756282836 425.9501953125,637336.964569251285866 851411.759697255445644 425.8203125,637336.964569251285866 851411.759697255445644 425.8203125,637473.175931254867464 851158.795739248627797 435.6298828125,637589.928527257987298 850711.244121236610226 420.509765625,637244.535430748714134 850511.791769731207751 420.7998046875,636758.066280735656619 850667.461897735483944 434.609375,636539.155163229792379 851056.63721774588339 422.6396484375,636889.412951239268295 851528.512293258565478 422.7001953125))&#8221; ./test/data/1.2-with-color.las output.laz</div></blockquote>
+<p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a></p>
 </div>
 </div>
 
@@ -335,7 +368,7 @@ translation operations.</p>
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Aug 29, 2014.
+                    on Aug 30, 2014.
         </div>
     </div>
 

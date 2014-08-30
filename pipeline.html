@@ -130,8 +130,8 @@ end point.</p>
 set.</p>
 <p><a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> is the substrate that flows between stages in a
 pipeline and transfers the actual data as it moves through the pipeline. A
-<a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> contains a <a class="reference internal" href="api/cpp/schema.html#pdal::Schema" title="pdal::Schema"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt></a>, which
-itself contains a list of <a class="reference internal" href="api/cpp/dimension.html#pdal::Dimension" title="pdal::Dimension"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt></a> objects that define the
+<a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> contains a <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt>, which
+itself contains a list of <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> objects that define the
 actual channels that are stored in the <a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a>.</p>
 <p>PDAL provides four types of stages &#8211; <a class="reference internal" href="api/cpp/reader.html#pdal::Reader" title="pdal::Reader"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></tt></a>,
 <a class="reference internal" href="api/cpp/writer.html#pdal::Writer" title="pdal::Writer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></tt></a>, <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></tt>, and
@@ -146,19 +146,19 @@ come along that stores the data non-interleaved for situations where that
 data arrangement is well-suited. Patches graciously accepted :)</p>
 </div>
 <div class="section" id="a-diversion-about-pdal-schema-and-pdal-dimension">
-<h3>A diversion about <a class="reference internal" href="api/cpp/schema.html#pdal::Schema" title="pdal::Schema"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt></a> and <a class="reference internal" href="api/cpp/dimension.html#pdal::Dimension" title="pdal::Dimension"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt></a><a class="headerlink" href="#a-diversion-about-pdal-schema-and-pdal-dimension" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> is composed of a <a class="reference internal" href="api/cpp/schema.html#pdal::Schema" title="pdal::Schema"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt></a>
-that itself contains a list of <a class="reference internal" href="api/cpp/dimension.html#pdal::Dimension" title="pdal::Dimension"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt></a> objects. A
-<a class="reference internal" href="api/cpp/dimension.html#pdal::Dimension" title="pdal::Dimension"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt></a> defines the properties of the data channel like
+<h3>A diversion about <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt> and <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt><a class="headerlink" href="#a-diversion-about-pdal-schema-and-pdal-dimension" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> is composed of a <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt>
+that itself contains a list of <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> objects. A
+<tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> defines the properties of the data channel like
 its size in bytes, its name, and its interpretation.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">As of this writing, <a class="reference internal" href="api/cpp/stage.html#pdal::Stage" title="pdal::Stage"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></tt></a> also has a
-<a class="reference internal" href="api/cpp/schema.html#pdal::Schema" title="pdal::Schema"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt></a> instance, but this merely exists to collect the
-<a class="reference internal" href="api/cpp/dimension.html#pdal::Dimension" title="pdal::Dimension"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt></a> that a <a class="reference internal" href="api/cpp/stage.html#pdal::Stage" title="pdal::Stage"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></tt></a> is currently
+<tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt> instance, but this merely exists to collect the
+<tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> that a <a class="reference internal" href="api/cpp/stage.html#pdal::Stage" title="pdal::Stage"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></tt></a> is currently
 capable of providing. The model is likely to change to simply providing a
-list of <a class="reference internal" href="api/cpp/dimension.html#pdal::Dimension" title="pdal::Dimension"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt></a> instances that are available, and the
-person composing the <a class="reference internal" href="api/cpp/schema.html#pdal::Schema" title="pdal::Schema"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt></a> will worry about their order
+list of <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> instances that are available, and the
+person composing the <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt> will worry about their order
 and other schema properties.</p>
 </div>
 </div>
@@ -540,7 +540,7 @@ directory.)</p>
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Aug 29, 2014.
+                    on Aug 30, 2014.
         </div>
     </div>
 
