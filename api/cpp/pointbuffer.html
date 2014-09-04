@@ -101,102 +101,7 @@
 <dl class="pdal::PointBuffer">
 <dt>
 <span class="target" id="pdal::PointBuffer"></span><span class="target" id="project0classpdal_1_1PointBuffer"></span><em>class</em> <tt class="descname">pdal::PointBuffer</tt></dt>
-<dd><dl class="user-defined">
-<dt>
-<em>Serialization</em></dt>
-<dd><dl class="variable">
-<dt>
-<span class="target" id="project0classpdal_1_1PointBuffer_1a2685d6086f76d2dd9ef28d873f90d9fc"></span>PointContext <tt class="descname">m_context</tt></dt>
-<dd></dd></dl>
-
-<dl class="variable">
-<dt>
-<span class="target" id="project0classpdal_1_1PointBuffer_1abc10231c6c946f931a6561a362e267ba"></span>std::vector&lt;  PointId  &gt; <tt class="descname">m_index</tt></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::toPTreeC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a8a5cf92646d936fc53b4ac94c2928fd1"></span>boost::property_tree::ptree <tt class="descname">toPTree</tt><big>(</big><big>)</big></dt>
-<dd><p>returns a boost::property_tree containing the point records, which is useful for dumping and such. <div class="highlight-python"><div class="highlight"><pre>0:
-    X: 1.00
-    Y: 2.00
-    Z: 3.00
-1:
-    X: 1.00
-    Y: 2.00
-    Z: 3.00
-</pre></div>
-</div>
- </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::toRST__osRC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac89cf7de8c37cd3141e47b56edbc8369"></span>std::ostream &amp; <tt class="descname">toRST</tt><big>(</big>std::ostream &amp; <em>os</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::calculateBounds__bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a2f9f7ad7d2687f42f1530e2f3d4f1bc1"></span><a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>pdal::Bounds</em></a> &lt; double &gt; <tt class="descname">calculateBounds</tt><big>(</big>bool <em>bis3d</em> = true<big>)</big></dt>
-<dd><p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a cumulated bounds of all points in the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>. <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This method requires that an <cite>X</cite>, <cite>Y</cite>, and <cite>Z</cite> dimension be
-available, and that it can be casted into a <em>double</em> data
-type using the <tt class="xref cpp cpp-func docutils literal"><span class="pre">pdal::Dimension::applyScaling()</span></tt>
-method. Otherwise, an exception will be thrown.</p>
-</div>
- </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::dump__osRC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa2d4e14851750da2d3bbf56055b76ca3"></span>void <tt class="descname">dump</tt><big>(</big>std::ostream &amp; <em>ostr</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::hasDim__Dimension::Id::EnumC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a448d18f3a763681987bd6f667a48ff2e"></span>bool <tt class="descname">hasDim</tt><big>(</big>Dimension::Id::Enum <em>id</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::dimName__Dimension::Id::EnumC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1abb8a61d355eef96a3f504aac99578a18"></span>std::string <tt class="descname">dimName</tt><big>(</big>Dimension::Id::Enum <em>id</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::dimsC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac2ad01f770ad7fa4d981b16a15f9b638"></span>Dimension::IdList <tt class="descname">dims</tt><big>(</big><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::convertAndSet__Dimension::Id::Enum.PointId.T_IN"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a6a87e7d7f7e53449709aceed1b1380d7"></span><div class="line">template &lt;typename T_IN, typename T_OUT&gt; </div>
-void <tt class="descname">convertAndSet</tt><big>(</big>Dimension::Id::Enum <em>dim</em>, PointId <em>idx</em>, T_IN <em>in</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::setFieldInternal__Dimension::Id::Enum.PointId.voidCP"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a8f6a30dfc4355aeaa8007e9f1dc4179c"></span>void <tt class="descname">setFieldInternal</tt><big>(</big>Dimension::Id::Enum <em>dim</em>, PointId <em>pointIndex</em>, const void * <em>value</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::getFieldInternal__Dimension::Id::Enum.PointIdC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aafb3541f9abe16ebbde5835a460eca4b"></span><div class="line">template &lt;class T&gt; </div>
-T <tt class="descname">getFieldInternal</tt><big>(</big>Dimension::Id::Enum <em>dim</em>, PointId <em>pointIndex</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::PointBuffer::getFieldInternal__Dimension::Id::Enum.PointId.voidPC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac62f17699a96a106dc4ef462ab275c3d"></span>void <tt class="descname">getFieldInternal</tt><big>(</big>Dimension::Id::Enum <em>dim</em>, PointId <em>pointIndex</em>, void * <em>value</em><big>)</big></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="public-func">
+<dd><dl class="public-func">
 <dt>
 <em>Public Functions</em></dt>
 <dd><dl class="function">
@@ -252,7 +157,50 @@ void <tt class="descname">setField</tt><big>(</big>Dimension::Id::Enum <em>dim</
 <span class="target" id="pdal::PointBuffer::getRawField__Dimension::Id::Enum.PointId.voidPC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a1da19cbf845a83602562e5512aab7e9e"></span>void <tt class="descname">getRawField</tt><big>(</big>Dimension::Id::Enum <em>dim</em>, PointId <em>idx</em>, void * <em>buf</em><big>)</big></dt>
 <dd></dd></dl>
 
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::calculateBounds__bC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a2f9f7ad7d2687f42f1530e2f3d4f1bc1"></span><a class="reference internal" href="bounds.html#project0classpdal_1_1Bounds"><em>pdal::Bounds</em></a> &lt; double &gt; <tt class="descname">calculateBounds</tt><big>(</big>bool <em>bis3d</em> = true<big>)</big></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a cumulated bounds of all points in the <a class="reference internal" href="#project0classpdal_1_1PointBuffer"><em>PointBuffer</em></a>. <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method requires that an <cite>X</cite>, <cite>Y</cite>, and <cite>Z</cite> dimension be
+available, and that it can be casted into a <em>double</em> data
+type using the <tt class="xref cpp cpp-func docutils literal"><span class="pre">pdal::Dimension::applyScaling()</span></tt>
+method. Otherwise, an exception will be thrown.</p>
+</div>
+ </dd>
+</dl>
+</p>
 </dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::dump__osRC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1aa2d4e14851750da2d3bbf56055b76ca3"></span>void <tt class="descname">dump</tt><big>(</big>std::ostream &amp; <em>ostr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::hasDim__Dimension::Id::EnumC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a448d18f3a763681987bd6f667a48ff2e"></span>bool <tt class="descname">hasDim</tt><big>(</big>Dimension::Id::Enum <em>id</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::dimName__Dimension::Id::EnumC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1abb8a61d355eef96a3f504aac99578a18"></span>std::string <tt class="descname">dimName</tt><big>(</big>Dimension::Id::Enum <em>id</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::dimsC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac2ad01f770ad7fa4d981b16a15f9b638"></span>Dimension::IdList <tt class="descname">dims</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="protected-attrib">
+</dl>
+
+<dl class="private-func">
+</dl>
 
 <dl class="friend">
 </dl>
@@ -290,7 +238,7 @@ void <tt class="descname">setField</tt><big>(</big>Dimension::Id::Enum <em>dim</
                         <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 03, 2014.
+                    on Sep 04, 2014.
         </div>
     </div>
 
