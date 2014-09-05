@@ -137,28 +137,9 @@ stage types available to PDAL.</p>
 latest and the greatest, but the instinct is hard to control. Specifically, PDAL
 takes advantage of a number of late-version features in boost::accumulators for
 statistics filtering, and as of this writing, it should be assumed that the
-minimum version required for Boost is 1.48. Other versions less than that may
+minimum version required for Boost is 1.55. Other versions less than that may
 work with some minor modifications or <tt class="docutils literal"><span class="pre">#ifdef</span></tt>&#8216;ing, but the PDAL developers
 currently track rather late versions of Boost.</p>
-<p>To that end, PDAL embeds a custom version of <a class="reference external" href="http://www.boost.org">Boost</a> in the ./boost directory
-of the source tree.  It is activated by the default <tt class="docutils literal"><span class="pre">-DPDAL_BOOST_EMBED=ON</span></tt>
-<a class="reference external" href="http://www.cmake.org">CMake</a> environment variable. Expect that the embedded <a class="reference external" href="http://www.boost.org">Boost</a> version is the
-active version used by the developers, and in nearly all situations you can
-just use the embedded Boost solution for your own builds.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you are not using the embedded Boost library that PDAL provides,
-a Boost version of 1.48+ is required.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">PDAL_BOOST_EMBED also causes the <a class="reference external" href="http://www.boost.org">Boost</a> build in ./boost to be namespaced
-and aliased as <tt class="docutils literal"><span class="pre">pdalboost::</span></tt> rather than merely <tt class="docutils literal"><span class="pre">boost::</span></tt>. The advantage
-here is you can mix in PDAL-based code using an embedded <a class="reference external" href="http://www.boost.org">Boost</a> version
-with code from your own Boost build. This isn&#8217;t something that is actively
-tested, however, and there may be leakage across the PDAL API of Boost
-data types in this scenario. If you find something, please let us know.</p>
-</div>
 <div class="section" id="boost-packages-used">
 <h3>Boost Packages Used<a class="headerlink" href="#boost-packages-used" title="Permalink to this headline">¶</a></h3>
 <p>An unexhaustive list includes:</p>
@@ -347,7 +328,7 @@ compressed LAS support.</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 04, 2014.
+                    on Sep 05, 2014.
         </div>
     </div>
 
