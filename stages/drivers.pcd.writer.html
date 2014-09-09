@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>drivers.faux.writer &mdash; pdal.io</title>
+        <title>drivers.pcd.writer &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,28 +96,36 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="drivers-faux-writer">
-<span id="id1"></span><h1>drivers.faux.writer<a class="headerlink" href="#drivers-faux-writer" title="Permalink to this headline">¶</a></h1>
-<p>The &#8220;<strong>faux writer</strong>&#8221; is used for testing pipelines. It does not write to a file or database, but consumes input points and quietly does nothing.</p>
+  <div class="section" id="drivers-pcd-writer">
+<span id="id1"></span><h1>drivers.pcd.writer<a class="headerlink" href="#drivers-pcd-writer" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>PCD Writer</strong> supports writing to <a class="reference external" href="http://pointclouds.org/documentation/tutorials/pcd_file_format.php">Point Cloud Data (PCD)</a> formatted
+files, which are used by the <a class="reference external" href="http://pointclouds.org">Point Cloud Library (PCL)</a>.</p>
+<p>By default, compression is not enabled, and the PCD writer will output ASCII
+formatted data. When compression is enabled, the output is PCD&#8217;s
+binary-compressed format.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.faux.writer&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.faux.reader&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;bounds&quot;</span><span class="nt">&gt;</span>([0,1000000],[0,1000000],[0,100])<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;num_points&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;mode&quot;</span><span class="nt">&gt;</span>random<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.pcd.writer&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>outputfile.pcd<span class="nt">&lt;/Option&gt;</span>
+
+    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.pcd.reader&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>inputfile.pcd<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;/Reader&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
-<p>This pipeline file will generate ten thousand random points from nowhere, and then do nothing with them as a the faux writer consumes them quietly.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>The faux writer has no options.</p>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>PCD file to write [Required]</dd>
+<dt>compression</dt>
+<dd>Apply compression to the PCD file? [Default: false]</dd>
+</dl>
 </div>
 </div>
 
@@ -133,19 +141,13 @@
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">drivers.faux.writer</a><ul>
+<li><a class="reference internal" href="#">drivers.pcd.writer</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="drivers.faux.reader.html"
-                        title="previous chapter">drivers.faux.reader</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="drivers.csardb.reader.html"
-                        title="next chapter">drivers.csardb.reader</a></p>
             </div>
         </div>
                 </div>
@@ -166,7 +168,7 @@
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'drivers.faux.writer &mdash; pdal.io';
+        var disqus_title = 'drivers.pcd.writer &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
