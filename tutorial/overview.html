@@ -150,17 +150,18 @@ register their use of an existing dimension or may have PDAL create a dimension
 with a name and type as requested.  Dimensions are referenced using items in the
 enumeration Dimension::Id::Enum.</p>
 </div>
-<div class="section" id="pointcontext">
-<h4>PointContext<a class="headerlink" href="#pointcontext" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="point-context">
+<h4>Point Context<a class="headerlink" href="#point-context" title="Permalink to this headline">¶</a></h4>
 <p>PDAL stores points in what is called a point context (PointContext object).  All
 points in a single point context have the same dimensions and all operations on
 a PDAL pipeline make use of a single point context.  In addition to storing
 points, a point context also stores pipeline metadata that may get created as
-pipeline stages are executed.  A point context is a lightweight object that can
-be treated as a built-in type or POD.</p>
+pipeline stages are executed.  Most functions receive a PointContextRef object,
+which refers to the active point context.  A PointContextRef can be stored
+or copied cheaply.</p>
 </div>
-<div class="section" id="pointbuffer">
-<h4>PointBuffer<a class="headerlink" href="#pointbuffer" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="point-buffer">
+<h4>Point Buffer<a class="headerlink" href="#point-buffer" title="Permalink to this headline">¶</a></h4>
 <p>A point buffer (PointBuffer object) stores references to points.  All storage
 and retrieval of points is done through a point buffer rather than directly
 through a point context.  Point data is accessed from a point buffer through a
@@ -249,7 +250,7 @@ should occur at this time.  Initialization that can be deferred until the
 execution stage should be performed in the ready() method (see below).</p>
 </div></blockquote>
 </li>
-<li><p class="first">void addDimensions(PointContext ctx)</p>
+<li><p class="first">void addDimensions(PointContextRef ctx)</p>
 <blockquote>
 <div><p>This method allows stages to inform a point context of the dimensions that
 it would like as part of the record of each point.  Normally, only readers
@@ -269,7 +270,7 @@ private virtual methods.  It is important to note that ready() and done() are
 called only once for each stage while run() is called once for each point buffer
 to be processed by the stage.</p>
 <ol class="arabic">
-<li><p class="first">void ready(PointContext ctx)</p>
+<li><p class="first">void ready(PointContextRef ctx)</p>
 <blockquote>
 <div><p>This function allows preprocessing to be performed prior to actual
 processing of the points in a point buffer.  For example, filters may
@@ -289,7 +290,7 @@ buffers.  This method is called once for each point buffer passed to the
 stage.</p>
 </div></blockquote>
 </li>
-<li><p class="first">void done(PointContext ctx)</p>
+<li><p class="first">void done(PointContextRef ctx)</p>
 <blockquote>
 <div><p>This function allows a stage to clean up resources not released by a
 stage’s destructor.  It also allows other termination functions, such
@@ -316,7 +317,7 @@ type of the variable using the enumeration Dimension::Type::Enum.</p>
 <p>In this example, the reader informs the point context that it will reference
 the dimensions X, Y and Z.</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointContext ctx)
+<div><div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointContextRef ctx)
 {
    ctx.registerDim(Dimension::Id::X);
    ctx.registerDim(Dimension::Id::Y);
@@ -328,7 +329,7 @@ the dimensions X, Y and Z.</p>
 <p>Here a reader determines dimensions from an input source and registers or
 assigns them.  All of the input dimension values are in this case double
 precision floating point.</p>
-<div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointContext ctx)
+<div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointContextRef ctx)
 {
     FileHeader header;
 
@@ -463,15 +464,19 @@ output point buffers:</p>
 <div class="section" id="implementing-a-writer">
 <h3>Implementing a Writer:<a class="headerlink" href="#implementing-a-writer" title="Permalink to this headline">¶</a></h3>
 <p>Analogous to the filter() method in a filter is the write() method of a writer.
-This function is usually the appropriate function to override when implementing
-a writer &#8211; it would be unusual to need to implement run() for a writer.  A
+This function is usually the appropriate one to override when implementing
+a writer &#8211; it would be unusual to need to implement run().  A
 typical writer will open its output file when ready() is called, write
-individual points in write() and close the file in done().  Important to note is
-that a writer may be passed multiple point buffers for output.  When
-implementing a writer, one should handle multiple calls to write() when
-possible.  If a write() function can’t provide correct output when called more
-than once, users of the writer should be warned to add a merge filter in the
-pipeline immediately before the writer.</p>
+individual points in write() and close the file in done().</p>
+<p>Like a filter, a writer may receive multiple point buffers during processing
+of a pipeline.  This will result in the write() function being called once
+for each of the input point buffers.  Some current writers do not produce
+correct output when provided with multiple point buffers.  Users should
+be warned use a merge filter immediately prior to such writers to avoid
+errors.  As new writers are created, developers should try to make sure
+that they behave reasonably if passed multiple point buffers &#8211; they
+correctly handle write() being called multiple times between after a single
+call to ready().</p>
 <div class="highlight-python"><div class="highlight"><pre>void write(const PointBuffer&amp; buf)
 {
     ostream&amp; out = *m_out;
@@ -505,8 +510,8 @@ pipeline immediately before the writer.</p>
 <li><a class="reference internal" href="#the-pdal-model">The PDAL model</a><ul>
 <li><a class="reference internal" href="#extending-pdal">Extending PDAL</a><ul>
 <li><a class="reference internal" href="#dimension">Dimension</a></li>
-<li><a class="reference internal" href="#pointcontext">PointContext</a></li>
-<li><a class="reference internal" href="#pointbuffer">PointBuffer</a></li>
+<li><a class="reference internal" href="#point-context">Point Context</a></li>
+<li><a class="reference internal" href="#point-buffer">Point Buffer</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#making-a-stage-reader-filter-or-writer">Making a Stage (Reader, Filter or Writer):</a><ul>
@@ -542,7 +547,7 @@ pipeline immediately before the writer.</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 13, 2014.
+                    on Sep 14, 2014.
         </div>
     </div>
 
