@@ -144,7 +144,7 @@ def reflectance_to_intensity(ins, outs):
     ref = ins[&quot;Reflectance&quot;]
     min = numpy.amin(ref)
     max = numpy.amax(ref)
-    outs[&quot;Intensity&quot;] = (65536 * (ref - min) / (max - min)).astype(numpy.uint16)
+    outs[&quot;Intensity&quot;] = (65535 * (ref - min) / (max - min)).astype(numpy.uint16)
     return True
                 <span class="nt">&lt;/Option&gt;</span>
                 <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;function&quot;</span><span class="nt">&gt;</span>reflectance_to_intensity<span class="nt">&lt;/Option&gt;</span>
@@ -169,7 +169,7 @@ You could also use &#8220;Amplitude&#8221; instead of &#8220;Reflectance&#8221;.
 If you do not need Intensity values in your output file, you can delete the programmable filter.</li>
 <li>We set the <tt class="docutils literal"><span class="pre">discard_high_return_numbers</span></tt> option to <tt class="docutils literal"><span class="pre">true</span></tt> on the las writer.
 RXP files can contain more returns per shot than is supported by las, and so we need to explicitly tell the las writer to ignore those high return number points.
-You could also use <tt class="docutils literal"><span class="pre">filters.predicate</span></tt> to filter those points earlier in the pipeline, or modify the returns values with a <tt class="docutils literal"><span class="pre">filters.programmable</span></tt>.</li>
+You could also use <tt class="docutils literal"><span class="pre">filters.predicate</span></tt> to filter those points earlier in the pipeline, or modify the return values with a <tt class="docutils literal"><span class="pre">filters.programmable</span></tt>.</li>
 </ul>
 </div>
 <div class="section" id="options">
@@ -240,7 +240,7 @@ Use of this feature should be considered highly experimental.</dd>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 16, 2014.
+                    on Sep 17, 2014.
         </div>
     </div>
 
