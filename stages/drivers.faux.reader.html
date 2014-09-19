@@ -98,7 +98,8 @@
                     
   <div class="section" id="drivers-faux-reader">
 <span id="id1"></span><h1>drivers.faux.reader<a class="headerlink" href="#drivers-faux-reader" title="Permalink to this headline">¶</a></h1>
-<p>The &#8220;<strong>faux reader</strong>&#8221; is used for testing pipelines. It does not read from a file or database, but generates synthetic data to feed into the pipeline.</p>
+<p>The &#8220;<strong>faux reader</strong>&#8221; is used for testing pipelines. It does not read from a
+file or database, but generates synthetic data to feed into the pipeline.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -119,11 +120,22 @@
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>bounds</dt>
-<dd>What spatial extent should points be generated within? Text string of the form &#8220;([xmin,xmax],ymin,ymax],[zmin,zmax])&#8221; [Required]</dd>
+<dd>What spatial extent should points be generated within? Text string of the
+form &#8220;([xmin,xmax],[ymin,ymax],[zmin,zmax])&#8221;. [Default: unit cube]</dd>
 <dt>num_points</dt>
 <dd>How many synthetic points to generate before finishing? [Required]</dd>
+<dt>mean_x|y|z</dt>
+<dd>Mean value in the x, y, or z dimension respectively. (Normal mode only)
+[Default: 0]</dd>
+<dt>stdev_x|y|z</dt>
+<dd>Standard deviation in the x, y, or z dimension respectively. (Normal mode
+only) [Default: 1]</dd>
 <dt>mode</dt>
-<dd>How to generate synthetic points. One of &#8220;constant&#8221; (repeat single value), &#8220;random&#8221; (random values within bounds), or &#8220;ramp&#8221; (steadily increasing values within the bounds). [Required]</dd>
+<dd>How to generate synthetic points. One of &#8220;constant&#8221; (repeat single value),
+&#8220;random&#8221; (random values within bounds), &#8220;ramp&#8221; (steadily increasing values
+within the bounds), &#8220;uniform&#8221; (uniformly distributed within bounds), or
+&#8220;normal&#8221; (normal distribution with given mean and standard deviation).
+[Required]</dd>
 </dl>
 </div>
 </div>
@@ -166,7 +178,7 @@
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 18, 2014.
+                    on Sep 19, 2014.
         </div>
     </div>
 

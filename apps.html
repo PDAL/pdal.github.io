@@ -115,9 +115,11 @@ application currently contains six commands:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#delta-command"><em>delta</em></a></li>
 <li><a class="reference internal" href="#diff-command"><em>diff</em></a></li>
+<li><em class="xref std std-ref">ground</em></li>
 <li><a class="reference internal" href="#info-command"><em>info</em></a></li>
 <li><a class="reference internal" href="#pcl-command"><em>pcl</em></a></li>
 <li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
+<li><a class="reference internal" href="#random-command"><em>random</em></a></li>
 <li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
 </ul>
 <p>Applications are run by invoking the <em>pdal</em> application along with the
@@ -129,7 +131,8 @@ $ pdal pipeline --stdin &lt; myxml.xml
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <em class="xref std std-ref">pcl</em> command is only available if PCL is linked.</p>
+<p class="last">The <em class="xref std std-ref">ground</em> and <a class="reference internal" href="#pcl-command"><em>pcl</em></a> commands
+are only available if PCL is linked.</p>
 </div>
 <p>Help about each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch.
 The <tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about
@@ -213,6 +216,26 @@ checking the following:</p>
 <li>Actual point count</li>
 <li>Byte-by-byte point data</li>
 </ul>
+<p>.._ground_command:</p>
+</div>
+<div class="section" id="ground-command">
+<h2><tt class="docutils literal"><span class="pre">ground</span></tt> command<a class="headerlink" href="#ground-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>ground</em> command is used to segment the input point cloud into ground
+versus non-ground returns. The output is a point cloud containing only ground
+returns. Internally, the tool is calling the Point Cloud Library&#8217;s
+<a class="reference external" href="http://pointclouds.org/documentation/tutorials/progressive_morphological_filtering.php#progressive-morphological-filtering.">ProgressiveMorphologicalFilter</a>. As such, <em>ground</em> is only available when
+PDAL is linked with PCL.</p>
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg            input file name
+-o [ --output ] arg           output file name
+--maxWindowSize arg (=33)     max window size
+--slope arg (=1)              slope
+--maxDistance arg (=2.5)      max distance
+--initialDistance arg (=0.15) initial distance
+--cellSize arg (=1)           cell size
+--base arg (=2)               base
+--exponential arg (=1)        exponential?
+</pre></div>
+</div>
 </div>
 <div class="section" id="info-command">
 <span id="id3"></span><h2><tt class="docutils literal"><span class="pre">info</span></tt> command<a class="headerlink" href="#info-command" title="Permalink to this headline">¶</a></h2>
@@ -279,8 +302,33 @@ or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em>
 </pre></div>
 </div>
 </div>
+<div class="section" id="random-command">
+<span id="id6"></span><h2><tt class="docutils literal"><span class="pre">random</span></tt> command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>random</em> command is used to create a random point cloud. It uses
+<a class="reference internal" href="stages/drivers.faux.reader.html#drivers-faux-reader"><em>drivers.faux.reader</em></a> to create a point cloud containing <em>count</em> points
+drawn randomly from either a uniform or normal distribution. For the uniform
+distribution, the bounds can be specified (they default to a unit cube). For
+the normal distribution, the mean and standard deviation can both be set for
+each of the x, y, and z dimensions.</p>
+<div class="highlight-python"><div class="highlight"><pre>-o [ --output ] arg           output file name
+-z [ --compress ]             Compress output data (if supported by output
+                              format)
+--count arg (=0)              How many points should we write?
+--bounds arg                  Extent (in XYZ to clip output to)
+--mean arg                    A comma-separated or quoted, space-separated
+                              list of means (normal mode):
+                              --mean 0.0,0.0,0.0
+                              --mean &quot;0.0 0.0 0.0&quot;
+--stdev arg                   A comma-separated or quoted, space-separated
+                              list of standard deviations (normal mode):
+                              --stdev 0.0,0.0,0.0
+                              --stdev &quot;0.0 0.0 0.0&quot;
+--distribution arg (=uniform) Distribution (uniform / normal)
+</pre></div>
+</div>
+</div>
 <div class="section" id="translate-command">
-<span id="id6"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
+<span id="id7"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>translate</em> command is used for simple conversion of files based on their
 file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
 translation operations.</p>
@@ -318,11 +366,15 @@ command line invocation. For example, the following invocation will translate
 <li>Setting the LAS point format to 1</li>
 <li>Cropping the file with the given polygon</li>
 </ul>
-<p><a href="#id7"><span class="problematic" id="id8">``</span></a>`
-./bin/pdal translate </p>
-<blockquote>
-<div>&#8211;drivers.las.writer.creation_doy=&#8221;42&#8221; &#8211;drivers.las.writer.creation_year=&#8221;2014&#8221; &#8211;drivers.las.writer.format=&#8221;1&#8221; &#8211;filters.crop.polygon=&#8221;POLYGON ((636889.412951239268295 851528.512293258565478 422.7001953125,636899.14233423944097 851475.000686757150106 422.4697265625,636899.14233423944097 851475.000686757150106 422.4697265625,636928.33048324030824 851494.459452757611871 422.5400390625,636928.33048324030824 851494.459452757611871 422.5400390625,636928.33048324030824 851494.459452757611871 422.5400390625,636976.977398241520859 851513.918218758190051 424.150390625,636976.977398241520859 851513.918218758190051 424.150390625,637069.406536744092591 851475.000686757150106 438.7099609375,637132.647526245797053 851445.812537756282836 425.9501953125,637132.647526245797053 851445.812537756282836 425.9501953125,637336.964569251285866 851411.759697255445644 425.8203125,637336.964569251285866 851411.759697255445644 425.8203125,637473.175931254867464 851158.795739248627797 435.6298828125,637589.928527257987298 850711.244121236610226 420.509765625,637244.535430748714134 850511.791769731207751 420.7998046875,636758.066280735656619 850667.461897735483944 434.609375,636539.155163229792379 851056.63721774588339 422.6396484375,636889.412951239268295 851528.512293258565478 422.7001953125))&#8221; ./test/data/1.2-with-color.las output.laz</div></blockquote>
-<p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a></p>
+<div class="highlight-python"><div class="highlight"><pre>./bin/pdal translate \
+    --drivers.las.writer.creation_doy=&quot;42&quot; \
+    --drivers.las.writer.creation_year=&quot;2014&quot; \
+    --drivers.las.writer.format=&quot;1&quot; \
+    --filters.crop.polygon=&quot;POLYGON ((636889.412951239268295 851528.512293258565478 422.7001953125,636899.14233423944097 851475.000686757150106 422.4697265625,636899.14233423944097 851475.000686757150106 422.4697265625,636928.33048324030824 851494.459452757611871 422.5400390625,636928.33048324030824 851494.459452757611871 422.5400390625,636928.33048324030824 851494.459452757611871 422.5400390625,636976.977398241520859 851513.918218758190051 424.150390625,636976.977398241520859 851513.918218758190051 424.150390625,637069.406536744092591 851475.000686757150106 438.7099609375,637132.647526245797053 851445.812537756282836 425.9501953125,637132.647526245797053 851445.812537756282836 425.9501953125,637336.964569251285866 851411.759697255445644 425.8203125,637336.964569251285866 851411.759697255445644 425.8203125,637473.175931254867464 851158.795739248627797 435.6298828125,637589.928527257987298 850711.244121236610226 420.509765625,637244.535430748714134 850511.791769731207751 420.7998046875,636758.066280735656619 850667.461897735483944 434.609375,636539.155163229792379 851056.63721774588339 422.6396484375,636889.412951239268295 851528.512293258565478 422.7001953125))&quot; \
+    ./test/data/1.2-with-color.las \
+    output.laz
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -341,9 +393,11 @@ command line invocation. For example, the following invocation will translate
 <li><a class="reference internal" href="#">PDAL Applications</a><ul>
 <li><a class="reference internal" href="#delta-command"><tt class="docutils literal"><span class="pre">delta</span></tt> command</a></li>
 <li><a class="reference internal" href="#diff-command"><tt class="docutils literal"><span class="pre">diff</span></tt> command</a></li>
+<li><a class="reference internal" href="#ground-command"><tt class="docutils literal"><span class="pre">ground</span></tt> command</a></li>
 <li><a class="reference internal" href="#info-command"><tt class="docutils literal"><span class="pre">info</span></tt> command</a></li>
 <li><a class="reference internal" href="#pcl-command"><tt class="docutils literal"><span class="pre">pcl</span></tt> command</a></li>
 <li><a class="reference internal" href="#pipeline-command"><tt class="docutils literal"><span class="pre">pipeline</span></tt> command</a></li>
+<li><a class="reference internal" href="#random-command"><tt class="docutils literal"><span class="pre">random</span></tt> command</a></li>
 <li><a class="reference internal" href="#translate-command"><tt class="docutils literal"><span class="pre">translate</span></tt> command</a></li>
 </ul>
 </li>
@@ -368,7 +422,7 @@ command line invocation. For example, the following invocation will translate
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 18, 2014.
+                    on Sep 19, 2014.
         </div>
     </div>
 
