@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>filters.predicate &mdash; pdal.io</title>
+        <title>filters.reprojection &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,83 +96,59 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="filters-predicate">
-<span id="id1"></span><h1>filters.predicate<a class="headerlink" href="#filters-predicate" title="Permalink to this headline">¶</a></h1>
-<p>Like the ref:<cite>filters.programmable</cite> filter, the predicate filter applies a <a class="reference external" href="http://python.org">Python</a> function to a stream of points. Points can be retained/removed from the stream by setting true/false values into a special &#8220;Mask&#8221; dimension in the output point array.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
-   <span class="n">cls</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s">&#39;Classification&#39;</span><span class="p">]</span>
-
-   <span class="n">keep_classes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-
-   <span class="c"># Use the first test for our base array.</span>
-   <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-   <span class="c"># For 1:n, test each predicate and join back</span>
-   <span class="c"># to our existing predicate array</span>
-   <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">keep_classes</span><span class="p">)):</span>
-       <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
-       <span class="n">keep</span> <span class="o">=</span> <span class="n">keep</span> <span class="o">+</span> <span class="n">t</span>
-
-   <span class="n">outs</span><span class="p">[</span><span class="s">&#39;Mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keep</span>
-   <span class="k">return</span> <span class="bp">True</span>
-</pre></div>
+  <div class="section" id="filters-reprojection">
+<span id="id1"></span><h1>filters.reprojection<a class="headerlink" href="#filters-reprojection" title="Permalink to this headline">¶</a></h1>
+<p>The reprojection filter converts the X, Y and/or Z dimensions to a new spatial
+reference system. The old coordinates are replaced by the new ones,
+if you want to preserve the old coordinates for future processing, use a
+<a href="#id2"><span class="problematic" id="id3">`filters.ferry`_</span></a> to create a new dimension and stuff them there.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>X, Y, and Z dimensions in PDAL are carried as doubles, with their
+scale information applied. Set the output scale (<cite>scale_x</cite>, <cite>scale_y</cite>, or
+<cite>scale_z</cite>) on your writer to descale the data on the way out.</p>
+<p class="last">Many LIDAR formats store coordinate information in 32-bit address spaces, and
+use scaling and offsetting to ensure that accuracy is not lost while fitting
+the information into a limited address space. When changing projections, the
+coordinate values will change, which may change the optimal scale and offset
+for storing the data.</p>
 </div>
-<p>The example above sets the &#8220;mask&#8221; to true for points that are in classifications 1 or 2 and to false otherwise, causing points that are not classified 1 or 2 to be dropped from the point stream.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.las.writer&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      file-cropped.las
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.predicate&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;function&quot;</span><span class="nt">&gt;</span>filter<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;module&quot;</span><span class="nt">&gt;</span>anything<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;source&quot;</span><span class="nt">&gt;</span>
-
-import numpy as np
-
-def filter(ins,outs):
-   cls = ins[&#39;Classification&#39;]
-
-   keep_classes = [1,2]
-
-   # Use the first test for our base array.
-   keep = np.equal(cls, keep_classes[0])
-
-   # For 1:n, test each predicate and join back
-   # to our existing predicate array
-   for k in range(1,len(keep_classes)):
-       t = np.equal(cls, keep_classes[k])
-       keep = keep + t
-
-   outs[&#39;Mask&#39;] = keep
-   return True
-
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.las.reader&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            file-input.las
-          <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Reader&gt;</span>
-      <span class="nt">&lt;/Filter&gt;</span>
-    <span class="nt">&lt;/Writer&gt;</span>
-  <span class="nt">&lt;/Pipeline&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>example-geog.las<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_x&quot;</span><span class="nt">&gt;</span>0.0000001<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_y&quot;</span><span class="nt">&gt;</span>0.0000001<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_z&quot;</span><span class="nt">&gt;</span>0.1<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;offset_x&quot;</span><span class="nt">&gt;</span>-100<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;offset_y&quot;</span><span class="nt">&gt;</span>40<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;offset_z&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/Option&gt;</span>
+  <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;spatialreference&quot;</span><span class="nt">&gt;</span>EPSG:4326<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.reprojection&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;in_srs&quot;</span><span class="nt">&gt;</span>EPSG:26916<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;out_srs&quot;</span><span class="nt">&gt;</span>EPSG:4326<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.las.reader&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>example-utm.las<span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;spatialreference&quot;</span><span class="nt">&gt;</span>EPSG:26916<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;/Reader&gt;</span>
+    <span class="nt">&lt;/Filter&gt;</span>
+  <span class="nt">&lt;/Writer&gt;</span>
+<span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>script</dt>
-<dd>When reading a function from a separate <a class="reference external" href="http://python.org">Python</a> file, the file name to read from. [Example: functions.py]</dd>
-<dt>module</dt>
-<dd>The Python module that is holding the function to run. [Required]</dd>
-<dt>function</dt>
-<dd>The function to call.</dd>
+<dt>in_srs</dt>
+<dd>Spatial reference system of the input data. Express as an EPSG string (eg
+&#8220;EPSG:4326&#8221; for WGS86 geographic) or a well-known text string. [Required if
+input reader does not supply SRS information]</dd>
+<dt>out_srs</dt>
+<dd>Spatial reference system of the output data. Express as an EPSG string (eg
+&#8220;EPSG:4326&#8221; for WGS86 geographic) or a well-known text string. [Required]</dd>
 </dl>
 </div>
 </div>
@@ -189,7 +165,7 @@ def filter(ins,outs):
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">filters.predicate</a><ul>
+<li><a class="reference internal" href="#">filters.reprojection</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
@@ -197,11 +173,11 @@ def filter(ins,outs):
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="filters.pclblock.html"
-                        title="previous chapter">filters.pclblock</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="filters.programmable.html"
-                        title="next chapter">filters.programmable</a></p>
+                        title="previous chapter">filters.programmable</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../pipeline.html"
+                        title="next chapter">Pipeline</a></p>
             </div>
         </div>
                 </div>
@@ -222,7 +198,7 @@ def filter(ins,outs):
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'filters.predicate &mdash; pdal.io';
+        var disqus_title = 'filters.reprojection &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 

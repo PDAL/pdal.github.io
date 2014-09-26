@@ -138,9 +138,12 @@ for those sections of the source tree. You are not required to include
 everything if you don&#8217;t need it, however, and it is still possible to
 selectively include the classes you need as shown in the example below.</p>
 </div>
+<p>Compile the example code with the following compile line:</p>
+<div class="highlight-python"><div class="highlight"><pre>g++ -g -std=c++11 -o example -I./include -L./lib -lpdalcpp example.cpp
+</pre></div>
+</div>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/pdal.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/drivers/buffer/Reader.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/filters/Scaling.hpp&gt;</span>
+<span class="cp">#include &lt;pdal/PointBuffer.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/drivers/las/Writer.hpp&gt;</span>
 
 <span class="cp">#include &lt;vector&gt;</span>
@@ -168,111 +171,23 @@ selectively include the classes you need as shown in the example below.</p>
     <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="n">pdal</span><span class="o">::</span><span class="n">PointBuffer</span><span class="o">*</span> <span class="n">createBuffer</span><span class="p">()</span>
+
+<span class="kt">void</span> <span class="n">fillBuffer</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointBufferPtr</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Schema</span> <span class="n">schema</span><span class="p">;</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span> <span class="n">x</span><span class="p">(</span><span class="s">&quot;X&quot;</span><span class="p">,</span> <span class="n">pdal</span><span class="o">::</span><span class="n">dimension</span><span class="o">::</span><span class="n">Float</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span> <span class="n">y</span><span class="p">(</span><span class="s">&quot;Y&quot;</span><span class="p">,</span> <span class="n">pdal</span><span class="o">::</span><span class="n">dimension</span><span class="o">::</span><span class="n">Float</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span> <span class="n">z</span><span class="p">(</span><span class="s">&quot;Z&quot;</span><span class="p">,</span> <span class="n">pdal</span><span class="o">::</span><span class="n">dimension</span><span class="o">::</span><span class="n">Float</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
-
-    <span class="n">x</span><span class="p">.</span><span class="n">setNamespace</span><span class="p">(</span><span class="s">&quot;myvector&quot;</span><span class="p">);</span>
-    <span class="n">y</span><span class="p">.</span><span class="n">setNamespace</span><span class="p">(</span><span class="s">&quot;myvector&quot;</span><span class="p">);</span>
-    <span class="n">z</span><span class="p">.</span><span class="n">setNamespace</span><span class="p">(</span><span class="s">&quot;myvector&quot;</span><span class="p">);</span>
-    <span class="n">x</span><span class="p">.</span><span class="n">createUUID</span><span class="p">();</span> <span class="n">y</span><span class="p">.</span><span class="n">createUUID</span><span class="p">();</span> <span class="n">z</span><span class="p">.</span><span class="n">createUUID</span><span class="p">();</span>
-
-    <span class="n">schema</span><span class="p">.</span><span class="n">appendDimension</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-    <span class="n">schema</span><span class="p">.</span><span class="n">appendDimension</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-    <span class="n">schema</span><span class="p">.</span><span class="n">appendDimension</span><span class="p">(</span><span class="n">z</span><span class="p">);</span>
-
-    <span class="c1">// 1000 is the capacity of the PointBuffer you wish to have</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">PointBuffer</span><span class="o">*</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pdal</span><span class="o">::</span><span class="n">PointBuffer</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
-<span class="p">}</span>
-
-
-<span class="kt">void</span> <span class="n">fillBuffer</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointBuffer</span><span class="o">*</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// You must fetch the buffer&#39;s schema &amp; and get a reference</span>
-    <span class="c1">// to the X dimension. Some operation may have updated the</span>
-    <span class="c1">// buffer&#39;s schema</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">getSchema</span><span class="p">().</span><span class="n">getDimension</span><span class="p">(</span><span class="s">&quot;X&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">getSchema</span><span class="p">().</span><span class="n">getDimension</span><span class="p">(</span><span class="s">&quot;Y&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">z</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">getSchema</span><span class="p">().</span><span class="n">getDimension</span><span class="p">(</span><span class="s">&quot;Z&quot;</span><span class="p">);</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="c1">// You must set the &quot;raw&quot; xyz values that have</span>
-        <span class="c1">// been descaled by the setNumericOffset and setNumericScale</span>
-        <span class="c1">// you provided when you created the dimensions and added</span>
-        <span class="c1">// them to the schema</span>
         <span class="n">Point</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">pt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-        <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
-        <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+        <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
     <span class="p">}</span>
-
-    <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setNumPoints</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-<span class="p">}</span>
-
-<span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">getOptions</span><span class="p">()</span>
-<span class="p">{</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">opts</span><span class="p">;</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">scalex</span><span class="p">(</span><span class="s">&quot;scale&quot;</span><span class="p">,</span> <span class="mf">0.001f</span><span class="p">,</span> <span class="s">&quot;fpscale&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">offsetx</span><span class="p">(</span><span class="s">&quot;offset&quot;</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="s">&quot;offset&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">xdim</span><span class="p">(</span><span class="s">&quot;dimension&quot;</span><span class="p">,</span> <span class="s">&quot;X&quot;</span><span class="p">,</span> <span class="s">&quot;dimension to scale&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">sizex</span><span class="p">(</span><span class="s">&quot;size&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;size&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">typex</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;SignedInteger&quot;</span><span class="p">,</span> <span class="s">&quot;tye&quot;</span><span class="p">);</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">xs</span><span class="p">;</span>
-    <span class="n">xs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">scalex</span><span class="p">);</span>
-    <span class="n">xs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">offsetx</span><span class="p">);</span>
-    <span class="n">xs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">sizex</span><span class="p">);</span>
-    <span class="n">xs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">typex</span><span class="p">);</span>
-
-    <span class="n">xdim</span><span class="p">.</span><span class="n">setOptions</span><span class="p">(</span><span class="n">xs</span><span class="p">);</span>
-    <span class="n">opts</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">xdim</span><span class="p">);</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">scaley</span><span class="p">(</span><span class="s">&quot;scale&quot;</span><span class="p">,</span> <span class="mf">0.001f</span><span class="p">,</span> <span class="s">&quot;fpscale&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">offsety</span><span class="p">(</span><span class="s">&quot;offset&quot;</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="s">&quot;offset&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">sizey</span><span class="p">(</span><span class="s">&quot;size&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;size&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">typey</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;SignedInteger&quot;</span><span class="p">,</span> <span class="s">&quot;tye&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">ydim</span><span class="p">(</span><span class="s">&quot;dimension&quot;</span><span class="p">,</span> <span class="s">&quot;Y&quot;</span><span class="p">,</span> <span class="s">&quot;dimension to scale&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">ys</span><span class="p">;</span>
-    <span class="n">ys</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">scaley</span><span class="p">);</span>
-    <span class="n">ys</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">offsety</span><span class="p">);</span>
-    <span class="n">ys</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">sizey</span><span class="p">);</span>
-    <span class="n">ys</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">typey</span><span class="p">);</span>
-    <span class="n">ydim</span><span class="p">.</span><span class="n">setOptions</span><span class="p">(</span><span class="n">ys</span><span class="p">);</span>
-    <span class="n">opts</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">ydim</span><span class="p">);</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">scalez</span><span class="p">(</span><span class="s">&quot;scale&quot;</span><span class="p">,</span> <span class="mf">0.01f</span><span class="p">,</span> <span class="s">&quot;fpscale&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">offsetz</span><span class="p">(</span><span class="s">&quot;offset&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;offset&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">sizez</span><span class="p">(</span><span class="s">&quot;size&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;size&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">typez</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;SignedInteger&quot;</span><span class="p">,</span> <span class="s">&quot;tye&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">zdim</span><span class="p">(</span><span class="s">&quot;dimension&quot;</span><span class="p">,</span> <span class="s">&quot;Z&quot;</span><span class="p">,</span> <span class="s">&quot;dimension to scale&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">zs</span><span class="p">;</span>
-    <span class="n">zs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">scalez</span><span class="p">);</span>
-    <span class="n">zs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">offsetz</span><span class="p">);</span>
-    <span class="n">zs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">sizez</span><span class="p">);</span>
-    <span class="n">zs</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">typez</span><span class="p">);</span>
-    <span class="n">zdim</span><span class="p">.</span><span class="n">setOptions</span><span class="p">(</span><span class="n">zs</span><span class="p">);</span>
-    <span class="n">opts</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">zdim</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="n">opts</span><span class="p">;</span>
-
 <span class="p">}</span>
 
 <span class="kt">int</span> <span class="n">main</span><span class="p">(</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[]</span> <span class="p">)</span>
 <span class="p">{</span>
 
-
-    <span class="c1">// No options are used for PointBuffer reader</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">options</span> <span class="o">=</span> <span class="n">getOptions</span><span class="p">();</span>
+    <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
 
     <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">debug</span><span class="p">(</span><span class="s">&quot;debug&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
     <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">verbose</span><span class="p">(</span><span class="s">&quot;verbose&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
@@ -281,22 +196,22 @@ selectively include the classes you need as shown in the example below.</p>
 
     <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">filename</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
     <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+    <span class="n">pdal</span><span class="o">::</span><span class="n">PointContextRef</span> <span class="n">ctx</span><span class="p">;</span>
+
+    <span class="n">ctx</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+    <span class="n">ctx</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
+    <span class="n">ctx</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
 
     <span class="p">{</span>
-        <span class="n">pdal</span><span class="o">::</span><span class="n">PointBuffer</span><span class="o">*</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">createBuffer</span><span class="p">();</span>
+        <span class="n">pdal</span><span class="o">::</span><span class="n">PointBufferPtr</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">pdal</span><span class="o">::</span><span class="n">PointBufferPtr</span><span class="p">(</span><span class="k">new</span> <span class="n">pdal</span><span class="o">::</span><span class="n">PointBuffer</span><span class="p">(</span><span class="n">ctx</span><span class="p">));</span>
 
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMyData</span><span class="p">();</span>
 
         <span class="n">fillBuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
 
-
-        <span class="n">pdal</span><span class="o">::</span><span class="n">drivers</span><span class="o">::</span><span class="n">buffer</span><span class="o">::</span><span class="n">Reader</span> <span class="n">reader</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="o">*</span><span class="n">buffer</span><span class="p">);</span>
-        <span class="n">pdal</span><span class="o">::</span><span class="n">filters</span><span class="o">::</span><span class="n">Scaling</span> <span class="n">scaling</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
-        <span class="n">pdal</span><span class="o">::</span><span class="n">drivers</span><span class="o">::</span><span class="n">las</span><span class="o">::</span><span class="n">Writer</span> <span class="n">writer</span><span class="p">(</span><span class="n">scaling</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
-
-
-        <span class="n">writer</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
-        <span class="n">writer</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">getNumPoints</span><span class="p">());</span>
+        <span class="n">pdal</span><span class="o">::</span><span class="n">drivers</span><span class="o">::</span><span class="n">las</span><span class="o">::</span><span class="n">Writer</span> <span class="n">writer</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
     <span class="p">}</span>
 
 <span class="p">}</span>
@@ -343,7 +258,7 @@ selectively include the classes you need as shown in the example below.</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 25, 2014.
+                    on Sep 26, 2014.
         </div>
     </div>
 
