@@ -121,6 +121,7 @@ application currently contains six commands:</p>
 <li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
 <li><a class="reference internal" href="#random-command"><em>random</em></a></li>
 <li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
+<li><a class="reference internal" href="#view-command"><em>view</em></a></li>
 </ul>
 <p>Applications are run by invoking the <em>pdal</em> application along with the
 command name:</p>
@@ -131,8 +132,8 @@ $ pdal pipeline --stdin &lt; myxml.xml
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <em class="xref std std-ref">ground</em> and <a class="reference internal" href="#pcl-command"><em>pcl</em></a> commands
-are only available if PCL is linked.</p>
+<p class="last">The <em class="xref std std-ref">ground</em>, <a class="reference internal" href="#pcl-command"><em>pcl</em></a>, and
+<a class="reference internal" href="#view-command"><em>view</em></a> commands are only available if PCL is linked.</p>
 </div>
 <p>Help about each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch.
 The <tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about
@@ -376,6 +377,52 @@ command line invocation. For example, the following invocation will translate
 </pre></div>
 </div>
 </div>
+<div class="section" id="view-command">
+<span id="id8"></span><h2><tt class="docutils literal"><span class="pre">view</span></tt> command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>view</em> command can be used to visualize a point cloud using the
+PCLVisualizer. The command takes a single argument, the input file name.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal view myfile.las
+</pre></div>
+</div>
+<p>Once the data has been loaded into the viewer, press h or H to display the
+help.</p>
+<div class="highlight-python"><div class="highlight"><pre>| Help:
+-------
+          p, P   : switch to a point-based representation
+          w, W   : switch to a wireframe-based representation (where available)
+          s, S   : switch to a surface-based representation (where available)
+
+          j, J   : take a .PNG snapshot of the current window view
+          c, C   : display current camera/window parameters
+          f, F   : fly to point mode
+
+          e, E   : exit the interactor
+          q, Q   : stop and call VTK&#39;s TerminateApp
+
+           +/-   : increment/decrement overall point size
+     +/- [+ ALT] : zoom in/out
+
+          g, G   : display scale grid (on/off)
+          u, U   : display lookup table (on/off)
+
+    o, O         : switch between perspective/parallel projection (default = perspective)
+    r, R [+ ALT] : reset camera [to viewpoint = {0, 0, 0} -&gt; center_{x, y, z}]
+    CTRL + s, S  : save camera parameters
+    CTRL + r, R  : restore camera parameters
+
+    ALT + s, S   : turn stereo mode on/off
+    ALT + f, F   : switch between maximized window mode and original size
+
+          l, L           : list all available geometric and color handlers for the current actor map
+    ALT + 0..9 [+ CTRL]  : switch between different geometric handlers (where available)
+          0..9 [+ CTRL]  : switch between different color handlers (where available)
+
+    SHIFT + left click   : select a point (start with -use_point_picking)
+
+          x, X   : toggle rubber band selection mode for left mouse button
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -399,6 +446,7 @@ command line invocation. For example, the following invocation will translate
 <li><a class="reference internal" href="#pipeline-command"><tt class="docutils literal"><span class="pre">pipeline</span></tt> command</a></li>
 <li><a class="reference internal" href="#random-command"><tt class="docutils literal"><span class="pre">random</span></tt> command</a></li>
 <li><a class="reference internal" href="#translate-command"><tt class="docutils literal"><span class="pre">translate</span></tt> command</a></li>
+<li><a class="reference internal" href="#view-command"><tt class="docutils literal"><span class="pre">view</span></tt> command</a></li>
 </ul>
 </li>
 </ul>
@@ -422,7 +470,7 @@ command line invocation. For example, the following invocation will translate
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 08, 2014.
+                    on Oct 09, 2014.
         </div>
     </div>
 

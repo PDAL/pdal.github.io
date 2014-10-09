@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>Errors and Error Handling &mdash; pdal.io</title>
+        <title>drivers.pclvisualizer.writer &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,38 +96,20 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="errors-and-error-handling">
-<span id="development-errorhandling"></span><h1>Errors and Error Handling<a class="headerlink" href="#errors-and-error-handling" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>throw exceptions, don&#8217;t use status codes</li>
-<li>use the pdal_error hiearchy (list)</li>
-</ul>
+  <div class="section" id="drivers-pclvisualizer-writer">
+<span id="id1"></span><h1>drivers.pclvisualizer.writer<a class="headerlink" href="#drivers-pclvisualizer-writer" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>PCLVisualizer Writer</strong> enables use of the <a class="reference external" href="http://pointclouds.org">Point Cloud Library (PCL)</a>
+PCLVisualizer. This is primarily used by <a class="reference internal" href="../apps.html#view-command"><em>pdal view</em></a>.</p>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>PCD file to write [Required]</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A filename is currently required by PDAL, but no data is written to disk.</p>
 </div>
-<div class="section" id="pdal-position-on-non-conformance">
-<h2>PDAL Position on (Non)conformance<a class="headerlink" href="#pdal-position-on-non-conformance" title="Permalink to this headline">¶</a></h2>
-<p>PDAL proudly and unabashedly supports formal standards/specifications for
-file formats.  We recognize, however, that in some cases files will not
-follow a given standard precisely, due to an unclear spec or simply out of
-carelessness.</p>
-<p>When reading files that are not formatted correctly:</p>
-<ul class="simple">
-<li>PDAL may try to compensate for the error.  This is typically done when as
-a practical matter the market needs support for well-known or pervasive,
-but nonetheless &#8220;broken&#8221;, upstream implementations.</li>
-<li>PDAL may explicitly reject such files.  This is typically done where we do
-not wish to continue to promote or support mistakes that should be fixed
-upstream.</li>
-</ul>
-<p>PDAL will always write correctly formatted files.  In some cases, however,
-PDAL may choose to offer as an option the ability to break the standard if,
-as a practical matter, doing so would significantly aid the market.  Such an
-option would never be the default behavior, however.</p>
-<p>For files that are conformant but which lie, such as the extents in the
-header being wrong, we will generally offer both the ability to propagate
-the &#8220;wrong&#8221; information and the ability to helpfully correct it on the fly;
-the latter is generally our default position.</p>
 </div>
 </div>
 
@@ -143,19 +125,12 @@ the latter is generally our default position.</p>
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Errors and Error Handling</a><ul>
-<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
-<li><a class="reference internal" href="#pdal-position-on-non-conformance">PDAL Position on (Non)conformance</a></li>
+<li><a class="reference internal" href="#">drivers.pclvisualizer.writer</a><ul>
+<li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="docs.html"
-                        title="previous chapter">Docs</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="goals.html"
-                        title="next chapter">Project Goals</a></p>
             </div>
         </div>
                 </div>
@@ -176,7 +151,7 @@ the latter is generally our default position.</p>
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'Errors and Error Handling &mdash; pdal.io';
+        var disqus_title = 'drivers.pclvisualizer.writer &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
