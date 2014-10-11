@@ -101,14 +101,14 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>PDAL is both a C++ library and a collection of command-line utilities for data
-processing operations. While the PDAL library addresses point cloud
-exploitation and filtering, this takes a back seat to its primary objective of
-being a data translation library, helping developers to navigate the a wide
-variety of point cloud formats. <a class="reference external" href="http://www.pointclouds.org">PCL</a> is another C++ library that is focused
-on developing a rich set of point cloud processing routines, with less of a
-focus on formats and data translation. Acknowledging this, the PCL Block filter
-was developed to serve as a bridge between the two libraries, enabling rapid
-development of point cloud processing pipelines.</p>
+processing operations. While the PDAL library addresses point cloud exploitation
+and filtering, this takes a back seat to its primary objective of being a data
+translation library, helping developers to navigate the a wide variety of point
+cloud formats. <a class="reference external" href="http://www.pointclouds.org">PCL</a> is another C++ library that is focused on developing a
+rich set of point cloud processing routines, with less of a focus on formats and
+data translation. Acknowledging this, the PCL Block filter was developed to
+serve as a bridge between the two libraries, enabling rapid development of point
+cloud processing pipelines.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">See <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><em>filters.pclblock</em></a> for details on PDAL&#8217;s PCL Block filter.</p>
@@ -136,20 +136,20 @@ development of point cloud processing pipelines.</p>
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Instructions for getting started with PDAL using Vagrant and VirtualBox
-can be found in the <a class="reference internal" href="../vagrant.html#vagrant"><em>Getting Started with PDAL using Vagrant and VirtualBox</em></a> document.</p>
+<p class="last">Instructions for getting started with PDAL using Vagrant and VirtualBox can
+be found in the <a class="reference internal" href="../vagrant.html#vagrant"><em>Getting Started with PDAL using Vagrant and VirtualBox</em></a> document.</p>
 </div>
 <p>PDAL&#8217;s Vagrant configuration now includes the PCL Block and all necessary
-dependencies. Assuming you&#8217;ve got Vagrant all set up, once you checkout the
-PDAL source code, just do the following:</p>
+dependencies. Assuming you&#8217;ve got Vagrant all set up, once you checkout the PDAL
+source code, just do the following:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ cd pdal
 $ vagrant up
 $ vagrant ssh
 </pre></div>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">vagrant</span> <span class="pre">up</span></tt> command will take a considerable amount of time, but once
-its completed you have a fully functional VM with both PCL and PDAL installed.
-Try entering</p>
+<p>The <tt class="docutils literal"><span class="pre">vagrant</span> <span class="pre">up</span></tt> command will take a considerable amount of time, but once its
+completed you have a fully functional VM with both PCL and PDAL installed. Try
+entering</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline --version
 </pre></div>
 </div>
@@ -169,24 +169,24 @@ tutorial but the <a class="reference internal" href="../pipeline.html#pipeline">
 <a class="reference internal" href="reading.html#reading"><em>Reading with PDAL</em></a> documents contain detailed examples and background
 information.</p>
 </div>
-<p>The <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><em>filters.pclblock</em></a> is implemented as a PDAL filter stage and as such
-is easily accessed via the PDAL pipeline. It accepts a single, required option
-- the name of the <a class="reference external" href="http://www.json.org/">JSON</a> file describing the PCL Block.</p>
+<p>The <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><em>filters.pclblock</em></a> is implemented as a PDAL filter stage and as such is
+easily accessed via the PDAL pipeline. It accepts a single, required option -
+the name of the <a class="reference external" href="http://www.json.org/">JSON</a> file describing the PCL Block.</p>
 <p>A sample pipeline XML which reads/writes LAS and has a single PCL Block filter
 is shown below.</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.las.writer&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            filtered_cloud.las
+            ../../../temp/foo.las
         <span class="nt">&lt;/Option&gt;</span>
         <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.pclblock&quot;</span><span class="nt">&gt;</span>
             <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                block.json
+                ./passthrough.json
             <span class="nt">&lt;/Option&gt;</span>
             <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.las.reader&quot;</span><span class="nt">&gt;</span>
                 <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                    input_cloud.las
+                    ../../autzen/autzen-point-format-3.las
                 <span class="nt">&lt;/Option&gt;</span>
             <span class="nt">&lt;/Reader&gt;</span>
         <span class="nt">&lt;/Filter&gt;</span>
@@ -195,18 +195,16 @@ is shown below.</p>
 </pre></div>
 </div>
 <p>And is run from the command line thusly.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline -i /path/to/xml
+<div class="highlight-python"><div class="highlight"><pre>$ cd pdal # your PDAL source tree
+$ cd test/data
+$ ../../bin/pdal pipeline -i filters/pcl/passthrough.xml -v4
 </pre></div>
 </div>
-<p>This simple pipeline reads the input LAS (<tt class="docutils literal"><span class="pre">input_cloud.las</span></tt>), passes it
-through the PCL Block (<tt class="docutils literal"><span class="pre">block.json</span></tt>), and writes the output LAS
-(<tt class="docutils literal"><span class="pre">filtered_cloud.las</span></tt>).</p>
-<p>You can also try running the PassThrough PCL Block pipeline similar to our
-example above by typing</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline -i pdal/test/data/filters/pcl_passthrough.xml -v4
-</pre></div>
-</div>
-<p>which should produce</p>
+<p>This simple pipeline reads the input LAS (<tt class="docutils literal"><span class="pre">autzen-point-format-3.las</span></tt>), passes
+it through the PCL Block (<tt class="docutils literal"><span class="pre">passthrough.json</span></tt>), and writes the output LAS
+(<tt class="docutils literal"><span class="pre">foo.las</span></tt>). Note that the file paths are interpreted relative to the
+directory containing the XML file.</p>
+<p>When run, it should produce output similar to this:</p>
 <div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
 Requested to write 106 points
 0
@@ -233,25 +231,29 @@ AUTHOR:
 <h2>PDAL PCL kernel<a class="headerlink" href="#pdal-pcl-kernel" title="Permalink to this headline">¶</a></h2>
 <p>For users that would like to bypass the creation (and subsequent modification)
 of the pipeline XML for every file they wish to process, there is another
-option&#8211;the <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></tt> command.</p>
+option: the <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></tt> command.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i /path/to/input/las -p /path/to/pcl/block/json -o /path/to/output/las
 </pre></div>
 </div>
-<p>This is functionally equivalent to the original pipeline, but does not afford
-the flexibility of constructing the pipeline (i.e., none the other PDAL filters
-are accessible).</p>
-<p>The same can be accomplished with the <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></tt> command. The basic syntax
-for the command is</p>
+<p>This is functionally equivalent to the original <cite>pdal pipeline</cite> command, but
+does not afford the flexibility of constructing the pipeline (i.e., none the
+other PDAL filters are accessible).</p>
+<p>The same can be accomplished with the <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></tt> command. The basic syntax for
+the command is</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i &lt;input cloud&gt; -p &lt;PCL Block JSON&gt; -o &lt;output cloud&gt;
 </pre></div>
 </div>
 <p>where the JSON file specified with <tt class="docutils literal"><span class="pre">-p</span></tt> is the same file that would be
-embedded in the pipeline XML file. This can be useful when the pipeline
-does not change frequently, but the input/output filenames do.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i test/data/autzen-point-format-3.las -p test/data/filters/pcl/passthrough.json -o test/temp/foo.las -v4
+embedded in the pipeline XML file. This can be useful when the pipeline does not
+change frequently, but the input/output filenames do.</p>
+<p>For example, the above <cite>pdal pipeline</cite> example can be written with <cite>pdal pcl</cite>
+like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd pdal  # your PDAL source tree
+$ cd test/data
+$ ../../bin/pdal pcl -i autzen/autzen-point-format-3.las -p filters/pcl/example_PassThrough_1.json -o ../temp/foo.las -v4
 </pre></div>
 </div>
-<p>which should produce</p>
+<p>This should produce the output</p>
 <div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
 Requested to write 106 points
 0
@@ -284,20 +286,27 @@ this example, we apply a single PCL filter to the PointBuffer. The
 specified dimension. Here, we are asking PCL to crop the input point cloud,
 returning only those points with z values in the range 100 to 200.</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThroughExample&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mi">200</span>
-        <span class="p">}</span>
-    <span class="p">}]</span>
-  <span class="p">}</span>
+    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThroughExample&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mf">410.0</span><span class="p">,</span>
+                    <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mf">440.0</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>(This example is taken from the unit test
+<cite>PCLBlockFilterTest_example_PassThrough_1</cite>.)</p>
 </div>
 <div class="section" id="point-cloud-cropping-with-outlier-removal">
 <h3>Point cloud cropping with outlier removal<a class="headerlink" href="#point-cloud-cropping-with-outlier-removal" title="Permalink to this headline">¶</a></h3>
@@ -308,64 +317,87 @@ now only a handful of the PCL filtering options are accessible through the PCL
 Block. Similarly, select parameters of these classes can be set by specifying
 their public member functions by name.</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThroughAndOutlierRemovalExample&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mi">200</span>
-        <span class="p">}</span>
-      <span class="p">},</span> <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="nt">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
-    <span class="p">}]</span>
-  <span class="p">}</span>
+    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CombinedExample&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;Apply passthrough filter followed by statistical outlier removal&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Bradley J Chambers&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;filter z values to the range [410,440]&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mf">410.0</span><span class="p">,</span>
+                    <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mf">440.0</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;apply outlier removal&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="nt">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">0.2</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>(This example is taken from the unit test
+<cite>PCLBlockFilterTest_example_PassThrough_2</cite>.)</p>
 </div>
 <div class="section" id="ground-return-filtering">
 <h3>Ground return filtering<a class="headerlink" href="#ground-return-filtering" title="Permalink to this headline">¶</a></h3>
 <p>The Progressive Morphological Filter (PMF) is an openly published approach to
-identifying ground vs. non-ground returns in point cloud data. An
-implementation of PMF is included with PCL and accessible through the PDAL&#8217;s
-PCL Block filter.</p>
+identifying ground vs. non-ground returns in point cloud data. An implementation
+of PMF is included with PCL and accessible through the PDAL&#8217;s PCL Block filter.</p>
 <p>A complete description of the algorithm can be found in the article <a class="reference external" href="http://users.cis.fiu.edu/~chens/PDF/TGRS.pdf">&#8220;A
 Progressive Morphological Filter for Removing Nonground Measurements from
 Airborne LIDAR Data&#8221;</a> by K.
 Zhang, S.  Chen, D. Whitman, M. Shyu, J. Yan, and C. Zhang.</p>
 <p>To run the PMF with default settings, the PCL Block JSON is simply:</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterDefaultExample&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span>
-    <span class="p">}]</span>
-  <span class="p">}</span>
+    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterExample&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span>
+                <span class="s2">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Additional parameters can be set by advanced users:</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterAdvancedExample&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="nt">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-        <span class="nt">&quot;setSlope&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="nt">&quot;setInitialDistance&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-        <span class="nt">&quot;setMaxDistance&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
-        <span class="nt">&quot;setExponential&quot;</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="p">}]</span>
-  <span class="p">}</span>
+    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterAdvancedExample&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="nt">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                <span class="nt">&quot;setSlope&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="nt">&quot;setInitialDistance&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="nt">&quot;setMaxDistance&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+                <span class="nt">&quot;setExponential&quot;</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="../stages/filters.pclblock.html#progressivemorphologicalfilter"><em>here</em></a> for a more detailed
+<p>(These examples are taken from the unit tests
+<cite>PCLBlockFilterTest_example_PMF_1</cite> and <cite>PCLBlockFilterTest_example_PMF_2</cite>.)</p>
+<p>See <em class="xref std std-ref">here</em> for a more detailed
 explanation of the PMF parameters.</p>
 </div>
 </div>
@@ -417,7 +449,7 @@ explanation of the PMF parameters.</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 10, 2014.
+                    on Oct 11, 2014.
         </div>
     </div>
 
