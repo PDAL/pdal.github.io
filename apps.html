@@ -115,7 +115,7 @@ application currently contains six commands:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#delta-command"><em>delta</em></a></li>
 <li><a class="reference internal" href="#diff-command"><em>diff</em></a></li>
-<li><em class="xref std std-ref">ground</em></li>
+<li><a class="reference internal" href="#ground-command"><em>ground</em></a></li>
 <li><a class="reference internal" href="#info-command"><em>info</em></a></li>
 <li><a class="reference internal" href="#pcl-command"><em>pcl</em></a></li>
 <li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
@@ -132,7 +132,7 @@ $ pdal pipeline --stdin &lt; myxml.xml
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <em class="xref std std-ref">ground</em>, <a class="reference internal" href="#pcl-command"><em>pcl</em></a>, and
+<p class="last">The <a class="reference internal" href="#ground-command"><em>ground</em></a>, <a class="reference internal" href="#pcl-command"><em>pcl</em></a>, and
 <a class="reference internal" href="#view-command"><em>view</em></a> commands are only available if PCL is linked.</p>
 </div>
 <p>Help about each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch.
@@ -217,10 +217,9 @@ checking the following:</p>
 <li>Actual point count</li>
 <li>Byte-by-byte point data</li>
 </ul>
-<p>.._ground_command:</p>
 </div>
 <div class="section" id="ground-command">
-<h2><tt class="docutils literal"><span class="pre">ground</span></tt> command<a class="headerlink" href="#ground-command" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2><tt class="docutils literal"><span class="pre">ground</span></tt> command<a class="headerlink" href="#ground-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>ground</em> command is used to segment the input point cloud into ground
 versus non-ground returns. The output is a point cloud containing only ground
 returns. Internally, the tool is calling the Point Cloud Library&#8217;s
@@ -239,7 +238,7 @@ PDAL is linked with PCL.</p>
 </div>
 </div>
 <div class="section" id="info-command">
-<span id="id3"></span><h2><tt class="docutils literal"><span class="pre">info</span></tt> command<a class="headerlink" href="#info-command" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2><tt class="docutils literal"><span class="pre">info</span></tt> command<a class="headerlink" href="#info-command" title="Permalink to this headline">¶</a></h2>
 <p>Dumps information about a point cloud file, such as:</p>
 <ul class="simple">
 <li>basic properties (extents, number of points, point format)</li>
@@ -253,15 +252,13 @@ a user to retransform the output into whatever they want with ease</li>
 </pre></div>
 </div>
 <p>Print the first 10 points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
-<dl class="docutils">
-<dt>::</dt>
-<dd>$ pdal info test/data/1.2-with-color.las -p 0-10</dd>
-</dl>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info test/data/1.2-with-color.las -p 0-10
+</pre></div>
+</div>
 <p>Print three selected points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
-<dl class="docutils">
-<dt>::</dt>
-<dd>$ pdal info test/data/1.2-with-color.las -p 4, 16, 28</dd>
-</dl>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info test/data/1.2-with-color.las -p 4, 16, 28
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre>-p [ --point ] [=arg(=0)] point to dump
 --query arg               A 2d or 3d point query point
 --distance arg            A query distance
@@ -279,7 +276,7 @@ a user to retransform the output into whatever they want with ease</li>
 </div>
 </div>
 <div class="section" id="pcl-command">
-<span id="id4"></span><h2><tt class="docutils literal"><span class="pre">pcl</span></tt> command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2><tt class="docutils literal"><span class="pre">pcl</span></tt> command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>pcl</em> command is used to invoke a PCL JSON pipeline. See
 <a class="reference internal" href="tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a> for more information.</p>
 <div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg      input file name
@@ -291,7 +288,7 @@ a user to retransform the output into whatever they want with ease</li>
 <p>The <em>pcl</em> command is only available when PDAL is build with PCL support.</p>
 </div>
 <div class="section" id="pipeline-command">
-<span id="id5"></span><h2><tt class="docutils literal"><span class="pre">pipeline</span></tt> command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
+<span id="id6"></span><h2><tt class="docutils literal"><span class="pre">pipeline</span></tt> command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>pipeline</em> command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See <a class="reference internal" href="tutorial/reading.html#reading"><em>Reading with PDAL</em></a>
 or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> for more information.</p>
 <div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
@@ -304,7 +301,7 @@ or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em>
 </div>
 </div>
 <div class="section" id="random-command">
-<span id="id6"></span><h2><tt class="docutils literal"><span class="pre">random</span></tt> command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
+<span id="id7"></span><h2><tt class="docutils literal"><span class="pre">random</span></tt> command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>random</em> command is used to create a random point cloud. It uses
 <a class="reference internal" href="stages/drivers.faux.reader.html#drivers-faux-reader"><em>drivers.faux.reader</em></a> to create a point cloud containing <em>count</em> points
 drawn randomly from either a uniform or normal distribution. For the uniform
@@ -329,7 +326,7 @@ each of the x, y, and z dimensions.</p>
 </div>
 </div>
 <div class="section" id="translate-command">
-<span id="id7"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
+<span id="id8"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>translate</em> command is used for simple conversion of files based on their
 file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
 translation operations.</p>
@@ -378,7 +375,7 @@ command line invocation. For example, the following invocation will translate
 </div>
 </div>
 <div class="section" id="view-command">
-<span id="id8"></span><h2><tt class="docutils literal"><span class="pre">view</span></tt> command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2><tt class="docutils literal"><span class="pre">view</span></tt> command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>view</em> command can be used to visualize a point cloud using the
 PCLVisualizer. The command takes a single argument, the input file name.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal view myfile.las
@@ -470,7 +467,7 @@ help.</p>
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 22, 2014.
+                    on Oct 23, 2014.
         </div>
     </div>
 

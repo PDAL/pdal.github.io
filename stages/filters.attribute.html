@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>drivers.p2g.writer &mdash; pdal.io</title>
+        <title>filters.attribute &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,64 +96,98 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="drivers-p2g-writer">
-<span id="id1"></span><h1>drivers.p2g.writer<a class="headerlink" href="#drivers-p2g-writer" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>points to grid writer</strong> takes in a stream of point data and writes out gridded summaries of the stream. Each cell in the output grids can give one of the: minimum value, maximum value, average value, average value, inverse distance weighted interpolation (for sparse points), or density. The points to grid writer supports creating multiple output grids simultaneously, so it is possible to generate all grid variants in one pass.</p>
+  <div class="section" id="filters-attribute">
+<h1>filters.attribute<a class="headerlink" href="#filters-attribute" title="Permalink to this headline">¶</a></h1>
+<p>The attribute filter allows you to set the values of a
+selected dimension. There are three possible scenarios that
+are currently supported:</p>
+<ul class="simple">
+<li>Set all points in a dimension to single value</li>
+<li>Set points inside an OGR-readable Polygon or MultiPolygon</li>
+</ul>
+<div class="section" id="ogr-sql-support">
+<h2>OGR SQL support<a class="headerlink" href="#ogr-sql-support" title="Permalink to this headline">¶</a></h2>
+<p>You can limit your queries based on OGR&#8217;s SQL support. If the
+filter has both a <cite>datasource</cite> and a <cite>query</cite> option, those will
+be used instead of the entire OGR data source. At this time it is
+not possible to further filter the OGR query based on a geometry
+but that may be added in the future.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The OGR SQL support follows the rules specified in <a class="reference external" href="http://www.gdal.org/ogr__api_8h.html#a9892ecb0bf61add295bd9decdb13797a">ExecuteSQL</a>
+documentation, and it will pass SQL down to the underlying
+datasource if it can do so.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If no <cite>datasource</cite> is given, it is assumed that the query
+is setting all of the values for the given dimension to the
+<cite>value</cite> option.</p>
+</div>
+</div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<p>In this scenario, we are altering the attributes of three
+dimensions &#8211; <cite>Classification</cite>, <cite>PointSourceId</cite>, and <cite>Intensity</cite>. The
+<cite>PointSourceId</cite> will simply be set to the single value <cite>26</cite>, while
+<cite>Classification</cite> and <cite>Intensity</cite> will have their values set when the
+candidate point is inside a polygon with that polygon&#8217;s attribute.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;2.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.p2g.writer&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;grid_dist_x&quot;</span><span class="nt">&gt;</span>
-      6.0
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;grid_dist_y&quot;</span><span class="nt">&gt;</span>
-      6.0
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;radius&quot;</span><span class="nt">&gt;</span>
-      8.4852813742385713
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      autzen_grid
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      min
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      max
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      mean
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      idw
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      den
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_format&quot;</span><span class="nt">&gt;</span>
-      grid
-    <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.inplacereprojection&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;out_srs&quot;</span><span class="nt">&gt;</span>
-          EPSG:26910
+    <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.las.writer&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+            attributed.las
         <span class="nt">&lt;/Option&gt;</span>
         <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_x&quot;</span><span class="nt">&gt;</span>
-          0.01
+            0.0000001
         <span class="nt">&lt;/Option&gt;</span>
         <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_y&quot;</span><span class="nt">&gt;</span>
-          0.01
+            0.0000001
         <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.las.reader&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            ../1.2-with-color.las
-          <span class="nt">&lt;/Option&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;spatialreference&quot;</span><span class="nt">&gt;</span>
-            ../1.2-with-color.las.wkt
-          <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Reader&gt;</span>
-    <span class="nt">&lt;/Filter&gt;</span>
-  <span class="nt">&lt;/Writer&gt;</span>
+        <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.attribute&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
+                Classification
+                <span class="nt">&lt;Options&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;datasource&quot;</span><span class="nt">&gt;</span>
+                        ./test/data/autzen/attributes.shp
+                    <span class="nt">&lt;/Option&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;layer&quot;</span><span class="nt">&gt;</span>
+                        attributes
+                    <span class="nt">&lt;/Option&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;column&quot;</span><span class="nt">&gt;</span>
+                        CLS
+                    <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;/Options&gt;</span>
+            <span class="nt">&lt;/Option&gt;</span>
+            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
+                Intensity
+                <span class="nt">&lt;Options&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;datasource&quot;</span><span class="nt">&gt;</span>
+                        ./test/data/autzen/attributes.shp
+                    <span class="nt">&lt;/Option&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;query&quot;</span><span class="nt">&gt;</span>
+                        SELECT CLS FROM attributes where cls!=6
+                    <span class="nt">&lt;/Option&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;column&quot;</span><span class="nt">&gt;</span>
+                        CLS
+                    <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;/Options&gt;</span>
+            <span class="nt">&lt;/Option&gt;</span>
+            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
+                PointSourceId
+                <span class="nt">&lt;Options&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;value&quot;</span><span class="nt">&gt;</span>
+                        26
+                    <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;/Options&gt;</span>
+            <span class="nt">&lt;/Option&gt;</span>
+            <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.las.reader&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+                    ../autzen/autzen-dd.las
+                <span class="nt">&lt;/Option&gt;</span>
+            <span class="nt">&lt;/Reader&gt;</span>
+        <span class="nt">&lt;/Filter&gt;</span>
+    <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
@@ -161,18 +195,20 @@
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>grid_dist_x</dt>
-<dd>Size of grid cell in x dimension [Default: <strong>6</strong>]</dd>
-<dt>grid_dist_y</dt>
-<dd>Size of grid cell in y dimension. [Default: <strong>6</strong>]</dd>
-<dt>radius</dt>
-<dd>??? [Default: <strong>8.48528</strong>]</dd>
-<dt>filename</dt>
-<dd>Base file name for output files. [Required]</dd>
-<dt>output_type</dt>
-<dd>One or many options, specifying &#8220;min&#8221;, &#8220;max&#8221;, &#8220;mean&#8221;, &#8220;idw&#8221; (inverse distance weighted), &#8220;den&#8221; (density), or &#8220;all&#8221; to get all variants with just one option. [Default: <strong>all</strong>]</dd>
-<dt>output_format</dt>
-<dd>File output format to use, one of &#8220;grid&#8221;, &#8220;tif&#8221;, or &#8220;asc&#8221;. [Default: <strong>grid</strong>]</dd>
+<dt>dimension</dt>
+<dd><p class="first">A dimension Option with an Options block containing at least a &#8220;value&#8221;
+Option to set all points.</p>
+<ul class="last simple">
+<li>value: The value to set all points to for the given dimension</li>
+<li>datasource: OGR-readable datasource for Polygon or MultiPolygon data</li>
+<li>column: The column from which to read the attribute. If none is
+specified, the first column is used.</li>
+<li>query: The OGR SQL query to execute on the datasource to fetch
+geometry and attributes.</li>
+<li>layer: The data source&#8217;s layer to use. If none is specified, the
+first one is used.</li>
+</ul>
+</dd>
 </dl>
 </div>
 </div>
@@ -189,19 +225,14 @@
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">drivers.p2g.writer</a><ul>
+<li><a class="reference internal" href="#">filters.attribute</a><ul>
+<li><a class="reference internal" href="#ogr-sql-support">OGR SQL support</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="drivers.oci.writer.html"
-                        title="previous chapter">drivers.oci.writer</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="drivers.pcd.reader.html"
-                        title="next chapter">drivers.pcd.reader</a></p>
             </div>
         </div>
                 </div>
@@ -222,7 +253,7 @@
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'drivers.p2g.writer &mdash; pdal.io';
+        var disqus_title = 'filters.attribute &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
