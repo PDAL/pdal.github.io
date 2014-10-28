@@ -99,30 +99,30 @@
   <div class="section" id="filters-pclblock">
 <span id="id1"></span><h1>filters.pclblock<a class="headerlink" href="#filters-pclblock" title="Permalink to this headline">¶</a></h1>
 <p>The PCL Block filter allows users to specify a block of Point Cloud Library
-(<a class="reference external" href="http://www.pointclouds.org">PCL</a>) operations on a PDAL <cite>PointBuffer</cite>, applying the necessary conversions
+(<a class="reference external" href="http://www.pointclouds.org">PCL</a>) operations on a PDAL <tt class="docutils literal"><span class="pre">PointBuffer</span></tt>, applying the necessary conversions
 between PDAL and PCL point cloud representations.</p>
 <p>This filter is under active development. The current implementation serves as a
 proof of concept for linking PCL into PDAL and converting data. The PCL Block
-filter creates a PCL <cite>Pipeline</cite> object and passes it a single argument, the JSON
+filter creates a PCL <tt class="docutils literal"><span class="pre">Pipeline</span></tt> object and passes it a single argument, the JSON
 file containing the PCL block definition. After filtering, the resulting indices
-can be retrieved and used to create a new PDAL <cite>PointBuffer</cite> containing only
+can be retrieved and used to create a new PDAL <tt class="docutils literal"><span class="pre">PointBuffer</span></tt> containing only
 those points that passed the filtering stages.</p>
-<p>At this stage in its development, the PCL <cite>Pipeline</cite> does not allow complex
-operations that may change the point type (e.g., <cite>PointXYZ</cite> to <cite>PointNormal</cite>) or
+<p>At this stage in its development, the PCL <tt class="docutils literal"><span class="pre">Pipeline</span></tt> does not allow complex
+operations that may change the point type (e.g., <tt class="docutils literal"><span class="pre">PointXYZ</span></tt> to <tt class="docutils literal"><span class="pre">PointNormal</span></tt>) or
 alter points.  We will continue to look into use cases that are of value and
 feasible, but for now are limited primarily to PCL functions that filter or
 segment the point cloud, returning a list of indices of the filtered points
 (e.g., ground or object, noise or signal). The main reason for this design
-decision is that we want to avoid converting all <cite>PointBuffer</cite> dimensions to the
-PCL <cite>PointCloud</cite>. In the case of an LAS reader, we may very well not want to
+decision is that we want to avoid converting all <tt class="docutils literal"><span class="pre">PointBuffer</span></tt> dimensions to the
+PCL <tt class="docutils literal"><span class="pre">PointCloud</span></tt>. In the case of an LAS reader, we may very well not want to
 operate on fields such as return number, but we do not want to lose this
 information post PCL filtering. The easy solution is to simply retain the index
-between the <cite>PointBuffer</cite> and <cite>PointCloud</cite> objects and update as necessary.</p>
+between the <tt class="docutils literal"><span class="pre">PointBuffer</span></tt> and <tt class="docutils literal"><span class="pre">PointCloud</span></tt> objects and update as necessary.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p>See <a class="reference internal" href="../tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a> for more on using the PCL Block including
 examples.</p>
-<p class="last">See <em class="xref std std-ref">pcl_spec</em> for complete details on the PCL Block JSON syntax
+<p class="last">See <em class="xref std std-ref">pcl_json_specification</em> for complete details on the PCL Block JSON syntax
 and the filters available.</p>
 </div>
 <div class="section" id="options">
@@ -167,11 +167,11 @@ PCL. Here is an example:</p>
 <h2>Implemented Filters<a class="headerlink" href="#implemented-filters" title="Permalink to this headline">¶</a></h2>
 <p>The list of PCL filters that are accessible through the PCL Block depends on PCL
 itself. PDAL is rather dumb in this respect, merely converting the PDAL
-<cite>PointBuffer</cite> to a PCL <cite>PointCloud</cite> object and passing the JSON filename. The
+<tt class="docutils literal"><span class="pre">PointBuffer</span></tt> to a PCL <tt class="docutils literal"><span class="pre">PointCloud</span></tt> object and passing the JSON filename. The
 parsing of the JSON file and implementation of the PCL filters is entirely
-embedded within the PCL <cite>Pipeline</cite>.</p>
+embedded within the PCL <tt class="docutils literal"><span class="pre">Pipeline</span></tt>.</p>
 <p>A summary of the currently available filters is listed below. For full details
-of the filters and their parameters, see the <em class="xref std std-ref">pcl_spec</em>.</p>
+of the filters and their parameters, see the <em class="xref std std-ref">pcl_json_specification</em>.</p>
 <dl class="docutils">
 <dt>ApproximateProgressiveMorphologicalFilter</dt>
 <dd>faster (and potentially less accurate) version of the
@@ -201,14 +201,14 @@ filters the data</dd>
 <p>Adding a new PCL filter to the PCLBlock ecosystem is mostly a process of
 judicious copying and pasting.</p>
 <ol class="arabic simple">
-<li>Add the filter function declaration of the form <cite>applyMyFilter</cite> to
-<cite>PCLPipeline.h</cite>.</li>
-<li>Add the implementation of <cite>applyMyFilter</cite> to <cite>PCLPipeline.hpp</cite>.</li>
+<li>Add the filter function declaration of the form <tt class="docutils literal"><span class="pre">applyMyFilter</span></tt> to
+<tt class="docutils literal"><span class="pre">PCLPipeline.h</span></tt>.</li>
+<li>Add the implementation of <tt class="docutils literal"><span class="pre">applyMyFilter</span></tt> to <tt class="docutils literal"><span class="pre">PCLPipeline.hpp</span></tt>.</li>
 <li>Add a one-line description of the shiny new filter to this file,
-<cite>filters.pclblock.rst</cite>.</li>
-<li>Add a full description of the new filter to <cite>pcl_spec.rst</cite>, including example
-JSON, all parameters, and default settings.</li>
-<li>Add a test to <cite>PCLBlockFilterTest.cpp</cite>. Make sure each parameter is
+<tt class="docutils literal"><span class="pre">filters.pclblock.rst</span></tt>.</li>
+<li>Add a full description of the new filter to <a class="reference internal" href="../tutorial/pcl_spec.html#pcl-json-specification"><em>pcl_spec.rst</em></a>, including example JSON, all parameters, and
+default settings.</li>
+<li>Add a test to <tt class="docutils literal"><span class="pre">PCLBlockFilterTest.cpp</span></tt>. Make sure each parameter is
 independently verified.</li>
 </ol>
 </div>
@@ -254,7 +254,7 @@ independently verified.</li>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 27, 2014.
+                    on Oct 28, 2014.
         </div>
     </div>
 
