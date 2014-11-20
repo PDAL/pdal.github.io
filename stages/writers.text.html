@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>Testing &mdash; pdal.io</title>
+        <title>drivers.text.writer &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,69 +96,48 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="testing">
-<span id="pdal-test"></span><h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="unit-tests">
-<h2>Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
-<p>A unit test framework is provided, with the goal that all (nontrivial)
-classes will have unit tests.  At the very least, each new class should have
-a corresponding unit test file stubbed in, even if there aren&#8217;t any tests
-yet.</p>
-<p>Our unit tests also include testing of each of the command line
-apps.</p>
-<p>We use the Boost unit test framework.  This gives us automatic
-memory leak testing as well.</p>
-<p>Unit tests for features that are configuration-dependent, e.g. laszip
-compression, should be put under the same #ifdef guards as the classes
-being tested.</p>
-<p>The Support class, in the test/unit directory, provides some functions for comparing files, etc, that are useful in writing test cases.</p>
-<p>Unit tests should not be long-running.  (As of this writing, a full test
-run executes 163 tests in under 10 seconds in Debug mode on mpg&#8217;s little
-laptop.  This is good.)</p>
-<p>To run the unit tests, issue the following command from your build directory:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ make test
-</pre></div>
-</div>
-<p>Your output should resemble the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>Running tests...
-Test project /path/to/pdal/build
-    Start 1: pdal_test
-1/1 Test #1: pdal_test ........................   Passed    3.53 sec
-
-100% tests passed, 0 tests failed out of 1
-
-Total Test time (real) =   4.79 sec
-</pre></div>
-</div>
-<p>Alternately, one can run the unit tests directly:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ bin/pdal_test ../../test/data/ --catch_system_errors=no
-</pre></div>
-</div>
-<p>Again, the output should resemble the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>Running 198 test cases...
-0.100
-Wrote 1065 points
-0.100
-Wrote 1065 points
-0.100
-Wrote 1065 points
-0.100
-Wrote 1065 points
-
-*** No errors detected
+  <div class="section" id="drivers-text-writer">
+<span id="id1"></span><h1>drivers.text.writer<a class="headerlink" href="#drivers-text-writer" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>text writer</strong> writes out to a text file. This is useful for debugging or getting smaller files into an easily parseable format.  The text writer supports both <a class="reference external" href="http://geojson.org">GeoJson</a> and <a class="reference external" href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> output.</p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;drivers.text.writer&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>output.js<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;format&quot;</span><span class="nt">&gt;</span>geojson<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;order&quot;</span><span class="nt">&gt;</span>X,Y,Z<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;keep_unspecified&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;drivers.qfit.reader&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>qfitfile.qi<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;flip_coordinates&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_z&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;/Reader&gt;</span>
+  <span class="nt">&lt;/Writer&gt;</span>
+<span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="test-data">
-<h2>Test Data<a class="headerlink" href="#test-data" title="Permalink to this headline">¶</a></h2>
-<p>Use the directory ./test/data to store files used for unit tests.  A
-function is provided in the Support class for referencing that directory
-in a configuration-independent manner.</p>
-<p>Temporary output files from unit tests should go into the test/temp directory.
-A Support function is provided for referencing this directory as well.</p>
-<p>Unit tests should always clean up and remove any files that they create
-(except perhaps in case of a failed test, in which case leaving the output
-around might be helpful for debugging).</p>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>File to write to, or &#8220;STDOUT&#8221; to write to standard out [Required]</dd>
+<dt>format</dt>
+<dd>Output format to use. One of &#8220;geojson&#8221; or &#8220;csv&#8221;. [Default: <strong>csv</strong>]</dd>
+<dt>order</dt>
+<dd>Comma-separated list of dimension names, giving the desired column order in the output file, for example &#8220;X,Y,Z,Red,Green,Blue&#8221;. [Default: none]</dd>
+<dt>keep_unspecified</dt>
+<dd>Should we output any fields that are not specified in the dimension order? [Default: <strong>true</strong>]</dd>
+<dt>jscallback</dt>
+<dd>When producing GeoJSON, the callback allows you to wrap the data in a function, so the output can be evaluated in a &lt;script&gt; tag.</dd>
+<dt>quote_header</dt>
+<dd>When producing CSV, should the column header named by quoted? [Default: <strong>true</strong>]</dd>
+<dt>newline</dt>
+<dd>When producing CSV, what newline character should be used? (For Windows, &#8220;\r\n&#8221; is common.) [Default: <strong>\n</strong>]</dd>
+<dt>delimiter</dt>
+<dd>When producing CSV, what character to use as a delimiter? [Default: <strong>,</strong>]</dd>
+</dl>
 </div>
 </div>
 
@@ -174,19 +153,19 @@ around might be helpful for debugging).</p>
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Testing</a><ul>
-<li><a class="reference internal" href="#unit-tests">Unit Tests</a></li>
-<li><a class="reference internal" href="#test-data">Test Data</a></li>
+<li><a class="reference internal" href="#">drivers.text.writer</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="goals.html"
-                        title="previous chapter">Project Goals</a></p>
+  <p class="topless"><a href="readers.sbet.html"
+                        title="previous chapter">readers.sbet</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="usecases.html"
-                        title="next chapter">Use Cases</a></p>
+  <p class="topless"><a href="filters.attribute.html"
+                        title="next chapter">filters.attribute</a></p>
             </div>
         </div>
                 </div>
@@ -207,7 +186,7 @@ around might be helpful for debugging).</p>
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'Testing &mdash; pdal.io';
+        var disqus_title = 'drivers.text.writer &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
