@@ -187,11 +187,11 @@ complex pipeline construction.</li>
 <p>Let&#8217;s start with the following basic example:</p>
 <div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;Pipeline version=&quot;1.0&quot;&gt;
-    &lt;Writer type=&quot;drivers.las.writer&quot;&gt;
+    &lt;Writer type=&quot;writers.las&quot;&gt;
         &lt;Option name=&quot;filename&quot;&gt;
             output.las
         &lt;/Option&gt;
-        &lt;Reader type=&quot;drivers.las.reader&quot;&gt;
+        &lt;Reader type=&quot;readers.las&quot;&gt;
             &lt;Option name=&quot;filename&quot;&gt;
                 ./path/to/my/file.las
             &lt;/Option&gt;
@@ -222,16 +222,16 @@ that we are going to have as the endpoint of our pipeline (see more about this
 in <a class="reference internal" href="#stage-types">Stage Types</a>). After that, we have an Option element, which provides the
 filename that the Writer is going to use when outputting the file. Then we
 have the final doll in our Matryoshka set, the Reader, which has a stage
-type of <cite>drivers.las.reader</cite> with its own Option giving a filename to use
+type of <cite>readers.las</cite> with its own Option giving a filename to use
 to read the file.</p>
 </div>
 <div class="section" id="stage-types">
 <h3>Stage Types<a class="headerlink" href="#stage-types" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="api/cpp/reader.html#pdal::Reader" title="pdal::Reader"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></tt></a>, <a class="reference internal" href="api/cpp/writer.html#pdal::Writer" title="pdal::Writer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></tt></a>, and
 <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></tt> are the C++ classes that define the stage types in
-PDAL. Readers follow the pattern of <tt class="docutils literal"><span class="pre">drivers.las.reader</span></tt> or
-<tt class="docutils literal"><span class="pre">drivers.oci.reader</span></tt>, Writers follow the pattern of <tt class="docutils literal"><span class="pre">drivers.las.writer</span></tt> or
-<tt class="docutils literal"><span class="pre">drivers.oci.reader</span></tt>, with Filters using <tt class="docutils literal"><span class="pre">filters.inplacereprojection</span></tt> or
+PDAL. Readers follow the pattern of <tt class="docutils literal"><span class="pre">readers.las</span></tt> or
+<tt class="docutils literal"><span class="pre">readers.oci</span></tt>, Writers follow the pattern of <tt class="docutils literal"><span class="pre">writers.las</span></tt> or
+<tt class="docutils literal"><span class="pre">readers.oci</span></tt>, with Filters using <tt class="docutils literal"><span class="pre">filters.inplacereprojection</span></tt> or
 <tt class="docutils literal"><span class="pre">filters.crop</span></tt>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -270,7 +270,7 @@ dimensions it must operate on.</p>
         &lt;/Option&gt;
         &lt;!-- &lt;Option name=&quot;debug&quot;&gt;true&lt;/Option&gt;
         &lt;Option name=&quot;verbose&quot;&gt;7&lt;/Option&gt;    --&gt;
-        &lt;Reader type=&quot;drivers.las.reader&quot;&gt;
+        &lt;Reader type=&quot;readers.las&quot;&gt;
             &lt;Option name=&quot;filename&quot;&gt;
                 ../1.2-with-color.las
             &lt;/Option&gt;
@@ -353,7 +353,7 @@ attribute shall be the string &#8220;1.0&#8221;</li>
 <dd><ul class="first last simple">
 <li>the &#8220;type&#8221; attribute must appear exactly once; the value of this
 attribute shall be the string corresponding to the name of
-the Writer stage type, e.g. &#8220;drivers.las.writer&#8221;</li>
+the Writer stage type, e.g. &#8220;writers.las&#8221;</li>
 </ul>
 </dd>
 </dl>
@@ -380,7 +380,7 @@ the Writer stage type, e.g. &#8220;drivers.las.writer&#8221;</li>
 <dd><ul class="first last simple">
 <li>the &#8220;type&#8221; attribute must appear exactly once; the value of this
 attribute shall be the string corresponding to the name of
-the Reader stage type, e.g. &#8220;drivers.las.reader&#8221;</li>
+the Reader stage type, e.g. &#8220;readers.las&#8221;</li>
 </ul>
 </dd>
 </dl>
@@ -540,7 +540,7 @@ directory.)</p>
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Nov 24, 2014.
+                    on Nov 25, 2014.
         </div>
     </div>
 
