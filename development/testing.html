@@ -100,65 +100,158 @@
 <span id="pdal-test"></span><h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="unit-tests">
 <h2>Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
-<p>A unit test framework is provided, with the goal that all (nontrivial)
-classes will have unit tests.  At the very least, each new class should have
-a corresponding unit test file stubbed in, even if there aren&#8217;t any tests
-yet.</p>
-<p>Our unit tests also include testing of each of the command line
-apps.</p>
-<p>We use the Boost unit test framework.  This gives us automatic
-memory leak testing as well.</p>
+<p>A unit test framework is provided, with the goal that all (nontrivial) classes
+will have unit tests.  At the very least, each new class should have a
+corresponding unit test file stubbed in, even if there aren&#8217;t any tests yet.</p>
+<p>Our unit tests also include testing of each of the command line apps and
+(known) plugins.</p>
+<p>We use the Google C++ Test Framework.</p>
 <p>Unit tests for features that are configuration-dependent, e.g. laszip
-compression, should be put under the same #ifdef guards as the classes
+compression, should be put under the same <tt class="docutils literal"><span class="pre">#ifdef</span></tt> guards as the classes
 being tested.</p>
-<p>The Support class, in the test/unit directory, provides some functions for comparing files, etc, that are useful in writing test cases.</p>
-<p>Unit tests should not be long-running.  (As of this writing, a full test
-run executes 163 tests in under 10 seconds in Debug mode on mpg&#8217;s little
-laptop.  This is good.)</p>
-<p>To run the unit tests, issue the following command from your build directory:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ make test
+<p>The Support class, in the <tt class="docutils literal"><span class="pre">./test/unit</span></tt> directory, provides some functions
+for comparing files, etc, that are useful in writing test cases.</p>
+<p>Unit tests should not be long-running. (As of this writing, a full test run
+executes 163 tests in under 10 seconds in Debug mode on mpg&#8217;s little laptop.
+This is good.)</p>
+<p>To run all unit tests, issue the following command from your build directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ ctest
 </pre></div>
 </div>
-<p>Your output should resemble the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>Running tests...
+<p><tt class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></tt> or <tt class="docutils literal"><span class="pre">ninja</span> <span class="pre">test</span></tt> should still work as well.</p>
+<p>Depending on the which optional components you&#8217;ve chose to build, your output
+should resemble the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>Test project /path/to/pdal/build
+      Start  1: pdal_base_test
+ 1/10 Test  #1: pdal_base_test ...................   Passed    3.13 sec
+      Start  2: pdal_io_test
+ 2/10 Test  #2: pdal_io_test .....................   Passed    1.19 sec
+      Start  3: pdal_filters_test
+ 3/10 Test  #3: pdal_filters_test ................   Passed    6.27 sec
+      Start  4: pdal_plang_test
+ 4/10 Test  #4: pdal_plang_test ..................   Passed    1.32 sec
+      Start  5: pc2pc_test
+ 5/10 Test  #5: pc2pc_test .......................   Passed    5.62 sec
+      Start  6: xml_schema_test
+ 6/10 Test  #6: xml_schema_test ..................   Passed    0.02 sec
+      Start  7: hexbintest
+ 7/10 Test  #7: hexbintest .......................   Passed    1.15 sec
+      Start  8: icetest
+ 8/10 Test  #8: icetest ..........................   Passed    1.12 sec
+      Start  9: nitftest
+ 9/10 Test  #9: nitftest .........................   Passed    1.28 sec
+      Start 10: pcltest
+10/10 Test #10: pcltest ..........................   Passed    1.47 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =  22.61 sec
+</pre></div>
+</div>
+<p>For a more verbose output, use the <tt class="docutils literal"><span class="pre">-V</span></tt> flag. Or, to run an individual test
+suite, use <tt class="docutils literal"><span class="pre">-R</span> <span class="pre">&lt;suite</span> <span class="pre">name&gt;</span></tt>. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ ctest -V -R pdal_io_test
+</pre></div>
+</div>
+<p>Should produce output similar to:</p>
+<div class="highlight-python"><div class="highlight"><pre>UpdateCTestConfiguration  from :/path/to/pdal/build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/path/to/pdal/build/DartConfiguration.tcl
 Test project /path/to/pdal/build
-    Start 1: pdal_test
-1/1 Test #1: pdal_test ........................   Passed    3.53 sec
+Constructing a list of tests
+Done constructing a list of tests
+Checking test dependency graph...
+Checking test dependency graph end
+test 2
+    Start 2: pdal_io_test
+
+2: Test command: /path/to/pdal/build/bin/pdal_io_test
+2: Test timeout computed to be: 9.99988e+06
+2: Running main() from gtest_main.cc
+2: [==========] Running 28 tests from 8 test cases.
+2: [----------] Global test environment set-up.
+2: [----------] 7 tests from BPFTest
+2: [ RUN      ] BPFTest.test_point_major
+2: [       OK ] BPFTest.test_point_major (8 ms)
+2: [ RUN      ] BPFTest.test_dim_major
+2: [       OK ] BPFTest.test_dim_major (2 ms)
+2: [ RUN      ] BPFTest.test_byte_major
+2: [       OK ] BPFTest.test_byte_major (3 ms)
+2: [ RUN      ] BPFTest.test_point_major_zlib
+2: [       OK ] BPFTest.test_point_major_zlib (4 ms)
+2: [ RUN      ] BPFTest.test_dim_major_zlib
+2: [       OK ] BPFTest.test_dim_major_zlib (3 ms)
+2: [ RUN      ] BPFTest.test_byte_major_zlib
+2: [       OK ] BPFTest.test_byte_major_zlib (4 ms)
+2: [ RUN      ] BPFTest.inspect
+2: [       OK ] BPFTest.inspect (0 ms)
+2: [----------] 7 tests from BPFTest (24 ms total)
+2:
+       ...
+2:
+2: [----------] Global test environment tear-down
+2: [==========] 28 tests from 8 test cases ran. (1195 ms total)
+2: [  PASSED  ] 28 tests.
+1/1 Test #2: pdal_io_test .....................   Passed    1.24 sec
+
+The following tests passed:
+        pdal_io_test
 
 100% tests passed, 0 tests failed out of 1
 
-Total Test time (real) =   4.79 sec
+Total Test time (real) =   1.24 sec
 </pre></div>
 </div>
-<p>Alternately, one can run the unit tests directly:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ bin/pdal_test ../../test/data/ --catch_system_errors=no
+<p>Alternately, one can run individual unit tests directly:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ bin/pdal_io_test
 </pre></div>
 </div>
 <p>Again, the output should resemble the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>Running 198 test cases...
-0.100
-Wrote 1065 points
-0.100
-Wrote 1065 points
-0.100
-Wrote 1065 points
-0.100
-Wrote 1065 points
+<div class="highlight-python"><div class="highlight"><pre>Running main() from gtest_main.cc
+[==========] Running 28 tests from 8 test cases.
+[----------] Global test environment set-up.
+[----------] 7 tests from BPFTest
+[ RUN      ] BPFTest.test_point_major
+[       OK ] BPFTest.test_point_major (5 ms)
+[ RUN      ] BPFTest.test_dim_major
+[       OK ] BPFTest.test_dim_major (2 ms)
+[ RUN      ] BPFTest.test_byte_major
+[       OK ] BPFTest.test_byte_major (3 ms)
+[ RUN      ] BPFTest.test_point_major_zlib
+[       OK ] BPFTest.test_point_major_zlib (4 ms)
+[ RUN      ] BPFTest.test_dim_major_zlib
+[       OK ] BPFTest.test_dim_major_zlib (3 ms)
+[ RUN      ] BPFTest.test_byte_major_zlib
+[       OK ] BPFTest.test_byte_major_zlib (3 ms)
+[ RUN      ] BPFTest.inspect
+[       OK ] BPFTest.inspect (0 ms)
+[----------] 7 tests from BPFTest (21 ms total)
 
-*** No errors detected
+    ...
+
+[----------] Global test environment tear-down
+[==========] 28 tests from 8 test cases ran. (1180 ms total)
+[  PASSED  ] 28 tests.
 </pre></div>
 </div>
+<p>This invocation allows us to alter Google Test&#8217;s default behavior. For more on
+the available flags type:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ bin/&lt;test_name&gt; --help
+</pre></div>
+</div>
+<p>Key among these flags are the ability to list tests (<tt class="docutils literal"><span class="pre">--gtest_list_tests</span></tt>)
+and to run only select tests (<tt class="docutils literal"><span class="pre">--gtest_filter</span></tt>).</p>
 </div>
 <div class="section" id="test-data">
 <h2>Test Data<a class="headerlink" href="#test-data" title="Permalink to this headline">¶</a></h2>
-<p>Use the directory ./test/data to store files used for unit tests.  A
-function is provided in the Support class for referencing that directory
-in a configuration-independent manner.</p>
-<p>Temporary output files from unit tests should go into the test/temp directory.
-A Support function is provided for referencing this directory as well.</p>
-<p>Unit tests should always clean up and remove any files that they create
-(except perhaps in case of a failed test, in which case leaving the output
-around might be helpful for debugging).</p>
+<p>Use the directory <tt class="docutils literal"><span class="pre">./test/data</span></tt> to store files used for unit tests.  A
+vfunction is provided in the Support class for referencing that directory in a
+configuration-independent manner.</p>
+<p>Temporary output files from unit tests should go into the <tt class="docutils literal"><span class="pre">./test/temp</span></tt>
+directory.  A Support function is provided for referencing this directory as
+well.</p>
+<p>Unit tests should always clean up and remove any files that they create (except
+perhaps in case of a failed test, in which case leaving the output around might
+be helpful for debugging).</p>
 </div>
 </div>
 
@@ -200,7 +293,7 @@ around might be helpful for debugging).</p>
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Dec 10, 2014.
+                    on Dec 11, 2014.
         </div>
     </div>
 
