@@ -158,6 +158,11 @@ T <tt class="descname">getFieldAs</tt><big>(</big>Dimension::Id::Enum <em>dim</e
 
 <dl class="function">
 <dt>
+<span class="target" id="pdal::PointBuffer::getField__cP.Dimension::Id::Enum.Dimension::Type::Enum.PointIdC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ae40a214e9dc97779638bd9862ee9d0b1"></span>void <tt class="descname">getField</tt><big>(</big>char * <em>pos</em>, Dimension::Id::Enum <em>d</em>, Dimension::Type::Enum <em>type</em>, PointId <em>id</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
 <span class="target" id="pdal::PointBuffer::setField__Dimension::Id::Enum.PointId.T"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a3138dfa209087cf63d2bed0d679987f1"></span><div class="line">template &lt;typename T&gt; </div>
 void <tt class="descname">setField</tt><big>(</big>Dimension::Id::Enum <em>dim</em>, PointId <em>idx</em>, T <em>val</em><big>)</big></dt>
 <dd></dd></dl>
@@ -219,6 +224,44 @@ method. Otherwise, an exception will be thrown.</p>
 <dt>
 <span class="target" id="pdal::PointBuffer::dimsC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1ac2ad01f770ad7fa4d981b16a15f9b638"></span>Dimension::IdList <tt class="descname">dims</tt><big>(</big><big>)</big></dt>
 <dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::getPackedPoint__DimTypeListCR.PointId.cPC"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a3b7836df02e02755d10a41f20537685b"></span>void <tt class="descname">getPackedPoint</tt><big>(</big>const  DimTypeList  &amp; <em>dims</em>, PointId <em>idx</em>, char * <em>buf</em><big>)</big></dt>
+<dd><p>Fill a buffer with point data specified by the dimension list. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dims</span></tt> - <p>List of dimensions/types to retrieve. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">idx</span></tt> - <p>Index of point to get. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">buf</span></tt> - <p>Pointer to buffer to fill. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::PointBuffer::setPackedPoint__DimTypeListCR.PointId.cCP"></span><span class="target" id="project0classpdal_1_1PointBuffer_1a08db2e4e56e4b79acf1d289fa31b5ae6"></span>void <tt class="descname">setPackedPoint</tt><big>(</big>const  DimTypeList  &amp; <em>dims</em>, PointId <em>idx</em>, const char * <em>buf</em><big>)</big></dt>
+<dd><p>Load the point buffer from memory whose arrangement is specified by the dimension list. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dims</span></tt> - <p>Dimension/types of data in packed order </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">idx</span></tt> - <p>Index of point to write. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">buf</span></tt> - <p>Packed data buffer. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt>
@@ -284,7 +327,7 @@ method. Otherwise, an exception will be thrown.</p>
                         <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Dec 13, 2014.
+                    on Dec 14, 2014.
         </div>
     </div>
 
