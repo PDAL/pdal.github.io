@@ -299,6 +299,17 @@ or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em>
 --skip arg (=0)              How many points should we skip?
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <cite>pipeline</cite> command can accept option substitutions, but they
+do not replace existing options that are specified in the XML. For example,
+to set the output and input LAS files for a pipeline that does a translation,
+construct XML that does not containe <cite>filename</cite> options for each, and then
+issue the command with the following arguments:</p>
+<div class="last highlight-python"><div class="highlight"><pre>pdal pipeline -i translate.xml --writers.las.filename=output.laz --readers.las.filename=input.las
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="random-command">
 <span id="id7"></span><h2><tt class="docutils literal"><span class="pre">random</span></tt> command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
@@ -467,7 +478,7 @@ help.</p>
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Dec 26, 2014.
+                    on Dec 27, 2014.
         </div>
     </div>
 

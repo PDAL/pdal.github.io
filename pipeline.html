@@ -104,9 +104,9 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Howard Butler</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">hobu.inc at gmail dot com</td>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:howard&#37;&#52;&#48;hobu&#46;co">howard<span>&#64;</span>hobu<span>&#46;</span>co</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">5/31/2012</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">12/26/2014</td>
 </tr>
 </tbody>
 </table>
@@ -130,7 +130,7 @@ end point.</p>
 set.</p>
 <p><a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> is the substrate that flows between stages in a
 pipeline and transfers the actual data as it moves through the pipeline. A
-<a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> contains a <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt>, which
+<a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> contains a <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointContextRef</span></tt>, which
 itself contains a list of <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> objects that define the
 actual channels that are stored in the <a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a>.</p>
 <p>PDAL provides four types of stages &#8211; <a class="reference internal" href="api/cpp/reader.html#pdal::Reader" title="pdal::Reader"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></tt></a>,
@@ -140,27 +140,10 @@ point. A Reader is a producer of data, a Writer is a consumer of data, and a
 Filter is an actor on data.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The current implementation of PointBuffer stores the point data in an
-interleaved fashion. It is probable that a subclass of PointBuffer will
-come along that stores the data non-interleaved for situations where that
-data arrangement is well-suited. Patches graciously accepted :)</p>
-</div>
-<div class="section" id="a-diversion-about-pdal-schema-and-pdal-dimension">
-<h3>A diversion about <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt> and <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt><a class="headerlink" href="#a-diversion-about-pdal-schema-and-pdal-dimension" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="api/cpp/pointbuffer.html#pdal::PointBuffer" title="pdal::PointBuffer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer</span></tt></a> is composed of a <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt>
-that itself contains a list of <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> objects. A
-<tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> defines the properties of the data channel like
-its size in bytes, its name, and its interpretation.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As of this writing, <a class="reference internal" href="api/cpp/stage.html#pdal::Stage" title="pdal::Stage"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></tt></a> also has a
-<tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt> instance, but this merely exists to collect the
-<tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> that a <a class="reference internal" href="api/cpp/stage.html#pdal::Stage" title="pdal::Stage"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></tt></a> is currently
-capable of providing. The model is likely to change to simply providing a
-list of <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></tt> instances that are available, and the
-person composing the <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></tt> will worry about their order
-and other schema properties.</p>
-</div>
+<p class="last">As a consumer, you are generally not supposed to worry about the underlying storage of the
+PointBuffer, but there might be times when you simply just &#8220;want the data.&#8221;
+In those situations, you can use the <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointBuffer::getBytes</span></tt>
+method to stream out the raw storage.</p>
 </div>
 </div>
 <div class="section" id="a-basic-example">
@@ -202,14 +185,6 @@ complex pipeline construction.</li>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Because the Pipeline XML has been in flux throughout development, this
-version number has not been incremented yet. It will be frozen at 1.0
-until there is a PDAL 1.0 release. After the 1.0 release, PDAL will
-provide a modicum of backward-compatibility using the version number
-provided in the Pipeline element of the XML.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last"><a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/test/data/pipeline/">https://github.com/PDAL/PDAL/blob/master/test/data/pipeline/</a> contains
 test suite pipeline files that provide an excellent example of the
 currently possible operations.</p>
@@ -229,18 +204,19 @@ to read the file.</p>
 <h3>Stage Types<a class="headerlink" href="#stage-types" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="api/cpp/reader.html#pdal::Reader" title="pdal::Reader"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></tt></a>, <a class="reference internal" href="api/cpp/writer.html#pdal::Writer" title="pdal::Writer"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></tt></a>, and
 <tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></tt> are the C++ classes that define the stage types in
-PDAL. Readers follow the pattern of <tt class="docutils literal"><span class="pre">readers.las</span></tt> or
-<tt class="docutils literal"><span class="pre">readers.oci</span></tt>, Writers follow the pattern of <tt class="docutils literal"><span class="pre">writers.las</span></tt> or
-<tt class="docutils literal"><span class="pre">readers.oci</span></tt>, with Filters using <tt class="docutils literal"><span class="pre">filters.inplacereprojection</span></tt> or
-<tt class="docutils literal"><span class="pre">filters.crop</span></tt>.</p>
+PDAL. Readers follow the pattern of <a class="reference internal" href="stages/readers.las.html#readers-las"><em>readers.las</em></a> or
+<a class="reference internal" href="stages/readers.oci.html#readers-oci"><em>readers.oci</em></a>, Writers follow the pattern of <a class="reference internal" href="stages/writers.las.html#writers-las"><em>writers.las</em></a> or
+<a class="reference internal" href="stages/readers.oci.html#readers-oci"><em>readers.oci</em></a>, with Filters using <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><em>filters.reprojection</em></a> or
+<a class="reference internal" href="stages/filters.crop.html#filters-crop"><em>filters.crop</em></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">A &#8220;Stage registry&#8221; is planned to be provided through PDAL&#8217;s
-GlobalEnvironment that will be available to applications to determine which
-stages are available to an application at runtime. This is not currently in
-place, however, and to determine the stage types that are available to you,
-you must look through the headers in <tt class="docutils literal"><span class="pre">./include/pdal/drivers</span></tt> and
-<tt class="docutils literal"><span class="pre">./include/pdal/filters</span></tt></p>
+<p class="last"><a class="reference internal" href="stages/index.html#stage-index"><em>Stage Reference</em></a> contains a full listing of possible stages and
+descriptions of their options.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Issuing the command <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></tt> will list all available
+stages and their options.</p>
 </div>
 </div>
 </div>
@@ -248,42 +224,28 @@ you must look through the headers in <tt class="docutils literal"><span class="p
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>Options are the mechanism that PDAL uses to inform <a class="reference internal" href="api/cpp/stage.html#pdal::Stage" title="pdal::Stage"><tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></tt></a>
 entities how to process data. A stage option can itself have options, going
-on ad infinitum. The following example is one that describes how the
-<tt class="xref cpp cpp-class docutils literal"><span class="pre">pdal::filters::Scaling</span></tt> filter defines its options to denote which
-dimensions it must operate on.</p>
-<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+on ad infinitum. The following example sorts the data using a <a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton
+ordering</a> using <a class="reference internal" href="stages/filters.mortonorder.html#filters-mortonorder"><em>filters.mortonorder</em></a> and writes out a <a class="reference external" href="http://www.laszip.org">LASzip</a> file as the result.</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;Pipeline version=&quot;1.0&quot;&gt;
-    &lt;Filter type=&quot;filters.scaling&quot;&gt;
-        &lt;Option name=&quot;dimension&quot;&gt;
-            X
-            &lt;Options&gt;
-                &lt;Option name=&quot;scale&quot;&gt;0.1&lt;/Option&gt;
-                &lt;Option name=&quot;offset&quot;&gt;1.0&lt;/Option&gt;
-            &lt;/Options&gt;
+    &lt;Writer type=&quot;writers.las&quot;&gt;
+        &lt;Option name=&quot;filename&quot;&gt;
+            compressed.laz
         &lt;/Option&gt;
-        &lt;Option name=&quot;dimension&quot;&gt;
-            Y
-            &lt;Options&gt;
-                &lt;Option name=&quot;scale&quot;&gt;0.1&lt;/Option&gt;
-                &lt;Option name=&quot;offset&quot;&gt;2.0&lt;/Option&gt;
-            &lt;/Options&gt;
+        &lt;Option name=&quot;compression&quot;&gt;
+            true
         &lt;/Option&gt;
-        &lt;!-- &lt;Option name=&quot;debug&quot;&gt;true&lt;/Option&gt;
-        &lt;Option name=&quot;verbose&quot;&gt;7&lt;/Option&gt;    --&gt;
-        &lt;Reader type=&quot;readers.las&quot;&gt;
-            &lt;Option name=&quot;filename&quot;&gt;
-                ../1.2-with-color.las
-            &lt;/Option&gt;
-        &lt;/Reader&gt;
-    &lt;/Filter&gt;
+        &lt;Filter type=&quot;filters.mortonorder&quot;&gt;
+            &lt;Reader type=&quot;readers.las&quot;&gt;
+                &lt;Option name=&quot;filename&quot;&gt;
+                    uncompressed.las
+                &lt;/Option&gt;
+            &lt;/Reader&gt;
+        &lt;/Filter&gt;
+    &lt;/Writer&gt;
 &lt;/Pipeline&gt;
 </pre></div>
 </div>
-<p>Options need not be uniquely named. In this example, we have the dimension
-option added multiple times for both the <tt class="docutils literal"><span class="pre">X</span></tt> and <tt class="docutils literal"><span class="pre">Y</span></tt> dimensions. In this
-way, it is possible to define an option type called &#8220;dimension&#8221; that applies
-for both. Stages can then ask an option instance for options with the name
-<tt class="docutils literal"><span class="pre">dimension</span></tt>, and do with it what is necessary beyond that point.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><a class="reference internal" href="metadata.html#metadata"><em>Metadata</em></a> is quite similar to <a class="reference internal" href="#options">Options</a> except that Option/Options
@@ -478,18 +440,6 @@ value of the option, e.g. &#8220;input.las&#8221;</li>
 </dl>
 </li>
 </ul>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In the implementation, boost::property_tree are used to read and write the
-pipelines.  This means less parsing hassle for us, but also means we can&#8217;t
-produce decent error messages (esp. because we don&#8217;t have line numbers).</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The schema is intended to be something that can be validated via XSD,
-although we don&#8217;t do that today.  (There is an XSD file in the schemas
-directory.)</p>
-</div>
 </div>
 </div>
 
@@ -506,10 +456,7 @@ directory.)</p>
   <h3><a href="docs.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Pipeline</a><ul>
-<li><a class="reference internal" href="#playing-dolls">Playing Dolls</a><ul>
-<li><a class="reference internal" href="#a-diversion-about-pdal-schema-and-pdal-dimension">A diversion about <tt class="docutils literal"><span class="pre">pdal::Schema</span></tt> and <tt class="docutils literal"><span class="pre">pdal::Dimension</span></tt></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#playing-dolls">Playing Dolls</a></li>
 <li><a class="reference internal" href="#a-basic-example">A Basic Example</a><ul>
 <li><a class="reference internal" href="#pipeline-textual-description">Pipeline textual description</a></li>
 <li><a class="reference internal" href="#stage-types">Stage Types</a></li>
@@ -540,7 +487,7 @@ directory.)</p>
                         <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Dec 26, 2014.
+                    on Dec 27, 2014.
         </div>
     </div>
 
