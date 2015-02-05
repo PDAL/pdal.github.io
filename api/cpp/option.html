@@ -132,20 +132,6 @@ with chars.</p>
 <em>Specializations</em></dt>
 <dd><dl class="function">
 <dt>
-<span class="target" id="pdal::Option::getValueC"></span><span class="target" id="project0classpdal_1_1Option_1a5abca0311094b746c5dc12883ee27822"></span><div class="line">template &lt;&gt; </div>
-bool <tt class="descname">getValue</tt><big>(</big><big>)</big></dt>
-<dd><p>explicit specialization to return actual bools in the case that the string value of the <a class="reference internal" href="#project0classpdal_1_1Option"><em>Option</em></a> is &#8220;true&#8221; or &#8220;false&#8221; </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="project0classpdal_1_1Option_1ae07ac41b2339ebd606c3487384032be9"></span><div class="line">template &lt;&gt; </div>
-const std::string &amp; <tt class="descname">getValue</tt><big>(</big><big>)</big></dt>
-<dd><p>explicit specialization to return a (const ref) string so we don&#8217;t need lexical_cast </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
 <span class="target" id="pdal::Option::setValue__bCR"></span><span class="target" id="project0classpdal_1_1Option_1ae52abe6ac25bc4427605aef71d50977b"></span><div class="line">template &lt;&gt; </div>
 void <tt class="descname">setValue</tt><big>(</big>const bool &amp; <em>value</em><big>)</big></dt>
 <dd><p>explicit specialization to insert a bool as &#8220;true&#8221; and &#8220;false&#8221; rather than &#8220;0&#8221; or &#8220;1&#8221; (which is what lexical_cast would do) </p>
@@ -262,7 +248,7 @@ void <tt class="descname">setValue</tt><big>(</big>const std::string &amp; <em>v
 
 <dl class="function">
 <dt>
-<span class="target" id="project0classpdal_1_1Option_1a3ba65cda8a2081cb2e0287e18d79b841"></span><div class="line">template &lt;typename T&gt; </div>
+<span class="target" id="pdal::Option::getValueC"></span><span class="target" id="project0classpdal_1_1Option_1a3ba65cda8a2081cb2e0287e18d79b841"></span><div class="line">template &lt;typename T&gt; </div>
 T <tt class="descname">getValue</tt><big>(</big><big>)</big></dt>
 <dd><p><dl class="docutils">
 <dt><strong>Return</strong></dt>
@@ -343,6 +329,28 @@ infinite depth (Option-&gt;Options-&gt;Option-&gt;Options...)</p>
 <span class="target" id="project0classpdal_1_1Option_1a534f82232db8a1a1fb69a8c1406c8e75"></span>options::OptionsPtr <tt class="descname">m_options</tt></dt>
 <dd></dd></dl>
 
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Option::getValue__TRC"></span><span class="target" id="project0classpdal_1_1Option_1ae692b820327b69ae2c19e0fcb7774516"></span><div class="line">template &lt;typename T&gt; </div>
+void <tt class="descname">getValue</tt><big>(</big>T &amp; <em>t</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Option::getValue__std::vector:ss:RC"></span><span class="target" id="project0classpdal_1_1Option_1a5a02c6f23b294d7ee009f325c4ef3642"></span>void <tt class="descname">getValue</tt><big>(</big>std::vector&lt; std::string &gt; &amp; <em>values</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Option::getValue__bRC"></span><span class="target" id="project0classpdal_1_1Option_1ac012e82bca06076f6191d9ceba7b4b18"></span>void <tt class="descname">getValue</tt><big>(</big>bool &amp; <em>value</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Option::getValue__ssRC"></span><span class="target" id="project0classpdal_1_1Option_1a53416408b3754e16b010a134738b2060"></span>void <tt class="descname">getValue</tt><big>(</big>std::string &amp; <em>value</em><big>)</big></dt>
+<dd><p>Avoid lexical cast. </p>
+</dd></dl>
+
 </dd></dl>
 
 </dd></dl>
@@ -378,7 +386,7 @@ infinite depth (Option-&gt;Options-&gt;Option-&gt;Options...)</p>
                         <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Feb 04, 2015.
+                    on Feb 05, 2015.
         </div>
     </div>
 
