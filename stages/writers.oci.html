@@ -214,6 +214,16 @@
 <dd>Stream block data chunk-wise by the DB&#8217;s chunk size rather than as an entire blob&#8221; [Default: <strong>false</strong>]</dd>
 <dt>blob_chunk_count</dt>
 <dd>When streaming, the number of chunks per write to use [Default: <strong>16</strong>]</dd>
+<dt>scale_x, scale_y, scale_z / offset_x, offset_y, offset_z</dt>
+<dd>If ANY of these options are specified the X, Y and Z dimensions are adjusted
+by subtracting the offset and then dividing the values by the specified
+scaling factor before being written as 32-bit integers (as opposed to double
+precision values).  If any of these options is specified, unspecified
+scale_&lt;x,y,x&gt; options are given the value of 1.0 and unspecified
+offset_&lt;x,y,z&gt; are given the value of 0.0.</dd>
+<dt>output_dims</dt>
+<dd>If specified, limits the dimensions written for each point.  Dimensions
+are listed by name and separated by commas.</dd>
 </dl>
 </div>
 </div>
@@ -256,7 +266,7 @@
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Feb 05, 2015.
+                    on Feb 06, 2015.
         </div>
     </div>
 

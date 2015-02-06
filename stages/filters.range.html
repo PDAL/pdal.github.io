@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>filters.predicate &mdash; pdal.io</title>
+        <title>filters.range &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,83 +96,56 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="filters-predicate">
-<span id="id1"></span><h1>filters.predicate<a class="headerlink" href="#filters-predicate" title="Permalink to this headline">¶</a></h1>
-<p>Like the ref:<cite>filters.programmable</cite> filter, the predicate filter applies a <a class="reference external" href="http://python.org">Python</a> function to a stream of points. Points can be retained/removed from the stream by setting true/false values into a special &#8220;Mask&#8221; dimension in the output point array.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
-   <span class="n">cls</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s">&#39;Classification&#39;</span><span class="p">]</span>
-
-   <span class="n">keep_classes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-
-   <span class="c"># Use the first test for our base array.</span>
-   <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-   <span class="c"># For 1:n, test each predicate and join back</span>
-   <span class="c"># to our existing predicate array</span>
-   <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">keep_classes</span><span class="p">)):</span>
-       <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
-       <span class="n">keep</span> <span class="o">=</span> <span class="n">keep</span> <span class="o">+</span> <span class="n">t</span>
-
-   <span class="n">outs</span><span class="p">[</span><span class="s">&#39;Mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keep</span>
-   <span class="k">return</span> <span class="bp">True</span>
-</pre></div>
-</div>
-<p>The example above sets the &#8220;mask&#8221; to true for points that are in classifications 1 or 2 and to false otherwise, causing points that are not classified 1 or 2 to be dropped from the point stream.</p>
+  <div class="section" id="filters-range">
+<span id="id1"></span><h1>filters.range<a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h1>
+<p>The range filter applies rudimentary filtering to the input point cloud
+based on a set of criteria on the given dimensions.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This example passes through all points whose Z value is in the range [0,100]
+and whose classification equals 2 (corresponding to ground in LAS).</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      file-cropped.las
+      filtered.las
     <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.predicate&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;function&quot;</span><span class="nt">&gt;</span>filter<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;module&quot;</span><span class="nt">&gt;</span>anything<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;source&quot;</span><span class="nt">&gt;</span>
-
-import numpy as np
-
-def filter(ins,outs):
-   cls = ins[&#39;Classification&#39;]
-
-   keep_classes = [1,2]
-
-   # Use the first test for our base array.
-   keep = np.equal(cls, keep_classes[0])
-
-   # For 1:n, test each predicate and join back
-   # to our existing predicate array
-   for k in range(1,len(keep_classes)):
-       t = np.equal(cls, keep_classes[k])
-       keep = keep + t
-
-   outs[&#39;Mask&#39;] = keep
-   return True
-
+    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.range&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
+        Z
+        <span class="nt">&lt;Options&gt;</span>
+          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/Option&gt;</span>
+          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;/Options&gt;</span>
+      <span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
+        Classification
+        <span class="nt">&lt;Options&gt;</span>
+          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;equals&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;/Options&gt;</span>
+      <span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+          input.las
         <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            file-input.las
-          <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Reader&gt;</span>
-      <span class="nt">&lt;/Filter&gt;</span>
-    <span class="nt">&lt;/Writer&gt;</span>
-  <span class="nt">&lt;/Pipeline&gt;</span>
+      <span class="nt">&lt;/Reader&gt;</span>
+    <span class="nt">&lt;/Filter&gt;</span>
+  <span class="nt">&lt;/Writer&gt;</span>
+<span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>script</dt>
-<dd>When reading a function from a separate <a class="reference external" href="http://python.org">Python</a> file, the file name to read from. [Example: functions.py]</dd>
-<dt>module</dt>
-<dd>The Python module that is holding the function to run. [Required]</dd>
-<dt>function</dt>
-<dd>The function to call.</dd>
+<dt>dimension</dt>
+<dd><p class="first">A dimension Option with an Options block containing the range criteria.</p>
+<ul class="last simple">
+<li>min: The minimum allowable value (inclusive) to pass through to the filtered point cloud.</li>
+<li>max: The maximum allowable value (inclusive) to pass through to the filtered point cloud.</li>
+<li>equals: The exact value to pass through to the filtered point cloud (i.e., min = max).</li>
+</ul>
+</dd>
 </dl>
 </div>
 </div>
@@ -189,7 +162,7 @@ def filter(ins,outs):
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">filters.predicate</a><ul>
+<li><a class="reference internal" href="#">filters.range</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
@@ -197,11 +170,11 @@ def filter(ins,outs):
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="filters.pclblock.html"
-                        title="previous chapter">filters.pclblock</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="filters.programmable.html"
-                        title="next chapter">filters.programmable</a></p>
+                        title="previous chapter">filters.programmable</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="filters.reprojection.html"
+                        title="next chapter">filters.reprojection</a></p>
             </div>
         </div>
                 </div>
@@ -222,7 +195,7 @@ def filter(ins,outs):
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'filters.predicate &mdash; pdal.io';
+        var disqus_title = 'filters.range &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
