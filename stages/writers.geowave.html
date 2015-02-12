@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>filters.programmable &mdash; pdal.io</title>
+        <title>writers.geowave &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,69 +96,51 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="filters-programmable">
-<span id="id1"></span><h1>filters.programmable<a class="headerlink" href="#filters-programmable" title="Permalink to this headline">¶</a></h1>
-<p>The programmable filter takes a stream of points and applies a <a class="reference external" href="http://python.org/">Python</a> function to each point in the stream.</p>
-<p>The function must have two <a class="reference external" href="http://www.numpy.org/">NumPy</a> arrays as arguments, <cite>ins</cite> and <cite>outs</cite>. The <cite>ins</cite> array represents input points, the <cite>outs</cite> array represents output points. Each array contains all the dimensions of the point schema, for a number of points (depending on how large a point buffer the pipeline is processing at the time, a run-time consideration). Individual arrays for each dimension can be read from the input point and written to the output point.</p>
-<p>This example scales the Z value by a factor of ten (of course, you could also use <em class="xref std std-ref">filters.scaling</em> to achieve the same result.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s">&#39;Z&#39;</span><span class="p">]</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span>
-    <span class="n">outs</span><span class="p">[</span><span class="s">&#39;Z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span>
-    <span class="k">return</span> <span class="bp">True</span>
-</pre></div>
-</div>
-<p>Note that the function always returns <cite>True</cite>. If the function returned <cite>False</cite>, an error would be thrown and the translation shut down.</p>
-<p>If you want to write a dimension that might not be available, use can use one or more <cite>add_dimension</cite> options.</p>
-<p>To filter points based on a <a class="reference external" href="http://python.org/">Python</a> function, use the <a class="reference internal" href="filters.predicate.html#filters-predicate"><em>filters.predicate</em></a> filter.</p>
+  <div class="section" id="writers-geowave">
+<span id="id1"></span><h1>writers.geowave<a class="headerlink" href="#writers-geowave" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>GeoWave writer</strong> uses <a class="reference external" href="https://ngageoint.github.io/geowave/">GeoWave</a> to write to Accumulo.  Instructions for configuring the GeoWave plugin can be found <a class="reference external" href="https://ngageoint.github.io/geowave/docs/pdal.html">here</a></p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      file-filtered.las
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.programmable&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;script&quot;</span><span class="nt">&gt;</span>multiply_z.py<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;function&quot;</span><span class="nt">&gt;</span>multiply_z<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;module&quot;</span><span class="nt">&gt;</span>anything<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-          file-input.las
-        <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;/Reader&gt;</span>
-    <span class="nt">&lt;/Filter&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.geowave&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;zookeeperUrl&quot;</span><span class="nt">&gt;</span>zookeeper1:2181,zookeeper2:2181,zookeeper3:2181<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;instanceName&quot;</span><span class="nt">&gt;</span>GeoWave<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;username&quot;</span><span class="nt">&gt;</span>user<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;password&quot;</span><span class="nt">&gt;</span>pass<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;tableNamespace&quot;</span><span class="nt">&gt;</span>PDAL_Table<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;featureTypeName&quot;</span><span class="nt">&gt;</span>PDAL_Point<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dataAdapter&quot;</span><span class="nt">&gt;</span>FeatureCollectionDataAdapter<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;pointsPerEntry&quot;</span><span class="nt">&gt;</span>5000u<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.qfit&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>qfitfile.qi<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;flip_coordinates&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_z&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;/Reader&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
-</pre></div>
-</div>
-<p>The XML pipeline file referenced the external <cite>multiply_z.py</cite> <a class="reference external" href="http://python.org/">Python</a> script, which scales up the Z coordinate by a factor of 10 (you could also do this with <em class="xref std std-ref">filters.scaling</em>).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s">&#39;Z&#39;</span><span class="p">]</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span>
-    <span class="n">outs</span><span class="p">[</span><span class="s">&#39;Z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span>
-    <span class="k">return</span> <span class="bp">True</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>script</dt>
-<dd>When reading a function from a separate <a class="reference external" href="http://python.org/">Python</a> file, the file name to read from. [Example: functions.py]</dd>
-<dt>module</dt>
-<dd>The Python module that is holding the function to run. [Required]</dd>
-<dt>function</dt>
-<dd>The function to call.</dd>
-<dt>source</dt>
-<dd>The literal <a class="reference external" href="http://python.org/">Python</a> code to execute, when the script option is not being used.</dd>
-<dt>add_dimension</dt>
-<dd>The name of a dimension to add to the pipeline that does not already exist.</dd>
+<dt>zookeeperUrl</dt>
+<dd>The comma-delimited URLs for all zookeeper servers, this will be directly used to instantiate a ZookeeperInstance. [Required]</dd>
+<dt>instanceName</dt>
+<dd>The zookeeper instance name, this will be directly used to instantiate a ZookeeperInstance. [Required]</dd>
+<dt>username</dt>
+<dd>The username for the account to establish an Accumulo connector. [Required]</dd>
+<dt>password</dt>
+<dd>The password for the account to establish an Accumulo connector. [Required]</dd>
+<dt>tableNamespace</dt>
+<dd>The table name to be used when interacting with GeoWave. [Required]</dd>
+<dt>featureTypeName</dt>
+<dd>The feature type name to be used when ineracting GeoWave. [Default: PDAL_Point]</dd>
+<dt>dataAdapter</dt>
+<dd>FeatureCollectionDataAdapter stores multiple points per Accumulo entry. FeatureDataAdapter stores a single point per Accumulo entry. [Default: FeatureCollectionDataAdapter]</dd>
+<dt>pointsPerEntry</dt>
+<dd>Sets the maximum number of points per Accumulo entry when using FeatureCollectionDataAdapter. [Default: 5000u]</dd>
 </dl>
 </div>
 </div>
@@ -175,19 +157,13 @@
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">filters.programmable</a><ul>
+<li><a class="reference internal" href="#">writers.geowave</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="filters.predicate.html"
-                        title="previous chapter">filters.predicate</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="filters.range.html"
-                        title="next chapter">filters.range</a></p>
             </div>
         </div>
                 </div>
@@ -208,7 +184,7 @@
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'filters.programmable &mdash; pdal.io';
+        var disqus_title = 'writers.geowave &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
