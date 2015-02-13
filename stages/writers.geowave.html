@@ -98,7 +98,7 @@
                     
   <div class="section" id="writers-geowave">
 <span id="id1"></span><h1>writers.geowave<a class="headerlink" href="#writers-geowave" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>GeoWave writer</strong> uses <a class="reference external" href="https://ngageoint.github.io/geowave/">GeoWave</a> to write to Accumulo.  Instructions for configuring the GeoWave plugin can be found <a class="reference external" href="https://ngageoint.github.io/geowave/docs/pdal.html">here</a></p>
+<p>The <strong>GeoWave writer</strong> uses <a class="reference external" href="https://ngageoint.github.io/geowave/">GeoWave</a> to write to Accumulo.  GeoWave entries are stored using EPSG:4326.  Instructions for configuring the GeoWave plugin can be found <a class="reference external" href="https://ngageoint.github.io/geowave/docs/pdal.html">here</a></p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -112,11 +112,14 @@
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;featureTypeName&quot;</span><span class="nt">&gt;</span>PDAL_Point<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dataAdapter&quot;</span><span class="nt">&gt;</span>FeatureCollectionDataAdapter<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;pointsPerEntry&quot;</span><span class="nt">&gt;</span>5000u<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.qfit&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>qfitfile.qi<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;flip_coordinates&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_z&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;/Reader&gt;</span>
+    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.reprojection&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;out_srs&quot;</span><span class="nt">&gt;</span>EPSG:4326<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.qfit&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>qfitfile.qi<span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;flip_coordinates&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_z&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;/Reader&gt;</span>
+    <span class="nt">&lt;/Filter&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
@@ -164,6 +167,12 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="readers.sbet.html"
+                        title="previous chapter">readers.sbet</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="writers.las.html"
+                        title="next chapter">writers.las</a></p>
             </div>
         </div>
                 </div>
@@ -177,7 +186,7 @@
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Feb 12, 2015.
+                    on Feb 13, 2015.
         </div>
     </div>
 
