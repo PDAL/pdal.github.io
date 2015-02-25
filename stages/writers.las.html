@@ -98,16 +98,20 @@
                     
   <div class="section" id="writers-las">
 <span id="id1"></span><h1>writers.las<a class="headerlink" href="#writers-las" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>LAS Writer</strong> supports writing to <a class="reference external" href="http://asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">LAS format</a> files, the standard interchange file format for LIDAR data.</p>
+<p>The <strong>LAS Writer</strong> supports writing to <a class="reference external" href="http://asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">LAS format</a> files, the standard
+interchange file format for LIDAR data.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>outputfile.las<span class="nt">&lt;/Option&gt;</span>
-
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+      outputfile.las
+    <span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>inputfile.las<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+        inputfile.las
+      <span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;/Reader&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
@@ -119,33 +123,71 @@
 <dl class="docutils">
 <dt>filename</dt>
 <dd>LAS file to read [Required]</dd>
+<dt>minor_version</dt>
+<dd>All LAS files are version 1, but the minor version (0 - 4) can be specified
+with this option. [Default: 3]</dd>
 <dt>software_id</dt>
-<dd>String identifying the software that created this LAS file. [Default: &#8220;libLAS 1.2&#8221;]</dd>
+<dd>String identifying the software that created this LAS file.</dd>
 <dt>creation_doy</dt>
-<dd>Number of the day of the year (January 1 == 0, Dec 31 == 365) this file is being created. [Default: 0]</dd>
+<dd>Number of the day of the year (January 1 == 0, Dec 31 == 365) this file is
+being created.</dd>
 <dt>creation_year</dt>
-<dd>Year (Gregorian) this file is being created. [Default: 0]</dd>
+<dd>Year (Gregorian) this file is being created.</dd>
 <dt>format</dt>
-<dd><p class="first">Controls whether information about color and time are stored with the point information in the LAS file. [Default: 3]</p>
+<dd><p class="first">Controls whether information about color and time are stored with the point
+information in the LAS file. [Default: 3]</p>
 <ul class="last simple">
 <li>0 == no color or time stored</li>
 <li>1 == time is stored</li>
 <li>2 == color is stored</li>
 <li>3 == color and time are stored</li>
+<li>4 [Not Currently Supported]</li>
+<li>5 [Not Currently Supported]</li>
+<li>6 == time is stored (version 1.4+ only)</li>
+<li>7 == time and color are stored (version 1.4+ only)</li>
+<li>8 == time, color and near infrared are stored (version 1.4+ only)</li>
+<li>9 [Not Currently Supported]</li>
+<li>10 [Not Currently Supported]</li>
 </ul>
 </dd>
 <dt>system_id</dt>
-<dd>String identifying the system that created this LAS file. [Default: &#8220;libLAS&#8221;]</dd>
-<dt>header_padding</dt>
-<dd>The number of bytes between the variable-length header information and the point data itself. Extra header padding allows extra headers to be written later without re-writing the whole file [Default: 0]</dd>
+<dd>String identifying the system that created this LAS file. [Default: &#8220;PDAL&#8221;]</dd>
 <dt>a_srs</dt>
 <dd>The spatial reference system of the file to be written. Can be an EPSG string (eg &#8220;EPSG:268910&#8221;) or a WKT string. [Default: Not set]</dd>
 <dt>compression</dt>
-<dd>Apply compressed to the LAS file? [Default: false]</dd>
+<dd>Set to true to apply compression to the output, creating a LAZ file instead
+of an LAS file.  Requires PDAL to have been built with compression support
+by linking with LASzip.  [Default: false]</dd>
+<dt>scale_x, scale_y, scale_z</dt>
+<dd><p class="first">Scale to be divided from the X, Y and Z nominal values, respectively, after
+the offset has been applied.  [Default: .01]</p>
+<p class="last">Note: written value = (nominal value - offset) / scale.</p>
+</dd>
+<dt>offset_x, offset_y, offset_z</dt>
+<dd><p class="first">Offset to be subtracted from the X, Y and Z nominal values, respectively,
+before the value is scaled.  The special value &#8220;auto&#8221; can be specified,
+which causes the writer to set the offset to the minimum value of the
+dimension.  [Default: 0]</p>
+<p class="last">Note: written value = (nominal value - offset) / scale.</p>
+</dd>
 <dt>filesource_id</dt>
-<dd>The file source id number to use for this file (a value between 1 and 65535) [Default: 0]</dd>
+<dd>The file source id number to use for this file (a value between
+1 and 65535) [Default: 0]</dd>
 <dt>discard_high_return_numbers</dt>
-<dd>If true, discard all points with a return number greater than five, and clamp NumberOfReturns to five. [Default: false]</dd>
+<dd>If true, discard all points with a return number greater than the maximum
+supported by the point format (5 for formats 0-5, 15 for formats 6-10).
+[Default: false]</dd>
+<dt>extra_dims</dt>
+<dd><p class="first">Extra dimensions to be written as part of each point beyond those specified
+by the LAS point format.  The format of the option is
+&lt;dimension_name&gt;=&lt;type&gt;, ... where type is one of:</p>
+<blockquote>
+<div>int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double</div></blockquote>
+<p class="last">&#8216;_t&#8217; may be added to any of the type names as well (e.g., uint32_t).  When
+the version of the output file is specified as 1.4 or greater, an extra
+bytes VLR (User ID: LASF_Spec, Record ID: 4), is created that describes the
+extra dimensions specified by this option.</p>
+</dd>
 </dl>
 </div>
 </div>
@@ -188,7 +230,7 @@
                         <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Feb 24, 2015.
+                    on Feb 25, 2015.
         </div>
     </div>
 
