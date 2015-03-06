@@ -3,29 +3,29 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>PDAL - Point Data Abstraction Library &mdash; pdal.io</title>
+        <title>readers.optech &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="_static/sphinx-bootstrap.css" type="text/css"/>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
-        <link rel="stylesheet" href="_static/breathe.css" type="text/css"/>
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css"/>
+        <link rel="stylesheet" href="../_static/breathe.css" type="text/css"/>
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
         <script type="text/javascript">
             var DOCUMENTATION_OPTIONS = {
-                URL_ROOT:'./',
+                URL_ROOT:'../',
                 VERSION:'1.0.0',
                 COLLAPSE_INDEX:false,
                 FILE_SUFFIX:'.html',
                 HAS_SOURCE:  true
             };
         </script>
-            <script type="text/javascript" src="_static/jquery.js"></script>
-            <script type="text/javascript" src="_static/underscore.js"></script>
-            <script type="text/javascript" src="_static/doctools.js"></script>
-            <script type="text/javascript" src="_static/bootstrap-dropdown.js"></script> 
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <script type="text/javascript" src="../_static/bootstrap-dropdown.js"></script> 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     
         <!-- analytics -->
@@ -51,8 +51,8 @@
     <div class="navbar navbar-static-top">
         <div class="navbar-inner">
             <div class="container">
-                        <a href="#">
-                            <img class="logo" src="_static/pdal_logo.png"
+                        <a href="../index.html">
+                            <img class="logo" src="../_static/pdal_logo.png"
                             
                             
                             alt="PDAL" title="PDAL"/>
@@ -61,7 +61,7 @@
 
                 <ul class="quick-links">
                     <li>
-                        <a href="docs.html" title="Documentation">Docs</a> 
+                        <a href="../docs.html" title="Documentation">Docs</a> 
                     </li>
                     <li class="divider">&middot;</li>
                     <li>
@@ -73,17 +73,17 @@
                     </li>
                     <li class="divider">&middot;</li>
                     <li>
-                        <a href="faq.html" title="FAQ">FAQ</a> 
+                        <a href="../faq.html" title="FAQ">FAQ</a> 
                     </li>
                     <li class="divider">&middot;</li>
 
                     <li>
-                        <a href="download.html" title="Home">Download</a>
+                        <a href="../download.html" title="Home">Download</a>
                     </li>
                     <li class="divider">&middot;</li>
 
                     <li>
-                        <a href="community.html" title="Mailing Lists">Mailing Lists</a>
+                        <a href="../community.html" title="Mailing Lists">Mailing Lists</a>
                     </li>
 
                 </ul>
@@ -96,26 +96,30 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="pdal-point-data-abstraction-library">
-<span id="home"></span><h1>PDAL - Point Data Abstraction Library<a class="headerlink" href="#pdal-point-data-abstraction-library" title="Permalink to this headline">¶</a></h1>
-<p>PDAL is a <a class="reference external" href="http://www.opensource.org/licenses/bsd-license.php">BSD licensed</a> library for translating and manipulating <a class="reference external" href="http://en.wikipedia.org/wiki/Point_cloud">point cloud
-data</a> of various formats. It is a library that is analogous to the <a class="reference external" href="http://www.gdal.org">GDAL</a>
-raster library.  PDAL is focussed on reading, writing, and translating point
-cloud data from the ever-growing constellation of data formats.
-While PDAL is not explicitly limited to working with <a class="reference external" href="http://en.wikipedia.org/wiki/LIDAR">LiDAR</a> data formats, its
-wides format coverage is in that domain.</p>
-<p>PDAL is related to <a class="reference external" href="http://pointclouds.org">Point Cloud Library (PCL)</a> in the sense that
-both work with point data, but PDAL&#8217;s niche is data translation and processing
-pipelines, and PCL&#8217;s is more in the algorithmic exploition domain. There is
-cross over of both niches, however, and PDAL provides a user the ability to
-exploit data using PCL&#8217;s techniques. See <a class="reference internal" href="stages/filters.pclblock.html#filters-pclblock"><em>filters.pclblock</em></a> for more
-background</p>
-<div class="section" id="developers-and-sponsorship">
-<h2>Developers and Sponsorship<a class="headerlink" href="#developers-and-sponsorship" title="Permalink to this headline">¶</a></h2>
-<p>PDAL is developed by <a class="reference external" href="http://hobu.co">Howard Butler</a>, <a class="reference external" href="http://www.radiantblue.com">Michael Gerlek</a>, <a class="reference external" href="http://hobu.co">Andrew Bell</a>,
-<a class="reference external" href="http://www.radiantblue.com">Brad Chambers</a> and others.</p>
-<p>PDAL&#8217;s development is in coordination with efforts by the <a class="reference external" href="http://www.crrel.usace.army.mil/">U.S. Army Cold Regions Research and
-Engineering Laboratory</a>.</p>
+  <div class="section" id="readers-optech">
+<span id="id1"></span><h1>readers.optech<a class="headerlink" href="#readers-optech" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>Optech reader</strong> reads Corrected Sensor Data (.csd) files.
+These files contain scan angles, ranges, IMU and GNSS information, and boresight calibration values, all of which are combined in the reader into XYZ points using the WGS84 reference frame.</p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.text&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>outputfile.txt<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.optech&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>inputfile.csd<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;/Reader&gt;</span>
+  <span class="nt">&lt;/Writer&gt;</span>
+<span class="nt">&lt;/Pipeline&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>csd file to read [Required]</dd>
+</dl>
 </div>
 </div>
 
@@ -129,60 +133,21 @@ Engineering Laboratory</a>.</p>
                     
         <div class="sphinxsidebar">
             <div class="sphinxsidebarwrapper">
-<p>
-<script src="http://widgets.twimg.com/j/2/widget.js"></script>
-<script>
-new TWTR.Widget({
-  version: 2,
-  type: 'profile',
-  rpp: 4,
-  interval: 6000,
-  width: 'auto',
-  height: 200,
-  theme: {
-    shell: {
-      background: '#2c7fb8',
-      color: '#ffffff'
-    },
-    tweets: {
-      background: '#2c7fb8',
-      color: '#ffffff',
-      links: '#ffffff'
-    }
-  },
-  features: {
-    scrollbar: false,
-    loop: false,
-    live: false,
-    hashtags: true,
-    timestamp: true,
-    avatars: false,
-    behavior: 'all'
-  }
-}).render().setUser('pointcloudpipe').start();
-</script>
-</p>
+  <h3><a href="../docs.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">readers.optech</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
 
-
-
-<p>
-<script type="text/javascript" src="http://www.ohloh.net/p/585810/widgets/project_thin_badge.js"></script>
-</p>
-
-
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="readers.oci.html"
+                        title="previous chapter">readers.oci</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="readers.pcd.html"
+                        title="next chapter">readers.pcd</a></p>
             </div>
         </div>
                 </div>
@@ -193,7 +158,7 @@ new TWTR.Widget({
         
         <div class="container">
                     &copy;
-                        <a href="copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
+                        <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
                     on Mar 06, 2015.
@@ -203,7 +168,7 @@ new TWTR.Widget({
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'PDAL - Point Data Abstraction Library &mdash; pdal.io';
+        var disqus_title = 'readers.optech &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
