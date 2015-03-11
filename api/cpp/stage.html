@@ -119,12 +119,7 @@ implement the reading API in a PDAL pipeline.</p>
 
 <dl class="function">
 <dt>
-<span class="target" id="pdal::Stage::setInput__std::vector:StageP:CR"></span><span class="target" id="project0classpdal_1_1Stage_1a34183a347732c657e4253f5b15588db4"></span>void <tt class="descname">setInput</tt><big>(</big>const std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; &amp; <em>inputs</em><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Stage::setInput__StageP"></span><span class="target" id="project0classpdal_1_1Stage_1a3563a21d1ea5d047ea17223f3d54e8d3"></span>void <tt class="descname">setInput</tt><big>(</big><a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * <em>input</em><big>)</big></dt>
+<span class="target" id="pdal::Stage::setInput__StageR"></span><span class="target" id="project0classpdal_1_1Stage_1abfd87d459bea04a919aace286b2e377e"></span>void <tt class="descname">setInput</tt><big>(</big><a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  &amp; <em>input</em><big>)</big></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -194,17 +189,17 @@ implement the reading API in a PDAL pipeline.</p>
 
 <dl class="function">
 <dt>
-<span class="target" id="pdal::Stage::getDescriptionC"></span><span class="target" id="project0classpdal_1_1Stage_1ac098609ac9d126de52a9d844b943d60f"></span>std::string <tt class="descname">getDescription</tt><big>(</big><big>)</big></dt>
+<span class="target" id="pdal::Stage::getInputsC"></span><span class="target" id="project0classpdal_1_1Stage_1aa34fac18f8496625744d99ced5965aa5"></span>const std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; &amp; <tt class="descname">getInputs</tt><big>(</big><big>)</big></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt>
-<span class="target" id="pdal::Stage::getInputsC"></span><span class="target" id="project0classpdal_1_1Stage_1a4ee39511be9800f8042a24eb51eed67b"></span>const std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; &amp; <tt class="descname">getInputs</tt><big>(</big><big>)</big></dt>
+<span class="target" id="pdal::Stage::findStage__ss"></span><span class="target" id="project0classpdal_1_1Stage_1aea0e60bca3388635d7bddfbd4b95b6fa"></span>std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; <tt class="descname">findStage</tt><big>(</big>std::string <em>name</em><big>)</big></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt>
-<span class="target" id="pdal::Stage::findStage__ss"></span><span class="target" id="project0classpdal_1_1Stage_1a55133469ac850d11911a6d01a9fb081a"></span>std::vector&lt;  <a class="reference internal" href="#project0classpdal_1_1Stage"><em>Stage</em></a>  * &gt; <tt class="descname">findStage</tt><big>(</big>std::string <em>name</em><big>)</big></dt>
+<span class="target" id="pdal::Stage::getDefaultOptions"></span><span class="target" id="project0classpdal_1_1Stage_1a384c395cac7bd3097bc90f1c42145b58"></span><a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a> <tt class="descname">getDefaultOptions</tt><big>(</big><big>)</big></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -222,17 +217,18 @@ implement the reading API in a PDAL pipeline.</p>
 <span class="target" id="pdal::Stage::getMetadataC"></span><span class="target" id="project0classpdal_1_1Stage_1a03070b4d2496f6c0993fb0dfe16cc8e0"></span>MetadataNode <tt class="descname">getMetadata</tt><big>(</big><big>)</big></dt>
 <dd></dd></dl>
 
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Stage::setUserCallback__UserCallbackP"></span><span class="target" id="project0classpdal_1_1Stage_1a795715685365850d6bbe28001f01bd1a"></span>void <tt class="descname">setUserCallback</tt><big>(</big>UserCallback  * <em>userCallback</em><big>)</big></dt>
+<dd><p>Sets the UserCallback to manage progress/cancel operations. </p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="public-static-func">
 <dt>
 <em>Public Static Functions</em></dt>
 <dd><dl class="function">
-<dt>
-<span class="target" id="pdal::Stage::getDefaultOptions"></span><span class="target" id="project0classpdal_1_1Stage_1afb11834c3966e0e5c5d9dacb779c1d09"></span><a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a> <tt class="descname">getDefaultOptions</tt><big>(</big><big>)</big></dt>
-<dd></dd></dl>
-
-<dl class="function">
 <dt>
 <span class="target" id="pdal::Stage::getDefaultDimensions"></span><span class="target" id="project0classpdal_1_1Stage_1a727262c02dfa14faf8b4660b5cef99c9"></span>Dimension::IdList <tt class="descname">getDefaultDimensions</tt><big>(</big><big>)</big></dt>
 <dd></dd></dl>
@@ -263,6 +259,11 @@ implement the reading API in a PDAL pipeline.</p>
 <dt>
 <em>Protected Attributes</em></dt>
 <dd><dl class="variable">
+<dt>
+<span class="target" id="project0classpdal_1_1Stage_1a050e5bfa81b06248043ac43bce22bd33"></span>std::unique_ptr&lt;  UserCallback  &gt; <tt class="descname">m_callback</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
 <dt>
 <span class="target" id="project0classpdal_1_1Stage_1ad0558907863498f3391a44696714525d"></span><a class="reference internal" href="options.html#project0classpdal_1_1Options"><em>Options</em></a> <tt class="descname">m_options</tt></dt>
 <dd></dd></dl>
@@ -316,7 +317,7 @@ implement the reading API in a PDAL pipeline.</p>
                         <a href="../../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Mar 10, 2015.
+                    on Mar 11, 2015.
         </div>
     </div>
 
