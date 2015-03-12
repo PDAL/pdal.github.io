@@ -98,9 +98,14 @@
                     
   <div class="section" id="filters-programmable">
 <span id="id1"></span><h1>filters.programmable<a class="headerlink" href="#filters-programmable" title="Permalink to this headline">¶</a></h1>
-<p>The programmable filter takes a stream of points and applies a <a class="reference external" href="http://python.org/">Python</a> function to each point in the stream.</p>
-<p>The function must have two <a class="reference external" href="http://www.numpy.org/">NumPy</a> arrays as arguments, <cite>ins</cite> and <cite>outs</cite>. The <cite>ins</cite> array represents input points, the <cite>outs</cite> array represents output points. Each array contains all the dimensions of the point schema, for a number of points (depending on how large a point buffer the pipeline is processing at the time, a run-time consideration). Individual arrays for each dimension can be read from the input point and written to the output point.</p>
-<p>This example scales the Z value by a factor of ten (of course, you could also use <em class="xref std std-ref">filters.scaling</em> to achieve the same result.</p>
+<p>The programmable filter takes a stream of points and applies a <a class="reference external" href="http://python.org/">Python</a>
+function to each point in the stream.</p>
+<p>The function must have two <a class="reference external" href="http://www.numpy.org/">NumPy</a> arrays as arguments, <cite>ins</cite> and <cite>outs</cite>. The
+<cite>ins</cite> array represents input points, the <cite>outs</cite> array represents output points.
+Each array contains all the dimensions of the point schema, for a number of
+points (depending on how large a point buffer the pipeline is processing at the
+time, a run-time consideration). Individual arrays for each dimension can be
+read from the input point and written to the output point.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="k">def</span> <span class="nf">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
@@ -110,9 +115,12 @@
     <span class="k">return</span> <span class="bp">True</span>
 </pre></div>
 </div>
-<p>Note that the function always returns <cite>True</cite>. If the function returned <cite>False</cite>, an error would be thrown and the translation shut down.</p>
-<p>If you want to write a dimension that might not be available, use can use one or more <cite>add_dimension</cite> options.</p>
-<p>To filter points based on a <a class="reference external" href="http://python.org/">Python</a> function, use the <a class="reference internal" href="filters.predicate.html#filters-predicate"><em>filters.predicate</em></a> filter.</p>
+<p>Note that the function always returns <cite>True</cite>. If the function returned <cite>False</cite>,
+an error would be thrown and the translation shut down.</p>
+<p>If you want to write a dimension that might not be available, use can use one
+or more <cite>add_dimension</cite> options.</p>
+<p>To filter points based on a <a class="reference external" href="http://python.org/">Python</a> function, use the
+<a class="reference internal" href="filters.predicate.html#filters-predicate"><em>filters.predicate</em></a> filter.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -135,7 +143,8 @@
 <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
-<p>The XML pipeline file referenced the external <cite>multiply_z.py</cite> <a class="reference external" href="http://python.org/">Python</a> script, which scales up the Z coordinate by a factor of 10 (you could also do this with <em class="xref std std-ref">filters.scaling</em>).</p>
+<p>The XML pipeline file referenced the external <cite>multiply_z.py</cite> <a class="reference external" href="http://python.org/">Python</a> script,
+which scales up the Z coordinate by a factor of 10.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="k">def</span> <span class="nf">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
@@ -150,7 +159,8 @@
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>script</dt>
-<dd>When reading a function from a separate <a class="reference external" href="http://python.org/">Python</a> file, the file name to read from. [Example: functions.py]</dd>
+<dd>When reading a function from a separate <a class="reference external" href="http://python.org/">Python</a> file, the file name to read
+from. [Example: functions.py]</dd>
 <dt>module</dt>
 <dd>The Python module that is holding the function to run. [Required]</dd>
 <dt>function</dt>
@@ -198,10 +208,10 @@
         
         <div class="container">
                     &copy;
-                        <a href="../copyright.html">Copyright</a> 2014, Howard Butler, Michael Gerlek and others
+                        <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Mar 11, 2015.
+                    on Mar 12, 2015.
         </div>
     </div>
 

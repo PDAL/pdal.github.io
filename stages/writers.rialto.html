@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>filters.mortonorder &mdash; pdal.io</title>
+        <title>writers.rialto &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,22 +96,22 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="filters-mortonorder">
-<span id="id1"></span><h1>filters.mortonorder<a class="headerlink" href="#filters-mortonorder" title="Permalink to this headline">¶</a></h1>
-<p>Sorts the XY data using <a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton ordering</a>.</p>
+  <div class="section" id="writers-rialto">
+<span id="id1"></span><h1>writers.rialto<a class="headerlink" href="#writers-rialto" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>RialtoWriter</strong> supports writing to <a class="reference external" href="http://lists.osgeo.org/pipermail/pointdown/2015-February/000001.html">Rialto-formatted
+tiles</a>.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      sorted.las
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.mortonorder&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.rialto&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>output.ria<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;max_levels&quot;</span><span class="nt">&gt;</span>18<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;overwrite&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.reprojection&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;out_srs&quot;</span><span class="nt">&gt;</span>EPSG:4326<span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-          unsorted.las
-        <span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>input.las<span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;/Reader&gt;</span>
     <span class="nt">&lt;/Filter&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
@@ -119,8 +119,20 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>The <strong>directory</strong> to stage the Rialto tiles in. An exception will be thrown
+if the directory exists, unless the overwrite option is set to true (see
+below). [Required]</dd>
+<dt>max_levels</dt>
+<dd>The maximum number of levels in the quadtree. Each rectangular node at level
+L reduces to 4 equally-sized nodes at level L+1. Each tile at level N-1
+contains 1/4 of the points contained in the level N nodes. [Default: 16]</dd>
+<dt>overwrite</dt>
+<dd>Delete the target directory prior to writing results? [Default: false]</dd>
+</dl>
 </div>
 </div>
 
@@ -136,19 +148,19 @@
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">filters.mortonorder</a><ul>
+<li><a class="reference internal" href="#">writers.rialto</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
-<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="filters.hexbin.html"
-                        title="previous chapter">filters.hexbin</a></p>
+  <p class="topless"><a href="writers.pclvisualizer.html"
+                        title="previous chapter">writers.pclvisualizer</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="filters.merge.html"
-                        title="next chapter">filters.merge</a></p>
+  <p class="topless"><a href="writers.sqlite.html"
+                        title="next chapter">writers.sqlite</a></p>
             </div>
         </div>
                 </div>
@@ -169,7 +181,7 @@
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'filters.mortonorder &mdash; pdal.io';
+        var disqus_title = 'writers.rialto &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
