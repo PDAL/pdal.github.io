@@ -99,13 +99,13 @@
   <div class="section" id="filters-pclblock">
 <span id="id1"></span><h1>filters.pclblock<a class="headerlink" href="#filters-pclblock" title="Permalink to this headline">¶</a></h1>
 <p>The PCL Block filter allows users to specify a block of Point Cloud Library
-(<a class="reference external" href="http://www.pointclouds.org">PCL</a>) operations on a PDAL <tt class="docutils literal"><span class="pre">PointBuffer</span></tt>, applying the necessary conversions
+(<a class="reference external" href="http://www.pointclouds.org">PCL</a>) operations on a PDAL <tt class="docutils literal"><span class="pre">PointView</span></tt>, applying the necessary conversions
 between PDAL and PCL point cloud representations.</p>
 <p>This filter is under active development. The current implementation serves as a
 proof of concept for linking PCL into PDAL and converting data. The PCL Block
 filter creates a PCL <tt class="docutils literal"><span class="pre">Pipeline</span></tt> object and passes it a single argument, the JSON
 file containing the PCL block definition. After filtering, the resulting indices
-can be retrieved and used to create a new PDAL <tt class="docutils literal"><span class="pre">PointBuffer</span></tt> containing only
+can be retrieved and used to create a new PDAL <tt class="docutils literal"><span class="pre">PointView</span></tt> containing only
 those points that passed the filtering stages.</p>
 <p>At this stage in its development, the PCL <tt class="docutils literal"><span class="pre">Pipeline</span></tt> does not allow complex
 operations that may change the point type (e.g., <tt class="docutils literal"><span class="pre">PointXYZ</span></tt> to <tt class="docutils literal"><span class="pre">PointNormal</span></tt>) or
@@ -113,11 +113,11 @@ alter points.  We will continue to look into use cases that are of value and
 feasible, but for now are limited primarily to PCL functions that filter or
 segment the point cloud, returning a list of indices of the filtered points
 (e.g., ground or object, noise or signal). The main reason for this design
-decision is that we want to avoid converting all <tt class="docutils literal"><span class="pre">PointBuffer</span></tt> dimensions to the
+decision is that we want to avoid converting all <tt class="docutils literal"><span class="pre">PointView</span></tt> dimensions to the
 PCL <tt class="docutils literal"><span class="pre">PointCloud</span></tt>. In the case of an LAS reader, we may very well not want to
 operate on fields such as return number, but we do not want to lose this
 information post PCL filtering. The easy solution is to simply retain the index
-between the <tt class="docutils literal"><span class="pre">PointBuffer</span></tt> and <tt class="docutils literal"><span class="pre">PointCloud</span></tt> objects and update as necessary.</p>
+between the <tt class="docutils literal"><span class="pre">PointView</span></tt> and <tt class="docutils literal"><span class="pre">PointCloud</span></tt> objects and update as necessary.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p>See <a class="reference internal" href="../tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a> for more on using the PCL Block including
@@ -167,7 +167,7 @@ PCL. Here is an example:</p>
 <h2>Implemented Filters<a class="headerlink" href="#implemented-filters" title="Permalink to this headline">¶</a></h2>
 <p>The list of PCL filters that are accessible through the PCL Block depends on PCL
 itself. PDAL is rather dumb in this respect, merely converting the PDAL
-<tt class="docutils literal"><span class="pre">PointBuffer</span></tt> to a PCL <tt class="docutils literal"><span class="pre">PointCloud</span></tt> object and passing the JSON filename. The
+<tt class="docutils literal"><span class="pre">PointView</span></tt> to a PCL <tt class="docutils literal"><span class="pre">PointCloud</span></tt> object and passing the JSON filename. The
 parsing of the JSON file and implementation of the PCL filters is entirely
 embedded within the PCL <tt class="docutils literal"><span class="pre">Pipeline</span></tt>.</p>
 <p>A summary of the currently available filters is listed below. For full details
@@ -254,7 +254,7 @@ independently verified.</li>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Mar 18, 2015.
+                    on Mar 19, 2015.
         </div>
     </div>
 

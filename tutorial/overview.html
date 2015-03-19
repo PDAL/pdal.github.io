@@ -168,34 +168,41 @@ requested type is a 16 bit unsigned integer (Unsigned16), PDAL will use a
 32 bit signed integer as the storage type for the dimension so that both
 16 bit storage types can be successfully accommodated.</p>
 </div>
-<div class="section" id="point-context">
-<h4>Point Context<a class="headerlink" href="#point-context" title="Permalink to this headline">¶</a></h4>
-<p>PDAL stores points in what is called a point context (PointContext object).  All
-points in a single point context have the same dimensions and all operations on
-a PDAL pipeline make use of a single point context.  In addition to storing
-points, a point context also stores pipeline metadata that may get created as
-pipeline stages are executed.  Most functions receive a PointContextRef object,
-which refers to the active point context.  A PointContextRef can be stored
+<div class="section" id="point-layout">
+<h4>Point Layout<a class="headerlink" href="#point-layout" title="Permalink to this headline">¶</a></h4>
+<p>PDAL stores orientation information in a point layout structure (PointLayout
+object).  This structure contains information about what dimensions are stored
+in a structure containing points, like their names, types, and offsets.</p>
+</div>
+<div class="section" id="point-table">
+<h4>Point Table<a class="headerlink" href="#point-table" title="Permalink to this headline">¶</a></h4>
+<p>PDAL stores points in what is called a point table (PointTable object).  Each
+point table has an associated point layout describing its format.  All
+points in a single point table have the same dimensions and all operations on
+a PDAL pipeline make use of a single point table.  In addition to storing
+points, a point table also stores pipeline metadata that may get created as
+pipeline stages are executed.  Most functions receive a PointTablePtr object,
+which refers to the active point table.  A PointTablePtr can be stored
 or copied cheaply.</p>
 </div>
-<div class="section" id="point-buffer">
-<h4>Point Buffer<a class="headerlink" href="#point-buffer" title="Permalink to this headline">¶</a></h4>
-<p>A point buffer (PointBuffer object) stores references to points.  All storage
-and retrieval of points is done through a point buffer rather than directly
-through a point context.  Point data is accessed from a point buffer through a
+<div class="section" id="point-view">
+<h4>Point View<a class="headerlink" href="#point-view" title="Permalink to this headline">¶</a></h4>
+<p>A point view (PointView object) stores references to points.  All storage
+and retrieval of points is done through a point view rather than directly
+through a point table.  Point data is accessed from a point view through a
 point ID (type PointId), which is an integer value.  The first point reference
-in a point buffer has a point ID of 0, the second has a point ID of 1, the third
+in a point view has a point ID of 0, the second has a point ID of 1, the third
 has a point ID of 2 and so on.  There are no null point references in a point
-buffer.  The size of a point buffer is the number of point references contained
-in the buffer.  A point buffer acts like a self-expanding array or vector of
+view.  The size of a point view is the number of point references contained
+in the view.  A point view acts like a self-expanding array or vector of
 point references, but it is always full.  For example, one can’t set the field
 value of point with a PointId of 9 unless there already exist at least 8 point
-references in the point buffer.</p>
-<p>Point references can be copied from one point buffer to another by appending an
-existing reference to a destination point buffer. The point ID of the appended
-point in the destination buffer may be different than the point ID of the same
-point in the source buffer.  The point ID of an appended point reference is the
-same as the size of the point buffer after the operation.  Note that appending a
+references in the point view.</p>
+<p>Point references can be copied from one point view to another by appending an
+existing reference to a destination point view. The point ID of the appended
+point in the destination view may be different than the point ID of the same
+point in the source view.  The point ID of an appended point reference is the
+same as the size of the point view after the operation.  Note that appending a
 point reference does not create a new point, rather, it creates another
 reference to an existing point.  There are currently no built-in facilities for
 creating copies of points.</p>
@@ -255,13 +262,14 @@ should occur at this time.  Initialization that can be deferred until the
 execution stage should be performed in the ready() method (see below).</p>
 </div></blockquote>
 </li>
-<li><p class="first">void addDimensions(PointContextRef ctx)</p>
+<li><p class="first">void addDimensions(PointLayoutPtr layout)</p>
 <blockquote>
-<div><p>This method allows stages to inform a point context of the dimensions that
-it would like as part of the record of each point.  Normally, only readers
-add dimensions to a point context, but there is no prohibition on filters or
-writers from adding dimensions if necessary.  Dimensions should not be added
-to a pipeline’s point context except in this method.</p>
+<div><p>This method allows stages to inform a point table&#8217;s layout of the dimensions
+that it would like as part of the record of each point.  Normally, only
+readers add dimensions to a point table, but there is no prohibition on
+filters or writers from adding dimensions if necessary.  Dimensions should
+not be added to the layout of a pipeline’s point table except in this
+method.</p>
 </div></blockquote>
 </li>
 </ol>
@@ -272,13 +280,13 @@ to a pipeline’s point context except in this method.</p>
 stage.  Each stage will be executed only after all stages preceding it in a
 pipeline have been executed.  A stage is executed by invoking the following
 private virtual methods.  It is important to note that ready() and done() are
-called only once for each stage while run() is called once for each point buffer
+called only once for each stage while run() is called once for each point view
 to be processed by the stage.</p>
 <ol class="arabic">
-<li><p class="first">void ready(PointContextRef ctx)</p>
+<li><p class="first">void ready(PointTablePtr table)</p>
 <blockquote>
 <div><p>This function allows preprocessing to be performed prior to actual
-processing of the points in a point buffer.  For example, filters may
+processing of the points in a point view.  For example, filters may
 initialize internal data structures or libraries, readers may connect to
 databases and writers may write a file header.  If there is a choice between
 performing operations in the preparation stage (in the initialize() method)
@@ -286,16 +294,16 @@ or the execution stage (in ready()), prefer to defer the operation until
 this point.</p>
 </div></blockquote>
 </li>
-<li><p class="first">PointBufferSet run(PointBufferPtr buf)</p>
+<li><p class="first">PointViewSet run(PointViewPtr buf)</p>
 <blockquote>
 <div><p>This is the method in which processing of individual points occurs.  One
-might read points into the buffer, transform point values in some way, or
-distribute the point references in the input buffer into numerous output
-buffers.  This method is called once for each point buffer passed to the
+might read points into the view, transform point values in some way, or
+distribute the point references in the input view into numerous output
+views.  This method is called once for each point view passed to the
 stage.</p>
 </div></blockquote>
 </li>
-<li><p class="first">void done(PointContextRef ctx)</p>
+<li><p class="first">void done(PointTablePtr table)</p>
 <blockquote>
 <div><p>This function allows a stage to clean up resources not released by a
 stage’s destructor.  It also allows other termination functions, such
@@ -309,24 +317,24 @@ closing or renaming files.</p>
 <div class="section" id="implementing-a-reader">
 <h3>Implementing a Reader<a class="headerlink" href="#implementing-a-reader" title="Permalink to this headline">¶</a></h3>
 <p>A reader is a stage that takes input from a point clould format supported by
-PDAL and loads points into a point context through a point buffer.</p>
+PDAL and loads points into a point table through a point view.</p>
 <p>A reader needs to register or assign those dimensions that it will reference
-when adding point data to the point context.  Dimensions that are predefined
-in PDAL can be registered by using the point context&#8217;s registerDim()
+when adding point data to the point table.  Dimensions that are predefined
+in PDAL can be registered by using the point table&#8217;s registerDim()
 method.  Dimensions that are not predefined can be added using assignDim().
 If dimensions are determined as named entities from a point cloud source,
 it may not be known whether the dimensions are predefined or not.  In this
 case the function registerOrAssignDim() can be used.  When a dimension is
 assigned, rather than registered, the reader needs to inform PDAL of the
 type of the variable using the enumeration Dimension::Type::Enum.</p>
-<p>In this example, the reader informs the point context that it will reference
-the dimensions X, Y and Z.</p>
+<p>In this example, the reader informs the point table&#8217;s layout that it will
+reference the dimensions X, Y and Z.</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointContextRef ctx)
+<div><div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointLayoutPtr layout)
 {
-   ctx.registerDim(Dimension::Id::X);
-   ctx.registerDim(Dimension::Id::Y);
-   ctx.registerDim(Dimension::Id::Z);
+   layout-&gt;registerDim(Dimension::Id::X);
+   layout-&gt;registerDim(Dimension::Id::Y);
+   layout-&gt;registerDim(Dimension::Id::Z);
 }
 </pre></div>
 </div>
@@ -334,14 +342,15 @@ the dimensions X, Y and Z.</p>
 <p>Here a reader determines dimensions from an input source and registers or
 assigns them.  All of the input dimension values are in this case double
 precision floating point.</p>
-<div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointContextRef ctx)
+<div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointLayoutPtr layout)
 {
     FileHeader header;
 
     for (auto di = header.names.begin(), di != header.names.end(); ++di)
     {
         std::string dimName = *di;
-        Dimension::Id::Enum id = ctx.registerOrAssignDim(dimName,
+        Dimension::Id::Enum id = layout-&gt;registerOrAssignDim(
+            dimName,
             Dimension::Type::Double);
     }
 }
@@ -351,20 +360,20 @@ precision floating point.</p>
 where the first point can be read from the source.  The done() function
 should be used to free resources or reset the state initialized in ready().</p>
 <p>Readers should implement a function, read(), that will place the data from
-the input source into the provided point buffer:</p>
-<p>point_count_t read(PointBuffer&amp; buf, point_count_t count)</p>
+the input source into the provided point view:</p>
+<p>point_count_t read(PointViewPtr view, point_count_t count)</p>
 <blockquote>
 <div><p>The reader should read at most &#8216;count&#8217; points from the input source and
-place them in buffer &#8216;buf&#8217;.  The reader must keep track of its current
+place them in the view.  The reader must keep track of its current
 position in the input source and points should be read until no points
-remain or &#8216;count&#8217; points have been added to the buffer.  The current
+remain or &#8216;count&#8217; points have been added to the view.  The current
 location in the input source is typically tracked with a integer variable
 called the index.</p>
 <p>As each point is read from the input source, it must be placed at the end
-of the point buffer.  The ID of the end of the point buffer can be
-determined by calling size() function of the point buffer.  read() should
+of the point view.  The ID of the end of the point view can be
+determined by calling size() function of the point view.  read() should
 return the number of points read by during the function call.</p>
-<div class="highlight-python"><div class="highlight"><pre>point_count_t MyFormat::read(PointBuffer&amp; buf, point_count_t count)
+<div class="highlight-python"><div class="highlight"><pre>point_count_t MyFormat::read(PointViewPtr view, point_count_t count)
 {
     // Determine the number of points remaining in the input.
     point_count_t remainingInput = m_totalNumPts - m_index;
@@ -372,8 +381,8 @@ return the number of points read by during the function call.</p>
     // Determine the number of points to read.
     count = std::min(count, remainingInput);
 
-    // Determine the ID of the next point in the point buffer
-    PointId nextId = buf.size();
+    // Determine the ID of the next point in the point view
+    PointId nextId = view-&gt;size();
 
     // Determine the current input position.
     auto pos = m_pointSize * m_index;
@@ -391,10 +400,10 @@ return the number of points read by during the function call.</p>
         z = m_file.read&lt;double&gt;(pos);
         pos += sizeof(double);
 
-        // Set X, Y and Z into the pointBuffer.
-        buf.setField(Dimension::Id::X, nextId, x);
-        buf.setField(Dimension::Id::Y, nextId, y);
-        buf.setField(Dimension::Id::Z, nextId, z);
+        // Set X, Y and Z into the pointView.
+        view-&gt;setField(Dimension::Id::X, nextId, x);
+        view-&gt;setField(Dimension::Id::Y, nextId, y);
+        view-&gt;setField(Dimension::Id::Z, nextId, z);
 
         nextId++;
     }
@@ -412,55 +421,55 @@ read.</p>
 <div class="section" id="implementing-a-filter">
 <h3>Implementing a Filter<a class="headerlink" href="#implementing-a-filter" title="Permalink to this headline">¶</a></h3>
 <p>A filter is a stage that allows processing of data after it has been read into a
-pipeline’s point context.  In many filters, the only function that need be
+pipeline’s point table.  In many filters, the only function that need be
 implemented is filter(), a simplified version of the stage’s run() method whose
-input and output is a point buffer provided by the previous stage:</p>
-<p>void filter(PointBuffer&amp; buf)</p>
+input and output is a point view provided by the previous stage:</p>
+<p>void filter(PointViewPtr view)</p>
 <blockquote>
 <div><p>One should implement filter() instead of run() if its interface is
 sufficient.  The expectation is that a filter will iterate through the
-points currently in the point buffer and apply some transformation or gather
+points currently in the point view and apply some transformation or gather
 some data to be output as pipeline metadata.</p>
 <p>Here as an example is the actual filter function from the reprojection
 filter:</p>
-<div class="highlight-python"><div class="highlight"><pre>void Reprojection::filter(PointBuffer&amp; data)
+<div class="highlight-python"><div class="highlight"><pre>void Reprojection::filter(PointViewPtr view)
 {
-    for (PointId id = 0; id &lt; data.size(); ++id)
+    for (PointId id = 0; id &lt; view-&gt;size(); ++id)
     {
-        double x = data.getFieldAs&lt;double&gt;(Dimension::Id::X, id);
-        double y = data.getFieldAs&lt;double&gt;(Dimension::Id::Y, id);
-        double z = data.getFieldAs&lt;double&gt;(Dimension::Id::Z, id);
+        double x = view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::X, id);
+        double y = view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Y, id);
+        double z = view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Z, id);
 
         transform(x, y, z);
 
-        data.setField(Dimension::Id::X, id, x);
-        data.setField(Dimension::Id::Y, id, y);
-        data.setField(Dimension::Id::Z, id, z);
+        view-&gt;setField(Dimension::Id::X, id, x);
+        view-&gt;setField(Dimension::Id::Y, id, y);
+        view-&gt;setField(Dimension::Id::Z, id, z);
     }
 }
 </pre></div>
 </div>
 <p>The filter simply loops through the points, retrieving the X, Y and Z values
 of each point, transforms those value using a reprojection algorithm and
-then stores the transformed values in the point context using the point
-buffer’s setField() function.</p>
+then stores the transformed values in the point table using the point
+view’s setField() function.</p>
 <p>A filter may need to use the run() function instead of filter(), typically
-because it needs to create multiple output point buffers from a single input
-buffer.  The following example puts every other input point into one of two
-output point buffers:</p>
-<div class="highlight-python"><div class="highlight"><pre>PointBufferSet Alternator::run(PointBufferPtr buf)
+because it needs to create multiple output point views from a single input
+view.  The following example puts every other input point into one of two
+output point views:</p>
+<div class="highlight-python"><div class="highlight"><pre>PointViewSet Alternator::run(PointViewPtr view)
 {
-    PointBufferSet pbSet;
-    PointBufferPtr even = buf-&gt;makeNew();
-    PointBufferPtr odd = buf-&gt;makeNew();
-    pbSet.insert(even);
-    pbSet.insert(odd);
-    for (PointId idx = 0; idx &lt; buf-&gt;size(); ++idx)
+    PointViewSet viewSet;
+    PointViewPtr even = view();
+    PointViewPtr odd = view();
+    viewSet.insert(even);
+    viewSet.insert(odd);
+    for (PointId idx = 0; idx &lt; view-&gt;size(); ++idx)
     {
-        PointBufferPtr out = idx % 2 ? even : odd;
-        out-&gt;appendPoint(*buf, idx);
+        PointViewPtr out = idx % 2 ? even : odd;
+        out-&gt;appendPoint(*view.get(), idx);
     }
-    return pbSet;
+    return viewSet;
 }
 </pre></div>
 </div>
@@ -473,24 +482,24 @@ This function is usually the appropriate one to override when implementing
 a writer &#8211; it would be unusual to need to implement run().  A
 typical writer will open its output file when ready() is called, write
 individual points in write() and close the file in done().</p>
-<p>Like a filter, a writer may receive multiple point buffers during processing
+<p>Like a filter, a writer may receive multiple point views during processing
 of a pipeline.  This will result in the write() function being called once
-for each of the input point buffers.  Some current writers do not produce
-correct output when provided with multiple point buffers.  Users should
+for each of the input point views.  Some current writers do not produce
+correct output when provided with multiple point views.  Users should
 use a merge filter immediately prior to such writers to avoid errors.
 As new writers are created, developers should try to make sure
-that they behave reasonably if passed multiple point buffers &#8211; they
+that they behave reasonably if passed multiple point views &#8211; they
 correctly handle write() being called multiple times between after a single
 call to ready().</p>
-<div class="highlight-python"><div class="highlight"><pre>void write(const PointBuffer&amp; buf)
+<div class="highlight-python"><div class="highlight"><pre>void write(const PointViewPtr view)
 {
     ostream&amp; out = *m_out;
 
-    for (PointId id = 0; id &lt; buf.size(); ++id)
+    for (PointId id = 0; id &lt; view-&gt;size(); ++id)
     {
-        out &lt;&lt; setw(10) &lt;&lt; buf.getFieldAs&lt;double&gt;(Dimension::Id::X, id);
-        out &lt;&lt; setw(10) &lt;&lt; buf.getFieldAs&lt;double&gt;(Dimension::Id::Y, id);
-        out &lt;&lt; setw(10) &lt;&lt; buf.getFieldAs&lt;double&gt;(Dimension::Id::Z, id);
+        out &lt;&lt; setw(10) &lt;&lt; view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::X, id);
+        out &lt;&lt; setw(10) &lt;&lt; view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Y, id);
+        out &lt;&lt; setw(10) &lt;&lt; view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Z, id);
     }
 }
 </pre></div>
@@ -515,8 +524,9 @@ call to ready().</p>
 <li><a class="reference internal" href="#the-pdal-model">The PDAL model</a><ul>
 <li><a class="reference internal" href="#extending-pdal">Extending PDAL</a><ul>
 <li><a class="reference internal" href="#dimension">Dimension</a></li>
-<li><a class="reference internal" href="#point-context">Point Context</a></li>
-<li><a class="reference internal" href="#point-buffer">Point Buffer</a></li>
+<li><a class="reference internal" href="#point-layout">Point Layout</a></li>
+<li><a class="reference internal" href="#point-table">Point Table</a></li>
+<li><a class="reference internal" href="#point-view">Point View</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#making-a-stage-reader-filter-or-writer">Making a Stage (Reader, Filter or Writer):</a><ul>
@@ -552,7 +562,7 @@ call to ready().</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Mar 18, 2015.
+                    on Mar 19, 2015.
         </div>
     </div>
 
