@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>writers.p2g &mdash; pdal.io</title>
+        <title>writers.null &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,84 +96,31 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="writers-p2g">
-<span id="id1"></span><h1>writers.p2g<a class="headerlink" href="#writers-p2g" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>points to grid writer</strong> takes in a stream of point data and writes out gridded summaries of the stream. Each cell in the output grids can give one of the: minimum value, maximum value, average value, average value, inverse distance weighted interpolation (for sparse points), or density. The points to grid writer supports creating multiple output grids simultaneously, so it is possible to generate all grid variants in one pass.</p>
+  <div class="section" id="writers-null">
+<span id="writers-text"></span><h1>writers.null<a class="headerlink" href="#writers-null" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>null writer</strong> discards its input.  No point output is produced when using
+a <strong>null writer</strong>.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.p2g&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;grid_dist_x&quot;</span><span class="nt">&gt;</span>
-      6.0
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;grid_dist_y&quot;</span><span class="nt">&gt;</span>
-      6.0
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;radius&quot;</span><span class="nt">&gt;</span>
-      8.4852813742385713
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      autzen_grid
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      min
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      max
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      mean
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      idw
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_type&quot;</span><span class="nt">&gt;</span>
-      den
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;output_format&quot;</span><span class="nt">&gt;</span>
-      grid
-    <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.inplacereprojection&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;out_srs&quot;</span><span class="nt">&gt;</span>
-          EPSG:26910
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_x&quot;</span><span class="nt">&gt;</span>
-          0.01
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale_y&quot;</span><span class="nt">&gt;</span>
-          0.01
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            ../1.2-with-color.las
-          <span class="nt">&lt;/Option&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;spatialreference&quot;</span><span class="nt">&gt;</span>
-            ../1.2-with-color.las.wkt
-          <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Reader&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.null&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.hexbin&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>simple.las<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;/Reader&gt;</span>
     <span class="nt">&lt;/Filter&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
+<p>When used with an option that forces metadata output, like
+&#8211;pipeline-serialization, this pipeline will create a hex boundary for
+the input file, but no output point data file will be produced.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>grid_dist_x</dt>
-<dd>Size of grid cell in x dimension [Default: <strong>6</strong>]</dd>
-<dt>grid_dist_y</dt>
-<dd>Size of grid cell in y dimension. [Default: <strong>6</strong>]</dd>
-<dt>radius</dt>
-<dd>??? [Default: <strong>8.48528</strong>]</dd>
-<dt>filename</dt>
-<dd>Base file name for output files. [Required]</dd>
-<dt>output_type</dt>
-<dd>One or many options, specifying &#8220;min&#8221;, &#8220;max&#8221;, &#8220;mean&#8221;, &#8220;idw&#8221; (inverse distance weighted), &#8220;den&#8221; (density), or &#8220;all&#8221; to get all variants with just one option. [Default: <strong>all</strong>]</dd>
-<dt>output_format</dt>
-<dd>File output format to use, one of &#8220;grid&#8221;, &#8220;tif&#8221;, or &#8220;asc&#8221;. [Default: <strong>grid</strong>]</dd>
-</dl>
+<p>The <strong>null writer</strong> discards all passed options.</p>
 </div>
 </div>
 
@@ -189,19 +136,13 @@
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">writers.p2g</a><ul>
+<li><a class="reference internal" href="#">writers.null</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="writers.oci.html"
-                        title="previous chapter">writers.oci</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="writers.pcd.html"
-                        title="next chapter">writers.pcd</a></p>
             </div>
         </div>
                 </div>
@@ -222,7 +163,7 @@
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'writers.p2g &mdash; pdal.io';
+        var disqus_title = 'writers.null &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
