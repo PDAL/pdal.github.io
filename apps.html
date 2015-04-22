@@ -122,6 +122,7 @@ application currently contains six commands:</p>
 <li><a class="reference internal" href="#random-command"><em>random</em></a></li>
 <li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
 <li><a class="reference internal" href="#view-command"><em>view</em></a></li>
+<li><a class="reference internal" href="#split-command"><em>split</em></a></li>
 </ul>
 <p>Applications are run by invoking the <em>pdal</em> application along with the
 command name:</p>
@@ -431,6 +432,33 @@ help.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="split-command">
+<span id="id10"></span><h2><tt class="docutils literal"><span class="pre">split</span></tt> command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>split</em> will create multiple point output files from a single input file.
+The command takes an input file name and an output filename (used as a template)
+or output directory specification.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal split --capacity 100000 infile.laz outfile.bpf
+</pre></div>
+</div>
+<p>This command takes the points from the input file &#8216;infile.laz&#8217; and creates
+output files &#8216;outfile_1.bpf&#8217;, &#8216;outfile_2.bpf&#8217;, ... where each output file
+contains no more than 100000 points.</p>
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
+-o [ --output ] arg          output file/directory name
+--length arg                 edge length for splitter cells
+--capacity arg               point capacity for chipper cells
+</pre></div>
+</div>
+<p>Input and output arguments are required.  If neither the length nor capacity
+arguments are specified, an implcit argument of capacity with a value of 100000
+is added.</p>
+<p>The output argument is a template.  If the output argument is, for example,
+&#8216;file.ext&#8217;, the output files created are &#8216;file_#.ext&#8217; where # is a number
+starting at one and incrementing for each file created.</p>
+<p>If the output argument ends in a path separator, it is assumed to be a
+directory and the input argument is appended to create the output template.
+The split command never creates directories.  Directories must pre-exist.</p>
+</div>
 </div>
 
 
@@ -455,6 +483,7 @@ help.</p>
 <li><a class="reference internal" href="#random-command"><tt class="docutils literal"><span class="pre">random</span></tt> command</a></li>
 <li><a class="reference internal" href="#translate-command"><tt class="docutils literal"><span class="pre">translate</span></tt> command</a></li>
 <li><a class="reference internal" href="#view-command"><tt class="docutils literal"><span class="pre">view</span></tt> command</a></li>
+<li><a class="reference internal" href="#split-command"><tt class="docutils literal"><span class="pre">split</span></tt> command</a></li>
 </ul>
 </li>
 </ul>
@@ -478,7 +507,7 @@ help.</p>
                         <a href="copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Apr 21, 2015.
+                    on Apr 22, 2015.
         </div>
     </div>
 
