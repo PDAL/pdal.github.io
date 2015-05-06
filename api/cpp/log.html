@@ -104,45 +104,6 @@
 <dd><p><a class="reference internal" href="#project0classpdal_1_1Log"><em>pdal::Log</em></a> is a logging object that is provided by <a class="reference internal" href="stage.html#project0classpdal_1_1Stage"><em>pdal::Stage</em></a> to facilitate logging operations. </p>
 <dl class="user-defined">
 <dt>
-<em>Constructors</em></dt>
-<dd><dl class="function">
-<dt>
-<span class="target" id="pdal::Log::Log__ssCR.ssCR"></span><span class="target" id="project0classpdal_1_1Log_1adc3bd1940708c9e4ef2ba97655c5bdba"></span><tt class="descname">Log</tt><big>(</big>std::string const &amp; <em>leaderString</em>, std::string const &amp; <em>outputName</em><big>)</big></dt>
-<dd><p>Constructs a <a class="reference internal" href="#project0classpdal_1_1Log"><em>pdal::Log</em></a> instance. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">leaderString</span></tt> - <p>A string to presage all log entries with </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">outputName</span></tt> - <p>A filename or one of &#8216;stdout&#8217;, &#8216;stdlog&#8217;, or &#8216;stderr&#8217; to use for outputting log information. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Log::Log__ssCR.osP"></span><span class="target" id="project0classpdal_1_1Log_1acea277caffa95aaf4d04fd8fc21857fb"></span><tt class="descname">Log</tt><big>(</big>std::string const &amp; <em>leaderString</em>, std::ostream * <em>v</em><big>)</big></dt>
-<dd><p>Constructs a <a class="reference internal" href="#project0classpdal_1_1Log"><em>pdal::Log</em></a> instance. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">leaderString</span></tt> - <p>A string to presage all log entries with </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">v</span></tt> - <p>An existing std::ostream to use for logging (instead of the the instance creating its own) </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="user-defined">
-<dt>
 <em>Destructor</em></dt>
 <dd><dl class="function">
 <dt>
@@ -195,48 +156,6 @@
 <dl class="user-defined">
 <dt>
 <em>Log stream operations</em></dt>
-<dd><dl class="function">
-<dt>
-<span class="target" id="pdal::Log::getLogStream"></span><span class="target" id="project0classpdal_1_1Log_1ad1e043d999106cddf098076d4969e818"></span>std::ostream * <tt class="descname">getLogStream</tt><big>(</big><big>)</big></dt>
-<dd><p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the stream object that is currently being used to for log operations regardless of logging level of the instance. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Log::get__LogLevel::Enum"></span><span class="target" id="project0classpdal_1_1Log_1a3cadc6cf82a2cf88bb2b2864f19a1e45"></span>std::ostream &amp; <tt class="descname">get</tt><big>(</big>LogLevel::Enum <em>level</em> = LogLevel::Info<big>)</big></dt>
-<dd><p>Returns the log stream given the logging level. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">level</span></tt> - <p>logging level to request If the logging level asked for with <a class="reference internal" href="#project0classpdal_1_1Log_1a3cadc6cf82a2cf88bb2b2864f19a1e45"><em>pdal::Log::get</em></a> is less than the logging level of the <a class="reference internal" href="#project0classpdal_1_1Log"><em>pdal::Log</em></a> instance an ostream with a boost::iostreams::null_sink is returned. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Log::floatPrecision__i"></span><span class="target" id="project0classpdal_1_1Log_1af3ff79e2170256ecb5203411a71895cb"></span>void <tt class="descname">floatPrecision</tt><big>(</big>int <em>level</em><big>)</big></dt>
-<dd><p>Sets the floating point precision. </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="pdal::Log::clearFloat"></span><span class="target" id="project0classpdal_1_1Log_1a4bb273cda82c4e8f866bc52148889498"></span>void <tt class="descname">clearFloat</tt><big>(</big><big>)</big></dt>
-<dd><p>Clears the floating point precision settings of the streams. </p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="user-defined">
-<dt>
-<em>private attributes</em></dt>
 <dd><dl class="variable">
 <dt>
 <span class="target" id="project0classpdal_1_1Log_1a3e787b5c1489bef8941a26a32706867b"></span>std::ostream * <tt class="descname">m_log</tt></dt>
@@ -244,7 +163,7 @@
 
 <dl class="variable">
 <dt>
-<span class="target" id="project0classpdal_1_1Log_1af873e3a115530acf380d0d40720823be"></span>null_stream <tt class="descname">m_null_stream</tt></dt>
+<span class="target" id="project0classpdal_1_1Log_1a80876a014195af0cea65cc01aa1506e1"></span>std::ostream * <tt class="descname">m_nullStream</tt></dt>
 <dd></dd></dl>
 
 <dl class="variable">
@@ -264,6 +183,43 @@
 
 <dl class="function">
 <dt>
+<span class="target" id="pdal::Log::getLogStream"></span><span class="target" id="project0classpdal_1_1Log_1ad1e043d999106cddf098076d4969e818"></span>std::ostream * <tt class="descname">getLogStream</tt><big>(</big><big>)</big></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the stream object that is currently being used to for log operations regardless of logging level of the instance. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Log::get__LogLevel::Enum"></span><span class="target" id="project0classpdal_1_1Log_1a3cadc6cf82a2cf88bb2b2864f19a1e45"></span>std::ostream &amp; <tt class="descname">get</tt><big>(</big>LogLevel::Enum <em>level</em> = LogLevel::Info<big>)</big></dt>
+<dd><p>Returns the log stream given the logging level. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">level</span></tt> - <p>logging level to request If the logging level asked for with <a class="reference internal" href="#project0classpdal_1_1Log_1a3cadc6cf82a2cf88bb2b2864f19a1e45"><em>pdal::Log::get</em></a> is less than the logging level of the <a class="reference internal" href="#project0classpdal_1_1Log"><em>pdal::Log</em></a> instance </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Log::floatPrecision__i"></span><span class="target" id="project0classpdal_1_1Log_1af3ff79e2170256ecb5203411a71895cb"></span>void <tt class="descname">floatPrecision</tt><big>(</big>int <em>level</em><big>)</big></dt>
+<dd><p>Sets the floating point precision. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Log::clearFloat"></span><span class="target" id="project0classpdal_1_1Log_1a4bb273cda82c4e8f866bc52148889498"></span>void <tt class="descname">clearFloat</tt><big>(</big><big>)</big></dt>
+<dd><p>Clears the floating point precision settings of the streams. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
 <span class="target" id="pdal::Log::Log__X"></span><span class="target" id="project0classpdal_1_1Log_1a68b3e61f0e3dafba9a5d41b59a6f359e"></span><tt class="descname">Log</tt><big>(</big>const  <a class="reference internal" href="#project0classpdal_1_1Log"><em>Log</em></a>  &amp;<big>)</big></dt>
 <dd></dd></dl>
 
@@ -271,6 +227,50 @@
 <dt>
 <span class="target" id="pdal::Log::assign-operator__X"></span><span class="target" id="project0classpdal_1_1Log_1a851b99fb74ebcc76d5df385c52dd5c72"></span><a class="reference internal" href="#project0classpdal_1_1Log"><em>Log</em></a>  &amp; <tt class="descname">operator=</tt><big>(</big>const  <a class="reference internal" href="#project0classpdal_1_1Log"><em>Log</em></a>  &amp;<big>)</big></dt>
 <dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Log::makeNullStream"></span><span class="target" id="project0classpdal_1_1Log_1a1bf884c6cf933a425a2b1f3f370ed9ee"></span>void <tt class="descname">makeNullStream</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="public-func">
+<dt>
+<em>Public Functions</em></dt>
+<dd><dl class="function">
+<dt>
+<span class="target" id="pdal::Log::Log__ssCR.ssCR"></span><span class="target" id="project0classpdal_1_1Log_1adc3bd1940708c9e4ef2ba97655c5bdba"></span><tt class="descname">Log</tt><big>(</big>std::string const &amp; <em>leaderString</em>, std::string const &amp; <em>outputName</em><big>)</big></dt>
+<dd><p>Constructs a <a class="reference internal" href="#project0classpdal_1_1Log"><em>pdal::Log</em></a> instance. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">leaderString</span></tt> - <p>A string to presage all log entries with </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">outputName</span></tt> - <p>A filename or one of &#8216;stdout&#8217;, &#8216;stdlog&#8217;, or &#8216;stderr&#8217; to use for outputting log information. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="pdal::Log::Log__ssCR.osP"></span><span class="target" id="project0classpdal_1_1Log_1acea277caffa95aaf4d04fd8fc21857fb"></span><tt class="descname">Log</tt><big>(</big>std::string const &amp; <em>leaderString</em>, std::ostream * <em>v</em><big>)</big></dt>
+<dd><p>Constructs a <a class="reference internal" href="#project0classpdal_1_1Log"><em>pdal::Log</em></a> instance. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">leaderString</span></tt> - <p>A string to presage all log entries with </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">v</span></tt> - <p>An existing std::ostream to use for logging (instead of the the instance creating its own) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -307,7 +307,7 @@
                         <a href="../../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on May 05, 2015.
+                    on May 06, 2015.
         </div>
     </div>
 
