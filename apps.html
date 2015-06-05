@@ -104,9 +104,9 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Howard Butler</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">hobu.inc at gmail dot com</td>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">howard at hobu.co</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">9/1/2014</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">6/1/2015</td>
 </tr>
 </tbody>
 </table>
@@ -120,6 +120,7 @@ application currently contains six commands:</p>
 <li><a class="reference internal" href="#pcl-command"><em>pcl</em></a></li>
 <li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
 <li><a class="reference internal" href="#random-command"><em>random</em></a></li>
+<li><a class="reference internal" href="#tindex-command"><em>tindex</em></a></li>
 <li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
 <li><a class="reference internal" href="#view-command"><em>view</em></a></li>
 <li><a class="reference internal" href="#split-command"><em>split</em></a></li>
@@ -337,8 +338,41 @@ each of the x, y, and z dimensions.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="tindex-command">
+<span id="id8"></span><h2><tt class="docutils literal"><span class="pre">tindex</span></tt> command<a class="headerlink" href="#tindex-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>tindex</em> command is used to create a <a class="reference external" href="http://www.gdal.org">GDAL</a>-style tile index for PDAL-readable
+point cloud types. The <a class="reference external" href="http://www.gdal.org/gdaltindex.html">gdaltindex</a> command is the concept in that software,
+and the PDAL variant follows it very closely. This command requires <a class="reference external" href="http://www.gdal.org">GDAL</a> to
+be linked to PDAL.</p>
+<div class="highlight-python"><div class="highlight"><pre>--tindex arg                          OGR-readable/writeable tile index
+                                      output
+--filespec arg                        Build: Pattern of files to index.
+                                      Merge: Output filename
+--lyr_name arg                        OGR layer name to write into datasource
+--tindex_name arg (=location)         Tile index column name
+-f [ --driver ] arg (=ESRI Shapefile) OGR driver name to use
+--t_srs arg (=EPSG:4326)              Target SRS of tile index
+--geometry arg                        Geometry to filter points when merging.
+--write_absolute_path arg (=0)        Write absolute rather than relative
+                                      file paths
+--merge                               Whether we&#39;re merging the entries in a
+                                      tindex file.
+</pre></div>
+</div>
+<p>Some examples:</p>
+<p>1) Find all LAS files via <cite>find</cite>, send that file list via STDIN to <cite>pdal tindex</cite>,
+and write a <cite>SQLite</cite> tile index file with a layer named <cite>pdal</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre>find las/ -iname &quot;*.las&quot; | pdal tindex index.sqlite -f &quot;SQLite&quot; --stdin --lyr_name pdal
+</pre></div>
+</div>
+<p>2) Glob a list of LAS files, output the SRS for the index entries to EPSG:4326, and
+write out an <a class="reference external" href="http://www.sqlite.org">SQLite</a> file.</p>
+<div class="highlight-python"><div class="highlight"><pre>pdal tindex index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; --t_srs &quot;EPSG:4326&quot;
+</pre></div>
+</div>
+</div>
 <div class="section" id="translate-command">
-<span id="id8"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2><tt class="docutils literal"><span class="pre">translate</span></tt> command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>translate</em> command is used for simple conversion of files based on their
 file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
 translation operations.</p>
@@ -387,7 +421,7 @@ command line invocation. For example, the following invocation will translate
 </div>
 </div>
 <div class="section" id="view-command">
-<span id="id9"></span><h2><tt class="docutils literal"><span class="pre">view</span></tt> command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
+<span id="id10"></span><h2><tt class="docutils literal"><span class="pre">view</span></tt> command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>view</em> command can be used to visualize a point cloud using the
 PCLVisualizer. The command takes a single argument, the input file name.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal view myfile.las
@@ -433,7 +467,7 @@ help.</p>
 </div>
 </div>
 <div class="section" id="split-command">
-<span id="id10"></span><h2><tt class="docutils literal"><span class="pre">split</span></tt> command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
+<span id="id11"></span><h2><tt class="docutils literal"><span class="pre">split</span></tt> command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>split</em> will create multiple point output files from a single input file.
 The command takes an input file name and an output filename (used as a template)
 or output directory specification.</p>
@@ -481,6 +515,7 @@ The split command never creates directories.  Directories must pre-exist.</p>
 <li><a class="reference internal" href="#pcl-command"><tt class="docutils literal"><span class="pre">pcl</span></tt> command</a></li>
 <li><a class="reference internal" href="#pipeline-command"><tt class="docutils literal"><span class="pre">pipeline</span></tt> command</a></li>
 <li><a class="reference internal" href="#random-command"><tt class="docutils literal"><span class="pre">random</span></tt> command</a></li>
+<li><a class="reference internal" href="#tindex-command"><tt class="docutils literal"><span class="pre">tindex</span></tt> command</a></li>
 <li><a class="reference internal" href="#translate-command"><tt class="docutils literal"><span class="pre">translate</span></tt> command</a></li>
 <li><a class="reference internal" href="#view-command"><tt class="docutils literal"><span class="pre">view</span></tt> command</a></li>
 <li><a class="reference internal" href="#split-command"><tt class="docutils literal"><span class="pre">split</span></tt> command</a></li>
@@ -507,7 +542,7 @@ The split command never creates directories.  Directories must pre-exist.</p>
                         <a href="copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jun 04, 2015.
+                    on Jun 05, 2015.
         </div>
     </div>
 
