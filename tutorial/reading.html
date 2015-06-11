@@ -115,6 +115,7 @@
 </li>
 <li><a class="reference internal" href="#a-pipeline-command-example" id="id10">A <a class="reference internal" href="../apps.html#pipeline-command"><em>pipeline command</em></a> example</a><ul>
 <li><a class="reference internal" href="#simple-conversion" id="id11">Simple conversion</a></li>
+<li><a class="reference internal" href="#loop-a-directory-and-filter-it-through-a-pipeline" id="id12">Loop a directory and filter it through a pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -332,6 +333,14 @@ effects.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="loop-a-directory-and-filter-it-through-a-pipeline">
+<h3>Loop a directory and filter it through a pipeline<a class="headerlink" href="#loop-a-directory-and-filter-it-through-a-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>This little bash script loops through a directory and pushes the las files through
+a pipeline, substituting the input and output as it goes.</p>
+<div class="highlight-python"><div class="highlight"><pre>ls *.las | cut -d. -f1 | xargs -P20 -I{} pdal pipeline -i /path/to/proj.xml --readers.las.filename={}.las --writers.las.filename=output/{}.laz
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -361,6 +370,7 @@ effects.</p>
 </li>
 <li><a class="reference internal" href="#a-pipeline-command-example">A <tt class="docutils literal"><span class="pre">pipeline_command</span></tt> example</a><ul>
 <li><a class="reference internal" href="#simple-conversion">Simple conversion</a></li>
+<li><a class="reference internal" href="#loop-a-directory-and-filter-it-through-a-pipeline">Loop a directory and filter it through a pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -386,7 +396,7 @@ effects.</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jun 10, 2015.
+                    on Jun 11, 2015.
         </div>
     </div>
 
