@@ -110,21 +110,19 @@
 </tr>
 </tbody>
 </table>
-<p>PDAL contains a single <a class="reference external" href="http://git-scm.com/">git</a>-style application, called <em>pdal</em>. The <cite>pdal</cite>
-application currently contains six commands:</p>
+<p>PDAL contains consists of a single application, called <em>pdal</em>. The <cite>pdal</cite>
+application currently has the following subcommands:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#delta-command"><em>delta</em></a></li>
-<li></li>
 <li><a class="reference internal" href="#ground-command"><em>ground</em></a></li>
 <li><a class="reference internal" href="#info-command"><em>info</em></a></li>
 <li><a class="reference internal" href="#pcl-command"><em>pcl</em></a></li>
 <li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
 <li><a class="reference internal" href="#random-command"><em>random</em></a></li>
-<li><em class="xref std std-ref">tindex</em></li>
-<li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
 <li><a class="reference internal" href="#view-command"><em>view</em></a></li>
 <li><a class="reference internal" href="#split-command"><em>split</em></a></li>
-<li><em class="xref std std-ref">tindex</em></li>
+<li><a class="reference internal" href="#tindex-command"><em>tindex</em></a></li>
+<li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
 </ul>
 <p>Applications are run by invoking the <em>pdal</em> application along with the
 command name:</p>
@@ -133,12 +131,7 @@ $ pdal translate input.las output.las
 $ pdal pipeline --stdin &lt; myxml.xml
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <a class="reference internal" href="#ground-command"><em>ground</em></a>, <a class="reference internal" href="#pcl-command"><em>pcl</em></a>, and
-<a class="reference internal" href="#view-command"><em>view</em></a> commands are only available if PCL is linked.</p>
-</div>
-<p>Help about each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch.
+<p>Help for each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch.
 The <tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about
 particular drivers and their options:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info --help
@@ -146,7 +139,7 @@ $ pdal translate --drivers
 $ pdal pipeline --options writers.las
 </pre></div>
 </div>
-<p>Additional, driver-specific options may be specified by using a
+<p>Additional driver-specific options may be specified by using a
 namespace-prefixed option name. For example, it is possible to
 set the LAS day of year at translation time with the following
 option:</p>
@@ -238,8 +231,11 @@ description of the differences is produced.</p>
 <span id="id3"></span><h2>ground command<a class="headerlink" href="#ground-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>ground</em> command is used to segment the input point cloud into ground
 versus non-ground returns. The output is a point cloud containing only ground
-returns. The <em>ground</em> command invokes <a class="reference external" href="http://pointclouds.org/">Point Cloud Library</a>&#8216;s <a class="reference external" href="http://pointclouds.org/documentation/tutorials/progressive_morphological_filtering.php#progressive-morphological-filtering.">ProgressiveMorphologicalFilter</a>. As such,
-<em>ground</em> is only available when PDAL is linked with PCL.</p>
+returns. The <em>ground</em> command invokes <a class="reference external" href="http://pointclouds.org/">Point Cloud Library</a>&#8216;s <a class="reference external" href="http://pointclouds.org/documentation/tutorials/progressive_morphological_filtering.php#progressive-morphological-filtering.">ProgressiveMorphologicalFilter</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em>ground</em> command is only available when PDAL is linked with PCL.</p>
+</div>
 <div class="highlight-python"><div class="highlight"><pre>pdal ground &lt;input&gt; &lt;output&gt;
 </pre></div>
 </div>
@@ -270,131 +266,198 @@ a user to retransform the output into whatever they want with ease</li>
 <div class="highlight-python"><div class="highlight"><pre>pdal info &lt;input&gt;
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>--input arg      Non-positional argument to specify input filename.
---point [-p] arg  Display points for particular points.  Points can be specified in a range or list: 4-10, 15, 255-300.
---query Point
+<div class="highlight-python"><div class="highlight"><pre>--input arg       Non-positional argument to specify input filename.
+--point [-p] arg  Display points for particular points.  Points can be specified in
+                  a range or list: 4-10, 15, 255-300.
+--query arg       Add a listing of points based on the distance from the provided
+                  location.
+                  --query &quot;25.34,35.123&quot; or --query &quot;11532.23 -10e23 1.234&quot;
+--stats           Display the minimum, maximum, average and count of each
+                  dimension.
+--boundary        Compute a hexagonal boundary that contains all points.
+--dimensions arg  Use with --stats to limit the dimensions on which statistics
+                  should be computed.
+                  --dimensions &quot;X, Y,Red&quot;
+--schema          Dump the schema of the internal point storage.
+--pipeline-serialization
+                  Create a JSON representation of the pipeline used to generate
+                  the output.
+--summary         Dump the point count, spatial reference, extrema and dimension
+                  names.
+--metadata        Dump the metadata associated with the input file.
 </pre></div>
 </div>
+<p>If no options are provided, &#8211;statistics is assumed.</p>
 <div class="section" id="id5">
 <h3>Example 1:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div>$ pdal info  test/data/1.2-with-color.las &#8211;count 3 &#8211;query &#8220;636601.87, 849018.59, 425.10&#8221;</div></blockquote>
-<p>Print the first 10 points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info  test/data/las/1.2-with-color.las --query=&quot;636601.87, 849018.59, 425.10&quot;
+{
+  &quot;0&quot;:
+  {
+    &quot;Blue&quot;: 134,
+    &quot;Classssification&quot;: 1,
+    &quot;EdgeOfFlightLine&quot;: 0,
+    &quot;GpsTime&quot;: 245383.38808001476,
+    &quot;Green&quot;: 104,
+    &quot;Intensity&quot;: 124,
+    &quot;NumberOfReturns&quot;: 1,
+    &quot;PointSourceId&quot;: 7326,
+    &quot;Red&quot;: 134,
+    &quot;ReturnNumber&quot;: 1,
+    &quot;ScanAngleRank&quot;: -4,
+    &quot;ScanDirectionFlag&quot;: 1,
+    &quot;UserData&quot;: 126,
+    &quot;X&quot;: 636601.87,
+    &quot;Y&quot;: 849018.59999999998,
+    &quot;Z&quot;: 425.10000000000002
+  },
+  &quot;1&quot;:
+  {
+    &quot;Blue&quot;: 134,
+    &quot;Classification&quot;: 2,
+    &quot;EdgeOfFlightLine&quot;: 0,
+    &quot;GpsTime&quot;: 246099.17323102333,
+    &quot;Green&quot;: 106,
+    &quot;Intensity&quot;: 153,
+    &quot;NumberOfReturns&quot;: 1,
+    &quot;PointSourceId&quot;: 7327,
+    &quot;Red&quot;: 143,
+    &quot;ReturnNumber&quot;: 1,
+    &quot;ScanAngleRank&quot;: -10,
+    &quot;ScanDirectionFlag&quot;: 1,
+    &quot;UserData&quot;: 126,
+    &quot;X&quot;: 636606.76000000001,
+    &quot;Y&quot;: 849053.94000000006,
+    &quot;Z&quot;: 425.88999999999999
+  },
+  ...
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>Example 2:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info test/data/1.2-with-color.las -p 0-10
-</pre></div>
-</div>
-<p>Print three selected points of the file as <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a></p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal info test/data/1.2-with-color.las -p 4, 16, 28
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>-p [ --point ] [=arg(=0)] point to dump
---query arg               A 2d or 3d point query point
---distance arg            A query distance
--a [ --stats ]            dump stats on all points (reads entire dataset)
---count arg (=0)          How many points should we write?
---dimensions arg          dump stats on all points (reads entire dataset)
--s [ --schema ]           dump the schema
--m [ --metadata ]         dump the metadata
---sdo_pc                  dump the SDO_PC Oracle Metadata
--r [ --stage ]            dump the stage info
---xml                     dump XML instead of JSON
---seed arg (=0)           Seed value for random sample
---sample_size arg (=1000) Sample size for random sample
+{
+  &quot;filename&quot;: &quot;../../test/data/las/1.2-with-color.las&quot;,
+  &quot;pdal_version&quot;: &quot;PDAL 1.0.0.b1 (116d7d) with GeoTIFF 1.4.1 GDAL 1.11.2 LASzip 2.2.0&quot;,
+  &quot;points&quot;:
+  {
+    &quot;point&quot;:
+    [
+      {
+        &quot;Blue&quot;: 88,
+        &quot;Classification&quot;: 1,
+        &quot;EdgeOfFlightLine&quot;: 0,
+        &quot;GpsTime&quot;: 245380.78254962614,
+        &quot;Green&quot;: 77,
+        &quot;Intensity&quot;: 143,
+        &quot;NumberOfReturns&quot;: 1,
+        &quot;PointId&quot;: 0,
+        &quot;PointSourceId&quot;: 7326,
+        &quot;Red&quot;: 68,
+        &quot;ReturnNumber&quot;: 1,
+        &quot;ScanAngleRank&quot;: -9,
+        &quot;ScanDirectionFlag&quot;: 1,
+        &quot;UserData&quot;: 132,
+        &quot;X&quot;: 637012.23999999999,
+        &quot;Y&quot;: 849028.31000000006,
+        &quot;Z&quot;: 431.66000000000003
+      },
+      {
+        &quot;Blue&quot;: 68,
+        &quot;Classification&quot;: 1,
+        &quot;EdgeOfFlightLine&quot;: 0,
+        &quot;GpsTime&quot;: 245381.45279923646,
+        &quot;Green&quot;: 66,
+        &quot;Intensity&quot;: 18,
+        &quot;NumberOfReturns&quot;: 2,
+        &quot;PointId&quot;: 1,
+        &quot;PointSourceId&quot;: 7326,
+        &quot;Red&quot;: 54,
+        &quot;ReturnNumber&quot;: 1,
+        &quot;ScanAngleRank&quot;: -11,
+        &quot;ScanDirectionFlag&quot;: 1,
+        &quot;UserData&quot;: 128,
+        &quot;X&quot;: 636896.32999999996,
+        &quot;Y&quot;: 849087.70000000007,
+        &quot;Z&quot;: 446.38999999999999
+      },
+      ...
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="pcl-command">
-<span id="id6"></span><h2>pcl command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>pcl</em> command is used to invoke a PCL JSON pipeline. See
-<a class="reference internal" href="tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a> for more information.</p>
-<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg      input file name
--o [ --output ] arg     output file name
--p [ --pcl ] arg        pcl file name
--z [ --compress ]       Compress output data (if supported by output format)
+<span id="id7"></span><h2>pcl command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>pcl</em> command is used to invoke a PCL JSON pipeline. See <a class="reference internal" href="tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a>
+for more information.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em>pcl</em> command is only available when PDAL is linked with PCL.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>pdal pcl &lt;input&gt; &lt;output&gt; &lt;pcl&gt;
 </pre></div>
 </div>
-<p>The <em>pcl</em> command is only available when PDAL is build with PCL support.</p>
+<div class="highlight-python"><div class="highlight"><pre>--input [-i] arg   Non-positional argument to specify input file name.
+--output [-o] arg  Non-positional argument to specify output file name.
+--pcl [-p] arg     Non-positional argument to specify pcl file name.
+--compress [-z]    Compress output data (if supported by output format)
+--metadata [-m]    Forward metadata from previous stages.
+</pre></div>
+</div>
 </div>
 <div class="section" id="pipeline-command">
-<span id="id7"></span><h2>pipeline command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>pipeline</em> command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See <a class="reference internal" href="tutorial/reading.html#reading"><em>Reading with PDAL</em></a>
-or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> for more information.</p>
-<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
+<span id="id8"></span><h2>pipeline command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>pipeline</em> command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See
+<a class="reference internal" href="tutorial/reading.html#reading"><em>Reading with PDAL</em></a> or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> for more information.</p>
+<div class="highlight-python"><div class="highlight"><pre>pdal pipeline &lt;input&gt;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>--input [-i] arg  Non-positional argument to specify input file name.
 --pipeline-serialization arg
---validate                   Validate the pipeline (including serialization),
-                           but do not execute writing of points
---count arg (=0)             How many points should we write?
---skip arg (=0)              How many points should we skip?
+                  Write input pipeline along with all metadata and created by the
+                  pipeline to the specified file.
+--validate        Validate the pipeline (including serialization), but do not execute
+                  writing of points
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The <cite>pipeline</cite> command can accept option substitutions, but they
-do not replace existing options that are specified in the XML. For example,
-to set the output and input LAS files for a pipeline that does a translation,
-construct XML that does not containe <cite>filename</cite> options for each, and then
-issue the command with the following arguments:</p>
-<div class="last highlight-python"><div class="highlight"><pre>pdal pipeline -i translate.xml --writers.las.filename=output.laz --readers.las.filename=input.las
+do not replace existing options that are specified in the input XML
+pipeline.  For example, to set the output and input LAS files for a
+pipeline that does a translation, construct XML that does not contain
+<cite>filename</cite> for reader and writer and issue the command with the
+following arguments:</p>
+<div class="last highlight-python"><div class="highlight"><pre>pdal pipeline -i translate.xml --writers.las.filename=output.laz \
+    --readers.las.filename=input.las
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="random-command">
-<span id="id8"></span><h2><tt class="docutils literal"><span class="pre">random</span></tt> command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2>random command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>random</em> command is used to create a random point cloud. It uses
 <a class="reference internal" href="stages/readers.faux.html#readers-faux"><em>readers.faux</em></a> to create a point cloud containing <em>count</em> points
 drawn randomly from either a uniform or normal distribution. For the uniform
 distribution, the bounds can be specified (they default to a unit cube). For
 the normal distribution, the mean and standard deviation can both be set for
 each of the x, y, and z dimensions.</p>
-<div class="highlight-python"><div class="highlight"><pre>-o [ --output ] arg           output file name
--z [ --compress ]             Compress output data (if supported by output
-                              format)
---count arg (=0)              How many points should we write?
---bounds arg                  Extent (in XYZ to clip output to)
---mean arg                    A comma-separated or quoted, space-separated
-                              list of means (normal mode):
-                              --mean 0.0,0.0,0.0
-                              --mean &quot;0.0 0.0 0.0&quot;
---stdev arg                   A comma-separated or quoted, space-separated
-                              list of standard deviations (normal mode):
-                              --stdev 0.0,0.0,0.0
-                              --stdev &quot;0.0 0.0 0.0&quot;
---distribution arg (=uniform) Distribution (uniform / normal)
+<div class="highlight-python"><div class="highlight"><pre>pdal random &lt;output&gt;
 </pre></div>
 </div>
-</div>
-<div class="section" id="tindex-command">
-<span id="id9"></span><h2><tt class="docutils literal"><span class="pre">tindex</span></tt> command<a class="headerlink" href="#tindex-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>tindex</em> command is used to create a <a class="reference external" href="http://www.gdal.org">GDAL</a>-style tile index for PDAL-readable
-point cloud types. The <a class="reference external" href="http://www.gdal.org/gdaltindex.html">gdaltindex</a> command is the concept in that software,
-and the PDAL variant follows it very closely. This command requires <a class="reference external" href="http://www.gdal.org">GDAL</a> to
-be linked to PDAL.</p>
-<div class="highlight-python"><div class="highlight"><pre>--tindex arg                          OGR-readable/writeable tile index
-                                      output
---filespec arg                        Build: Pattern of files to index.
-                                      Merge: Output filename
---lyr_name arg                        OGR layer name to write into datasource
---tindex_name arg (=location)         Tile index column name
--f [ --driver ] arg (=ESRI Shapefile) OGR driver name to use
---t_srs arg (=EPSG:4326)              Target SRS of tile index
---geometry arg                        Geometry to filter points when merging.
---write_absolute_path arg (=0)        Write absolute rather than relative
-                                      file paths
---merge                               Whether we&#39;re merging the entries in a
-                                      tindex file.
-</pre></div>
-</div>
-<p>Some examples:</p>
-<p>1) Find all LAS files via <cite>find</cite>, send that file list via STDIN to <cite>pdal tindex</cite>,
-and write a <cite>SQLite</cite> tile index file with a layer named <cite>pdal</cite>:</p>
-<div class="highlight-python"><div class="highlight"><pre>find las/ -iname &quot;*.las&quot; | pdal tindex index.sqlite -f &quot;SQLite&quot; --stdin --lyr_name pdal
-</pre></div>
-</div>
-<p>2) Glob a list of LAS files, output the SRS for the index entries to EPSG:4326, and
-write out an <a class="reference external" href="http://www.sqlite.org">SQLite</a> file.</p>
-<div class="highlight-python"><div class="highlight"><pre>pdal tindex index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; --t_srs &quot;EPSG:4326&quot;
+<div class="highlight-python"><div class="highlight"><pre>--output [-o] arg   Non-positional argument to specify output file name.
+--compress [-z]     Compress output data (if supported by output format)
+--count arg         Number of points in created point cloud [0].
+--bounds arg        Extent (in XYZ to clip output to):
+                    --bounds &quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;
+--mean arg          List of means (for --distribution normal)
+                    --mean 0.0,0.0,0.0
+                    --mean &quot;0.0 0.0 0.0&quot;
+--stdev arg         List of standard deviations (for --distribution normal)
+                    --stdev 0.0,0.0,0.0
+                    --stdev &quot;0.0 0.0 0.0&quot;
+--distribution arg  Distribution type (uniform or normal) [uniform]
 </pre></div>
 </div>
 </div>
@@ -403,29 +466,23 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
 <p>The <em>translate</em> command is used for simple conversion of files based on their
 file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
 translation operations.</p>
-<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg           input file name
--o [ --output ] arg          output file name
---a_srs arg                  Assign input coordinate system (if supported by
-                           output format)
---t_srs arg                  Transform to output coordinate system (if
-                           supported by output format)
--z [ --compress ]            Compress output data (if supported by output
-                           format)
---count arg (=0)             How many points should we write?
---skip arg (=0)              How many points should we skip?
---bounds arg                 Extent (in XYZ to clip output to)
---polygon arg                POLYGON WKT to use for precise crop of data (2d
-                           or 3d)
---scale arg                  A comma-separated or quoted, space-separated
-                           list of scales to set on the output file:
-                           --scale 0.1,0.1,0.00001
-                           --scale &quot;0.1 0.1 0.00001&quot;
---offset arg                 A comma-separated or quoted, space-separated
-                           list of offsets to set on the output file:
-                           --offset 0,0,0
-                           --offset &quot;1234 5678 91011&quot;
--m [ --metadata ] [=arg(=1)] Forward metadata (VLRs, header entries, etc)
-                           from previous stages
+<div class="highlight-python"><div class="highlight"><pre>pdal translate &lt;input&gt; &lt;output&gt;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>--input [-i] arg   Non-positional argument to specify input file name.
+--output [-o] arg  Non-positional argument to specify output file name.
+--compress arg     Compress output data if supported by output format. [false]
+--a_srs arg        Assign input coordinate system.
+--t_srs arg        Transform to output coordinate system.
+--bounds arg       Limit output to points inside the specified box.
+                   --bounds &quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;
+--polygon arg      Limit output to point inside the specified polygon (specified as
+                   well-known text).
+--d_step arg       Step value to be passed to decimation filter. [1]
+--d_offset arg     Offset value to be passed to decimation filter. [0]
+--d_leaf_size arg  Leaf size to be bassed to decimation filter. [1]
+--d_method arg     Decimation filter method (RankOrder|VoxelGrid).  [RankOrder]
+--d_limit arg      Limit to be passed to decimation filter. [0]
 </pre></div>
 </div>
 <p>The translate command can be augmented by specifying full-path options at the
@@ -451,7 +508,11 @@ command line invocation. For example, the following invocation will translate
 <span id="id11"></span><h2>view command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
 <p>The <em>view</em> command can be used to visualize a point cloud using the
 PCLVisualizer. The command takes a single argument, the input file name.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal view myfile.las
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em>view</em> command is only available when PDAL is linked with PCL.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal view &lt;input&gt;
 </pre></div>
 </div>
 <p>Once the data has been loaded into the viewer, press h or H to display the
@@ -495,34 +556,44 @@ help.</p>
 </div>
 <div class="section" id="split-command">
 <span id="id12"></span><h2>split command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>split</em> command will create multiple point output files from a single
-input file.
-The command takes an input file name and an output filename (used as a template)
-or output directory specification.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal split --capacity 100000 infile.laz outfile.bpf
+<p>The <em>split</em> command will create multiple output files from a single
+input file.  The command takes an input file name and an output filename
+(used as a template) or output directory specification.</p>
+<div class="highlight-python"><div class="highlight"><pre>pdal split &lt;input&gt; &lt;output&gt;
 </pre></div>
 </div>
-<p>This command takes the points from the input file &#8216;infile.laz&#8217; and creates
-output files &#8216;outfile_1.bpf&#8217;, &#8216;outfile_2.bpf&#8217;, ... where each output file
-contains no more than 100000 points.</p>
-<div class="highlight-python"><div class="highlight"><pre>-i [--input] arg   Non-positional option for specifying input file name
--o [--output] arg  Non-positional option for specifying output file/directory name
---length arg       Edge length for splitter cells
---capacity arg     Point capacity for chipper cells
+<div class="highlight-python"><div class="highlight"><pre>--input [-i] arg   Non-positional option for specifying input file name
+--output [-o] arg  Non-positional option for specifying output file/directory name
+--length arg       Edge length for splitter cells.  See :ref:`filters.splitter`.
+--capacity arg     Point capacity for chipper cells.  See :ref:`filters.chipper`.
 </pre></div>
 </div>
-<p>Input and output arguments are required.  If neither the length nor capacity
-arguments are specified, an implcit argument of capacity with a value of 100000
-is added.</p>
+<p>If neither the length nor capacity arguments are specified, an implcit argument of
+capacity with a value of 100000 is added.</p>
 <p>The output argument is a template.  If the output argument is, for example,
 &#8216;file.ext&#8217;, the output files created are &#8216;file_#.ext&#8217; where # is a number
 starting at one and incrementing for each file created.</p>
 <p>If the output argument ends in a path separator, it is assumed to be a
 directory and the input argument is appended to create the output template.
 The split command never creates directories.  Directories must pre-exist.</p>
-</div>
 <div class="section" id="id13">
-<span id="id14"></span><h2>tindex command<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<h3>Example 1:<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal split --capacity 100000 infile.laz outfile.bpf
+</pre></div>
+</div>
+<p>This command takes the points from the input file &#8216;infile.laz&#8217; and creates
+output files &#8216;outfile_1.bpf&#8217;, &#8216;outfile_2.bpf&#8217;, ... where each output file
+contains no more than 100000 points.</p>
+</div>
+</div>
+<div class="section" id="tindex-command">
+<span id="id14"></span><h2>tindex command<a class="headerlink" href="#tindex-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>tindex</em> command is used to create a <a class="reference external" href="http://www.gdal.org">GDAL</a>-style tile index for
+PDAL-readable point cloud types (see <a class="reference external" href="http://www.gdal.org/gdaltindex.html">gdaltindex</a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em>tindex</em> command is only available when PDAL is linked with <a class="reference external" href="http://www.gdal.org">GDAL</a>.</p>
+</div>
 <p>The <em>tindex</em> command has two modes.  The first mode creates a spatial index
 file for a set of point cloud files.  The second mode creates a point cloud
 file that is the result of merging the points from files referred to in a
@@ -543,16 +614,13 @@ to &#8220;ESRI Shapefile&#8221;.</p>
 in a layer in the index file. The filespec is a
 <a href="#id15"><span class="problematic" id="id16">`</span></a>glob pattern &lt;<a class="reference external" href="http://man7.org/linux/man-pages/man7/glob.7.html">http://man7.org/linux/man-pages/man7/glob.7.html</a>&gt;&#8217;_.  and
 normally needs to be quoted to prevent shell expansion of wildcard characters.</p>
-<div class="highlight-python"><div class="highlight"><pre>--tindex       Non-positional option for specifying the index file name.
---filespec     Non-positional option for specifying pattern of files to
-               be indexed.
---lyr_name     Name of layer in which to store the features. Defaults to
-               the base name of the first file indexed.
---tindex_name  Name of the field in the feature in which to store the
-               indexed file name. [&quot;location&quot;]
---driver       OGR driver name. [&quot;ESRI Shapefile&quot;]
---t_srs        Spatial reference system in which to store index vector
-               data. [&quot;EPSG:4326&quot;]
+<div class="highlight-python"><div class="highlight"><pre>--tindex                   Non-positional option for specifying the index file name.
+--filespec                 Non-positional option for specifying pattern of files to be indexed.
+--lyr_name                 Name of layer in which to store the features. Defaults to the base name of the first file indexed.
+--tindex_name              Name of the field in the feature in which to store the indexed file name. [&quot;location&quot;]
+--driver                   OGR driver name. [&quot;ESRI Shapefile&quot;]
+--t_srs                    Spatial reference system in which to store index vector data. [&quot;EPSG:4326&quot;]
+--write_absolute_path arg  Write absolute rather than relative file paths [false]
 </pre></div>
 </div>
 </div>
@@ -571,6 +639,22 @@ of the output file is determined automatically from the filename extension.</p>
             points inside the object will be in the output file.
 --t_srs     Spatial reference system in which the output data should be
             represented. [&quot;EPSG:4326&quot;]
+</pre></div>
+</div>
+</div>
+<div class="section" id="id17">
+<h3>Example 1:<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<p>Find all LAS files via <cite>find</cite>, send that file list via STDIN to <cite>pdal tindex</cite>,
+and write a <cite>SQLite</cite> tile index file with a layer named <cite>pdal</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre>find las/ -iname &quot;*.las&quot; | pdal tindex index.sqlite -f &quot;SQLite&quot; --stdin --lyr_name pdal
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>Example 2:<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>Glob a list of LAS files, output the SRS for the index entries to EPSG:4326, and
+write out an <a class="reference external" href="http://www.sqlite.org">SQLite</a> file.</p>
+<div class="highlight-python"><div class="highlight"><pre>pdal tindex index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; --t_srs &quot;EPSG:4326&quot;
 </pre></div>
 </div>
 </div>
@@ -599,18 +683,23 @@ of the output file is determined automatically from the filename extension.</p>
 <li><a class="reference internal" href="#ground-command">ground command</a></li>
 <li><a class="reference internal" href="#info-command">info command</a><ul>
 <li><a class="reference internal" href="#id5">Example 1:</a></li>
+<li><a class="reference internal" href="#id6">Example 2:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pcl-command">pcl command</a></li>
 <li><a class="reference internal" href="#pipeline-command">pipeline command</a></li>
-<li><a class="reference internal" href="#random-command"><tt class="docutils literal"><span class="pre">random</span></tt> command</a></li>
-<li><a class="reference internal" href="#tindex-command"><tt class="docutils literal"><span class="pre">tindex</span></tt> command</a></li>
+<li><a class="reference internal" href="#random-command">random command</a></li>
 <li><a class="reference internal" href="#translate-command">translate command</a></li>
 <li><a class="reference internal" href="#view-command">view command</a></li>
-<li><a class="reference internal" href="#split-command">split command</a></li>
-<li><a class="reference internal" href="#id13">tindex command</a><ul>
+<li><a class="reference internal" href="#split-command">split command</a><ul>
+<li><a class="reference internal" href="#id13">Example 1:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tindex-command">tindex command</a><ul>
 <li><a class="reference internal" href="#tindex-creation-mode">tindex Creation Mode</a></li>
 <li><a class="reference internal" href="#tindex-merge-mode">tindex Merge Mode</a></li>
+<li><a class="reference internal" href="#id17">Example 1:</a></li>
+<li><a class="reference internal" href="#id18">Example 2:</a></li>
 </ul>
 </li>
 </ul>
@@ -636,7 +725,7 @@ of the output file is determined automatically from the filename extension.</p>
                         <a href="copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jun 15, 2015.
+                    on Jun 16, 2015.
         </div>
     </div>
 
