@@ -121,7 +121,13 @@
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>BPF file to read [Required]</dd>
+<dd>BPF file to read.  The writer will accept a filename containing
+a single placeholder character (&#8216;#&#8217;).  If input to the writer consists
+of multiple PointViews, each will be written to a separate file, where
+the placeholder will be replaced with an incrementing integer.  If no
+placeholder is found, all PointViews provided to the writer are
+aggregated into a single file for output.  Multiple PointViews are usually
+the result of using <a class="reference internal" href="filters.splitter.html#filters-splitter"><em>filters.splitter</em></a> or <a class="reference internal" href="filters.chipper.html#filters-chipper"><em>filters.chipper</em></a>.</dd>
 <dt>compression</dt>
 <dd>This option can be set to true to cause the file to be written with Zlib
 compression as described in the BPF specification.  [Default: false]</dd>
@@ -194,7 +200,7 @@ dimension.  [Default: 0]</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jul 02, 2015.
+                    on Jul 03, 2015.
         </div>
     </div>
 
