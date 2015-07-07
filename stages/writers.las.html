@@ -122,7 +122,14 @@ interchange file format for LIDAR data.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>LAS file to read [Required]</dd>
+<dd>LAS file to read. The writer will accept a filename containing
+a single placeholder character (&#8216;#&#8217;).  If input to the writer consists
+of multiple PointViews, each will be written to a separate file, where
+the placeholder will be replaced with an incrementing integer.  If no
+placeholder is found, all PointViews provided to the writer are
+aggregated into a single file for output.  Multiple PointViews are usually
+the result of using <a class="reference internal" href="filters.splitter.html#filters-splitter"><em>filters.splitter</em></a> or <a class="reference internal" href="filters.chipper.html#filters-chipper"><em>filters.chipper</em></a>.
+[Required]</dd>
 <dt>minor_version</dt>
 <dd>All LAS files are version 1, but the minor version (0 - 4) can be specified
 with this option. [Default: 3]</dd>
@@ -232,7 +239,7 @@ extra dimensions specified by this option.</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jul 06, 2015.
+                    on Jul 07, 2015.
         </div>
     </div>
 
