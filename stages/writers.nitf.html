@@ -98,8 +98,9 @@
                     
   <div class="section" id="writers-nitf">
 <span id="id1"></span><h1>writers.nitf<a class="headerlink" href="#writers-nitf" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference external" href="http://en.wikipedia.org/wiki/National_Imagery_Transmission_Format">NITF</a> format is used primarily by the US Department of Defence and supports many kinds of data inside a generic wrapper. The <a class="reference external" href="http://www.gwg.nga.mil/ntb/baseline/docs/2500c/index.html">NITF 2.1</a> version added support for LIDAR point cloud data, and the <strong>NITF file writing</strong> supports reading that data.</p>
-<p>The dimensions read by the writer match should exactly to the LAS dimension names and types for convenience in file format transformation.</p>
+<p>The <a class="reference external" href="http://en.wikipedia.org/wiki/National_Imagery_Transmission_Format">NITF</a> format is a US Department of Defense format for the transmission
+of imagery.  It supports various formats inside a generic wrapper.  However,
+the PDAL NITF writer only supports LAS/LAZ data.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -120,23 +121,43 @@
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>Filename to read from [Required]</dd>
+<dd>NITF file to write.  The writer will accept a filename containing
+a single placeholder character (&#8216;#&#8217;).  If input to the writer consists
+of multiple PointViews, each will be written to a separate file, where
+the placeholder will be replaced with an incrementing integer.  If no
+placeholder is found, all PointViews provided to the writer are
+aggregated into a single file for output.  Multiple PointViews are usually
+the result of using <a class="reference internal" href="filters.splitter.html#filters-splitter"><em>filters.splitter</em></a> or <a class="reference internal" href="filters.chipper.html#filters-chipper"><em>filters.chipper</em></a>.</dd>
 <dt>CLEVEL</dt>
-<dd>Set the &#8220;compliance level&#8221; metadata [Default: <strong>03</strong>]</dd>
+<dd>File complexity level (2 characters) [Default: <strong>03</strong>]</dd>
 <dt>STYPE</dt>
-<dd>Set the &#8220;system type&#8221; metadata [Default: <strong>BF01</strong>]</dd>
+<dd>Standard type (4 characters) [Default: <strong>BF01</strong>]</dd>
 <dt>OSTAID</dt>
-<dd>Set the &#8220;origin station id&#8221; metadata [Default: <strong>PDAL</strong>]</dd>
+<dd>Originating station ID (10 characters) [Default: <strong>PDAL</strong>]</dd>
 <dt>FTITLE</dt>
-<dd>Set the &#8220;file title&#8221; metadata [Default: <strong>FTITLE</strong>]</dd>
+<dd>File title (80 characters) [Default: &lt;spaces&gt;]</dd>
 <dt>FSCLAS</dt>
-<dd>Set the &#8220;classification&#8221; metadata [Default: <strong>U</strong>]</dd>
+<dd>File security classification (&#8216;T&#8217;, &#8216;S&#8217;, &#8216;C&#8217;, &#8216;R&#8217; or &#8216;U&#8217;) [Default: <strong>U</strong>]</dd>
 <dt>ONAME</dt>
-<dd>Set the &#8220;originator name&#8221; metadata [Default: none]</dd>
+<dd>Originator name (24 characters) [Default: &lt;spaces&gt;]</dd>
 <dt>OPHONE</dt>
-<dd>Set the &#8220;originator phone&#8221; metadata [Default: none]</dd>
+<dd>Originator phone (18 characters) [Default: &lt;spaces&gt;]</dd>
+<dt>FSCTLH</dt>
+<dd>File control and handling (2 characters) [Default: &lt;spaces&gt;]</dd>
+<dt>FSCLSY</dt>
+<dd>File classification system (2 characters) [Default: &lt;spaces&gt;]</dd>
 <dt>IDATIM</dt>
-<dd>Set the &#8220;file date&#8221; metadata [Default: none]</dd>
+<dd>Image date and time (format: &#8216;CCYYMMDDhhmmss&#8217;) [Default: &lt;spaces&gt;]</dd>
+<dt>IID2</dt>
+<dd>Image identifier 2 (80 characters) [Default: &lt;spaces&gt;]</dd>
+<dt>FSCLTX</dt>
+<dd>File classification text (43 characters) [Default: &lt;spaces&gt;]</dd>
+<dt>AIMIDB</dt>
+<dd>Option tag that should contain further options to complete the AIMIDB
+(Additional Image ID) TRE record [Default: None]</dd>
+<dt>ACFTB</dt>
+<dd>Option tag that should contain further options to complete the ACFTB
+(Aircraft Information) TRE record [Default: None]</dd>
 </dl>
 </div>
 </div>
@@ -179,7 +200,7 @@
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jul 08, 2015.
+                    on Jul 09, 2015.
         </div>
     </div>
 
