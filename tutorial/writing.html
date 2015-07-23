@@ -108,28 +108,14 @@ PDAL&#8217;s <a class="reference internal" href="../api/cpp/stage.html#pdal::Sta
 pipeline using <a class="reference internal" href="../pipeline.html#pipeline"><em>Pipeline</em></a> and not have to code anything explicit
 yourself.</p>
 </div>
-<div class="section" id="compilation">
-<h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
-<p>To build this example create a file called <cite>pdal-tutorial.cpp</cite> in the root of your PDAL tree and
-issue a compilation command something like the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>g++ -g -std=c++11 -o pdal-tutorial -I./include -L./lib -lpdalcpp pdal-tutorial.cpp
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Refer to <a class="reference internal" href="../compilation/index.html#building"><em>Installation</em></a> for information on how to build PDAL.</p>
-</div>
-</div>
 <div class="section" id="includes">
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
-<p>As of PDAL 1.0.0, there&#8217;s a couple of include files available for use.  The
-main one, <cite>&lt;pdal/pdal.hpp&gt;</cite>, brings in most of the utility and basic classes
-used throughout the PDAL system. Additionally, the following includes are
-available subject to having the required include directories pathed:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/pdal.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/PointView.hpp&gt;</span>
-<span class="cp">#include &lt;BufferReader.hpp&gt;</span>
-<span class="cp">#include &lt;LasWriter.hpp&gt;</span>
+<p>First, our code.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/PointView.hpp&gt;</span>
+<span class="cp">#include &lt;pdal/BufferReader.hpp&gt;</span>
+<span class="cp">#include &lt;pdal/Pointtable-&gt;hpp&gt;</span>
+<span class="cp">#include &lt;pdal/Dimension.hpp&gt;</span>
+<span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
 
 <span class="cp">#include &lt;vector&gt;</span>
 
@@ -142,14 +128,13 @@ available subject to having the required include directories pathed:</p>
 
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">getMyData</span><span class="p">()</span>
 <span class="p">{</span>
-
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">output</span><span class="p">;</span>
     <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
-        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span> <span class="p">;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
         <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
         <span class="n">output</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
     <span class="p">}</span>
@@ -159,7 +144,6 @@ available subject to having the required include directories pathed:</p>
 
 <span class="kt">void</span> <span class="n">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
-
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="n">Point</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">pt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
@@ -169,41 +153,153 @@ available subject to having the required include directories pathed:</p>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[]</span> <span class="p">)</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
 
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
+    <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
 
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">debug</span><span class="p">(</span><span class="s">&quot;debug&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">verbose</span><span class="p">(</span><span class="s">&quot;verbose&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
-    <span class="c1">// options.add(debug);</span>
-    <span class="c1">// options.add(verbose);</span>
-
-    <span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">filename</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
-    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
-    <span class="n">pdal</span><span class="o">::</span><span class="n">PointTablePtr</span> <span class="n">table</span><span class="p">(</span><span class="k">new</span> <span class="n">pdal</span><span class="o">::</span><span class="n">DefaultPointTable</span><span class="p">());</span>
-
-    <span class="n">table</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
-    <span class="n">table</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
-    <span class="n">table</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
 
     <span class="p">{</span>
-        <span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">pdal</span><span class="o">::</span><span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+        <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
 
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMyData</span><span class="p">();</span>
-
         <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
 
-        <span class="n">pdal</span><span class="o">::</span><span class="n">BufferReader</span> <span class="n">reader</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+        <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
         <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
-        <span class="n">pdal</span><span class="o">::</span><span class="n">LasWriter</span> <span class="n">writer</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+
+        <span class="n">LasWriter</span> <span class="n">writer</span><span class="p">;</span>
+
         <span class="n">writer</span><span class="p">.</span><span class="n">setInput</span><span class="p">(</span><span class="o">&amp;</span><span class="n">reader</span><span class="p">);</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
         <span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
         <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-
     <span class="p">}</span>
-
 <span class="p">}</span>
+</pre></div>
+</div>
+<p>Take a closer look. We will need to include several PDAL headers.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/PointView.hpp&gt;</span>
+<span class="cp">#include &lt;pdal/BufferReader.hpp&gt;</span>
+<span class="cp">#include &lt;pdal/Pointtable-&gt;hpp&gt;</span>
+<span class="cp">#include &lt;pdal/Dimension.hpp&gt;</span>
+<span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
+
+<span class="cp">#include &lt;vector&gt;</span>
+</pre></div>
+</div>
+<p><cite>BufferReader</cite> will not be required by all users. Here is it used to populate a
+bare <cite>PointBuffer</cite>. This will often be accomplished by a <cite>Reader</cite> stage.</p>
+<p>Instead of directly including headers for individual stages, e.g., <cite>LasWriter</cite>,
+we rely on the <cite>StageFactory</cite> which has the ability to query available stages
+at runtime and return pointers to the created stages.</p>
+<p>We proceed by providing a mechanism for generating dummy data for the x, y, and
+z dimensions.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="p">{</span>
+    <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">getMyData</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">output</span><span class="p">;</span>
+    <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">output</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Point</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">pt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
+
+    <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
+
+    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+
+    <span class="p">{</span>
+        <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMyData</span><span class="p">();</span>
+        <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+
+        <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
+        <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+
+        <span class="n">LasWriter</span> <span class="n">writer</span><span class="p">;</span>
+
+        <span class="n">writer</span><span class="p">.</span><span class="n">setInput</span><span class="p">(</span><span class="o">&amp;</span><span class="n">reader</span><span class="p">);</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compiling-and-running-the-program">
+<h2>Compiling and running the program<a class="headerlink" href="#compiling-and-running-the-program" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Refer to <a class="reference internal" href="../compilation/index.html#building"><em>Installation</em></a> for information on how to build PDAL.</p>
+</div>
+<p>To build this example, simply copy the files tutorial.cpp and CMakeLists.txt
+from the examples/writing directory of the PDAL source tree.</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">WritingTutorial</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+<span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span> <span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">tutorial.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Refer to <a class="reference internal" href="using.html#using"><em>Using PDAL with CMake</em></a> for an explanation of the basic CMakeLists.</p>
+</div>
+<p>Begin by configuring your project using CMake (shown here on Unix) and building
+using make.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /PATH/TO/WRITING/TUTORIAL
+<span class="nv">$ </span>mkdir build
+<span class="nv">$ </span><span class="nb">cd </span>build
+<span class="nv">$ </span>cmake ..
+<span class="nv">$ </span>make
+</pre></div>
+</div>
+<p>After the project is built, you can run it by typing:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./tutorial
 </pre></div>
 </div>
 </div>
@@ -222,8 +318,8 @@ available subject to having the required include directories pathed:</p>
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Writing with PDAL</a><ul>
-<li><a class="reference internal" href="#compilation">Compilation</a></li>
 <li><a class="reference internal" href="#includes">Includes</a></li>
+<li><a class="reference internal" href="#compiling-and-running-the-program">Compiling and running the program</a></li>
 </ul>
 </li>
 </ul>
@@ -241,7 +337,7 @@ available subject to having the required include directories pathed:</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jul 22, 2015.
+                    on Jul 23, 2015.
         </div>
     </div>
 
