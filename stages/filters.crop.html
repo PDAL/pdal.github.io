@@ -98,7 +98,11 @@
                     
   <div class="section" id="filters-crop">
 <span id="id1"></span><h1>filters.crop<a class="headerlink" href="#filters-crop" title="Permalink to this headline">¶</a></h1>
-<p>The cropping filter takes a stream of points and removes points that fall outside the cropping bounds, or an optional cropping polygon. The cropping filter requires a bounds or a polygon to crop with.</p>
+<p>The crop filter removes points that fall outside or inside a cropping bounding
+box (2D)
+or polygon.  If more than one bounding region is specified, the filter will
+pass all input points through each bounding region, creating an output point
+set for each input crop region.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -109,7 +113,7 @@
     <span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.crop&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;bounds&quot;</span><span class="nt">&gt;</span>
-        ([0,1000000],[0,1000000],[0,1000000])
+        ([0,1000000],[0,1000000])
       <span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
@@ -126,15 +130,9 @@
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>bounds</dt>
-<dd>The extent of the clipping rectangle, expressed in a string, eg: <em>([xmin, xmax], [ymin, ymax], [zmin, zmax])</em></dd>
+<dd>The extent of the clipping rectangle, expressed in a string, eg: <em>([xmin, xmax], [ymin, ymax])</em></dd>
 <dt>polygon</dt>
 <dd>The clipping polygon, expressed in a well-known text string, eg: <em>POLYGON((0 0, 5000 10000, 10000 0, 0 0))</em></dd>
-<dt>x_dim</dt>
-<dd>The name of the dimension to use as the X coordinate in the cropping process. [Default: <strong>X</strong>]</dd>
-<dt>y_dim</dt>
-<dd>The name of the dimension to use as the Y coordinate in the cropping process. [Default: <strong>Y</strong>]</dd>
-<dt>z_dim</dt>
-<dd>The name of the dimension to use as the Z coordinate in the cropping process. [Default: <strong>Z</strong>]</dd>
 <dt>outside</dt>
 <dd>Invert the cropping logic and only take points <strong>outside</strong> the cropping bounds or polygon. [Default: <strong>false</strong>]</dd>
 </dl>
@@ -179,7 +177,7 @@
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Jul 27, 2015.
+                    on Jul 28, 2015.
         </div>
     </div>
 
