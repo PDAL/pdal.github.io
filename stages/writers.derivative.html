@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8"/>
     
-        <title>writers.las &mdash; pdal.io</title>
+        <title>writers.derivative &mdash; pdal.io</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css"/>
@@ -96,17 +96,19 @@
         <div class="content row">
                 <div class="span9">
                     
-  <div class="section" id="writers-las">
-<span id="id1"></span><h1>writers.las<a class="headerlink" href="#writers-las" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>LAS Writer</strong> supports writing to <a class="reference external" href="http://asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">LAS format</a> files, the standard
-interchange file format for LIDAR data.</p>
+  <div class="section" id="writers-derivative">
+<span id="id1"></span><h1>writers.derivative<a class="headerlink" href="#writers-derivative" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>Derivative Writer</strong> supports writing of primary topographic attributes.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.derivative&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      outputfile.las
+      outputfile.tiff
+    <span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;primitive_type&quot;</span><span class="nt">&gt;</span>
+      slope_d8
     <span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
@@ -122,81 +124,25 @@ interchange file format for LIDAR data.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>LAS file to read. The writer will accept a filename containing
-a single placeholder character (&#8216;#&#8217;).  If input to the writer consists
-of multiple PointViews, each will be written to a separate file, where
-the placeholder will be replaced with an incrementing integer.  If no
-placeholder is found, all PointViews provided to the writer are
-aggregated into a single file for output.  Multiple PointViews are usually
-the result of using <a class="reference internal" href="filters.splitter.html#filters-splitter"><em>filters.splitter</em></a> or <a class="reference internal" href="filters.chipper.html#filters-chipper"><em>filters.chipper</em></a>.
-[Required]</dd>
-<dt>minor_version</dt>
-<dd>All LAS files are version 1, but the minor version (0 - 4) can be specified
-with this option. [Default: 3]</dd>
-<dt>software_id</dt>
-<dd>String identifying the software that created this LAS file.</dd>
-<dt>creation_doy</dt>
-<dd>Number of the day of the year (January 1 == 0, Dec 31 == 365) this file is
-being created.</dd>
-<dt>creation_year</dt>
-<dd>Year (Gregorian) this file is being created.</dd>
-<dt>format</dt>
-<dd><p class="first">Controls whether information about color and time are stored with the point
-information in the LAS file. [Default: 3]</p>
+<dd>GeoTiff file to write.  [Required]</dd>
+<dt>primitive_type</dt>
+<dd><p class="first">Topographic attribute to compute.  [Default: slope_d8]</p>
 <ul class="last simple">
-<li>0 == no color or time stored</li>
-<li>1 == time is stored</li>
-<li>2 == color is stored</li>
-<li>3 == color and time are stored</li>
-<li>4 [Not Currently Supported]</li>
-<li>5 [Not Currently Supported]</li>
-<li>6 == time is stored (version 1.4+ only)</li>
-<li>7 == time and color are stored (version 1.4+ only)</li>
-<li>8 == time, color and near infrared are stored (version 1.4+ only)</li>
-<li>9 [Not Currently Supported]</li>
-<li>10 [Not Currently Supported]</li>
+<li>slope_d8</li>
+<li>slope_fd</li>
+<li>aspect_d8</li>
+<li>aspect_fd</li>
+<li>contour_curvature</li>
+<li>profile_curvature</li>
+<li>tangential_curvature</li>
+<li>total_curvature</li>
+<li>hillshade</li>
+<li>catchment_area</li>
 </ul>
 </dd>
-<dt>system_id</dt>
-<dd>String identifying the system that created this LAS file. [Default: &#8220;PDAL&#8221;]</dd>
-<dt>a_srs</dt>
-<dd>The spatial reference system of the file to be written. Can be an EPSG string (eg &#8220;EPSG:268910&#8221;) or a WKT string. [Default: Not set]</dd>
-<dt>compression</dt>
-<dd>Set to true to apply compression to the output, creating a LAZ file instead
-of an LAS file.  Requires PDAL to have been built with compression support
-by linking with LASzip.  [Default: false]</dd>
-<dt>scale_x, scale_y, scale_z</dt>
-<dd><p class="first">Scale to be divided from the X, Y and Z nominal values, respectively, after
-the offset has been applied.  The special value &#8220;auto&#8221; can be specified,
-which causes the writer to select a scale to set the stored values of the
-dimensions to range from [0, 2147483647].  [Default: .01]</p>
-<p class="last">Note: written value = (nominal value - offset) / scale.</p>
-</dd>
-<dt>offset_x, offset_y, offset_z</dt>
-<dd><p class="first">Offset to be subtracted from the X, Y and Z nominal values, respectively,
-before the value is scaled.  The special value &#8220;auto&#8221; can be specified,
-which causes the writer to set the offset to the minimum value of the
-dimension.  [Default: 0]</p>
-<p class="last">Note: written value = (nominal value - offset) / scale.</p>
-</dd>
-<dt>filesource_id</dt>
-<dd>The file source id number to use for this file (a value between
-1 and 65535) [Default: 0]</dd>
-<dt>discard_high_return_numbers</dt>
-<dd>If true, discard all points with a return number greater than the maximum
-supported by the point format (5 for formats 0-5, 15 for formats 6-10).
-[Default: false]</dd>
-<dt>extra_dims</dt>
-<dd><p class="first">Extra dimensions to be written as part of each point beyond those specified
-by the LAS point format.  The format of the option is
-&lt;dimension_name&gt;=&lt;type&gt;, ... where type is one of:</p>
-<blockquote>
-<div>int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double</div></blockquote>
-<p class="last">&#8216;_t&#8217; may be added to any of the type names as well (e.g., uint32_t).  When
-the version of the output file is specified as 1.4 or greater, an extra
-bytes VLR (User ID: LASF_Spec, Record ID: 4), is created that describes the
-extra dimensions specified by this option.</p>
-</dd>
+<dt>grid_dist_x, grid_dist_y</dt>
+<dd>Size of grid cell in X and Y dimensions using native units of the input point
+cloud.  [Default: 15.0]</dd>
 </dl>
 </div>
 </div>
@@ -213,7 +159,7 @@ extra dimensions specified by this option.</p>
             <div class="sphinxsidebarwrapper">
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">writers.las</a><ul>
+<li><a class="reference internal" href="#">writers.derivative</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
@@ -221,11 +167,11 @@ extra dimensions specified by this option.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="writers.geowave.html"
-                        title="previous chapter">writers.geowave</a></p>
+  <p class="topless"><a href="readers.sqlite.html"
+                        title="previous chapter">readers.sqlite</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="writers.matlab.html"
-                        title="next chapter">writers.matlab</a></p>
+  <p class="topless"><a href="writers.geowave.html"
+                        title="next chapter">writers.geowave</a></p>
             </div>
         </div>
                 </div>
@@ -246,7 +192,7 @@ extra dimensions specified by this option.</p>
 
     <!-- disqus -->
     <script type="text/javascript">
-        var disqus_title = 'writers.las &mdash; pdal.io';
+        var disqus_title = 'writers.derivative &mdash; pdal.io';
         var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
     </script>
 
