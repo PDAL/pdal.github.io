@@ -110,60 +110,59 @@
 </tr>
 </tbody>
 </table>
-<p>PDAL contains consists of a single application, called <em>pdal</em>. The <cite>pdal</cite>
+<p>PDAL contains consists of a single application, called <tt class="docutils literal"><span class="pre">pdal</span></tt>. The <tt class="docutils literal"><span class="pre">`pdal</span></tt>
 application currently has the following subcommands:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#delta-command"><em>delta</em></a></li>
+<li><a class="reference internal" href="#diff-command"><em>diff</em></a></li>
 <li><a class="reference internal" href="#ground-command"><em>ground</em></a></li>
 <li><a class="reference internal" href="#info-command"><em>info</em></a></li>
 <li><a class="reference internal" href="#pcl-command"><em>pcl</em></a></li>
 <li><a class="reference internal" href="#pipeline-command"><em>pipeline</em></a></li>
 <li><a class="reference internal" href="#random-command"><em>random</em></a></li>
-<li><a class="reference internal" href="#view-command"><em>view</em></a></li>
 <li><a class="reference internal" href="#split-command"><em>split</em></a></li>
 <li><a class="reference internal" href="#tindex-command"><em>tindex</em></a></li>
 <li><a class="reference internal" href="#translate-command"><em>translate</em></a></li>
+<li><a class="reference internal" href="#view-command"><em>view</em></a></li>
 </ul>
-<p>Applications are run by invoking the <em>pdal</em> application along with the
+<p>Applications are run by invoking the <tt class="docutils literal"><span class="pre">pdal</span></tt> application along with the
 command name:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info myfile.las
 $ pdal translate input.las output.las
 $ pdal pipeline --stdin &lt; myxml.xml
 </pre></div>
 </div>
-<p>Help for each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch.
-The <tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about
-particular drivers and their options:</p>
+<p>Help for each command can be retrieved via the <tt class="docutils literal"><span class="pre">--help</span></tt> switch. The
+<tt class="docutils literal"><span class="pre">--drivers</span></tt> and <tt class="docutils literal"><span class="pre">--options</span></tt> switches can tell you more about particular
+drivers and their options:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info --help
 $ pdal translate --drivers
 $ pdal pipeline --options writers.las
 </pre></div>
 </div>
 <p>Additional driver-specific options may be specified by using a
-namespace-prefixed option name. For example, it is possible to
-set the LAS day of year at translation time with the following
-option:</p>
+namespace-prefixed option name. For example, it is possible to set the LAS day
+of year at translation time with the following option:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal translate \
---writers.las.creation_doy=&quot;42&quot; \
-input.las
-output.las
+    --writers.las.creation_doy=&quot;42&quot; \
+    input.las \
+    output.las
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Driver specific options can be identified using the
-<tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></tt> invocation.</p>
+<p class="last">Driver specific options can be identified using the <tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></tt>
+invocation.</p>
 </div>
 <div class="section" id="delta-command">
 <span id="id1"></span><h2>delta command<a class="headerlink" href="#delta-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>delta</em> command is used to select a nearest point from a candidate file
+<p>The <tt class="docutils literal"><span class="pre">delta</span></tt> command is used to select a nearest point from a candidate file
 for each point in the source file. If the <tt class="docutils literal"><span class="pre">--2d</span></tt> option is used, the
 query only happens in XY coordinate space.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal delta &lt;source&gt; &lt;candidate&gt; [output]
-
-Standard out is used if no output file is specified.
 </pre></div>
 </div>
+<p>Standard out is used if no output file is specified.</p>
 <div class="highlight-python"><div class="highlight"><pre>--source arg     Non-positional option for specifying source filename
 --candidate arg  Non-positional option for specifying candidate filename
 --output arg     Non-positional option for specifying output filename [/dev/stdout]
@@ -172,7 +171,8 @@ Standard out is used if no output file is specified.
 </div>
 <div class="section" id="example-1">
 <h3>Example 1:<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal delta ../../test/data/las/1.2-with-color.las ../../test/data/las/1.2-with-color.las
+<div class="highlight-python"><div class="highlight"><pre>$ pdal delta ../../test/data/las/1.2-with-color.las \
+    ../../test/data/las/1.2-with-color.las
 --------------------------------------------------------------------------------
 Delta summary for
      source: &#39;../../test/data/las/1.2-with-color.las&#39;
@@ -191,7 +191,8 @@ Delta summary for
 </div>
 <div class="section" id="example-2">
 <h3>Example 2:<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>$ ./bin/pdal delta test/data/1.2-with-color.las test/data/1.2-with-color.las --detail
+<div class="highlight-python"><div class="highlight"><pre>$ pdal delta test/data/1.2-with-color.las \
+    test/data/1.2-with-color.las --detail
 &quot;ID&quot;,&quot;DeltaX&quot;,&quot;DeltaY&quot;,&quot;DeltaZ&quot;
 0,0.00,0.00,0.00
 1,0.00,0.00,0.00
@@ -206,7 +207,7 @@ Delta summary for
 </div>
 <div class="section" id="diff-command">
 <span id="id2"></span><h2>diff command<a class="headerlink" href="#diff-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>diff</em> command is used for executing a simple contextual difference
+<p>The <tt class="docutils literal"><span class="pre">diff</span></tt> command is used for executing a simple contextual difference
 between two sources.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal diff &lt;source&gt; &lt;candidate&gt;
 </pre></div>
@@ -229,14 +230,14 @@ description of the differences is produced.</p>
 </div>
 <div class="section" id="ground-command">
 <span id="id3"></span><h2>ground command<a class="headerlink" href="#ground-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>ground</em> command is used to segment the input point cloud into ground
+<p>The <tt class="docutils literal"><span class="pre">ground</span></tt> command is used to segment the input point cloud into ground
 versus non-ground returns. The output is a point cloud containing only ground
-returns. The <em>ground</em> command invokes <a class="reference external" href="http://pointclouds.org/">Point Cloud Library</a>&#8216;s <a class="reference external" href="http://pointclouds.org/documentation/tutorials/progressive_morphological_filtering.php#progressive-morphological-filtering.">ProgressiveMorphologicalFilter</a>.</p>
+returns. The <tt class="docutils literal"><span class="pre">ground</span></tt> command invokes <a class="reference external" href="http://pointclouds.org/">Point Cloud Library</a>&#8216;s <a class="reference external" href="http://pointclouds.org/documentation/tutorials/progressive_morphological_filtering.php#progressive-morphological-filtering.">ProgressiveMorphologicalFilter</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <em>ground</em> command is only available when PDAL is linked with PCL.</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">ground</span></tt> command is only available when PDAL is linked with PCL.</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>pdal ground &lt;input&gt; &lt;output&gt;
+<div class="highlight-python"><div class="highlight"><pre>$ pdal ground &lt;input&gt; &lt;output&gt;
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>--input [-i] arg       Non-positional option for specifying input filename
@@ -260,10 +261,10 @@ returns. The <em>ground</em> command invokes <a class="reference external" href=
 <li>coordinate reference system</li>
 <li>additional metadata</li>
 <li>summary statistics about the points</li>
-<li>the plain text format should be reStructured text if possible to allow
-a user to retransform the output into whatever they want with ease</li>
+<li>the plain text format should be reStructured text if possible to allow a user
+to retransform the output into whatever they want with ease</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre>pdal info &lt;input&gt;
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info &lt;input&gt;
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>--input arg       Non-positional argument to specify input filename.
@@ -288,10 +289,11 @@ a user to retransform the output into whatever they want with ease</li>
 --metadata        Dump the metadata associated with the input file.
 </pre></div>
 </div>
-<p>If no options are provided, &#8211;statistics is assumed.</p>
+<p>If no options are provided, <tt class="docutils literal"><span class="pre">--stats</span></tt> is assumed.</p>
 <div class="section" id="id5">
 <h3>Example 1:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal info  test/data/las/1.2-with-color.las --query=&quot;636601.87, 849018.59, 425.10&quot;
+<div class="highlight-python"><div class="highlight"><pre>$ pdal info  test/data/las/1.2-with-color.las \
+    --query=&quot;636601.87, 849018.59, 425.10&quot;
 {
   &quot;0&quot;:
   {
@@ -390,13 +392,13 @@ a user to retransform the output into whatever they want with ease</li>
 </div>
 <div class="section" id="pcl-command">
 <span id="id7"></span><h2>pcl command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>pcl</em> command is used to invoke a PCL JSON pipeline. See <a class="reference internal" href="tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a>
-for more information.</p>
+<p>The <tt class="docutils literal"><span class="pre">pcl</span></tt> command is used to invoke a PCL JSON pipeline. See
+<a class="reference internal" href="tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><em>Filtering data with PCL</em></a> for more information.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <em>pcl</em> command is only available when PDAL is linked with PCL.</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">pcl</span></tt> command is only available when PDAL is linked with PCL.</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>pdal pcl &lt;input&gt; &lt;output&gt; &lt;pcl&gt;
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl &lt;input&gt; &lt;output&gt; &lt;pcl&gt;
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>--input [-i] arg   Non-positional argument to specify input file name.
@@ -409,9 +411,9 @@ for more information.</p>
 </div>
 <div class="section" id="pipeline-command">
 <span id="id8"></span><h2>pipeline command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>pipeline</em> command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See
+<p>The <tt class="docutils literal"><span class="pre">pipeline</span></tt> command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> XML. See
 <a class="reference internal" href="tutorial/reading.html#reading"><em>Reading with PDAL</em></a> or <a class="reference internal" href="pipeline.html#pipeline"><em>Pipeline</em></a> for more information.</p>
-<div class="highlight-python"><div class="highlight"><pre>pdal pipeline &lt;input&gt;
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline &lt;input&gt;
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>--input [-i] arg  Non-positional argument to specify input file name.
@@ -424,13 +426,13 @@ for more information.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The <cite>pipeline</cite> command can accept option substitutions, but they
+<p>The <tt class="docutils literal"><span class="pre">pipeline</span></tt> command can accept option substitutions, but they
 do not replace existing options that are specified in the input XML
 pipeline.  For example, to set the output and input LAS files for a
 pipeline that does a translation, construct XML that does not contain
-<cite>filename</cite> for reader and writer and issue the command with the
+<tt class="docutils literal"><span class="pre">filename</span></tt> for reader and writer and issue the command with the
 following arguments:</p>
-<div class="last highlight-python"><div class="highlight"><pre>pdal pipeline -i translate.xml --writers.las.filename=output.laz \
+<div class="last highlight-python"><div class="highlight"><pre>$ pdal pipeline -i translate.xml --writers.las.filename=output.laz \
     --readers.las.filename=input.las
 </pre></div>
 </div>
@@ -438,13 +440,13 @@ following arguments:</p>
 </div>
 <div class="section" id="random-command">
 <span id="id9"></span><h2>random command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>random</em> command is used to create a random point cloud. It uses
-<a class="reference internal" href="stages/readers.faux.html#readers-faux"><em>readers.faux</em></a> to create a point cloud containing <em>count</em> points
+<p>The <tt class="docutils literal"><span class="pre">random</span></tt> command is used to create a random point cloud. It uses
+<a class="reference internal" href="stages/readers.faux.html#readers-faux"><em>readers.faux</em></a> to create a point cloud containing <tt class="docutils literal"><span class="pre">count</span></tt> points
 drawn randomly from either a uniform or normal distribution. For the uniform
 distribution, the bounds can be specified (they default to a unit cube). For
 the normal distribution, the mean and standard deviation can both be set for
 each of the x, y, and z dimensions.</p>
-<div class="highlight-python"><div class="highlight"><pre>pdal random &lt;output&gt;
+<div class="highlight-python"><div class="highlight"><pre>$ pdal random &lt;output&gt;
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>--output [-o] arg   Non-positional argument to specify output file name.
@@ -462,40 +464,159 @@ each of the x, y, and z dimensions.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="split-command">
+<span id="id10"></span><h2>split command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">split</span></tt> command will create multiple output files from a single input
+file.  The command takes an input file name and an output filename (used as a
+template) or output directory specification.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal split &lt;input&gt; &lt;output&gt;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>--input [-i] arg   Non-positional option for specifying input file name
+--output [-o] arg  Non-positional option for specifying output file/directory name
+--length arg       Edge length for splitter cells.  See :ref:`filters.splitter`.
+--capacity arg     Point capacity for chipper cells.  See :ref:`filters.chipper`.
+</pre></div>
+</div>
+<p>If neither the <tt class="docutils literal"><span class="pre">--length</span></tt> nor <tt class="docutils literal"><span class="pre">--capacity</span></tt> arguments are specified, an
+implcit argument of capacity with a value of 100000 is added.</p>
+<p>The output argument is a template.  If the output argument is, for example,
+<tt class="docutils literal"><span class="pre">file.ext</span></tt>, the output files created are <tt class="docutils literal"><span class="pre">file_#.ext</span></tt> where # is a number
+starting at one and incrementing for each file created.</p>
+<p>If the output argument ends in a path separator, it is assumed to be a
+directory and the input argument is appended to create the output template.
+The <tt class="docutils literal"><span class="pre">split</span></tt> command never creates directories.  Directories must pre-exist.</p>
+<div class="section" id="id11">
+<h3>Example 1:<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal split --capacity 100000 infile.laz outfile.bpf
+</pre></div>
+</div>
+<p>This command takes the points from the input file <tt class="docutils literal"><span class="pre">infile.laz</span></tt> and creates
+output files <tt class="docutils literal"><span class="pre">outfile_1.bpf</span></tt>, <tt class="docutils literal"><span class="pre">outfile_2.bpf</span></tt>, ... where each output file
+contains no more than 100000 points.</p>
+</div>
+</div>
+<div class="section" id="tindex-command">
+<span id="id12"></span><h2>tindex command<a class="headerlink" href="#tindex-command" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">tindex</span></tt> command is used to create a <a class="reference external" href="http://www.gdal.org">GDAL</a>-style tile index for
+PDAL-readable point cloud types (see <a class="reference external" href="http://www.gdal.org/gdaltindex.html">gdaltindex</a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">tindex</span></tt> command is only available when PDAL is linked with <a class="reference external" href="http://www.gdal.org">GDAL</a>.</p>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">tindex</span></tt> command has two modes.  The first mode creates a spatial index
+file for a set of point cloud files.  The second mode creates a point cloud
+file that is the result of merging the points from files referred to in a
+spatial index file that meet some criteria (usually a geographic region filter).</p>
+<div class="section" id="tindex-creation-mode">
+<h3>tindex Creation Mode<a class="headerlink" href="#tindex-creation-mode" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal tindex &lt;tindex&gt; &lt;filespec&gt;
+</pre></div>
+</div>
+<p>This command will index the files referred to by <tt class="docutils literal"><span class="pre">filespec</span></tt> and place the
+result in <tt class="docutils literal"><span class="pre">tindex</span></tt>.  The <tt class="docutils literal"><span class="pre">tindex</span></tt> is a vector file or database that can be
+handled by <a class="reference external" href="http://www.gdal.org/ogr_formats.html">OGR</a>. The type of the index
+file can be specified by specifying the OGR code for the format using the
+<tt class="docutils literal"><span class="pre">--driver</span></tt> option.  If no driver is specified, the format defaults to &#8220;ESRI
+Shapefile&#8221;.</p>
+<p>In vector file-speak, each file specified by <tt class="docutils literal"><span class="pre">filespec</span></tt> is stored as a feature
+in a layer in the index file. The <tt class="docutils literal"><span class="pre">filespec</span></tt> is a <a href="#id13"><span class="problematic" id="id14">`</span></a>glob pattern
+&lt;<a class="reference external" href="http://man7.org/linux/man-pages/man7/glob.7.html">http://man7.org/linux/man-pages/man7/glob.7.html</a>&gt;&#8217;_.  and normally needs to be
+quoted to prevent shell expansion of wildcard characters.</p>
+<div class="highlight-python"><div class="highlight"><pre>--tindex                   Non-positional option for specifying the index file name.
+--filespec                 Non-positional option for specifying pattern of files to
+                           be indexed.
+--lyr_name                 Name of layer in which to store the features. Defaults to
+                           the base name of the first file indexed.
+--tindex_name              Name of the field in the feature in which to store the
+                           indexed file name. [&quot;location&quot;]
+--driver                   OGR driver name. [&quot;ESRI Shapefile&quot;]
+--t_srs                    Spatial reference system in which to store index vector
+                           data. [&quot;EPSG:4326&quot;]
+--a_srs                    Spatial reference assumed to be the reference for the
+                           source data.  If the source data includes spatial reference
+                           information, this value is IGNORED. [&quot;EPSG:4326&quot;]
+--write_absolute_path arg  Write absolute rather than relative file paths [false]
+</pre></div>
+</div>
+</div>
+<div class="section" id="tindex-merge-mode">
+<h3>tindex Merge Mode<a class="headerlink" href="#tindex-merge-mode" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal tindex --merge &lt;tindex&gt; &lt;filespec&gt;
+</pre></div>
+</div>
+<p>This command will read the index file <tt class="docutils literal"><span class="pre">tindex</span></tt> and merge the points in the
+files listed index file that pass any filter that might be specified, writing
+the output to the point cloud file specified in <tt class="docutils literal"><span class="pre">filespec</span></tt>.  The type of the
+output file is determined automatically from the filename extension.</p>
+<div class="highlight-python"><div class="highlight"><pre>--tindex    Non-positional option for specifying the index filename.
+--filespec  Non-positional option for specifying the merge output filename.
+--polygon   Well-known text representation of geometric filter.  Only
+            points inside the object will be written to the output file.
+--bounds    Bounding box for clipping points.  Only points inside the box
+            will be written to the output file.
+            --bounds &quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;
+--t_srs     Spatial reference system in which the output data should be
+            represented. [&quot;EPSG:4326&quot;]
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>Example 1:<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>Find all LAS files via <tt class="docutils literal"><span class="pre">find</span></tt>, send that file list via STDIN to
+<tt class="docutils literal"><span class="pre">pdal</span> <span class="pre">tindex</span></tt>, and write a SQLite tile index file with a layer named <tt class="docutils literal"><span class="pre">pdal</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ find las/ -iname &quot;*.las&quot; | pdal tindex index.sqlite -f &quot;SQLite&quot; \
+    --stdin --lyr_name pdal
+</pre></div>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>Example 2:<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<p>Glob a list of LAS files, output the SRS for the index entries to EPSG:4326, and
+write out an <a class="reference external" href="http://www.sqlite.org">SQLite</a> file.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal tindex index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; \
+    --t_srs &quot;EPSG:4326&quot;
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="translate-command">
-<span id="id10"></span><h2>translate command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>translate</em> command is used for simple conversion of files based on their
-file extensions. Use the <a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a> for more significant
-translation operations.</p>
-<div class="highlight-python"><div class="highlight"><pre>pdal translate &lt;input&gt; &lt;output&gt;
+<span id="id17"></span><h2>translate command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">translate</span></tt> command can be used for simple conversion of files based on
+their file extensions. It can also be used for constructing pipelines directly
+from the command-line.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate &lt;input&gt; &lt;output&gt;
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>--input [-i] arg   Non-positional argument to specify input file name.
---output [-o] arg  Non-positional argument to specify output file name.
---compress arg     Compress output data if supported by output format. [false]
---a_srs arg        Assign input coordinate system.
---t_srs arg        Transform to output coordinate system.
---bounds arg       Limit output to points inside the specified box.
-                   --bounds &quot;([xmin,xmax],[ymin,ymax])&quot;
---polygon arg      Limit output to point inside the specified polygon (specified as
-                   well-known text).
---d_step arg       Step value to be passed to decimation filter. [1]
---d_offset arg     Offset value to be passed to decimation filter. [0]
---d_leaf_size arg  Leaf size to be bassed to decimation filter. [1]
---d_method arg     Decimation filter method (RankOrder|VoxelGrid).  [RankOrder]
---d_limit arg      Limit to be passed to decimation filter. [0]
+<div class="highlight-python"><div class="highlight"><pre>-i [ --input ] arg    input file name
+-o [ --output ] arg   output file name
+-p [ --pipeline ] arg pipeline output
+-r [ --reader ] arg   reader type
+-f [ --filter ] arg   filter type
+-w [ --writer ] arg   writer type
 </pre></div>
 </div>
-<p>The translate command can be augmented by specifying full-path options at the
-command line invocation. For example, the following invocation will translate
-<cite>1.2-with-color.las</cite> to <cite>output.laz</cite> while doing the following:</p>
+<p>The <tt class="docutils literal"><span class="pre">--input</span></tt> and <tt class="docutils literal"><span class="pre">--output</span></tt> file names are required options.</p>
+<p>The <tt class="docutils literal"><span class="pre">--pipeline</span></tt> file name is optional. If given, the pipeline constructed
+from the command-line arguments will be written to disk for reuse in the
+<a class="reference internal" href="#pipeline-command"><em>pipeline command</em></a>.</p>
+<p>The <tt class="docutils literal"><span class="pre">--filter</span></tt> flag is optional. It is used to specify the driver used to
+filter the data. <tt class="docutils literal"><span class="pre">--filter</span></tt> accepts multiple arguments if provided, thus
+constructing a multi-stage filtering operation.</p>
+<p>If no <tt class="docutils literal"><span class="pre">--reader</span></tt> or <tt class="docutils literal"><span class="pre">--writer</span></tt> type are given, PDAL will attempt to infer
+the correct drivers from the input and output file name extensions respectively.</p>
+<div class="section" id="id18">
+<h3>Example 1:<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">translate</span></tt> command can be augmented by specifying full-path options at
+the command-line invocation. For example, the following invocation will
+translate <tt class="docutils literal"><span class="pre">1.2-with-color.las</span></tt> to <tt class="docutils literal"><span class="pre">output.laz</span></tt> while doing the following:</p>
 <ul class="simple">
 <li>Setting the creation day of year to 42</li>
 <li>Setting the creation year to 2014</li>
 <li>Setting the LAS point format to 1</li>
 <li>Cropping the file with the given polygon</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre>./bin/pdal translate \
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate \
     --writers.las.creation_doy=&quot;42&quot; \
     --writers.las.creation_year=&quot;2014&quot; \
     --writers.las.format=&quot;1&quot; \
@@ -505,13 +626,27 @@ command line invocation. For example, the following invocation will translate
 </pre></div>
 </div>
 </div>
+<div class="section" id="id19">
+<h3>Example 2:<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<p>Given these tools, we can now construct a custom pipeline on-the-fly. The
+example below uses a simple LAS reader and writer, but stages a PCL-based
+voxel grid filter, followed by the PCL-based ground filter. We can even set
+stage-specific parameters as shown.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate input.las output.las \
+    --filter filters.pclblock filters.ground \
+    --filters.pclblock.json=&quot;{\&quot;pipeline\&quot;:{\&quot;filters\&quot;:[{\&quot;name\&quot;:\&quot;VoxelGrid\&quot;}]}}&quot; \
+    --filters.ground.approximate=true --filters.ground.extract=true
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="view-command">
-<span id="id11"></span><h2>view command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>view</em> command can be used to visualize a point cloud using the
+<span id="id20"></span><h2>view command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">view</span></tt> command can be used to visualize a point cloud using the
 PCLVisualizer. The command takes a single argument, the input file name.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <em>view</em> command is only available when PDAL is linked with PCL.</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">view</span></tt> command is only available when PDAL is linked with PCL.</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal view &lt;input&gt;
 </pre></div>
@@ -555,121 +690,6 @@ help.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="split-command">
-<span id="id12"></span><h2>split command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>split</em> command will create multiple output files from a single
-input file.  The command takes an input file name and an output filename
-(used as a template) or output directory specification.</p>
-<div class="highlight-python"><div class="highlight"><pre>pdal split &lt;input&gt; &lt;output&gt;
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>--input [-i] arg   Non-positional option for specifying input file name
---output [-o] arg  Non-positional option for specifying output file/directory name
---length arg       Edge length for splitter cells.  See :ref:`filters.splitter`.
---capacity arg     Point capacity for chipper cells.  See :ref:`filters.chipper`.
-</pre></div>
-</div>
-<p>If neither the length nor capacity arguments are specified, an implcit argument of
-capacity with a value of 100000 is added.</p>
-<p>The output argument is a template.  If the output argument is, for example,
-&#8216;file.ext&#8217;, the output files created are &#8216;file_#.ext&#8217; where # is a number
-starting at one and incrementing for each file created.</p>
-<p>If the output argument ends in a path separator, it is assumed to be a
-directory and the input argument is appended to create the output template.
-The split command never creates directories.  Directories must pre-exist.</p>
-<div class="section" id="id13">
-<h3>Example 1:<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal split --capacity 100000 infile.laz outfile.bpf
-</pre></div>
-</div>
-<p>This command takes the points from the input file &#8216;infile.laz&#8217; and creates
-output files &#8216;outfile_1.bpf&#8217;, &#8216;outfile_2.bpf&#8217;, ... where each output file
-contains no more than 100000 points.</p>
-</div>
-</div>
-<div class="section" id="tindex-command">
-<span id="id14"></span><h2>tindex command<a class="headerlink" href="#tindex-command" title="Permalink to this headline">¶</a></h2>
-<p>The <em>tindex</em> command is used to create a <a class="reference external" href="http://www.gdal.org">GDAL</a>-style tile index for
-PDAL-readable point cloud types (see <a class="reference external" href="http://www.gdal.org/gdaltindex.html">gdaltindex</a>).</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <em>tindex</em> command is only available when PDAL is linked with <a class="reference external" href="http://www.gdal.org">GDAL</a>.</p>
-</div>
-<p>The <em>tindex</em> command has two modes.  The first mode creates a spatial index
-file for a set of point cloud files.  The second mode creates a point cloud
-file that is the result of merging the points from files referred to in a
-spatial index file that meet some criteria (usually a geographic region
-filter).</p>
-<div class="section" id="tindex-creation-mode">
-<h3>tindex Creation Mode<a class="headerlink" href="#tindex-creation-mode" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal tindex &lt;tindex&gt; &lt;filespec&gt;
-</pre></div>
-</div>
-<p>This command will index the files referred to by &#8216;filespec&#8217; and place the
-result in &#8216;tindex&#8217;.  The &#8216;tindex&#8217; is a vector file or database that
-can be handled by <a class="reference external" href="http://www.gdal.org/ogr_formats.html">OGR</a>. The type of
-the index file can be specified by specifying the OGR code for the format
-using the <em>&#8211;driver</em> option.  If no driver is specified, the format defaults
-to &#8220;ESRI Shapefile&#8221;.</p>
-<p>In vector file-speak, each file specified by &#8216;filespec&#8217; is stored as a feature
-in a layer in the index file. The filespec is a
-<a href="#id15"><span class="problematic" id="id16">`</span></a>glob pattern &lt;<a class="reference external" href="http://man7.org/linux/man-pages/man7/glob.7.html">http://man7.org/linux/man-pages/man7/glob.7.html</a>&gt;&#8217;_.  and
-normally needs to be quoted to prevent shell expansion of wildcard characters.</p>
-<div class="highlight-python"><div class="highlight"><pre>--tindex                   Non-positional option for specifying the index file name.
---filespec                 Non-positional option for specifying pattern of files to
-                           be indexed.
---lyr_name                 Name of layer in which to store the features. Defaults to
-                           the base name of the first file indexed.
---tindex_name              Name of the field in the feature in which to store the
-                           indexed file name. [&quot;location&quot;]
---driver                   OGR driver name. [&quot;ESRI Shapefile&quot;]
---t_srs                    Spatial reference system in which to store index vector
-                           data. [&quot;EPSG:4326&quot;]
---a_srs                    Spatial reference assumed to be the reference for the
-                           source data.  If the source data includes spatial reference
-                           information, this value is IGNORED. [&quot;EPSG:4326&quot;]
---write_absolute_path arg  Write absolute rather than relative file paths [false]
-</pre></div>
-</div>
-</div>
-<div class="section" id="tindex-merge-mode">
-<h3>tindex Merge Mode<a class="headerlink" href="#tindex-merge-mode" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal tindex --merge &lt;tindex&gt; &lt;filespec&gt;
-</pre></div>
-</div>
-<p>This command will read the index file &#8216;tindex&#8217; and merge the points in the
-files listed index file that pass any filter that might be specified,
-writing the output to the point cloud file specified in &#8216;filespec&#8217;.  The type
-of the output file is determined automatically from the filename extension.</p>
-<div class="highlight-python"><div class="highlight"><pre>--tindex    Non-positional option for specifying the index filename.
---filespec  Non-positional option for specifying the merge output filename.
---polygon   Well-known text representation of geometric filter.  Only
-            points inside the object will be written to the output file.
---bounds    Bounding box for clipping points.  Only points inside the box
-            will be written to the output file.
-            --bounds &quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;
---t_srs     Spatial reference system in which the output data should be
-            represented. [&quot;EPSG:4326&quot;]
-</pre></div>
-</div>
-</div>
-<div class="section" id="id17">
-<h3>Example 1:<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
-<p>Find all LAS files via <cite>find</cite>, send that file list via STDIN to <cite>pdal tindex</cite>,
-and write a <cite>SQLite</cite> tile index file with a layer named <cite>pdal</cite>:</p>
-<div class="highlight-python"><div class="highlight"><pre>find las/ -iname &quot;*.las&quot; | pdal tindex index.sqlite -f &quot;SQLite&quot; --stdin --lyr_name pdal
-</pre></div>
-</div>
-</div>
-<div class="section" id="id18">
-<h3>Example 2:<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
-<p>Glob a list of LAS files, output the SRS for the index entries to EPSG:4326, and
-write out an <a class="reference external" href="http://www.sqlite.org">SQLite</a> file.</p>
-<div class="highlight-python"><div class="highlight"><pre>pdal tindex index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; --t_srs &quot;EPSG:4326&quot;
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 
 
@@ -700,19 +720,23 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
 <li><a class="reference internal" href="#pcl-command">pcl command</a></li>
 <li><a class="reference internal" href="#pipeline-command">pipeline command</a></li>
 <li><a class="reference internal" href="#random-command">random command</a></li>
-<li><a class="reference internal" href="#translate-command">translate command</a></li>
-<li><a class="reference internal" href="#view-command">view command</a></li>
 <li><a class="reference internal" href="#split-command">split command</a><ul>
-<li><a class="reference internal" href="#id13">Example 1:</a></li>
+<li><a class="reference internal" href="#id11">Example 1:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tindex-command">tindex command</a><ul>
 <li><a class="reference internal" href="#tindex-creation-mode">tindex Creation Mode</a></li>
 <li><a class="reference internal" href="#tindex-merge-mode">tindex Merge Mode</a></li>
-<li><a class="reference internal" href="#id17">Example 1:</a></li>
-<li><a class="reference internal" href="#id18">Example 2:</a></li>
+<li><a class="reference internal" href="#id15">Example 1:</a></li>
+<li><a class="reference internal" href="#id16">Example 2:</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#translate-command">translate command</a><ul>
+<li><a class="reference internal" href="#id18">Example 1:</a></li>
+<li><a class="reference internal" href="#id19">Example 2:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#view-command">view command</a></li>
 </ul>
 </li>
 </ul>
@@ -736,7 +760,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
                         <a href="copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 08, 2015.
+                    on Sep 09, 2015.
         </div>
     </div>
 
