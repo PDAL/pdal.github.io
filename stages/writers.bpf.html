@@ -98,7 +98,9 @@
                     
   <div class="section" id="writers-bpf">
 <span id="id1"></span><h1>writers.bpf<a class="headerlink" href="#writers-bpf" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>BPF Writer</strong> supports writing of version 3 BPF format files.</p>
+<p>BPF is an NGA specification for point cloud data. The specification can be
+found at <a class="reference external" href="https://nsgreg.nga.mil/doc/view?i=4202">https://nsgreg.nga.mil/doc/view?i=4202</a> The PDAL <strong>BPF Writer</strong>
+only supports writing of version 3 BPF format files.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -160,14 +162,20 @@ type is currently supported. [Default: 0, with coordinate type set to none]</dd>
 the offset has been applied.  The special value &#8220;auto&#8221; can be specified,
 which causes the writer to select a scale to set the stored values of the
 dimensions to range from [0, 2147483647].  [Default: .01]</p>
-<p class="last">Note: written value = (nominal value - offset) / scale.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">written value = (nominal value - offset) / scale.</p>
+</div>
 </dd>
 <dt>offset_x, offset_y, offset_z</dt>
 <dd><p class="first">Offset to be subtracted from the X, Y and Z nominal values, respectively,
 before the value is scaled.  The special value &#8220;auto&#8221; can be specified,
 which causes the writer to set the offset to the minimum value of the
 dimension.  [Default: 0]</p>
-<p class="last">Note: written value = (nominal value - offset) / scale.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">written value = (nominal value - offset) / scale.</p>
+</div>
 </dd>
 </dl>
 </div>
@@ -205,7 +213,7 @@ dimension.  [Default: 0]</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 10, 2015.
+                    on Sep 11, 2015.
         </div>
     </div>
 
