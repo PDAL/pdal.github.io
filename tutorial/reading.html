@@ -103,19 +103,14 @@
 <ul class="simple">
 <li><a class="reference internal" href="#reading-with-pdal" id="id2">Reading with PDAL</a><ul>
 <li><a class="reference internal" href="#introduction" id="id3">Introduction</a></li>
-<li><a class="reference internal" href="#a-basic-inquiry-example" id="id4">A basic inquiry example</a><ul>
-<li><a class="reference internal" href="#restructuredtext-output" id="id5">reStructuredText output</a></li>
-<li><a class="reference internal" href="#javascript-output" id="id6">JavaScript output</a></li>
-<li><a class="reference internal" href="#xml-output" id="id7">XML output</a></li>
+<li><a class="reference internal" href="#a-basic-inquiry-example" id="id4">A basic inquiry example</a></li>
+<li><a class="reference internal" href="#a-conversion-example" id="id5">A conversion example</a><ul>
+<li><a class="reference internal" href="#metadata" id="id6"><a class="reference internal" href="../metadata.html#metadata"><em>Metadata</em></a></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#a-conversion-example" id="id8">A conversion example</a><ul>
-<li><a class="reference internal" href="#metadata" id="id9"><a class="reference internal" href="../metadata.html#metadata"><em>Metadata</em></a></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#a-pipeline-command-example" id="id10">A <a class="reference internal" href="../apps.html#pipeline-command"><em>pipeline command</em></a> example</a><ul>
-<li><a class="reference internal" href="#simple-conversion" id="id11">Simple conversion</a></li>
-<li><a class="reference internal" href="#loop-a-directory-and-filter-it-through-a-pipeline" id="id12">Loop a directory and filter it through a pipeline</a></li>
+<li><a class="reference internal" href="#a-pipeline-command-example" id="id7">A <a class="reference internal" href="../apps.html#pipeline-command"><em>pipeline command</em></a> example</a><ul>
+<li><a class="reference internal" href="#simple-conversion" id="id8">Simple conversion</a></li>
+<li><a class="reference internal" href="#loop-a-directory-and-filter-it-through-a-pipeline" id="id9">Loop a directory and filter it through a pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -147,95 +142,38 @@ data space.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">The <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/test/data/interesting.las?raw=true">interesting.las</a> file in these examples can be found on github.</p>
 </div>
-<div class="section" id="restructuredtext-output">
-<h3><a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> output<a class="headerlink" href="#restructuredtext-output" title="Permalink to this headline">¶</a></h3>
-<p>By default, PDAL outputs <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>. This makes it convenient for
-transforming the output into more pleasing formats like PDF (using <a class="reference external" href="https://code.google.com/p/rst2pdf/">rst2pdf</a>)
-or HTML (using <a class="reference external" href="http://docutils.sourceforge.net/docs/user/tools.html#rst2html-py">rst2html</a>) as part of a processing pipeline.</p>
+<p>PDAL outputs JavaScript <a class="reference external" href="http://www.json.org/">JSON</a>.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info interesting.las -p 0
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Point 0
---------------------------------------------------------------------------------
-
-=================== ======================================= ===================
-            Name                                Value        Namespace
-=================== ======================================= ===================
-X                                        637012.23999999999  readers.las
-Y                                        849028.31000000006  readers.las
-Z                                        431.66000000000003  readers.las
-Intensity                                               143  readers.las
-ReturnNumber                                              1  readers.las
-NumberOfReturns                                           1  readers.las
-ScanDirectionFlag                                         1  readers.las
-EdgeOfFlightLine                                          0  readers.las
-Classification                                            1  readers.las
-ScanAngleRank                                            -9  readers.las
-UserData                                                132  readers.las
-PointSourceId                                          7326  readers.las
-Time                                     245380.78254962614  readers.las
-Red                                                      68  readers.las
-Green                                                    77  readers.las
-Blue                                                     88  readers.las
-=================== ======================================= ===================
-</pre></div>
-</div>
-</div>
-<div class="section" id="javascript-output">
-<h3>JavaScript output<a class="headerlink" href="#javascript-output" title="Permalink to this headline">¶</a></h3>
-<p>JavaScript <a class="reference external" href="http://www.json.org/">JSON</a> can also be output.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal info interesting.las -p 0 --json
-</pre></div>
-</div>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s2">&quot;X&quot;</span><span class="o">:</span> <span class="s2">&quot;637012.23999999999&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Y&quot;</span><span class="o">:</span> <span class="s2">&quot;849028.31000000006&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Z&quot;</span><span class="o">:</span> <span class="s2">&quot;431.66000000000003&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Intensity&quot;</span><span class="o">:</span> <span class="s2">&quot;143&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ReturnNumber&quot;</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;NumberOfReturns&quot;</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ScanDirectionFlag&quot;</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;EdgeOfFlightLine&quot;</span><span class="o">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Classification&quot;</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ScanAngleRank&quot;</span><span class="o">:</span> <span class="s2">&quot;-9&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;UserData&quot;</span><span class="o">:</span> <span class="s2">&quot;132&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;PointSourceId&quot;</span><span class="o">:</span> <span class="s2">&quot;7326&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Time&quot;</span><span class="o">:</span> <span class="s2">&quot;245380.78254962614&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Red&quot;</span><span class="o">:</span> <span class="s2">&quot;68&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Green&quot;</span><span class="o">:</span> <span class="s2">&quot;77&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Blue&quot;</span><span class="o">:</span> <span class="s2">&quot;88&quot;</span>
+  <span class="s2">&quot;filename&quot;</span><span class="o">:</span> <span class="s2">&quot;interesting.las&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;pdal_version&quot;</span><span class="o">:</span> <span class="s2">&quot;1.0.1 (git-version: 80644d)&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;points&quot;</span><span class="o">:</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;point&quot;</span><span class="o">:</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;Blue&quot;</span><span class="o">:</span> <span class="mi">88</span><span class="p">,</span>
+      <span class="s2">&quot;Classification&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;EdgeOfFlightLine&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;GpsTime&quot;</span><span class="o">:</span> <span class="mi">245381</span><span class="p">,</span>
+      <span class="s2">&quot;Green&quot;</span><span class="o">:</span> <span class="mi">77</span><span class="p">,</span>
+      <span class="s2">&quot;Intensity&quot;</span><span class="o">:</span> <span class="mi">143</span><span class="p">,</span>
+      <span class="s2">&quot;NumberOfReturns&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;PointId&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;PointSourceId&quot;</span><span class="o">:</span> <span class="mi">7326</span><span class="p">,</span>
+      <span class="s2">&quot;Red&quot;</span><span class="o">:</span> <span class="mi">68</span><span class="p">,</span>
+      <span class="s2">&quot;ReturnNumber&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;ScanAngleRank&quot;</span><span class="o">:</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span>
+      <span class="s2">&quot;ScanDirectionFlag&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;UserData&quot;</span><span class="o">:</span> <span class="mi">132</span><span class="p">,</span>
+      <span class="s2">&quot;X&quot;</span><span class="o">:</span> <span class="mi">637012</span><span class="p">,</span>
+      <span class="s2">&quot;Y&quot;</span><span class="o">:</span> <span class="mi">849028</span><span class="p">,</span>
+      <span class="s2">&quot;Z&quot;</span><span class="o">:</span> <span class="mf">431.66</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-</div>
-<div class="section" id="xml-output">
-<h3>XML output<a class="headerlink" href="#xml-output" title="Permalink to this headline">¶</a></h3>
-<p>XML output of this same point is as simple as adding the appropriate
-switch:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal info interesting.las -p 0 --xml
-</pre></div>
-</div>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;point&gt;</span>
-  <span class="nt">&lt;X&gt;</span>637012.23999999999<span class="nt">&lt;/X&gt;</span>
-  <span class="nt">&lt;Y&gt;</span>849028.31000000006<span class="nt">&lt;/Y&gt;</span>
-  <span class="nt">&lt;Z&gt;</span>431.66000000000003<span class="nt">&lt;/Z&gt;</span>
-  <span class="nt">&lt;Intensity&gt;</span>143<span class="nt">&lt;/Intensity&gt;</span>
-  <span class="nt">&lt;ReturnNumber&gt;</span>1<span class="nt">&lt;/ReturnNumber&gt;</span>
-  <span class="nt">&lt;NumberOfReturns&gt;</span>1<span class="nt">&lt;/NumberOfReturns&gt;</span>
-  <span class="nt">&lt;ScanDirectionFlag&gt;</span>1<span class="nt">&lt;/ScanDirectionFlag&gt;</span>
-  <span class="nt">&lt;EdgeOfFlightLine&gt;</span>0<span class="nt">&lt;/EdgeOfFlightLine&gt;</span>
-  <span class="nt">&lt;Classification&gt;</span>1<span class="nt">&lt;/Classification&gt;</span>
-  <span class="nt">&lt;ScanAngleRank&gt;</span>-9<span class="nt">&lt;/ScanAngleRank&gt;</span>
-  <span class="nt">&lt;UserData&gt;</span>132<span class="nt">&lt;/UserData&gt;</span>
-  <span class="nt">&lt;PointSourceId&gt;</span>7326<span class="nt">&lt;/PointSourceId&gt;</span>
-  <span class="nt">&lt;Time&gt;</span>245380.78254962614<span class="nt">&lt;/Time&gt;</span>
-  <span class="nt">&lt;Red&gt;</span>68<span class="nt">&lt;/Red&gt;</span>
-  <span class="nt">&lt;Green&gt;</span>77<span class="nt">&lt;/Green&gt;</span>
-  <span class="nt">&lt;Blue&gt;</span>88<span class="nt">&lt;/Blue&gt;</span>
-<span class="nt">&lt;/point&gt;</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="a-conversion-example">
@@ -358,12 +296,7 @@ a pipeline, substituting the input and output as it goes.</p>
   <ul>
 <li><a class="reference internal" href="#">Reading with PDAL</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#a-basic-inquiry-example">A basic inquiry example</a><ul>
-<li><a class="reference internal" href="#restructuredtext-output">reStructuredText output</a></li>
-<li><a class="reference internal" href="#javascript-output">JavaScript output</a></li>
-<li><a class="reference internal" href="#xml-output">XML output</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#a-basic-inquiry-example">A basic inquiry example</a></li>
 <li><a class="reference internal" href="#a-conversion-example">A conversion example</a><ul>
 <li><a class="reference internal" href="#metadata"><tt class="docutils literal"><span class="pre">metadata</span></tt></a></li>
 </ul>
@@ -396,7 +329,7 @@ a pipeline, substituting the input and output as it goes.</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 11, 2015.
+                    on Sep 12, 2015.
         </div>
     </div>
 
