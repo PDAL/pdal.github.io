@@ -148,28 +148,22 @@ right away while in libLAS we just open the file.
 To make use of other readers supported by PDAL, see <tt class="docutils literal"><span class="pre">StageFactory</span></tt> class.</p>
 <p>The test if the file was loaded successfully, the test of the header
 pointer was used with libLAS:</p>
-<div class="highlight-cpp"><div class="highlight"><pre>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">LAS_header</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* fail */</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>if (LAS_header == NULL) {</dt>
-<dd>/* fail <a href="#id1"><span class="problematic" id="id2">*</span></a>/</dd>
-</dl>
-<p>}</p>
 <p>In general, PDAL will throw a <tt class="docutils literal"><span class="pre">pdal_error</span></tt> exception in case something
 is wrong and it can&#8217;t recover such in the case when the file can&#8217;t be opened.
 To handle the exceptional state by yourself, you can wrap the code
 in <tt class="docutils literal"><span class="pre">try-catch</span></tt> block:</p>
-<div class="highlight-cpp"><div class="highlight"><pre>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">try</span> <span class="p">{</span>
+    <span class="cm">/* actual code */</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="cm">/* fail in your own way */</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>try {</dt>
-<dd>/* actual code <a href="#id3"><span class="problematic" id="id4">*</span></a>/</dd>
-<dt>} catch {</dt>
-<dd>/* fail in your own way <a href="#id5"><span class="problematic" id="id6">*</span></a>/</dd>
-</dl>
-<p>}</p>
 </div>
 <div class="section" id="dataset-properties">
 <h2>Dataset properties<a class="headerlink" href="#dataset-properties" title="Permalink to this headline">¶</a></h2>
@@ -419,7 +413,7 @@ such as <tt class="docutils literal"><span class="pre">exit()</span></tt> functi
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 15, 2015.
+                    on Sep 16, 2015.
         </div>
     </div>
 
