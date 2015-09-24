@@ -196,9 +196,10 @@ that PDAL will always set bit four when creating LAS version output.
 <dt>project_id</dt>
 <dd>UID reserved for the user [Default: Nil UID]</dd>
 <dt>compression</dt>
-<dd>Set to true to apply compression to the output, creating a LAZ file instead
-of an LAS file.  Requires PDAL to have been built with compression support
-by linking with LASzip.  [Default: false]</dd>
+<dd>Set to &#8220;lazperf&#8221; or &#8220;laszip&#8221; to apply compression to the output, creating
+a LAZ file instead of an LAS file.  &#8220;lazperf&#8221; selects the LazPerf compressor
+and &#8220;laszip&#8221; (or &#8220;true&#8221;) selects the LasZip compressor. PDAL must have
+been built with support for the requested compressor.  [Default: &#8220;none&#8221;]</dd>
 <dt>scale_x, scale_y, scale_z</dt>
 <dd><p class="first">Scale to be divided from the X, Y and Z nominal values, respectively, after
 the offset has been applied.  The special value &#8220;auto&#8221; can be specified,
@@ -271,7 +272,7 @@ extra dimensions specified by this option.</dd>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 23, 2015.
+                    on Sep 24, 2015.
         </div>
     </div>
 

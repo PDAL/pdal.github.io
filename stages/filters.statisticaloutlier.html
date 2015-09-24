@@ -106,10 +106,18 @@ iteration it will compute the average distance that each point has to its
 nearest k neighbors. The value of k can be set using <tt class="docutils literal"><span class="pre">mean_k</span></tt>. Next, the mean
 and standard deviation of all these distances are computed in order to determine
 a distance threshold. The distance threshold will be equal to:
-<img class="math" src="../_images/math/b9b56e3764c0b35eb6f1779f642ede4594179857.png" alt="mean + stddev_mult * stddev"/>. The multiplier for the standard deviation
+<img class="math" src="../_images/math/91908b7ca1a9353a6944568049337e6847e2b6e4.png" alt="mean + stddev_{mult} * stddev"/>. The multiplier for the standard deviation
 can be set using <tt class="docutils literal"><span class="pre">multiplier</span></tt>. During the next iteration the points will be
 classified as inlier or outlier if their average neighbor distance is below or
 above this threshold respectively.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/filters.statisticaloutlier.img1.png"><img alt="Points before outlier removal" src="../_images/filters.statisticaloutlier.img1.png" style="width: 916.0px; height: 1016.0px;" /></a>
+<p class="caption">Before outlier removal, noise points can be found both above and below the scene.</p>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/filters.statisticaloutlier.img2.png"><img alt="Points after outlier removal" src="../_images/filters.statisticaloutlier.img2.png" style="width: 1068.0px; height: 876.0px;" /></a>
+<p class="caption">After outlier removal, the noise points are removed.</p>
+</div>
 <p>See <a class="reference internal" href="#rusu2008" id="id2">[Rusu2008]</a> for more information.</p>
 <table class="docutils citation" frame="void" id="rusu2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -121,9 +129,9 @@ above this threshold respectively.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>mean_k</dt>
-<dd>Mean number of neighbors. [Default: <strong>2</strong>]</dd>
+<dd>Mean number of neighbors. [Default: <strong>8</strong>]</dd>
 <dt>multiplier</dt>
-<dd>Standard deviation threshold. [Default: <strong>0.0</strong>]</dd>
+<dd>Standard deviation threshold. [Default: <strong>2.0</strong>]</dd>
 <dt>classify</dt>
 <dd>Apply classification labels? [Default: <strong>true</strong>]</dd>
 <dt>extract</dt>
@@ -169,7 +177,7 @@ above this threshold respectively.</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 23, 2015.
+                    on Sep 24, 2015.
         </div>
     </div>
 
