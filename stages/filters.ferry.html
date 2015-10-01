@@ -128,21 +128,8 @@ processing, can then operate on these data.</p>
                 0.0000001
             <span class="nt">&lt;/Option&gt;</span>
             <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.ferry&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                    X
-                    <span class="nt">&lt;Options&gt;</span>
-                        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;to&quot;</span><span class="nt">&gt;</span>
-                            StatePlaneX
-                        <span class="nt">&lt;/Option&gt;</span>
-                    <span class="nt">&lt;/Options&gt;</span>
-                <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                    Y
-                    <span class="nt">&lt;Options&gt;</span>
-                        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;to&quot;</span><span class="nt">&gt;</span>
-                            StatePlaneY
-                        <span class="nt">&lt;/Option&gt;</span>
-                    <span class="nt">&lt;/Options&gt;</span>
+                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimensions&quot;</span><span class="nt">&gt;</span>
+                    X = StatePlaneX, Y=StatePlaneY
                 <span class="nt">&lt;/Option&gt;</span>
                 <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
@@ -162,15 +149,12 @@ processing, can then operate on these data.</p>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>dimension</dt>
-<dd><p class="first">A dimension Option with an Options block containing at least a &#8220;to&#8221; dimension
-name.  If the &#8220;to&#8221; dimension already exists, it will be used. If it does not,
-it will be created as a dimension of type <cite>double</cite>.</p>
-<ul class="last simple">
-<li>to: The dimension to copy the data to. The data are currently read as
-doubles and put into the output dimension as double.</li>
-</ul>
-</dd>
+<dt>dimensions</dt>
+<dd>A list of dimensions whose values should be copied to the specified
+dimensions.
+The format of the option is &lt;from&gt;=&lt;to&gt;, &lt;from&gt;=&lt;to&gt;,... Spaces are ignored.
+&#8216;from&#8217; dimensions must exist and have been created by a reader or filter.
+&#8216;to&#8217; dimensions will be created if necessary.</dd>
 </dl>
 </div>
 </div>
@@ -213,7 +197,7 @@ doubles and put into the output dimension as double.</li>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Sep 30, 2015.
+                    on Oct 01, 2015.
         </div>
     </div>
 
