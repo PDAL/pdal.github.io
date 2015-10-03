@@ -100,8 +100,8 @@
 <span id="id1"></span><h1>filters.range<a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h1>
 <p>The range filter applies rudimentary filtering to the input point cloud
 based on a set of criteria on the given dimensions.</p>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pipeline-example">
+<h2>Pipeline Example<a class="headerlink" href="#pipeline-example" title="Permalink to this headline">¶</a></h2>
 <p>This example passes through all points whose Z value is in the range [0,100]
 and whose classification equals 2 (corresponding to ground in LAS).</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -111,18 +111,8 @@ and whose classification equals 2 (corresponding to ground in LAS).</p>
       filtered.las
     <span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.range&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-        Z
-        <span class="nt">&lt;Options&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/Option&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Options&gt;</span>
-      <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-        Classification
-        <span class="nt">&lt;Options&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;equals&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Options&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;limits&quot;</span><span class="nt">&gt;</span>
+        Z[0:100],Classification[2:2]
       <span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
@@ -135,16 +125,41 @@ and whose classification equals 2 (corresponding to ground in LAS).</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="command-line-example">
+<h2>Command-line Example<a class="headerlink" href="#command-line-example" title="Permalink to this headline">¶</a></h2>
+<p>The equivalent pipeline invoked via the PDAL <tt class="docutils literal"><span class="pre">translate</span></tt> command would be</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pdal translate -i input.las -o filtered.las -f range --filters.range.limits<span class="o">=</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>dimension</dt>
-<dd><p class="first">A dimension Option with an Options block containing the range criteria.</p>
-<ul class="last simple">
-<li>min: The minimum allowable value (inclusive) to pass through to the filtered point cloud.</li>
-<li>max: The maximum allowable value (inclusive) to pass through to the filtered point cloud.</li>
-<li>equals: The exact value to pass through to the filtered point cloud (i.e., min = max).</li>
-</ul>
+<dt>limits</dt>
+<dd><p class="first">A comma-separated list of dimension names and limits, given in the following
+form.</p>
+<div class="highlight-bash"><div class="highlight"><pre>dimension-name<span class="o">(</span>lower-bound:upper-bound<span class="o">)</span>
+</pre></div>
+</div>
+<p>In this example, we have used parenthesis to enclose the bounds, thus
+indicating that the bounds shall be interpreted as exclusive. To mark either
+the upper or lower bound as inclusive, simply replace the corresponding
+parenthesis with a square bracket. For example,</p>
+<div class="highlight-bash"><div class="highlight"><pre>dimension-name<span class="o">(</span>lower-bound:upper-bound<span class="o">]</span>
+</pre></div>
+</div>
+<p>where the lower bound remains exclusive, but the upper bound is inclusive.</p>
+<p>Either bound may also be omitted to indicate that there is no bound. In the
+following example, points with a Z value of 10 or greater are retained.</p>
+<div class="highlight-bash"><div class="highlight"><pre>Z<span class="o">[</span>10:<span class="o">]</span>
+</pre></div>
+</div>
+<p>Currently, exact values can be matched by repeating the exact value as both
+the upper and lower bound. Below, only points with a Classification of 2 are
+retained.</p>
+<div class="last highlight-bash"><div class="highlight"><pre>Classification<span class="o">[</span>2:2<span class="o">]</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </div>
@@ -163,7 +178,8 @@ and whose classification equals 2 (corresponding to ground in LAS).</p>
   <h3><a href="../docs.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">filters.range</a><ul>
-<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#pipeline-example">Pipeline Example</a></li>
+<li><a class="reference internal" href="#command-line-example">Command-line Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -188,7 +204,7 @@ and whose classification equals 2 (corresponding to ground in LAS).</p>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 02, 2015.
+                    on Oct 03, 2015.
         </div>
     </div>
 
