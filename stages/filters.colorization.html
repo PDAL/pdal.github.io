@@ -109,26 +109,8 @@
   <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>colorized.las<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.colorization&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-        Red
-        <span class="nt">&lt;Options&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;band&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/Option&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Options&gt;</span>
-      <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-        Green
-        <span class="nt">&lt;Options&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;band&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Options&gt;</span>
-      <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-        Blue
-        <span class="nt">&lt;Options&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;band&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/Option&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale&quot;</span><span class="nt">&gt;</span>256<span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Options&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimensions&quot;</span><span class="nt">&gt;</span>
+        Red:1:1.0, Blue, Green::256.0
       <span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;raster&quot;</span><span class="nt">&gt;</span>aerial.tif<span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
@@ -144,19 +126,14 @@
 <dl class="docutils">
 <dt>raster</dt>
 <dd>The raster file to read the band from. Any format supported by <a class="reference external" href="http://gdal.org">GDAL</a> may be read.</dd>
-<dt>dimension</dt>
-<dd><p class="first">A dimension to populate with values from the raster file. There may be multiple dimension options declared. The dimension name should be supplied, and an options list indicating the raster band to read from and the scaling to apply.</p>
-<dl class="last docutils">
-<dt>band</dt>
-<dd>The raster band from which to read values for this dimension.</dd>
-<dt>scale</dt>
-<dd>The scaling factor to apply to the value read from the raster. [Default: <strong>1.0</strong>]</dd>
-</dl>
-</dd>
-<dt>x_dim</dt>
-<dd>The point dimension to use for the x dimension [Default: <strong>X</strong>]</dd>
-<dt>y_dim</dt>
-<dd>The point dimension to use for the y dimension [Default: <strong>Y</strong>]</dd>
+<dt>dimensions</dt>
+<dd>A comma separated list of dimensions to populate with values from the raster
+file. The format of each dimension is &lt;name&gt;:&lt;band_number&gt;:&lt;scale_factor&gt;.
+Either or both of band number and scale factor may be omitted as may &#8216;:&#8217;
+separators if the data is not ambiguous.  If not supplied, band numbers
+begin at 1 and increment from the band number of the previous dimension.
+If not supplied, the scaling factor is 1.0.
+[Default: &#8220;Red:1:1.0, Green:2:1.0, Blue:3:1.0&#8221;]</dd>
 </dl>
 </div>
 </div>
@@ -198,7 +175,7 @@
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 05, 2015.
+                    on Oct 06, 2015.
         </div>
     </div>
 
