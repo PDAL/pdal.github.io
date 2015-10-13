@@ -222,14 +222,19 @@ dimension.  [Default: 0]</p>
 supported by the point format (5 for formats 0-5, 15 for formats 6-10).
 [Default: false]</dd>
 <dt>extra_dims</dt>
-<dd>Extra dimensions to be written as part of each point beyond those specified
+<dd><p class="first">Extra dimensions to be written as part of each point beyond those specified
 by the LAS point format.  The format of the option is
 &lt;dimension_name&gt;=&lt;type&gt;, ... where type is one of:
 int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double
 &#8216;_t&#8217; may be added to any of the type names as well (e.g., uint32_t).  When
 the version of the output file is specified as 1.4 or greater, an extra
 bytes VLR (User ID: LASF_Spec, Record ID: 4), is created that describes the
-extra dimensions specified by this option.</dd>
+extra dimensions specified by this option.</p>
+<p class="last">The special value &#8216;all&#8217; can be used in place of a dimension/type list
+to request
+that all dimensions that can&#8217;t be stored in the predefined LAS point
+record get added as extra data at the end of each point record.</p>
+</dd>
 </dl>
 </div>
 </div>
@@ -272,7 +277,7 @@ extra dimensions specified by this option.</dd>
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 12, 2015.
+                    on Oct 13, 2015.
         </div>
     </div>
 
