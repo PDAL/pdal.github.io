@@ -108,14 +108,14 @@ can be found <a class="reference external" href="https://ngageoint.github.io/geo
   <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.text&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>outputfile.txt<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.geowave&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;zookeeperUrl&quot;</span><span class="nt">&gt;</span>zookeeper1:2181,zookeeper2:2181,zookeeper3:2181<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;instanceName&quot;</span><span class="nt">&gt;</span>GeoWave<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;zookeeper_url&quot;</span><span class="nt">&gt;</span>zookeeper1:2181,zookeeper2:2181,zookeeper3:2181<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;instance_name&quot;</span><span class="nt">&gt;</span>GeoWave<span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;username&quot;</span><span class="nt">&gt;</span>user<span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;password&quot;</span><span class="nt">&gt;</span>pass<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;tableNamespace&quot;</span><span class="nt">&gt;</span>PDAL_Table<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;featureTypeName&quot;</span><span class="nt">&gt;</span>PDAL_Point<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dataAdapter&quot;</span><span class="nt">&gt;</span>FeatureCollectionDataAdapter<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;pointsPerEntry&quot;</span><span class="nt">&gt;</span>5000u<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;table_namespace&quot;</span><span class="nt">&gt;</span>PDAL_Table<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;feature_type_name&quot;</span><span class="nt">&gt;</span>PDAL_Point<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;data_adapter&quot;</span><span class="nt">&gt;</span>FeatureCollectionDataAdapter<span class="nt">&lt;/Option&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;points_per_entry&quot;</span><span class="nt">&gt;</span>5000u<span class="nt">&lt;/Option&gt;</span>
       <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;bounds&quot;</span><span class="nt">&gt;</span>([0,1000000],[0,1000000],[0,100])<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;/Reader&gt;</span>
   <span class="nt">&lt;/Writer&gt;</span>
@@ -126,21 +126,21 @@ can be found <a class="reference external" href="https://ngageoint.github.io/geo
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>zookeeperUrl</dt>
+<dt>zookeeper_url</dt>
 <dd>The comma-delimited URLs for all zookeeper servers, this will be directly used to instantiate a ZookeeperInstance. [Required]</dd>
-<dt>instanceName</dt>
-<dd>The zookeeper instance name, this will be directly used to instantiate a ZookeeperInstance. [Required]</dd>
+<dt>instance_name</dt>
+<dd>the zookeeper instance name, this will be directly used to instantiate a ZookeeperInstance. [Required]</dd>
 <dt>username</dt>
 <dd>The username for the account to establish an Accumulo connector. [Required]</dd>
 <dt>password</dt>
 <dd>The password for the account to establish an Accumulo connector. [Required]</dd>
-<dt>tableNamespace</dt>
+<dt>table_namespace</dt>
 <dd>The table name to be used when interacting with GeoWave. [Required]</dd>
-<dt>featureTypeName</dt>
+<dt>feature_type_name</dt>
 <dd>The feature type name to be used when ineracting GeoWave. [Default: PDAL_Point]</dd>
-<dt>dataAdapter</dt>
+<dt>data_adapter</dt>
 <dd>FeatureCollectionDataAdapter stores multiple points per Accumulo entry. FeatureDataAdapter stores a single point per Accumulo entry. [Default: FeatureCollectionDataAdapter]</dd>
-<dt>pointsPerEntry</dt>
+<dt>points_per_entry</dt>
 <dd>Sets the maximum number of points per Accumulo entry when using FeatureCollectionDataAdapter. [Default: 5000u]</dd>
 <dt>bounds</dt>
 <dd>The extent of the bounding rectangle to use to query points, expressed as a string, eg: “([xmin,xmax],[ymin,ymax],[zmin,zmax])”. [Default: unit cube]</dd>
@@ -186,7 +186,7 @@ can be found <a class="reference external" href="https://ngageoint.github.io/geo
                         <a href="../copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
                         .
                 Last updated
-                    on Oct 13, 2015.
+                    on Oct 14, 2015.
         </div>
     </div>
 
