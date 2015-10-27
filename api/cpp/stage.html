@@ -55,14 +55,14 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
                 <li><a href="../../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
                 <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
                 <li><a href="../../faq.html">FAQ</a></li>
                 <li><a href="../../community.html">Mailing Lists</a></li>
@@ -103,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../apps.html#view-command">view command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Stage Reference</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Readers, Writers, and Filters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#readers">Readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#writers">Writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#filters">Filters</a></li>
@@ -116,15 +116,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../community.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#github">GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../community.html#irc">IRC</a></li>
 </ul>
 </li>
@@ -149,12 +149,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
 </ul>
@@ -172,12 +166,24 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">pdal::Stage</a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">pdal::Stage</span></code></a></li>
 </ul>
 </ul>
 </li>
               
             
+            
+              
+                
+  <li>
+    <a href="reader.html" title="Previous Chapter: pdal::Reader"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; pdal::Reader</span>
+    </a>
+  </li>
+  <li>
+    <a href="writer.html" title="Next Chapter: pdal::Writer"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">pdal::Writer &raquo;</span>
+    </a>
+  </li>
+              
             
             
             
@@ -204,11 +210,158 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="pdal-stage">
-<span id="cpp-pdal-stage"></span><h1>pdal::Stage<a class="headerlink" href="#pdal-stage" title="Permalink to this headline">¶</a></h1>
-<p><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code> is the base class of <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code>,
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code>, and <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::MultiFilter</span></code> classes that
+  <span class="target" id="cpp-pdal-stage"></span><div class="section" id="pdal-stage">
+<span id="index-0"></span><h1><a class="reference internal" href="#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a><a class="headerlink" href="#pdal-stage" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> is the base class of <a class="reference internal" href="filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a>,
+<a class="reference internal" href="reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>, and <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::MultiFilter</span></code> classes that
 implement the reading API in a PDAL pipeline.</p>
+<dl class="class">
+<dt id="_CPPv2N4pdal5StageE">
+<span id="pdal::Stage"></span><span class="target" id="project0classpdal_1_1Stage"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">Stage</code><a class="headerlink" href="#_CPPv2N4pdal5StageE" title="Permalink to this definition">¶</a></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage5StageEv">
+<span id="pdal::Stage::Stage"></span><span class="target" id="project0classpdal_1_1Stage_1a328a062e19310343a6e96ca0feae1f6a"></span><code class="descname">Stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage5StageEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5StageD0Ev">
+<span id="pdal::Stage::~Stage"></span>virtual <span class="target" id="project0classpdal_1_1Stage_1af377472ea3b71bd65e0b0fb0bb2fd32b"></span><code class="descname">~Stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5StageD0Ev" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage8setInputER5Stage">
+<span id="pdal::Stage::setInput__StageR"></span><span class="target" id="project0classpdal_1_1Stage_1abfd87d459bea04a919aace286b2e377e"></span>void <code class="descname">setInput</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4pdal5Stage5StageEv" title="pdal::Stage::Stage">Stage</a> &amp;<em>input</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage8setInputER5Stage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage13setProgressFdEi">
+<span id="pdal::Stage::setProgressFd__i"></span><span class="target" id="project0classpdal_1_1Stage_1a714dfe1f3b91fd41afe8146d94759b29"></span>void <code class="descname">setProgressFd</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage13setProgressFdEi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage7previewEv">
+<span id="pdal::Stage::preview"></span><span class="target" id="project0classpdal_1_1Stage_1a25bb5ef4315f98fb88657876077ae7e4"></span>QuickInfo <code class="descname">preview</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage7previewEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage7prepareE13PointTableRef">
+<span id="pdal::Stage::prepare__PointTableRef"></span><span class="target" id="project0classpdal_1_1Stage_1a4b9296a59f8852b3d08630f1086bfbea"></span>void <code class="descname">prepare</code><span class="sig-paren">(</span>PointTableRef <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage7prepareE13PointTableRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage7executeE13PointTableRef">
+<span id="pdal::Stage::execute__PointTableRef"></span><span class="target" id="project0classpdal_1_1Stage_1a1615c4aa5ec5e48f90d73f0e7a796935"></span>PointViewSet <code class="descname">execute</code><span class="sig-paren">(</span>PointTableRef <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage7executeE13PointTableRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage19setSpatialReferenceER16SpatialReference">
+<span id="pdal::Stage::setSpatialReference__SpatialReferenceCR"></span><span class="target" id="project0classpdal_1_1Stage_1a3f82add240be2abae9e8655fa7138278"></span>void <code class="descname">setSpatialReference</code><span class="sig-paren">(</span>SpatialReference <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage19setSpatialReferenceER16SpatialReference" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage19getSpatialReferenceEv">
+<span id="pdal::Stage::getSpatialReference"></span><span class="target" id="project0classpdal_1_1Stage_1a2b9427d88035593e7d0c8f2d6e46e15b"></span><em class="property">const</em> SpatialReference &amp;<code class="descname">getSpatialReference</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage19getSpatialReferenceEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage10getOptionsEv">
+<span id="pdal::Stage::getOptions"></span><span class="target" id="project0classpdal_1_1Stage_1a9ad91349d2c09741a1d152ee256a6168"></span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv2N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<code class="descname">getOptions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage10getOptionsEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage10setOptionsE7Options">
+<span id="pdal::Stage::setOptions__Options"></span><span class="target" id="project0classpdal_1_1Stage_1acb2434df20f371f1fec9577de3cf0046"></span>void <code class="descname">setOptions</code><span class="sig-paren">(</span><a class="reference internal" href="options.html#_CPPv2N4pdal7OptionsE" title="pdal::Options">Options</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage10setOptionsE7Options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage21addConditionalOptionsERK7Options">
+<span id="pdal::Stage::addConditionalOptions__OptionsCR"></span><span class="target" id="project0classpdal_1_1Stage_1a782c57a2d5646a0a59af94321f9c5ba1"></span>void <code class="descname">addConditionalOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv2N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage21addConditionalOptionsERK7Options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage10addOptionsERK7Options">
+<span id="pdal::Stage::addOptions__OptionsCR"></span><span class="target" id="project0classpdal_1_1Stage_1ace3043bc318e31d6d88a296c0a8cf62b"></span>void <code class="descname">addOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv2N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage10addOptionsERK7Options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage13removeOptionsERK7Options">
+<span id="pdal::Stage::removeOptions__OptionsCR"></span><span class="target" id="project0classpdal_1_1Stage_1ab1fa73224209557248ed896eae7a1f4d"></span>void <code class="descname">removeOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv2N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage13removeOptionsERK7Options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage17serializePipelineEv">
+<span id="pdal::Stage::serializePipeline"></span>virtual <span class="target" id="project0classpdal_1_1Stage_1af41aed4e4c377130aa50846c5bd38546"></span>boost::property_tree::ptree <code class="descname">serializePipeline</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0<a class="headerlink" href="#_CPPv2N4pdal5Stage17serializePipelineEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage3logEv">
+<span id="pdal::Stage::log"></span>virtual <span class="target" id="project0classpdal_1_1Stage_1ae8c29817e14d7cda53fdcbb23102d872"></span>LogPtr <code class="descname">log</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage3logEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage7isDebugEv">
+<span id="pdal::Stage::isDebug"></span><span class="target" id="project0classpdal_1_1Stage_1aec4fb27c40bb4b032ff003a89a950dd4"></span>bool <code class="descname">isDebug</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage7isDebugEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage9isVerboseEv">
+<span id="pdal::Stage::isVerbose"></span><span class="target" id="project0classpdal_1_1Stage_1aaf07998e5dd4ec3bb421d2b89a4193c5"></span>bool <code class="descname">isVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage9isVerboseEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage15getVerboseLevelEv">
+<span id="pdal::Stage::getVerboseLevel"></span><span class="target" id="project0classpdal_1_1Stage_1a4c0f086ad2ab4e00f9aa55f20a6f226d"></span>uint32_t <code class="descname">getVerboseLevel</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage15getVerboseLevelEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage7getNameEv">
+<span id="pdal::Stage::getName"></span>virtual <span class="target" id="project0classpdal_1_1Stage_1a6c81d6fbbac17ebe4cd63806916cc750"></span>std::string <code class="descname">getName</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0<a class="headerlink" href="#_CPPv2N4pdal5Stage7getNameEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage9getInputsEv">
+<span id="pdal::Stage::getInputs"></span><span class="target" id="project0classpdal_1_1Stage_1aa34fac18f8496625744d99ced5965aa5"></span><em class="property">const</em> std::vector&lt;<a class="reference internal" href="#_CPPv2N4pdal5Stage5StageEv" title="pdal::Stage::Stage">Stage</a> *&gt; &amp;<code class="descname">getInputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage9getInputsEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage9findStageENSt6stringE">
+<span id="pdal::Stage::findStage__ss"></span><span class="target" id="project0classpdal_1_1Stage_1aea0e60bca3388635d7bddfbd4b95b6fa"></span>std::vector&lt;<a class="reference internal" href="#_CPPv2N4pdal5Stage5StageEv" title="pdal::Stage::Stage">Stage</a> *&gt; <code class="descname">findStage</code><span class="sig-paren">(</span>std::string <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage9findStageENSt6stringE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage17getDefaultOptionsEv">
+<span id="pdal::Stage::getDefaultOptions"></span>virtual <span class="target" id="project0classpdal_1_1Stage_1a384c395cac7bd3097bc90f1c42145b58"></span><a class="reference internal" href="options.html#_CPPv2N4pdal7OptionsE" title="pdal::Options">Options</a> <code class="descname">getDefaultOptions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage17getDefaultOptionsEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage11getMetadataEv">
+<span id="pdal::Stage::getMetadata"></span><span class="target" id="project0classpdal_1_1Stage_1a03070b4d2496f6c0993fb0dfe16cc8e0"></span><a class="reference internal" href="metadata.html#_CPPv2N4pdal12MetadataNodeE" title="pdal::MetadataNode">MetadataNode</a> <code class="descname">getMetadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5Stage11getMetadataEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage15setUserCallbackEP12UserCallback">
+<span id="pdal::Stage::setUserCallback__UserCallbackP"></span><span class="target" id="project0classpdal_1_1Stage_1a795715685365850d6bbe28001f01bd1a"></span>void <code class="descname">setUserCallback</code><span class="sig-paren">(</span>UserCallback *<em>userCallback</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage15setUserCallbackEP12UserCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the UserCallback to manage progress/cancel operations. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage20getDefaultDimensionsEv">
+<span id="pdal::Stage::getDefaultDimensions"></span><span class="target" id="project0classpdal_1_1Stage_1a727262c02dfa14faf8b4660b5cef99c9"></span><em class="property">static</em> Dimension::IdList <code class="descname">getDefaultDimensions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage20getDefaultDimensionsEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage18s_getPluginVersionEv">
+<span id="pdal::Stage::s_getPluginVersion"></span><span class="target" id="project0classpdal_1_1Stage_1aa2da309835b1b848c787f4a1d6bd9934"></span><em class="property">static</em> std::string <code class="descname">s_getPluginVersion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage18s_getPluginVersionEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
 </div>
 
 

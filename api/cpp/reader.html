@@ -55,14 +55,14 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
                 <li><a href="../../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
                 <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
                 <li><a href="../../faq.html">FAQ</a></li>
                 <li><a href="../../community.html">Mailing Lists</a></li>
@@ -103,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../apps.html#view-command">view command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Stage Reference</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Readers, Writers, and Filters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#readers">Readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#writers">Writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#filters">Filters</a></li>
@@ -116,15 +116,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../community.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#github">GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../community.html#irc">IRC</a></li>
 </ul>
 </li>
@@ -149,12 +149,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
 </ul>
@@ -172,18 +166,24 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">pdal::Reader</span></code></a><ul>
-<li><a class="reference internal" href="#asprs-las-reader">ASPRS LAS Reader</a></li>
-<li><a class="reference internal" href="#oci-reader">OCI Reader</a></li>
-<li><a class="reference internal" href="#qfit-reader">QFIT Reader</a></li>
-<li><a class="reference internal" href="#terrasolid-reader">TerraSolid Reader</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">pdal::Reader</span></code></a></li>
 </ul>
 </ul>
 </li>
               
             
+            
+              
+                
+  <li>
+    <a href="pointtable.html" title="Previous Chapter: pdal::PointTable"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; pdal::PointTable</span>
+    </a>
+  </li>
+  <li>
+    <a href="stage.html" title="Next Chapter: pdal::Stage"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">pdal::Stage &raquo;</span>
+    </a>
+  </li>
+              
             
             
             
@@ -211,42 +211,15 @@
     <div class="col-md-12">
       
   <div class="section" id="pdal-reader">
-<span id="cpp-reader"></span><h1><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code><a class="headerlink" href="#pdal-reader" title="Permalink to this headline">¶</a></h1>
-<p><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code> are classes that provided interfaces to various the
+<span id="cpp-reader"></span><h1><a class="reference internal" href="#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a><a class="headerlink" href="#pdal-reader" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a> are classes that provided interfaces to various the
 various point cloud formats and hands them off to a PDAL pipeline in a common
 format that is described via the <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Schema</span></code>.</p>
-<div class="section" id="asprs-las-reader">
-<h2><a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> Reader<a class="headerlink" href="#asprs-las-reader" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> format is a sequential binary format used to store data from
-LiDAR sensors and by LiDAR processing software for data interchange and archival.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">doxygenclass: Cannot find class &#8220;pdal::drivers::las::Reader&#8221; in doxygen xml output for project &#8220;project0&#8221; from directory: doxygen/xml</p>
-</div>
-</div>
-<div class="section" id="oci-reader">
-<h2>OCI Reader<a class="headerlink" href="#oci-reader" title="Permalink to this headline">¶</a></h2>
-<p>The OCI reader provides <a class="reference external" href="http://docs.oracle.com/cd/B28359_01/appdev.111/b28400/sdo_pc_pkg_ref.htm">Oracle Point Cloud</a> support to PDAL.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">doxygenclass: Cannot find class &#8220;pdal::drivers::oci::OciReader&#8221; in doxygen xml output for project &#8220;project0&#8221; from directory: doxygen/xml</p>
-</div>
-</div>
-<div class="section" id="qfit-reader">
-<h2>QFIT Reader<a class="headerlink" href="#qfit-reader" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://nsidc.org/data/ilatm1b.html">QFIT</a> is a format for the NASA IceBridge sea ice sensor.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">doxygenclass: Cannot find class &#8220;pdal::QfitReader&#8221; in doxygen xml output for project &#8220;project0&#8221; from directory: doxygen/xml</p>
-</div>
-</div>
-<div class="section" id="terrasolid-reader">
-<h2>TerraSolid Reader<a class="headerlink" href="#terrasolid-reader" title="Permalink to this headline">¶</a></h2>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">doxygenclass: Cannot find class &#8220;pdal::drivers::terrasolid::Reader&#8221; in doxygen xml output for project &#8220;project0&#8221; from directory: doxygen/xml</p>
-</div>
-</div>
+<dl class="class">
+<dt id="_CPPv2N4pdal6ReaderE">
+<span id="pdal::Reader"></span><span class="target" id="project0classpdal_1_1Reader"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">Reader</code><a class="headerlink" href="#_CPPv2N4pdal6ReaderE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 

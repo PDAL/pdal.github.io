@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Stage Reference &mdash; pdal.io</title>
+    <title>Readers, Writers, and Filters &mdash; pdal.io</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -54,14 +54,14 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
                 <li><a href="../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
                 <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
                 <li><a href="../faq.html">FAQ</a></li>
                 <li><a href="../community.html">Mailing Lists</a></li>
@@ -102,7 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Stage Reference</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Readers, Writers, and Filters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#readers">Readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writers">Writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filters">Filters</a></li>
@@ -115,15 +115,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
 </ul>
 </li>
@@ -148,12 +148,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
 </ul>
@@ -171,7 +165,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Stage Reference</a><ul>
+<li><a class="reference internal" href="#">Readers, Writers, and Filters</a><ul>
 <li><a class="reference internal" href="#readers">Readers</a></li>
 <li><a class="reference internal" href="#writers">Writers</a></li>
 <li><a class="reference internal" href="#filters">Filters</a></li>
@@ -182,6 +176,18 @@
 </li>
               
             
+            
+              
+                
+  <li>
+    <a href="../apps.html" title="Previous Chapter: PDAL Applications"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; PDAL Applicat...</span>
+    </a>
+  </li>
+  <li>
+    <a href="readers.bpf.html" title="Next Chapter: readers.bpf"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">readers.bpf &raquo;</span>
+    </a>
+  </li>
+              
             
             
             
@@ -208,8 +214,10 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="stage-reference">
-<span id="stage-index"></span><h1>Stage Reference<a class="headerlink" href="#stage-reference" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="readers-writers-and-filters">
+<span id="stage-index"></span><h1>Readers, Writers, and Filters<a class="headerlink" href="#readers-writers-and-filters" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="../api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> object encapsulates the reading, writing, and
+filtering capabilities for PDAL.</p>
 <div class="section" id="readers">
 <span id="id1"></span><h2>Readers<a class="headerlink" href="#readers" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">

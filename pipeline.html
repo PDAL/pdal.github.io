@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="copyright.html" />
     <link rel="top" title="pdal.io" href="index.html" />
-    <link rel="next" title="Getting Started with PDAL using Vagrant and VirtualBox" href="vagrant.html" />
+    <link rel="next" title="Vagrant" href="vagrant.html" />
     <link rel="prev" title="filters.voxelgrid" href="stages/filters.voxelgrid.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -54,14 +54,14 @@
         </button>
         <a class="navbar-brand" href="index.html">
           PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
                 <li><a href="download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
                 <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="community.html">Mailing Lists</a></li>
@@ -102,7 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="apps.html#view-command">view command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="stages/index.html">Stage Reference</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="stages/index.html">Readers, Writers, and Filters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="stages/index.html#readers">Readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stages/index.html#writers">Writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stages/index.html#filters">Filters</a></li>
@@ -115,15 +115,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="vagrant.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="community.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community.html#github">GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="community.html#irc">IRC</a></li>
 </ul>
 </li>
@@ -146,12 +146,6 @@
 <li class="toctree-l2"><a class="reference internal" href="metadata.html#metadata-types">Metadata Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html#json-representation">JSON representation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="copyright.html">License</a><ul>
@@ -187,6 +181,18 @@
 </li>
               
             
+            
+              
+                
+  <li>
+    <a href="stages/filters.voxelgrid.html" title="Previous Chapter: filters.voxelgrid"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; filters.voxel...</span>
+    </a>
+  </li>
+  <li>
+    <a href="vagrant.html" title="Next Chapter: Vagrant"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Vagrant &raquo;</span>
+    </a>
+  </li>
+              
             
             
             
@@ -237,21 +243,21 @@ operations.</p>
 <p>A <cite>Pipeline</cite> is composed as a set of <a class="reference external" href="http://en.wikipedia.org/wiki/Matryoshka_doll">Matryoshka dolls</a>, with the outside
 or largest doll being the final endpoint of the pipeline, and the inner-most
 doll being the starting point. Each &#8220;doll&#8221; in the set represents a
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code> with its subsequent operations happening at that
+<a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> with its subsequent operations happening at that
 point as data are pulled through the pipeline from the starting point to
 end point.</p>
-<p>There are two primary building blocks in PDAL, <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code> and
-<a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a>. <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code>,
-<a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, and <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code> are all subclasses of
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code> that provide the concrete dolls for the Matryoshka
+<p>There are two primary building blocks in PDAL, <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> and
+<a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a>. <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>,
+<a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, and <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> are all subclasses of
+<a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> that provide the concrete dolls for the Matryoshka
 set.</p>
 <p><a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a> is the substrate that flows between stages in a
 pipeline and transfers the actual data as it moves through the pipeline. A
 <a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a> contains a <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTablePtr</span></code>, which
 itself contains a list of <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></code> objects that define the
 actual channels that are stored in the <a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a>.</p>
-<p>PDAL provides four types of stages &#8211; <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code>,
-<a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code>, and
+<p>PDAL provides four types of stages &#8211; <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>,
+<a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a>, and
 <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::MultiFilter</span></code> &#8211; with the latter being hardly used at this
 point. A Reader is a producer of data, a Writer is a consumer of data, and a
 Filter is an actor on data.</p>
@@ -319,15 +325,15 @@ to read the file.</p>
 </div>
 <div class="section" id="stage-types">
 <h3>Stage Types<a class="headerlink" href="#stage-types" title="Permalink to this headline">¶</a></h3>
-<p><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code>, <a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, and
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code> are the C++ classes that define the stage types in
+<p><a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>, <a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, and
+<a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> are the C++ classes that define the stage types in
 PDAL. Readers follow the pattern of <a class="reference internal" href="stages/readers.las.html#readers-las"><span>readers.las</span></a> or
 <a class="reference internal" href="stages/readers.oci.html#readers-oci"><span>readers.oci</span></a>, Writers follow the pattern of <a class="reference internal" href="stages/writers.las.html#writers-las"><span>writers.las</span></a> or
 <a class="reference internal" href="stages/readers.oci.html#readers-oci"><span>readers.oci</span></a>, with Filters using <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span>filters.reprojection</span></a> or
 <a class="reference internal" href="stages/filters.crop.html#filters-crop"><span>filters.crop</span></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="stages/index.html#stage-index"><span>Stage Reference</span></a> contains a full listing of possible stages and
+<p class="last"><a class="reference internal" href="stages/index.html#stage-index"><span>Readers, Writers, and Filters</span></a> contains a full listing of possible stages and
 descriptions of their options.</p>
 </div>
 <div class="admonition note">
@@ -339,7 +345,7 @@ stages and their options.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>Options are the mechanism that PDAL uses to inform <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code>
+<p>Options are the mechanism that PDAL uses to inform <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>
 entities how to process data. A stage option can itself have options, going
 on ad infinitum. The following example sorts the data using a <a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton
 ordering</a> using <a class="reference internal" href="stages/filters.mortonorder.html#filters-mortonorder"><span>filters.mortonorder</span></a> and writes out a <a class="reference external" href="http://www.laszip.org">LASzip</a> file as the result.</p>
@@ -442,7 +448,7 @@ the Writer stage type, e.g. &#8220;writers.las&#8221;</li>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&lt;Reader&gt; <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></dt>
+<dt>&lt;Reader&gt; <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a></dt>
 <dd><ul class="first last">
 <li><p class="first">indicates a reader stage</p>
 </li>
@@ -469,7 +475,7 @@ the Reader stage type, e.g. &#8220;readers.las&#8221;</li>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&lt;Filter&gt; <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></dt>
+<dt>&lt;Filter&gt; <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a></dt>
 <dd><ul class="first last">
 <li><p class="first">indicates a filter stage</p>
 </li>
@@ -525,7 +531,7 @@ the MultiFilter stage type, e.g. &#8220;filter.mosaic&#8221;</li>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&lt;Option&gt; <a class="reference internal" href="api/cpp/option.html#_CPPv2N4pdal6OptionE" title="pdal::Option"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Option</span></code></a></dt>
+<dt>&lt;Option&gt; <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Option</span></code></dt>
 <dd><ul class="first last">
 <li><p class="first">indicates an option parameter to the pipeline stage</p>
 </li>

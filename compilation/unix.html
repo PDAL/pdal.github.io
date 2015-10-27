@@ -55,14 +55,14 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
                 <li><a href="../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
                 <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
                 <li><a href="../faq.html">FAQ</a></li>
                 <li><a href="../community.html">Mailing Lists</a></li>
@@ -103,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../stages/index.html">Stage Reference</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../stages/index.html">Readers, Writers, and Filters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stages/index.html#readers">Readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stages/index.html#writers">Writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stages/index.html#filters">Filters</a></li>
@@ -116,15 +116,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
 </ul>
 </li>
@@ -147,12 +147,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html#metadata-types">Metadata Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html#json-representation">JSON representation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
@@ -205,6 +199,18 @@
               
             
             
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: Installation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Installation</span>
+    </a>
+  </li>
+  <li>
+    <a href="windows.html" title="Next Chapter: Building Under Windows"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Building Unde... &raquo;</span>
+    </a>
+  </li>
+              
+            
             
             
             
@@ -240,26 +246,27 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:howard&#37;&#52;&#48;hobu&#46;co">howard<span>&#64;</span>hobu<span>&#46;</span>co</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">11/16/2013</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">10/27/2015</td>
 </tr>
 </tbody>
 </table>
-<p><a class="reference external" href="http://www.cmake.org/">CMake</a> 2.8.6+ is the prescribed tool for building from source as well as
-running unit tests. <a class="reference external" href="http://www.cmake.org/">CMake</a> is a cross-platform build system that provides a
-number of benefits, and its usage ensures a single, up-to-date build system
-for all PDAL-supported operating systems and compiler platforms.</p>
-<p>Like a combination of autoconf/autotools, except that it actually works on
-Windows (and works without eye-stabbing pain in general), <a class="reference external" href="http://www.cmake.org/">CMake</a> is somewhat
-of a meta-building tool. It can be used to generate MSVC project files, GNU
-Makefiles, NMake files for MSVC, XCode projects on Mac OS X, and Eclipse
-projects (as well as many others).  This functionality allows the PDAL project
-to avoid maintaining these build options by hand and target a single configuration
-and build platform.</p>
-<p>This tutorial will describe how to build PDAL using CMake on a
-Unix platform.  PDAL is known to compile on Linux 2.6&#8217;s of various flavors and
-OSX Snow Leopard and Lion with XCode 4.2.</p>
-<p><a class="reference internal" href="dependencies.html#dependencies"><span>Dependencies</span></a> contains more information about specific library version
-requirements and notes about building or acquiring them.</p>
+<p><a class="reference external" href="http://www.cmake.org/">CMake</a> 2.8.11+ is the prescribed tool for building from source, with <a class="reference external" href="http://www.cmake.org/">CMake</a>
+3.0+ being desired. <a class="reference external" href="http://www.cmake.org/">CMake</a> is a cross-platform build system that provides a
+number of benefits, and its usage ensures a single, up-to-date build system for
+all PDAL-supported operating systems and compiler platforms.</p>
+<p>Like a combination of autoconf/autotools, except that it works on Windows with
+minimal eye-stabbing pain, <a class="reference external" href="http://www.cmake.org/">CMake</a> is somewhat of a meta-building tool. It can
+be used to generate MSVC project files, GNU Makefiles, NMake files for MSVC,
+XCode projects on Mac OS X, and Eclipse projects (as well as many others).
+This functionality allows the PDAL project to avoid maintaining these build
+options by hand and target a single configuration and build platform.</p>
+<p>This tutorial will describe how to build PDAL using CMake on a Unix platform.
+PDAL is known to compile on Linux 2.6&#8217;s of various flavors and OSX with XCode.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="dependencies.html#dependencies"><span>Dependencies</span></a> contains more information about specific library
+version requirements and notes about building or acquiring them.</p>
+</div>
 <div class="section" id="using-unix-makefiles-on-linux">
 <h2>Using &#8220;Unix Makefiles&#8221; on Linux<a class="headerlink" href="#using-unix-makefiles-on-linux" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="get-the-source-code">
@@ -304,7 +311,7 @@ $ cd makefiles
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal"><span class="pre">hobu-config.sh</span></code> shell script contains a number of common
+<p class="last">The <code class="docutils literal"><span class="pre">./cmake/examples/hobu-config.sh</span></code> shell script contains a number of common
 settings that I use to configure my <cite>Homebrew</cite>-based Macintosh
 system.</p>
 </div>
@@ -316,9 +323,9 @@ configured.</p>
 </div>
 <div class="section" id="run-make-install-and-test-your-installation-with-a-pdal-test-command">
 <span id="make-install"></span><h3>Run <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> and test your installation with a <a class="reference internal" href="../development/testing.html#pdal-test"><span>Testing</span></a> command<a class="headerlink" href="#run-make-install-and-test-your-installation-with-a-pdal-test-command" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> will install the <a class="reference internal" href="../apps.html#apps"><span>utilities</span></a> in the location
-that was specified for &#8216;CMAKE_INSTALL_PREFIX&#8217;.  Once installed, ensure that
-you can run <cite>pdal info</cite>.</p>
+<p><code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> will install the <a class="reference internal" href="../apps.html#apps"><span>utilities</span></a> in the location that
+was specified for &#8216;CMAKE_INSTALL_PREFIX&#8217;.  Once installed, ensure that you can
+run <cite>pdal info</cite>.</p>
 </div>
 <div class="section" id="configure-your-optional-libraries">
 <span id="configure-optional-libraries"></span><h3>Configure your <a class="reference internal" href="dependencies.html#dependencies"><span>Optional Libraries</span></a>.<a class="headerlink" href="#configure-your-optional-libraries" title="Permalink to this headline">¶</a></h3>
@@ -466,15 +473,20 @@ $ cd xcode/
 -- Build files have been written to: /Users/hobu/hg/PDAL-cmake/xcode
 </pre></div>
 </div>
-<p>Alternatively, if you have <a class="reference external" href="http://www.kyngchaos.com/software/unixport">KyngChaos</a> frameworks for <a class="reference external" href="http://www.gdal.org">GDAL</a> and
-<a class="reference external" href="http://trac.osgeo.org/geotiff">GeoTIFF</a> installed, you can provide locations for those as part of your
-<code class="docutils literal"><span class="pre">cmake</span></code> invocation:</p>
+<p>Alternatively, if you have <a class="reference external" href="http://www.kyngchaos.com/software/unixport">KyngChaos</a> frameworks for <a class="reference external" href="http://www.gdal.org">GDAL</a> and <a class="reference external" href="http://trac.osgeo.org/geotiff">GeoTIFF</a>
+installed, you can provide locations for those as part of your <code class="docutils literal"><span class="pre">cmake</span></code>
+invocation:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ cmake -G &quot;Xcode&quot; \
   -D GDAL_CONFIG=/Library/Frameworks/GDAL.framework/Programs/gdal-config \
   -D GEOTIFF_INCLUDE_DIR=/Library/Frameworks/UnixImageIO.framework/unix/include \
   -D GEOTIFF_LIBRARY=/Library/Frameworks/UnixImageIO.framework/unix/lib/libgeotiff.dylib \
   ..
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I recommend that you use in <a class="reference external" href="http://brew.sh/">Homebrew</a> for <a class="reference external" href="http://www.gdal.org">GDAL</a> and friends. Its configuration
+is featureful and up-to-date.</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>$ open PDAL.xcodeproj/
 </pre></div>

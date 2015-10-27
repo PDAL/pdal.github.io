@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="top" title="pdal.io" href="../index.html" />
-    <link rel="up" title="Stage Reference" href="index.html" />
+    <link rel="up" title="Readers, Writers, and Filters" href="index.html" />
     <link rel="next" title="readers.geowave" href="readers.geowave.html" />
     <link rel="prev" title="readers.faux" href="readers.faux.html" />
 <meta charset='utf-8'>
@@ -55,14 +55,14 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
                 <li><a href="../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
                 <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
                 <li><a href="../faq.html">FAQ</a></li>
                 <li><a href="../community.html">Mailing Lists</a></li>
@@ -103,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Stage Reference</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Readers, Writers, and Filters</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html#readers">Readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#writers">Writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#filters">Filters</a></li>
@@ -116,15 +116,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
 </ul>
 </li>
@@ -147,12 +147,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html#metadata-types">Metadata Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html#json-representation">JSON representation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
@@ -184,6 +178,18 @@
               
             
             
+              
+                
+  <li>
+    <a href="readers.faux.html" title="Previous Chapter: readers.faux"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; readers.faux</span>
+    </a>
+  </li>
+  <li>
+    <a href="readers.geowave.html" title="Next Chapter: readers.geowave"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">readers.geowave &raquo;</span>
+    </a>
+  </li>
+              
+            
             
             
             
@@ -211,11 +217,17 @@
       
   <div class="section" id="readers-gdal">
 <span id="id1"></span><h1>readers.gdal<a class="headerlink" href="#readers-gdal" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference external" href="http://gdal.org">GDAL</a> reader reads <a class="reference external" href="http://www.gdal.org/formats_list.html">GDAL readable raster</a> datasources as point clouds.</p>
-<p>Each pixel is given an X and Y coordinate (and corresponding PDAL dimensions) that
-are center pixel, and each band is represented by &#8220;band-1&#8221;, &#8220;band-2&#8221;, or &#8220;band-n&#8221;. The
-user must know what the bands correspond to, and use <a class="reference internal" href="filters.ferry.html#filters-ferry"><span>filters.ferry</span></a> to copy data into
-known dimensions as needed.</p>
+<p>The <a class="reference external" href="http://gdal.org">GDAL</a> reader reads <a class="reference external" href="http://www.gdal.org/formats_list.html">GDAL readable raster</a> data sources as point clouds.</p>
+<p>Each pixel is given an X and Y coordinate (and corresponding PDAL dimensions)
+that are center pixel, and each band is represented by &#8220;band-1&#8221;, &#8220;band-2&#8221;, or
+&#8220;band-n&#8221;. The user must know what the bands correspond to, and use
+<a class="reference internal" href="filters.ferry.html#filters-ferry"><span>filters.ferry</span></a> to copy data into known dimensions as needed.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="filters.ferry.html#filters-ferry"><span>filters.ferry</span></a> is needed because raster data do not map to
+typical dimension names. For output to formats such as <span class="xref std std-ref">writers.las</span>,
+this mapping is required.</p>
+</div>
 <div class="section" id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
@@ -244,36 +256,15 @@ known dimensions as needed.</p>
             out.las
         <span class="nt">&lt;/Option&gt;</span>
         <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.ferry&quot;</span><span class="nt">&gt;</span>
-           <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                band-1
-                <span class="nt">&lt;Options&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;to&quot;</span><span class="nt">&gt;</span>
-                        Red
-                    <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Options&gt;</span>
+           <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimensions&quot;</span><span class="nt">&gt;</span>
+                Red=band-1, Green=band-2, Blue=band-3
             <span class="nt">&lt;/Option&gt;</span>
-           <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                band-2
-                <span class="nt">&lt;Options&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;to&quot;</span><span class="nt">&gt;</span>
-                        Green
-                    <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Options&gt;</span>
+        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.gdal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+                /Users/hobu/dev/git/pdal/test/data/autzen/autzen.jpg
             <span class="nt">&lt;/Option&gt;</span>
-           <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                band-3
-                <span class="nt">&lt;Options&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;to&quot;</span><span class="nt">&gt;</span>
-                        Blue
-                    <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Options&gt;</span>
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.gdal&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                    /Users/hobu/dev/git/pdal/test/data/autzen/autzen.jpg
-                <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;/Reader&gt;</span>
-        <span class="nt">&lt;/Filter&gt;</span>
+        <span class="nt">&lt;/Reader&gt;</span>
+    <span class="nt">&lt;/Filter&gt;</span>
     <span class="nt">&lt;/Writer&gt;</span>
 <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>

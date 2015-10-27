@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pdal::BOX3D &mdash; pdal.io</title>
+    <title>pdal::BOX2D &mdash; pdal.io</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -34,7 +34,7 @@
     <link rel="copyright" title="Copyright" href="../../copyright.html" />
     <link rel="top" title="pdal.io" href="../../index.html" />
     <link rel="up" title="C++ API" href="index.html" />
-    <link rel="next" title="pdal::Log" href="log.html" />
+    <link rel="next" title="pdal::Filter" href="filter.html" />
     <link rel="prev" title="pdal::Dimension" href="dimension.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -55,14 +55,14 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
                 <li><a href="../../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
                 <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
                 <li><a href="../../faq.html">FAQ</a></li>
                 <li><a href="../../community.html">Mailing Lists</a></li>
@@ -103,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../apps.html#view-command">view command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Stage Reference</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Readers, Writers, and Filters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#readers">Readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#writers">Writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#filters">Filters</a></li>
@@ -116,15 +116,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../community.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#github">GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../community.html#irc">IRC</a></li>
 </ul>
 </li>
@@ -149,12 +149,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
 </ul>
@@ -172,12 +166,24 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">pdal::BOX3D</a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">pdal::BOX2D</span></code></a></li>
 </ul>
 </ul>
 </li>
               
             
+            
+              
+                
+  <li>
+    <a href="dimension.html" title="Previous Chapter: pdal::Dimension"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; pdal::Dimension</span>
+    </a>
+  </li>
+  <li>
+    <a href="filter.html" title="Next Chapter: pdal::Filter"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">pdal::Filter &raquo;</span>
+    </a>
+  </li>
+              
             
             
             
@@ -204,16 +210,251 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="pdal-box3d">
-<span id="cpp-pdal-bounds"></span><h1>pdal::BOX3D<a class="headerlink" href="#pdal-box3d" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pdal-box2d">
+<span id="cpp-pdal-bounds"></span><h1><a class="reference internal" href="#_CPPv2N4pdal5BOX2DE" title="pdal::BOX2D"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::BOX2D</span></code></a><a class="headerlink" href="#pdal-box2d" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4pdal5BOX2DE">
+<span id="pdal::BOX2D"></span><span class="target" id="project0classpdal_1_1BOX2D"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">BOX2D</code><a class="headerlink" href="#_CPPv2N4pdal5BOX2DE" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Bounds is for manipulating n-dimensional ranges of data.  Typically
+used for defining the spatial extents of XYZ data, this class can also be
+used for defining bounds of other dimensions.</p>
+ </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5BOX2DEv">
+<span id="pdal::BOX2D::BOX2D"></span><span class="target" id="project0classpdal_1_1BOX2D_1a375c7291fb08957fb5681da9b9fa4937"></span><code class="descname">BOX2D</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5BOX2DERK5BOX2D">
+<span id="pdal::BOX2D::BOX2D__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1a0c95d80a6ee54f85e126e6dd509485b5"></span><code class="descname">BOX2D</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> &amp;<em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D5BOX2DERK5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5BOX2DEdddd">
+<span id="pdal::BOX2D::BOX2D__double.double.double.double"></span><span class="target" id="project0classpdal_1_1BOX2D_1a9f8c396394e2954259768927318aac28"></span><code class="descname">BOX2D</code><span class="sig-paren">(</span>double <em>minx</em>, double <em>miny</em>, double <em>maxx</em>, double <em>maxy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D5BOX2DEdddd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5emptyEv">
+<span id="pdal::BOX2D::empty"></span><span class="target" id="project0classpdal_1_1BOX2D_1aec5fae5f73a34a1d4248d596cad77755"></span>bool <code class="descname">empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2D5emptyEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5clearEv">
+<span id="pdal::BOX2D::clear"></span><span class="target" id="project0classpdal_1_1BOX2D_1a299dd7a0eb6878ba584f6ae3608c22f1"></span>void <code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D5clearEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D4growEdd">
+<span id="pdal::BOX2D::grow__double.double"></span><span class="target" id="project0classpdal_1_1BOX2D_1ad7673d05a1323a58e86eb721ae6a3b57"></span>void <code class="descname">grow</code><span class="sig-paren">(</span>double <em>x</em>, double <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4growEdd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D8containsEdd">
+<span id="pdal::BOX2D::contains__double.double"></span><span class="target" id="project0classpdal_1_1BOX2D_1a1bddea4a0dd77fc736a9ed837f291fb0"></span>bool <code class="descname">contains</code><span class="sig-paren">(</span>double <em>x</em>, double <em>y</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2D8containsEdd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D8containsERK5BOX2D">
+<span id="pdal::BOX2D::contains__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1a38325ca51a488ab38b32bbedc88b0da1"></span>bool <code class="descname">contains</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2D8containsERK5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5equalERK5BOX2D">
+<span id="pdal::BOX2D::equal__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1abfa0b6056e25cdb043017c4e8a76cef3"></span>bool <code class="descname">equal</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2D5equalERK5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2DeqER5BOX2D">
+<span id="pdal::BOX2D::eq-operator__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1abbf331f9aecadbde8b0c5ef33526c27f"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> <em class="property">const</em> &amp;<em>rhs</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2DeqER5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2DneER5BOX2D">
+<span id="pdal::BOX2D::neq-operator__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1a37fe45a0ca529e880bef7e4c2bee9362"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> <em class="property">const</em> &amp;<em>rhs</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2DneER5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D4growERK5BOX2D">
+<span id="pdal::BOX2D::grow__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1ab3c80682addbe0cd2fce7e784e4da927"></span>void <code class="descname">grow</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4growERK5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D4clipEdd">
+<span id="pdal::BOX2D::clip__double.double"></span><span class="target" id="project0classpdal_1_1BOX2D_1a7c0ac849ea9aa914234db6575c8ceeea"></span>void <code class="descname">clip</code><span class="sig-paren">(</span>double <em>x</em>, double <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4clipEdd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D4clipERK5BOX2D">
+<span id="pdal::BOX2D::clip__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1a3aef8b868845f667fda96fd3556a6e7c"></span>void <code class="descname">clip</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4clipERK5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D8overlapsERK5BOX2D">
+<span id="pdal::BOX2D::overlaps__BOX2DCR"></span><span class="target" id="project0classpdal_1_1BOX2D_1a08a778401e09bf4e6373a3ecc0ad6d3d"></span>bool <code class="descname">overlaps</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D8overlapsERK5BOX2D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5toBoxE8uint32_t">
+<span id="pdal::BOX2D::toBox__uint32_t"></span><span class="target" id="project0classpdal_1_1BOX2D_1a9f09a1fbfd114f0a5ea47113b9a2aebb"></span>std::string <code class="descname">toBox</code><span class="sig-paren">(</span>uint32_t <em>precision</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2D5toBoxE8uint32_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D5toWKTE8uint32_t">
+<span id="pdal::BOX2D::toWKT__uint32_t"></span><span class="target" id="project0classpdal_1_1BOX2D_1a9ad349ac01cf2f71c532aeaef8389551"></span>std::string <code class="descname">toWKT</code><span class="sig-paren">(</span>uint32_t <em>precision</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX2D5toWKTE8uint32_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N4pdal5BOX2D4minxE">
+<span id="pdal::BOX2D::minx__double"></span><span class="target" id="project0classpdal_1_1BOX2D_1ae47a946028d6d48b96477a17596c449f"></span>double <code class="descname">minx</code><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4minxE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4pdal5BOX2D4maxxE">
+<span id="pdal::BOX2D::maxx__double"></span><span class="target" id="project0classpdal_1_1BOX2D_1ab2b3bbff63b654340c501a71524ba333"></span>double <code class="descname">maxx</code><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4maxxE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4pdal5BOX2D4minyE">
+<span id="pdal::BOX2D::miny__double"></span><span class="target" id="project0classpdal_1_1BOX2D_1a7811c55c05b344a64c9bbc830112c8d7"></span>double <code class="descname">miny</code><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4minyE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4pdal5BOX2D4maxyE">
+<span id="pdal::BOX2D::maxy__double"></span><span class="target" id="project0classpdal_1_1BOX2D_1a772f64b028f339247a06f62d538c871c"></span>double <code class="descname">maxy</code><a class="headerlink" href="#_CPPv2N4pdal5BOX2D4maxyE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX2D23getDefaultSpatialExtentEv">
+<span id="pdal::BOX2D::getDefaultSpatialExtent"></span><span class="target" id="project0classpdal_1_1BOX2D_1ae5bdbbfbc33010c385dcc498e9df65b2"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX2D5BOX2DEv" title="pdal::BOX2D::BOX2D">BOX2D</a> &amp;<code class="descname">getDefaultSpatialExtent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX2D23getDefaultSpatialExtentEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a staticly-allocated Bounds extent that represents infinity. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="class">
 <dt id="_CPPv2N4pdal5BOX3DE">
 <span id="pdal::BOX3D"></span><span class="target" id="project0classpdal_1_1BOX3D"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">BOX3D</code><a class="headerlink" href="#_CPPv2N4pdal5BOX3DE" title="Permalink to this definition">¶</a></dt>
 <dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5BOX3DEv">
+<span id="pdal::BOX3D::BOX3D"></span><span class="target" id="project0classpdal_1_1BOX3D_1adf44e4d7f449ea21c665ee2511f20ed4"></span><code class="descname">BOX3D</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5BOX3DERK5BOX3D">
+<span id="pdal::BOX3D::BOX3D__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1afb0f95a0fb317d7c423f72355255d5b6"></span><code class="descname">BOX3D</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> &amp;<em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D5BOX3DERK5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5BOX3DEdddddd">
+<span id="pdal::BOX3D::BOX3D__double.double.double.double.double.double"></span><span class="target" id="project0classpdal_1_1BOX3D_1a387cf669058755e95597da658e693c48"></span><code class="descname">BOX3D</code><span class="sig-paren">(</span>double <em>minx</em>, double <em>miny</em>, double <em>minz</em>, double <em>maxx</em>, double <em>maxy</em>, double <em>maxz</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D5BOX3DEdddddd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5emptyEv">
+<span id="pdal::BOX3D::empty"></span><span class="target" id="project0classpdal_1_1BOX3D_1ab1150f00df7ce85599138b2c0d45d4dc"></span>bool <code class="descname">empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3D5emptyEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D4growEddd">
+<span id="pdal::BOX3D::grow__double.double.double"></span><span class="target" id="project0classpdal_1_1BOX3D_1a3dd1b7cf2ec9bd58f73a0183f0b64702"></span>void <code class="descname">grow</code><span class="sig-paren">(</span>double <em>x</em>, double <em>y</em>, double <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D4growEddd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5clearEv">
+<span id="pdal::BOX3D::clear"></span><span class="target" id="project0classpdal_1_1BOX3D_1a2bc36ba06f8eb54acd95cf58fb968317"></span>void <code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D5clearEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D8containsEddd">
+<span id="pdal::BOX3D::contains__double.double.double"></span><span class="target" id="project0classpdal_1_1BOX3D_1a7d400beffa460b7924d3659da4836147"></span>bool <code class="descname">contains</code><span class="sig-paren">(</span>double <em>x</em>, double <em>y</em>, double <em>z</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3D8containsEddd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D8containsERK5BOX3D">
+<span id="pdal::BOX3D::contains__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1a68cc6084b41917b6a7f97ea283bbab33"></span>bool <code class="descname">contains</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3D8containsERK5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5equalERK5BOX3D">
+<span id="pdal::BOX3D::equal__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1ae863f077c3108e9273c9c65f84c91e45"></span>bool <code class="descname">equal</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3D5equalERK5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3DeqER5BOX3D">
+<span id="pdal::BOX3D::eq-operator__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1ab4db555c1032bf150c4fd3ea51c6888c"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> <em class="property">const</em> &amp;<em>rhs</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3DeqER5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3DneER5BOX3D">
+<span id="pdal::BOX3D::neq-operator__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1a97813c044cc697c4c815dc156b106eb9"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> <em class="property">const</em> &amp;<em>rhs</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3DneER5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D4growERK5BOX3D">
+<span id="pdal::BOX3D::grow__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1ae74d59f3ee09276d16325f4b032ded1c"></span>void <code class="descname">grow</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D4growERK5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D4clipEddd">
+<span id="pdal::BOX3D::clip__double.double.double"></span><span class="target" id="project0classpdal_1_1BOX3D_1af0ff94f322166c840705e4a35dabbb5e"></span>void <code class="descname">clip</code><span class="sig-paren">(</span>double <em>x</em>, double <em>y</em>, double <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D4clipEddd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D4clipERK5BOX3D">
+<span id="pdal::BOX3D::clip__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1a0d928cc17ca6e4e6c9c95059bbc8ea7a"></span>void <code class="descname">clip</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D4clipERK5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D8overlapsERK5BOX3D">
+<span id="pdal::BOX3D::overlaps__BOX3DCR"></span><span class="target" id="project0classpdal_1_1BOX3D_1a4431375d3af101af81f405881fdfe8d4"></span>bool <code class="descname">overlaps</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D8overlapsERK5BOX3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D4to2dEv">
+<span id="pdal::BOX3D::to2d"></span><span class="target" id="project0classpdal_1_1BOX3D_1a2d5d7874dc81428fb8435721348654e0"></span><a class="reference internal" href="#_CPPv2N4pdal5BOX2DE" title="pdal::BOX2D">BOX2D</a> <code class="descname">to2d</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3D4to2dEv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5toBoxE8uint32_t">
+<span id="pdal::BOX3D::toBox__uint32_t"></span><span class="target" id="project0classpdal_1_1BOX3D_1a900618c4752f5db834901c8ba6182060"></span>std::string <code class="descname">toBox</code><span class="sig-paren">(</span>uint32_t <em>precision</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3D5toBoxE8uint32_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5BOX3D5toWKTE8uint32_t">
+<span id="pdal::BOX3D::toWKT__uint32_t"></span><span class="target" id="project0classpdal_1_1BOX3D_1af2db618c595c1252df372f8a78bb6e53"></span>std::string <code class="descname">toWKT</code><span class="sig-paren">(</span>uint32_t <em>precision</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal5BOX3D5toWKTE8uint32_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N4pdal5BOX3D4minzE">
+<span id="pdal::BOX3D::minz__double"></span><span class="target" id="project0classpdal_1_1BOX3D_1a910963ee88ce253b63dd660fd56572e0"></span>double <code class="descname">minz</code><a class="headerlink" href="#_CPPv2N4pdal5BOX3D4minzE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4pdal5BOX3D4maxzE">
+<span id="pdal::BOX3D::maxz__double"></span><span class="target" id="project0classpdal_1_1BOX3D_1aae93b6f00bb7d668447a4d7b368f61c5"></span>double <code class="descname">maxz</code><a class="headerlink" href="#_CPPv2N4pdal5BOX3D4maxzE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Static Functions</p>
 <dl class="function">
 <dt id="_CPPv2N4pdal5BOX3D23getDefaultSpatialExtentEv">
-<span id="pdal::BOX3D::getDefaultSpatialExtent"></span><span class="target" id="project0classpdal_1_1BOX3D_1a43b112e45cd53332095f8b5c2b2bcbf4"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3DE" title="pdal::BOX3D">BOX3D</a> &amp;<code class="descname">getDefaultSpatialExtent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D23getDefaultSpatialExtentEv" title="Permalink to this definition">¶</a></dt>
+<span id="pdal::BOX3D::getDefaultSpatialExtent"></span><span class="target" id="project0classpdal_1_1BOX3D_1a43b112e45cd53332095f8b5c2b2bcbf4"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal5BOX3D5BOX3DEv" title="pdal::BOX3D::BOX3D">BOX3D</a> &amp;<code class="descname">getDefaultSpatialExtent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5BOX3D23getDefaultSpatialExtentEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a staticly-allocated Bounds extent that represents infinity. </p>
 </dd></dl>
 
