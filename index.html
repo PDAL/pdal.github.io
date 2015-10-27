@@ -1,352 +1,246 @@
-
-<!DOCTYPE html>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!DOCTYPE html><html>
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8"/>
     
-    <title>PDAL - Point Data Abstraction Library &mdash; pdal.io</title>
+        <title>PDAL - Point Data Abstraction Library &mdash; pdal.io</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="_static/sphinx-bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+        <link rel="stylesheet" href="_static/breathe.css" type="text/css"/>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+                URL_ROOT:'./',
+                VERSION:'1.0.1',
+                COLLAPSE_INDEX:false,
+                FILE_SUFFIX:'.html',
+                HAS_SOURCE:  true
+            };
+        </script>
+            <script type="text/javascript" src="_static/jquery.js"></script>
+            <script type="text/javascript" src="_static/underscore.js"></script>
+            <script type="text/javascript" src="_static/doctools.js"></script>
+            <script type="text/javascript" src="_static/bootstrap-dropdown.js"></script> 
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+        <!-- analytics -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-00000000-1']);
+            
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/disqus.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="pdal.io" href="#" />
-    <link rel="next" title="Download" href="download.html" />
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
-<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
 
-  </head>
-  <body role="document">
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <div class="container">
+                        <a href="#">
+                            <img class="logo" src="_static/pdal_logo.png"
+                            
+                            
+                            alt="PDAL" title="PDAL"/>
+                        </a>
 
-  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b></b></span>
-      </div>
 
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
-            
-                <li><a href="download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">github</a></li>
-                <li><a href="https://github.com/PDAL/PDAL/issues">Bugs</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="community.html">Mailing Lists</a></li>
-            
-            
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">Docs <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="download.html#current-release-s">Current Release(s)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="download.html#past-releases">Past Releases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="download.html#binaries">Binaries</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="compilation/index.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="compilation/unix.html">Unix Compilation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation/windows.html">Building Under Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation/dependencies.html">Dependencies</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="apps.html">PDAL Applications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#delta-command">delta command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#diff-command">diff command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#ground-command">ground command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#info-command">info command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#pcl-command">pcl command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#pipeline-command">pipeline command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#random-command">random command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#split-command">split command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#tindex-command">tindex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#translate-command">translate command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#view-command">view command</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="stages/index.html">Stage Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="stages/index.html#readers">Readers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stages/index.html#writers">Writers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stages/index.html#filters">Filters</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#a-basic-example">A Basic Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#options">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#syntax-specification">Syntax Specification</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="community.html#bugs">Bugs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="community.html#irc">IRC</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="development/index.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="development/index.html#build-and-test-status">Build and Test Status</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/index.html#using-pdal">Using PDAL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/index.html#developing">Developing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api/index.html">API documentation for PDAL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/cpp/index.html">C++ API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="metadata.html">Metadata</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="metadata.html#metadata-types">Metadata Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata.html#json-representation">JSON representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="copyright.html">License</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">Here <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">PDAL - Point Data Abstraction Library</a><ul>
-<li><a class="reference internal" href="#documentation">Documentation</a><ul>
-<li><a class="reference internal" href="#developers-and-sponsorship">Developers and Sponsorship</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-            
-            
-            
-              <li class="hidden-sm"></li>
-            
-          </ul>
+                <ul class="quick-links">
+                    <li>
+                        <a href="docs.html" title="Documentation">Docs</a> 
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="https://github.com/PDAL/PDAL/">github</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="https://github.com/PDAL/PDAL/issues">Bugs</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+                    <li>
+                        <a href="faq.html" title="FAQ">FAQ</a> 
+                    </li>
+                    <li class="divider">&middot;</li>
 
-          
-            
-<form class="navbar-form navbar-right" action="search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-          
+                    <li>
+                        <a href="download.html" title="Home">Download</a>
+                    </li>
+                    <li class="divider">&middot;</li>
+
+                    <li>
+                        <a href="community.html" title="Mailing Lists">Mailing Lists</a>
+                    </li>
+
+                </ul>
+
+            </div>
         </div>
     </div>
-  </div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      
+  
+    <div class="container">
+        <div class="content row">
+                <div class="span9">
+                    
   <div class="section" id="pdal-point-data-abstraction-library">
 <span id="home"></span><h1>PDAL - Point Data Abstraction Library<a class="headerlink" href="#pdal-point-data-abstraction-library" title="Permalink to this headline">¶</a></h1>
-<p>PDAL is a C++ <a class="reference external" href="http://www.opensource.org/licenses/bsd-license.php">BSD</a> library for translating and manipulating <a class="reference external" href="http://en.wikipedia.org/wiki/Point_cloud">point cloud data</a>.
-It is very much like the <a class="reference external" href="http://www.gdal.org">GDAL</a> library which handles raster and vector data.
-See <a class="reference internal" href="stages/index.html#readers"><span>Readers</span></a> and <a class="reference internal" href="stages/index.html#writers"><span>Writers</span></a> for data formats PDAL supports, and see
-<a class="reference internal" href="stages/index.html#filters"><span>Filters</span></a> for filtering operations that you can apply with PDAL.</p>
-<p>In addition to the library code, PDAL provides a suite of command-line
-applications that users can conveniently use to process, filter, translate, and
-query point cloud data.  See <a class="reference internal" href="apps.html#apps"><span>PDAL Applications</span></a> for more information.</p>
-<div class="section" id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="download.html#current-release-s">Current Release(s)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="download.html#past-releases">Past Releases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="download.html#binaries">Binaries</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="compilation/index.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="compilation/unix.html">Unix Compilation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation/windows.html">Building Under Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation/dependencies.html">Dependencies</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="apps.html">PDAL Applications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#delta-command">delta command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#diff-command">diff command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#ground-command">ground command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#info-command">info command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#pcl-command">pcl command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#pipeline-command">pipeline command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#random-command">random command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#split-command">split command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#tindex-command">tindex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#translate-command">translate command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apps.html#view-command">view command</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="stages/index.html">Stage Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="stages/index.html#readers">Readers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stages/index.html#writers">Writers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stages/index.html#filters">Filters</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#a-basic-example">A Basic Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#options">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#syntax-specification">Syntax Specification</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="community.html#mailing-lists">Mailing Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="community.html#bugs">Bugs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="community.html#irc">IRC</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="development/index.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="development/index.html#build-and-test-status">Build and Test Status</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/index.html#using-pdal">Using PDAL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/index.html#developing">Developing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api/index.html">API documentation for PDAL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/cpp/index.html">C++ API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="metadata.html">Metadata</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="metadata.html#metadata-types">Metadata Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata.html#json-representation">JSON representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Getting Started with PDAL using Vagrant and VirtualBox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#what-you-get">What you get</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="copyright.html">License</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<p>PDAL is a <a class="reference external" href="http://www.opensource.org/licenses/bsd-license.php">BSD licensed</a> library for translating and manipulating <a class="reference external" href="http://en.wikipedia.org/wiki/Point_cloud">point cloud
+data</a> of various formats.  PDAL can be used to read, write and translate
+point cloud data in many formats.  Support is included for input files of
+LAS, LAZ, SBET, BPF, QFIT and others.  PDAL can also read from and write to
+databases that support point cloud storage, including Oracle, Postgres
+and SQLite.</p>
+<p>PDAL should not be confused with <a href="#id1"><span class="problematic" id="id2">`PCL`_</span></a> (Point Cloud Library).  PCL is a
+library specifically designed
+to provide algorithmic analysis and modification of point clouds.  PDAL
+provides a limited interface to the facilities of PCL, but does not in
+general attempt to duplicate its capabilites.  See <a class="reference internal" href="stages/filters.pclblock.html#filters-pclblock"><span>filters.pclblock</span></a>
+for more background</p>
 <div class="section" id="developers-and-sponsorship">
-<h3>Developers and Sponsorship<a class="headerlink" href="#developers-and-sponsorship" title="Permalink to this headline">¶</a></h3>
-<p>PDAL is developed by <a class="reference external" href="http://github.com/hobu">Howard Butler</a>, <a class="reference external" href="http://github.com/mpgerlek">Michael Gerlek</a>, <a class="reference external" href="http://github.com/abellgithub">Andrew Bell</a>,
-<a class="reference external" href="http://github.com/chambbj">Brad Chambers</a> and others.</p>
-<p>PDAL&#8217;s development is supported in coordination with efforts by the <a class="reference external" href="http://www.crrel.usace.army.mil/">U.S. Army
-Cold Regions Research and Engineering Laboratory</a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">PDAL should not be confused with <a class="reference external" href="http://pointclouds.org">PCL</a> (Point Cloud Library).  PCL is a
-library specifically designed to provide algorithmic analysis and
-modification of point clouds.  PDAL provides a limited interface to the
-facilities of PCL, but does not in general attempt to duplicate its
-capabilites.  PDAL is focused more on data access and translation than
-PCL. See <a class="reference internal" href="stages/filters.pclblock.html#filters-pclblock"><span>filters.pclblock</span></a> for more background.</p>
-</div>
-<div data-disqus-identifier="PDAL - Point Data Abstraction Library" data-disqus-shortname="pdal" id="disqus_thread"></div></div>
-</div>
-<div class="section" id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
-</ul>
+<h2>Developers and Sponsorship<a class="headerlink" href="#developers-and-sponsorship" title="Permalink to this headline">¶</a></h2>
+<p>PDAL is developed by <a class="reference external" href="http://hobu.co">Howard Butler</a>, <a class="reference external" href="http://www.radiantblue.com">Michael Gerlek</a>, <a class="reference external" href="http://hobu.co">Andrew Bell</a>,
+<a class="reference external" href="http://www.radiantblue.com">Brad Chambers</a> and others.</p>
+<p>PDAL&#8217;s development is in coordination with efforts by the
+<a class="reference external" href="http://www.crrel.usace.army.mil/">U.S. Army Cold Regions Research and Engineering Laboratory</a>.</p>
 </div>
 </div>
 
 
-    </div>
-      
-  </div>
+                    
+                        <div id="disqus_thread"></div>
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    
+                </div>
+                <div class="span3">
+                    
+        <div class="sphinxsidebar">
+            <div class="sphinxsidebarwrapper">
+<p>
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 4,
+  interval: 6000,
+  width: 'auto',
+  height: 200,
+  theme: {
+    shell: {
+      background: '#2c7fb8',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#2c7fb8',
+      color: '#ffffff',
+      links: '#ffffff'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: false,
+    hashtags: true,
+    timestamp: true,
+    avatars: false,
+    behavior: 'all'
+  }
+}).render().setUser('pointcloudpipe').start();
+</script>
+</p>
+
+
+
+<p>
+<script type="text/javascript" src="http://www.ohloh.net/p/585810/widgets/project_thin_badge.js"></script>
+</p>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
-    <div class="footer">
-        <div class="container">
-                    &copy;  2015
-                        <a href="http://github.com/hobu">Howard Butler</a>,
-                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
-                        and
-                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
-                Last updated
-                    on Oct 25, 2015.
+<script type="text/javascript">$('#searchbox').show(0);</script>
+            </div>
+        </div>
+                </div>
+            
         </div>
     </div>
-  </body>
+    <div class="footer">
+        
+        <div class="container">
+                    &copy;
+                        <a href="copyright.html">Copyright</a> 2015, Howard Butler, Michael Gerlek and others
+                        .
+                Last updated
+                    on Oct 27, 2015.
+        </div>
+    </div>
+
+
+    <!-- disqus -->
+    <script type="text/javascript">
+        var disqus_title = 'PDAL - Point Data Abstraction Library &mdash; pdal.io';
+        var disqus_identifier ='code' + '.' + "pdal" + window.location.pathname.replace('/', '.');
+    </script>
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = "pdal"; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+<script type="text/javascript">
+    $('.nav .active').on('click', function () {
+        e.preventDefault()
+        $(this).siblings().toggle()
+    });
+</script>
+
+<!-- plusone -->
+<script type="text/javascript">
+    (function () {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+    })();
+</script>
+
+<!-- twitter -->
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+
+</body>
 </html>
