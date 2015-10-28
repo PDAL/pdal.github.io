@@ -86,7 +86,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../compilation/dependencies.html">Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../apps.html">PDAL Applications</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../apps.html#delta-command">delta command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../apps.html#diff-command">diff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../apps.html#ground-command">ground command</a></li>
@@ -164,7 +164,15 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Docs</a><ul>
-<li><a class="reference internal" href="#building-the-documentation">Building the Documentation</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#sphinx-breathe-and-bootstrap">Sphinx, Breathe and Bootstrap</a></li>
+<li><a class="reference internal" href="#doxygen">Doxygen</a></li>
+<li><a class="reference internal" href="#id1">Latex</a></li>
+<li><a class="reference internal" href="#id2">dvipng</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#generation">Generation</a></li>
+<li><a class="reference internal" href="#website">Website</a></li>
 </ul>
 </li>
 </ul>
@@ -212,26 +220,74 @@
       
   <div class="section" id="docs">
 <span id="development-docs"></span><h1>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="building-the-documentation">
-<h2>Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h2>
-<p>To build the PDAL documentation yourself, you need to install <a class="reference external" href="http://sphinx-doc.org/">sphinx</a>, <a class="reference external" href="https://github.com/michaeljones/breathe">breathe</a>, and other python dependencies, preferably with <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a>.
-If you have <a class="reference external" href="http://www.pip-installer.org/en/latest/installing.html">pip installed</a>, install the documentation dependencies with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="o">(</span>sudo<span class="o">)</span> pip install sphinx breathe rst2pdf
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>To build the PDAL documentation yourself, you need to install the following
+items:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a></li>
+<li><a class="reference external" href="https://github.com/michaeljones/breathe">Breathe</a></li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx-bootstrap-theme/">sphinx_bootstrap_theme</a></li>
+<li><a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/LaTeX">Latex</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Dvipng">dvipng</a></li>
+</ul>
+<div class="section" id="sphinx-breathe-and-bootstrap">
+<h3>Sphinx, <a class="reference external" href="https://github.com/michaeljones/breathe">Breathe</a> and Bootstrap<a class="headerlink" href="#sphinx-breathe-and-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p>Python dependencies should be installed from <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a> with <code class="docutils literal"><span class="pre">pip</span></code> or
+<code class="docutils literal"><span class="pre">easy_install</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="o">(</span>sudo<span class="o">)</span> pip install sphinx breathe rst2pdf sphinx_bootstrap_theme
 </pre></div>
 </div>
-<p>If you are installing these packages to a system-wide directory, you may need the <strong>sudo</strong> in front of the <strong>pip</strong>, though it might be better that instead you use <a class="reference external" href="https://pypi.python.org/pypi/virtualenv">virtual environments</a> instead of installing the packages system-wide.</p>
-<p>The PDAL documentation also depends on <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a>, which can be installed from source or from binaries from the <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/download.html">doxygen website</a>.
-If you are on Max OS X and use <a class="reference external" href="http://mxcl.github.io/homebrew/">homebrew</a>, you can install doxygen with a simple <code class="docutils literal"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">doxygen</span></code>.</p>
-<p>Once you have installed all the doc dependencies, you can then build the documentation itself.
-The <code class="file docutils literal"><span class="pre">doc/</span></code> directory in the PDAL source tree contains a Makefile which can be used to build all documentation.
-For a list of the output formats supported by Sphinx, simply type <code class="docutils literal"><span class="pre">make</span></code>.
-For example, to build html documentation:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are installing these packages to a system-wide directory, you may need
+the <strong>sudo</strong> in front of the <strong>pip</strong>, though it might be better that instead
+you use <a class="reference external" href="https://pypi.python.org/pypi/virtualenv">virtual environments</a> instead of installing the packages system-wide.</p>
+</div>
+</div>
+<div class="section" id="doxygen">
+<h3>Doxygen<a class="headerlink" href="#doxygen" title="Permalink to this headline">¶</a></h3>
+<p>The PDAL documentation also depends on <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a>, which can be installed from
+source or from binaries from the <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/download.html">doxygen website</a>.  If you are on Max OS X
+and use <a class="reference external" href="http://mxcl.github.io/homebrew/">homebrew</a>, you can install doxygen with a simple <code class="docutils literal"><span class="pre">brew</span> <span class="pre">install</span>
+<span class="pre">doxygen</span></code>.</p>
+</div>
+<div class="section" id="id1">
+<h3>Latex<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/LaTeX">Latex</a> is used for equation editing inside of Sphinx. It is used to generate
+figures and graphs.</p>
+</div>
+<div class="section" id="id2">
+<h3>dvipng<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>For math output, we depend on <a class="reference external" href="https://en.wikipedia.org/wiki/Dvipng">dvipng</a> to turn <a class="reference external" href="https://en.wikipedia.org/wiki/LaTeX">Latex</a> output into math PNGs.</p>
+</div>
+</div>
+<div class="section" id="generation">
+<h2>Generation<a class="headerlink" href="#generation" title="Permalink to this headline">¶</a></h2>
+<p>Once you have installed all the doc dependencies, you can then build the
+documentation itself.  The <code class="file docutils literal"><span class="pre">doc/</span></code> directory in the PDAL source tree
+contains a Makefile which can be used to build all documentation.  For a list
+of the output formats supported by Sphinx, simply type <code class="docutils literal"><span class="pre">make</span></code>.  For example,
+to build html documentation:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd </span>doc
 make doxygen html
 </pre></div>
 </div>
-<p>The html docs will be placed in <code class="file docutils literal"><span class="pre">doc/build/html/</span></code>.
-The <code class="docutils literal"><span class="pre">make</span> <span class="pre">doxygen</span></code> is necessary to re-generate the API documentation from the source code.</p>
+<p>The html docs will be placed in <code class="file docutils literal"><span class="pre">doc/build/html/</span></code>.  The <code class="docutils literal"><span class="pre">make</span> <span class="pre">doxygen</span></code>
+is necessary to re-generate the API documentation from the source code using
+<a class="reference external" href="https://github.com/michaeljones/breathe">Breathe</a> and <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>.</p>
+</div>
+<div class="section" id="website">
+<h2>Website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="http://pdal.io">http://pdal.io</a> website is regenerated from the master branch at the following
+cron schedule:</p>
+<div class="highlight-python"><div class="highlight"><pre>30 2,8,12,16,20 * * * /home/pdal/periodic/pdal.sh
+</pre></div>
+</div>
+<p>It is generated by a <a class="reference external" href="digitalocean.com">Digital Ocean</a> droplet that uses the <code class="docutils literal"><span class="pre">PDAL-docs</span></code> <a class="reference external" href="http://github.com/PDAL/PDAL">GitHub</a>
+user to write to the <a class="reference external" href="https://github.com/PDAL/pdal.github.io">https://github.com/PDAL/pdal.github.io</a> repository. The website
+is then served via <a class="reference external" href="https://pages.github.com/">GitHub Pages</a>.</p>
 </div>
 </div>
 
