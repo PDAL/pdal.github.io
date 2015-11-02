@@ -217,6 +217,16 @@
 filtering capabilities for PDAL.</p>
 <div class="section" id="readers">
 <span id="id1"></span><h2>Readers<a class="headerlink" href="#readers" title="Permalink to this headline">¶</a></h2>
+<p>Readers provide data to <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> operations. Readers might be a simple
+file type, like <a class="reference internal" href="readers.las.html#readers-las"><span>readers.las</span></a>, a complex database like <a class="reference internal" href="readers.oci.html#readers-oci"><span>readers.oci</span></a>, or
+a network service like <a class="reference internal" href="readers.greyhound.html#readers-greyhound"><span>readers.greyhound</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Readers provide <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></code> to <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a>. PDAL attempts
+to normalize common dimension types, like X, Y, Z, or Intensity, which are
+often found in LiDAR point clouds. Not all dimension types need to be fixed, however.
+Database drivers typically return unstructured lists of dimensions.</p>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
@@ -243,6 +253,14 @@ filtering capabilities for PDAL.</p>
 </div>
 <div class="section" id="writers">
 <span id="id2"></span><h2>Writers<a class="headerlink" href="#writers" title="Permalink to this headline">¶</a></h2>
+<p>Writers consume data provided by <a class="reference internal" href="#readers"><span>Readers</span></a>. Some writers can consume any
+dimension type, while others only understand fixed dimension names.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some writers can only consume known dimension names, while PDAL doesn&#8217;t
+yet have a registery for the dimension types, you can see the
+base dimension types at <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/include/pdal/Dimension.hpp">https://github.com/PDAL/PDAL/blob/master/include/pdal/Dimension.hpp</a></p>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
@@ -266,6 +284,11 @@ filtering capabilities for PDAL.</p>
 </div>
 <div class="section" id="filters">
 <span id="id3"></span><h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>Filters operate on data as inline operations. They can remove, modify, reorganize,
+and add points to the data stream as it goes by. Some filters can only operate on
+dimensions they understand (consider <a class="reference internal" href="filters.reprojection.html#filters-reprojection"><span>filters.reprojection</span></a> doing geographic
+reprojection on XYZ coordinates), while others do not interrogate the point data at
+all and simply reorganize or split data.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="filters.attribute.html">filters.attribute</a></li>
