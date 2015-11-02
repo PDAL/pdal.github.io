@@ -164,6 +164,7 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">filters.colorization</a><ul>
+<li><a class="reference internal" href="#considerations">Considerations</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -235,6 +236,51 @@
 <span class="nt">&lt;/Pipeline&gt;</span>
 </pre></div>
 </div>
+<div class="section" id="considerations">
+<h2>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">¶</a></h2>
+<p>Certain data configurations can cause degenerate filter behavior. One significant
+knob to adjust is the <code class="docutils literal"><span class="pre">GDAL_CACHEMAX</span></code> environment variable. One driver which
+can have issues is when a <a class="reference external" href="http://www.gdal.org/frmt_gtiff.html">TIFF</a> file is striped vs. tiled. GDAL&#8217;s data access
+in that situation is likely to cause lots of re-reading if the cache isn&#8217;t large
+enough.</p>
+<p>Consider a striped TIFF file of 286mb:</p>
+<div class="highlight-python"><div class="highlight"><pre>-rw-r-----@  1 hobu  staff   286M Oct 29 16:58 orth-striped.tif
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;Pipeline version=&quot;1.0&quot;&gt;
+&lt;Writer type=&quot;writers.las&quot;&gt;
+  &lt;Option name=&quot;filename&quot;&gt;coloured-striped.las&lt;/Option&gt;
+  &lt;Filter type=&quot;filters.colorization&quot;&gt;
+    &lt;Option name=&quot;raster&quot;&gt;orth-striped.tif&lt;/Option&gt;
+    &lt;Reader type=&quot;readers.las&quot;&gt;
+      &lt;Option name=&quot;filename&quot;&gt;colourless.laz&lt;/Option&gt;
+    &lt;/Reader&gt;
+  &lt;/Filter&gt;
+&lt;/Writer&gt;
+&lt;/Pipeline&gt;
+</pre></div>
+</div>
+<p>Simple application of the <a class="reference internal" href="#filters-colorization"><span>filters.colorization</span></a> using the striped <a class="reference external" href="http://www.gdal.org/frmt_gtiff.html">TIFF</a>
+with a 268mb <a class="reference internal" href="readers.las.html#readers-las"><span>readers.las</span></a> file will take nearly 1:54.</p>
+<div class="highlight-python"><div class="highlight"><pre>[hobu@pyro knudsen (master)]$ time ~/dev/git/pdal/bin/pdal pipeline -i striped.xml
+
+real        1m53.477s
+user        1m20.018s
+sys 0m33.397s
+</pre></div>
+</div>
+<p>Setting the <code class="docutils literal"><span class="pre">GDAL_CACHEMAX</span></code> variable to a size larger than the TIFF file
+dramatically speeds up the color fetching:</p>
+<div class="highlight-python"><div class="highlight"><pre>[hobu@pyro knudsen (master)]$ export GDAL_CACHEMAX=500
+[hobu@pyro knudsen (master)]$ time ~/dev/git/pdal/bin/pdal pipeline striped.xml
+
+real        0m19.034s
+user        0m15.557s
+sys 0m1.102s
+</pre></div>
+</div>
+</div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
@@ -265,7 +311,7 @@ If not supplied, the scaling factor is 1.0.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 01, 2015.
+                    on Nov 02, 2015.
         </div>
     </div>
   </body>
