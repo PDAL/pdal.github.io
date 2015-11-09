@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Clipping with Geometries &mdash; pdal.io</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="pdal.io" href="../index.html" />
+    <link rel="up" title="Tutorials" href="index.html" />
+    <link rel="next" title="Writing a filter" href="writing-filter.html" />
+    <link rel="prev" title="Identifying ground returns using ProgressiveMorphologicalFilter segmentation" href="pcl_ground.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          PDAL</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../download.html">Download</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Docs <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#current-release-s">Current Release(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#past-releases">Past Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#binaries">Binaries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../compilation/unix.html">Unix Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compilation/windows.html">Building Under Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compilation/dependencies.html">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#delta-command">delta command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#diff-command">diff command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#ground-command">ground command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#info-command">info command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#pcl-command">pcl command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#pipeline-command">pipeline command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#random-command">random command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#split-command">split command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#tindex-command">tindex command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#translate-command">translate command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/index.html">Readers, Writers, and Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#readers">Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#writers">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#developing">Developing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/index.html#build-and-test-status">Build and Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/cpp/index.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../metadata.html">Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html#metadata-types">Metadata Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html#json-representation">JSON representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Here <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Clipping with Geometries</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#example-data">Example Data</a></li>
+<li><a class="reference internal" href="#stage-operations">Stage Operations</a></li>
+<li><a class="reference internal" href="#data-preparation">Data Preparation</a></li>
+<li><a class="reference internal" href="#pipeline">Pipeline</a></li>
+<li><a class="reference internal" href="#processing">Processing</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="pcl_ground.html" title="Previous Chapter: Identifying ground returns using ProgressiveMorphologicalFilter segmentation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Identifying g...</span>
+    </a>
+  </li>
+  <li>
+    <a href="writing-filter.html" title="Next Chapter: Writing a filter"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Writing a filter &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="clipping-with-geometries">
+<span id="clipping"></span><h1>Clipping with Geometries<a class="headerlink" href="#clipping-with-geometries" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Howard Butler</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:howard&#37;&#52;&#48;hobu&#46;co">howard<span>&#64;</span>hobu<span>&#46;</span>co</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">11/09/2015</td>
+</tr>
+</tbody>
+</table>
+<p>This tutorial describes how to construct a pipeline that takes in geometries and
+clips out data with given geometry attributes.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial describes how to construct a pipeline that takes in geometries
+and clips out data with given geometry attributes.  It is common to desire
+being able to cut or clip point cloud data with 2D geometries, often from
+auxillary data sources such as <cite>OGR</cite>-readable <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefiles</a>.  This tutorial
+describes how to construct a pipeline that takes in geometries and clips out
+point cloud data inside geometries with matching attributes.</p>
+</div>
+<div class="section" id="example-data">
+<h2>Example Data<a class="headerlink" href="#example-data" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial utilizes the Autzen dataset. In addition to typical PDAL
+software (fetch it from <a class="reference internal" href="../download.html#download"><span>Download</span></a>), you will need to download the
+following two files:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.liblas.org/samples/autzen/autzen.laz">http://www.liblas.org/samples/autzen/autzen.laz</a></li>
+<li><a class="reference external" href="https://github.com/PDAL/PDAL/raw/master/test/data/autzen/attributes.json">https://github.com/PDAL/PDAL/raw/master/test/data/autzen/attributes.json</a></li>
+</ul>
+</div>
+<div class="section" id="stage-operations">
+<h2>Stage Operations<a class="headerlink" href="#stage-operations" title="Permalink to this headline">¶</a></h2>
+<p>This operation depends on two <a class="reference internal" href="../stages/index.html#stage-index"><span>stages</span></a> PDAL provides.
+The first is the <a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span>filters.attribute</span></a> stage, which allows you to assign
+point values based on polygons read from <a class="reference external" href="http://www.gdal.org">OGR</a>. The second is the <a class="reference internal" href="../stages/filters.range.html#filters-range"><span>filters.range</span></a>,
+which allows you to keep or reject points from the set that match given
+criteria.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../stages/filters.predicate.html#filters-predicate"><span>filters.predicate</span></a> allows you to construct sophisticated logic
+for keeping or rejecting points in a more expressive environment (<a class="reference external" href="http://www.python.org">Python</a>).</p>
+</div>
+</div>
+<div class="section" id="data-preparation">
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>The data are mixed in two different coordinate systems. The <a class="reference internal" href="../stages/readers.las.html#readers-las"><span>LAZ</span></a> file is in <a class="reference external" href="http://www.oregon.gov/DAS/CIO/GEO/pages/coordination/projections/projections.aspx">Oregon State Plane Ft.</a> and the <a class="reference external" href="http://geojson.org">GeoJSON</a> defining
+the polygons is in <a class="reference external" href="http://epsg.io/4326">EPSG:4326</a>. We have two options &#8211; project the point cloud
+into the coordinate system of the attribute polygons, or project the attribute
+polygons into the coordinate system of the points. The latter is preferable in
+this case because it will be less math and therefore less computation. To make
+it convenient, we can utilize <a class="reference external" href="http://www.gdal.org">OGR</a>&#8216;s <a class="reference external" href="http://www.gdal.org/drv_vrt.html">VRT</a> capability to reproject the data
+for us on-the-fly:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;OGRVRTDataSource&gt;</span>
+    <span class="nt">&lt;OGRVRTWarpedLayer&gt;</span>
+        <span class="nt">&lt;OGRVRTLayer</span> <span class="na">name=</span><span class="s">&quot;OGRGeoJSON&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;SrcDataSource&gt;</span>attributes.json<span class="nt">&lt;/SrcDataSource&gt;</span>
+            <span class="nt">&lt;LayerSRS&gt;</span>EPSG:4326<span class="nt">&lt;/LayerSRS&gt;</span>
+        <span class="nt">&lt;/OGRVRTLayer&gt;</span>
+        <span class="nt">&lt;TargetSRS&gt;</span>+proj=lcc +lat_1=43 +lat_2=45.5 +lat_0=41.75 +lon_0=-120.5 +x_0=399999.9999999999 +y_0=0 +ellps=GRS80 +units=ft +no_defs<span class="nt">&lt;/TargetSRS&gt;</span>
+    <span class="nt">&lt;/OGRVRTWarpedLayer&gt;</span>
+<span class="nt">&lt;/OGRVRTDataSource&gt;</span>
+</pre></div>
+</div>
+<p>Save this VRT definition to a file, called <code class="docutils literal"><span class="pre">attributes.vrt</span></code> in the same location where you
+stored the <code class="docutils literal"><span class="pre">autzen.laz</span></code> and <code class="docutils literal"><span class="pre">attributes.json</span></code> files.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The GeoJSON file does not have an externally-defined coordinate system,
+so we are explictly setting one with the LayerSRS parameter. If your
+data does have coordinate system information, you don&#8217;t need to do that.</p>
+</div>
+<p>The attribute GeoJSON file has a couple of features with different attributes.
+For our scenario, we want to clip out the yellow-green polygon, marked number &#8220;5&#8221;,
+in the upper right hand corner.</p>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../_images/autzen-shapes-point-cloud.png"><img alt="../_images/autzen-shapes-point-cloud.png" src="../_images/autzen-shapes-point-cloud.png" style="width: 1129.0px; height: 668.0px;" /></a>
+<p class="caption"><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span></p>
+</div>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../_images/autzen-shapes-to-clip.png"><img alt="../_images/autzen-shapes-to-clip.png" src="../_images/autzen-shapes-to-clip.png" style="width: 1156.0px; height: 635.0px;" /></a>
+<p class="caption"><span class="caption-text">We want to clip out the polygon in the upper right hand corner.</span></p>
+</div>
+</div>
+<div class="section" id="pipeline">
+<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
+<p>A PDAL <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> is how you define a set of actions to happen to data
+as they are read, filtered, and written.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;2.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+            output.las
+        <span class="nt">&lt;/Option&gt;</span>
+        <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.range&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;limits&quot;</span><span class="nt">&gt;</span>
+               Classification[5:5]
+             <span class="nt">&lt;/Option&gt;</span>
+            <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.attribute&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
+                    Classification
+                <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;datasource&quot;</span><span class="nt">&gt;</span>
+                    attributes.vrt
+                <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;layer&quot;</span><span class="nt">&gt;</span>
+                    OGRGeoJSON
+                <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;column&quot;</span><span class="nt">&gt;</span>
+                    CLS
+                <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
+                        autzen.laz
+                    <span class="nt">&lt;/Option&gt;</span>
+                <span class="nt">&lt;/Reader&gt;</span>
+            <span class="nt">&lt;/Filter&gt;</span>
+        <span class="nt">&lt;/Filter&gt;</span>
+    <span class="nt">&lt;/Writer&gt;</span>
+<span class="nt">&lt;/Pipeline&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> files are read inside-out, so we will start with the
+<a class="reference internal" href="../stages/readers.las.html#readers-las"><span>readers.las</span></a> and move up until we hit the <a class="reference internal" href="../stages/writers.las.html#writers-las"><span>writers.las</span></a>.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../stages/readers.las.html#readers-las"><span>readers.las</span></a>: Define a reader that can read <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> or <a class="reference external" href="http://laszip.org">LASzip</a>
+data.</li>
+<li><a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span>filters.attribute</span></a>: Using the VRT we defined in <a class="reference internal" href="#data-preparation">Data Preparation</a>,
+read attribute polygons out of the data source and assign the values from the
+<code class="docutils literal"><span class="pre">CLS</span></code> column to the <code class="docutils literal"><span class="pre">Classification</span></code> field.</li>
+<li><a class="reference internal" href="../stages/filters.range.html#filters-range"><span>filters.range</span></a>: Given that we have set the <code class="docutils literal"><span class="pre">Classification</span></code> values
+for the points that have coincident polygons to 2, 5, and 6, only keep
+<code class="docutils literal"><span class="pre">Classification</span></code> values in the range of <code class="docutils literal"><span class="pre">5:5</span></code>. This functionally means
+we&#8217;re only keeping those points with a classification value of 5.</li>
+<li><a class="reference internal" href="../stages/writers.las.html#writers-las"><span>writers.las</span></a>: write our content back out using an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> writer.</li>
+</ul>
+</div>
+<div class="section" id="processing">
+<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Save the pipeline to a file called <code class="docutils literal"><span class="pre">shape-clip.xml</span></code> in the same directory as
+your <code class="docutils literal"><span class="pre">attributes.json</span></code> and <code class="docutils literal"><span class="pre">autzen.laz</span></code> files.</p>
+</li>
+<li><p class="first">Call <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> on the <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre>pdal pipeline shape-clip.xml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Visualize <code class="docutils literal"><span class="pre">output.las</span></code> in an environment capable of viewing it. <a class="reference external" href="http://plas.io">http://plas.io</a>
+or <a class="reference external" href="http://www.danielgm.net/cc/">CloudCompare</a> should do the trick.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/autzen-shapes-clipped.png"><img alt="../_images/autzen-shapes-clipped.png" src="../_images/autzen-shapes-clipped.png" style="width: 1104.0px; height: 746.0px;" /></a>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>PDAL allows the composition of point cloud operations. This tutorial demonstrated
+how to use the <a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span>filters.attribute</span></a> and <a class="reference internal" href="../stages/filters.range.html#filters-range"><span>filters.range</span></a> stages to clip
+points with shapefiles.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <div class="footer">
+        <div class="container">
+                    &copy;  2015
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Nov 09, 2015.
+        </div>
+    </div>
+  </body>
+</html>
