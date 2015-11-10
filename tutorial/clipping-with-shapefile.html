@@ -230,16 +230,29 @@
 </tr>
 </tbody>
 </table>
-<p>This tutorial describes how to construct a pipeline that takes in geometries and
-clips out data with given geometry attributes.</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial describes how to construct a pipeline that takes in geometries
 and clips out data with given geometry attributes.  It is common to desire
 being able to cut or clip point cloud data with 2D geometries, often from
-auxillary data sources such as <cite>OGR</cite>-readable <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefiles</a>.  This tutorial
+auxillary data sources such as <a class="reference external" href="http://www.gdal.org">OGR</a>-readable <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefiles</a>.  This tutorial
 describes how to construct a pipeline that takes in geometries and clips out
 point cloud data inside geometries with matching attributes.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#clipping-with-geometries" id="id3">Clipping with Geometries</a><ul>
+<li><a class="reference internal" href="#introduction" id="id4">Introduction</a></li>
+<li><a class="reference internal" href="#example-data" id="id5">Example Data</a></li>
+<li><a class="reference internal" href="#stage-operations" id="id6">Stage Operations</a></li>
+<li><a class="reference internal" href="#data-preparation" id="id7">Data Preparation</a></li>
+<li><a class="reference internal" href="#pipeline" id="id8">Pipeline</a></li>
+<li><a class="reference internal" href="#processing" id="id9">Processing</a></li>
+<li><a class="reference internal" href="#conclusion" id="id10">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="example-data">
 <h2>Example Data<a class="headerlink" href="#example-data" title="Permalink to this headline">¶</a></h2>
@@ -266,6 +279,10 @@ for keeping or rejecting points in a more expressive environment (<a class="refe
 </div>
 <div class="section" id="data-preparation">
 <h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../_images/autzen-shapes-point-cloud.png"><img alt="../_images/autzen-shapes-point-cloud.png" src="../_images/autzen-shapes-point-cloud.png" style="width: 677.4px; height: 400.8px;" /></a>
+<p class="caption"><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span></p>
+</div>
 <p>The data are mixed in two different coordinate systems. The <a class="reference internal" href="../stages/readers.las.html#readers-las"><span>LAZ</span></a> file is in <a class="reference external" href="http://www.oregon.gov/DAS/CIO/GEO/pages/coordination/projections/projections.aspx">Oregon State Plane Ft.</a> and the <a class="reference external" href="http://geojson.org">GeoJSON</a> defining
 the polygons is in <a class="reference external" href="http://epsg.io/4326">EPSG:4326</a>. We have two options &#8211; project the point cloud
 into the coordinate system of the attribute polygons, or project the attribute
@@ -284,24 +301,21 @@ for us on-the-fly:</p>
 <span class="nt">&lt;/OGRVRTDataSource&gt;</span>
 </pre></div>
 </div>
-<p>Save this VRT definition to a file, called <code class="docutils literal"><span class="pre">attributes.vrt</span></code> in the same location where you
-stored the <code class="docutils literal"><span class="pre">autzen.laz</span></code> and <code class="docutils literal"><span class="pre">attributes.json</span></code> files.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The GeoJSON file does not have an externally-defined coordinate system,
 so we are explictly setting one with the LayerSRS parameter. If your
 data does have coordinate system information, you don&#8217;t need to do that.</p>
 </div>
+<p>Save this VRT definition to a file, called <code class="docutils literal"><span class="pre">attributes.vrt</span></code> in the same location where you
+stored the <code class="docutils literal"><span class="pre">autzen.laz</span></code> and <code class="docutils literal"><span class="pre">attributes.json</span></code> files.</p>
 <p>The attribute GeoJSON file has a couple of features with different attributes.
 For our scenario, we want to clip out the yellow-green polygon, marked number &#8220;5&#8221;,
 in the upper right hand corner.</p>
-<div class="figure" id="id1">
-<a class="reference internal image-reference" href="../_images/autzen-shapes-point-cloud.png"><img alt="../_images/autzen-shapes-point-cloud.png" src="../_images/autzen-shapes-point-cloud.png" style="width: 1129.0px; height: 668.0px;" /></a>
-<p class="caption"><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span></p>
-</div>
 <div class="figure" id="id2">
-<a class="reference internal image-reference" href="../_images/autzen-shapes-to-clip.png"><img alt="../_images/autzen-shapes-to-clip.png" src="../_images/autzen-shapes-to-clip.png" style="width: 1156.0px; height: 635.0px;" /></a>
-<p class="caption"><span class="caption-text">We want to clip out the polygon in the upper right hand corner.</span></p>
+<a class="reference internal image-reference" href="../_images/autzen-shapes-to-clip.png"><img alt="../_images/autzen-shapes-to-clip.png" src="../_images/autzen-shapes-to-clip.png" style="width: 693.6px; height: 381.0px;" /></a>
+<p class="caption"><span class="caption-text">We want to clip out the polygon in the upper right hand corner. We can
+view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geometry using something like <a class="reference external" href="http://qgis.org">QGIS</a></span></p>
 </div>
 </div>
 <div class="section" id="pipeline">
@@ -356,6 +370,14 @@ for the points that have coincident polygons to 2, 5, and 6, only keep
 we&#8217;re only keeping those points with a classification value of 5.</li>
 <li><a class="reference internal" href="../stages/writers.las.html#writers-las"><span>writers.las</span></a>: write our content back out using an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> writer.</li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You don&#8217;t have to use only <code class="docutils literal"><span class="pre">Classification</span></code> to set the attributes
+with <a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span>filters.attribute</span></a>. Any valid dimension name could work, but
+most LiDAR softwares will display categorical coloring for the
+<code class="docutils literal"><span class="pre">Classification</span></code> field, and we can leverage that behavior in this
+scenario.</p>
+</div>
 </div>
 <div class="section" id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
@@ -363,9 +385,9 @@ we&#8217;re only keeping those points with a classification value of 5.</li>
 <li><p class="first">Save the pipeline to a file called <code class="docutils literal"><span class="pre">shape-clip.xml</span></code> in the same directory as
 your <code class="docutils literal"><span class="pre">attributes.json</span></code> and <code class="docutils literal"><span class="pre">autzen.laz</span></code> files.</p>
 </li>
-<li><p class="first">Call <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> on the <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a></p>
+<li><p class="first">Call <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> on the <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a>.</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>pdal pipeline shape-clip.xml
+<div><div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline shape-clip.xml
 </pre></div>
 </div>
 </div></blockquote>
@@ -373,7 +395,7 @@ your <code class="docutils literal"><span class="pre">attributes.json</span></co
 <li><p class="first">Visualize <code class="docutils literal"><span class="pre">output.las</span></code> in an environment capable of viewing it. <a class="reference external" href="http://plas.io">http://plas.io</a>
 or <a class="reference external" href="http://www.danielgm.net/cc/">CloudCompare</a> should do the trick.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/autzen-shapes-clipped.png"><img alt="../_images/autzen-shapes-clipped.png" src="../_images/autzen-shapes-clipped.png" style="width: 1104.0px; height: 746.0px;" /></a>
+<div><a class="reference internal image-reference" href="../_images/autzen-shapes-clipped.png"><img alt="../_images/autzen-shapes-clipped.png" src="../_images/autzen-shapes-clipped.png" style="width: 662.4px; height: 447.6px;" /></a>
 </div></blockquote>
 </li>
 </ol>
