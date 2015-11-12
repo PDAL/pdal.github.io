@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Calculating Normalized Heights &mdash; pdal.io</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="pdal.io" href="../index.html" />
+    <link rel="up" title="Tutorials" href="index.html" />
+    <link rel="next" title="Writing a filter" href="writing-filter.html" />
+    <link rel="prev" title="Clipping with Geometries" href="clipping-with-shapefile.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          PDAL</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../download.html">Download</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Docs <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#current-release-s">Current Release(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#past-releases">Past Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#binaries">Binaries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../compilation/unix.html">Unix Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compilation/windows.html">Building Under Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compilation/dependencies.html">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#delta-command">delta command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#diff-command">diff command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#ground-command">ground command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#info-command">info command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#pcl-command">pcl command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#pipeline-command">pipeline command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#random-command">random command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#split-command">split command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#tindex-command">tindex command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#translate-command">translate command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/index.html">Readers, Writers, and Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#readers">Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#writers">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#developing">Developing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vagrant.html">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrant.html#what-you-get">What you get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/index.html#build-and-test-status">Build and Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/cpp/index.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../metadata.html">Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html#metadata-types">Metadata Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html#json-representation">JSON representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Here <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Calculating Normalized Heights</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#approach">Approach</a></li>
+<li><a class="reference internal" href="#example-1">Example #1</a></li>
+<li><a class="reference internal" href="#example-2">Example #2</a></li>
+<li><a class="reference internal" href="#example-3">Example #3</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="clipping-with-shapefile.html" title="Previous Chapter: Clipping with Geometries"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Clipping with...</span>
+    </a>
+  </li>
+  <li>
+    <a href="writing-filter.html" title="Next Chapter: Writing a filter"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Writing a filter &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="calculating-normalized-heights">
+<h1>Calculating Normalized Heights<a class="headerlink" href="#calculating-normalized-heights" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Bradley Chambers</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">11/11/2015</td>
+</tr>
+</tbody>
+</table>
+<p>This tutorial will describe the creation of a new filter for calculating normalized heights, <a class="reference internal" href="../stages/filters.height.html#filters-height"><span>filters.height</span></a>.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Normalized heights are a commonly used attribute of point cloud data. This can also be referred to as _height above <a href="#id1"><span class="problematic" id="id2">ground_</span></a> (HAG) or _above ground <a href="#id3"><span class="problematic" id="id4">level_</span></a> (AGL) heights. In the end, it is simply a measure of a point&#8217;s relative height as opposed to its raw elevation value.</p>
+<p>The process of computing normalized heights is straightforward. First, we must have an estimate of the underlying terrain model. With this we can compute the difference between each point&#8217;s elevation and the elevation of the terrain model at the same XY coordinate. The quality of the normalized heights will be a function of the quality of the terrain model, which of course depends on the quality of the ground segmentation approach and any interpolation that is required to arrive at the terrain elevation for a given XY coordinate.</p>
+<p>We will use a nearest neighbor interpolation scheme to estimate terrain elevations. While this may not be the most accurate approach, it is available in PDAL today, and we hope it will inspire you to implement your own methods!</p>
+</div>
+<div class="section" id="approach">
+<h2>Approach<a class="headerlink" href="#approach" title="Permalink to this headline">¶</a></h2>
+<p>For the height filter, we only assume that our input point cloud has an already existing <code class="docutils literal"><span class="pre">Classification</span></code> dimension with some subset of points marked as ground (<code class="docutils literal"><span class="pre">Classification=2</span></code>). This could, for example, be generated by <a class="reference internal" href="../stages/filters.ground.html#filters-ground"><span>filters.ground</span></a> (see <a class="reference internal" href="pcl_ground.html#pcl-ground"><span>Identifying ground returns using ProgressiveMorphologicalFilter segmentation</span></a>), but you can use whichever method you choose, as long as the ground returns are marked.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We expect ground returns to have the classification value of 2 in keeping with the ASPRS Standard LIDAR Point Classes (see <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf">http://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf</a>).</p>
+</div>
+<p>For the full source, please see <code class="docutils literal"><span class="pre">HeightFilter.cpp</span></code> in the <code class="docutils literal"><span class="pre">plugins/pcl/filters</span></code> folder. Below, we dissect the key aspects of the algorithm and its implementation.</p>
+<p>The bulk of our processing is actually taking place within PCL. For convenience, we&#8217;ve defined:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">Cloud</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Our first step is to convert the filter&#8217;s incoming PDAL <code class="docutils literal"><span class="pre">PointView</span></code> to a PCL <code class="docutils literal"><span class="pre">PointCloud</span></code>, which requires that we first calculate our bounds so that we can subtract our XYZ offsets in the conversion step.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">BOX3D</span> <span class="n">bounds</span><span class="p">;</span>
+<span class="n">view</span><span class="p">.</span><span class="n">calculateBounds</span><span class="p">(</span><span class="n">bounds</span><span class="p">);</span>
+
+<span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_in</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
+<span class="n">pclsupport</span><span class="o">::</span><span class="n">PDALtoPCD</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">PointView</span><span class="o">&gt;</span><span class="p">(</span><span class="n">view</span><span class="p">),</span> <span class="o">*</span><span class="n">cloud_in</span><span class="p">,</span> <span class="n">bounds</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next, we will create two vectors of indices - one for ground returns, one for non-ground returns - and make our first pass through the point cloud to populate these.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">PointIndices</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">ground</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointIndices</span><span class="p">());</span>
+<span class="n">ground</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PointId</span><span class="o">&gt;</span> <span class="n">nonground</span><span class="p">;</span>
+<span class="n">nonground</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">PointId</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">id</span> <span class="o">&lt;</span> <span class="n">view</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">id</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">c</span> <span class="o">=</span> <span class="n">view</span><span class="p">.</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Classification</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">ground</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">nonground</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With our ground indices identified, we can use PCL to extract the ground returns into a new <code class="docutils literal"><span class="pre">PointCloud</span></code>.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">ExtractIndices</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">extract</span><span class="p">;</span>
+<span class="n">extract</span><span class="p">.</span><span class="n">setInputCloud</span><span class="p">(</span><span class="n">cloud_in</span><span class="p">);</span>
+<span class="n">extract</span><span class="p">.</span><span class="n">setIndices</span><span class="p">(</span><span class="n">ground</span><span class="p">);</span>
+
+<span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_ground</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
+<span class="n">extract</span><span class="p">.</span><span class="n">setNegative</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<span class="n">extract</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">*</span><span class="n">cloud_ground</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We repeat the extraction now, flipping <code class="docutils literal"><span class="pre">setNegative</span></code> from false to true to extract the non-ground returns into a new <code class="docutils literal"><span class="pre">PointCloud</span></code>.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_nonground</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
+<span class="n">extract</span><span class="p">.</span><span class="n">setNegative</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="n">extract</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">*</span><span class="n">cloud_nonground</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To compute the normalized height, we wish to find the nearest ground point for each non-ground point. Here, we achieve this by using a nearest neighbor interpolation scheme. One may prefer to use a more sophisticated interpolation scheme, but that is beyond the scope of this tutorial. We begin by defining model coefficients that will allow us to project the ground and non-ground clouds into the XY plane.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">ModelCoefficients</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">coefficients</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">ModelCoefficients</span><span class="p">());</span>
+<span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>We can now project the ground points</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">ProjectInliers</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">proj</span><span class="p">;</span>
+<span class="n">proj</span><span class="p">.</span><span class="n">setModelType</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">SACMODEL_PLANE</span><span class="p">);</span>
+
+<span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_ground_projected</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
+<span class="n">proj</span><span class="p">.</span><span class="n">setInputCloud</span><span class="p">(</span><span class="n">cloud_ground</span><span class="p">);</span>
+<span class="n">proj</span><span class="p">.</span><span class="n">setModelCoefficients</span><span class="p">(</span><span class="n">coefficients</span><span class="p">);</span>
+<span class="n">proj</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">*</span><span class="n">cloud_ground_projected</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>followed by the non-ground points</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_nonground_projected</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
+<span class="n">proj</span><span class="p">.</span><span class="n">setInputCloud</span><span class="p">(</span><span class="n">cloud_nonground</span><span class="p">);</span>
+<span class="n">proj</span><span class="p">.</span><span class="n">setModelCoefficients</span><span class="p">(</span><span class="n">coefficients</span><span class="p">);</span>
+<span class="n">proj</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">*</span><span class="n">cloud_nonground_projected</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next, we create a KdTree to accelerate our nearest neighbor search. The tree is composed of only ground returns, as our non-ground returns will serve as query points for the nearest neighbor search.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">search</span><span class="o">::</span><span class="n">KdTree</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="n">ground_tree</span><span class="p">;</span>
+<span class="n">ground_tree</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">search</span><span class="o">::</span><span class="n">KdTree</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="p">(</span><span class="nb">false</span><span class="p">));</span>
+<span class="n">ground_tree</span><span class="o">-&gt;</span><span class="n">setInputCloud</span><span class="p">(</span><span class="n">cloud_ground_projected</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We iterate over each of our projected non-ground points, searching for our nearest neighbor in the ground points. Using the indices of each the query (non-ground) and nearest neighbor (ground), we can retrieve the Z dimension from the input cloud, compute the height, and set this field in our original <code class="docutils literal"><span class="pre">PointView</span></code>.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cloud_nonground_projected</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span> <span class="n">nonground_query</span> <span class="o">=</span> <span class="n">cloud_nonground_projected</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">sqr_distances</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">ground_tree</span><span class="o">-&gt;</span><span class="n">nearestKSearch</span><span class="p">(</span><span class="n">nonground_query</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">sqr_distances</span><span class="p">);</span>
+
+    <span class="kt">double</span> <span class="n">nonground_Z</span> <span class="o">=</span> <span class="n">view</span><span class="p">.</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">nonground</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="kt">double</span> <span class="n">ground_Z</span> <span class="o">=</span> <span class="n">view</span><span class="p">.</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">ground</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">[</span><span class="n">neighbors</span><span class="p">[</span><span class="mi">0</span><span class="p">]]);</span>
+    <span class="kt">double</span> <span class="n">height</span> <span class="o">=</span> <span class="n">nonground_Z</span> <span class="o">-</span> <span class="n">ground_Z</span><span class="p">;</span>
+
+    <span class="n">view</span><span class="p">.</span><span class="n">setField</span><span class="p">(</span><span class="n">m_heightDim</span><span class="p">,</span> <span class="n">nonground</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">height</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The only thing left is to set the height field to 0.0 for each of the ground points.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">&amp;</span> <span class="nl">ground_idx</span> <span class="p">:</span> <span class="n">ground</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">)</span>
+    <span class="n">view</span><span class="p">.</span><span class="n">setField</span><span class="p">(</span><span class="n">m_heightDim</span><span class="p">,</span> <span class="n">ground_idx</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-1">
+<h2>Example #1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>Using the autzen dataset (here shown colored by elevation)</p>
+<a class="reference internal image-reference" href="../_images/autzen-elevation.png"><img alt="../_images/autzen-elevation.png" src="../_images/autzen-elevation.png" style="height: 400px;" /></a>
+<p>we run the following PDAL CLI command</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate autzen.laz autzen-height.bpf height \
+  --writers.bpf.output_dims=&quot;X,Y,Z,Height&quot;
+</pre></div>
+</div>
+<p>The result, when colored by the normalized height instead of elevation is</p>
+<a class="reference internal image-reference" href="../_images/autzen-elevation.png"><img alt="../_images/autzen-elevation.png" src="../_images/autzen-elevation.png" style="height: 400px;" /></a>
+</div>
+<div class="section" id="example-2">
+<h2>Example #2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;d like to overwrite your Z values, follow the height filter with <a class="reference internal" href="../stages/filters.ferry.html#filters-ferry"><span>filters.ferry</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate input.laz output-height-as-Z.bpf height ferry \
+  --writers.bpf.output_dims=&quot;X,Y,Z&quot; --filters.ferry.dimensions=&quot;Height=Z&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-3">
+<h2>Example #3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h2>
+<p>If you don&#8217;t yet have points classified as ground, start with <a class="reference internal" href="../stages/filters.ground.html#filters-ground"><span>filters.ground</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pdal translate input.laz output-ground-height.bpf ground height \
+  --writers.bpf.output_dims=&quot;X,Y,Z,Height&quot;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <div class="footer">
+        <div class="container">
+                    &copy;  2015
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Nov 12, 2015.
+        </div>
+    </div>
+  </body>
+</html>

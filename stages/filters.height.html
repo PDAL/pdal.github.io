@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>filters.hexbin &mdash; pdal.io</title>
+    <title>filters.height &mdash; pdal.io</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -34,8 +34,8 @@
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="top" title="pdal.io" href="../index.html" />
     <link rel="up" title="Readers, Writers, and Filters" href="index.html" />
-    <link rel="next" title="filters.merge" href="filters.merge.html" />
-    <link rel="prev" title="filters.height" href="filters.height.html" />
+    <link rel="next" title="filters.hexbin" href="filters.hexbin.html" />
+    <link rel="prev" title="filters.ground" href="filters.ground.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -163,8 +163,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">filters.hexbin</a><ul>
-<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#">filters.height</a><ul>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -177,11 +176,11 @@
               
                 
   <li>
-    <a href="filters.height.html" title="Previous Chapter: filters.height"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; filters.height</span>
+    <a href="filters.ground.html" title="Previous Chapter: filters.ground"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; filters.ground</span>
     </a>
   </li>
   <li>
-    <a href="filters.merge.html" title="Next Chapter: filters.merge"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">filters.merge &raquo;</span>
+    <a href="filters.hexbin.html" title="Next Chapter: filters.hexbin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">filters.hexbin &raquo;</span>
     </a>
   </li>
               
@@ -211,85 +210,12 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="filters-hexbin">
-<span id="id1"></span><h1>filters.hexbin<a class="headerlink" href="#filters-hexbin" title="Permalink to this headline">¶</a></h1>
-<p>A common questions for users of point clouds is what the spatial extent of a point cloud collection is. Files generally provide only rectangular bounds, but often the points inside the files only fill up a small percentage of the area within the bounds.</p>
-<div class="figure" id="id2">
-<a class="reference internal image-reference" href="../_images/filters.hexbin.img1.jpg"><img alt="Hexbin derive from input point buffer" src="../_images/filters.hexbin.img1.jpg" style="width: 464.0px; height: 456.5px;" /></a>
-<p class="caption"><span class="caption-text">Hexbin output shows boundary of actual points in point buffer, not just rectangular extents.</span></p>
-</div>
-<p>The hexbin filter reads a point stream and writes out a metadata record that contains a much tighter data bound, expressed as a well-known text polygon. In order to write out the metadata record, the <cite>pdal</cite> pipeline command must be invoked using the <cite>&#8211;pipeline-serialization</cite> option:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal hexbin-pipeline.xml --pipeline-serialization hexbin-out.xml
-</pre></div>
-</div>
-<p>After running with the pipeline serialization option, the output file looks like this:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;PointView&gt;</span>
-  <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;pointbuffer&quot;</span> <span class="na">type=</span><span class="s">&quot;blank&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;filters.hexbin&quot;</span> <span class="na">type=</span><span class="s">&quot;blank&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;edge_size&quot;</span> <span class="na">type=</span><span class="s">&quot;double&quot;</span><span class="nt">&gt;</span>
-        0.002218331916495204
-      <span class="nt">&lt;/Metadata&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;threshold&quot;</span> <span class="na">type=</span><span class="s">&quot;nonNegativeInteger&quot;</span><span class="nt">&gt;</span>
-        15
-      <span class="nt">&lt;/Metadata&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;sample_size&quot;</span> <span class="na">type=</span><span class="s">&quot;nonNegativeInteger&quot;</span><span class="nt">&gt;</span>
-        5000
-      <span class="nt">&lt;/Metadata&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;boundary&quot;</span> <span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="nt">&gt;</span>
-        MULTIPOLYGON (((
-        -80.8466 35.2183, -80.8460 35.2194,
-        -80.8447 35.2194, -80.8441 35.2205,
-        -80.8428 35.2205, -80.8421 35.2216,
-        ...
-        -80.8498 35.2194, -80.8486 35.2194,
-        -80.8479 35.2183, -80.8466 35.2183
-        )))
-      <span class="nt">&lt;/Metadata&gt;</span>
-    <span class="nt">&lt;/Metadata&gt;</span>
-  <span class="nt">&lt;/Metadata&gt;</span>
-<span class="nt">&lt;/PointView&gt;</span>
-</pre></div>
-</div>
-<p>In addition, if you have defined a writer you will have the usual point data output file.</p>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      file-output.las
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.hexbin&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;x_dim&quot;</span><span class="nt">&gt;</span>readers.las.X<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;y_dim&quot;</span><span class="nt">&gt;</span>readers.las.Y<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;threshold&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-          file-input.las
-        <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;/Reader&gt;</span>
-    <span class="nt">&lt;/Filter&gt;</span>
-  <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
-</pre></div>
-</div>
-</div>
+  <div class="section" id="filters-height">
+<span id="id1"></span><h1>filters.height<a class="headerlink" href="#filters-height" title="Permalink to this headline">¶</a></h1>
+<p>The Height filter takes as input a point cloud with a Classification dimension, with ground points assigned the classification label of 2 (per LAS specification). It returns a point cloud with a new dimension <code class="docutils literal"><span class="pre">Height</span></code> that contains the normalized height value.</p>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>x_dim</dt>
-<dd>The name of the dimension to use as the X coordinate in the cropping process. [Default: <strong>X</strong>]</dd>
-<dt>y_dim</dt>
-<dd>The name of the dimension to use as the Y coordinate in the cropping process. [Default: <strong>Y</strong>]</dd>
-<dt>edge_size</dt>
-<dd>If not set, the hexbin filter will estimate a hex size based on a sample of the data. If set, hexbin will use the provided size in constructing the hexbins to test.</dd>
-<dt>sample_size</dt>
-<dd>How many points to sample when automatically calculating the edge size? [Default: <strong>5000</strong>]</dd>
-<dt>threshold</dt>
-<dd>Number of points that have to fall within a hexbin before it is considered &#8220;in&#8221; the data set. [Default: <strong>15</strong>]</dd>
-<dt>precision</dt>
-<dd>Coordinate precision to use in writing out the well-known text of the boundary polygon. [Default: <strong>8</strong>]</dd>
-</dl>
+<p>None</p>
 </div>
 </div>
 
