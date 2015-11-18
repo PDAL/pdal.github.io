@@ -216,15 +216,41 @@
 <p>The <strong>LAS Reader</strong> supports reading from <a class="reference external" href="http://asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">LAS format</a> files, the standard
 interchange format for LIDAR data.  The reader does NOT support point formats
 containing waveform data (4, 5, 9 and 10).</p>
-<p>The reader will accept version 1.4 LAS files and will interpret the extra bytes
-VLR (User ID: LASF_Spec, Record ID: 4) if present.  Two dimensions are
-created for each
-extra byte field with types 11 - 20, &#8220;0&#8221; and &#8220;1&#8221; being appended to the field
-name to create the dimension names. Three dimensions are created for each
-extra byte field with types 21-30, &#8220;0&#8221;, &#8220;1&#8221; and &#8220;2&#8221; being appended to the field
-name to create the dimension names.  Field type 0 is understood, but the data
-associated with field type 0 is ignored (no PDAL dimension is created).  The
-presence of this VLR overrides the <strong>extra_dims</strong> option.</p>
+<p>The reader also supports compressed LAS files, known as LAZ files or
+<a class="reference external" href="http://www.laszip.org">LASzip</a> files.
+In order to use compresed LAS, your version of PDAL must be built with one of
+the two supported decompressors, <a class="reference external" href="http://www.laszip.org">LASzip</a> or <a class="reference external" href="https://github.com/verma/laz-perf">LAZperf</a>.  See the
+<a class="reference internal" href="#compression">compression</a> option below for more information.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LAS stores X, Y and Z dimensions as scaled integers.  Users converting an
+input LAS file to an output LAS file will frequently want to use the same
+scale factors and offsets in the output file as existed in the input
+file in order to
+maintain the precision of the data.  Use the &#8216;forward&#8217; option on the
+<a class="reference internal" href="writers.las.html#writers-las"><span>writers.las</span></a> to facilitate transfer of header information from
+source to destination LAS/LAZ files.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LAS 1.4 files can contain datatypes that are actually arrays rather than
+individual dimensions.  Since PDAL doesn&#8217;t support these datatypes, it
+must map them into datatypes is supports.  This is done by appending the
+array index to the name of the datatype.  For example, datatypes 11 - 20
+are two dimensional array types and if a field had the name Foo for
+datatype 11, PDAL would create the dimensions Foo0 and Foo1 to hold the
+values associated with LAS field Foo.  Similarly, datatypes 21 - 30 are
+three dimensional arrays and a field of type 21 with the name Bar would
+cause PDAL to create dimensions Bar0, Bar1 and Bar2.  See the information
+on the extra bytes VLR in the <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf">LAS Specification</a> for more information
+on the extra bytes VLR and array datatypes.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LAS 1.4 files that use the extra bytes VLR and datatype 0 will be accepted,
+but the data associated with a dimension of datatype 0 will be ignored
+(no PDAL dimension will be created).</p>
+</div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -242,17 +268,19 @@ presence of this VLR overrides the <strong>extra_dims</strong> option.</p>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>filename</dt>
+<dt><span class="target" id="filename">filename</span></dt>
 <dd>LAS file to read [Required]</dd>
-<dt>extra_dims</dt>
+<dt><span class="target" id="extra-dims">extra_dims</span></dt>
 <dd>Extra dimensions to be read as part of each point beyond those specified by
 the LAS point format.  The format of the option is
 &lt;dimension_name&gt;=&lt;type&gt;, ... where type is one of:
 int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double
-&#8216;_t&#8217; may be added to any of the type names as well (e.g., uint32_t)</dd>
+&#8216;_t&#8217; may be added to any of the type names as well (e.g., uint32_t).  NOTE:
+the presence of an extra bytes VLR causes when reading a version 1.4 LAS
+file causes this option to be ignored.</dd>
 </dl>
 <dl class="docutils">
-<dt>compression</dt>
+<dt><span class="target" id="compression">compression</span></dt>
 <dd>May be set to &#8220;lazperf&#8221; or &#8220;laszip&#8221; to choose either the LazPerf decompressor
 or the LasZip decompressor for LAZ files.  PDAL must have been build with
 support for the decompressor being requested.  The LazPerf decompressor
