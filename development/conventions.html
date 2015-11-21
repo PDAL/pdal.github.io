@@ -243,7 +243,7 @@ neither count thou five...&#8221;)</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">copyright header on every file</p>
+<li><p class="first">copyright header, license, and author(s) on every file</p>
 </li>
 <li><p class="first">two spaces between major units, e.g. function bodies</p>
 </li>
@@ -270,8 +270,8 @@ variables</li>
 may introduce a nested namespace.</li>
 <li>Use exceptions for exceptional events that are not going to be handled
 directly within the context of where the event occurs.  Avoid status
-codes.  See exceptions.hpp for a set of pdal-specific exception types
-you may throw.  (See Note on error handling)</li>
+codes.  See pdal_error.hpp for a set of pdal-specific exception types
+you may throw.</li>
 <li>Describe use of &#8220;debug&#8221; and &#8220;verbose&#8221; settings.</li>
 <li>Don&#8217;t put member function bodies in the class declaration in the
 header file, unless clearly justified for performance reasons.
@@ -292,24 +292,33 @@ doxygen markup.</li>
 </div>
 <div class="section" id="include-conventions">
 <h2>#include Conventions<a class="headerlink" href="#include-conventions" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>For public headers from the ./include/pdal directory, use angle brackets:
-#include &lt;pdal/Stage.h&gt;</li>
-<li>For private headers (from somehwere in ./src), use quotes:
-#include &#8220;support.hpp&#8221;</li>
-<li>#include lines should be grouped and arranged in this order: C++/std headers,
+<ul>
+<li><p class="first">For public headers from the ./include/pdal directory, use angle brackets:
+#include &lt;pdal/Stage.h&gt;</p>
+</li>
+<li><p class="first">For private headers (from somehwere in ./src), use quotes:
+#include &#8220;support.hpp&#8221;</p>
+</li>
+<li><p class="first">#include lines should be grouped and arranged in this order: C++/std headers,
 3rd-party headers (e.g. gdal or boost), pdal headers, local headers.  The
 pdal headers may be further grouped by subdirectory, e.g. drivers/liblas,
-filters, etc.</li>
-<li>Exception to the above: source files (.cpp) should #include their
+filters, etc.</p>
+</li>
+<li><p class="first">Exception to the above: source files (.cpp) should #include their
 corresponding .hpp file first.  This assures that the header is including
-all the files it needs to.</li>
-<li>Don&#8217;t #include a file where a simple forward declaration will do.
+all the files it needs to.</p>
+</li>
+<li><p class="first">Don&#8217;t #include a file where a simple forward declaration will do.
 (Note: this only applies to pdal files; don&#8217;t forward declare from system
-or 3rd party headers.)</li>
-<li>Don&#8217;t include a file unless it actually is required to compile the source unit.</li>
-<li>Include guards should spell out the full path, like this:
-#ifndef INCLUDED_DRIVERS_FAUX_READER_ITERATOR_HPP</li>
+or 3rd party headers.)</p>
+</li>
+<li><p class="first">Don&#8217;t include a file unless it actually is required to compile the source unit.</p>
+</li>
+<li><p class="first">Don&#8217;t use manual include guards. All reasonable compilers support the once pragma:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#pragma once</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 </div>
