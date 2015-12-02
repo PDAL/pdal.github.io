@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FAQ &mdash; pdal.io</title>
+    <title>Docker &mdash; pdal.io</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -33,8 +33,8 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="copyright.html" />
     <link rel="top" title="pdal.io" href="index.html" />
-    <link rel="next" title="Development" href="development/index.html" />
-    <link rel="prev" title="Pipeline" href="pipeline.html" />
+    <link rel="next" title="Pipeline" href="pipeline.html" />
+    <link rel="prev" title="libLAS C API to PDAL transition guide" href="tutorial/liblas_to_pdal.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -117,11 +117,11 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorial/index.html#developing">Developing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#data">Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#what-you-get">What you get</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-you-get">What you get</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a><ul>
@@ -131,7 +131,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development/index.html">Development</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="development/index.html#build-and-test-status">Build and Test Status</a></li>
 </ul>
@@ -163,7 +163,13 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">FAQ</a></li>
+<li><a class="reference internal" href="#">Docker</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#data">Data</a></li>
+<li><a class="reference internal" href="#what-you-get">What you get</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -173,11 +179,11 @@
               
                 
   <li>
-    <a href="pipeline.html" title="Previous Chapter: Pipeline"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Pipeline</span>
+    <a href="tutorial/liblas_to_pdal.html" title="Previous Chapter: libLAS C API to PDAL transition guide"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; libLAS C API ...</span>
     </a>
   </li>
   <li>
-    <a href="development/index.html" title="Next Chapter: Development"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Development &raquo;</span>
+    <a href="pipeline.html" title="Next Chapter: Pipeline"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Pipeline &raquo;</span>
     </a>
   </li>
               
@@ -207,43 +213,70 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="faq">
-<span id="id1"></span><h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
-<ul id="index-0">
-<li><p class="first">How do you pronounce PDAL?</p>
-<p>The proper spelling of the project name is PDAL, in uppercase. It is
-pronounced to rhyme with &#8220;GDAL&#8221;.</p>
-</li>
-<li><p class="first">What is PDAL&#8217;s relationship to PCL?</p>
-<p>PDAL is PCL&#8217;s data translation cousin. PDAL is focused on providing a
-declarative pipeline syntax for orchestrating translation operations.
-PDAL can also use PCL through the <a class="reference internal" href="stages/filters.pclblock.html#filters-pclblock"><span>filters.pclblock</span></a> mechanism.</p>
-</li>
-<li><p class="first">What is PDAL&#8217;s relationship to libLAS?</p>
-<p>The idea behind libLAS was limited to LIDAR data and basic
-manipulation. libLAS was also trying to be partially compatible
-with LASlib and LAStools. PDAL, on the other hand, aims to be
-a ultimate library and a set of tools for manipulating and processing
-point clouds and is easily extensible by its users.</p>
-</li>
-<li><p class="first">Are there any command line tools in PDAL similar to LAStools?</p>
-<p>Yes. The <code class="docutils literal"><span class="pre">pdal</span></code> command provides a wide range of features which go
-far beyond basic LIDAR data processing. Additionally, PDAL is licensed
-under an open source license (this applies to the whole library and
-all command line tools).</p>
+  <div class="section" id="docker">
+<span id="id1"></span><h1>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Howard Butler</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:howard&#37;&#52;&#48;hobu&#46;co">howard<span>&#64;</span>hobu<span>&#46;</span>co</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">12/02/2015</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="introduction">
+<span id="index-0"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s a giant pain to build everything yourself. Like the <a class="reference internal" href="vagrant.html#vagrant"><span>Vagrant</span></a> configuration,
+a PDAL build based on <a class="reference internal" href="#docker">Docker</a> is also available. This document describes how
+to use it to operate on data.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="apps.html#apps"><span>Applications</span></a> describes application operations you can
-achieve with PDAL.</p>
+<p class="last">The <a class="reference external" href="https://www.docker.com/what-docker">What is Docker</a> document describes
+in more detail what exactly Docker is. Think of it as a virtualization platform
+that doesn&#8217;t have to be &#8220;built&#8221; every time from scratch like <a class="reference internal" href="vagrant.html#vagrant"><span>Vagrant</span></a>.</p>
 </div>
-</li>
-<li><p class="first">Is there any compatibility with libLAS&#8217;s LAS Utility Applications or LAStools?</p>
-<p>No. The the command line interface was developed from scratch with
-focus on usability and readability. You will find that the <code class="docutils literal"><span class="pre">pdal</span></code>
-command has several well-organized subcommands such as <code class="docutils literal"><span class="pre">info</span></code>
-or <code class="docutils literal"><span class="pre">translate</span></code> (see <a class="reference internal" href="apps.html#apps"><span>Applications</span></a>).</p>
-</li>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Install <a class="reference internal" href="#docker">Docker</a>.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.docker.com/windows/started/">Windows</a></li>
+<li><a class="reference external" href="http://docs.docker.com/mac/started/">OSX</a></li>
+<li><a class="reference external" href="http://docs.docker.com/linux/started/">Linux</a></li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This tutorial will assume you are running on Windows, but the same commands should
+work in OSX or Linux too.</p>
+</div>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>Copy some LAS data to the directory you&#8217;re running the shell</p>
+</div>
+<div class="section" id="what-you-get">
+<h2>What you get<a class="headerlink" href="#what-you-get" title="Permalink to this headline">¶</a></h2>
+<p>The <a href="#id2"><span class="problematic" id="id3">:ref:`docker`_</span></a> configuration that PDAL provides contains nearly
+every possible feature except for <a class="reference external" href="http://docs.oracle.com/cd/B28359_01/appdev.111/b28400/sdo_pc_pkg_ref.htm">Oracle Point Cloud</a> support. Things it
+includes are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="stages/filters.hexbin.html#filters-hexbin"><span>filters.hexbin</span></a></li>
+<li><a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span>filters.reprojection</span></a></li>
+<li><a class="reference internal" href="stages/readers.nitf.html#readers-nitf"><span>readers.nitf</span></a> and <a class="reference internal" href="stages/writers.nitf.html#writers-nitf"><span>writers.nitf</span></a></li>
+<li><a class="reference external" href="http://laszip.org">LASzip</a> support in <a class="reference internal" href="stages/readers.las.html#readers-las"><span>readers.las</span></a> and <a class="reference internal" href="stages/writers.las.html#writers-las"><span>writers.las</span></a></li>
+<li>Interpolation with <a class="reference external" href="https://github.com/CRREL/points2grid">Points2Grid</a> using <a class="reference internal" href="stages/writers.p2g.html#writers-p2g"><span>writers.p2g</span></a></li>
+<li>Python manipulation using <a class="reference internal" href="stages/filters.predicate.html#filters-predicate"><span>filters.predicate</span></a> and <a class="reference internal" href="stages/filters.programmable.html#filters-programmable"><span>filters.programmable</span></a></li>
+<li><a class="reference external" href="http://www.pointclouds.org">PCL</a> support via <a class="reference internal" href="stages/filters.pclblock.html#filters-pclblock"><span>filters.pclblock</span></a>, <a class="reference internal" href="stages/readers.pcd.html#readers-pcd"><span>readers.pcd</span></a>,
+<a class="reference internal" href="stages/writers.pcd.html#writers-pcd"><span>writers.pcd</span></a>, <a class="reference internal" href="apps.html#ground-command"><span>ground command</span></a>, and <a class="reference internal" href="apps.html#pcl-command"><span>pcl command</span></a></li>
+<li><a class="reference internal" href="stages/writers.geowave.html#writers-geowave"><span>writers.geowave</span></a></li>
+</ul>
+<p>Head to <a class="reference internal" href="pipeline.html#pipeline"><span>Pipeline</span></a> for more information on using PDAL pipelines. Two pipelines
+are provided in <code class="docutils literal"><span class="pre">/home/vagrant</span></code> that are used to load the <code class="docutils literal"><span class="pre">st-helens-small.las</span></code>
+file into <a class="reference external" href="https://github.com/pramsey/pointcloud">pgpointcloud</a>.</p>
+</div>
 </div>
 
 
