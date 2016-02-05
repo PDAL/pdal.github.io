@@ -254,42 +254,31 @@ yourself.</p>
 
 <span class="cp">#include &lt;vector&gt;</span>
 
-<span class="k">struct</span> <span class="n">Point</span>
+<span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">getMyData</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">output</span><span class="p">;</span>
-    <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Point</span>
+    <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">};</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="p">{</span>
+        <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+
         <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
         <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
         <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
-        <span class="n">output</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
-<span class="p">}</span>
 
-
-<span class="kt">void</span> <span class="n">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Point</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">pt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
 
@@ -301,23 +290,23 @@ yourself.</p>
     <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
     <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
 
-    <span class="p">{</span>
-        <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+    <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
 
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMyData</span><span class="p">();</span>
-        <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
 
-        <span class="n">BufferReader</span> <span class="o">*</span><span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferReader</span><span class="p">();</span>
-        <span class="n">reader</span><span class="o">-&gt;</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+    <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
+    <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
 
-        <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
-        <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span>
+    <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
 
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">reader</span><span class="p">);</span>
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
+    <span class="c1">// stage and facilitate clean up.</span>
+    <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -339,43 +328,29 @@ we rely on the <cite>StageFactory</cite> which has the ability to query availabl
 at runtime and return pointers to the created stages.</p>
 <p>We proceed by providing a mechanism for generating dummy data for the x, y, and
 z dimensions.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Point</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">getMyData</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">output</span><span class="p">;</span>
-    <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Point</span>
+    <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">};</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="p">{</span>
+        <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+
         <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
         <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
         <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
-        <span class="n">output</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
-<span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Point</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">pt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">pt</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Finally, the main code which creates the dummy data, puts it into a BufferReader
-and sends it to a writer.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
@@ -385,26 +360,27 @@ and sends it to a writer.</p>
 
     <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
     <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally, the main code which creates the dummy data, puts it into a BufferReader
+and sends it to a writer.</p>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
 
-    <span class="p">{</span>
-        <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+    <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
 
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMyData</span><span class="p">();</span>
-        <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
+    <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
 
-        <span class="n">BufferReader</span> <span class="o">*</span><span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferReader</span><span class="p">();</span>
-        <span class="n">reader</span><span class="o">-&gt;</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+    <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
 
-        <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
-        <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span>
+    <span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
+    <span class="c1">// stage and facilitate clean up.</span>
+    <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
 
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">reader</span><span class="p">);</span>
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-        <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>

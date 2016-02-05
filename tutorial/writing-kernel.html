@@ -249,22 +249,21 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <span class="k">namespace</span> <span class="n">pdal</span>
 <span class="p">{</span>
 
-  <span class="k">class</span> <span class="nc">PDAL_DLL</span> <span class="nl">MyKernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">Kernel</span>
-  <span class="p">{</span>
-  <span class="k">public</span><span class="o">:</span>
+<span class="k">class</span> <span class="nc">PDAL_DLL</span> <span class="nl">MyKernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">Kernel</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
     <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">create</span><span class="p">();</span>
     <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
     <span class="kt">int</span> <span class="nf">execute</span><span class="p">();</span> <span class="c1">// override</span>
 
-  <span class="k">private</span><span class="o">:</span>
+<span class="k">private</span><span class="o">:</span>
     <span class="n">MyKernel</span><span class="p">();</span>
-    <span class="kt">void</span> <span class="nf">validateSwitches</span><span class="p">();</span>
-    <span class="kt">void</span> <span class="nf">addSwitches</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">addSwitches</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">);</span>
 
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_input_file</span><span class="p">;</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_output_file</span><span class="p">;</span>
-  <span class="p">};</span>
+<span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace pdal</span>
 </pre></div>
@@ -282,8 +281,6 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// MyKernel.cpp</span>
 
 <span class="cp">#include &quot;MyKernel.hpp&quot;</span>
-
-<span class="cp">#include &lt;boost/program_options.hpp&gt;</span>
 
 <span class="cp">#include &lt;pdal/Filter.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/Kernel.hpp&gt;</span>
@@ -314,25 +311,10 @@ kernel functions. In this tutorial, we will give a brief example.</p>
   <span class="n">MyKernel</span><span class="o">::</span><span class="n">MyKernel</span><span class="p">()</span> <span class="o">:</span> <span class="n">Kernel</span><span class="p">()</span>
   <span class="p">{}</span>
 
-  <span class="kt">void</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">validateSwitches</span><span class="p">()</span>
+  <span class="kt">void</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">addSwitches</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">m_input_file</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
-      <span class="k">throw</span> <span class="n">pdal</span><span class="o">::</span><span class="n">app_usage_error</span><span class="p">(</span><span class="s">&quot;--input/-i required&quot;</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">m_output_file</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
-      <span class="k">throw</span> <span class="n">pdal</span><span class="o">::</span><span class="n">app_usage_error</span><span class="p">(</span><span class="s">&quot;--output/-o required&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kt">void</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">addSwitches</span><span class="p">()</span>
-  <span class="p">{</span>
-    <span class="n">po</span><span class="o">::</span><span class="n">options_description</span><span class="o">*</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">po</span><span class="o">::</span><span class="n">options_description</span><span class="p">(</span><span class="s">&quot;file options&quot;</span><span class="p">);</span>
-    <span class="n">options</span><span class="o">-&gt;</span><span class="n">add_options</span><span class="p">()</span>
-    <span class="p">(</span><span class="s">&quot;input,i&quot;</span><span class="p">,</span> <span class="n">po</span><span class="o">::</span><span class="n">value</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_input_file</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">default_value</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span> <span class="s">&quot;input file name&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;output,o&quot;</span><span class="p">,</span> <span class="n">po</span><span class="o">::</span><span class="n">value</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_output_file</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">default_value</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span> <span class="s">&quot;output file name&quot;</span><span class="p">)</span>
-    <span class="p">;</span>
-
-    <span class="n">addSwitchSet</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
-    <span class="n">addPositionalSwitch</span><span class="p">(</span><span class="s">&quot;input&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="n">addPositionalSwitch</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;input,i&quot;</span><span class="p">,</span> <span class="s">&quot;Input filename&quot;</span><span class="p">,</span> <span class="n">m_input_file</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>
+      <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;output,o&quot;</span><span class="p">,</span> <span class="s">&quot;Output filename&quot;</span><span class="p">,</span> <span class="n">m_output_file</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>
   <span class="p">}</span>
 
   <span class="kt">int</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">execute</span><span class="p">()</span>
@@ -368,13 +350,13 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <p>In your kernel implementation, you will use a macro defined in pdal_macros.
 This macro registers the plugin with the Kernel factory. It is
 only required by plugins.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="p">{</span>
-    <span class="s">&quot;kernels.mykernel&quot;</span><span class="p">,</span>
-    <span class="s">&quot;MyKernel&quot;</span><span class="p">,</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="s">&quot;MyKernel&quot;</span><span class="p">,</span>
     <span class="s">&quot;http://link/to/documentation&quot;</span>
   <span class="p">};</span>
 
   <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyKernel</span><span class="p">,</span> <span class="n">Kernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
 </pre></div>
 </div>
 <p>A static plugin macro can also be used to integrate the kernel with the main code.
@@ -384,7 +366,7 @@ example, we need to create two objects: the
 PointTable and the StageFactory. The latter is
 used to create the various stages that will be
 used within the kernel.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">StageFactory</span> <span class="n">f</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">filter</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The Reader is created from the StageFactory, and
@@ -392,10 +374,10 @@ is specified by the stage name, in this case an
 LAS reader. For brevity, we provide the reader a
 single option, the filename of the file to be
 read.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">readerOptions</span><span class="p">;</span>
-    <span class="n">readerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_input_file</span><span class="p">);</span>
-    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">readerOptions</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
 </pre></div>
 </div>
 <p>The Filter is also created from the StageFactory.
@@ -403,31 +385,16 @@ Here, we create a decimation filter that will
 pass every tenth point to subsequent stages. We
 also specify the input to this stage, which is
 the reader.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
-    <span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">filterOptions</span><span class="p">);</span>
-    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">reader</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="p">}</span> <span class="c1">// namespace pdal</span>
 </pre></div>
 </div>
 <p>Finally, the Writer is created from the
 StageFactory. This text writer, takes as input
 the previous stage (the decimation filter) and
 the output filename as its sole option.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">writerOptions</span><span class="p">;</span>
-    <span class="n">writerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_output_file</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">writerOptions</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">filter</span><span class="p">);</span>
-</pre></div>
-</div>
 <p>The final two steps are to prepare and execute
 the pipeline. This is achieved by calling prepare
 and execute on the final stage.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-</pre></div>
-</div>
 <p>When compiled, a dynamic library file will be created; in this case, <code class="docutils literal"><span class="pre">libpdal_plugin_kernel_mykernel.dylib</span></code></p>
 <p>Put this file in whatever directory <code class="docutils literal"><span class="pre">PDAL_DRIVER_PATH</span></code> is pointing to.  Then, if you run <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">--help</span></code>, you should see <code class="docutils literal"><span class="pre">mykernel</span></code> listed in the possible commands.</p>
 <p>To run this kernel, you would use <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">mykernel</span> <span class="pre">-i</span> <span class="pre">&lt;input</span> <span class="pre">las</span> <span class="pre">file&gt;</span> <span class="pre">-o</span> <span class="pre">&lt;output</span> <span class="pre">text</span> <span class="pre">file&gt;</span></code>.</p>
