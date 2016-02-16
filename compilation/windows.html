@@ -283,8 +283,7 @@ need to run <cite>vsvars32.bat</cite> (&#8220;Microsoft Visual Studio
 <div class="section" id="basic-build-steps">
 <h2>Basic Build Steps<a class="headerlink" href="#basic-build-steps" title="Permalink to this headline">¶</a></h2>
 <p>Most users can use this procedure to build PDAL on Windows. We satisfy all
-dependencies using OSGeo4W and use the Boost subset that is included with the
-library.</p>
+dependencies using OSGeo4W.</p>
 <p>0. If you plan to use LAZ support (compressed LAS), get the LASzip source code
 and build it (<a class="reference external" href="http://www.laszip.org">http://www.laszip.org</a>). Add the directory with laszip.dll to
 your %PATH% (or copy the laszip.* files into the bin directory of PDAL
@@ -429,7 +428,6 @@ perhaps, download prebuilt binary packages).</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Boost (get version 1.4.8 or later from <a class="reference external" href="http://boost.org">http://boost.org</a>) [ required ]</li>
 <li>GDAL (get version 1.6 or later from <a class="reference external" href="http://gdal.org">http://gdal.org</a>) [ optional ]</li>
 <li>LASZip (get version 1.0.1 or later from <a class="reference external" href="http://laszip.org">http://laszip.org</a>) [ optional ]</li>
 <li>libxml2 (<a class="reference external" href="http://libxml2.org">http://libxml2.org</a>) [ optional ]</li>
@@ -438,43 +436,8 @@ perhaps, download prebuilt binary packages).</li>
 <li>libtiff (optional)</li>
 <li>libgeotiff (optional)</li>
 </ul>
-<p>One option for all dependencies except Boost is OSGeo4W (free, win32
+<p>One option for all dependencies is OSGeo4W (free, win32
 installer, no x64 &#8211; see &#8220;Basic Build Steps&#8221;_ above).</p>
-<p>Boost Build Notes</p>
-<p>Options for Boost include might include BoostPro (free win32 installer, no
-x64) or the internal &#8220;BCP&#8217;ed&#8221; extract in PDAL. We say &#8220;might&#8221; because PDAL
-requires Boost version 1.48 or later and at this writing that&#8217;s not supported
-by BoostPro. If you need to build Boost from source, the following notes will
-be helpful.</p>
-<p>Boost libraries include an &#8220;ABI&#8221; description as part of the name.
-For example</p>
-<div class="highlight-python"><div class="highlight"><pre>&quot;libboost_filesystem-vc100-mt-gd-1_48.lib&quot;
-                              ^^  This is the &lt;abi-tag&gt;
-</pre></div>
-</div>
-<p>&lt;abi-tag&gt; - This is a string of one or more characters. For us, the characters of interest are s, g, d.</p>
-<blockquote>
-<div><p>s - indicates that the library is statically linked to the C++ Standard Library and Runtime Library.</p>
-<p>g - indicates that the debug versions of the standard and runtime support libraries are linked against. On a typical Windows installation you will get a debug version of the runtime libraries to link against, but this need not be the case on Unix boxes.</p>
-<p>d - indicates all debug symbols are available in the library, no inlining and optimization has been done while building the code.</p>
-</div></blockquote>
-<p>This is particularly important on Windows. Unlike other platforms, CRT
-configuration (debug vs release and statically linked vs shared dll), needs to
-match you PDAL configuration.</p>
-<p>After you get the Boost archive (source) from <a class="reference external" href="http://www.boost.org">http://www.boost.org</a> from the
-root of the boost distribution run &#8220;bootstrap.bat&#8221; and then &#8220;b2&#8221; with the
-appropriate options.</p>
-<p>Our default release configuration uses /MD, so you want the release shared CRT, like &#8220;libboost_filesystem-vc100-mt-1_48.lib&#8221;:</p>
-<div class="highlight-python"><div class="highlight"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
-c:\utils\boost_1_48_0&gt;.\b2 variant=release link=static threading=multi runtime-link=shared stage
-</pre></div>
-</div>
-<p>Our default debug configuration uses /MDd, so you want the debug shared CRT, like &#8220;libboost_filesystem-vc100-mt-gd-1_48.lib&#8221;:</p>
-<div class="highlight-python"><div class="highlight"><pre>c:\utils\boost_1_48_0&gt;.\bootstrap.bat
-c:\utils\boost_1_48_0&gt;.\b2 variant=debug link=static threading=multi runtime-link=shared stage
-</pre></div>
-</div>
-<p>Finally, we&#8217;ve seen problems with b2.exe if the path includes some paths that are quoted (&#8220;c:\Program Files (x86)\doxygen\bin&#8221;).  You can unquote or remove them from the %PATH% while building Boost.</p>
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li>Having staged the above libs, you need to specify where they are by editing
@@ -528,7 +491,6 @@ Run with debug (F5)</p>
 <li>libtiff.dll errors - double check that other versions of the lib are not on the path. For example, ArcGIS installs a version of libtiff that is not compatible.</li>
 <li>&#8220;ERROR 4: Unable to open EPSG support file gcs.csv&#8221; or GDAL_DATA variable errors - Set GDAL_DATA system variable to <code class="docutils literal"><span class="pre">C:\OSGeo4W\share\gdal</span></code></li>
 <li>PROJ errors - Set PROJ_LIB system variable to <code class="docutils literal"><span class="pre">C:\OSGeo4W\share\proj</span></code></li>
-<li>link failures due to _ITERATOR_DEBUG_LEVEL mismatches between (external) boost and PDAL.  Most likely problem is that you are mixing Release and Debug libs (e.g. PDAL is debug but Boost is release).  You can also set _ITERATOR_DEBUG_LEVEL=0 as in Project Pages / Configuration Properties / C,C++ / Preprocessor / Preprocessor Definitions.</li>
 </ul>
 </div>
 </div>
@@ -546,7 +508,7 @@ Run with debug (F5)</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Feb 10, 2016.
+                    on Feb 16, 2016.
         </div>
     </div>
   </body>
