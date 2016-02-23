@@ -221,17 +221,15 @@
 <span id="id1"></span><h1>filters.statisticaloutlier<a class="headerlink" href="#filters-statisticaloutlier" title="Permalink to this headline">¶</a></h1>
 <p>The Statistical Outlier filter passes data through the Point Cloud Library
 (<a class="reference external" href="http://www.pointclouds.org">PCL</a>) StatisticalOutlierRemoval algorithm.</p>
-<p>StatisticalOutlierRemoval uses point neighborhood statistics to filter outlier
-data. The algorithm iterates through the entire input twice. During the first
-iteration it will compute the average distance that each point has to its
-nearest k neighbors. The value of k can be set using <code class="docutils literal"><span class="pre">mean_k</span></code>. Next, the mean
-and standard deviation of all these distances are computed in order to determine
-a distance threshold. The distance threshold will be equal to:</p>
-<div class="math">
-<p><img src="../_images/math/cb3e46a30bec6510cf3441875019a751f26bcfcb.png" alt="\hat{mean_k} + \sigma_{mult} * \sigma"/></p>
-</div><p>The multiplier for the standard deviation can be set using <code class="docutils literal"><span class="pre">multiplier</span></code>.
-During the next iteration the points will be classified as inlier or outlier if
-their average neighbor distance is below or above this threshold respectively.</p>
+<p><code class="docutils literal"><span class="pre">filters.statisticaloutlier</span></code> uses point neighborhood statistics to filter
+outlier data. The algorithm iterates through the entire input twice. The first
+iteration is used to calculate the average of the distances from each point <img class="math" src="../_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>
+to its <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> nearest neighbors or  <img class="math" src="../_images/math/3b70d2a8c91ab0263718d7fde906e132653b6be3.png" alt="AD_{i}"/>.  The second iteration is used to
+identify outliers based on the distribution of <img class="math" src="../_images/math/3b70d2a8c91ab0263718d7fde906e132653b6be3.png" alt="AD_{i}"/> values.  Points with an
+average neighbor distance greater than the mean plus 2 standard deviations are
+classified as outliers.  The value of <img class="math" src="../_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> can be set using <img class="math" src="../_images/math/09cf4625e8c938bcbba4aea51d2f3df3892cd8d5.png" alt="\tt mean\_k"/>. By
+default, the distance threshold is set to <img class="math" src="../_images/math/f3d8968f0faa05f36bfd9bdb6fe4418994de994c.png" alt="\overline{AD}_{i} + 2 \hat{\sigma}"/>,
+but a value other than 2 can be chosen using <img class="math" src="../_images/math/896383b0a244a4873be215a5f2346052d9108f2d.png" alt="\tt  multiplier"/>.</p>
 <div class="figure" id="id3">
 <a class="reference internal image-reference" href="../_images/filters.statisticaloutlier.img1.png"><img alt="Points before outlier removal" src="../_images/filters.statisticaloutlier.img1.png" style="width: 641.2px; height: 711.2px;" /></a>
 <p class="caption"><span class="caption-text">Before outlier removal, noise points can be found both above and below the scene.</span></p>
