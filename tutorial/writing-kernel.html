@@ -285,7 +285,6 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <span class="cp">#include &lt;pdal/Filter.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/Kernel.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/KernelFactory.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/KernelSupport.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/pdal_macros.hpp&gt;</span>
 <span class="cp">#include &lt;pdal/StageFactory.hpp&gt;</span>
@@ -350,8 +349,7 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <p>In your kernel implementation, you will use a macro defined in pdal_macros.
 This macro registers the plugin with the Kernel factory. It is
 only required by plugins.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="s">&quot;MyKernel&quot;</span><span class="p">,</span>
-    <span class="s">&quot;http://link/to/documentation&quot;</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="s">&quot;http://link/to/documentation&quot;</span>
   <span class="p">};</span>
 
   <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyKernel</span><span class="p">,</span> <span class="n">Kernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
@@ -366,7 +364,7 @@ example, we need to create two objects: the
 PointTable and the StageFactory. The latter is
 used to create the various stages that will be
 used within the kernel.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">filter</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The Reader is created from the StageFactory, and
@@ -374,9 +372,7 @@ is specified by the stage name, in this case an
 LAS reader. For brevity, we provide the reader a
 single option, the filename of the file to be
 read.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
   <span class="p">}</span>
 </pre></div>
 </div>
@@ -385,9 +381,6 @@ Here, we create a decimation filter that will
 pass every tenth point to subsequent stages. We
 also specify the input to this stage, which is
 the reader.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="p">}</span> <span class="c1">// namespace pdal</span>
-</pre></div>
-</div>
 <p>Finally, the Writer is created from the
 StageFactory. This text writer, takes as input
 the previous stage (the decimation filter) and
@@ -414,7 +407,7 @@ and execute on the final stage.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Feb 24, 2016.
+                    on Feb 25, 2016.
         </div>
     </div>
   </body>
