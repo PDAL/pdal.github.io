@@ -311,6 +311,7 @@ could be overridden, which will not be discussed in this tutorial.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// MyReader.cpp</span>
 
 <span class="cp">#include &quot;MyReader.hpp&quot;</span>
+<span class="cp">#include &lt;pdal/pdal_macros.hpp&gt;</span>
 
 <span class="k">namespace</span> <span class="n">pdal</span>
 <span class="p">{</span>
@@ -440,12 +441,11 @@ could be overridden, which will not be discussed in this tutorial.</p>
 </pre></div>
 </div>
 <p>In your reader implementation, you will use a macro defined in pdal_macros.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="p">{</span>
+  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span>
     <span class="s">&quot;readers.myreader&quot;</span><span class="p">,</span>
     <span class="s">&quot;My Awesome Reader&quot;</span><span class="p">,</span>
     <span class="s">&quot;http://link/to/documentation&quot;</span> <span class="p">);</span>
-
-  <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyReader</span><span class="p">,</span> <span class="n">Reader</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This macro registers the plugin with the PDAL code.  In this case, we are
@@ -462,7 +462,6 @@ in this tutorial.</p>
     <span class="n">Option</span> <span class="nf">z_scale</span><span class="p">(</span><span class="s">&quot;z_scale&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
     <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">z_scale</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">options</span><span class="p">;</span>
-  <span class="p">}</span>
 </pre></div>
 </div>
 <p>This method will process a set of default options for the reader.  In this
@@ -475,7 +474,6 @@ the pipeline configuration, etc.</p>
 <div class="highlight-cpp"><div class="highlight"><pre>  <span class="kt">void</span> <span class="n">MyReader</span><span class="o">::</span><span class="n">processOptions</span><span class="p">(</span><span class="k">const</span> <span class="n">Options</span><span class="o">&amp;</span> <span class="n">options</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">m_scale_z</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="n">getValueOrDefault</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;z_scale&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
-  <span class="p">}</span>
 </pre></div>
 </div>
 <p>This method takes an Options object and populates the reader&#8217;s private
@@ -486,7 +484,6 @@ variables with values found in the options object.</p>
     <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
     <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
     <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerOrAssignDim</span><span class="p">(</span><span class="s">&quot;MyData&quot;</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">::</span><span class="n">Type</span><span class="o">::</span><span class="n">Unsigned64</span><span class="p">);</span>
-  <span class="p">}</span>
 </pre></div>
 </div>
 <p>This method registers the various dimensions the reader will use.  In our case,
@@ -496,7 +493,6 @@ dimension MyData.</p>
   <span class="p">{</span>
     <span class="n">SpatialReference</span> <span class="n">ref</span><span class="p">(</span><span class="s">&quot;EPSG:4385&quot;</span><span class="p">);</span>
     <span class="n">setSpatialReference</span><span class="p">(</span><span class="n">ref</span><span class="p">);</span>
-  <span class="p">}</span>
 </pre></div>
 </div>
 <p>This method is called when the Reader is ready for use.  It will only be
@@ -515,7 +511,6 @@ processed.</p>
       <span class="p">}</span>
 
       <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
-  <span class="p">}</span>
 </pre></div>
 </div>
 <p>This is a helper function, which will convert a string value into the type
@@ -527,8 +522,6 @@ strings to doubles when reading from the input stream.</p>
     <span class="n">PointId</span> <span class="n">nextId</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
     <span class="n">PointId</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">m_index</span><span class="p">;</span>
     <span class="kt">point_count_t</span> <span class="n">numRead</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="n">m_stream</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">ILeStream</span><span class="p">(</span><span class="n">m_filename</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>This method is the main processing method for the reader.  It takes a
@@ -540,23 +533,23 @@ being read, but this should serve as a good start for how to build the
 PointView ojbect.</p>
 <div class="highlight-cpp"><div class="highlight"><pre>    <span class="kt">size_t</span> <span class="nf">HEADERSIZE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="kt">size_t</span> <span class="nf">skip_lines</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">HEADERSIZE</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">m_index</span><span class="p">));</span>
-    <span class="kt">size_t</span> <span class="nf">line_no</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>In prepration for reading the file, we prepare to skip some header lines.  In
 our case, the header is only a single line.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="o">*</span><span class="n">m_stream</span><span class="o">-&gt;</span><span class="n">stream</span><span class="p">(),</span> <span class="n">line</span><span class="p">);</span> <span class="n">line_no</span><span class="o">++</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="kt">size_t</span> <span class="nf">line_no</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="o">*</span><span class="n">m_stream</span><span class="o">-&gt;</span><span class="n">stream</span><span class="p">(),</span> <span class="n">line</span><span class="p">);</span> <span class="n">line_no</span><span class="o">++</span><span class="p">)</span>
     <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">line_no</span> <span class="o">&lt;=</span> <span class="n">skip_lines</span><span class="p">)</span>
       <span class="p">{</span>
-        <span class="k">continue</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Here we begin our main loop.  In our example file, the first line is a header,
 and each line thereafter is a single point.  If the file had a different format
 the method of looping and reading would have to change as appropriate.  We make
 sure we are skipping the header lines here before moving on.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>      <span class="n">StringList</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Utils</span><span class="o">::</span><span class="n">split2</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="sc">&#39;:&#39;</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre>      <span class="c1">// MyReader format:  X::Y::Z::Data</span>
+      <span class="n">StringList</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Utils</span><span class="o">::</span><span class="n">split2</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="sc">&#39;:&#39;</span><span class="p">);</span>
 
       <span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">u64</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span>
@@ -564,7 +557,6 @@ sure we are skipping the header lines here before moving on.</p>
         <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">oss</span><span class="p">;</span>
         <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unable to split proper number of fields.  Expected 4, got &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
         <span class="k">throw</span> <span class="nf">pdal_error</span><span class="p">(</span><span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">());</span>
-      <span class="p">}</span>
 </pre></div>
 </div>
 <p>Here we take the line we read in the for block header, split it, and make sure
@@ -580,7 +572,6 @@ that we have the proper number of fields.</p>
       <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">nextId</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
 
       <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;MyData&quot;</span><span class="p">;</span>
-      <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">layout</span><span class="o">-&gt;</span><span class="n">findProprietaryDim</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">nextId</span><span class="p">,</span> <span class="n">convert</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>Here we take the values we read and put them into the PointView object.  The
@@ -602,7 +593,6 @@ each iteration of the loop), and the dimension value.</p>
     <span class="n">numRead</span> <span class="o">=</span> <span class="n">nextId</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="n">numRead</span><span class="p">;</span>
-  <span class="p">}</span>
 </pre></div>
 </div>
 <p>Finally, we increment the nextId.  After the loop is done, we set the index
@@ -612,7 +602,6 @@ be covered here.</p>
 <div class="highlight-cpp"><div class="highlight"><pre>  <span class="kt">void</span> <span class="n">MyReader</span><span class="o">::</span><span class="n">done</span><span class="p">(</span><span class="n">PointTableRef</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">m_stream</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
-  <span class="p">}</span>
 </pre></div>
 </div>
 <p>When the read method is finished, the done method is called for any cleanup.
@@ -663,7 +652,7 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Feb 25, 2016.
+                    on Feb 26, 2016.
         </div>
     </div>
   </body>
