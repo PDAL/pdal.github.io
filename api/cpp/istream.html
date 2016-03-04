@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pdal::IStream &mdash; pdal.io</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="pdal.io" href="../../index.html" />
+    <link rel="up" title="C++ API" href="index.html" />
+    <link rel="next" title="pdal::Log" href="log.html" />
+    <link rel="prev" title="pdal::Filter" href="filter.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          PDAL</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../download.html">Download</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Docs <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../download.html#current-release-s">Current Release(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../download.html#past-releases">Past Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../download.html#binaries">Binaries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/unix.html">Unix Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/windows.html">Building Under Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/python.html">Python installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#delta-command">delta command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#diff-command">diff command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#ground-command">ground command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#info-command">info command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#merge-command">merge command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#pcl-command">pcl command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#pipeline-command">pipeline command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#random-command">random command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#split-command">split command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#tindex-command">tindex command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#translate-command">translate command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#view-command">view command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#github">GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#irc">IRC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Readers, Writers, and Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#readers">Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#writers">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/index.html#using-pdal">Using PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/index.html#developing">Developing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/docker.html">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/docker.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/docker.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/docker.html#what-you-get">What you get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#playing-dolls">Playing Dolls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#syntax-specification">Syntax Specification</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../development/index.html#build-and-test-status">Build and Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../metadata.html#metadata-types">Metadata Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../metadata.html#json-representation">JSON representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributors.html#engineering-contributors">Engineering Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributors.html#funding-contributors">Funding Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Here <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">pdal::IStream</span></code></a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="filter.html" title="Previous Chapter: pdal::Filter"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; pdal::Filter</span>
+    </a>
+  </li>
+  <li>
+    <a href="log.html" title="Next Chapter: pdal::Log"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">pdal::Log &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="pdal-istream">
+<span id="cpp-pdal-istream"></span><h1><a class="reference internal" href="#_CPPv2N4pdal7IStreamE" title="pdal::IStream"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::IStream</span></code></a><a class="headerlink" href="#pdal-istream" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4pdal7IStreamE">
+<span id="pdal::IStream"></span><span class="target" id="project0classpdal_1_1IStream"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">IStream</code><a class="headerlink" href="#_CPPv2N4pdal7IStreamE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stream wrapper for input of binary data. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream7IStreamEv">
+<span id="pdal::IStream::IStream"></span><span class="target" id="project0classpdal_1_1IStream_1a9635b15a943ced4a20996ce137710214"></span><code class="descname">IStream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream7IStreamEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream7IStreamERKNSt6stringE">
+<span id="pdal::IStream::IStream__ssCR"></span><span class="target" id="project0classpdal_1_1IStream_1a3a5efc1a114effef7ca6e6365d848e33"></span><code class="descname">IStream</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream7IStreamERKNSt6stringE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an <a class="reference internal" href="#project0classpdal_1_1IStream"><span>IStream</span></a> from a filename. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>File from which to read. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream7IStreamEPNSt7istreamE">
+<span id="pdal::IStream::IStream__isP"></span><span class="target" id="project0classpdal_1_1IStream_1aa5e25608fed89294775335ea0692c850"></span><code class="descname">IStream</code><span class="sig-paren">(</span>std::istream *<em>stream</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream7IStreamEPNSt7istreamE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an <a class="reference internal" href="#project0classpdal_1_1IStream"><span>IStream</span></a> from an input stream pointer. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">stream</span></code> - <p>Stream from which to read. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStreamD0Ev">
+<span id="pdal::IStream::~IStream"></span><span class="target" id="project0classpdal_1_1IStream_1a5b370e441011e40e01b1b8a099a33553"></span><code class="descname">~IStream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStreamD0Ev" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream4openERKNSt6stringE">
+<span id="pdal::IStream::open__ssCR"></span><span class="target" id="project0classpdal_1_1IStream_1a0074e680467d82862ba2fe6d3e5c4d43"></span>int <code class="descname">open</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream4openERKNSt6stringE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a file to extract. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>-1 if a stream is already assigned, 0 otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Filename. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream5closeEv">
+<span id="pdal::IStream::close"></span><span class="target" id="project0classpdal_1_1IStream_1a709c2b3ca3b258bd183e8f9754e01e11"></span>void <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream5closeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the underlying stream. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStreamcvbEv">
+<span id="pdal::IStream::castto-b-operator"></span><span class="target" id="project0classpdal_1_1IStream_1a7a2e246a939dd3c8b32c1cb36e5f1632"></span><code class="descname">operator bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStreamcvbEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the state of the stream. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The state of the underlying stream. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream4seekENSt9streamposE">
+<span id="pdal::IStream::seek__std::streampos"></span><span class="target" id="project0classpdal_1_1IStream_1a427debab93b63959764c42bc1eeab5a5"></span>void <code class="descname">seek</code><span class="sig-paren">(</span>std::streampos <em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream4seekENSt9streamposE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to a position in the underlying stream. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">pos</span></code> - <p>Position to seek to, </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream4seekENSt9streamposENSt8ios_base7seekdirE">
+<span id="pdal::IStream::seek__std::streampos.std::ios_base::seekdir"></span><span class="target" id="project0classpdal_1_1IStream_1a9c31196acba201a8dba9594a5714c33c"></span>void <code class="descname">seek</code><span class="sig-paren">(</span>std::streampos <em>off</em>, std::ios_base::seekdir <em>way</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream4seekENSt9streamposENSt8ios_base7seekdirE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to an offset from a specified position. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">off</span></code> - <p>Offset. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">way</span></code> - <p>Absolute position for offset (beg, end or cur) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream4skipENSt9streamoffE">
+<span id="pdal::IStream::skip__std::streamoff"></span><span class="target" id="project0classpdal_1_1IStream_1ab74fd7dbf07b226acc217c5392053701"></span>void <code class="descname">skip</code><span class="sig-paren">(</span>std::streamoff <em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream4skipENSt9streamoffE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skip relative to the current position. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">offset</span></code> - <p>Offset from the current position. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream8positionEv">
+<span id="pdal::IStream::position"></span><span class="target" id="project0classpdal_1_1IStream_1aa1467e2daa7e22fcab5ddf08e40dd8bb"></span>std::streampos <code class="descname">position</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal7IStream8positionEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the position of the get pointer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Current get position. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream4goodEv">
+<span id="pdal::IStream::good"></span><span class="target" id="project0classpdal_1_1IStream_1aaa58c69605bad9a722a2c6f014257e1b"></span>bool <code class="descname">good</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal7IStream4goodEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the underlying stream is good. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Whether the underlying stream is good. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream6streamEv">
+<span id="pdal::IStream::stream"></span><span class="target" id="project0classpdal_1_1IStream_1a961ffdacbfd93b1ab0ec4d5ae4b4b390"></span>std::istream *<code class="descname">stream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream6streamEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch a pointer to the underlying stream. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Pointer to the underlying stream. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream10pushStreamEPNSt7istreamE">
+<span id="pdal::IStream::pushStream__isP"></span><span class="target" id="project0classpdal_1_1IStream_1a6b2d3f5faf57d4be525f857287e1d453"></span>void <code class="descname">pushStream</code><span class="sig-paren">(</span>std::istream *<em>strm</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream10pushStreamEPNSt7istreamE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Temporarily push a stream to read from. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">strm</span></code> - <p>New stream to read from. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream9popStreamEv">
+<span id="pdal::IStream::popStream"></span><span class="target" id="project0classpdal_1_1IStream_1a34732ad922a094243aa65c6fc6432bcb"></span>std::istream *<code class="descname">popStream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream9popStreamEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pop the current stream and return it. </p>
+<p>The last stream on the stack cannot be popped.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Pointer to the popped stream. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream3getERNSt6stringE6size_t">
+<span id="pdal::IStream::get__ssR.s"></span><span class="target" id="project0classpdal_1_1IStream_1a11c824121d70238166f82446a7453d79"></span>void <code class="descname">get</code><span class="sig-paren">(</span>std::string &amp;<em>s</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream3getERNSt6stringE6size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch data from the stream into a string. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">s</span></code> - <p>String to fill. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Number of bytes to extract. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream3getERNSt6vectorIcEE">
+<span id="pdal::IStream::get__std::vector:c:R"></span><span class="target" id="project0classpdal_1_1IStream_1ac1ebed62e6793951e5816cf0cd26adc0"></span>void <code class="descname">get</code><span class="sig-paren">(</span>std::vector&lt;char&gt; &amp;<em>buf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream3getERNSt6vectorIcEE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch data from the stream into a vector of char. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Buffer to fill. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="project0classpdal_1_1IStream_1a45080a6d76c341aa8ee46a4445058b60"></span><code class="descname">void pdal::IStream::get(std::vector&lt; unsigned char &gt; &amp; buf)</code></dt>
+<dd><p>Fetch data from the stream into a vector of unsigned char. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Buffer to fill. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal7IStream3getEPc6size_t">
+<span id="pdal::IStream::get__cP.s"></span><span class="target" id="project0classpdal_1_1IStream_1ac3c15a662bbc31eba28efec4092f463e"></span>void <code class="descname">get</code><span class="sig-paren">(</span>char *<em>buf</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7IStream3getEPc6size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch data from the stream into the specified buffer of char. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Buffer to fill. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Number of bytes to extract. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="project0classpdal_1_1IStream_1a88746b11045d0d40cad417fca62aef8f"></span><code class="descname">void pdal::IStream::get(unsigned char * buf, size_t size)</code></dt>
+<dd><p>Fetch data from the stream into the specified buffer of unsigned char. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Buffer to fill. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Number of bytes to extract. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Mar 04, 2016.
+        </div>
+    </div>
+  </body>
+</html>

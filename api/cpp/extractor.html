@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pdal::Extractor &mdash; pdal.io</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="pdal.io" href="../../index.html" />
+    <link rel="up" title="C++ API" href="index.html" />
+    <link rel="next" title="pdal::FileUtils" href="fileutils.html" />
+    <link rel="prev" title=":cpp:namespace:`pdal::Dimension`" href="dimension.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          PDAL</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../download.html">Download</a></li>
+                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Docs <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../download.html#current-release-s">Current Release(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../download.html#past-releases">Past Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../download.html#binaries">Binaries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/unix.html">Unix Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/windows.html">Building Under Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compilation/python.html">Python installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#delta-command">delta command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#diff-command">diff command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#ground-command">ground command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#info-command">info command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#merge-command">merge command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#pcl-command">pcl command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#pipeline-command">pipeline command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#random-command">random command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#split-command">split command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#tindex-command">tindex command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#translate-command">translate command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../apps.html#view-command">view command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#mailing-list">Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#github">GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#irc">IRC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/index.html">Readers, Writers, and Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#readers">Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#writers">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stages/index.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/index.html#using-pdal">Using PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/index.html#developing">Developing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/docker.html">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/docker.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/docker.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/docker.html#what-you-get">What you get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#playing-dolls">Playing Dolls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pipeline.html#syntax-specification">Syntax Specification</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../development/index.html#build-and-test-status">Build and Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../metadata.html#metadata-types">Metadata Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../metadata.html#json-representation">JSON representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributors.html#engineering-contributors">Engineering Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributors.html#funding-contributors">Funding Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Here <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">pdal::Extractor</span></code></a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="dimension.html" title="Previous Chapter: :cpp:namespace:`pdal::Dimension`"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; :cpp:namespac...</span>
+    </a>
+  </li>
+  <li>
+    <a href="fileutils.html" title="Next Chapter: pdal::FileUtils"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">pdal::FileUtils &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="pdal-extractor">
+<span id="cpp-pdal-extractor"></span><h1><a class="reference internal" href="#_CPPv2N4pdal9ExtractorE" title="pdal::Extractor"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Extractor</span></code></a><a class="headerlink" href="#pdal-extractor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4pdal9ExtractorE">
+<span id="pdal::Extractor"></span><span class="target" id="project0classpdal_1_1Extractor"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">Extractor</code><a class="headerlink" href="#_CPPv2N4pdal9ExtractorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Buffer wrapper for input of binary data from a buffer. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE">
+<span id="pdal::Extractor::Extractor__cCP.std::s"></span><span class="target" id="project0classpdal_1_1Extractor_1a6af31439e57abccf7354b59dc93c82ee"></span><code class="descname">Extractor</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>buf</em>, std::size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an extractor to operate on a buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Buffer to extract from. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Buffer size. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorcvbEv">
+<span id="pdal::Extractor::castto-b-operator"></span><span class="target" id="project0classpdal_1_1Extractor_1ac135b264de04da54ddaed8c0d21e9aa3"></span><code class="descname">operator bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9ExtractorcvbEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the buffer is good. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Whether the buffer is good. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor4seekENSt6size_tE">
+<span id="pdal::Extractor::seek__std::s"></span><span class="target" id="project0classpdal_1_1Extractor_1a43e6b09a23c8334e7adf6aa71faa0ac3"></span>void <code class="descname">seek</code><span class="sig-paren">(</span>std::size_t <em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9Extractor4seekENSt6size_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to a position in the buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">pos</span></code> - <p>Position to seek in buffer. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor4skipENSt6size_tE">
+<span id="pdal::Extractor::skip__std::s"></span><span class="target" id="project0classpdal_1_1Extractor_1a232fe89cbee3d93538e0110f219b22be"></span>void <code class="descname">skip</code><span class="sig-paren">(</span>std::size_t <em>cnt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9Extractor4skipENSt6size_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Advance buffer position. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">cnt</span></code> - <p>Number of bytes to skip in buffer. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor8positionEv">
+<span id="pdal::Extractor::position"></span><span class="target" id="project0classpdal_1_1Extractor_1a309033241049eee78e4a0a206b537b36"></span>size_t <code class="descname">position</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9Extractor8positionEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the get position of buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Get position. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor4goodEv">
+<span id="pdal::Extractor::good"></span><span class="target" id="project0classpdal_1_1Extractor_1ad2de9e929c57588a8b70188203a91543"></span>bool <code class="descname">good</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9Extractor4goodEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine whether the extractor is good (the get pointer is in the buffer). </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Whether the get pointer is valid. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor3getERNSt6stringE6size_t">
+<span id="pdal::Extractor::get__ssR.s"></span><span class="target" id="project0classpdal_1_1Extractor_1a40f045f582d459664cf0f26d32ebe10b"></span>void <code class="descname">get</code><span class="sig-paren">(</span>std::string &amp;<em>s</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9Extractor3getERNSt6stringE6size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a string of a particular size from the buffer. </p>
+<p>Trim trailing null bytes.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">s</span></code> - <p>String to extract to. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Number of bytes to extract from buffer into string. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor3getERNSt6vectorIcEE">
+<span id="pdal::Extractor::get__std::vector:c:R"></span><span class="target" id="project0classpdal_1_1Extractor_1a38d2e02bc9d6737ac87f93ddf850ee93"></span>void <code class="descname">get</code><span class="sig-paren">(</span>std::vector&lt;char&gt; &amp;<em>buf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9Extractor3getERNSt6vectorIcEE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract data to char vector. </p>
+<p>Vector must be sized to indicate number of bytes to extract.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Vector to which bytes should be extracted. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="project0classpdal_1_1Extractor_1a558e1da71e5ac625b424f806585e315e"></span><code class="descname">void pdal::Extractor::get(std::vector&lt; unsigned char &gt; &amp; buf)</code></dt>
+<dd><p>Extract data to unsigned char vector. </p>
+<p>Vector must be sized to indicate number of bytes to extract.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Vector to which bytes should be extracted. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9Extractor3getEPc6size_t">
+<span id="pdal::Extractor::get__cP.s"></span><span class="target" id="project0classpdal_1_1Extractor_1ad733e96c6958f039692c121899549893"></span>void <code class="descname">get</code><span class="sig-paren">(</span>char *<em>buf</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9Extractor3getEPc6size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract data into a provided buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Pointer to buffer to which bytes should be extracted. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Number of bytes to extract. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="project0classpdal_1_1Extractor_1a970bf542f6632eedb19b9f554626ed3f"></span><code class="descname">void pdal::Extractor::get(unsigned char * buf, size_t size)</code></dt>
+<dd><p>Extract data into a provided unsigned buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Pointer to buffer to which bytes should be extracted. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Number of bytes to extract. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER7uint8_t">
+<span id="pdal::Extractor::rshift-operator__uint8_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1aa5b67481be81fda8269eea3615c5ffa0"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>uint8_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER7uint8_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER6int8_t">
+<span id="pdal::Extractor::rshift-operator__int8_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1a790cefd9fa5cfab9db3584d4daaff696"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>int8_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER6int8_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER8uint16_t">
+<span id="pdal::Extractor::rshift-operator__uint16_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1a7857cc3b9ae8ff37764f11f64335b4d0"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>uint16_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER8uint16_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER7int16_t">
+<span id="pdal::Extractor::rshift-operator__int16_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1aadc2998ebc8319a2c4578ef7ba6bd17d"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>int16_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER7int16_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER8uint32_t">
+<span id="pdal::Extractor::rshift-operator__uint32_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1ab2e2fa9ebd81b7c8a59bae5e55c1ecb2"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>uint32_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER8uint32_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER7int32_t">
+<span id="pdal::Extractor::rshift-operator__int32_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1aa5c29a8d988a951922c505812edb5b81"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>int32_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER7int32_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER8uint64_t">
+<span id="pdal::Extractor::rshift-operator__uint64_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1af7b8d85aede8c5a7f338f97c9cadcd00"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>uint64_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER8uint64_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsER7int64_t">
+<span id="pdal::Extractor::rshift-operator__int64_tR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1ab2dc7425bcd60c82e8a55b8af457ee2e"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>int64_t &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsER7int64_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsERf">
+<span id="pdal::Extractor::rshift-operator__floatR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1a6cd2d4c782591b5dcb5451108636a10d"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>float &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsERf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9ExtractorrsERd">
+<span id="pdal::Extractor::rshift-operator__doubleR"></span>virtual <span class="target" id="project0classpdal_1_1Extractor_1a70f64b815a5f403a9dfa6dece99874e2"></span><a class="reference internal" href="#_CPPv2N4pdal9Extractor9ExtractorEPKcNSt6size_tE" title="pdal::Extractor::Extractor">Extractor</a> &amp;<code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>double &amp;<em>v</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4pdal9ExtractorrsERd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Mar 04, 2016.
+        </div>
+    </div>
+  </body>
+</html>
