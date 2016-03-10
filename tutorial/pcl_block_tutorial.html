@@ -302,38 +302,27 @@ information.</p>
 <p>The <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><span>filters.pclblock</span></a> is implemented as a PDAL filter stage and as such is
 easily accessed via the PDAL pipeline. It accepts a single, required option -
 the name of the <a class="reference external" href="http://www.json.org/">JSON</a> file describing the PCL Block.</p>
-<p>A sample pipeline XML which reads/writes LAS and has a single PCL Block filter
+<p>A sample pipeline JSON which reads/writes LAS and has a single PCL Block filter
 is shown below.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            ../../../temp/foo.las
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.pclblock&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                ./passthrough.json
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                    ../../autzen/autzen-point-format-3.las
-                <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;/Reader&gt;</span>
-        <span class="nt">&lt;/Filter&gt;</span>
-    <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;autzen-point-format-3.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.pclblock&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;passthrough.json&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;foo.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>And is run from the command line thusly.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ cd pdal # your PDAL source tree
-$ cd test/data
-$ ../../bin/pdal pipeline -i filters/pcl/passthrough.xml -v4
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline passthrough.json
 </pre></div>
 </div>
 <p>This simple pipeline reads the input LAS (<code class="docutils literal"><span class="pre">autzen-point-format-3.las</span></code>), passes
 it through the PCL Block (<code class="docutils literal"><span class="pre">passthrough.json</span></code>), and writes the output LAS
-(<code class="docutils literal"><span class="pre">foo.las</span></code>). Note that the file paths are interpreted relative to the
-directory containing the XML file.</p>
+(<code class="docutils literal"><span class="pre">foo.las</span></code>).</p>
 <p>When run, it should produce output similar to this:</p>
 <div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
 Requested to write 106 points
@@ -360,7 +349,7 @@ AUTHOR:
 <div class="section" id="pdal-pcl-kernel">
 <h2>PDAL PCL kernel<a class="headerlink" href="#pdal-pcl-kernel" title="Permalink to this headline">¶</a></h2>
 <p>For users that would like to bypass the creation (and subsequent modification)
-of the pipeline XML for every file they wish to process, there is another
+of the pipeline JSON for every file they wish to process, there is another
 option: the <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></code> command.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i /path/to/input/las -p /path/to/pcl/block/json -o /path/to/output/las
 </pre></div>
@@ -374,7 +363,7 @@ the command is</p>
 </pre></div>
 </div>
 <p>where the JSON file specified with <code class="docutils literal"><span class="pre">-p</span></code> is the same file that would be
-embedded in the pipeline XML file. This can be useful when the pipeline does not
+embedded in the pipeline JSON file. This can be useful when the pipeline does not
 change frequently, but the input/output filenames do.</p>
 <p>For example, the above <cite>pdal pipeline</cite> example can be written with <cite>pdal pcl</cite>
 like this:</p>

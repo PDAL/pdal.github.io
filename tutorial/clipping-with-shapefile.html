@@ -329,42 +329,25 @@ view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geo
 <h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
 <p>A PDAL <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> is how you define a set of actions to happen to data
 as they are read, filtered, and written.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;2.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            output.las
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.range&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;limits&quot;</span><span class="nt">&gt;</span>
-               Classification[5:5]
-             <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.attribute&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                    Classification
-                <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;datasource&quot;</span><span class="nt">&gt;</span>
-                    attributes.vrt
-                <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;layer&quot;</span><span class="nt">&gt;</span>
-                    OGRGeoJSON
-                <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;column&quot;</span><span class="nt">&gt;</span>
-                    CLS
-                <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                        autzen.laz
-                    <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Reader&gt;</span>
-            <span class="nt">&lt;/Filter&gt;</span>
-        <span class="nt">&lt;/Filter&gt;</span>
-    <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;autzen.laz&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.attribute&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.vrt&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;CLS&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[5:5]&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> files are read inside-out, so we will start with the
-<a class="reference internal" href="../stages/readers.las.html#readers-las"><span>readers.las</span></a> and move up until we hit the <a class="reference internal" href="../stages/writers.las.html#writers-las"><span>writers.las</span></a>.</p>
 <ul class="simple">
 <li><a class="reference internal" href="../stages/readers.las.html#readers-las"><span>readers.las</span></a>: Define a reader that can read <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> or <a class="reference external" href="http://laszip.org">LASzip</a>
 data.</li>
@@ -389,12 +372,12 @@ scenario.</p>
 <div class="section" id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Save the pipeline to a file called <code class="docutils literal"><span class="pre">shape-clip.xml</span></code> in the same directory as
+<li><p class="first">Save the pipeline to a file called <code class="docutils literal"><span class="pre">shape-clip.json</span></code> in the same directory as
 your <code class="docutils literal"><span class="pre">attributes.json</span></code> and <code class="docutils literal"><span class="pre">autzen.laz</span></code> files.</p>
 </li>
 <li><p class="first">Call <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> on the <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a>.</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline shape-clip.xml
+<div><div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline shape-clip.json
 </pre></div>
 </div>
 </div></blockquote>

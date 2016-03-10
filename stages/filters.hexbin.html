@@ -226,56 +226,113 @@
 <p class="caption"><span class="caption-text">Hexbin output shows boundary of actual points in point buffer, not just rectangular extents.</span></p>
 </div>
 <p>The hexbin filter reads a point stream and writes out a metadata record that contains a much tighter data bound, expressed as a well-known text polygon. In order to write out the metadata record, the <cite>pdal</cite> pipeline command must be invoked using the <cite>&#8211;pipeline-serialization</cite> option:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal hexbin-pipeline.xml --pipeline-serialization hexbin-out.xml
+<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline hexbin-pipeline.json --pipeline-serialization hexbin-out.json
 </pre></div>
 </div>
 <p>After running with the pipeline serialization option, the output file looks like this:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;PointView&gt;</span>
-  <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;pointbuffer&quot;</span> <span class="na">type=</span><span class="s">&quot;blank&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;filters.hexbin&quot;</span> <span class="na">type=</span><span class="s">&quot;blank&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;edge_size&quot;</span> <span class="na">type=</span><span class="s">&quot;double&quot;</span><span class="nt">&gt;</span>
-        0.002218331916495204
-      <span class="nt">&lt;/Metadata&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;threshold&quot;</span> <span class="na">type=</span><span class="s">&quot;nonNegativeInteger&quot;</span><span class="nt">&gt;</span>
-        15
-      <span class="nt">&lt;/Metadata&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;sample_size&quot;</span> <span class="na">type=</span><span class="s">&quot;nonNegativeInteger&quot;</span><span class="nt">&gt;</span>
-        5000
-      <span class="nt">&lt;/Metadata&gt;</span>
-      <span class="nt">&lt;Metadata</span> <span class="na">name=</span><span class="s">&quot;boundary&quot;</span> <span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="nt">&gt;</span>
-        MULTIPOLYGON (((
-        -80.8466 35.2183, -80.8460 35.2194,
-        -80.8447 35.2194, -80.8441 35.2205,
-        -80.8428 35.2205, -80.8421 35.2216,
-        ...
-        -80.8498 35.2194, -80.8486 35.2194,
-        -80.8479 35.2183, -80.8466 35.2183
-        )))
-      <span class="nt">&lt;/Metadata&gt;</span>
-    <span class="nt">&lt;/Metadata&gt;</span>
-  <span class="nt">&lt;/Metadata&gt;</span>
-<span class="nt">&lt;/PointView&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+  <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;execution_metadata&quot;</span><span class="p">:</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;comp_spatialreference&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;compressed&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1065</span><span class="p">,</span>
+        <span class="nt">&quot;creation_doy&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;creation_year&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;dataformat_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nt">&quot;dataoffset&quot;</span><span class="p">:</span> <span class="mi">229</span><span class="p">,</span>
+        <span class="nt">&quot;filesource_id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;global_encoding&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;global_encoding_base64&quot;</span><span class="p">:</span> <span class="s2">&quot;AAA=&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;header_size&quot;</span><span class="p">:</span> <span class="mi">227</span><span class="p">,</span>
+        <span class="nt">&quot;major_version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;maxx&quot;</span><span class="p">:</span> <span class="mf">638982.55</span><span class="p">,</span>
+        <span class="nt">&quot;maxy&quot;</span><span class="p">:</span> <span class="mf">853535.43</span><span class="p">,</span>
+        <span class="nt">&quot;maxz&quot;</span><span class="p">:</span> <span class="mf">586.38</span><span class="p">,</span>
+        <span class="nt">&quot;minor_version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nt">&quot;minx&quot;</span><span class="p">:</span> <span class="mf">635619.85</span><span class="p">,</span>
+        <span class="nt">&quot;miny&quot;</span><span class="p">:</span> <span class="mf">848899.7</span><span class="p">,</span>
+        <span class="nt">&quot;minz&quot;</span><span class="p">:</span> <span class="mf">406.59</span><span class="p">,</span>
+        <span class="nt">&quot;offset_x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;offset_y&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;offset_z&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;project_id&quot;</span><span class="p">:</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="nt">&quot;scale_z&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="nt">&quot;software_id&quot;</span><span class="p">:</span> <span class="s2">&quot;TerraScan&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;srs&quot;</span><span class="p">:</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;compoundwkt&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;horizontal&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;isgeocentric&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nt">&quot;isgeographic&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nt">&quot;prettycompoundwkt&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;prettywkt&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;proj4&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;units&quot;</span><span class="p">:</span>
+          <span class="p">{</span>
+            <span class="nt">&quot;horizontal&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;vertical&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+          <span class="p">},</span>
+          <span class="nt">&quot;vertical&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;wkt&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;system_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2-with-color.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.las1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.las&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;execution_metadata&quot;</span><span class="p">:</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;area&quot;</span><span class="p">:</span> <span class="mf">40981005.83</span><span class="p">,</span>
+        <span class="nt">&quot;boundary&quot;</span><span class="p">:</span> <span class="s2">&quot;MULTIPOLYGON (((636019.34031678 847308.55730142, 639990.93904966 850748.06269858, 638998.03936644 855907.32079433, 633040.64126713 852467.81539716, 636019.34031678 847308.55730142)))&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;density&quot;</span><span class="p">:</span> <span class="mf">2.598764912e-05</span><span class="p">,</span>
+        <span class="nt">&quot;edge_length&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;estimated_edge&quot;</span><span class="p">:</span> <span class="mf">3439.505397</span><span class="p">,</span>
+        <span class="nt">&quot;hex_offsets&quot;</span><span class="p">:</span> <span class="s2">&quot;MULTIPOINT (0 0, -992.9 1719.75, 0 3439.51, 1985.8 3439.51, 2978.7 1719.75, 1985.8 0)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;sample_size&quot;</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
+        <span class="nt">&quot;threshold&quot;</span><span class="p">:</span> <span class="mi">10</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;inputs&quot;</span><span class="p">:</span>
+      <span class="p">[</span>
+        <span class="s2">&quot;readers.las1&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.hexbin1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;threshold&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.hexbin&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;file-output.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;inputs&quot;</span><span class="p">:</span>
+      <span class="p">[</span>
+        <span class="s2">&quot;filters.hexbin1&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>In addition, if you have defined a writer you will have the usual point data output file.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      file-output.las
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.hexbin&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;threshold&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-          file-input.las
-        <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;/Reader&gt;</span>
-    <span class="nt">&lt;/Filter&gt;</span>
-  <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;1.2-with-color.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.hexbin&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="mi">10</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;file-output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>

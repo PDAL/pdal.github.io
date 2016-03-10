@@ -388,7 +388,7 @@ topic.</p>
 <p class="last">The <a class="reference internal" href="../apps.html#pipeline-command"><span>pipeline command</span></a> document contains detailed examples and background
 information.</p>
 </div>
-<p>The <a class="reference internal" href="../apps.html#pipeline-command"><span>pipeline command</span></a> PDAL utility is one that takes in a <code class="docutils literal"><span class="pre">.xml</span></code> file
+<p>The <a class="reference internal" href="../apps.html#pipeline-command"><span>pipeline command</span></a> PDAL utility is one that takes in a <code class="docutils literal"><span class="pre">.json</span></code> file
 containing <a class="reference internal" href="../apps.html#pipeline-command"><span>pipeline</span></a> description that defines a PDAL
 processing pipeline. Options can be given at each <a class="reference internal" href="../api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> of
 the pipeline to affect different aspects of the processing pipeline, and
@@ -396,21 +396,14 @@ stages may be chained together into multiple combinations to have varying
 effects.</p>
 <div class="section" id="simple-conversion">
 <h3>Simple conversion<a class="headerlink" href="#simple-conversion" title="Permalink to this headline">¶</a></h3>
-<p>The following <a class="reference external" href="http://en.wikipedia.org/wiki/XML">XML</a> document defines a <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> that takes the <code class="docutils literal"><span class="pre">file.las</span></code>
+<p>The following <a class="reference external" href="http://www.json.org/">JSON</a> document defines a <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> that takes the <code class="docutils literal"><span class="pre">file.las</span></code>
 <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">ASPRS LAS</a> file and converts it to a new file called <code class="docutils literal"><span class="pre">output.las</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;Pipeline version=&quot;1.0&quot;&gt;
-    &lt;Writer type=&quot;writers.las&quot;&gt;
-        &lt;Option name=&quot;filename&quot;&gt;
-            output.las
-        &lt;/Option&gt;
-        &lt;Reader type=&quot;readers.las&quot;&gt;
-            &lt;Option name=&quot;filename&quot;&gt;
-                ./path/to/my/file.las
-            &lt;/Option&gt;
-        &lt;/Reader&gt;
-    &lt;/Writer&gt;
-&lt;/Pipeline&gt;
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;file.las&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -418,7 +411,7 @@ effects.</p>
 <h3>Loop a directory and filter it through a pipeline<a class="headerlink" href="#loop-a-directory-and-filter-it-through-a-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>This little bash script loops through a directory and pushes the las files through
 a pipeline, substituting the input and output as it goes.</p>
-<div class="highlight-python"><div class="highlight"><pre>ls *.las | cut -d. -f1 | xargs -P20 -I{} pdal pipeline -i /path/to/proj.xml --readers.las.filename={}.las --writers.las.filename=output/{}.laz
+<div class="highlight-python"><div class="highlight"><pre>ls *.las | cut -d. -f1 | xargs -P20 -I{} pdal pipeline -i /path/to/proj.json --readers.las.filename={}.las --writers.las.filename=output/{}.laz
 </pre></div>
 </div>
 </div>
