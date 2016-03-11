@@ -231,12 +231,32 @@ of January of 2016.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p><strong>Example One</strong></p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.nitf&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>mynitf.nitf<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;oname&quot;</span><span class="nt">&gt;</span>James Alexander<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;ophone&quot;</span><span class="nt">&gt;</span>646-322-3123<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>mynitf.ntf<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;compression&quot;</span><span class="nt">&gt;</span>laszip<span class="nt">&lt;/Options&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;idatim&quot;</span><span class="nt">&gt;</span>20160102220000<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;forward&quot;</span><span class="nt">&gt;</span>all<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;acftb&quot;</span><span class="nt">&gt;</span>SENSOR_ID:LIDAR,SENSOR_ID_TYPE:LILN<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>inputfile.las<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;/Reader&gt;</span>
+  <span class="nt">&lt;/Writer&gt;</span>
+<span class="nt">&lt;/Pipeline&gt;</span>
+</pre></div>
+</div>
+<p><strong>Example Two</strong></p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.nitf&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>mynitf.ntf<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;compression&quot;</span><span class="nt">&gt;</span>laszip<span class="nt">&lt;/Options&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;forward&quot;</span><span class="nt">&gt;</span>all<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;aimidb&quot;</span><span class="nt">&gt;</span>ACQUISITION_DATE:20160102235900<span class="nt">&lt;/Option&gt;</span>
+    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;acftb&quot;</span><span class="nt">&gt;</span>SENSOR_ID:BUCKEY,SENSOR_ID_TYPE:LILN<span class="nt">&lt;/Option&gt;</span>
+
     <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>inputfile.las<span class="nt">&lt;/Option&gt;</span>
     <span class="nt">&lt;/Reader&gt;</span>
@@ -276,17 +296,21 @@ the result of using <a class="reference internal" href="filters.splitter.html#fi
 <dt>fsclsy</dt>
 <dd>File classification system (2 characters) [Default: &lt;spaces&gt;]</dd>
 <dt>idatim</dt>
-<dd>Image date and time (format: &#8216;CCYYMMDDhhmmss&#8217;) [Default: &lt;spaces&gt;]</dd>
+<dd>Image date and time (format: &#8216;CCYYMMDDhhmmss&#8217;). Required.
+[Default: AIMIDB.ACQUISITION_DATE if set or &lt;spaces&gt;]</dd>
 <dt>iid2</dt>
 <dd>Image identifier 2 (80 characters) [Default: &lt;spaces&gt;]</dd>
 <dt>fscltx</dt>
 <dd>File classification text (43 characters) [Default: &lt;spaces&gt;]</dd>
 <dt>aimidb</dt>
 <dd>Comma separated list of name/value pairs to complete the AIMIDB
-(Additional Image ID) TRE record (format name:value) [Default: None]</dd>
+(Additional Image ID) TRE record (format name:value).
+Required: ACQUISITION_DATE, will default to IDATIM value.
+[Default: NITF defaults]</dd>
 <dt>acftb</dt>
 <dd>Comma separated list of name/value pairs to complete the ACFTB
-(Aircraft Information) TRE record (format name:value) [Default: None]</dd>
+(Aircraft Information) TRE record (format name:value). Required:
+SENSOR_ID, SENSOR_ID_TYPE [Default: NITF defaults]</dd>
 </dl>
 </div>
 </div>
