@@ -88,6 +88,7 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#delta-command">delta command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#density-command">delta command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#diff-command">diff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ground-command">ground command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#info-command">info command</a></li>
@@ -175,11 +176,12 @@
 <li><a class="reference internal" href="#example-2">Example 2:</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#density-command">delta command</a></li>
 <li><a class="reference internal" href="#diff-command">diff command</a></li>
 <li><a class="reference internal" href="#ground-command">ground command</a></li>
 <li><a class="reference internal" href="#info-command">info command</a><ul>
-<li><a class="reference internal" href="#id5">Example 1:</a></li>
-<li><a class="reference internal" href="#id6">Example 2:</a></li>
+<li><a class="reference internal" href="#id6">Example 1:</a></li>
+<li><a class="reference internal" href="#id7">Example 2:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#merge-command">merge command</a></li>
@@ -187,19 +189,19 @@
 <li><a class="reference internal" href="#pipeline-command">pipeline command</a></li>
 <li><a class="reference internal" href="#random-command">random command</a></li>
 <li><a class="reference internal" href="#split-command">split command</a><ul>
-<li><a class="reference internal" href="#id12">Example 1:</a></li>
+<li><a class="reference internal" href="#id13">Example 1:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tindex-command">tindex command</a><ul>
 <li><a class="reference internal" href="#tindex-creation-mode">tindex Creation Mode</a></li>
 <li><a class="reference internal" href="#tindex-merge-mode">tindex Merge Mode</a></li>
-<li><a class="reference internal" href="#id16">Example 1:</a></li>
-<li><a class="reference internal" href="#id17">Example 2:</a></li>
+<li><a class="reference internal" href="#id17">Example 1:</a></li>
+<li><a class="reference internal" href="#id18">Example 2:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#translate-command">translate command</a><ul>
-<li><a class="reference internal" href="#id19">Example 1:</a></li>
-<li><a class="reference internal" href="#id20">Example 2:</a></li>
+<li><a class="reference internal" href="#id20">Example 1:</a></li>
+<li><a class="reference internal" href="#id21">Example 2:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#view-command">view command</a></li>
@@ -258,7 +260,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">howard at hobu.co</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">6/1/2015</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">03/13/2016</td>
 </tr>
 </tbody>
 </table>
@@ -266,6 +268,7 @@
 application currently has the following subcommands:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#delta-command"><span>delta</span></a></li>
+<li><a class="reference internal" href="#density-command"><span>density</span></a></li>
 <li><a class="reference internal" href="#diff-command"><span>diff</span></a></li>
 <li><a class="reference internal" href="#ground-command"><span>ground</span></a></li>
 <li><a class="reference internal" href="#info-command"><span>info</span></a></li>
@@ -358,8 +361,19 @@ Delta summary for
 </div>
 </div>
 </div>
+<div class="section" id="density-command">
+<span id="id2"></span><h2>delta command<a class="headerlink" href="#density-command" title="Permalink to this headline">¶</a></h2>
+<p>The density command produces a tessellated hexagonal OGR layer from the
+output of <a class="reference internal" href="stages/filters.hexbin.html#filters-hexbin"><span>filters.hexbin</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre>--input, -i        input point cloud file name
+--output, -o       output vector data source
+--lyr_name         OGR layer name to write into datasource
+--driver, -f       OGR driver name to use
+</pre></div>
+</div>
+</div>
 <div class="section" id="diff-command">
-<span id="id2"></span><h2>diff command<a class="headerlink" href="#diff-command" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2>diff command<a class="headerlink" href="#diff-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">diff</span></code> command is used for executing a simple contextual difference
 between two sources.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal diff &lt;source&gt; &lt;candidate&gt;
@@ -382,7 +396,7 @@ description of the differences is produced.</p>
 </ul>
 </div>
 <div class="section" id="ground-command">
-<span id="id3"></span><h2>ground command<a class="headerlink" href="#ground-command" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2>ground command<a class="headerlink" href="#ground-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">ground</span></code> command is used to segment the input point cloud into ground
 versus non-ground returns. The output is a point cloud containing only ground
 returns. The <code class="docutils literal"><span class="pre">ground</span></code> command invokes <a class="reference external" href="http://pointclouds.org/">Point Cloud Library</a>&#8216;s <a class="reference external" href="http://pointclouds.org/documentation/tutorials/progressive_morphological_filtering.php#progressive-morphological-filtering.">ProgressiveMorphologicalFilter</a>.</p>
@@ -407,7 +421,7 @@ returns. The <code class="docutils literal"><span class="pre">ground</span></cod
 </div>
 </div>
 <div class="section" id="info-command">
-<span id="id4"></span><h2>info command<a class="headerlink" href="#info-command" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>info command<a class="headerlink" href="#info-command" title="Permalink to this headline">¶</a></h2>
 <p>Dumps information about a point cloud file, such as:</p>
 <ul class="simple">
 <li>basic properties (extents, number of points, point format)</li>
@@ -443,8 +457,8 @@ to retransform the output into whatever they want with ease</li>
 </pre></div>
 </div>
 <p>If no options are provided, <code class="docutils literal"><span class="pre">--stats</span></code> is assumed.</p>
-<div class="section" id="id5">
-<h3>Example 1:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Example 1:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info  test/data/las/1.2-with-color.las \
     --query=&quot;636601.87, 849018.59, 425.10&quot;
 {
@@ -490,8 +504,8 @@ to retransform the output into whatever they want with ease</li>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id6">
-<h3>Example 2:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Example 2:<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal info test/data/1.2-with-color.las -p 0-10
 {
   &quot;filename&quot;: &quot;../../test/data/las/1.2-with-color.las&quot;,
@@ -544,7 +558,7 @@ to retransform the output into whatever they want with ease</li>
 </div>
 </div>
 <div class="section" id="merge-command">
-<span id="id7"></span><h2>merge command<a class="headerlink" href="#merge-command" title="Permalink to this headline">¶</a></h2>
+<span id="id8"></span><h2>merge command<a class="headerlink" href="#merge-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">merge</span></code> command will combine input files into a single output file.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal merge &lt;input&gt; ... &lt;output&gt;
 </pre></div>
@@ -558,7 +572,7 @@ filtering, reprojection, etc.  The file type of the input files may be
 different from one another and different from that of the output file.</p>
 </div>
 <div class="section" id="pcl-command">
-<span id="id8"></span><h2>pcl command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2>pcl command<a class="headerlink" href="#pcl-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">pcl</span></code> command is used to invoke a PCL JSON pipeline. See
 <a class="reference internal" href="tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><span>Filtering data with PCL</span></a> for more information.</p>
 <div class="admonition note">
@@ -577,7 +591,7 @@ different from one another and different from that of the output file.</p>
 </div>
 </div>
 <div class="section" id="pipeline-command">
-<span id="id9"></span><h2>pipeline command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
+<span id="id10"></span><h2>pipeline command<a class="headerlink" href="#pipeline-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">pipeline</span></code> command is used to execute <a class="reference internal" href="pipeline.html#pipeline"><span>Pipeline</span></a> XML. See
 <a class="reference internal" href="tutorial/reading.html#reading"><span>Reading with PDAL</span></a> or <a class="reference internal" href="pipeline.html#pipeline"><span>Pipeline</span></a> for more information.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline &lt;input&gt;
@@ -606,7 +620,7 @@ following arguments:</p>
 </div>
 </div>
 <div class="section" id="random-command">
-<span id="id10"></span><h2>random command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
+<span id="id11"></span><h2>random command<a class="headerlink" href="#random-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">random</span></code> command is used to create a random point cloud. It uses
 <a class="reference internal" href="stages/readers.faux.html#readers-faux"><span>readers.faux</span></a> to create a point cloud containing <code class="docutils literal"><span class="pre">count</span></code> points
 drawn randomly from either a uniform or normal distribution. For the uniform
@@ -632,7 +646,7 @@ each of the x, y, and z dimensions.</p>
 </div>
 </div>
 <div class="section" id="split-command">
-<span id="id11"></span><h2>split command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
+<span id="id12"></span><h2>split command<a class="headerlink" href="#split-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">split</span></code> command will create multiple output files from a single input
 file.  The command takes an input file name and an output filename (used as a
 template) or output directory specification.</p>
@@ -653,8 +667,8 @@ starting at one and incrementing for each file created.</p>
 <p>If the output argument ends in a path separator, it is assumed to be a
 directory and the input argument is appended to create the output template.
 The <code class="docutils literal"><span class="pre">split</span></code> command never creates directories.  Directories must pre-exist.</p>
-<div class="section" id="id12">
-<h3>Example 1:<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h3>Example 1:<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal split --capacity 100000 infile.laz outfile.bpf
 </pre></div>
 </div>
@@ -664,7 +678,7 @@ contains no more than 100000 points.</p>
 </div>
 </div>
 <div class="section" id="tindex-command">
-<span id="id13"></span><h2>tindex command<a class="headerlink" href="#tindex-command" title="Permalink to this headline">¶</a></h2>
+<span id="id14"></span><h2>tindex command<a class="headerlink" href="#tindex-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">tindex</span></code> command is used to create a <a class="reference external" href="http://www.gdal.org">GDAL</a>-style tile index for
 PDAL-readable point cloud types (see <a class="reference external" href="http://www.gdal.org/gdaltindex.html">gdaltindex</a>).</p>
 <div class="admonition note">
@@ -687,7 +701,7 @@ file can be specified by specifying the OGR code for the format using the
 <code class="docutils literal"><span class="pre">--driver</span></code> option.  If no driver is specified, the format defaults to &#8220;ESRI
 Shapefile&#8221;.</p>
 <p>In vector file-speak, each file specified by <code class="docutils literal"><span class="pre">filespec</span></code> is stored as a feature
-in a layer in the index file. The <code class="docutils literal"><span class="pre">filespec</span></code> is a <a href="#id14"><span class="problematic" id="id15">`</span></a>glob pattern
+in a layer in the index file. The <code class="docutils literal"><span class="pre">filespec</span></code> is a <a href="#id15"><span class="problematic" id="id16">`</span></a>glob pattern
 &lt;<a class="reference external" href="http://man7.org/linux/man-pages/man7/glob.7.html">http://man7.org/linux/man-pages/man7/glob.7.html</a>&gt;&#8217;_.  and normally needs to be
 quoted to prevent shell expansion of wildcard characters.</p>
 <div class="highlight-python"><div class="highlight"><pre>--tindex                   Non-positional option for specifying the index file name.
@@ -728,8 +742,8 @@ output file is determined automatically from the filename extension.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id16">
-<h3>Example 1:<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h3>Example 1:<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <p>Find all LAS files via <code class="docutils literal"><span class="pre">find</span></code>, send that file list via STDIN to
 <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">tindex</span></code>, and write a SQLite tile index file with a layer named <code class="docutils literal"><span class="pre">pdal</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ find las/ -iname &quot;*.las&quot; | pdal tindex index.sqlite -f &quot;SQLite&quot; \
@@ -737,8 +751,8 @@ output file is determined automatically from the filename extension.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id17">
-<h3>Example 2:<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h3>Example 2:<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <p>Glob a list of LAS files, output the SRS for the index entries to EPSG:4326, and
 write out an <a class="reference external" href="http://www.sqlite.org">SQLite</a> file.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ pdal tindex index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; \
@@ -748,7 +762,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
 </div>
 </div>
 <div class="section" id="translate-command">
-<span id="id18"></span><h2>translate command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
+<span id="id19"></span><h2>translate command<a class="headerlink" href="#translate-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">translate</span></code> command can be used for simple conversion of files based on
 their file extensions. It can also be used for constructing pipelines directly
 from the command-line.</p>
@@ -772,8 +786,8 @@ filter the data. <code class="docutils literal"><span class="pre">--filter</span
 constructing a multi-stage filtering operation.</p>
 <p>If no <code class="docutils literal"><span class="pre">--reader</span></code> or <code class="docutils literal"><span class="pre">--writer</span></code> type are given, PDAL will attempt to infer
 the correct drivers from the input and output file name extensions respectively.</p>
-<div class="section" id="id19">
-<h3>Example 1:<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id20">
+<h3>Example 1:<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal"><span class="pre">translate</span></code> command can be augmented by specifying full-path options at
 the command-line invocation. For example, the following invocation will
 translate <code class="docutils literal"><span class="pre">1.2-with-color.las</span></code> to <code class="docutils literal"><span class="pre">output.laz</span></code> while doing the following:</p>
@@ -793,8 +807,8 @@ translate <code class="docutils literal"><span class="pre">1.2-with-color.las</s
 </pre></div>
 </div>
 </div>
-<div class="section" id="id20">
-<h3>Example 2:<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id21">
+<h3>Example 2:<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <p>Given these tools, we can now construct a custom pipeline on-the-fly. The
 example below uses a simple LAS reader and writer, but stages a PCL-based
 voxel grid filter, followed by the PCL-based ground filter. We can even set
@@ -808,7 +822,7 @@ stage-specific parameters as shown.</p>
 </div>
 </div>
 <div class="section" id="view-command">
-<span id="id21"></span><h2>view command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
+<span id="id22"></span><h2>view command<a class="headerlink" href="#view-command" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">view</span></code> command can be used to visualize a point cloud using the
 PCLVisualizer. The command takes a single argument, the input file name.</p>
 <div class="admonition note">
@@ -872,7 +886,7 @@ help.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 12, 2016.
+                    on Mar 15, 2016.
         </div>
     </div>
   </body>
