@@ -238,7 +238,35 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <div class="section" id="the-header">
 <h2>The header<a class="headerlink" href="#the-header" title="Permalink to this headline">¶</a></h2>
 <p>First, we provide a full listing of the kernel header.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// MyKernel.hpp</span>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// MyKernel.hpp</span>
 
 <span class="cp">#pragma once</span>
 
@@ -268,8 +296,9 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 
 <span class="p">}</span> <span class="c1">// namespace pdal</span>
 </pre></div>
-</div>
-<p>As with other plugins, the MyKernel class needs to have the following three methods declared for the plugin interface to be satisfied:</p>
+</td></tr></table></div>
+<p>As with other plugins, the MyKernel class needs to have the following three
+methods declared for the plugin interface to be satisfied:</p>
 <div class="highlight-cpp"><div class="highlight"><pre>    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
     <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
@@ -279,7 +308,74 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <div class="section" id="the-source">
 <h2>The source<a class="headerlink" href="#the-source" title="Permalink to this headline">¶</a></h2>
 <p>Again, we start with a full listing of the kernel source.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// MyKernel.cpp</span>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// MyKernel.cpp</span>
 
 <span class="cp">#include &quot;MyKernel.hpp&quot;</span>
 
@@ -348,57 +444,70 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 
 <span class="p">}</span> <span class="c1">// namespace pdal</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>In your kernel implementation, you will use a macro defined in pdal_macros.
 This macro registers the plugin with the Kernel factory. It is
 only required by plugins.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="s">&quot;kernels.mykernel&quot;</span><span class="p">,</span>
-    <span class="s">&quot;MyKernel&quot;</span><span class="p">,</span>
-    <span class="s">&quot;http://link/to/documentation&quot;</span>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="s">&quot;http://link/to/documentation&quot;</span>
   <span class="p">};</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A static plugin macro can also be used to integrate the kernel with the
+main code.  This will not be described here.  Using this as a shared plugin
+will be described later.</p>
+</div>
+<p>To build up a processing pipeline in this example, we need to create two
+objects: the <a class="reference internal" href="../api/cpp/pointtable.html#_CPPv2N4pdal10PointTableE" title="pdal::PointTable"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTable</span></code></a> and the
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>. The latter is used to create the various
+stages that will be used within the kernel.</p>
+<div class="highlight-cpp"><div class="highlight"><pre>  <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a> is created from the
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>, and is specified by the stage name, in this
+case an LAS reader. For brevity, we provide the reader a single option, the
+filename of the file to be read.</p>
+<div class="highlight-cpp"><div class="highlight"><pre>  <span class="p">{</span>
+    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+    <span class="n">StageFactory</span> <span class="n">f</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> is also created from the
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>.  Here, we create a decimation filter that will
+pass every tenth point to subsequent stages. We also specify the input to this
+stage, which is the reader.</p>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Options</span> <span class="n">readerOptions</span><span class="p">;</span>
+    <span class="n">readerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_input_file</span><span class="p">);</span>
+    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">readerOptions</span><span class="p">);</span>
 
-  <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyKernel</span><span class="p">,</span> <span class="n">Kernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
+    <span class="n">Stage</span> <span class="o">*</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>A static plugin macro can also be used to integrate the kernel with the main code.
-This will not be described here.  Using this as a shared plugin will be described later.</p>
-<p>To build up a processing pipeline in this
-example, we need to create two objects: the
-PointTable and the StageFactory. The latter is
-used to create the various stages that will be
-used within the kernel.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">writerOptions</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>The Reader is created from the StageFactory, and
-is specified by the stage name, in this case an
-LAS reader. For brevity, we provide the reader a
-single option, the filename of the file to be
-read.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<p>Finally, the <a class="reference internal" href="../api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a> is created from the
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>. This <a class="reference internal" href="../stages/writers.text.html#writers-text"><span>writers.text</span></a>, takes as input the previous
+stage (the <a class="reference internal" href="../stages/filters.decimation.html#filters-decimation"><span>filters.decimation</span></a>) and the output filename as its sole option.</p>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">filterOptions</span><span class="p">);</span>
+    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">reader</span><span class="p">);</span>
 
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">Stage</span> <span class="o">*</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The Filter is also created from the StageFactory.
-Here, we create a decimation filter that will
-pass every tenth point to subsequent stages. We
-also specify the input to this stage, which is
-the reader.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="p">}</span> <span class="c1">// namespace pdal</span>
+<p>The final two steps are to prepare and execute the pipeline. This is achieved
+by calling prepare and execute on the final stage.</p>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Options</span> <span class="n">writerOptions</span><span class="p">;</span>
+    <span class="n">writerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_output_file</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Finally, the Writer is created from the
-StageFactory. This text writer, takes as input
-the previous stage (the decimation filter) and
-the output filename as its sole option.</p>
-<p>The final two steps are to prepare and execute
-the pipeline. This is achieved by calling prepare
-and execute on the final stage.</p>
-<p>When compiled, a dynamic library file will be created; in this case, <code class="docutils literal"><span class="pre">libpdal_plugin_kernel_mykernel.dylib</span></code></p>
-<p>Put this file in whatever directory <code class="docutils literal"><span class="pre">PDAL_DRIVER_PATH</span></code> is pointing to.  Then, if you run <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">--help</span></code>, you should see <code class="docutils literal"><span class="pre">mykernel</span></code> listed in the possible commands.</p>
-<p>To run this kernel, you would use <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">mykernel</span> <span class="pre">-i</span> <span class="pre">&lt;input</span> <span class="pre">las</span> <span class="pre">file&gt;</span> <span class="pre">-o</span> <span class="pre">&lt;output</span> <span class="pre">text</span> <span class="pre">file&gt;</span></code>.</p>
+<p>When compiled, a dynamic library file will be created; in this case,
+<code class="docutils literal"><span class="pre">libpdal_plugin_kernel_mykernel.dylib</span></code></p>
+<p>Put this file in whatever directory <code class="docutils literal"><span class="pre">PDAL_DRIVER_PATH</span></code> is pointing to.  Then,
+if you run <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">--help</span></code>, you should see <code class="docutils literal"><span class="pre">mykernel</span></code> listed in the possible
+commands.</p>
+<p>To run this kernel, you would use <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">mykernel</span> <span class="pre">-i</span> <span class="pre">&lt;input</span> <span class="pre">las</span> <span class="pre">file&gt;</span> <span class="pre">-o</span>
+<span class="pre">&lt;output</span> <span class="pre">text</span> <span class="pre">file&gt;</span></code>.</p>
 </div>
 </div>
 

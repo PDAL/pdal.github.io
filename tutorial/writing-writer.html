@@ -566,6 +566,19 @@ up the output stream by resetting it.</p>
 <h2>Compiling and Usage<a class="headerlink" href="#compiling-and-usage" title="Permalink to this headline">¶</a></h2>
 <p>To compile this reader, we will use cmake.  Here is the CMakeLists.txt file we
 will use for this process:</p>
+<div class="highlight-python"><div class="highlight"><pre>cmake_minimum_required(VERSION 2.8.12)
+project(WriterTutorial)
+
+find_package(PDAL 1.0.0 REQUIRED CONFIG)
+include_directories(${PDAL_INCLUDE_DIRS})
+
+include_directories(/Users/chambbj/loki/pdal/repo/writers)
+
+set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)
+add_library(pdal_plugin_writer_mywriter SHARED MyWriter.cpp)
+target_link_libraries(pdal_plugin_writer_mywriter ${PDAL_LIBRARIES})
+</pre></div>
+</div>
 <p>If this file is in the directory with the MyWriter.hpp and MyWriter.cpp files,
 simply run <code class="docutils literal"><span class="pre">cmake</span> <span class="pre">.</span></code> followed by <code class="docutils literal"><span class="pre">make</span></code>.  This will generate a file called
 <code class="docutils literal"><span class="pre">libpdal_plugin_writer_mywriter.dylib</span></code>.</p>

@@ -234,7 +234,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:howard&#37;&#52;&#48;hobu&#46;co">howard<span>&#64;</span>hobu<span>&#46;</span>co</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">12/26/2014</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">03/22/2016</td>
 </tr>
 </tbody>
 </table>
@@ -245,17 +245,12 @@ Pipelines and give some examples you can use to execute translation
 operations.</p>
 <div class="section" id="playing-dolls">
 <h2>Playing Dolls<a class="headerlink" href="#playing-dolls" title="Permalink to this headline">¶</a></h2>
-<p>A <cite>Pipeline</cite> is composed as a set of <a class="reference external" href="http://en.wikipedia.org/wiki/Matryoshka_doll">Matryoshka dolls</a>, with the outside
-or largest doll being the final endpoint of the pipeline, and the inner-most
-doll being the starting point. Each &#8220;doll&#8221; in the set represents a
-<a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> with its subsequent operations happening at that
-point as data are pulled through the pipeline from the starting point to
-end point.</p>
-<p>There are two primary building blocks in PDAL, <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> and
+<p>A <cite>Pipeline</cite> is composed as an array of <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> , with the
+first stage at the beginning and the last at the end.  There are two primary
+building blocks in PDAL, <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> and
 <a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a>. <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>,
 <a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, and <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> are all subclasses of
-<a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> that provide the concrete dolls for the Matryoshka
-set.</p>
+<a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>.</p>
 <p><a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a> is the substrate that flows between stages in a
 pipeline and transfers the actual data as it moves through the pipeline. A
 <a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a> contains a <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTablePtr</span></code>, which
@@ -263,31 +258,31 @@ itself contains a list of <a class="reference internal" href="api/cpp/dimension.
 actual channels that are stored in the <a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a>.</p>
 <p>PDAL provides four types of stages &#8211; <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>,
 <a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a>, and
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::MultiFilter</span></code> &#8211; with the latter being hardly used at this
-point. A Reader is a producer of data, a Writer is a consumer of data, and a
-Filter is an actor on data.</p>
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::MultiFilter</span></code> &#8211; with the latter being hardly used (just
+<a class="reference internal" href="stages/filters.merge.html#filters-merge"><span>filters.merge</span></a>) at this point. A Reader is a producer of data, a Writer
+is a consumer of data, and a Filter is an actor on data.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As a consumer, you are generally not supposed to worry about the underlying storage of the
-PointView, but there might be times when you simply just &#8220;want the data.&#8221;
-In those situations, you can use the <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView::getBytes</span></code>
-method to stream out the raw storage.</p>
+<p class="last">As a consumer, you are generally not supposed to worry about the underlying
+storage of the PointView, but there might be times when you simply just
+&#8220;want the data.&#8221; In those situations, you can use the
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView::getBytes</span></code> method to stream out the raw storage.</p>
 </div>
 </div>
 <div class="section" id="a-basic-example">
 <h2>A Basic Example<a class="headerlink" href="#a-basic-example" title="Permalink to this headline">¶</a></h2>
 <p>While pipeline objects are manipulable through C++ objects, the other, more
-convenient way is through an XML syntax. The XML syntax mirrors the Matryoshka
+convenient way is through an JSON syntax. The JSON syntax mirrors the Matryoshka
 arrangement of the Pipeline, with options and auxiliary metadata added on a
 per-stage basis.</p>
 <p>We have two use cases specifically in mind:</p>
 <blockquote>
 <div><ul class="simple">
-<li>a command-line application that reads an XML file to allow a user to
+<li>a command-line application that reads an JSON file to allow a user to
 easily construct arbitrary writer pipelines, as opposed to having to
 build applications custom to individual needs with arbitrary options,
 filters, etc.</li>
-<li>a user can provide XML for a reader pipeline, construct it via a simple
+<li>a user can provide JSON for a reader pipeline, construct it via a simple
 call to the PipelineManager API, and then use the Stage read() function
 to perform the read and then do any processing of the points.  This style
 of operation is very appropriate for using PDAL from within environments
@@ -296,19 +291,12 @@ complex pipeline construction.</li>
 </ul>
 </div></blockquote>
 <p>Let&#8217;s start with the following basic example:</p>
-<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;Pipeline version=&quot;1.0&quot;&gt;
-    &lt;Writer type=&quot;writers.las&quot;&gt;
-        &lt;Option name=&quot;filename&quot;&gt;
-            output.las
-        &lt;/Option&gt;
-        &lt;Reader type=&quot;readers.las&quot;&gt;
-            &lt;Option name=&quot;filename&quot;&gt;
-                ./path/to/my/file.las
-            &lt;/Option&gt;
-        &lt;/Reader&gt;
-    &lt;/Writer&gt;
-&lt;/Pipeline&gt;
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s">&quot;/path/to/my/file/input.las&quot;</span><span class="p">,</span>
+    <span class="s">&quot;output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -354,220 +342,25 @@ stages and their options.</p>
 entities how to process data. A stage option can itself have options, going
 on ad infinitum. The following example sorts the data using a <a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton
 ordering</a> using <a class="reference internal" href="stages/filters.mortonorder.html#filters-mortonorder"><span>filters.mortonorder</span></a> and writes out a <a class="reference external" href="http://www.laszip.org">LASzip</a> file as the result.</p>
-<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;Pipeline version=&quot;1.0&quot;&gt;
-    &lt;Writer type=&quot;writers.las&quot;&gt;
-        &lt;Option name=&quot;filename&quot;&gt;
-            compressed.laz
-        &lt;/Option&gt;
-        &lt;Option name=&quot;compression&quot;&gt;
-            true
-        &lt;/Option&gt;
-        &lt;Filter type=&quot;filters.mortonorder&quot;&gt;
-            &lt;Reader type=&quot;readers.las&quot;&gt;
-                &lt;Option name=&quot;filename&quot;&gt;
-                    uncompressed.las
-                &lt;/Option&gt;
-            &lt;/Reader&gt;
-        &lt;/Filter&gt;
-    &lt;/Writer&gt;
-&lt;/Pipeline&gt;
+<div class="highlight-python"><div class="highlight"><pre>{
+  &quot;pipeline&quot;:[
+    &quot;uncompressed.las&quot;,
+    {
+      &quot;type&quot;:&quot;filters.mortonorder&quot;
+    }
+    {
+      &quot;type&quot;:&quot;writers.las&quot;,
+      &quot;filename&quot;:&quot;compressed.laz&quot;,
+      &quot;compression&quot;:&quot;true&quot;
+    }
+  ]
+}
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="metadata.html#metadata"><span>Metadata</span></a> is quite similar to <a class="reference internal" href="#options">Options</a> except that Option/Options
-instances are used to denote an action to be done during a stage rather
-than simply a data value to be set or fetched.  PDAL is indeed still hazy
-here and there is ample room to clean this up, but the general gestalt is
-that you use Options to tell a Stage what to do, and you use Metadata to
-set a value or data member for something related to a stage.</p>
 </div>
 </div>
 <div class="section" id="syntax-specification">
 <h2>Syntax Specification<a class="headerlink" href="#syntax-specification" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><dl class="first docutils">
-<dt>&lt;Pipeline&gt;</dt>
-<dd><ul class="first last">
-<li><p class="first">this is the root element for all pipeline xml</p>
-</li>
-<li><p class="first">mandatory</p>
-</li>
-<li><dl class="first docutils">
-<dt>child elements:</dt>
-<dd><ul class="first last">
-<li><dl class="first docutils">
-<dt>exactly one of the following four:</dt>
-<dd><ul class="first last simple">
-<li>&lt;Writer&gt; element, for writer pipelines</li>
-<li>&lt;Reader&gt; or &lt;Filter&gt; or &lt;MultiFilter&gt; element, for reader
-pipelines</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>attributes:</dt>
-<dd><ul class="first last simple">
-<li>the &#8220;version&#8221; attribute must appear exactly once; the value of this
-attribute shall be the string &#8220;1.0&#8221;</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>&lt;Writer&gt; <a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a></dt>
-<dd><ul class="first last">
-<li><p class="first">indicates a writer stage</p>
-</li>
-<li><dl class="first docutils">
-<dt>child elements:</dt>
-<dd><ul class="first last simple">
-<li>zero or more &lt;Option&gt; elements</li>
-<li>exactly one &lt;Reader&gt; or &lt;Filter&gt; or &lt;MultiFilter&gt; element</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>attributes:</dt>
-<dd><ul class="first last simple">
-<li>the &#8220;type&#8221; attribute must appear exactly once; the value of this
-attribute shall be the string corresponding to the name of
-the Writer stage type, e.g. &#8220;writers.las&#8221;</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>&lt;Reader&gt; <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a></dt>
-<dd><ul class="first last">
-<li><p class="first">indicates a reader stage</p>
-</li>
-<li><dl class="first docutils">
-<dt>child elements:</dt>
-<dd><ul class="first last simple">
-<li>zero or more &lt;Option&gt; elements</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>attributes:</dt>
-<dd><ul class="first last simple">
-<li>the &#8220;type&#8221; attribute must appear exactly once; the value of this
-attribute shall be the string corresponding to the name of
-the Reader stage type, e.g. &#8220;readers.las&#8221;</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>&lt;Filter&gt; <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a></dt>
-<dd><ul class="first last">
-<li><p class="first">indicates a filter stage</p>
-</li>
-<li><dl class="first docutils">
-<dt>child elements:</dt>
-<dd><ul class="first last simple">
-<li>zero or more &lt;Option&gt; elements</li>
-<li>exactly one &lt;Reader&gt; or &lt;Filter&gt; or &lt;MultiFilter&gt; element</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>attributes:</dt>
-<dd><ul class="first last simple">
-<li>the &#8220;type&#8221; attribute must appear exactly once; the value of this
-attribute shall be the string corresponding to the name of
-the filter stage type, e.g. &#8220;filters.crop&#8221;</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>&lt;MultiFilter&gt; <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::MultiFilter</span></code></dt>
-<dd><ul class="first last">
-<li><p class="first">indicates a multifilter stage (filter than takes &gt;1 input stage)</p>
-</li>
-<li><dl class="first docutils">
-<dt>child elements:</dt>
-<dd><ul class="first last simple">
-<li>zero or more &lt;Option&gt; elements</li>
-<li>one or more &lt;Reader&gt; or &lt;Filter&gt; or &lt;MultiFilter&gt; elements</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>attributes:</dt>
-<dd><ul class="first last simple">
-<li>the &#8220;type&#8221; attribute must appear exactly once; the value of this
-attribute shall be the string corresponding to the name of
-the MultiFilter stage type, e.g. &#8220;filter.mosaic&#8221;</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>&lt;Option&gt; <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Option</span></code></dt>
-<dd><ul class="first last">
-<li><p class="first">indicates an option parameter to the pipeline stage</p>
-</li>
-<li><p class="first">may only be a child of a &lt;Reader&gt;, &lt;Writer&gt;, &lt;Filter&gt;, or &lt;MultiFilter&gt;
-element</p>
-</li>
-<li><dl class="first docutils">
-<dt>attributes:</dt>
-<dd><ul class="first last simple">
-<li>the &#8220;name&#8221; attribute must appear exactly once; the value of this
-attribute shall be the name of the option, e.g. &#8220;filename&#8221;</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p class="first">any number of recursively-defined &lt;Option&gt; elements</p>
-</li>
-<li><dl class="first docutils">
-<dt>content:</dt>
-<dd><ul class="first last simple">
-<li>the content of the element shall be the string representing the
-value of the option, e.g. &#8220;input.las&#8221;</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
+<p>See <a class="reference internal" href="json_pipeline_specification.html#json-pipeline-specification"><span>1&nbsp;&nbsp;&nbsp;Draft PDAL JSON Pipeline Specification</span></a> for more detail</p>
 </div>
 </div>
 
