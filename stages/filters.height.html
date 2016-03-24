@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -172,6 +172,7 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">filters.height</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -224,6 +225,27 @@
 with ground points assigned the classification label of 2 (per LAS
 specification). It returns a point cloud with a new dimension <code class="docutils literal"><span class="pre">HeightAboveGround</span></code> that
 contains the normalized height value.</p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.height&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;Z = HeightAboveGround&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>None</p>

@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -224,59 +224,23 @@
 <p>The OCI writer is used to write data to <a class="reference external" href="http://docs.oracle.com/cd/B28359_01/appdev.111/b28400/sdo_pc_pkg_ref.htm">Oracle point cloud</a> databases.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.oci&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;connection&quot;</span><span class="nt">&gt;</span>
-      lidar/lidar@oracle.hobu.biz/lidar
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;base_table_name&quot;</span><span class="nt">&gt;</span>
-      QFIT_CLOUD
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;block_table_name&quot;</span><span class="nt">&gt;</span>
-      QFIT_BLOCKS
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;cloud_column_name&quot;</span><span class="nt">&gt;</span>
-      CLOUD
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;is3d&quot;</span><span class="nt">&gt;</span>
-      false
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;solid&quot;</span><span class="nt">&gt;</span>
-      false
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;overwrite&quot;</span><span class="nt">&gt;</span>
-      false
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;srid&quot;</span><span class="nt">&gt;</span>
-      4269
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span><span class="nt">&gt;</span>
-      5000
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;stream_output_precision&quot;</span><span class="nt">&gt;</span>
-      8
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.chipper&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span><span class="nt">&gt;</span>
-        5000
-      <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.cache&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;max_cache_blocks&quot;</span><span class="nt">&gt;</span>
-          1
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;cache_block_size&quot;</span><span class="nt">&gt;</span>
-          50000000
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            file.las
-          <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Reader&gt;</span>
-      <span class="nt">&lt;/Filter&gt;</span>
-    <span class="nt">&lt;/Filter&gt;</span>
-  <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.oci&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;grid/grid@localhost/orcl&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;block_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;QFIT_BLOCKS&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;base_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;QFIT_CLOUD&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;cloud_column_name&quot;</span><span class="p">:</span><span class="s2">&quot;CLOUD&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;srid&quot;</span><span class="p">:</span><span class="s2">&quot;4269&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;capacity&quot;</span><span class="p">:</span><span class="s2">&quot;5000&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>

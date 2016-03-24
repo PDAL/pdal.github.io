@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -224,31 +224,20 @@
 <p>The OCI reader is used to read data from <a class="reference external" href="http://docs.oracle.com/cd/B28359_01/appdev.111/b28400/sdo_pc_pkg_ref.htm">Oracle point cloud</a> databases.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>outputfile.las<span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.oci&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;query&quot;</span><span class="nt">&gt;</span>
-        SELECT
-          l.&quot;OBJ_ID&quot;, l.&quot;BLK_ID&quot;, l.&quot;BLK_EXTENT&quot;,
-          l.&quot;BLK_DOMAIN&quot;, l.&quot;PCBLK_MIN_RES&quot;,
-          l.&quot;PCBLK_MAX_RES&quot;, l.&quot;NUM_POINTS&quot;,
-          l.&quot;NUM_UNSORTED_POINTS&quot;, l.&quot;PT_SORT_DIM&quot;,
-          l.&quot;POINTS&quot;, b.cloud
-        FROM AUTZEN_BLOCKS l, AUTZEN_CLOUD b
-        WHERE l.obj_id = b.id and l.obj_id in (1,2)
-        ORDER BY l.obj_id
-      <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;connection&quot;</span><span class="nt">&gt;</span>
-        grid/grid@localhost/orcl
-      <span class="nt">&lt;/Option&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;populate_pointsourceid&quot;</span><span class="nt">&gt;</span>
-        true
-      <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;/Reader&gt;</span>
-  <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.oci&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="s2">&quot;SELECT \r\n            l.\&quot;OBJ_ID\&quot;, l.\&quot;BLK_ID\&quot;, l.\&quot;BLK_EXTENT\&quot;, \r\n            l.\&quot;BLK_DOMAIN\&quot;, l.\&quot;PCBLK_MIN_RES\&quot;, \r\n            l.\&quot;PCBLK_MAX_RES\&quot;, l.\&quot;NUM_POINTS\&quot;,\r\n            l.\&quot;NUM_UNSORTED_POINTS\&quot;, l.\&quot;PT_SORT_DIM\&quot;, \r\n            l.\&quot;POINTS\&quot;, b.cloud\r\n          FROM AUTZEN_BLOCKS l, AUTZEN_CLOUD b\r\n          WHERE l.obj_id = b.id and l.obj_id in (1,2)\r\n          ORDER BY l.obj_id&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;grid/grid@localhost/orcl&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;populate_pointsourceid&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>

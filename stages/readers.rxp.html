@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -241,66 +241,48 @@ For help building PDAL with optional libraries, see <a class="reference external
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example rescales the points, given in the scanner&#8217;s own coordinate system, to values that can be written to a las file.
 Only points with a valid gps time, as determined by a pps pulse, are read from the rxp, since the <code class="docutils literal"><span class="pre">sync_to_pps</span></code> option is &#8220;true&#8221;.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>output.las<span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;discard_high_return_numbers&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.scaling&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                X
-                <span class="nt">&lt;Options&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale&quot;</span><span class="nt">&gt;</span>0.001<span class="nt">&lt;/Option&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;offset&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Options&gt;</span>
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                Y
-                <span class="nt">&lt;Options&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale&quot;</span><span class="nt">&gt;</span>0.001<span class="nt">&lt;/Option&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;offset&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Options&gt;</span>
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;dimension&quot;</span><span class="nt">&gt;</span>
-                Z
-                <span class="nt">&lt;Options&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;scale&quot;</span><span class="nt">&gt;</span>0.001<span class="nt">&lt;/Option&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;offset&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Options&gt;</span>
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.programmable&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;source&quot;</span><span class="nt">&gt;</span>
-import numpy
-def reflectance_to_intensity(ins, outs):
-    ref = ins[&quot;Reflectance&quot;]
-    min = numpy.amin(ref)
-    max = numpy.amax(ref)
-    outs[&quot;Intensity&quot;] = (65535 * (ref - min) / (max - min)).astype(numpy.uint16)
-    return True
-                <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;function&quot;</span><span class="nt">&gt;</span>reflectance_to_intensity<span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;module&quot;</span><span class="nt">&gt;</span>pyrxp<span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;add_dimension&quot;</span><span class="nt">&gt;</span>Intensity<span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.rxp&quot;</span><span class="nt">&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>120304_204030.rxp<span class="nt">&lt;/Option&gt;</span>
-                    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;sync_to_pps&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;/Reader&gt;</span>
-            <span class="nt">&lt;/Filter&gt;</span>
-        <span class="nt">&lt;/Filter&gt;</span>
-    <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="k">def</span> <span class="nf">reflectance_to_intensity</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span> <span class="n">outs</span><span class="p">):</span>
+    <span class="n">ref</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s">&quot;Reflectance&quot;</span><span class="p">]</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+    <span class="n">outs</span><span class="p">[</span><span class="s">&quot;Intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">65535</span> <span class="o">*</span> <span class="p">(</span><span class="n">ref</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</div>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;120304_204030.rxp&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;sync_to_pps&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.programmable&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="s2">&quot;filter_rxp.py&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="s2">&quot;reflectance_to_intensity&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;add_dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Intensity&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="s2">&quot;filter_rxp&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+      <span class="s2">&quot;discard_high_return_numbers&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>A few things to note:</p>
 <ul class="simple">
-<li>We use a <code class="docutils literal"><span class="pre">filters.programmable</span></code> to remap Reflectance values to Intensity values, scaling them so the entire range of Reflectance values fit into the Intensity field.
+<li>We use a <a class="reference internal" href="filters.programmable.html#filters-programmable"><span>filters.programmable</span></a> to remap Reflectance values to Intensity values, scaling them so the entire range of Reflectance values fit into the Intensity field.
 This is analogous to the &#8220;Export reflectance as intensity&#8221; option in RiSCAN Pro.
 You could also explicitly set the minimum and maximum Reflectance values as you would in RiSCAN Pro using the same programmable filter.
 You could also use &#8220;Amplitude&#8221; instead of &#8220;Reflectance&#8221;.
 If you do not need Intensity values in your output file, you can delete the programmable filter.</li>
-<li>We set the <code class="docutils literal"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal"><span class="pre">true</span></code> on the las writer.
+<li>We set the <code class="docutils literal"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal"><span class="pre">true</span></code> on the <a class="reference internal" href="writers.las.html#writers-las"><span>writers.las</span></a>.
 RXP files can contain more returns per shot than is supported by las, and so we need to explicitly tell the las writer to ignore those high return number points.
-You could also use <code class="docutils literal"><span class="pre">filters.predicate</span></code> to filter those points earlier in the pipeline, or modify the return values with a <code class="docutils literal"><span class="pre">filters.programmable</span></code>.</li>
+You could also use <a class="reference internal" href="filters.predicate.html#filters-predicate"><span>filters.predicate</span></a> to filter those points earlier in the pipeline, or modify the return values with a <a class="reference internal" href="filters.programmable.html#filters-programmable"><span>filters.programmable</span></a>.</li>
 </ul>
 </div>
 <div class="section" id="options">

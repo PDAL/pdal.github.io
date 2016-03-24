@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -239,37 +239,24 @@ data described by the tiles.</p>
 </div>
 <p>Use the following <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a> example to read and automatically
 merge the data.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.las&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-            out.las
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.tindex&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;sql&quot;</span><span class="nt">&gt;</span>
-                SELECT * from pdal
-            <span class="nt">&lt;/Option&gt;</span>
-           <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filter_srs&quot;</span><span class="nt">&gt;</span>
-                +proj=lcc +lat_1=43 +lat_2=45.5 +lat_0=41.75 +lon_0=-120.5 +x_0=399999.9999999999 +y_0=0 +ellps=GRS80 +units=ft +no_defs
-            <span class="nt">&lt;/Option&gt;</span>
-           <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;merge&quot;</span><span class="nt">&gt;</span>
-               true
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                /Users/hobu/dev/git/pdal/test/temp/index.sqlite
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;where&quot;</span><span class="nt">&gt;</span>
-                location LIKE &#39;%nteresting.las%&#39;
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;boundary&quot;</span><span class="nt">&gt;</span>
-                ([635629.85, 638982.55], [848999.70 , 853535.43])
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;polygon&quot;</span><span class="nt">&gt;</span>
-                POLYGON ((635629.85000000 848999.70000000, 635629.85000000 853535.43000000, 638982.55000000 853535.43000000, 638982.55000000 848999.70000000, 635629.85000000 848999.70000000))
-            <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;/Reader&gt;</span>
-    <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.tindex&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;sql&quot;</span><span class="p">:</span><span class="s2">&quot;SELECT * from pdal&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filter_srs&quot;</span><span class="p">:</span><span class="s2">&quot;+proj=lcc +lat_1=43 +lat_2=45.5 +lat_0=41.75 +lon_0=-120.5 +x_0=399999.9999999999 +y_0=0 +ellps=GRS80 +units=ft +no_defs&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;merge&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;index.sqlite&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;where&quot;</span><span class="p">:</span><span class="s2">&quot;location LIKE \&#39;%nteresting.las%\&#39;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;boundary&quot;</span><span class="p">:</span><span class="s2">&quot;([635629.85, 638982.55], [848999.70 , 853535.43])&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;polygon&quot;</span><span class="p">:</span><span class="s2">&quot;POLYGON ((635629.85000000 848999.70000000, 635629.85000000 853535.43000000, 638982.55000000 853535.43000000, 638982.55000000 848999.70000000, 635629.85000000 848999.70000000))&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>

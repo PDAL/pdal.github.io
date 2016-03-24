@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -226,19 +226,18 @@ found at <a class="reference external" href="https://nsgreg.nga.mil/doc/view?i=4
 only supports writing of version 3 BPF format files.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.bpf&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-      outputfile.bpf
-    <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-        inputfile.las
-      <span class="nt">&lt;/Option&gt;</span>
-    <span class="nt">&lt;/Reader&gt;</span>
-  <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre>{
+  &quot;pipeline&quot;:[
+    {
+      &quot;type&quot;:&quot;readers.&quot;,s
+      &quot;filename&quot;:&quot;inputfile.las&quot;
+    },
+    {
+      &quot;type&quot;:&quot;writers.bpf&quot;,
+      &quot;filename&quot;:&quot;outputfile.bpf&quot;
+    }
+  ]
+}
 </pre></div>
 </div>
 </div>

@@ -128,7 +128,7 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -172,8 +172,7 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Pipeline</a><ul>
 <li><a class="reference internal" href="#playing-dolls">Playing Dolls</a></li>
-<li><a class="reference internal" href="#a-basic-example">A Basic Example</a><ul>
-<li><a class="reference internal" href="#pipeline-textual-description">Pipeline textual description</a></li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
 <li><a class="reference internal" href="#stage-types">Stage Types</a></li>
 </ul>
 </li>
@@ -243,6 +242,11 @@ to perform data translation operations, filter data, or simply to provide data
 to an endpoint. This document describes some features and background of PDAL
 Pipelines and give some examples you can use to execute translation
 operations.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="apps.html#pipeline-command"><span>pipeline command</span></a> is used to invoke JSON pipeline operations
+via the command line.</p>
+</div>
 <div class="section" id="playing-dolls">
 <h2>Playing Dolls<a class="headerlink" href="#playing-dolls" title="Permalink to this headline">¶</a></h2>
 <p>A <cite>Pipeline</cite> is composed as an array of <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> , with the
@@ -263,38 +267,35 @@ actual channels that are stored in the <a class="reference internal" href="api/c
 is a consumer of data, and a Filter is an actor on data.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As a consumer, you are generally not supposed to worry about the underlying
+<p class="last">As a C++ API consumer, you are generally not supposed to worry about the underlying
 storage of the PointView, but there might be times when you simply just
 &#8220;want the data.&#8221; In those situations, you can use the
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView::getBytes</span></code> method to stream out the raw storage.</p>
+<code class="xref cpp cpp-func docutils literal"><span class="pre">pdal::PointView::getBytes()</span></code> method to stream out the raw storage.</p>
 </div>
 </div>
-<div class="section" id="a-basic-example">
-<h2>A Basic Example<a class="headerlink" href="#a-basic-example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>While pipeline objects are manipulable through C++ objects, the other, more
-convenient way is through an JSON syntax. The JSON syntax mirrors the Matryoshka
+convenient way is through an JSON syntax. The JSON syntax mirrors the
 arrangement of the Pipeline, with options and auxiliary metadata added on a
 per-stage basis.</p>
 <p>We have two use cases specifically in mind:</p>
-<blockquote>
-<div><ul class="simple">
-<li>a command-line application that reads an JSON file to allow a user to
-easily construct arbitrary writer pipelines, as opposed to having to
-build applications custom to individual needs with arbitrary options,
-filters, etc.</li>
-<li>a user can provide JSON for a reader pipeline, construct it via a simple
-call to the PipelineManager API, and then use the Stage read() function
-to perform the read and then do any processing of the points.  This style
-of operation is very appropriate for using PDAL from within environments
-like Python where the focus is on just getting the points, as opposed to
-complex pipeline construction.</li>
+<ul class="simple">
+<li>a <a class="reference internal" href="apps.html#pipeline-command"><span>command-line</span></a> application that reads an JSON
+file to allow a user to easily construct arbitrary writer pipelines, as
+opposed to having to build applications custom to individual needs with
+arbitrary options, filters, etc.</li>
+<li>a user can provide JSON for a reader pipeline, construct it via a simple call
+to the PipelineManager API, and then use the <code class="xref cpp cpp-func docutils literal"><span class="pre">pdal::Stage::read()</span></code>
+function to perform the read and then do any processing of the points.  This
+style of operation is very appropriate for using PDAL from within
+environments like Python where the focus is on just getting the points, as
+opposed to complex pipeline construction.</li>
 </ul>
-</div></blockquote>
-<p>Let&#8217;s start with the following basic example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
-  <span class="s">&quot;pipeline&quot;</span><span class="p">:[</span>
-    <span class="s">&quot;/path/to/my/file/input.las&quot;</span><span class="p">,</span>
-    <span class="s">&quot;output.las&quot;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;/path/to/my/file/input.las&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;output.las&quot;</span>
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -304,17 +305,6 @@ complex pipeline construction.</li>
 <p class="last"><a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/test/data/pipeline/">https://github.com/PDAL/PDAL/blob/master/test/data/pipeline/</a> contains
 test suite pipeline files that provide an excellent example of the
 currently possible operations.</p>
-</div>
-<div class="section" id="pipeline-textual-description">
-<h3>Pipeline textual description<a class="headerlink" href="#pipeline-textual-description" title="Permalink to this headline">¶</a></h3>
-<p>The first element, Pipeline, tells us what we are and gives a version number.
-Next, we have the Writer element, and provides the <cite>type</cite> of writer stage
-that we are going to have as the endpoint of our pipeline (see more about this
-in <a class="reference internal" href="#stage-types">Stage Types</a>). After that, we have an Option element, which provides the
-filename that the Writer is going to use when outputting the file. Then we
-have the final doll in our Matryoshka set, the Reader, which has a stage
-type of <cite>readers.las</cite> with its own Option giving a filename to use
-to read the file.</p>
 </div>
 <div class="section" id="stage-types">
 <h3>Stage Types<a class="headerlink" href="#stage-types" title="Permalink to this headline">¶</a></h3>
@@ -332,29 +322,30 @@ descriptions of their options.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Issuing the command <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></code> will list all available
-stages and their options.</p>
+stages and their options. See <a class="reference internal" href="apps.html#info-command"><span>info command</span></a> for more.</p>
 </div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>Options are the mechanism that PDAL uses to inform <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>
-entities how to process data. A stage option can itself have options, going
-on ad infinitum. The following example sorts the data using a <a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton
-ordering</a> using <a class="reference internal" href="stages/filters.mortonorder.html#filters-mortonorder"><span>filters.mortonorder</span></a> and writes out a <a class="reference external" href="http://www.laszip.org">LASzip</a> file as the result.</p>
-<div class="highlight-python"><div class="highlight"><pre>{
-  &quot;pipeline&quot;:[
-    &quot;uncompressed.las&quot;,
-    {
-      &quot;type&quot;:&quot;filters.mortonorder&quot;
-    }
-    {
-      &quot;type&quot;:&quot;writers.las&quot;,
-      &quot;filename&quot;:&quot;compressed.laz&quot;,
-      &quot;compression&quot;:&quot;true&quot;
-    }
-  ]
-}
+entities how to process data. The following example sorts the data using a
+<a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton ordering</a> using <a class="reference internal" href="stages/filters.mortonorder.html#filters-mortonorder"><span>filters.mortonorder</span></a> and writes out a <a class="reference external" href="http://www.laszip.org">LASzip</a>
+file as the result. We use options to define the <code class="docutils literal"><span class="pre">compression</span></code> function
+for the <a class="reference internal" href="stages/writers.las.html#writers-las"><span>writers.las</span></a> <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>.</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;uncompressed.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.mortonorder&quot;</span>
+    <span class="p">}</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;compressed.laz&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>

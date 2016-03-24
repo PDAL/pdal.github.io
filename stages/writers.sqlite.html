@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#playing-dolls">Playing Dolls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#a-basic-example">A Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
 </ul>
@@ -225,39 +225,28 @@
 that matches the approach of <a class="reference internal" href="readers.pgpointcloud.html#readers-pgpointcloud"><span>readers.pgpointcloud</span></a> and <a class="reference internal" href="readers.oci.html#readers-oci"><span>readers.oci</span></a>.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Pipeline</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Writer</span> <span class="na">type=</span><span class="s">&quot;writers.sqlite&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;connection&quot;</span><span class="nt">&gt;</span>
-            output.sqlite
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;cloud_table_name&quot;</span><span class="nt">&gt;</span>
-            SIMPLE_CLOUD
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;pre_sql&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;post_sql&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;block_table_name&quot;</span><span class="nt">&gt;</span>
-            SIMPLE_BLOCKS
-        <span class="nt">&lt;/Option&gt;</span>
-        <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;cloud_column_name&quot;</span><span class="nt">&gt;</span>
-            CLOUD
-        <span class="nt">&lt;/Option&gt;</span>
-
-        <span class="nt">&lt;Filter</span> <span class="na">type=</span><span class="s">&quot;filters.chipper&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span><span class="nt">&gt;</span>
-                50
-            <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;Reader</span> <span class="na">type=</span><span class="s">&quot;readers.las&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span><span class="nt">&gt;</span>
-                    latlon.las
-                <span class="nt">&lt;/Option&gt;</span>
-                <span class="nt">&lt;Option</span> <span class="na">name=</span><span class="s">&quot;spatialreference&quot;</span><span class="nt">&gt;</span>
-                    EPSG:4326
-                <span class="nt">&lt;/Option&gt;</span>
-            <span class="nt">&lt;/Reader&gt;</span>
-        <span class="nt">&lt;/Filter&gt;</span>
-    <span class="nt">&lt;/Writer&gt;</span>
-<span class="nt">&lt;/Pipeline&gt;</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.chipper&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;capacity&quot;</span><span class="p">:</span><span class="mi">50</span>
+    <span class="p">}</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.sqlite&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;output.sqlite&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;cloud_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;SIMPLE_CLOUD&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;pre_sql&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;post_sql&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;block_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;SIMPLE_BLOCKS&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;cloud_column_name&quot;</span><span class="p">:</span><span class="s2">&quot;CLOUD&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.pcd&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
