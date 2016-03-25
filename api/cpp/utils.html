@@ -571,14 +571,16 @@
 
 <dl class="function">
 <dt>
-<span class="target" id="project0namespacepdal_1_1Utils_1af8acb4f075d77db0e0642ee11d2ddd58"></span><code class="descname">PDAL_DLL char* pdal::Utils::getenv(const char * name)</code></dt>
+<span class="target" id="project0namespacepdal_1_1Utils_1a8d521c2f067ae613fe35e05753ad78ef"></span><code class="descname">PDAL_DLL int pdal::Utils::getenv(std::string const &amp; name, std::string &amp; val)</code></dt>
 <dd><p>Fetch the value of an environment variable. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
-<dd>Value of environment variable. </dd>
+<dd>0 on success, -1 on failure </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><code class="first docutils literal"><span class="pre">name</span></code> - <p>Name of environment varaible. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>Value of the environemnt variable if it exists, empty otherwise. </p>
 </li>
 </ul>
 </dd>
@@ -588,31 +590,33 @@
 
 <dl class="function">
 <dt>
-<span class="target" id="project0namespacepdal_1_1Utils_1a3f0c4b597b556f98a5c9e2fd54dbfed6"></span><code class="descname">PDAL_DLL std::string pdal::Utils::getenv(std::string const &amp; name)</code></dt>
-<dd><p>Fetch the value of an environment variable. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Value of environment variable. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>Name of environment varaible. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="project0namespacepdal_1_1Utils_1a39b3fbf3723ca3f1e78b27239b78d740"></span><code class="descname">PDAL_DLL int pdal::Utils::putenv(const char * env)</code></dt>
+<span class="target" id="project0namespacepdal_1_1Utils_1acc287d8ba61b37d0ce69a9bca00ef26c"></span><code class="descname">PDAL_DLL int pdal::Utils::setenv(const std::string &amp; env, const std::string &amp; val)</code></dt>
 <dd><p>Set the value of an environment variable. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>0 on success, -1 on failure </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">env</span></code> - <p>Name/value of environment varaible in the format NAME=VALUE. </p>
+<li><code class="first docutils literal"><span class="pre">env</span></code> - <p>Name of environment variable. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">val</span></code> - <p>Value of environment variable. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="project0namespacepdal_1_1Utils_1a4127951d3fab7b3c2da53e89ecc6dad9"></span><code class="descname">PDAL_DLL int pdal::Utils::unsetenv(const std::string &amp; env)</code></dt>
+<dd><p>Clear the value of an environment variable. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>0 on success, -1 on failure </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">env</span></code> - <p>Name of the environment variable to clear. </p>
 </li>
 </ul>
 </dd>
