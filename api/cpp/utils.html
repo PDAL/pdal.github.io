@@ -832,7 +832,29 @@
 <dt>
 <span class="target" id="project0namespacepdal_1_1Utils_1ae618f562500cd3f50b171bc693ad3554"></span><code class="descname">PDAL_DLL std::vector&lt;std::string&gt; pdal::Utils::wordWrap(std::string const &amp; inputString, size_t lineLength, size_t firstLength)</code></dt>
 <dd><p>Break a string into a list of strings to not exceed a specified length. </p>
-<p>The first string can optionally have a maximum length other than that of the rest of the strings.</p>
+<p>Whitespace is condensed to a single space and each string is free of whitespace at the beginning and end when possible. Optionally, a line length for the first line can be different from subsequent lines.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>List of substrings generated from the input string. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">inputString</span></code> - <p>String to split into substrings. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">lineLength</span></code> - <p>Maximum length of substrings. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">firstLength</span></code> - <p>When non-zero, the maximum length of the first substring. When zero, the first firstLength is assigned the value provided in lineLength. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="project0namespacepdal_1_1Utils_1ade39140fb27dcf23a80c92289b6c2874"></span><code class="descname">PDAL_DLL std::vector&lt;std::string&gt; pdal::Utils::wordWrap2(std::string const &amp; inputString, size_t lineLength, size_t firstLength)</code></dt>
+<dd><p>Break a string into a list of strings to not exceed a specified length. </p>
+<p>The concatanation of the returned substrings will yield the original string. The algorithm attempts to break the original string such that each substring begins with a word.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>List of substrings generated from the input string. </dd>
