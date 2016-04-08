@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -217,7 +217,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="pcl-ground">
 <span id="identifying-ground-returns-using-progressivemorphologicalfilter-segmentation"></span><h1>Identifying ground returns using ProgressiveMorphologicalFilter segmentation<a class="headerlink" href="#pcl-ground" title="Permalink to this headline">¶</a></h1>
@@ -258,7 +258,7 @@ and save it somewhere to disk.</p>
 <p>The <a class="reference internal" href="../apps.html#ground-command"><span>pdal ground</span></a> kernel can be used to filter ground
 returns, allowing the user to tweak filtering parameters at the command-line.</p>
 <p>Let&#8217;s start by running <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">ground</span></code> with the default parameters.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz --visualize
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz --visualize
 </pre></div>
 </div>
 <div class="admonition note">
@@ -272,7 +272,7 @@ visualize the result with the viewer of your choice.</p>
 increase the verbosity of the output. We&#8217;ll try <code class="docutils literal"><span class="pre">-v4</span></code>.  Here we see a summary
 of the parameters, along with height threshold, window size, and number of
 remaining ground points.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz --visualize -v4
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz --visualize -v4
 
 --------------------------------------------------------------------------------
 NAME:    ()
@@ -308,22 +308,23 @@ points that have fooled the PMF filter.</p>
 pipeline, where we preprocess with an outlier removal step. The command is
 nearly identical, replacing <code class="docutils literal"><span class="pre">ground</span></code> with <code class="docutils literal"><span class="pre">pcl</span></code> and adding a pipeline JSON
 specified with <code class="docutils literal"><span class="pre">-p</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
-  <span class="s">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
-    <span class="s">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="s">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
-        <span class="s">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="s">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
       <span class="p">},</span> <span class="p">{</span>
-        <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;ProgressiveMorphologicalFilter&quot;</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span>
     <span class="p">}]</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf.json --visualize -v4
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf.json --visualize -v4
 
 --------------------------------------------------------------------------------
 NAME:   Progressive Morphological Filter with Outlier Removal (1.0)
@@ -361,23 +362,24 @@ process tile 0 through the pipeline
 <p>Unfortunately, you may notice that we still have a rather large building in the
 lower right of the image. By tweaking the parameters slightly, in this case,
 increasing the cell size, we can do a better job of removing such features.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
-  <span class="s">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
-    <span class="s">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="s">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
-        <span class="s">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="s">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
       <span class="p">},</span> <span class="p">{</span>
-        <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
-        <span class="s">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.5</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.5</span>
     <span class="p">}]</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf2.json --visualize -v4
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf2.json --visualize -v4
 
 --------------------------------------------------------------------------------
 NAME:   Progressive Morphological Filter with Outlier Removal (1.0)

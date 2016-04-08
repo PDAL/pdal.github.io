@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -217,7 +217,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="writing-with-pdal">
 <span id="writing"></span><h1>Writing with PDAL<a class="headerlink" href="#writing-with-pdal" title="Permalink to this headline">¶</a></h1>
@@ -246,14 +246,14 @@ yourself.</p>
 <div class="section" id="includes">
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
 <p>First, our code.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/PointView.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/BufferReader.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/PointTable.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/Dimension.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/StageFactory.hpp&gt;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/BufferReader.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;vector&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
 
 <span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
 <span class="p">{</span>
@@ -312,14 +312,14 @@ yourself.</p>
 </pre></div>
 </div>
 <p>Take a closer look. We will need to include several PDAL headers.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;pdal/PointView.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/BufferReader.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/PointTable.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/Dimension.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/StageFactory.hpp&gt;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/BufferReader.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;vector&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
 </pre></div>
 </div>
 <p><cite>BufferReader</cite> will not be required by all users. Here is it used to populate a
@@ -329,7 +329,7 @@ we rely on the <cite>StageFactory</cite> which has the ability to query availabl
 at runtime and return pointers to the created stages.</p>
 <p>We proceed by providing a mechanism for generating dummy data for the x, y, and
 z dimensions.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">struct</span> <span class="n">Point</span>
     <span class="p">{</span>
@@ -352,7 +352,7 @@ z dimensions.</p>
     <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
 
@@ -365,7 +365,7 @@ z dimensions.</p>
 </div>
 <p>Finally, the main code which creates the dummy data, puts it into a BufferReader
 and sends it to a writer.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
 
     <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
 
@@ -394,7 +394,7 @@ and sends it to a writer.</p>
 </div>
 <p>To build this example, simply copy the files tutorial.cpp and CMakeLists.txt
 from the examples/writing directory of the PDAL source tree.</p>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">WritingTutorial</span><span class="p">)</span>
 
 <span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
@@ -411,15 +411,15 @@ from the examples/writing directory of the PDAL source tree.</p>
 </div>
 <p>Begin by configuring your project using CMake (shown here on Unix) and building
 using make.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /PATH/TO/WRITING/TUTORIAL
-<span class="nv">$ </span>mkdir build
-<span class="nv">$ </span><span class="nb">cd </span>build
-<span class="nv">$ </span>cmake ..
-<span class="nv">$ </span>make
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /PATH/TO/WRITING/TUTORIAL
+$ mkdir build
+$ <span class="nb">cd</span> build
+$ cmake ..
+$ make
 </pre></div>
 </div>
 <p>After the project is built, you can run it by typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./tutorial
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./tutorial
 </pre></div>
 </div>
 </div>

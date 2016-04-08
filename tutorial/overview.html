@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -233,7 +233,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="pdal-architecture-overview">
 <span id="overview"></span><h1>PDAL Architecture Overview<a class="headerlink" href="#pdal-architecture-overview" title="Permalink to this headline">¶</a></h1>
@@ -469,7 +469,7 @@ type of the variable using the enumeration Dimension::Type::Enum.</p>
 <p>In this example, the reader informs the point table&#8217;s layout that it will
 reference the dimensions X, Y and Z.</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointLayoutPtr layout)
+<div><div class="highlight-python"><div class="highlight"><pre><span></span>void Reader::addDimensions(PointLayoutPtr layout)
 {
    layout-&gt;registerDim(Dimension::Id::X);
    layout-&gt;registerDim(Dimension::Id::Y);
@@ -481,7 +481,7 @@ reference the dimensions X, Y and Z.</p>
 <p>Here a reader determines dimensions from an input source and registers or
 assigns them.  All of the input dimension values are in this case double
 precision floating point.</p>
-<div class="highlight-python"><div class="highlight"><pre>void Reader::addDimensions(PointLayoutPtr layout)
+<div class="highlight-python"><div class="highlight"><pre><span></span>void Reader::addDimensions(PointLayoutPtr layout)
 {
     FileHeader header;
 
@@ -512,7 +512,7 @@ called the index.</p>
 of the point view.  The ID of the end of the point view can be
 determined by calling size() function of the point view.  read() should
 return the number of points read by during the function call.</p>
-<div class="highlight-python"><div class="highlight"><pre>point_count_t MyFormat::read(PointViewPtr view, point_count_t count)
+<div class="highlight-python"><div class="highlight"><pre><span></span>point_count_t MyFormat::read(PointViewPtr view, point_count_t count)
 {
     // Determine the number of points remaining in the input.
     point_count_t remainingInput = m_totalNumPts - m_index;
@@ -571,7 +571,7 @@ points currently in the point view and apply some transformation or gather
 some data to be output as pipeline metadata.</p>
 <p>Here as an example is the actual filter function from the reprojection
 filter:</p>
-<div class="highlight-python"><div class="highlight"><pre>void Reprojection::filter(PointViewPtr view)
+<div class="highlight-python"><div class="highlight"><pre><span></span>void Reprojection::filter(PointViewPtr view)
 {
     for (PointId id = 0; id &lt; view-&gt;size(); ++id)
     {
@@ -596,7 +596,7 @@ view’s setField() function.</p>
 because it needs to create multiple output point views from a single input
 view.  The following example puts every other input point into one of two
 output point views:</p>
-<div class="highlight-python"><div class="highlight"><pre>PointViewSet Alternator::run(PointViewPtr view)
+<div class="highlight-python"><div class="highlight"><pre><span></span>PointViewSet Alternator::run(PointViewPtr view)
 {
     PointViewSet viewSet;
     PointViewPtr even = view();
@@ -630,7 +630,7 @@ As new writers are created, developers should try to make sure
 that they behave reasonably if passed multiple point views &#8211; they
 correctly handle write() being called multiple times after a single
 call to ready().</p>
-<div class="highlight-python"><div class="highlight"><pre>void write(const PointViewPtr view)
+<div class="highlight-python"><div class="highlight"><pre><span></span>void write(const PointViewPtr view)
 {
     ostream&amp; out = *m_out;
 

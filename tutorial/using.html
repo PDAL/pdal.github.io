@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -218,7 +218,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="using-pdal-with-cmake">
 <span id="using"></span><h1>Using PDAL with CMake<a class="headerlink" href="#using-pdal-with-cmake" title="Permalink to this headline">¶</a></h1>
@@ -243,7 +243,7 @@ more complete, working example can be found <a class="reference internal" href="
 <div class="section" id="basic-cmake-configuration">
 <h2>Basic CMake configuration<a class="headerlink" href="#basic-cmake-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Begin by creating a file named CMakeLists.txt that contains:</p>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">MY_PDAL_PROJECT</span><span class="p">)</span>
 <span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
 <span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
@@ -257,22 +257,22 @@ more complete, working example can be found <a class="reference internal" href="
 </div>
 <div class="section" id="cmakelists-explained">
 <h2>CMakeLists explained<a class="headerlink" href="#cmakelists-explained" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <cite>cmake_minimum_required</cite> command specifies the minimum required version of
 CMake. We use some recent additions to CMake in PDAL that require version
 2.8.12.</p>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">project</span><span class="p">(</span><span class="s">MY_PDAL_PROJECT</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">MY_PDAL_PROJECT</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The CMake <cite>project</cite> command names your project and sets a number of useful
 CMake variables.</p>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We next ask CMake to locate the PDAL package, requiring version 1.0.0 or higher.</p>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
 <span class="nb">link_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
 <span class="nb">add_definitions</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_DEFINITIONS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
@@ -286,18 +286,18 @@ CMake variables.</p>
 <li><em>PDAL_VERSION</em>: the detected version of PDAL</li>
 <li><em>PDAL_DEFINITIONS</em>: list the needed preprocessor definitions and compiler flags</li>
 </ul>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span> <span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span> <span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We haven&#8217;t quite implemented the setting of <em>PDAL_DEFINITIONS</em> within the
 <cite>PDALConfig.cmake</cite> file, so for now you should specify the c++11 compiler flag,
 as we use it extensively throughout PDAL.</p>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">tutorial.cpp</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">tutorial.cpp</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We use the <cite>add_executable</cite> command to tell CMake to create an executable named
 <cite>tutorial</cite> from the source file <cite>tutorial.cpp</cite>.</p>
-<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We assume that the tutorial executable makes calls to PDAL functions. To make
@@ -307,21 +307,21 @@ the linker aware of the PDAL libraries, we use <cite>target_link_libraries</cite
 <div class="section" id="compiling-the-project">
 <h2>Compiling the project<a class="headerlink" href="#compiling-the-project" title="Permalink to this headline">¶</a></h2>
 <p>Make a <cite>build</cite> directory, where compilation will occur:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /PATH/TO/MY/PDAL/PROJECT
-<span class="nv">$ </span>mkdir build
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /PATH/TO/MY/PDAL/PROJECT
+$ mkdir build
 </pre></div>
 </div>
 <p>Run cmake from within the build directory:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>build
-<span class="nv">$ </span>cmake ..
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> build
+$ cmake ..
 </pre></div>
 </div>
 <p>Now, build the project:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>make
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ make
 </pre></div>
 </div>
 <p>The project is now built and ready to run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./tutorial
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./tutorial
 </pre></div>
 </div>
 </div>

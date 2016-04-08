@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -220,7 +220,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="calculating-normalized-heights">
 <h1>Calculating Normalized Heights<a class="headerlink" href="#calculating-normalized-heights" title="Permalink to this headline">¶</a></h1>
@@ -252,11 +252,11 @@
 </div>
 <p>For the full source, please see <code class="docutils literal"><span class="pre">HeightFilter.cpp</span></code> in the <code class="docutils literal"><span class="pre">plugins/pcl/filters</span></code> folder. Below, we dissect the key aspects of the algorithm and its implementation.</p>
 <p>The bulk of our processing is actually taking place within PCL. For convenience, we&#8217;ve defined:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">Cloud</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">Cloud</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Our first step is to convert the filter&#8217;s incoming PDAL <code class="docutils literal"><span class="pre">PointView</span></code> to a PCL <code class="docutils literal"><span class="pre">PointCloud</span></code>, which requires that we first calculate our bounds so that we can subtract our XYZ offsets in the conversion step.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">BOX3D</span> <span class="n">bounds</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">BOX3D</span> <span class="n">bounds</span><span class="p">;</span>
 <span class="n">view</span><span class="p">.</span><span class="n">calculateBounds</span><span class="p">(</span><span class="n">bounds</span><span class="p">);</span>
 
 <span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_in</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
@@ -264,7 +264,7 @@
 </pre></div>
 </div>
 <p>Next, we will create two vectors of indices - one for ground returns, one for non-ground returns - and make our first pass through the point cloud to populate these.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">PointIndices</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">ground</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointIndices</span><span class="p">());</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">pcl</span><span class="o">::</span><span class="n">PointIndices</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">ground</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointIndices</span><span class="p">());</span>
 <span class="n">ground</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
 
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PointId</span><span class="o">&gt;</span> <span class="n">nonground</span><span class="p">;</span>
@@ -282,7 +282,7 @@
 </pre></div>
 </div>
 <p>With our ground indices identified, we can use PCL to extract the ground returns into a new <code class="docutils literal"><span class="pre">PointCloud</span></code>.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">ExtractIndices</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">extract</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">pcl</span><span class="o">::</span><span class="n">ExtractIndices</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">extract</span><span class="p">;</span>
 <span class="n">extract</span><span class="p">.</span><span class="n">setInputCloud</span><span class="p">(</span><span class="n">cloud_in</span><span class="p">);</span>
 <span class="n">extract</span><span class="p">.</span><span class="n">setIndices</span><span class="p">(</span><span class="n">ground</span><span class="p">);</span>
 
@@ -292,13 +292,13 @@
 </pre></div>
 </div>
 <p>We repeat the extraction now, flipping <code class="docutils literal"><span class="pre">setNegative</span></code> from false to true to extract the non-ground returns into a new <code class="docutils literal"><span class="pre">PointCloud</span></code>.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_nonground</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_nonground</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
 <span class="n">extract</span><span class="p">.</span><span class="n">setNegative</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
 <span class="n">extract</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">*</span><span class="n">cloud_nonground</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>To compute the normalized height, we wish to find the nearest ground point for each non-ground point. Here, we achieve this by using a nearest neighbor interpolation scheme. One may prefer to use a more sophisticated interpolation scheme, but that is beyond the scope of this tutorial. We begin by defining model coefficients that will allow us to project the ground and non-ground clouds into the XY plane.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">ModelCoefficients</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">coefficients</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">ModelCoefficients</span><span class="p">());</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">pcl</span><span class="o">::</span><span class="n">ModelCoefficients</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">coefficients</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">ModelCoefficients</span><span class="p">());</span>
 <span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
 <span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="n">coefficients</span><span class="o">-&gt;</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
@@ -306,7 +306,7 @@
 </pre></div>
 </div>
 <p>We can now project the ground points</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">ProjectInliers</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">proj</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">pcl</span><span class="o">::</span><span class="n">ProjectInliers</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">proj</span><span class="p">;</span>
 <span class="n">proj</span><span class="p">.</span><span class="n">setModelType</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">SACMODEL_PLANE</span><span class="p">);</span>
 
 <span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_ground_projected</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
@@ -316,20 +316,20 @@
 </pre></div>
 </div>
 <p>followed by the non-ground points</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_nonground_projected</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">Cloud</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">cloud_nonground_projected</span><span class="p">(</span><span class="k">new</span> <span class="n">Cloud</span><span class="p">);</span>
 <span class="n">proj</span><span class="p">.</span><span class="n">setInputCloud</span><span class="p">(</span><span class="n">cloud_nonground</span><span class="p">);</span>
 <span class="n">proj</span><span class="p">.</span><span class="n">setModelCoefficients</span><span class="p">(</span><span class="n">coefficients</span><span class="p">);</span>
 <span class="n">proj</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">*</span><span class="n">cloud_nonground_projected</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Next, we create a KdTree to accelerate our nearest neighbor search. The tree is composed of only ground returns, as our non-ground returns will serve as query points for the nearest neighbor search.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">pcl</span><span class="o">::</span><span class="n">search</span><span class="o">::</span><span class="n">KdTree</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="n">ground_tree</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">pcl</span><span class="o">::</span><span class="n">search</span><span class="o">::</span><span class="n">KdTree</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="n">ground_tree</span><span class="p">;</span>
 <span class="n">ground_tree</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">search</span><span class="o">::</span><span class="n">KdTree</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="p">(</span><span class="nb">false</span><span class="p">));</span>
 <span class="n">ground_tree</span><span class="o">-&gt;</span><span class="n">setInputCloud</span><span class="p">(</span><span class="n">cloud_ground_projected</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>We iterate over each of our projected non-ground points, searching for our nearest neighbor in the ground points. Using the indices of each the query (non-ground) and nearest neighbor (ground), we can retrieve the Z dimension from the input cloud, compute the height, and set this field in our original <code class="docutils literal"><span class="pre">PointView</span></code>.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cloud_nonground_projected</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cloud_nonground_projected</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span> <span class="n">nonground_query</span> <span class="o">=</span> <span class="n">cloud_nonground_projected</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
@@ -345,7 +345,7 @@
 </pre></div>
 </div>
 <p>The only thing left is to set the height field to 0.0 for each of the ground points.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">&amp;</span> <span class="nl">ground_idx</span> <span class="p">:</span> <span class="n">ground</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">&amp;</span> <span class="nl">ground_idx</span> <span class="p">:</span> <span class="n">ground</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">)</span>
     <span class="n">view</span><span class="p">.</span><span class="n">setField</span><span class="p">(</span><span class="n">m_heightDim</span><span class="p">,</span> <span class="n">ground_idx</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -355,7 +355,7 @@
 <p>Using the autzen dataset (here shown colored by elevation)</p>
 <a class="reference internal image-reference" href="../_images/autzen-elevation.png"><img alt="../_images/autzen-elevation.png" src="../_images/autzen-elevation.png" style="height: 400px;" /></a>
 <p>we run the following PDAL CLI command</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal translate autzen.laz autzen-height.bpf height \
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal translate autzen.laz autzen-height.bpf height \
   --writers.bpf.output_dims=&quot;X,Y,Z,Height&quot;
 </pre></div>
 </div>
@@ -365,7 +365,7 @@
 <div class="section" id="example-2">
 <h2>Example #2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>If you&#8217;d like to overwrite your Z values, follow the height filter with <a class="reference internal" href="../stages/filters.ferry.html#filters-ferry"><span>filters.ferry</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal translate input.laz output-height-as-Z.bpf height ferry \
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal translate input.laz output-height-as-Z.bpf height ferry \
   --writers.bpf.output_dims=&quot;X,Y,Z&quot; --filters.ferry.dimensions=&quot;Height=Z&quot;
 </pre></div>
 </div>
@@ -373,7 +373,7 @@
 <div class="section" id="example-3">
 <h2>Example #3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h2>
 <p>If you don&#8217;t yet have points classified as ground, start with <a class="reference internal" href="../stages/filters.ground.html#filters-ground"><span>filters.ground</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal translate input.laz output-ground-height.bpf ground height \
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal translate input.laz output-ground-height.bpf ground height \
   --writers.bpf.output_dims=&quot;X,Y,Z,Height&quot;
 </pre></div>
 </div>

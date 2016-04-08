@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -225,7 +225,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="filtering-data-with-pcl">
 <span id="pcl-block-tutorial"></span><h1>Filtering data with PCL<a class="headerlink" href="#filtering-data-with-pcl" title="Permalink to this headline">¶</a></h1>
@@ -273,7 +273,7 @@ include built-in PCL support.</p>
 <p>PDAL&#8217;s Vagrant configuration now includes the PCL Block and all necessary
 dependencies. Assuming you&#8217;ve got Vagrant all set up, once you checkout the PDAL
 source code, just do the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ cd pdal
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ cd pdal
 $ vagrant up
 $ vagrant ssh
 </pre></div>
@@ -281,11 +281,11 @@ $ vagrant ssh
 <p>The <code class="docutils literal"><span class="pre">vagrant</span> <span class="pre">up</span></code> command will take a considerable amount of time, but once its
 completed you have a fully functional VM with both PCL and PDAL installed. Try
 entering</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline --version
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pipeline --version
 </pre></div>
 </div>
 <p>at the command line. You should see output similar to the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>------------------------------------------------------------------------------------------
+<div class="highlight-python"><div class="highlight"><pre><span></span>------------------------------------------------------------------------------------------
 pdal pipeline (PDAL 0.9.9 (2c6aa8) with GeoTIFF 1.4.0 GDAL 1.9.2 LASzip 2.2.0 System )
 ------------------------------------------------------------------------------------------
 </pre></div>
@@ -305,7 +305,7 @@ easily accessed via the PDAL pipeline. It accepts a single, required option -
 the name of the <a class="reference external" href="http://www.json.org/">JSON</a> file describing the PCL Block.</p>
 <p>A sample pipeline JSON which reads/writes LAS and has a single PCL Block filter
 is shown below.</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;autzen-point-format-3.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
@@ -318,14 +318,14 @@ is shown below.</p>
 </pre></div>
 </div>
 <p>And is run from the command line thusly.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pipeline passthrough.json
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pipeline passthrough.json
 </pre></div>
 </div>
 <p>This simple pipeline reads the input LAS (<code class="docutils literal"><span class="pre">autzen-point-format-3.las</span></code>), passes
 it through the PCL Block (<code class="docutils literal"><span class="pre">passthrough.json</span></code>), and writes the output LAS
 (<code class="docutils literal"><span class="pre">foo.las</span></code>).</p>
 <p>When run, it should produce output similar to this:</p>
-<div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
+<div class="highlight-python"><div class="highlight"><pre><span></span>Requested to read 106 points
 Requested to write 106 points
 0
 Processing /home/vagrant/pdal/test/data/filters/pcl/passthrough.json
@@ -352,7 +352,7 @@ AUTHOR:
 <p>For users that would like to bypass the creation (and subsequent modification)
 of the pipeline JSON for every file they wish to process, there is another
 option: the <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></code> command.</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i /path/to/input/las -p /path/to/pcl/block/json -o /path/to/output/las
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pcl -i /path/to/input/las -p /path/to/pcl/block/json -o /path/to/output/las
 </pre></div>
 </div>
 <p>This is functionally equivalent to the original <cite>pdal pipeline</cite> command, but
@@ -360,7 +360,7 @@ does not afford the flexibility of constructing the pipeline (i.e., none the
 other PDAL filters are accessible).</p>
 <p>The same can be accomplished with the <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></code> command. The basic syntax for
 the command is</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pdal pcl -i &lt;input cloud&gt; -p &lt;PCL Block JSON&gt; -o &lt;output cloud&gt;
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pcl -i &lt;input cloud&gt; -p &lt;PCL Block JSON&gt; -o &lt;output cloud&gt;
 </pre></div>
 </div>
 <p>where the JSON file specified with <code class="docutils literal"><span class="pre">-p</span></code> is the same file that would be
@@ -368,13 +368,13 @@ embedded in the pipeline JSON file. This can be useful when the pipeline does no
 change frequently, but the input/output filenames do.</p>
 <p>For example, the above <cite>pdal pipeline</cite> example can be written with <cite>pdal pcl</cite>
 like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ cd pdal  # your PDAL source tree
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ cd pdal  # your PDAL source tree
 $ cd test/data
 $ ../../bin/pdal pcl -i autzen/autzen-point-format-3.las -p filters/pcl/example_PassThrough_1.json -o ../temp/foo.las -v4
 </pre></div>
 </div>
 <p>This should produce the output</p>
-<div class="highlight-python"><div class="highlight"><pre>Requested to read 106 points
+<div class="highlight-python"><div class="highlight"><pre><span></span>Requested to read 106 points
 Requested to write 106 points
 0
 Processing /home/vagrant/pdal/test/data/filters/pcl/passthrough.json
@@ -405,7 +405,7 @@ this example, we apply a single PCL filter to the PointView. The
 <a class="reference external" href="http://pointclouds.org/documentation/tutorials/passthrough.php">PassThrough</a> filter removes points that lie outside a given range for the
 specified dimension. Here, we are asking PCL to crop the input point cloud,
 returning only those points with z values in the range 100 to 200.</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
     <span class="p">{</span>
         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThroughExample&quot;</span><span class="p">,</span>
@@ -436,7 +436,7 @@ field identifies the PCL filter by its class name, and furthermore that as of
 now only a handful of the PCL filtering options are accessible through the PCL
 Block. Similarly, select parameters of these classes can be set by specifying
 their public member functions by name.</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
     <span class="p">{</span>
         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CombinedExample&quot;</span><span class="p">,</span>
@@ -479,7 +479,7 @@ Progressive Morphological Filter for Removing Nonground Measurements from
 Airborne LIDAR Data&#8221;</a> by K.
 Zhang, S.  Chen, D. Whitman, M. Shyu, J. Yan, and C. Zhang.</p>
 <p>To run the PMF with default settings, the PCL Block JSON is simply:</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
     <span class="p">{</span>
         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterExample&quot;</span><span class="p">,</span>
@@ -495,7 +495,7 @@ Zhang, S.  Chen, D. Whitman, M. Shyu, J. Yan, and C. Zhang.</p>
 </pre></div>
 </div>
 <p>Additional parameters can be set by advanced users:</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
     <span class="p">{</span>
         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterAdvancedExample&quot;</span><span class="p">,</span>

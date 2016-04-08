@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -218,7 +218,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="writing-a-filter">
 <span id="writing-filter"></span><h1>Writing a filter<a class="headerlink" href="#writing-a-filter" title="Permalink to this headline">¶</a></h1>
@@ -245,14 +245,14 @@
 <div class="section" id="the-header">
 <h2>The header<a class="headerlink" href="#the-header" title="Permalink to this headline">¶</a></h2>
 <p>First, we provide a full listing of the filter header.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// MyFilter.hpp</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="c1">// MyFilter.hpp</span>
 
 <span class="cp">#pragma once</span>
 
-<span class="cp">#include &lt;pdal/Filter.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/Stage.hpp&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Filter.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Stage.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;memory&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">pdal</span>
 <span class="p">{</span>
@@ -289,7 +289,7 @@
 </pre></div>
 </div>
 <p>This header should be relatively straightforward, but we will point out three methods that must be declared for the plugin interface to be satisfied.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
     <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </pre></div>
@@ -299,15 +299,15 @@
 <div class="section" id="the-source">
 <h2>The source<a class="headerlink" href="#the-source" title="Permalink to this headline">¶</a></h2>
 <p>Again, we start with a full listing of the filter source.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// MyFilter.cpp</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="c1">// MyFilter.cpp</span>
 
-<span class="cp">#include &quot;MyFilter.hpp&quot;</span>
+<span class="cp">#include</span> <span class="cpf">&quot;MyFilter.hpp&quot;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/pdal_macros.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/PointTable.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/PointView.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/StageFactory.hpp&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/pdal_macros.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">pdal</span>
 <span class="p">{</span>
@@ -353,26 +353,26 @@
 </div>
 <p>For your filter to be available to PDAL at runtime, it must adhere to the PDAL plugin interface. As a convenience, we provide the macros in <code class="docutils literal"><span class="pre">pdal_macros.hpp</span></code> to do just this.</p>
 <p>We begin by creating a <code class="docutils literal"><span class="pre">PluginInfo</span></code> struct containing three identifying elements - the filter name, description, and a link to documentation.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span>
     <span class="n">PluginInfo</span><span class="p">(</span><span class="s">&quot;filters.name&quot;</span><span class="p">,</span> <span class="s">&quot;My awesome filter&quot;</span><span class="p">,</span>
                <span class="s">&quot;http://link/to/documentation&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>PDAL requires that filter names always begin with <code class="docutils literal"><span class="pre">filters.</span></code>, and end with a string that uniquely identifies the filter. The description will be displayed to users of the PDAL CLI (<code class="docutils literal"><span class="pre">pdal</span> <span class="pre">--drivers</span></code>).</p>
 <p>Next, we pass the following to the <code class="docutils literal"><span class="pre">CREATE_STATIC_PLUGIN</span></code> macro, in order: PDAL plugin ABI major version, PDAL plugin ABI minor version, filter class name, stage type (<code class="docutils literal"><span class="pre">Filter</span></code>), and our <code class="docutils literal"><span class="pre">PluginInfo</span></code> struct.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">CREATE_STATIC_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyFilter</span><span class="p">,</span> <span class="n">Filter</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">CREATE_STATIC_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyFilter</span><span class="p">,</span> <span class="n">Filter</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To create a shared plugin, we simply change <code class="docutils literal"><span class="pre">CREATE_STATIC_PLUGIN</span></code> to <code class="docutils literal"><span class="pre">CREATE_SHARED_PLUGIN</span></code>.</p>
 <p>Finally, we implement a method to get the plugin name, which is primarily used by the PDAL CLI when using the <code class="docutils literal"><span class="pre">--drivers</span></code> or <code class="docutils literal"><span class="pre">--options</span></code> arguments.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Now that the filter has implemented the proper plugin interface, we will begin to implement some methods that actually implement the filter. First, <code class="docutils literal"><span class="pre">getDefaultOptions()</span></code> is used to advertise those options that the filter provides. Within PDAL, this is primarily used as a means of displaying options via the PDAL CLI with the <code class="docutils literal"><span class="pre">--options</span></code> argument. It provides the user with the option names, descriptions, and default values.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Options</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">getDefaultOptions</span><span class="p">()</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">Options</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">getDefaultOptions</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
     <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;param&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s">&quot;My parameter&quot;</span><span class="p">);</span>
@@ -381,14 +381,14 @@
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">processOptions()</span></code> method is used to parse any provided options. Here, we get the value of <code class="docutils literal"><span class="pre">param</span></code>, if provided, else we populate <code class="docutils literal"><span class="pre">m_value</span></code> with the default value of <code class="docutils literal"><span class="pre">1.0</span></code>.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">processOptions</span><span class="p">(</span><span class="k">const</span> <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span><span class="o">&amp;</span> <span class="n">options</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">processOptions</span><span class="p">(</span><span class="k">const</span> <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span><span class="o">&amp;</span> <span class="n">options</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">m_value</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="n">getValueOrDefault</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;param&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal"><span class="pre">addDimensions()</span></code> we make sure that the known <code class="docutils literal"><span class="pre">Intensity</span></code> dimension is registered. We can also add a custom dimension, <code class="docutils literal"><span class="pre">MyDimension</span></code>, which will be populated within <code class="docutils literal"><span class="pre">run()</span></code>.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">addDimensions</span><span class="p">(</span><span class="n">PointLayoutPtr</span> <span class="n">layout</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">addDimensions</span><span class="p">(</span><span class="n">PointLayoutPtr</span> <span class="n">layout</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Intensity</span><span class="p">);</span>
     <span class="n">m_myDimension</span> <span class="o">=</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerOrAssignDim</span><span class="p">(</span><span class="s">&quot;MyDimension&quot;</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">::</span><span class="n">Type</span><span class="o">::</span><span class="n">Unsigned8</span><span class="p">);</span>
@@ -396,7 +396,7 @@
 </pre></div>
 </div>
 <p>Finally, we define <code class="docutils literal"><span class="pre">run()</span></code>, which takes as input a <code class="docutils literal"><span class="pre">PointViewPtr</span></code> and returns a <code class="docutils literal"><span class="pre">PointViewSet</span></code>. It is here that we can transform existing dimensions, add data to new dimensions, or selectively add/remove individual points.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">PointViewSet</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">PointViewPtr</span> <span class="n">input</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">PointViewSet</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">PointViewPtr</span> <span class="n">input</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">PointViewSet</span> <span class="n">viewSet</span><span class="p">;</span>
     <span class="n">viewSet</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
@@ -410,11 +410,11 @@
 <h2>StageFactory<a class="headerlink" href="#stagefactory" title="Permalink to this headline">¶</a></h2>
 <p>As of this writing, users must also make a couple of changes to <code class="docutils literal"><span class="pre">StageFactory.cpp</span></code> to properly register static plugins only (this is not required for shared plugins). It is our goal to eventually remove this requirement to further streamline development of add-on plugins.</p>
 <p>First, add the following line to the beginning of <code class="docutils literal"><span class="pre">StageFactory.cpp</span></code> (adjusting the path and filename as necessary).</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;MyFilter.hpp&gt;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;MyFilter.hpp&gt;</span><span class="cp"></span>
 </pre></div>
 </div>
 <p>Next, add the following line of code to the <code class="docutils literal"><span class="pre">StageFactory</span></code> constructor.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">PluginManager</span><span class="o">::</span><span class="n">initializePlugin</span><span class="p">(</span><span class="n">MyFilter_InitPlugin</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">PluginManager</span><span class="o">::</span><span class="n">initializePlugin</span><span class="p">(</span><span class="n">MyFilter_InitPlugin</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>

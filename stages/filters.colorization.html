@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -217,7 +217,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="filters-colorization">
 <span id="id1"></span><h1>filters.colorization<a class="headerlink" href="#filters-colorization" title="Permalink to this headline">¶</a></h1>
@@ -238,7 +238,7 @@ read from the raster and applied to any dimension name desired.</p>
 and the values of the band may be scaled before being written to the dimension.
 If the band range is 0-1, for example, it might make sense to scale by 256 to
 fit into a traditional 1-byte color value range.</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;uncolored.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
@@ -259,10 +259,10 @@ can have issues is when a <a class="reference external" href="http://www.gdal.or
 in that situation is likely to cause lots of re-reading if the cache isn&#8217;t large
 enough.</p>
 <p>Consider a striped TIFF file of 286mb:</p>
-<div class="highlight-python"><div class="highlight"><pre>-rw-r-----@  1 hobu  staff   286M Oct 29 16:58 orth-striped.tif
+<div class="highlight-python"><div class="highlight"><pre><span></span>-rw-r-----@  1 hobu  staff   286M Oct 29 16:58 orth-striped.tif
 </pre></div>
 </div>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;colourless.laz&quot;</span><span class="p">,</span>
     <span class="p">{</span>
@@ -276,7 +276,7 @@ enough.</p>
 </div>
 <p>Simple application of the <a class="reference internal" href="#filters-colorization"><span>filters.colorization</span></a> using the striped <a class="reference external" href="http://www.gdal.org/frmt_gtiff.html">TIFF</a>
 with a 268mb <a class="reference internal" href="readers.las.html#readers-las"><span>readers.las</span></a> file will take nearly 1:54.</p>
-<div class="highlight-python"><div class="highlight"><pre>[hobu@pyro knudsen (master)]$ time ~/dev/git/pdal/bin/pdal pipeline -i striped.json
+<div class="highlight-python"><div class="highlight"><pre><span></span>[hobu@pyro knudsen (master)]$ time ~/dev/git/pdal/bin/pdal pipeline -i striped.json
 
 real        1m53.477s
 user        1m20.018s
@@ -285,7 +285,7 @@ sys 0m33.397s
 </div>
 <p>Setting the <code class="docutils literal"><span class="pre">GDAL_CACHEMAX</span></code> variable to a size larger than the TIFF file
 dramatically speeds up the color fetching:</p>
-<div class="highlight-python"><div class="highlight"><pre>[hobu@pyro knudsen (master)]$ export GDAL_CACHEMAX=500
+<div class="highlight-python"><div class="highlight"><pre><span></span>[hobu@pyro knudsen (master)]$ export GDAL_CACHEMAX=500
 [hobu@pyro knudsen (master)]$ time ~/dev/git/pdal/bin/pdal pipeline striped.json
 
 real        0m19.034s

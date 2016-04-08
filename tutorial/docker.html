@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,13 +28,14 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="top" title="pdal.io" href="../index.html" />
-    <link rel="next" title="Pipeline" href="../pipeline.html" />
-    <link rel="prev" title="libLAS C API to PDAL transition guide" href="liblas_to_pdal.html" />
+    <link rel="up" title="Tutorials" href="index.html" />
+    <link rel="next" title="Filtering data with PCL" href="pcl_block_tutorial.html" />
+    <link rel="prev" title="Writing with PDAL" href="writing.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -192,11 +193,11 @@
               
                 
   <li>
-    <a href="liblas_to_pdal.html" title="Previous Chapter: libLAS C API to PDAL transition guide"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; libLAS C API ...</span>
+    <a href="writing.html" title="Previous Chapter: Writing with PDAL"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Writing with ...</span>
     </a>
   </li>
   <li>
-    <a href="../pipeline.html" title="Next Chapter: Pipeline"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Pipeline &raquo;</span>
+    <a href="pcl_block_tutorial.html" title="Next Chapter: Filtering data with PCL"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Filtering dat... &raquo;</span>
     </a>
   </li>
               
@@ -224,7 +225,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="docker">
 <span id="id1"></span><h1>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
@@ -281,7 +282,7 @@ link on your desktop (Windows) or run the &#8220;Docker Quickstart Terminal&#822
 <img alt="../_images/docker-quickstart-terminal.png" src="../_images/docker-quickstart-terminal.png" />
 <p>To be sure Docker is working correctly and everything is happy,
 issue the following command and confirm that it reports similar information:</p>
-<div class="highlight-python"><div class="highlight"><pre>docker-machine env default
+<div class="highlight-python"><div class="highlight"><pre><span></span>docker-machine env default
 </pre></div>
 </div>
 <img alt="../_images/docker-quickstart-env.png" src="../_images/docker-quickstart-env.png" />
@@ -293,7 +294,7 @@ to <a class="reference external" href="http://hub.docker.com">Docker Hub</a> per
 locally so we can use it to run PDAL commands. Once it is pulled, we
 don&#8217;t have to pull it again unless we want to refresh it for
 whatever reason.</p>
-<div class="highlight-python"><div class="highlight"><pre>docker pull pdal/pdal
+<div class="highlight-python"><div class="highlight"><pre><span></span>docker pull pdal/pdal
 </pre></div>
 </div>
 <div class="admonition note">
@@ -310,7 +311,7 @@ on this topic.</p>
 <p>We need some sample data to play with, so we&#8217;re going to download
 the <code class="docutils literal"><span class="pre">autzen.laz</span></code> file to your <code class="docutils literal"><span class="pre">C:/Users/Howard</span></code> drive. Inside the
 Quickstart Terminal, issue the following <code class="docutils literal"><span class="pre">curl</span></code> command:</p>
-<div class="highlight-python"><div class="highlight"><pre>curl -O http://www.liblas.org/samples/autzen/autzen.laz
+<div class="highlight-python"><div class="highlight"><pre><span></span>curl -O http://www.liblas.org/samples/autzen/autzen.laz
 </pre></div>
 </div>
 <div class="admonition note">
@@ -318,7 +319,7 @@ Quickstart Terminal, issue the following <code class="docutils literal"><span cl
 <p class="last">That&#8217;s a capital Oh, not a zero.</p>
 </div>
 <p>List the directory to be sure that it was downloaded</p>
-<div class="highlight-python"><div class="highlight"><pre>ls *.laz
+<div class="highlight-python"><div class="highlight"><pre><span></span>ls *.laz
 </pre></div>
 </div>
 </div>
@@ -326,7 +327,7 @@ Quickstart Terminal, issue the following <code class="docutils literal"><span cl
 <h3>Print the first point<a class="headerlink" href="#print-the-first-point" title="Permalink to this headline">¶</a></h3>
 <p>To test that we have a working system, we will print out the values of the
 very first point of <code class="docutils literal"><span class="pre">autzen.laz</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre>docker run -v //c/Users/Howard:/data pdal/pdal pdal info //data/autzen.laz -p 0
+<div class="highlight-python"><div class="highlight"><pre><span></span>docker run -v //c/Users/Howard:/data pdal/pdal pdal info //data/autzen.laz -p 0
 </pre></div>
 </div>
 <p>Here&#8217;s a summary of what&#8217;s going on with that command invocation</p>

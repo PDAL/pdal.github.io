@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -218,7 +218,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="filters-range">
 <span id="id1"></span><h1>filters.range<a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h1>
@@ -228,7 +228,7 @@ based on a set of criteria on the given dimensions.</p>
 <h2>Pipeline Example<a class="headerlink" href="#pipeline-example" title="Permalink to this headline">¶</a></h2>
 <p>This example passes through all points whose Z value is in the range [0,100]
 and whose classification equals 2 (corresponding to ground in LAS).</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
@@ -247,7 +247,7 @@ and whose classification equals 2 (corresponding to ground in LAS).</p>
 <div class="section" id="command-line-example">
 <h2>Command-line Example<a class="headerlink" href="#command-line-example" title="Permalink to this headline">¶</a></h2>
 <p>The equivalent pipeline invoked via the PDAL <code class="docutils literal"><span class="pre">translate</span></code> command would be</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pdal translate -i input.las -o filtered.las -f range --filters.range.limits<span class="o">=</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pdal translate -i input.las -o filtered.las -f range --filters.range.limits<span class="o">=</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -260,7 +260,7 @@ specified for a dimension, the criteria are treated as being logically
 ORed together.  Ranges for different dimensions are treated as being
 logically ANDed.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Classification</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">Red</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">50</span><span class="p">],</span> <span class="n">Blue</span><span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">75</span><span class="p">],</span> <span class="n">Red</span><span class="p">[</span><span class="mi">75</span><span class="p">:</span><span class="mi">255</span><span class="p">],</span> <span class="n">Classification</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Classification</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">Red</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">50</span><span class="p">],</span> <span class="n">Blue</span><span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">75</span><span class="p">],</span> <span class="n">Red</span><span class="p">[</span><span class="mi">75</span><span class="p">:</span><span class="mi">255</span><span class="p">],</span> <span class="n">Classification</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
 </pre></div>
 </div>
 <p class="last">This specification will select points that have the classification of

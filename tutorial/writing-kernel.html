@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -217,7 +217,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="writing-a-kernel">
 <span id="writing-kernel"></span><h1>Writing a kernel<a class="headerlink" href="#writing-a-kernel" title="Permalink to this headline">¶</a></h1>
@@ -266,14 +266,14 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 26
 27
 28
-29</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// MyKernel.hpp</span>
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyKernel.hpp</span>
 
 <span class="cp">#pragma once</span>
 
-<span class="cp">#include &lt;pdal/Kernel.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/plugin.hpp&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Kernel.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/plugin.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;string&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">pdal</span>
 <span class="p">{</span>
@@ -299,7 +299,7 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 </td></tr></table></div>
 <p>As with other plugins, the MyKernel class needs to have the following three
 methods declared for the plugin interface to be satisfied:</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
     <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </pre></div>
@@ -371,20 +371,20 @@ methods declared for the plugin interface to be satisfied:</p>
 61
 62
 63
-64</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// MyKernel.cpp</span>
+64</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyKernel.cpp</span>
 
-<span class="cp">#include &quot;MyKernel.hpp&quot;</span>
+<span class="cp">#include</span> <span class="cpf">&quot;MyKernel.hpp&quot;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;pdal/Filter.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/Kernel.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/KernelFactory.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/Options.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/pdal_macros.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/StageFactory.hpp&gt;</span>
-<span class="cp">#include &lt;pdal/PointTable.hpp&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Filter.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Kernel.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/KernelFactory.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/pdal_macros.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;memory&gt;</span>
-<span class="cp">#include &lt;string&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
 
 
 <span class="k">namespace</span> <span class="n">pdal</span> <span class="p">{</span>
@@ -440,7 +440,7 @@ methods declared for the plugin interface to be satisfied:</p>
 <p>In your kernel implementation, you will use a macro defined in pdal_macros.
 This macro registers the plugin with the Kernel factory. It is
 only required by plugins.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>  <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyKernel</span><span class="p">,</span> <span class="n">Kernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>  <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyKernel</span><span class="p">,</span> <span class="n">Kernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
 </pre></div>
 </div>
@@ -454,7 +454,7 @@ will be described later.</p>
 objects: the <a class="reference internal" href="../api/cpp/pointtable.html#_CPPv2N4pdal10PointTableE" title="pdal::PointTable"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTable</span></code></a> and the
 <a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>. The latter is used to create the various
 stages that will be used within the kernel.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
     <span class="n">StageFactory</span> <span class="n">f</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -462,7 +462,7 @@ stages that will be used within the kernel.</p>
 <a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>, and is specified by the stage name, in this
 case an LAS reader. For brevity, we provide the reader a single option, the
 filename of the file to be read.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
     <span class="n">Options</span> <span class="n">readerOptions</span><span class="p">;</span>
     <span class="n">readerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_input_file</span><span class="p">);</span>
     <span class="n">reader</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">readerOptions</span><span class="p">);</span>
@@ -472,7 +472,7 @@ filename of the file to be read.</p>
 <a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>.  Here, we create a decimation filter that will
 pass every tenth point to subsequent stages. We also specify the input to this
 stage, which is the reader.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">);</span>
     <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
     <span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">filterOptions</span><span class="p">);</span>
@@ -482,7 +482,7 @@ stage, which is the reader.</p>
 <p>Finally, the <a class="reference internal" href="../api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a> is created from the
 <a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>. This <a class="reference internal" href="../stages/writers.text.html#writers-text"><span>writers.text</span></a>, takes as input the previous
 stage (the <a class="reference internal" href="../stages/filters.decimation.html#filters-decimation"><span>filters.decimation</span></a>) and the output filename as its sole option.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
     <span class="n">Options</span> <span class="n">writerOptions</span><span class="p">;</span>
     <span class="n">writerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_output_file</span><span class="p">);</span>
     <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">writerOptions</span><span class="p">);</span>
@@ -491,7 +491,7 @@ stage (the <a class="reference internal" href="../stages/filters.decimation.html
 </div>
 <p>The final two steps are to prepare and execute the pipeline. This is achieved
 by calling prepare and execute on the final stage.</p>
-<div class="highlight-cpp"><div class="highlight"><pre>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
     <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
 </pre></div>
 </div>

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="copyright" title="Copyright" href="../copyright.html" />
@@ -218,7 +218,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="readers-rxp">
 <span id="id1"></span><h1>readers.rxp<a class="headerlink" href="#readers-rxp" title="Permalink to this headline">¶</a></h1>
@@ -241,16 +241,16 @@ For help building PDAL with optional libraries, see <a class="reference external
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example rescales the points, given in the scanner&#8217;s own coordinate system, to values that can be written to a las file.
 Only points with a valid gps time, as determined by a pps pulse, are read from the rxp, since the <code class="docutils literal"><span class="pre">sync_to_pps</span></code> option is &#8220;true&#8221;.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="k">def</span> <span class="nf">reflectance_to_intensity</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span> <span class="n">outs</span><span class="p">):</span>
-    <span class="n">ref</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s">&quot;Reflectance&quot;</span><span class="p">]</span>
+    <span class="n">ref</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s2">&quot;Reflectance&quot;</span><span class="p">]</span>
     <span class="nb">min</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
-    <span class="n">outs</span><span class="p">[</span><span class="s">&quot;Intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">65535</span> <span class="o">*</span> <span class="p">(</span><span class="n">ref</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+    <span class="n">outs</span><span class="p">[</span><span class="s2">&quot;Intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">65535</span> <span class="o">*</span> <span class="p">(</span><span class="n">ref</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">True</span>
 </pre></div>
 </div>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span>
