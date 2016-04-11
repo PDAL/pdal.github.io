@@ -1,0 +1,410 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction to LiDAR &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Point Cloud Processing and Analysis with PDAL" href="index.html"/>
+        <link rel="next" title="Introduction to PDAL" href="pdal-introduction.html"/>
+        <link rel="prev" title="Introduction" href="agenda.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Workshop</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="agenda.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to LiDAR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-lidar">Types of LiDAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modes-of-lidar-collection">Modes of LiDAR Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#georeferencing">Georeferencing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#integrating-lidar-and-gnss-imu-data">Integrating LiDAR and GNSS/IMU data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discrete-return-vs-full-waveform">Discrete-Return vs. Full-Waveform</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pdal-introduction.html">Introduction to PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Software Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="index.html">Point Cloud Processing and Analysis with PDAL</a> &raquo;</li>
+      
+    <li>Introduction to LiDAR</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction-to-lidar">
+<span id="lidar-introduction"></span><h1>Introduction to LiDAR<a class="headerlink" href="#introduction-to-lidar" title="Permalink to this headline">¶</a></h1>
+<p>LiDAR is a remote sensing technique that uses visible or near-infrared laser
+energy to measure the distance between a sensor and an object.  LiDAR sensors
+are versatile and (often) mobile; they help autonomous cars avoid obstacles and
+make detailed topographic measurements from space.  Before diving into LiDAR
+data processing, we will spend a bit of time reviewing some LiDAR fundamentals
+and discussing some terms of art.</p>
+<div class="section" id="types-of-lidar">
+<h2>Types of LiDAR<a class="headerlink" href="#types-of-lidar" title="Permalink to this headline">¶</a></h2>
+<p>LiDAR systems, generally speaking, come in one of three types:</p>
+<ul class="simple">
+<li><strong>Pulse-based</strong>, or <strong>linear-mode</strong>, systems emit a pulse of laser energy and
+measure the time it takes for that energy to travel to a target, bounce off
+the target, and be returned to the sensor.  These systems are called
+linear-mode because they (generally) only have a single aperture, and so can
+only measure distance along a single vector at any point in time.
+Pulse-based systems are very common, and are usually what you would think of
+when you think of LiDAR.</li>
+<li><strong>Phase-based</strong> LiDAR systems measure distance via <em>interferometry</em>, that is,
+by using the phase of a modulated laser beam to calculate a distance as a
+fraction of the modulated signal&#8217;s wavelength.  Phase-based systems can be
+very precise, on the order of a few millimeters, but since they require
+comparatively more energy than the other two types they are usually used for
+short-range (e.g. indoor) scanning.</li>
+<li><strong>Geiger-mode</strong>, or <strong>photon-counting</strong>, systems use extremely sensitive
+detectors that can be triggered by a single photon.
+Since only a single photon is required to trigger a measurement, these
+systems can operate at much much higher altitudes than linear mode systems.
+However, Geiger-mode systems are relatively new and suffer from very high
+amounts of noise and other operational restrictions, making them
+significantly less common than linear-mode systems.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unless otherwise noted, if we talk about a LiDAR scanner in this program,
+we will be referring to a pulse-based (linear) system.</p>
+</div>
+</div>
+<div class="section" id="modes-of-lidar-collection">
+<h2>Modes of LiDAR Collection<a class="headerlink" href="#modes-of-lidar-collection" title="Permalink to this headline">¶</a></h2>
+<p>LiDAR collects are generally categorized into four subjective types:</p>
+<ul class="simple">
+<li><strong>Terrestrial LiDAR Scanning (TLS)</strong>: scanning with a stationary LiDAR
+sensor, usually mounted on a tripod.</li>
+<li><strong>Airborne LiDAR scanning (ALS)</strong>: also called airborne laser swath mapping
+(ALSM), scanning with a LiDAR scanner mounted to a fixed-wing or rotor
+aircraft.</li>
+<li><strong>Mobile LiDAR scanning (MLS)</strong>: scanning from a ground-based vehicle, such
+as a car.</li>
+<li><strong>Unmanned LiDAR scanning (ULS)</strong>: scanning with drones or other unmanned
+vehicles.</li>
+</ul>
+<p>With the exception of stationary TLS, LiDAR scanning generally requires the use
+of an integrated GNSS/IMU (Global Navigation Satellite System/Inertial Motion
+Unit), which provides information about the position, rotation, and motion of
+the scanning platform.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As stated in the class description, we will focus on mobile and airborne
+laser scanning (MLS/ALS), though we will also use some TLS data.</p>
+</div>
+<span class="target" id="georeferencing-introduction"></span></div>
+<div class="section" id="georeferencing">
+<span id="index-0"></span><h2>Georeferencing<a class="headerlink" href="#georeferencing" title="Permalink to this headline">¶</a></h2>
+<p>LiDAR scanners collect information in the Scanner&#8217;s Own Coordinate System
+(SOCS); this is a coordinate system centered at the scanner.  The process of
+rotating, translating, and (possibly) transforming a point cloud into a
+real-world spatial reference system is known as <strong>georeferencing</strong>.</p>
+<p>In the case of TLS, georeferencing is simply a matter of discovering the
+position and orientation of the static scanner.  This is usually done with GNSS
+control points, which are used to solve for the scanner&#8217;s position via
+least-squares.</p>
+<p>For mobile or airborne LiDAR scanning, it is necessary to merge the scanner&#8217;s
+points with the GNSS/IMU data.  This can be done on-the-fly or as a part of a
+post-processing workflow.  Since this is a common operation for mobile and
+airborne LiDAR collects, we will spend a moment discussing the methods and
+complications for georeferencing mobile LiDAR and GNSS/IMU data.</p>
+<div class="section" id="integrating-lidar-and-gnss-imu-data">
+<h3>Integrating LiDAR and GNSS/IMU data<a class="headerlink" href="#integrating-lidar-and-gnss-imu-data" title="Permalink to this headline">¶</a></h3>
+<p>The LiDAR georeferencing equation is well-established; we present a version
+here from <a class="reference internal" href="#glennie2007" id="id1">[Gle07]</a>:</p>
+<div class="math" id="equation-georeferencing">
+<span class="eqno">(1)</span>\[\mathbf{p}^l_G = \mathbf{p}^l_{GPS} + \mathbf{R}^l_b \left( \mathbf{R}^b_s \mathbf{r}^s - \mathbf{l}^b \right)\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(\mathbf{p}^l_G\)</span> are the coordinates of the target point in the global reference frame</li>
+<li><span class="math">\(\mathbf{p}^l_{GPS}\)</span> are the coordinates of the GNSS sensor in the global reference frame</li>
+<li><span class="math">\(\mathbf{R}^l_b\)</span> is the rotation matrix from the navigation frame to the global reference frame</li>
+<li><span class="math">\(\mathbf{R}^b_s\)</span> is the rotation matrix from the scanner&#8217;s frame to the navigation frame (boresight matrix)</li>
+<li><span class="math">\(\mathbf{r}^s\)</span> is the coordinates of the laser point in the scanner&#8217;s frame</li>
+<li><span class="math">\(\mathbf{l}^b\)</span> is the lever-arm offset between the scanner&#8217;s original and the navigation&#8217;s origin</li>
+</ul>
+<p>This equation contains fourteen unknowns, and in order to georeference a single
+LiDAR return we must determine all fourteen variables at the time of the pulse.</p>
+<p>As a rule of thumb, the position, attitude, and motion of the scanning platform
+(aircraft, vehicle, etc) are sampled at a much lower rate than the pulse rate
+of the laser — rates of ~1Hz are common for GNSS/IMU sampling.  In order to
+match the GNSS/IMU sampling rate with the sampling rate of the laser, GNSS/IMU
+measurements are interpolated to line up with the LiDAR measurements.  Then,
+these positions and attitudes are combined via Equation <a href="#equation-georeferencing">(1)</a> to
+create a final, georeferenced point cloud.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While lever-arm offsets are usually taken from the schematic drawings of
+the LiDAR mounting system, the boresight matrix cannot be reliably
+determined from drawings alone.  The boresight matrix must therefore be
+determined either via manual or automated boresight calibration using
+actual LiDAR data of planar surfaces, such as the roof and sides of
+buildings.  The process for determining a boresight calibration from LiDAR
+data is beyond the scope of this class.</p>
+</div>
+</div>
+</div>
+<div class="section" id="discrete-return-vs-full-waveform">
+<h2>Discrete-Return vs. Full-Waveform<a class="headerlink" href="#discrete-return-vs-full-waveform" title="Permalink to this headline">¶</a></h2>
+<p>Pulse-based LiDAR systems use the round-trip travel time of a pulse of laser
+energy to measure distances.  The outgoing pulse of a LiDAR system is roughly
+(but not exactly) a Gaussian:</p>
+<div class="figure" id="id2">
+<img alt="../_images/reference-pulse.png" src="../_images/reference-pulse.png" />
+<p class="caption"><span class="caption-text">A real-world outgoing LiDAR pulse.</span></p>
+</div>
+<p>This pulse can interact with multiple objects in a scene before it is returned to the sensor.
+Here is an example of a LiDAR return:</p>
+<div class="figure" id="id3">
+<img alt="../_images/return-pulse.png" src="../_images/return-pulse.png" />
+<p class="caption"><span class="caption-text">A real-world incoming LiDAR return.
+Potential discrete-return peaks are marked in red.</span></p>
+</div>
+<p>As you can see, this return pulse can be very complicated.  While there is more
+information contained in the &#8220;full waveform&#8221; picture displayed above, many
+LiDAR consumers are only interested in detecting the presence or absence of an
+object — simplistically, the peaks in that waveform.</p>
+<p>Full waveform data is used only in specialized circumstances.  If you have or
+receive LiDAR data, it will usually be discrete return (point clouds).
+Processing full waveform data is beyond the scope of this class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">PDAL is a discrete-return point cloud processing library.
+It does not have any functionality to analyse or process full waveform data.</p>
+</div>
+<p id="bibtex-bibliography-workshop/lidar-introduction-0"><table class="docutils citation" frame="void" id="glennie2007" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Gle07]</a></td><td>Craig&nbsp;L. Glennie. Rigorous 3D error analysis of kinematic scanning LIDAR systems. <em>Journal of Applied Geodesy</em>, jan 2007.</td></tr>
+</tbody>
+</table>
+</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pdal-introduction.html" class="btn btn-neutral float-right" title="Introduction to PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="agenda.html" class="btn btn-neutral" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

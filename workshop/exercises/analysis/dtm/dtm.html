@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Generating a DTM &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../../../../index.html"/>
+        <link rel="up" title="Exercises" href="../../index.html"/>
+        <link rel="next" title="Georeferencing" href="../../georeferencing/index.html"/>
+        <link rel="prev" title="Identifying ground" href="../ground/ground.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Workshop</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../agenda.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../lidar-introduction.html">Introduction to LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pdal-introduction.html">Introduction to PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../software.html">Software Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Exercises</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#basic-information">Basic Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#translation">Translation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#analysis">Analysis</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../boundary/boundary.html">Finding the boundary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../clipping/clipping.html">Clipping data with polygons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../colorization/colorization.html">Colorizing points with imagery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../denoising/denoising.html">Removing noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../density/density.html">Visualizing acquisition density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Generating a DTM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="../../../index.html">Point Cloud Processing and Analysis with PDAL</a> &raquo;</li>
+      
+        <li><a href="../../index.html">Exercises</a> &raquo;</li>
+      
+    <li>Generating a DTM</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="generating-a-dtm">
+<span id="dtm"></span><h1>Generating a DTM<a class="headerlink" href="#generating-a-dtm" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">This exercise uses PDAL to generate an elevation model surface using the
+output from the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise, PDAL&#8217;s <a class="reference internal" href="../../../../stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a> operation,
+and <a class="reference external" href="http://gdal.org/">GDAL</a> to generate an elevation and hillshade surface from point cloud
+data.</p>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The primary input for <a class="reference external" href="https://en.wikipedia.org/wiki/Digital_elevation_model">Digital Terrain Model</a> generation is a point cloud
+with ground classifications. We created this file, called
+<code class="docutils literal"><span class="pre">ground-filtered.laz</span></code>, in the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise. Please produce that
+file by following that exercise before starting this one.</p>
+</div>
+<div class="section" id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<p>Invoke the following command, substituting accordingly, in your <cite>Docker
+Quickstart Terminal</cite>:</p>
+<p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a>
+stage. There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we
+must use a pipeline.</p>
+</div>
+<div class="section" id="pipeline-breakdown">
+<h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;/data/exercises/analysis/ground/ground-filtered.laz&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;/data/exercises/analysis/dtm/dtm&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;output_format&quot;</span><span class="p">:</span><span class="s2">&quot;tif&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;grid_dist_x&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;grid_dist_y&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.p2g&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">this pipeline is available in your workshop materials in the
+<code class="docutils literal"><span class="pre">./exercises/analysis/dtm/dtm.json</span></code> file.</p>
+</div>
+<div class="section" id="reader">
+<h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">ground-filtered.laz</span></code> is the <a class="reference external" href="http://laszip.org">LASzip</a> file we will clip. You should have
+created this output as part of the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise.</p>
+</div>
+<div class="section" id="writers-p2g">
+<h4>2. <a class="reference internal" href="../../../../stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a><a class="headerlink" href="#writers-p2g" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference external" href="https://github.com/CRREL/points2grid">Points2grid</a> writer that bins the point cloud data into an elevation
+surface.</p>
+</div>
+</div>
+<div class="section" id="execution">
+<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
+       <span class="n">pdal</span> <span class="n">pipeline</span> \
+       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">p2g</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" />
+</div>
+<div class="section" id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
+<p>Something happened, and some files were written, but we cannot really
+see what was produced. Let us use <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> to visualize the output.</p>
+<ol class="arabic">
+<li><p class="first">Open <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> and <cite>Add Raster Layer</cite>:</p>
+<img alt="../../../../_images/dtm-add-raster-layer.png" src="../../../../_images/dtm-add-raster-layer.png" />
+</li>
+<li><p class="first">Add the <cite>dtm.idw.tif</cite> file from your <code class="docutils literal"><span class="pre">./PDAL/exercises/analysis/dtm</span></code>
+directory.</p>
+<img alt="../../../../_images/dtm-add-raster-mean.png" src="../../../../_images/dtm-add-raster-mean.png" />
+<img alt="../../../../_images/dtm-qgis-added.png" src="../../../../_images/dtm-qgis-added.png" />
+</li>
+<li><p class="first">Classify the DTM by right-clicking on the <cite>dtm.idw.tif</cite> and choosing
+<cite>Properties</cite>. Pick the pseudocolor rendering type, and then
+choose a color ramp and click <cite>Classify</cite>.</p>
+<img alt="../../../../_images/dtm-qgis-classify.png" src="../../../../_images/dtm-qgis-classify.png" />
+<img alt="../../../../_images/dtm-qgis-colorize-dtm.png" src="../../../../_images/dtm-qgis-colorize-dtm.png" />
+</li>
+<li><p class="first"><a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> provides access to <a class="reference external" href="http://gdal.org/">GDAL</a> processing tools, and we
+are going to use that to create a hillshade of our surface.
+Choose <cite>Raster&#8211;&gt;Analysis&#8211;&gt;Dem</cite>:</p>
+<img alt="../../../../_images/dtm-qgis-select-hillshade.png" src="../../../../_images/dtm-qgis-select-hillshade.png" />
+</li>
+<li><p class="first">Click the window for the <cite>Output file</cite> and select a location
+to save the <code class="docutils literal"><span class="pre">hillshade.tif</span></code> file.</p>
+<img alt="../../../../_images/dtm-qgis-gdaldem.png" src="../../../../_images/dtm-qgis-gdaldem.png" />
+</li>
+<li><p class="first">Click <cite>OK</cite> and the hillshade of your DTM is now available</p>
+<img alt="../../../../_images/dtm-qgis-hillshade-done.png" src="../../../../_images/dtm-qgis-hillshade-done.png" />
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a>, which powers the <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> DEM tools, is a very powerful
+command line utility you can use for processing data.</li>
+<li><a class="reference external" href="https://github.com/CRREL/points2grid">Points2grid</a> can be used for large data, but it does not interplate
+typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triangulated_irregular_network">TIN</a> surface model before interpolating.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../georeferencing/index.html" class="btn btn-neutral float-right" title="Georeferencing" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../ground/ground.html" class="btn btn-neutral" title="Identifying ground" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

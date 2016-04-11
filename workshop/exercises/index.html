@@ -1,0 +1,415 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Exercises &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../../index.html"/>
+        <link rel="up" title="Point Cloud Processing and Analysis with PDAL" href="../index.html"/>
+        <link rel="next" title="Printing the first point" href="info/single-point.html"/>
+        <link rel="prev" title="QGIS" href="../qgis.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Workshop</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../agenda.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lidar-introduction.html">Introduction to LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pdal-introduction.html">Introduction to PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software.html">Software Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Exercises</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-information">Basic Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="info/single-point.html">Printing the first point</a></li>
+<li class="toctree-l4"><a class="reference internal" href="info/metadata.html">Printing file metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="info/near.html">Searching near a point</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#translation">Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="translation/compression.html">Compression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="translation/reprojection.html">Reprojection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#analysis">Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="analysis/boundary/boundary.html">Finding the boundary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis/clipping/clipping.html">Clipping data with polygons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis/colorization/colorization.html">Colorizing points with imagery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis/denoising/denoising.html">Removing noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis/density/density.html">Visualizing acquisition density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis/thinning/thinning.html">Thinning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis/ground/ground.html">Identifying ground</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis/dtm/dtm.html">Generating a DTM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#georeferencing">Georeferencing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="georeferencing/index.html">Georeferencing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="../index.html">Point Cloud Processing and Analysis with PDAL</a> &raquo;</li>
+      
+    <li>Exercises</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="exercises">
+<span id="id1"></span><h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-information">
+<span id="basic-info"></span><h2>Basic Information<a class="headerlink" href="#basic-information" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="info/single-point.html">Printing the first point</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="info/single-point.html#exercise">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info/single-point.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="info/metadata.html">Printing file metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="info/metadata.html#exercise">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info/metadata.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="info/near.html">Searching near a point</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="info/near.html#exercise">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info/near.html#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="translation">
+<span id="id2"></span><h2>Translation<a class="headerlink" href="#translation" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="translation/compression.html">Compression</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="translation/compression.html#exercise">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translation/compression.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="translation/reprojection.html">Reprojection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="translation/reprojection.html#exercise">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translation/reprojection.html#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="analysis">
+<span id="analysisa"></span><h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="analysis/boundary/boundary.html">Finding the boundary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/boundary/boundary.html#exercise">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis/boundary/boundary.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/clipping/clipping.html">Clipping data with polygons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/clipping/clipping.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis/clipping/clipping.html#data-preparation">Data preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/clipping/clipping.html#pipeline-breakdown">Pipeline breakdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/clipping/clipping.html#execution">Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/clipping/clipping.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis/clipping/clipping.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/colorization/colorization.html">Colorizing points with imagery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/colorization/colorization.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis/colorization/colorization.html#pipeline-breakdown">Pipeline breakdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/colorization/colorization.html#execution">Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/colorization/colorization.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis/colorization/colorization.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/denoising/denoising.html">Removing noise</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/denoising/denoising.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis/denoising/denoising.html#pipeline-breakdown">Pipeline breakdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/denoising/denoising.html#execution">Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/denoising/denoising.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis/denoising/denoising.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/density/density.html">Visualizing acquisition density</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/density/density.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis/density/density.html#command">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/density/density.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis/density/density.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/thinning/thinning.html">Thinning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/thinning/thinning.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis/thinning/thinning.html#command">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/thinning/thinning.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis/thinning/thinning.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ground/ground.html">Identifying ground</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/ground/ground.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis/ground/ground.html#command">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/ground/ground.html#filtering">Filtering</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/dtm/dtm.html">Generating a DTM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis/dtm/dtm.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis/dtm/dtm.html#command">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/dtm/dtm.html#pipeline-breakdown">Pipeline breakdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/dtm/dtm.html#execution">Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis/dtm/dtm.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis/dtm/dtm.html#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="georeferencing">
+<h2>Georeferencing<a class="headerlink" href="#georeferencing" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="georeferencing/index.html">Georeferencing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="georeferencing/index.html#exercise">Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="georeferencing/index.html#command">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="georeferencing/index.html#visualization">Visualization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="info/single-point.html" class="btn btn-neutral float-right" title="Printing the first point" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../qgis.html" class="btn btn-neutral" title="QGIS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

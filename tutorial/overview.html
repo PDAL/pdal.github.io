@@ -1,240 +1,172 @@
 
+
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PDAL Architecture Overview &mdash; pdal.io</title>
+  
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>PDAL Architecture Overview &mdash; pdal.io</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.2.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+  
+  
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="pdal.io" href="../index.html" />
-    <link rel="up" title="Tutorials" href="index.html" />
-    <link rel="next" title="Reading with PDAL" href="reading.html" />
-    <link rel="prev" title="Using PDAL with CMake" href="using.html" />
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
-<meta name="apple-mobile-web-app-capable" content="yes">
+  
 
-  </head>
-  <body role="document">
+  
 
-  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../index.html">
-          PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b>1.2.0</b></span>
-      </div>
+  
+  
+    
 
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Reading with PDAL" href="reading.html"/>
+        <link rel="prev" title="Using PDAL with CMake" href="using.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
             
-                <li><a href="../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
             
             
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="../index.html">Docs <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#current-release-s">Current Release(s)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#past-releases">Past Releases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#binaries">Binaries</a></li>
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../compilation/index.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/unix.html">Unix Compilation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/windows.html">Building Under Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/dependencies.html">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/python.html">Python installation</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#delta-command">delta command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#density-command">density command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#diff-command">diff command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#ground-command">ground command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#info-command">info command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#merge-command">merge command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#pcl-command">pcl command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#pipeline-command">pipeline command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#random-command">random command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#split-command">split command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#tindex-command">tindex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#translate-command">translate command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../stages/index.html">Readers, Writers, and Filters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#readers">Readers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#writers">Writers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#filters">Filters</a></li>
-</ul>
-</li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#getting-started">Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="using.html">Using PDAL with CMake</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PDAL Architecture Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-pdal-model">The PDAL model</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#developing">Developing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#what-you-get">What you get</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#composing-pipelines">Composing pipelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
 </ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../development/index.html#build-and-test-status">Build and Test Status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../api/cpp/index.html">C++ API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../metadata.html">Metadata</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#metadata-types">Metadata Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#json-representation">JSON representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributors.html#engineering-contributors">Engineering Contributors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributors.html#funding-contributors">Funding Contributors</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">Here <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">PDAL Architecture Overview</a><ul>
-<li><a class="reference internal" href="#the-pdal-model">The PDAL model</a><ul>
-<li><a class="reference internal" href="#extending-pdal">Extending PDAL</a><ul>
-<li><a class="reference internal" href="#dimension">Dimension</a></li>
-<li><a class="reference internal" href="#point-layout">Point Layout</a></li>
-<li><a class="reference internal" href="#point-table">Point Table</a></li>
-<li><a class="reference internal" href="#point-view">Point View</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#making-a-stage-reader-filter-or-writer">Making a Stage (Reader, Filter or Writer):</a><ul>
-<li><a class="reference internal" href="#stage-preparation">Stage Preparation</a></li>
-<li><a class="reference internal" href="#stage-execution">Stage Execution</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#implementing-a-reader">Implementing a Reader</a></li>
-<li><a class="reference internal" href="#implementing-a-filter">Implementing a Filter</a></li>
-<li><a class="reference internal" href="#implementing-a-writer">Implementing a Writer:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-              
-                
-  <li>
-    <a href="using.html" title="Previous Chapter: Using PDAL with CMake"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Using PDAL wi...</span>
-    </a>
-  </li>
-  <li>
-    <a href="reading.html" title="Next Chapter: Reading with PDAL"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Reading with ... &raquo;</span>
-    </a>
-  </li>
-              
-            
-            
-            
-            
-              <li class="hidden-sm"></li>
-            
-          </ul>
 
-          
             
-<form class="navbar-form navbar-right" action="../search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
           
         </div>
-    </div>
-  </div>
+      </div>
+    </nav>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 content">
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
       
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="index.html">Tutorials</a> &raquo;</li>
+      
+    <li>PDAL Architecture Overview</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
   <div class="section" id="pdal-architecture-overview">
 <span id="overview"></span><h1>PDAL Architecture Overview<a class="headerlink" href="#pdal-architecture-overview" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
@@ -469,30 +401,30 @@ type of the variable using the enumeration Dimension::Type::Enum.</p>
 <p>In this example, the reader informs the point table&#8217;s layout that it will
 reference the dimensions X, Y and Z.</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span>void Reader::addDimensions(PointLayoutPtr layout)
-{
-   layout-&gt;registerDim(Dimension::Id::X);
-   layout-&gt;registerDim(Dimension::Id::Y);
-   layout-&gt;registerDim(Dimension::Id::Z);
-}
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Reader</span><span class="p">::</span><span class="n">addDimensions</span><span class="p">(</span><span class="n">PointLayoutPtr</span> <span class="n">layout</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">X</span><span class="p">);</span>
+   <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Y</span><span class="p">);</span>
+   <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Z</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p>Here a reader determines dimensions from an input source and registers or
 assigns them.  All of the input dimension values are in this case double
 precision floating point.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>void Reader::addDimensions(PointLayoutPtr layout)
-{
-    FileHeader header;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Reader</span><span class="p">::</span><span class="n">addDimensions</span><span class="p">(</span><span class="n">PointLayoutPtr</span> <span class="n">layout</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">FileHeader</span> <span class="n">header</span><span class="p">;</span>
 
-    for (auto di = header.names.begin(), di != header.names.end(); ++di)
-    {
-        std::string dimName = *di;
-        Dimension::Id::Enum id = layout-&gt;registerOrAssignDim(
-            dimName,
-            Dimension::Type::Double);
-    }
-}
+    <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">di</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">di</span> <span class="o">!=</span> <span class="n">header</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">di</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="n">dimName</span> <span class="o">=</span> <span class="o">*</span><span class="n">di</span><span class="p">;</span>
+        <span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Enum</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerOrAssignDim</span><span class="p">(</span>
+            <span class="n">dimName</span><span class="p">,</span>
+            <span class="n">Dimension</span><span class="p">::</span><span class="n">Type</span><span class="p">::</span><span class="n">Double</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Readers should use the ready() function to reset the input data to a state
@@ -512,43 +444,43 @@ called the index.</p>
 of the point view.  The ID of the end of the point view can be
 determined by calling size() function of the point view.  read() should
 return the number of points read by during the function call.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>point_count_t MyFormat::read(PointViewPtr view, point_count_t count)
-{
-    // Determine the number of points remaining in the input.
-    point_count_t remainingInput = m_totalNumPts - m_index;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">point_count_t</span> <span class="n">MyFormat</span><span class="p">::</span><span class="n">read</span><span class="p">(</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">,</span> <span class="n">point_count_t</span> <span class="n">count</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="o">//</span> <span class="n">Determine</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">points</span> <span class="n">remaining</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">input</span><span class="o">.</span>
+    <span class="n">point_count_t</span> <span class="n">remainingInput</span> <span class="o">=</span> <span class="n">m_totalNumPts</span> <span class="o">-</span> <span class="n">m_index</span><span class="p">;</span>
 
-    // Determine the number of points to read.
-    count = std::min(count, remainingInput);
+    <span class="o">//</span> <span class="n">Determine</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">points</span> <span class="n">to</span> <span class="n">read</span><span class="o">.</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="nb">min</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">remainingInput</span><span class="p">);</span>
 
-    // Determine the ID of the next point in the point view
-    PointId nextId = view-&gt;size();
+    <span class="o">//</span> <span class="n">Determine</span> <span class="n">the</span> <span class="n">ID</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">next</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">point</span> <span class="n">view</span>
+    <span class="n">PointId</span> <span class="n">nextId</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
 
-    // Determine the current input position.
-    auto pos = m_pointSize * m_index;
+    <span class="o">//</span> <span class="n">Determine</span> <span class="n">the</span> <span class="n">current</span> <span class="nb">input</span> <span class="n">position</span><span class="o">.</span>
+    <span class="n">auto</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">m_pointSize</span> <span class="o">*</span> <span class="n">m_index</span><span class="p">;</span>
 
-    point_count_t remaining = count;
-    while (remaining--)
-    {
-        double x, y, z;
+    <span class="n">point_count_t</span> <span class="n">remaining</span> <span class="o">=</span> <span class="n">count</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">remaining</span><span class="o">--</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">double</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
 
-        // Read X, Y and from input source.
-        x = m_file.read&lt;double&gt;(pos);
-        pos += sizeof(double);
-        y = m_file.read&lt;double&gt;(pos);
-        pos += sizeof(double);
-        z = m_file.read&lt;double&gt;(pos);
-        pos += sizeof(double);
+        <span class="o">//</span> <span class="n">Read</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="ow">and</span> <span class="kn">from</span> <span class="nn">input</span> <span class="n">source</span><span class="o">.</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">m_file</span><span class="o">.</span><span class="n">read</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">double</span><span class="p">);</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">m_file</span><span class="o">.</span><span class="n">read</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">double</span><span class="p">);</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">m_file</span><span class="o">.</span><span class="n">read</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">double</span><span class="p">);</span>
 
-        // Set X, Y and Z into the pointView.
-        view-&gt;setField(Dimension::Id::X, nextId, x);
-        view-&gt;setField(Dimension::Id::Y, nextId, y);
-        view-&gt;setField(Dimension::Id::Z, nextId, z);
+        <span class="o">//</span> <span class="n">Set</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="ow">and</span> <span class="n">Z</span> <span class="n">into</span> <span class="n">the</span> <span class="n">pointView</span><span class="o">.</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">X</span><span class="p">,</span> <span class="n">nextId</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">nextId</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">nextId</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
 
-        nextId++;
-    }
-    m_index += count;
-    return count;
-}
+        <span class="n">nextId</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">m_index</span> <span class="o">+=</span> <span class="n">count</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Note that we don&#8217;t read more points than requested, we don&#8217;t read past
@@ -571,21 +503,21 @@ points currently in the point view and apply some transformation or gather
 some data to be output as pipeline metadata.</p>
 <p>Here as an example is the actual filter function from the reprojection
 filter:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>void Reprojection::filter(PointViewPtr view)
-{
-    for (PointId id = 0; id &lt; view-&gt;size(); ++id)
-    {
-        double x = view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::X, id);
-        double y = view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Y, id);
-        double z = view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Z, id);
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Reprojection</span><span class="p">::</span><span class="nb">filter</span><span class="p">(</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">PointId</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nb">id</span> <span class="o">&lt;</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="nb">id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">X</span><span class="p">,</span> <span class="nb">id</span><span class="p">);</span>
+        <span class="n">double</span> <span class="n">y</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Y</span><span class="p">,</span> <span class="nb">id</span><span class="p">);</span>
+        <span class="n">double</span> <span class="n">z</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Z</span><span class="p">,</span> <span class="nb">id</span><span class="p">);</span>
 
-        transform(x, y, z);
+        <span class="n">transform</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
 
-        view-&gt;setField(Dimension::Id::X, id, x);
-        view-&gt;setField(Dimension::Id::Y, id, y);
-        view-&gt;setField(Dimension::Id::Z, id, z);
-    }
-}
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">X</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Y</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Z</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The filter simply loops through the points, retrieving the X, Y and Z values
@@ -596,7 +528,7 @@ view’s setField() function.</p>
 because it needs to create multiple output point views from a single input
 view.  The following example puts every other input point into one of two
 output point views:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>PointViewSet Alternator::run(PointViewPtr view)
+<div class="highlight-default"><div class="highlight"><pre><span></span>PointViewSet Alternator::run(PointViewPtr view)
 {
     PointViewSet viewSet;
     PointViewPtr even = view();
@@ -630,17 +562,17 @@ As new writers are created, developers should try to make sure
 that they behave reasonably if passed multiple point views &#8211; they
 correctly handle write() being called multiple times after a single
 call to ready().</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>void write(const PointViewPtr view)
-{
-    ostream&amp; out = *m_out;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">write</span><span class="p">(</span><span class="n">const</span> <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span> <span class="o">=</span> <span class="o">*</span><span class="n">m_out</span><span class="p">;</span>
 
-    for (PointId id = 0; id &lt; view-&gt;size(); ++id)
-    {
-        out &lt;&lt; setw(10) &lt;&lt; view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::X, id);
-        out &lt;&lt; setw(10) &lt;&lt; view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Y, id);
-        out &lt;&lt; setw(10) &lt;&lt; view-&gt;getFieldAs&lt;double&gt;(Dimension::Id::Z, id);
-    }
-}
+    <span class="k">for</span> <span class="p">(</span><span class="n">PointId</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nb">id</span> <span class="o">&lt;</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="nb">id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">X</span><span class="p">,</span> <span class="nb">id</span><span class="p">);</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Y</span><span class="p">,</span> <span class="nb">id</span><span class="p">);</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Z</span><span class="p">,</span> <span class="nb">id</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -648,10 +580,76 @@ call to ready().</p>
 </div>
 
 
-    </div>
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="reading.html" class="btn btn-neutral float-right" title="Reading with PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="using.html" class="btn btn-neutral" title="Using PDAL with CMake" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
   </div>
-</div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
     <div class="footer">
         <div class="container">
                     &copy;  2016
@@ -660,8 +658,9 @@ call to ready().</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 08, 2016.
+                    on Apr 11, 2016.
         </div>
     </div>
-  </body>
+
+</body>
 </html>

@@ -1,0 +1,481 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Metadata &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Development" href="index.html"/>
+        <link rel="next" title="Project Goals" href="goals.html"/>
+        <link rel="prev" title="Errors and Error Handling" href="errorhandling.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compilation/index.html">Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html">Coding Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs.html">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#metadata-types">Metadata Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#json-representation">JSON representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="goals.html">Project Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration.html">Continuous Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="index.html">Development</a> &raquo;</li>
+      
+    <li>Metadata</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metadata">
+<span id="id1"></span><h1>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h1>
+<p>Metadata is an important component of any data processing story. PDAL attempts
+to allow users to operate with metadata in a relatively free-form way, with
+its main Metadata utility, <a class="reference internal" href="../api/cpp/metadata.html#_CPPv2N4pdal8MetadataE" title="pdal::Metadata"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Metadata</span></code></a>.</p>
+<p>The basic structure of a <a class="reference internal" href="../api/cpp/metadata.html#_CPPv2N4pdal8MetadataE" title="pdal::Metadata"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Metadata</span></code></a> instance is the following
+tree structure:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;blank&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Metadata instances can contain other Metadata instances by adding them
+with the <code class="xref cpp cpp-func docutils literal"><span class="pre">pdal::Metadata::addMetadata()</span></code> method.  They will be
+added to the <cite>metadata</cite> sub-tree of the internal property_tree.</p>
+</div>
+<div class="section" id="metadata-types">
+<h2>Metadata Types<a class="headerlink" href="#metadata-types" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../api/cpp/metadata.html#_CPPv2N4pdal8MetadataE" title="pdal::Metadata"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Metadata</span></code></a> instances require that any classes that are added
+to them be copy-constructable and have an ostream&lt;&lt; operator for them.  While
+these constraints mean they are all serializable to strings,
+<a class="reference internal" href="../api/cpp/metadata.html#_CPPv2N4pdal8MetadataE" title="pdal::Metadata"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Metadata</span></code></a> also keeps an explicit type variable, <cite>type</cite> for
+each instance. This property allows us to say something extra about the
+Metadata entry, and allows them to go in and out of <a class="reference internal" href="../api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> and
+<a class="reference internal" href="../api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a> with type fidelity.</p>
+<p>The metadata <cite>type</cite> variable roughly maps to the <a class="reference external" href="http://infohost.nmt.edu/tcc/help/pubs/rnc/xsd.html">XSD type names</a>.  The following
+types are valid for current PDAL versions, though more may be added.</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">PDAL <a class="reference internal" href="../api/cpp/metadata.html#_CPPv2N4pdal8MetadataE" title="pdal::Metadata"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Metadata</span></code></a> types</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>double</td>
+<td>float</td>
+<td>integer</td>
+</tr>
+<tr class="row-even"><td>nonNegativeInteger</td>
+<td>boolean</td>
+<td>string</td>
+</tr>
+<tr class="row-odd"><td>base64Binary</td>
+<td>uuid</td>
+<td>bounds</td>
+</tr>
+<tr class="row-even"><td>spatialreference</td>
+<td>blank</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Explicitly-sized types are not supported. Assume that <cite>integer</cite> or
+<cite>nonNegativeInteger</cite> map to the typical 4-byte signed and unsigned types.
+You might be required to adjust the value based on an explicit
+interpretation and cast it into these larger types.</p>
+</div>
+</div>
+<div class="section" id="json-representation">
+<h2><a class="reference external" href="http://www.json.org/">JSON</a> representation<a class="headerlink" href="#json-representation" title="Permalink to this headline">¶</a></h2>
+<p>A more interesting metadata tree might come from the
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::drivers::las::Reader</span></code>.  Interesting things to note include</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;blank&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;metadata&quot;</span><span class="o">:</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;compressed&quot;</span><span class="o">:</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;compressed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;true if this LAS file is compressed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;false&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;dataformatid&quot;</span><span class="o">:</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;dataformatid&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;The Point Format ID as specified in the LAS specification&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;nonNegativeInteger&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;3&quot;</span>
+        <span class="p">},</span>
+        <span class="p">...</span>
+        <span class="s2">&quot;project_id&quot;</span><span class="o">:</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;project_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;Project ID (GUID data): The four fields that comprise a complete Globally Unique Identifier (GUID) are now reserved for use as a Project Identifier (Project ID). The field remains optional. The time of assignment of the Project ID is at the discretion of processing software. The Project ID should be the same for all files that are associated with a unique project. By assigning a Project ID and using a File Source ID (defined above) every file within a project and every point within a file can be uniquely identified, globally.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000000&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;system_id&quot;</span><span class="o">:</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;system_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;HOBU-SYSTEMID&quot;</span>
+        <span class="p">},</span>
+        <span class="p">...</span>
+        <span class="s2">&quot;vlr_0&quot;</span><span class="o">:</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;vlr_0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;A Polygon WKT entry&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;base64Binary&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;UE9MWUdPTigoNiAxNSwgMTAgMTAsIDIwIDEwLCAyNSAxNSwgMjUgMzUsIDE5IDQwLCAxMSA0MCwgNiAyNSwgNiAxNSkpCg==&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;reserved&quot;</span><span class="o">:</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;reserved&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;Two bytes of padded, unused space. Some softwares expect the values of these bytes to be 0xAABB as specified in the 1.0 version of the LAS specification&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;nonNegativeInteger&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;43707&quot;</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;user_id&quot;</span><span class="o">:</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;The User ID field is ASCII character data that identifies the user which created the variable length record. It is possible to have many Variable Length Records from different sources with different User IDs. If the character data is less than 16 characters, the remaining data must be null. The User ID must be registered with the LAS specification managing body. The management of these User IDs ensures that no two individuals accidentally use the same User ID. The specification will initially use two IDs: one for globally specified records (LASF_Spec), and another for projection types (LASF_Projection). Keys may be requested at http:\/\/www.asprs.org\/lasform\/keyform.html.&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;hobu&quot;</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;record_id&quot;</span><span class="o">:</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;record_id&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;The Record ID is dependent upon the User ID. There can be 0 to 65535 Record IDs for every User ID. The LAS specification manages its own Record IDs (User IDs owned by the specification), otherwise Record IDs will be managed by the owner of the given User ID. Thus each User ID is allowed to assign 0 to 65535 Record IDs in any manner they desire. Publicizing the meaning of a given Record ID is left to the owner of the given User ID. Unknown User ID\/Record ID combinations should be ignored.&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;nonNegativeInteger&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;1234&quot;</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;description&quot;</span><span class="o">:</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;description&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;A Polygon WKT entry&quot;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pipeline-xml-representation">
+<span id="metadatajson"></span><h2><a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> XML representation<a class="headerlink" href="#pipeline-xml-representation" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> representation of the <a class="reference internal" href="../api/cpp/metadata.html#_CPPv2N4pdal8MetadataE" title="pdal::Metadata"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Metadata</span></code></a> is a
+little bit flatter...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;Reader type=&quot;readers.las&quot;&gt;
+  &lt;Option name=&quot;debug&quot;&gt;false&lt;/Option&gt;
+  &lt;Option name=&quot;filename&quot;&gt;test/data/interesting.las&lt;/Option&gt;
+  &lt;Option name=&quot;verbose&quot;&gt;0&lt;/Option&gt;
+  &lt;Metadata name=&quot;writers.las&quot; type=&quot;blank&quot;&gt;
+    &lt;Metadata name=&quot;compressed&quot; type=&quot;boolean&quot;&gt;false&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;dataformatid&quot; type=&quot;nonNegativeInteger&quot;&gt;3&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;version_major&quot; type=&quot;nonNegativeInteger&quot;&gt;1&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;version_minor&quot; type=&quot;nonNegativeInteger&quot;&gt;2&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;filesource_id&quot; type=&quot;nonNegativeInteger&quot;&gt;0&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;reserved&quot; type=&quot;nonNegativeInteger&quot;&gt;0&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;project_id&quot; type=&quot;uuid&quot;&gt;00000000-0000-0000-0000-000000000000&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;system_id&quot; type=&quot;string&quot;&gt;HOBU-SYSTEMID&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;software_id&quot; type=&quot;string&quot;&gt;HOBU-GENERATING&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;creation_doy&quot; type=&quot;nonNegativeInteger&quot;&gt;145&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;creation_year&quot; type=&quot;nonNegativeInteger&quot;&gt;2012&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;header_size&quot; type=&quot;nonNegativeInteger&quot;&gt;227&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;dataoffset&quot; type=&quot;nonNegativeInteger&quot;&gt;1488&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;scale_x&quot; type=&quot;double&quot;&gt;0.01&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;scale_y&quot; type=&quot;double&quot;&gt;0.01&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;scale_z&quot; type=&quot;double&quot;&gt;0.01&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;offset_x&quot; type=&quot;double&quot;&gt;-0&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;offset_y&quot; type=&quot;double&quot;&gt;-0&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;offset_z&quot; type=&quot;double&quot;&gt;-0&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;minx&quot; type=&quot;double&quot;&gt;635619.85&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;miny&quot; type=&quot;double&quot;&gt;848899.7000000001&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;minz&quot; type=&quot;double&quot;&gt;406.59&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;maxx&quot; type=&quot;double&quot;&gt;638982.55&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;maxy&quot; type=&quot;double&quot;&gt;853535.4300000001&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;maxz&quot; type=&quot;double&quot;&gt;586.38&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;count&quot; type=&quot;nonNegativeInteger&quot;&gt;1065&lt;/Metadata&gt;
+    &lt;Metadata name=&quot;vlr_0&quot; type=&quot;base64Binary&quot;&gt;UE9MWUdPTigoNiAxNSwgMTAgMTAsIDIwIDEwLCAyNSAxNSwgMjUgMzUsIDE5IDQwLCAxMSA0MCwgNiAyNSwgNiAxNSkpCg==
+        &lt;Metadata name=&quot;reserved&quot; type=&quot;nonNegativeInteger&quot;&gt;43707&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;user_id&quot; type=&quot;string&quot;&gt;hobu&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;record_id&quot; type=&quot;nonNegativeInteger&quot;&gt;1234&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;description&quot; type=&quot;string&quot;&gt;A Polygon WKT entry&lt;/Metadata&gt;
+    &lt;/Metadata&gt;
+    &lt;Metadata name=&quot;vlr_1&quot; type=&quot;base64Binary&quot;&gt;AQABAAAAFQAABAAAAQABAAEEAAABAAEAAgSxhywAAAAACAAAAQD/fwEIsYdqACwAAggAAAEA/38GCAAAAQCOIwgIAAABAP9/CQiwhwEABgALCLCHAQAHAA0IsIcBAAgAAAwAAAEA/38CDAAAAQD/fwMMAAABAAgABAwAAAEAKiMGDLCHAQACAAcMsIcBAAMADAywhwEAAQANDLCHAQAAAA4MsIcBAAQADwywhwEABQAAAAAAAAAAAA==
+        &lt;Metadata name=&quot;reserved&quot; type=&quot;nonNegativeInteger&quot;&gt;43707&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;user_id&quot; type=&quot;string&quot;&gt;LASF_Projection&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;record_id&quot; type=&quot;nonNegativeInteger&quot;&gt;34735&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;description&quot; type=&quot;string&quot;&gt;GeoTIFF GeoKeyDirectoryTag&lt;/Metadata&gt;
+    &lt;/Metadata&gt;
+    &lt;Metadata name=&quot;vlr_2&quot; type=&quot;base64Binary&quot;&gt;AAAAAADgREAAAAAAACBewAAAAAAAgEVAAAAAAADARkD//////2kYQQAAAAAAAAAAAAAAQKZUWEGo+euUHaRyQAAAAAAAAAAA
+        &lt;Metadata name=&quot;reserved&quot; type=&quot;nonNegativeInteger&quot;&gt;43707&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;user_id&quot; type=&quot;string&quot;&gt;LASF_Projection&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;record_id&quot; type=&quot;nonNegativeInteger&quot;&gt;34736&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;description&quot; type=&quot;string&quot;&gt;GeoTIFF GeoDoubleParamsTag&lt;/Metadata&gt;
+    &lt;/Metadata&gt;
+    &lt;Metadata name=&quot;vlr_3&quot; type=&quot;base64Binary&quot;&gt;TkFEXzE5ODNfT3JlZ29uX1N0YXRld2lkZV9MYW1iZXJ0X0ZlZXRfSW50bHxHQ1MgTmFtZSA9IEdDU19Ob3J0aF9BbWVyaWNhbl8xOTgzfERhdHVtID0gRF9Ob3J0aF9BbWVyaWNhbl8xOTgzfEVsbGlwc29pZCA9IEdSU18xOTgwfFByaW1lbSA9IEdyZWVud2ljaHx8AA==
+        &lt;Metadata name=&quot;reserved&quot; type=&quot;nonNegativeInteger&quot;&gt;43707&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;user_id&quot; type=&quot;string&quot;&gt;LASF_Projection&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;record_id&quot; type=&quot;nonNegativeInteger&quot;&gt;34737&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;description&quot; type=&quot;string&quot;&gt;GeoTIFF GeoAsciiParamsTag&lt;/Metadata&gt;
+    &lt;/Metadata&gt;
+    &lt;Metadata name=&quot;vlr_4&quot; type=&quot;base64Binary&quot;&gt;UFJPSkNTWyJOQURfMTk4M19PcmVnb25fU3RhdGV3aWRlX0xhbWJlcnRfRmVldF9JbnRsIixHRU9HQ1NbIkdDU19Ob3J0aF9BbWVyaWNhbl8xOTgzIixEQVRVTVsiRF9Ob3J0aF9BbWVyaWNhbl8xOTgzIixTUEhFUk9JRFsiR1JTXzE5ODAiLDYzNzgxMzcuMCwyOTguMjU3MjIyMTAxXV0sUFJJTUVNWyJHcmVlbndpY2giLDAuMF0sVU5JVFsiRGVncmVlIiwwLjAxNzQ1MzI5MjUxOTk0MzI5NV1dLFBST0pFQ1RJT05bIkxhbWJlcnRfQ29uZm9ybWFsX0NvbmljXzJTUCJdLFBBUkFNRVRFUlsiRmFsc2VfRWFzdGluZyIsMTMxMjMzNS45NTgwMDUyNDldLFBBUkFNRVRFUlsiRmFsc2VfTm9ydGhpbmciLDAuMF0sUEFSQU1FVEVSWyJDZW50cmFsX01lcmlkaWFuIiwtMTIwLjVdLFBBUkFNRVRFUlsiU3RhbmRhcmRfUGFyYWxsZWxfMSIsNDMuMF0sUEFSQU1FVEVSWyJTdGFuZGFyZF9QYXJhbGxlbF8yIiw0NS41XSxQQVJBTUVURVJbIkxhdGl0dWRlX09mX09yaWdpbiIsNDEuNzVdLFVOSVRbIkZvb3QiLDAuMzA0OF1dAA==
+        &lt;Metadata name=&quot;reserved&quot; type=&quot;nonNegativeInteger&quot;&gt;43707&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;user_id&quot; type=&quot;string&quot;&gt;liblas&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;record_id&quot; type=&quot;nonNegativeInteger&quot;&gt;2112&lt;/Metadata&gt;
+        &lt;Metadata name=&quot;description&quot; type=&quot;string&quot;&gt;OGR variant of OpenGIS WKT SRS&lt;/Metadata&gt;
+    &lt;/Metadata&gt;
+  &lt;/Metadata&gt;
+&lt;/Reader&gt;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="goals.html" class="btn btn-neutral float-right" title="Project Goals" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="errorhandling.html" class="btn btn-neutral" title="Errors and Error Handling" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

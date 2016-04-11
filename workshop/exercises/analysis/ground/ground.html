@@ -1,0 +1,411 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Identifying ground &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../../../../index.html"/>
+        <link rel="up" title="Exercises" href="../../index.html"/>
+        <link rel="next" title="Generating a DTM" href="../dtm/dtm.html"/>
+        <link rel="prev" title="Thinning" href="../thinning/thinning.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Workshop</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../agenda.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../lidar-introduction.html">Introduction to LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pdal-introduction.html">Introduction to PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../software.html">Software Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Exercises</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#basic-information">Basic Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#translation">Translation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#analysis">Analysis</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../boundary/boundary.html">Finding the boundary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../clipping/clipping.html">Clipping data with polygons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../colorization/colorization.html">Colorizing points with imagery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../denoising/denoising.html">Removing noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../density/density.html">Visualizing acquisition density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Identifying ground</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="../../../index.html">Point Cloud Processing and Analysis with PDAL</a> &raquo;</li>
+      
+        <li><a href="../../index.html">Exercises</a> &raquo;</li>
+      
+    <li>Identifying ground</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ground">
+<span id="identifying-ground"></span><h1>Identifying ground<a class="headerlink" href="#ground" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">This exercise uses PDAL to classify ground returns using the <cite>Progressive
+Morphological Filter (PMF)</cite> technique.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This excerise is an adaptation of the <a class="reference internal" href="../../../../tutorial/pcl_ground.html#pcl-ground"><span class="std std-ref">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</span></a> tutorial on the
+PDAL website by Brad Chambers. You can find more detail and example
+invocations there.</p>
+</div>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>The primary input for <a class="reference external" href="https://en.wikipedia.org/wiki/Digital_elevation_model">Digital Terrain Model</a> generation is a point cloud with
+ground vs. not-ground classifications. In this example, we will use an
+algorithm provided by PDAL, the <cite>Progressive Morphological Filter</cite> technique to
+generate a ground surface.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">PMF is implemented in PCL. PCL is then linked to PDAL. You can read more
+about the specifics of the algorithm from the <a class="reference external" href="http://users.cis.fiu.edu/~chens/PDF/TGRS.pdf">paper</a>, and you can read more
+about the PCL implementation in the source code on <a class="reference external" href="https://github.com/PointCloudLibrary/pcl/blob/master/filters/include/pcl/filters/morphological_filter.h">github</a>.</p>
+</div>
+<div class="section" id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<p>Invoke the following command, substituting accordingly, in your <cite>Docker
+Quickstart Terminal</cite>:</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
+       <span class="n">pdal</span> <span class="n">ground</span> \
+       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+       <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">ground</span><span class="o">.</span><span class="n">classify</span><span class="o">=</span><span class="n">true</span> \
+       <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="../../../../_images/ground-run-command.png" src="../../../../_images/ground-run-command.png" />
+<p>As we can see, the algorithm does a great job of discriminating the points, but
+there&#8217;s a few issues.</p>
+<img alt="../../../../_images/ground-classified-included.png" src="../../../../_images/ground-classified-included.png" />
+<p>There&#8217;s noise underneath the main surface that will cause us trouble when we
+generate a terrain surface.</p>
+<img alt="../../../../_images/ground-classified-included-side.png" src="../../../../_images/ground-classified-included-side.png" />
+</div>
+<div class="section" id="filtering">
+<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
+<p>We do not yet have a satisfactory surface for generating a DTM.  When we
+visualize the output of this ground operation, we notice there&#8217;s still some
+noise. PCL also has its own <a class="reference internal" href="../../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> concept, and we can stack the
+call to PMF with a call to a the <cite>filters.statisticaloutlier</cite> technique we
+learned about in <a class="reference internal" href="../denoising/denoising.html#denoising"><span class="std std-ref">Removing noise</span></a>.</p>
+<ol class="arabic simple">
+<li>Let us start by removing the non-ground data:</li>
+</ol>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
+       <span class="n">pdal</span> <span class="n">ground</span> \
+       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+       <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">ground</span><span class="o">.</span><span class="n">classify</span><span class="o">=</span><span class="n">true</span> \
+<span class="hll">       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">ground</span><span class="o">.</span><span class="n">extract</span><span class="o">=</span><span class="n">true</span> \
+</span>       <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">filters.ground.extract=true</span></code> item causes all data except
+ground-classified points to be removed from the set.</p>
+</div>
+<p>Buildings and other non-ground points are removed with the <code class="docutils literal"><span class="pre">extract</span></code> option
+of <a class="reference internal" href="../../../../stages/filters.ground.html#filters-ground"><span class="std std-ref">filters.ground</span></a></p>
+<img alt="../../../../_images/ground-ground-only-view.png" src="../../../../_images/ground-ground-only-view.png" />
+<ol class="arabic simple" start="2">
+<li>Now we will remove the noise. PDAL has the <a class="reference internal" href="../../../../apps/pcl.html#pcl-command"><span class="std std-ref">pcl</span></a> to allow you
+to pass <a class="reference external" href="http://pointclouds.org">PCL</a> pipelines for processing. We will use this to combine
+the PMF and StatisticalOutlierRemoval filters into a single operation.</li>
+</ol>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.5</span>
+    <span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<dl class="last docutils">
+<dt>This pipeline is available in your workshop materials in the</dt>
+<dd><code class="docutils literal"><span class="pre">./exercises/analysis/ground/filter.json</span></code> file.</dd>
+</dl>
+</div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
+   <span class="n">pdal</span> <span class="n">pcl</span> \
+   <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+   <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">-</span><span class="n">filtered</span><span class="o">.</span><span class="n">laz</span> \
+   <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="nb">filter</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <a class="reference internal" href="../../../../apps/pcl.html#pcl-command"><span class="std std-ref">pcl</span></a> allows you to use <a class="reference internal" href="../../../../tutorial/pcl_spec.html#pcl-json-specification"><span class="std std-ref">1&nbsp;&nbsp;&nbsp;Draft PCL JSON Specification</span></a> operations in
+succession over data.</p>
+<img alt="../../../../_images/ground-filtered.png" src="../../../../_images/ground-filtered.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This pipeline is available in your workshop materials in the
+<code class="docutils literal"><span class="pre">./exercises/analysis/ground/filter.json</span></code> file.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dtm/dtm.html" class="btn btn-neutral float-right" title="Generating a DTM" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../thinning/thinning.html" class="btn btn-neutral" title="Thinning" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

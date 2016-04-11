@@ -1,0 +1,355 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Point Cloud Processing and Analysis with PDAL &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="next" title="Introduction" href="agenda.html"/>
+        <link rel="prev" title="libLAS C API to PDAL transition guide" href="../tutorial/liblas_to_pdal.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workshop</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agenda.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar-introduction.html">Introduction to LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pdal-introduction.html">Introduction to PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Software Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+    <li>Point Cloud Processing and Analysis with PDAL</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="point-cloud-processing-and-analysis-with-pdal">
+<span id="workshop"></span><h1>Point Cloud Processing and Analysis with PDAL<a class="headerlink" href="#point-cloud-processing-and-analysis-with-pdal" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Howard Butler</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">Pete Gadomski</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Dr. Craig Glennie</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:howard&#37;&#52;&#48;hobu&#46;co">howard<span>&#64;</span>hobu<span>&#46;</span>co</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">03/30/2016</td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="agenda.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agenda.html#materials">Materials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agenda.html#slides">Slides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agenda.html#workshop-materials">Workshop Materials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agenda.html#usb-example-data-drive">USB Example Data Drive</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lidar-introduction.html">Introduction to LiDAR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lidar-introduction.html#types-of-lidar">Types of LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar-introduction.html#modes-of-lidar-collection">Modes of LiDAR Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar-introduction.html#georeferencing">Georeferencing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lidar-introduction.html#integrating-lidar-and-gnss-imu-data">Integrating LiDAR and GNSS/IMU data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lidar-introduction.html#discrete-return-vs-full-waveform">Discrete-Return vs. Full-Waveform</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pdal-introduction.html">Introduction to PDAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pdal-introduction.html#what-is-pdal">What is PDAL?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#what-is-its-big-idea">What is its big idea?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#how-is-it-different-than-other-tools">How is it different than other tools?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#where-did-pdal-come-from">Where did PDAL come from?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#how-is-point-cloud-data-different-than-raster-or-vector-geo-data">How is point cloud data different than raster or vector geo data?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#what-tasks-are-pdal-good-at">What tasks are PDAL good at?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#what-are-pdal-s-weak-points">What are PDAL&#8217;s weak points?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pdal-introduction.html#high-level-overview">High Level Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#core-c-software-library">Core C++ Software Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#command-line-utilities">Command Line Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdal-introduction.html#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pdal-introduction.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#what-is-docker">What is Docker?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#how-will-we-use-docker">How will we use Docker?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#installing-docker">Installing Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#images-and-containers">Images and Containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qgis.html">QGIS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qgis.html#what-is-qgis">What is QGIS?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qgis.html#how-will-we-use-qgis">How will we use QGIS?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qgis.html#installing-qgis">Installing QGIS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qgis.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exercises/index.html">Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html#basic-information">Basic Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exercises/info/single-point.html">Printing the first point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/info/metadata.html">Printing file metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/info/near.html">Searching near a point</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html#translation">Translation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exercises/translation/compression.html">Compression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/translation/reprojection.html">Reprojection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/boundary/boundary.html">Finding the boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/clipping/clipping.html">Clipping data with polygons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/colorization/colorization.html">Colorizing points with imagery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/denoising/denoising.html">Removing noise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/density/density.html">Visualizing acquisition density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/thinning/thinning.html">Thinning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/ground/ground.html">Identifying ground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exercises/analysis/dtm/dtm.html">Generating a DTM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html#georeferencing">Georeferencing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exercises/georeferencing/index.html">Georeferencing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="agenda.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tutorial/liblas_to_pdal.html" class="btn btn-neutral" title="libLAS C API to PDAL transition guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

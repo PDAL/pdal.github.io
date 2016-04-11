@@ -1,232 +1,155 @@
 
+
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1   Draft PCL JSON Specification &mdash; pdal.io</title>
+  
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>1   Draft PCL JSON Specification &mdash; pdal.io</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.2.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+  
+  
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="pdal.io" href="../index.html" />
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
-<meta name="apple-mobile-web-app-capable" content="yes">
+  
 
-  </head>
-  <body role="document">
+  
 
-  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../index.html">
-          PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b>1.2.0</b></span>
-      </div>
+  
+  
+    
 
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
-            
-                <li><a href="../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
-            
-            
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="../index.html">Docs <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#current-release-s">Current Release(s)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#past-releases">Past Releases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#binaries">Binaries</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../compilation/index.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/unix.html">Unix Compilation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/windows.html">Building Under Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/dependencies.html">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/python.html">Python installation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#delta-command">delta command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#density-command">density command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#diff-command">diff command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#ground-command">ground command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#info-command">info command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#merge-command">merge command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#pcl-command">pcl command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#pipeline-command">pipeline command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#random-command">random command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#split-command">split command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#tindex-command">tindex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#translate-command">translate command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../stages/index.html">Readers, Writers, and Filters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#readers">Readers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#writers">Writers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#filters">Filters</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#developing">Developing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#what-you-get">What you get</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#composing-pipelines">Composing pipelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../development/index.html#build-and-test-status">Build and Test Status</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../api/cpp/index.html">C++ API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../metadata.html">Metadata</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#metadata-types">Metadata Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#json-representation">JSON representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributors.html#engineering-contributors">Engineering Contributors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributors.html#funding-contributors">Funding Contributors</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">Here <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">1&nbsp;&nbsp;&nbsp;Draft PCL JSON Specification</a></li>
-<li><a class="reference internal" href="#introduction">2&nbsp;&nbsp;&nbsp;Introduction</a><ul>
-<li><a class="reference internal" href="#examples">2.1&nbsp;&nbsp;&nbsp;Examples</a></li>
-<li><a class="reference internal" href="#definitions">2.2&nbsp;&nbsp;&nbsp;Definitions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#pcl-json-objects">3&nbsp;&nbsp;&nbsp;PCL JSON Objects</a><ul>
-<li><a class="reference internal" href="#pipeline-objects">3.1&nbsp;&nbsp;&nbsp;Pipeline Objects</a><ul>
-<li><a class="reference internal" href="#filters">3.1.1&nbsp;&nbsp;&nbsp;Filters</a><ul>
-<li><a class="reference internal" href="#approximateprogressivemorphologicalfilter-apmf">3.1.1.1&nbsp;&nbsp;&nbsp;ApproximateProgressiveMorphologicalFilter (APMF)</a></li>
-<li><a class="reference internal" href="#conditionalremoval">3.1.1.2&nbsp;&nbsp;&nbsp;ConditionalRemoval</a></li>
-<li><a class="reference internal" href="#gridminimum">3.1.1.3&nbsp;&nbsp;&nbsp;GridMinimum</a></li>
-<li><a class="reference internal" href="#normalestimation">3.1.1.4&nbsp;&nbsp;&nbsp;NormalEstimation</a></li>
-<li><a class="reference internal" href="#passthrough">3.1.1.5&nbsp;&nbsp;&nbsp;PassThrough</a></li>
-<li><a class="reference internal" href="#progressivemorphologicalfilter-pmf">3.1.1.6&nbsp;&nbsp;&nbsp;ProgressiveMorphologicalFilter (PMF)</a></li>
-<li><a class="reference internal" href="#radiusoutlierremoval">3.1.1.7&nbsp;&nbsp;&nbsp;RadiusOutlierRemoval</a></li>
-<li><a class="reference internal" href="#statisticaloutlierremoval">3.1.1.8&nbsp;&nbsp;&nbsp;StatisticalOutlierRemoval</a></li>
-<li><a class="reference internal" href="#voxelgrid">3.1.1.9&nbsp;&nbsp;&nbsp;VoxelGrid</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-              
-                
-              
-            
-            
-            
-            
-              <li class="hidden-sm"></li>
-            
-          </ul>
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
 
           
             
-<form class="navbar-form navbar-right" action="../search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
           
         </div>
-    </div>
-  </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 content">
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
       
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+    <li>1&nbsp;&nbsp;&nbsp;Draft PCL JSON Specification</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
   <div class="section" id="draft-pcl-json-specification">
 <span id="pcl-json-specification"></span><h1>1&nbsp;&nbsp;&nbsp;Draft PCL JSON Specification<a class="headerlink" href="#draft-pcl-json-specification" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
@@ -437,7 +360,7 @@ considered a ground return. [default: 0.15]</dd>
 <h4>3.1.1.2&nbsp;&nbsp;&nbsp;ConditionalRemoval<a class="headerlink" href="#conditionalremoval" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../stages/filters.range.html#filters-range"><span>filters.range</span></a> implements support for this PCL operation as a
+<p class="last"><a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> implements support for this PCL operation as a
 PDAL filter</p>
 </div>
 <p>This filter removes normals outside of a given Z range.</p>
@@ -574,7 +497,7 @@ requires the names be given in lower case (&#8220;z&#8221;, &#8220;intensity&#82
 <h4>3.1.1.6&nbsp;&nbsp;&nbsp;ProgressiveMorphologicalFilter (PMF)<a class="headerlink" href="#progressivemorphologicalfilter-pmf" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../stages/filters.ground.html#filters-ground"><span>filters.ground</span></a> implements support for this operation as a
+<p class="last"><a class="reference internal" href="../stages/filters.ground.html#filters-ground"><span class="std std-ref">filters.ground</span></a> implements support for this operation as a
 PDAL filter</p>
 </div>
 <p><strong>Description</strong></p>
@@ -632,7 +555,7 @@ considered a ground return. [default: 0.15]</dd>
 <h4>3.1.1.7&nbsp;&nbsp;&nbsp;RadiusOutlierRemoval<a class="headerlink" href="#radiusoutlierremoval" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../stages/filters.radiusoutlier.html#filters-radiusoutlier"><span>filters.radiusoutlier</span></a> implements support for this operation
+<p class="last"><a class="reference internal" href="../stages/filters.radiusoutlier.html#filters-radiusoutlier"><span class="std std-ref">filters.radiusoutlier</span></a> implements support for this operation
 as a PDAL filter</p>
 </div>
 <p><strong>Description</strong></p>
@@ -669,7 +592,7 @@ classified as an inlier. [default: 2]</dd>
 <h4>3.1.1.8&nbsp;&nbsp;&nbsp;StatisticalOutlierRemoval<a class="headerlink" href="#statisticaloutlierremoval" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../stages/filters.statisticaloutlier.html#filters-statisticaloutlier"><span>filters.statisticaloutlier</span></a> implements support for this
+<p class="last"><a class="reference internal" href="../stages/filters.statisticaloutlier.html#filters-statisticaloutlier"><span class="std std-ref">filters.statisticaloutlier</span></a> implements support for this
 operation as a PDAL filter</p>
 </div>
 <p><strong>Description</strong></p>
@@ -705,7 +628,7 @@ calculation. [default: 0.0]</dd>
 <h4>3.1.1.9&nbsp;&nbsp;&nbsp;VoxelGrid<a class="headerlink" href="#voxelgrid" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../stages/filters.voxelgrid.html#filters-voxelgrid"><span>filters.voxelgrid</span></a> implements support for this operation as a
+<p class="last"><a class="reference internal" href="../stages/filters.voxelgrid.html#filters-voxelgrid"><span class="std std-ref">filters.voxelgrid</span></a> implements support for this operation as a
 PDAL filter</p>
 </div>
 <p>This filter assembles a local 3D grid over a given PointCloud, then downsamples
@@ -742,10 +665,67 @@ and filters the data.</p>
 </div>
 
 
-    </div>
-      
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
   </div>
-</div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
     <div class="footer">
         <div class="container">
                     &copy;  2016
@@ -754,8 +734,9 @@ and filters the data.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 08, 2016.
+                    on Apr 11, 2016.
         </div>
     </div>
-  </body>
+
+</body>
 </html>

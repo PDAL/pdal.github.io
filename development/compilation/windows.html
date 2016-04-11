@@ -1,0 +1,542 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building Under Windows &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../../index.html"/>
+        <link rel="up" title="Compilation" href="index.html"/>
+        <link rel="next" title="Dependencies" href="dependencies.html"/>
+        <link rel="prev" title="Unix Compilation" href="unix.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../workshop/index.html">Workshop</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Compilation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unix.html">Unix Compilation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Building Under Windows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#most-users">Most Users</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-users">Advanced Users</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-build-steps">Basic Build Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-build-steps">Advanced Build Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../conventions.html">Coding Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs.html">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../errorhandling.html">Errors and Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../goals.html">Project Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integration.html">Continuous Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="../index.html">Development</a> &raquo;</li>
+      
+        <li><a href="index.html">Compilation</a> &raquo;</li>
+      
+    <li>Building Under Windows</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-under-windows">
+<span id="building-windows"></span><h1>Building Under Windows<a class="headerlink" href="#building-under-windows" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Michael Rosen</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">unknown at lizardtech dot com</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">3/19/2012</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="https://trac.osgeo.org/osgeo4w/">OSGeo4W</a> contains a pre-built up-to-date 64 bit Windows binary. It
+is fully-featured, and if you do not need anything custom, it is likely
+the fastest way to get going.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../../quickstart.html#docker"><span class="std std-ref">Install Docker</span></a> describes a way to get a PDAL build and all of
+its dependencies. If you just want to apply PDAL commandline
+operations to data, this mechanism is likely to be much faster than
+compiling your own.</p>
+</div>
+<div class="section" id="most-users">
+<h2>Most Users<a class="headerlink" href="#most-users" title="Permalink to this headline">¶</a></h2>
+<p>If you just want to build PDAL so you can</p>
+<ol class="loweralpha simple">
+<li>use the utilities or</li>
+<li>investigate PDAL integration</li>
+<li>test / fix / extend the library and</li>
+</ol>
+<p>you are OK with doing all this with a 32 bit compiler, check the
+<a class="reference internal" href="#prerequisites">Prerequisites</a> and follow the <a class="reference internal" href="#basic-build-steps">Basic Build Steps</a> below.</p>
+</div>
+<div class="section" id="advanced-users">
+<h2>Advanced Users<a class="headerlink" href="#advanced-users" title="Permalink to this headline">¶</a></h2>
+<p>If your needs go beyond this, then check the <a class="reference internal" href="#prerequisites">Prerequisites</a> and use the
+<a class="reference internal" href="#advanced-build-steps">Advanced Build Steps</a> below as a guide to configuring the library.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Ensure you have git. We used version 1.7.3.1.msysgit.0 from
+<a class="reference external" href="http://code.google.com/p/msysgit">http://code.google.com/p/msysgit</a></li>
+<li>Ensure you have a Visual Studio 2010 environment setup. We used VStudio 2010
+Premium.</li>
+<li>Ensure you have <a class="reference external" href="http://www.cmake.org">CMake</a>. We used version 2.8.4 from <a class="reference external" href="http://www.cmake.org">http://www.cmake.org</a></li>
+</ul>
+<p>The steps below assume that these tools are available from your command line.
+For Git and CMake, that&#8217;s just adding them to your %PATH%. For VStudio, you
+need to run <cite>vsvars32.bat</cite> (&#8220;Microsoft Visual Studio
+10.0\Common7\Tools\vsvars32.bat&#8221;)</p>
+</div>
+<div class="section" id="basic-build-steps">
+<h2>Basic Build Steps<a class="headerlink" href="#basic-build-steps" title="Permalink to this headline">¶</a></h2>
+<p>Most users can use this procedure to build PDAL on Windows. We satisfy all
+dependencies using OSGeo4W.</p>
+<p>0. If you plan to use LAZ support (compressed LAS), get the LASzip source code
+and build it (<a class="reference external" href="http://www.laszip.org">http://www.laszip.org</a>). Add the directory with laszip.dll to
+your %PATH% (or copy the laszip.* files into the bin directory of PDAL
+itself). Make sure it appears in your PATH before OSGeo4W (as per step 4
+below).</p>
+<p>While LASzip is included in the OSGeo4W distribution below (see step 1), the
+version there is compiled with Visual Studio 2008 and we have some suspicion
+that it is incompatible with the version of PDAL you are about to build with
+Visual Studio 2010. Building the LASzip library should be no more complicated
+than:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">G</span><span class="o">=</span><span class="s2">&quot;Visual Studio 10&quot;</span>
+<span class="nb">set</span> <span class="n">BUILD_TYPE</span><span class="o">=</span><span class="n">Debug</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="o">%</span><span class="n">G</span><span class="o">%</span> <span class="o">^</span>
+    <span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=%</span><span class="n">BUILD_TYPE</span><span class="o">%</span> <span class="o">^</span>
+    <span class="o">-</span><span class="n">DCMAKE_VERBOSE_MAKEFILE</span><span class="o">=</span><span class="n">OFF</span> <span class="o">^</span>
+    <span class="o">.</span>
+</pre></div>
+</div>
+<p>1. Install OSGeo4W (<a class="reference external" href="http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe">http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe</a>) using
+the &#8220;Advanced Install&#8221; option and include the following: gdal-dev, laszip,
+libxml2, iconv.</p>
+<blockquote>
+<div><blockquote>
+<div><div class="figure">
+<img alt="../../_images/OSGeo4WInstallAdvanced.png" src="../../_images/OSGeo4WInstallAdvanced.png" />
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt>Install from Internet</dt>
+<dd><div class="first last figure">
+<img alt="../../_images/OSGeo4WInstallFromInternet.png" src="../../_images/OSGeo4WInstallFromInternet.png" />
+</div>
+</dd>
+<dt>Leave the &#8220;Root Directory&#8221; for the installation unchanged.</dt>
+<dd><div class="first last figure">
+<img alt="../../_images/OSGeo4WInstallRootDirectory.png" src="../../_images/OSGeo4WInstallRootDirectory.png" />
+</div>
+</dd>
+<dt>You can leave the &#8220;Select Local Package Directory&#8221; and &#8220;Internet Connection Type&#8221; at the defaults. Under the &#8220;libs&#8221; tree, select &#8220;gdal-dev&#8221; for installation. (You should probably use the latest version, e.g. 1.8pre-6.)</dt>
+<dd><div class="first last figure">
+<img alt="../../_images/OSGeo4WInstallGDALDev.png" src="../../_images/OSGeo4WInstallGDALDev.png" />
+</div>
+</dd>
+<dt>Select &#8220;laszip&#8221; (this is not required currently &#8211; see step 0 above).</dt>
+<dd><div class="first last figure">
+<img alt="../../_images/OSGeo4WInstallLASZip.png" src="../../_images/OSGeo4WInstallLASZip.png" />
+</div>
+</dd>
+<dt>Select &#8220;libxml2&#8221;.</dt>
+<dd><div class="first last figure">
+<img alt="../../_images/OSGeo4WInstallLibXML2.png" src="../../_images/OSGeo4WInstallLibXML2.png" />
+</div>
+</dd>
+<dt>Select &#8220;iconv&#8221;.</dt>
+<dd><div class="first last figure">
+<img alt="development/compilation/media/OSGeo4WInstallIconv.png" src="development/compilation/media/OSGeo4WInstallIconv.png" />
+</div>
+</dd>
+<dt>Select &#8220;oci&#8221;.</dt>
+<dd><div class="first last figure">
+<img alt="../../_images/OSGeo4WInstallOCI.png" src="../../_images/OSGeo4WInstallOCI.png" />
+</div>
+</dd>
+</dl>
+<p>There are some other required dependencies (e.g. libtiff, libgeotiff) but
+they are installed by default.</p>
+<p>Select Next to continue on to install the packages.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Get the source code for PDAL:</li>
+</ol>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">:</span>\<span class="n">dev</span><span class="o">&gt;</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">PDAL</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>From the root of your PDAL tree, run &#8221;./cmake/examples/mpg-config.bat&#8221;. This will create the
+VStudio solution file and .vcxproj files.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">PDAL</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">cmake</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">mpg</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">bat</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The config.bat file is set up to build PDAL in the &#8220;officially supported&#8221;
+configuration &#8211; that is, with Oracle, and GDAL, and LASzip, and such. If you
+followed the previous steps, you should be fine to use this default
+configuration. You may modify this file if you need to (such as to use a local
+copy of GDAL or to use NMake instead of Visual Studio); see the <a class="reference internal" href="#advanced-build-steps">Advanced Build Steps</a>
+below for more instructions.</p>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Verify your system environment variables are set properly:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>PATH should include %OSGeo4W%bin</li>
+<li>GDAL_DATA should be set to %OSGeo4W%shareepsg_csv</li>
+<li>PROJ_LIB should be set to %OSGeo4W%shareproj</li>
+</ul>
+</div></blockquote>
+<ol class="arabic" start="5">
+<li><p class="first">Start Visual Studio and open PDAL.sln.  Build the solution (F6).</p>
+</li>
+<li><p class="first">Set pdal_test as the startup project and run it (F5). You should see a
+console window startup, print something like &#8220;Running 158 test cases...&#8221;
+(exact number may vary), and then after a short period print something like
+&#8220;*** No errors detected&#8221;. If you do get errors, that means either something is
+broken on the version of PDAL you checked out OR something is wrong with your
+installation.</p>
+</li>
+<li><p class="first">PYTHON/PLANG NOTE: If you build WITH_PLANG=ON in Debug mode, the system will
+try to link against &#8220;python27d.lib&#8221;. You need to change .../Python27/include/pyconfig.h
+as follows:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>change the line #pragma comment(lib,&#8221;python27d.lib&#8221;) to refer to python27.lib instead</dt>
+<dd><ul class="first last simple">
+<li>comment out the line &#8220;#define Py_DEBUG&#8221;</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="advanced-build-steps">
+<h2>Advanced Build Steps<a class="headerlink" href="#advanced-build-steps" title="Permalink to this headline">¶</a></h2>
+<p>Advanced users can use this procedure to customize their PDAL build on
+Windows. This enables the use of custom-built external libraries to satisify
+situations (including x64 support) where using OSGeo4W is inadequate.</p>
+<ol class="arabic simple">
+<li>Acquire and stage the required dependent libraries. PDAL depends on the
+following external libraries. You&#8217;ll need to get them and build them (or
+perhaps, download prebuilt binary packages).</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>GDAL (get version 1.6 or later from <a class="reference external" href="http://gdal.org">http://gdal.org</a>) [ optional ]</li>
+<li>LASZip (get version 1.0.1 or later from <a class="reference external" href="http://laszip.org">http://laszip.org</a>) [ optional ]</li>
+<li>libxml2 (<a class="reference external" href="http://libxml2.org">http://libxml2.org</a>) [ optional ]</li>
+<li>iconv (<a class="reference external" href="http://www.gnu.org/software/libiconv/">http://www.gnu.org/software/libiconv/</a>) [ optional (required by libxml2) ]</li>
+<li>oci (optional, <a class="reference external" href="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html">http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html</a>)</li>
+<li>libtiff (optional)</li>
+<li>libgeotiff (optional)</li>
+</ul>
+<p>One option for all dependencies is OSGeo4W (free, win32
+installer, no x64 &#8211; see &#8220;Basic Build Steps&#8221;_ above).</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Having staged the above libs, you need to specify where they are by editing
+the appropriate lines in the &#8220;config.bat&#8221; file. Each dependency has a short
+section of the config.bat file. Check these are specified correctly. For
+example</li>
+</ol>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">::</span> <span class="n">LASZIP</span>
+<span class="nb">set</span> <span class="n">LASZIP_ENABLED</span><span class="o">=</span><span class="n">ON</span>
+<span class="nb">set</span> <span class="n">LASZIP_LIBRARY</span><span class="o">=%</span><span class="n">DEV_DIR</span><span class="o">%</span>\<span class="n">laszip</span>\<span class="nb">bin</span>\<span class="n">Debug</span>\<span class="n">laszip</span><span class="o">.</span><span class="n">lib</span>
+<span class="nb">set</span> <span class="n">LASZIP_INCLUDE_DIR</span><span class="o">=%</span><span class="n">DEV_DIR</span><span class="o">%</span>\<span class="n">laszip</span>\<span class="n">include</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>While you&#8217;re still in config.bat, configure the &#8220;Generator&#8221; for CMake.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">::</span> <span class="n">Pick</span> <span class="n">your</span> <span class="n">Generator</span><span class="o">.</span>  <span class="n">NMake</span> <span class="n">will</span> <span class="n">pick</span> <span class="n">up</span> <span class="n">architecture</span> <span class="p">(</span><span class="n">x32</span><span class="p">,</span> <span class="n">x64</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">your</span> <span class="n">environment</span>
+<span class="n">rem</span> <span class="nb">set</span> <span class="n">GENERATOR</span><span class="o">=</span><span class="s2">&quot;NMake Makefiles&quot;</span>
+<span class="n">rem</span> <span class="nb">set</span> <span class="n">GENERATOR</span><span class="o">=</span><span class="s2">&quot;Visual Studio 10 Win64&quot;</span>
+<span class="nb">set</span> <span class="n">GENERATOR</span><span class="o">=</span><span class="s2">&quot;Visual Studio 10&quot;</span>
+
+<span class="nb">set</span> <span class="n">BUILD_TYPE</span><span class="o">=</span><span class="n">Release</span>
+<span class="n">rem</span> <span class="nb">set</span> <span class="n">BUILD_TYPE</span><span class="o">=</span><span class="n">Debug</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Run &#8220;config.bat&#8221; in the PDAL directory. This will create the VStudio solution file and .vcxproj files.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">PDAL</span><span class="o">&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">bat</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Start Visual Studio and open PDAL.sln (or if you picked &#8220;NMake Makefiles&#8221;, run NMake).</li>
+</ol>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Set pdal_test as the default/startup application in Visual Studio
+Run with debug (F5)</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Missing liblas.dll - double check that <code class="docutils literal"><span class="pre">C:\OSGeo4W\bin</span></code> is on your system PATH variable</li>
+<li>libtiff.dll errors - double check that other versions of the lib are not on the path. For example, ArcGIS installs a version of libtiff that is not compatible.</li>
+<li>&#8220;ERROR 4: Unable to open EPSG support file gcs.csv&#8221; or GDAL_DATA variable errors - Set GDAL_DATA system variable to <code class="docutils literal"><span class="pre">C:\OSGeo4W\share\gdal</span></code></li>
+<li>PROJ errors - Set PROJ_LIB system variable to <code class="docutils literal"><span class="pre">C:\OSGeo4W\share\proj</span></code></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dependencies.html" class="btn btn-neutral float-right" title="Dependencies" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="unix.html" class="btn btn-neutral" title="Unix Compilation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

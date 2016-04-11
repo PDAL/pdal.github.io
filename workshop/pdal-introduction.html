@@ -1,0 +1,528 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction to PDAL &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Point Cloud Processing and Analysis with PDAL" href="index.html"/>
+        <link rel="next" title="Software Installation" href="software.html"/>
+        <link rel="prev" title="Introduction to LiDAR" href="lidar-introduction.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Workshop</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="agenda.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar-introduction.html">Introduction to LiDAR</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to PDAL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-pdal">What is PDAL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-its-big-idea">What is its big idea?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-is-it-different-than-other-tools">How is it different than other tools?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#where-did-pdal-come-from">Where did PDAL come from?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-is-point-cloud-data-different-than-raster-or-vector-geo-data">How is point cloud data different than raster or vector geo data?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-tasks-are-pdal-good-at">What tasks are PDAL good at?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-are-pdal-s-weak-points">What are PDAL&#8217;s weak points?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-overview">High Level Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#core-c-software-library">Core C++ Software Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command-line-utilities">Command Line Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Software Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="index.html">Point Cloud Processing and Analysis with PDAL</a> &raquo;</li>
+      
+    <li>Introduction to PDAL</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction-to-pdal">
+<span id="pdal-introduction"></span><h1>Introduction to PDAL<a class="headerlink" href="#introduction-to-pdal" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-pdal">
+<h2>What is PDAL?<a class="headerlink" href="#what-is-pdal" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://pdal.io/">PDAL</a> is Point Data Abstraction Library, and it is an open source software for
+translating and processing point cloud data. It is not limited to just <a class="reference external" href="https://en.wikipedia.org/wiki/Lidar">LiDAR</a>
+data, although the focus and impetus for many of the tools have their origins
+in LiDAR.</p>
+<div class="section" id="what-is-its-big-idea">
+<h3>What is its big idea?<a class="headerlink" href="#what-is-its-big-idea" title="Permalink to this headline">¶</a></h3>
+<p>Say you wanted to load some <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> (the most common LiDAR binary format)
+data into a database, but you wanted to transform it into a common coordinate
+system along the way. One option would be to write a specialized program that
+reads LAS data, reprojects it as necessary, and then handles the necessary
+operations to insert the data in the appropriate format in the database.</p>
+<p>This approach has a distinct disadvantage. It is a kind of one-off, and it
+could quickly spiral out of control as you look to add new little tweaks and
+features to the operation. It ends up being very specific, and it
+does not allow you to easily reuse the component that reads the LAS data
+separately from the component that transforms the data.</p>
+<p>Little programs that encapsulate specific functionality that can be composed
+together provide a more streamlined approach to the problem. They allow for
+reuse, composition, and separation of concerns.  PDAL views point cloud
+processing operations as a pipeline composed as a series of stages.  You might
+have a simple pipeline composed of a <a class="reference internal" href="../stages/readers.las.html#readers-las"><span class="std std-ref">LAS Reader</span></a> stage, a
+<a class="reference internal" href="../stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">Reprojection</span></a> stage, and a <a class="reference internal" href="../stages/writers.pgpointcloud.html#writers-pgpointcloud"><span class="std std-ref">PostgreSQL Writer</span></a>, for example. Rather than writing a single, monolithic
+specialized program to perform this operation, you can dynamically compose it
+as a sequence of steps or operations.</p>
+<div class="figure" id="id3">
+<img alt="../_images/intro-pdal-simple-pipeline.png" src="../_images/intro-pdal-simple-pipeline.png" />
+<p class="caption"><span class="caption-text">A simple PDAL pipeline composed of a reader, filter, and writer
+stages.</span></p>
+</div>
+<p>PDAL can compose intermediate stages, for operations such as filtering,
+clipping, tiling, transforming into a processing pipeline and reuse as
+necessary. It allows you to define these pipelines as <a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/XML">XML</a>, and it
+provides a command, <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a>, to allow you to execute them.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Raster processing tools often compose operations with this approach.
+PDAL conceptually steals its pipeline modeling from <a class="reference external" href="http://gdal.org/">GDAL</a>&#8216;s
+<a class="reference external" href="http://www.gdal.org/gdal_vrttut.html">Virtual Raster Format</a>.</p>
+</div>
+</div>
+<div class="section" id="how-is-it-different-than-other-tools">
+<h3>How is it different than other tools?<a class="headerlink" href="#how-is-it-different-than-other-tools" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="lastools">
+<h4>LAStools<a class="headerlink" href="#lastools" title="Permalink to this headline">¶</a></h4>
+<p id="index-0">One of the most common open source processing tool suites available is <a class="reference external" href="http://lastools.org">LAStools</a>
+from <a class="reference external" href="https://www.cs.unc.edu/~isenburg/">Martin Isenburg</a>. PDAL is different in philosophy in a number of important
+ways:</p>
+<ol class="arabic simple">
+<li>All components of PDAL are released as open source software under an <a class="reference external" href="https://opensource.org/licenses">OSI</a>-approved
+license.</li>
+<li>PDAL allows application developers to provide proprietary extensions that
+act as stages in processing pipelines. These might be things like custom format
+readers, specialized exploitation algorithms, or entire processing pipelines.</li>
+<li>PDAL must be able to generically operate on point cloud data of any format &#8211;
+not just <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a>. <a class="reference external" href="http://lastools.org">LAStools</a> can read and write formats other than LAS, but
+its view of formats it understands is within the context of the dimension
+types provided by the LAS format.</li>
+</ol>
+</div>
+<div class="section" id="pcl">
+<h4>PCL<a class="headerlink" href="#pcl" title="Permalink to this headline">¶</a></h4>
+<p id="index-1"><a class="reference external" href="http://pointclouds.org">PCL</a> is a complementary, rather than substitute, open source software processing
+suite for point cloud data. PDAL itself uses PCL to provide sophisticated algorithmic
+exploitation, <a class="reference internal" href="../stages/filters.statisticaloutlier.html#filters-statisticaloutlier"><span class="std std-ref">statistical filtering</span></a>, and
+<a class="reference internal" href="../tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><span class="std std-ref">dynamic filtering</span></a>. The developer community of the PCL
+library is focused on algorithm development, robotic and computer vision, and
+real-time laser scanner processing. PDAL links and uses PCL, and PDAL provides a
+convenient pipeline mechanism to orchestrate PCL operations.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See <a class="reference internal" href="../tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><span class="std std-ref">Filtering data with PCL</span></a> for more detail on how to take advantage of
+PCL capabilities within PDAL operations.</p>
+</div>
+</div>
+<div class="section" id="greyhound-and-entwine">
+<h4>Greyhound and Entwine<a class="headerlink" href="#greyhound-and-entwine" title="Permalink to this headline">¶</a></h4>
+<p id="index-2"><a class="reference external" href="http://github.com/hobu/greyhound">Greyhound</a> is an open source software from Hobu, Inc. that allows clients
+over the internet to query and stream progressive point cloud data.  <a class="reference external" href="http://github.com/connormanning/entwine">Entwine</a>
+is an open source software from Hobu, Inc. that organizes massive point cloud
+collections into <a class="reference external" href="http://github.com/hobu/greyhound">Greyhound</a>-streamable data services. These two software
+projects allow province-scale LiDAR collections to be organized and served
+via HTTP clients over the internet.</p>
+</div>
+<div class="section" id="plas-io-and-potree">
+<h4>plas.io and Potree<a class="headerlink" href="#plas-io-and-potree" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://plas.io">plas.io</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/WebGL">WebGL</a> HTML5 point cloud renderer that speaks <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> and
+<a class="reference external" href="http://laszip.org">LASzip</a> compressed LAS.</p>
+<p><a class="reference external" href="http://potree.org">Potree</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/WebGL">WebGL</a> HTML5 point cloud renderer that speaks <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> and
+<a class="reference external" href="http://laszip.org">LASzip</a> compressed LAS.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Both renderers can now consume data from Greyhound. See them in action at
+<a class="reference external" href="http://speck.ly">http://speck.ly</a> and <a class="reference external" href="http://potree.entwine.io">http://potree.entwine.io</a></p>
+</div>
+</div>
+<div class="section" id="others">
+<h4>Others<a class="headerlink" href="#others" title="Permalink to this headline">¶</a></h4>
+<p id="index-3">Other open source point cloud softwares tend to be GUI, rather than library,
+focused.  They include some processing operations, and sometimes they even
+embed tools such as PDAL. We&#8217;re obviously biased toward PDAL, but you might
+find useful bits of functionality in them. These other tools include:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://liblas.org">libLAS</a></li>
+<li><a class="reference external" href="http://www.danielgm.net/cc/">CloudCompare</a></li>
+<li><a class="reference external" href="http://www.idaholidar.org/tools/fusion-ldv/">Fusion</a></li>
+<li><a class="reference external" href="https://www.orfeo-toolbox.org/">OrfeoToolbox</a></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <a class="reference external" href="http://liblas.org">libLAS</a> project is an open source project that pre-dates PDAL, and
+provides some of the processing capabilities provided by PDAL. It is
+currently in maintenance mode due to its dependence on LAS, the release of
+relevant LAStools capabilities as open source, and the completion of
+<a class="reference external" href="https://pypi.python.org/pypi/laspy/1.4.1">Python LAS</a> software.</p>
+</div>
+</div>
+</div>
+<div class="section" id="where-did-pdal-come-from">
+<h3>Where did PDAL come from?<a class="headerlink" href="#where-did-pdal-come-from" title="Permalink to this headline">¶</a></h3>
+<p>PDAL takes its cue from another very popular open source project &#8211; <a class="reference external" href="http://gdal.org/">GDAL</a>.
+GDAL is Geospatial Data Abstraction Library, and it is used throughout the geospatial
+software industry to provide translation and processing support for a variety
+of raster and vector formats. PDAL provides the same capability for point
+cloud data types.</p>
+<p>PDAL evolved out of the development of database storage and access capabilities
+for the U.S. Army Corps of Engineers CRREL <a class="reference external" href="http://lidar.io/">GRiD</a> project. Functionality that was creeping into libLAS
+was pulled into a new library, and it was designed from the ground up to mimic
+successful extract, transform, and load libraries in the geospatial software
+domain. PDAL has steadily attracted more contributors as other software developers
+use it to provide point cloud data translation and processing capability to
+their software.</p>
+</div>
+<div class="section" id="how-is-point-cloud-data-different-than-raster-or-vector-geo-data">
+<h3>How is point cloud data different than raster or vector geo data?<a class="headerlink" href="#how-is-point-cloud-data-different-than-raster-or-vector-geo-data" title="Permalink to this headline">¶</a></h3>
+<p>Point cloud data are indeed very much like the typical vector point data type
+of which many geospatial practitioners are familiar, but their volume causes some
+significant challenges. Besides their <cite>X</cite>, <cite>Y</cite>, and <cite>Z</cite> locations, each point
+often has full attribute information of other things like <cite>Intensity</cite>, <cite>Time</cite>,
+<cite>Red</cite>, <cite>Green</cite>, and <cite>Blue</cite>.</p>
+<p>Typical vector coverages of point data might max out at a million or so
+features. Point clouds quickly get into the billions and even trillions, and
+because of this specialized processing and management techniques must be used
+to handle so much data efficiently.</p>
+<p>The algorithms used to extract and exploit point cloud data are also significantly
+different than typical vector GIS work flows, and data organization is extremely
+important to be able to efficiently leverage the available computing. These
+characteristics demand a library oriented toward these approaches and PDAL
+achieves it.</p>
+</div>
+<div class="section" id="what-tasks-are-pdal-good-at">
+<h3>What tasks are PDAL good at?<a class="headerlink" href="#what-tasks-are-pdal-good-at" title="Permalink to this headline">¶</a></h3>
+<p>PDAL is great at point cloud data translation work flows. It allows users to
+apply algorithms to data by providing an abstract API to the content &#8211; freeing
+users from worrying about many data format issues.  PDAL&#8217;s format-free worry
+does come with a bit of overhead cost. In most cases this is not significant,
+but for specific processing work flows with specific data, specialized tools
+will certainly outperform it.</p>
+<p>In exchange for possible performance penalty or data model impedance, developers
+get the freedom to access data over an abstract API, a multitude of algorithms
+to apply to data within easy reach, and the most complete set of
+point cloud format drivers in the industry. PDAL also provides a straightforward
+command line, and it extends simple generic Python processing through Numpy. These
+features make it attractive to software developers, data managers, and
+scientists.</p>
+</div>
+<div class="section" id="what-are-pdal-s-weak-points">
+<h3>What are PDAL&#8217;s weak points?<a class="headerlink" href="#what-are-pdal-s-weak-points" title="Permalink to this headline">¶</a></h3>
+<p>PDAL doesn&#8217;t provide a friendly GUI interface, it expects that you have the
+confidence to dig into a command-line interface, and it sometimes forgets that
+you don&#8217;t always want to read source code to figure out what exactly is
+happening.  PDAL is an open source project in active development, and because
+of that, we&#8217;re always working to improve it. Please visit <a class="reference internal" href="../community.html#community"><span class="std std-ref">Community</span></a> to
+find out how you can participate if you are interested. The project is always
+looking for contribution, and the mailing list is the place to ask for help if
+you are stuck.</p>
+</div>
+</div>
+<div class="section" id="high-level-overview">
+<h2>High Level Overview<a class="headerlink" href="#high-level-overview" title="Permalink to this headline">¶</a></h2>
+<p>PDAL is first and foremost a software library. A successful software library
+must meet the needs of software developers who use it to provide its software
+capabilities to their own software. In addition to its use as a software
+library, PDAL provides some <a class="reference internal" href="../apps/index.html#apps"><span class="std std-ref">command line applications</span></a> users can
+leverage to conveniently translate, filter, and process data with PDAL.
+Finally, PDAL provides <a class="reference external" href="http://python.org/">Python</a> support in the form of embedded operations
+and Python extensions.</p>
+<div class="section" id="core-c-software-library">
+<h3>Core C++ Software Library<a class="headerlink" href="#core-c-software-library" title="Permalink to this headline">¶</a></h3>
+<p>PDAL provides a <a class="reference internal" href="../api/index.html#api"><span class="std std-ref">C++ API</span></a> software developers can use to provide
+point cloud processing capabilities in their own software. PDAL is cross-platform
+C++, and it can compile and run on Linux, OS X, and Windows.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">PDAL <a class="reference internal" href="../tutorial/reading.html#reading"><span class="std std-ref">software</span></a> <a class="reference internal" href="../tutorial/writing.html#writing"><span class="std std-ref">development</span></a>
+<a class="reference internal" href="../tutorial/writing-reader.html#writing-reader"><span class="std std-ref">tutorials</span></a> have more information on how to
+use the library from a software developer&#8217;s perspective. We won&#8217;t
+get very deep in the C++ swamp in this workshop.</p>
+</div>
+</div>
+<div class="section" id="command-line-utilities">
+<h3>Command Line Utilities<a class="headerlink" href="#command-line-utilities" title="Permalink to this headline">¶</a></h3>
+<p id="index-4">PDAL provides a number of <a class="reference internal" href="../apps/index.html#apps"><span class="std std-ref">applications</span></a> that allow users to
+coordinate and construct point cloud processing work flows. Some key tasks
+users can achieve with these applications include:</p>
+<ul class="simple">
+<li>Print <a class="reference internal" href="../apps/info.html#info-command"><span class="std std-ref">info</span></a> about a data set</li>
+<li>Data <a class="reference internal" href="../apps/translate.html#translate-command"><span class="std std-ref">translation</span></a> from one point cloud format to another</li>
+<li>Application of exploitation algorithms<ul>
+<li>Generate a DTM</li>
+<li>Remove noise</li>
+<li>Reproject from one coordinate system to another</li>
+<li>Classify points as <a class="reference internal" href="../apps/ground.html#ground-command"><span class="std std-ref">ground/not ground</span></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="../apps/merge.html#merge-command"><span class="std std-ref">Merge</span></a> or <a class="reference internal" href="../apps/split.html#split-command"><span class="std std-ref">split</span></a> data</li>
+<li><a class="reference internal" href="../apps/tindex.html#tindex-command"><span class="std std-ref">Catalog</span></a> collections of data</li>
+</ul>
+</div>
+<div class="section" id="python-api">
+<h3>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline">¶</a></h3>
+<p id="index-5">PDAL supports both embedding <a class="reference external" href="http://python.org/">Python</a> and extending with <a class="reference external" href="http://python.org/">Python</a>. These
+allow you to dynamically interact with point cloud data in a more
+comfortable and familiar language environment for geospatial practitioners</p>
+<div class="section" id="embed">
+<h4>Embed<a class="headerlink" href="#embed" title="Permalink to this headline">¶</a></h4>
+<p id="index-6">By embedding Python, PDAL allows you to interact with point cloud data using
+typical <a class="reference external" href="http://www.numpy.org/">Numpy</a> features. PDAL embeds <a class="reference external" href="http://python.org/">Python</a> scripts in your processing work
+flows with the <a class="reference internal" href="../stages/filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a> and <a class="reference internal" href="../stages/filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a>
+filters. Your Python scripts can process and interact with point cloud data
+during the execution of a <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">PDAL pipeline</span></a>, and you are free to
+dynamically do whatever you want in your scripts.</p>
+</div>
+<div class="section" id="extension">
+<h4>Extension<a class="headerlink" href="#extension" title="Permalink to this headline">¶</a></h4>
+<p id="index-7">PDAL also provides a Python extension for software developers who simply
+want to use data as a mechanism to abstract data formats. This approach
+works really well in algorithm work bench scenarios, simple data testing
+and validation challenges, or situations where full C++ applications would be
+too much effort or complexity.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="../development/compilation/python.html#python-installation"><span class="std std-ref">Python installation</span></a> document contains information on how to
+install and use the PDAL Python extension.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>PDAL is an open source project for translating, filtering, and processing
+point cloud data. It provides a C++ API, command line utilities, and Python
+extensions. There are many open source software projects for interacting
+with point cloud data, and PDAL&#8217;s niche is in processing, translation,
+and automation.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="software.html" class="btn btn-neutral float-right" title="Software Installation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lidar-introduction.html" class="btn btn-neutral" title="Introduction to LiDAR" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 11, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,232 +1,181 @@
 
+
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Filtering data with PCL &mdash; pdal.io</title>
+  
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Filtering data with PCL &mdash; pdal.io</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.2.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+  
+  
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="pdal.io" href="../index.html" />
-    <link rel="up" title="Tutorials" href="index.html" />
-    <link rel="next" title="Identifying ground returns using ProgressiveMorphologicalFilter segmentation" href="pcl_ground.html" />
-    <link rel="prev" title="Docker" href="docker.html" />
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
-<meta name="apple-mobile-web-app-capable" content="yes">
+  
 
-  </head>
-  <body role="document">
+  
 
-  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../index.html">
-          PDAL</a>
-        <span class="navbar-text navbar-version pull-left"><b>1.2.0</b></span>
-      </div>
+  
+  
+    
 
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Identifying ground returns using ProgressiveMorphologicalFilter segmentation" href="pcl_ground.html"/>
+        <link rel="prev" title="Writing with PDAL" href="writing.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
             
-                <li><a href="../download.html">Download</a></li>
-                <li><a href="https://github.com/PDAL/PDAL">GitHub</a></li>
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
             
             
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="../index.html">Docs <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#current-release-s">Current Release(s)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#past-releases">Past Releases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../download.html#binaries">Binaries</a></li>
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../compilation/index.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/unix.html">Unix Compilation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/windows.html">Building Under Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/dependencies.html">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../compilation/python.html">Python installation</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#delta-command">delta command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#density-command">density command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#diff-command">diff command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#ground-command">ground command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#info-command">info command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#merge-command">merge command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#pcl-command">pcl command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#pipeline-command">pipeline command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#random-command">random command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#split-command">split command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#tindex-command">tindex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#translate-command">translate command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../apps.html#view-command">view command</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#mailing-list">Mailing List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#github">GitHub</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../community.html#irc">IRC</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../stages/index.html">Readers, Writers, and Filters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#readers">Readers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#writers">Writers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../stages/index.html#filters">Filters</a></li>
-</ul>
-</li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Filtering data with PCL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pdal-pipeline-kernel">PDAL Pipeline kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pdal-pcl-kernel">PDAL PCL kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pcl_ground.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clipping-with-shapefile.html">Clipping with Geometries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calculating-normalized-heights.html">Calculating Normalized Heights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dart-throwing.html">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#developing">Developing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#what-you-get">What you get</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#composing-pipelines">Composing pipelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#options">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline.html#syntax-specification">Syntax Specification</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
 </ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../development/index.html#build-and-test-status">Build and Test Status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../api/cpp/index.html">C++ API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../metadata.html">Metadata</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#metadata-types">Metadata Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#json-representation">JSON representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata.html#pipeline-xml-representation"><code class="docutils literal"><span class="pre">Pipeline</span></code> XML representation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributors.html#engineering-contributors">Engineering Contributors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributors.html#funding-contributors">Funding Contributors</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../copyright.html#overall-pdal-license-bsd">Overall PDAL license (BSD)</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">Here <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Filtering data with PCL</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
-<li><a class="reference internal" href="#pdal-pipeline-kernel">PDAL Pipeline kernel</a></li>
-<li><a class="reference internal" href="#pdal-pcl-kernel">PDAL PCL kernel</a></li>
-<li><a class="reference internal" href="#examples">Examples</a><ul>
-<li><a class="reference internal" href="#simple-point-cloud-cropping">Simple point cloud cropping</a></li>
-<li><a class="reference internal" href="#point-cloud-cropping-with-outlier-removal">Point cloud cropping with outlier removal</a></li>
-<li><a class="reference internal" href="#ground-return-filtering">Ground return filtering</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-              
-                
-  <li>
-    <a href="docker.html" title="Previous Chapter: Docker"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Docker</span>
-    </a>
-  </li>
-  <li>
-    <a href="pcl_ground.html" title="Next Chapter: Identifying ground returns using ProgressiveMorphologicalFilter segmentation"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Identifying g... &raquo;</span>
-    </a>
-  </li>
-              
-            
-            
-            
-            
-              <li class="hidden-sm"></li>
-            
-          </ul>
 
-          
             
-<form class="navbar-form navbar-right" action="../search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
           
         </div>
-    </div>
-  </div>
+      </div>
+    </nav>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 content">
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
       
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="index.html">Tutorials</a> &raquo;</li>
+      
+    <li>Filtering data with PCL</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
   <div class="section" id="filtering-data-with-pcl">
 <span id="pcl-block-tutorial"></span><h1>Filtering data with PCL<a class="headerlink" href="#filtering-data-with-pcl" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
@@ -242,7 +191,7 @@ serve as a bridge between the two libraries, enabling rapid development of point
 cloud processing pipelines.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">See <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><span>filters.pclblock</span></a> for details on PDAL&#8217;s PCL Block filter.</p>
+<p class="last">See <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><span class="std std-ref">filters.pclblock</span></a> for details on PDAL&#8217;s PCL Block filter.</p>
 </div>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
@@ -265,42 +214,20 @@ cloud processing pipelines.</p>
 </div>
 <div class="section" id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Instructions for getting started with PDAL using <a class="reference internal" href="docker.html#docker"><span>Docker</span></a> also
-include built-in PCL support.</p>
-</div>
-<p>PDAL&#8217;s Vagrant configuration now includes the PCL Block and all necessary
-dependencies. Assuming you&#8217;ve got Vagrant all set up, once you checkout the PDAL
-source code, just do the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ cd pdal
-$ vagrant up
-$ vagrant ssh
-</pre></div>
-</div>
-<p>The <code class="docutils literal"><span class="pre">vagrant</span> <span class="pre">up</span></code> command will take a considerable amount of time, but once its
-completed you have a fully functional VM with both PCL and PDAL installed. Try
-entering</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pipeline --version
-</pre></div>
-</div>
-<p>at the command line. You should see output similar to the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>------------------------------------------------------------------------------------------
-pdal pipeline (PDAL 0.9.9 (2c6aa8) with GeoTIFF 1.4.0 GDAL 1.9.2 LASzip 2.2.0 System )
-------------------------------------------------------------------------------------------
-</pre></div>
-</div>
+<p>The <a class="reference internal" href="../quickstart.html#quickstart"><span class="std std-ref">Quickstart</span></a> document describes how to use PDAL with Docker, which
+includes built-in PCL support. After you have worked through that document, you
+should be able to run any PDAL PCL operations.</p>
 </div>
 <div class="section" id="pdal-pipeline-kernel">
 <h2>PDAL Pipeline kernel<a class="headerlink" href="#pdal-pipeline-kernel" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">A full description of the PDAL pipeline concept is beyond the scope of this
-tutorial but the <a class="reference internal" href="../pipeline.html#pipeline"><span>Pipeline</span></a>, <a class="reference internal" href="../apps.html#pipeline-command"><span>pipeline command</span></a>, and
-<a class="reference internal" href="reading.html#reading"><span>Reading with PDAL</span></a> documents contain detailed examples and background
+tutorial but the <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>, <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a>, and
+<a class="reference internal" href="reading.html#reading"><span class="std std-ref">Reading with PDAL</span></a> documents contain detailed examples and background
 information.</p>
 </div>
-<p>The <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><span>filters.pclblock</span></a> is implemented as a PDAL filter stage and as such is
+<p>The <a class="reference internal" href="../stages/filters.pclblock.html#filters-pclblock"><span class="std std-ref">filters.pclblock</span></a> is implemented as a PDAL filter stage and as such is
 easily accessed via the PDAL pipeline. It accepts a single, required option -
 the name of the <a class="reference external" href="http://www.json.org/">JSON</a> file describing the PCL Block.</p>
 <p>A sample pipeline JSON which reads/writes LAS and has a single PCL Block filter
@@ -318,32 +245,32 @@ is shown below.</p>
 </pre></div>
 </div>
 <p>And is run from the command line thusly.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pipeline passthrough.json
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pipeline passthrough.json
 </pre></div>
 </div>
 <p>This simple pipeline reads the input LAS (<code class="docutils literal"><span class="pre">autzen-point-format-3.las</span></code>), passes
 it through the PCL Block (<code class="docutils literal"><span class="pre">passthrough.json</span></code>), and writes the output LAS
 (<code class="docutils literal"><span class="pre">foo.las</span></code>).</p>
 <p>When run, it should produce output similar to this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Requested to read 106 points
-Requested to write 106 points
-0
-Processing /home/vagrant/pdal/test/data/filters/pcl/passthrough.json
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Requested</span> <span class="n">to</span> <span class="n">read</span> <span class="mi">106</span> <span class="n">points</span>
+<span class="n">Requested</span> <span class="n">to</span> <span class="n">write</span> <span class="mi">106</span> <span class="n">points</span>
+<span class="mi">0</span>
+<span class="n">Processing</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">filters</span><span class="o">/</span><span class="n">pcl</span><span class="o">/</span><span class="n">passthrough</span><span class="o">.</span><span class="n">json</span>
 
---------------------------------------------------------------------------------
-NAME:   PassThroughExample ()
-HELP:
-AUTHOR:
---------------------------------------------------------------------------------
-106 points copied
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="n">NAME</span><span class="p">:</span>   <span class="n">PassThroughExample</span> <span class="p">()</span>
+<span class="n">HELP</span><span class="p">:</span>
+<span class="n">AUTHOR</span><span class="p">:</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="mi">106</span> <span class="n">points</span> <span class="n">copied</span>
 
-   Step 1) PassThrough
+   <span class="n">Step</span> <span class="mi">1</span><span class="p">)</span> <span class="n">PassThrough</span>
 
-      Field name: z
-      Limits: 410.000000, 440.000000
+      <span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">z</span>
+      <span class="n">Limits</span><span class="p">:</span> <span class="mf">410.000000</span><span class="p">,</span> <span class="mf">440.000000</span>
 
-76(writers.las DEBUG: 3): Wrote 81 points to the LAS file
-.100
+<span class="mi">76</span><span class="p">(</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span> <span class="n">DEBUG</span><span class="p">:</span> <span class="mi">3</span><span class="p">):</span> <span class="n">Wrote</span> <span class="mi">81</span> <span class="n">points</span> <span class="n">to</span> <span class="n">the</span> <span class="n">LAS</span> <span class="n">file</span>
+<span class="o">.</span><span class="mi">100</span>
 </pre></div>
 </div>
 </div>
@@ -352,7 +279,7 @@ AUTHOR:
 <p>For users that would like to bypass the creation (and subsequent modification)
 of the pipeline JSON for every file they wish to process, there is another
 option: the <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></code> command.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pcl -i /path/to/input/las -p /path/to/pcl/block/json -o /path/to/output/las
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i /path/to/input/las -p /path/to/pcl/block/json -o /path/to/output/las
 </pre></div>
 </div>
 <p>This is functionally equivalent to the original <cite>pdal pipeline</cite> command, but
@@ -360,7 +287,7 @@ does not afford the flexibility of constructing the pipeline (i.e., none the
 other PDAL filters are accessible).</p>
 <p>The same can be accomplished with the <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pcl</span></code> command. The basic syntax for
 the command is</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ pdal pcl -i &lt;input cloud&gt; -p &lt;PCL Block JSON&gt; -o &lt;output cloud&gt;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i &lt;input cloud&gt; -p &lt;PCL Block JSON&gt; -o &lt;output cloud&gt;
 </pre></div>
 </div>
 <p>where the JSON file specified with <code class="docutils literal"><span class="pre">-p</span></code> is the same file that would be
@@ -368,31 +295,31 @@ embedded in the pipeline JSON file. This can be useful when the pipeline does no
 change frequently, but the input/output filenames do.</p>
 <p>For example, the above <cite>pdal pipeline</cite> example can be written with <cite>pdal pcl</cite>
 like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ cd pdal  # your PDAL source tree
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd pdal  # your PDAL source tree
 $ cd test/data
 $ ../../bin/pdal pcl -i autzen/autzen-point-format-3.las -p filters/pcl/example_PassThrough_1.json -o ../temp/foo.las -v4
 </pre></div>
 </div>
 <p>This should produce the output</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Requested to read 106 points
-Requested to write 106 points
-0
-Processing /home/vagrant/pdal/test/data/filters/pcl/passthrough.json
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Requested</span> <span class="n">to</span> <span class="n">read</span> <span class="mi">106</span> <span class="n">points</span>
+<span class="n">Requested</span> <span class="n">to</span> <span class="n">write</span> <span class="mi">106</span> <span class="n">points</span>
+<span class="mi">0</span>
+<span class="n">Processing</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">filters</span><span class="o">/</span><span class="n">pcl</span><span class="o">/</span><span class="n">passthrough</span><span class="o">.</span><span class="n">json</span>
 
---------------------------------------------------------------------------------
-NAME:   PassThroughExample ()
-HELP:
-AUTHOR:
---------------------------------------------------------------------------------
-106 points copied
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="n">NAME</span><span class="p">:</span>   <span class="n">PassThroughExample</span> <span class="p">()</span>
+<span class="n">HELP</span><span class="p">:</span>
+<span class="n">AUTHOR</span><span class="p">:</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="mi">106</span> <span class="n">points</span> <span class="n">copied</span>
 
-   Step 1) PassThrough
+   <span class="n">Step</span> <span class="mi">1</span><span class="p">)</span> <span class="n">PassThrough</span>
 
-      Field name: z
-      Limits: 410.000000, 440.000000
+      <span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">z</span>
+      <span class="n">Limits</span><span class="p">:</span> <span class="mf">410.000000</span><span class="p">,</span> <span class="mf">440.000000</span>
 
-76(writers.las DEBUG: 3): Wrote 81 points to the LAS file
-.100
+<span class="mi">76</span><span class="p">(</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span> <span class="n">DEBUG</span><span class="p">:</span> <span class="mi">3</span><span class="p">):</span> <span class="n">Wrote</span> <span class="mi">81</span> <span class="n">points</span> <span class="n">to</span> <span class="n">the</span> <span class="n">LAS</span> <span class="n">file</span>
+<span class="o">.</span><span class="mi">100</span>
 </pre></div>
 </div>
 </div>
@@ -517,17 +444,83 @@ Zhang, S.  Chen, D. Whitman, M. Shyu, J. Yan, and C. Zhang.</p>
 </div>
 <p>(These examples are taken from the unit tests
 <cite>PCLBlockFilterTest_example_PMF_1</cite> and <cite>PCLBlockFilterTest_example_PMF_2</cite>.)</p>
-<p>See <a class="reference internal" href="pcl_ground.html#pcl-ground"><span>here</span></a> for a more detailed
+<p>See <a class="reference internal" href="pcl_ground.html#pcl-ground"><span class="std std-ref">here</span></a> for a more detailed
 explanation of the PMF parameters.</p>
 </div>
 </div>
 </div>
 
 
-    </div>
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="pcl_ground.html" class="btn btn-neutral float-right" title="Identifying ground returns using ProgressiveMorphologicalFilter segmentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="writing.html" class="btn btn-neutral" title="Writing with PDAL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 11, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
   </div>
-</div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
     <div class="footer">
         <div class="container">
                     &copy;  2016
@@ -536,8 +529,9 @@ explanation of the PMF parameters.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 08, 2016.
+                    on Apr 11, 2016.
         </div>
     </div>
-  </body>
+
+</body>
 </html>
