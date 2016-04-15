@@ -21,7 +21,7 @@ This exercise uses PDAL to remove unwanted noise in an ALS collection.
 
     2. Create a new one with 2gb of memory
 
-        .. literalinclude:: ./denoising-docker-machine-delete.txt
+        .. literalinclude:: ./denoising-docker-machine-create.txt
 
 
 
