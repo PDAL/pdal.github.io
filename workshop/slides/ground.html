@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Identifying ground &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
+    <link rel="next" title="Generating a DTM" href="dtm.html" />
+    <link rel="prev" title="Thinning" href="thinning.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="ground">
+
+<h1>Identifying ground</h1>
+
+<dl class="docutils">
+<dt>Purpose:</dt>
+<dd><ul class="first last simple">
+<li>Filter and classify ground points</li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/analysis/ground/ground.html#ground" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Ground Workshop Materials</span></a></p>
+
+
+
+
+</article>
+<article class="slide level-1" id="filters-ground">
+
+<h1>filters.ground</h1>
+
+<ul class="simple">
+<li>Progressive Morphological Filter <a class="reference internal" href="#zhang2003" id="id1">[Zhang2003]</a>.</li>
+<li>Exact (slow) and Approximate (fast)</li>
+<li>Ground only, no other types</li>
+</ul>
+<table class="docutils citation" frame="void" id="zhang2003" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Zhang2003]</a></td><td>Zhang, Keqi, et al. &quot;A progressive morphological filter for removing nonground measurements from airborne LIDAR data.&quot; Geoscience and Remote Sensing, IEEE Transactions on 41.4 (2003): 872-882.</td></tr>
+</tbody>
+</table>
+
+
+
+
+</article>
+<article class="slide level-1" id="ground-execution">
+
+<h1>Ground (execution)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+       pdal ground \
+       /data/exercises/analysis/ground/CSite1_orig-utm.laz \
+       -o /data/exercises/analysis/ground/ground.laz \
+       --filters.ground.classify=true \
+       --writers.las.compression=true -v 4
+</pre></div>
+</td></tr></table></div>
+
+
+
+
+</article>
+<article class="slide level-1" id="ground-view">
+
+<h1>Ground (view)</h1>
+
+<img alt="_images/ground-classified-included.png" src="_images/ground-classified-included.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="ground-noise">
+
+<h1>Ground (noise)</h1>
+
+<p>Noise!</p>
+<img alt="_images/ground-classified-included-side.png" src="_images/ground-classified-included-side.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="ground-ground-only">
+
+<h1>Ground (ground only)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+       pdal ground \
+       /data/exercises/analysis/ground/CSite1_orig-utm.laz \
+       -o /data/exercises/analysis/ground/ground-only.laz \
+       --filters.ground.classify=true \
+<span class="hll">       --filters.ground.extract=true \
+</span>       --writers.las.compression=true -v 4
+</pre></div>
+</td></tr></table></div>
+
+
+
+
+</article>
+<article class="slide level-1" id="ground-pcl-pipeline">
+
+<h1>Ground (PCL pipeline)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.5</span>
+    <span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+
+
+
+
+</article>
+<article class="slide level-1" id="id2">
+
+<h1>Ground (PCL pipeline)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+   pdal pcl \
+   /data/exercises/analysis/ground/CSite1_orig-utm.laz \
+   -o /data/exercises/analysis/ground/ground-filtered.laz \
+<span class="hll">   -p /data/exercises/analysis/ground/filter.json
+</span></pre></div>
+</td></tr></table></div>
+
+
+
+
+</article>
+<article class="slide level-1" id="id3">
+
+<h1>Ground (view)</h1>
+
+<img alt="_images/ground-filtered.png" src="_images/ground-filtered.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="next">
+
+<h1>Next</h1>
+
+<p>On to <a class="reference internal" href="dtm.html#dtm"><span>Generating a DTM</span></a></p>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>

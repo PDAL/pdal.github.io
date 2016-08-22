@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Thinning &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
+    <link rel="next" title="Identifying ground" href="ground.html" />
+    <link rel="prev" title="Visualizing acquisition density" href="density.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="thinning">
+
+<h1>Thinning</h1>
+
+<dl class="docutils">
+<dt>Purpose:</dt>
+<dd><ul class="first last simple">
+<li>Reduce collection density</li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/analysis/thinning/thinning.html#thinning" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Thinning Workshop Materials</span></a></p>
+
+
+
+
+</article>
+<article class="slide level-1" id="pdal-thinning-techniques">
+
+<h1>PDAL Thinning Techniques</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.dartsample.html#filters-dartsample" title="(in PDAL v1.2.0)"><span class="xref std std-ref">filters.dartsample</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.voxelgrid.html#filters-voxelgrid" title="(in PDAL v1.2.0)"><span class="xref std std-ref">filters.voxelgrid</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.randomize.html#filters-randomize" title="(in PDAL v1.2.0)"><span class="xref std std-ref">filters.randomize</span></a> + <a class="reference external" href="http://www.pdal.io/stages/filters.decimation.html#filters-decimation" title="(in PDAL v1.2.0)"><span class="xref std std-ref">filters.decimation</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="dart-sample">
+
+<h1>Dart sample</h1>
+
+<ul class="simple">
+<li>Poisson <a class="reference internal" href="#cook1986" id="id2">[Cook1986]</a> and <a class="reference internal" href="#dippe1985" id="id3">[Dippe1985]</a>.</li>
+<li>Non-destructive</li>
+<li>Settable threshold</li>
+</ul>
+<table class="docutils citation" frame="void" id="cook1986" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Cook1986]</a></td><td>Cook, Robert L. &quot;Stochastic sampling in computer graphics.&quot; <em>ACM Transactions on Graphics (TOG)</em> 5.1 (1986): 51-72.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="dippe1985" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[Dippe1985]</a></td><td>Dippé, Mark AZ, and Erling Henry Wold. &quot;Antialiasing through stochastic sampling.&quot; <em>ACM Siggraph Computer Graphics</em> 19.3 (1985): 69-78.</td></tr>
+</tbody>
+</table>
+
+
+
+
+</article>
+<article class="slide level-1" id="voxel-grid">
+
+<h1>Voxel grid</h1>
+
+<ul class="simple">
+<li>Little boxes</li>
+<li>Uniform</li>
+<li>Approximated by centroid</li>
+<li>Destructive</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="random-decimate">
+
+<h1>Random + Decimate</h1>
+
+<ul class="simple">
+<li>Decimation filter just keeps every X point</li>
+<li>Insensitive to density</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="thinning-overview">
+
+<h1>Thinning (overview)</h1>
+
+<img alt="_images/thinning-overview.png" src="_images/thinning-overview.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="thinning-dart-command">
+
+<h1>Thinning (dart command)</h1>
+
+<img alt="_images/thinning-command-run.png" src="_images/thinning-command-run.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="thinning-before">
+
+<h1>Thinning (before)</h1>
+
+<a class="reference internal image-reference" href="_images/thinning-full-res.png"><img alt="_images/thinning-full-res.png" src="_images/thinning-full-res.png" style="width: 548.8px; height: 566.3px;" /></a>
+
+
+
+
+</article>
+<article class="slide level-1" id="thinning-after">
+
+<h1>Thinning (after)</h1>
+
+<a class="reference internal image-reference" href="_images/thinning-poisson-thin.png"><img alt="_images/thinning-poisson-thin.png" src="_images/thinning-poisson-thin.png" style="width: 548.8px; height: 566.3px;" /></a>
+
+
+
+
+</article>
+<article class="slide level-1" id="next">
+
+<h1>Next</h1>
+
+<p>On to <a class="reference internal" href="ground.html#ground"><span>Identifying ground</span></a></p>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction to PDAL &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
+    <link rel="next" title="Software installation" href="software.html" />
+    <link rel="prev" title="Introduction to LiDAR" href="lidar_intro.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="introduction-to-pdal">
+
+<h1>Introduction to PDAL</h1>
+
+<ul class="simple">
+<li>Point Data Abstraction Library</li>
+<li>&quot;GDAL for point cloud data&quot;</li>
+<li>Focus (in priority)<ol class="arabic">
+<li>Translation</li>
+<li>Processing</li>
+<li>Exploitation</li>
+</ol>
+</li>
+</ul>
+<a class="reference external image-reference" href="http://pdal.io"><img alt="_images/pdal_logo.png" src="_images/pdal_logo.png" /></a>
+
+
+
+
+</article>
+<article class="slide level-1" id="open-source">
+
+<h1>Open Source</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="https://opensource.org/licenses/BSD-2-Clause">BSD</a> license</li>
+<li><a class="reference external" href="https://github.com/PDAL/PDAL">https://github.com/PDAL/PDAL</a></li>
+<li><a class="reference external" href="http://travis-ci.org/PDAL/PDAL/builds/">Tested with every commit</a></li>
+<li>30+ <a class="reference external" href="https://github.com/PDAL/PDAL/graphs/contributors">contributors</a></li>
+<li>Driven by real world use</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="history">
+
+<h1>History</h1>
+
+<ul>
+<li><p class="first">Started in 2010</p>
+</li>
+<li><a class="first reference external image-reference" href="http://liblas.org"><img alt="_images/liblaslogo.png" src="_images/liblaslogo.png" /></a>
+</li>
+<li><p class="first">Used by <a class="reference external" href="http://lidar.io">USACE GRiD</a> project for data warehousing</p>
+<a class="reference external image-reference" href="http://lidar.io"><img alt="_images/rsgis_logo.png" src="_images/rsgis_logo.png" style="width: 300.0px; height: 300.0px;" /></a>
+</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="gdal-pdal-s-niche">
+
+<h1><span class="strike">GDAL</span> PDAL's Niche</h1>
+
+<ul class="simple">
+<li>On-disk or over-the-wire data format is a function of software requirements</li>
+<li>Immature industry-wide standards (think vector world pre-shapefile)</li>
+<li>Formats are proliferating quickly as the lidar/radar/sonar software industry expands</li>
+<li>Need for basic processing operations</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="processing-pipeline">
+
+<h1>Processing Pipeline</h1>
+
+<ul>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://www.pdal.io/api/index.html#api" title="(in PDAL v1.2.0)"><span class="xref std std-ref">C++ core library</span></a> implementation</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/index.html#stage-index" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Stages</span></a> specialize implementation</li>
+<li><a class="reference external" href="http://www.pdal.io/api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="(in PDAL v1.2.0)"><code class="xref cpp cpp-class docutils literal"><span class="pre">PointView</span></code></a> transits data</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Pipelines</span></a> orchestrate operations</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.pdal.io/apps.html#apps" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Applications</span></a> invoke pipelines</p>
+</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="pipeline-architecture">
+
+<h1>Pipeline Architecture</h1>
+
+<img alt="_images/pdal-reader-writer.png" src="_images/pdal-reader-writer.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="id1">
+
+<h1>Pipeline Architecture</h1>
+
+<img alt="_images/pdal-architecture-overview.png" src="_images/pdal-architecture-overview.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="readers-file">
+
+<h1>Readers (file)</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.las.html#readers-las" title="(in PDAL v1.2.0)"><span class="xref std std-ref">ASPRS LAS</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.bpf.html#readers-bpf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">BPF</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.mrsid.html#readers-mrsid" title="(in PDAL v1.2.0)"><span class="xref std std-ref">MrSID</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.text.html#readers-text" title="(in PDAL v1.2.0)"><span class="xref std std-ref">text</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.pcd.html#readers-pcd" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PCD (PCL)</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.ply.html#readers-ply" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PLY</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.ilvis2.html#readers-ilvis2" title="(in PDAL v1.2.0)"><span class="xref std std-ref">ILVIS2</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.nitf.html#readers-nitf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">NITF</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="readers-database">
+
+<h1>Readers (database)</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.pgpointcloud.html#readers-pgpointcloud" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PostgreSQL</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.oci.html#readers-oci" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Oracle</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/readers.sqlite.html#readers-sqlite" title="(in PDAL v1.2.0)"><span class="xref std std-ref">SQLite</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="writers-file">
+
+<h1>Writers (file)</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.las.html#writers-las" title="(in PDAL v1.2.0)"><span class="xref std std-ref">ASPRS LAS</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.bpf.html#writers-bpf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">BPF</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.text.html#writers-text" title="(in PDAL v1.2.0)"><span class="xref std std-ref">text</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.pcd.html#writers-pcd" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PCD (PCL)</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.ply.html#writers-ply" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PLY</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.nitf.html#writers-nitf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">NITF</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="writers-database">
+
+<h1>Writers (database)</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.pgpointcloud.html#writers-pgpointcloud" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PostgreSQL</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.oci.html#writers-oci" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Oracle</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.sqlite.html#writers-sqlite" title="(in PDAL v1.2.0)"><span class="xref std std-ref">SQLite</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="filters">
+
+<h1>Filters</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.attribute.html#filters-attribute" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Attribute assignment</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.crop.html#filters-crop" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Polygon clipping</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.chipper.html#filters-chipper" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Splitting by volume</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.divider.html#filters-divider" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Splitting by geometry</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.splitter.html#filters-splitter" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Splitting by count</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.colorization.html#filters-colorization" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Coloring with imagery</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="filters-cont">
+
+<h1>Filters (cont)</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.ground.html#filters-ground" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Ground classification</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.height.html#filters-height" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Normalized heights</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.sort.html#filters-sort" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Sorting</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.mortonorder.html#filters-mortonorder" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Spatial curve sorting</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.statisticaloutlier.html#filters-statisticaloutlier" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Noise filtering</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.merge.html#filters-merge" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Merge</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="id2">
+
+<h1>Filters (cont)</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.reprojection.html#filters-reprojection" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Reprojection</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.mortonorder.html#filters-mortonorder" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Statistics</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.crop.html#filters-crop" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Cropping</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.voxelgrid.html#filters-voxelgrid" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Voxel sampling</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.poisson.html#filters-poisson" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Poisson sampling</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Range filter</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.decimation.html#filters-decimation" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Rank decimation</span></a></li>
+<li><a class="reference external" href="http://www.pdal.io/stages/filters.hexbin.html#filters-hexbin" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Boundary computation</span></a></li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="python">
+
+<h1>Python</h1>
+
+<ul class="simple">
+<li>Extension<ul>
+<li>Use PDAL to read data into your own applications</li>
+</ul>
+</li>
+<li>Embed<ul>
+<li>Use Python inline with <a class="reference external" href="http://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.2.0)"><span class="xref std std-ref">pipeline</span></a> operations</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="python-cont">
+
+<h1>Python (cont)</h1>
+
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
+   <span class="c1"># Keep only points with classification 1 or 2</span>
+   <span class="n">cls</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s1">&#39;Classification&#39;</span><span class="p">]</span>
+
+   <span class="n">keep_classes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+   <span class="c1"># Use the first test for our base array.</span>
+   <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+   <span class="c1"># For 1:n, test each predicate and join back</span>
+   <span class="c1"># to our existing predicate array</span>
+   <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">keep_classes</span><span class="p">)):</span>
+       <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+       <span class="n">keep</span> <span class="o">=</span> <span class="n">keep</span> <span class="o">+</span> <span class="n">t</span>
+
+   <span class="n">outs</span><span class="p">[</span><span class="s1">&#39;Mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keep</span>
+   <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="next">
+
+<h1>Next</h1>
+
+<p>On to <a class="reference internal" href="software.html#software"><span>Software installation</span></a></p>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>

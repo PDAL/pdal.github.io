@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Boundary &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
+    <link rel="next" title="Cliping data with polygons" href="clipping.html" />
+    <link rel="prev" title="Georeferencing" href="georeferencing.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="boundary">
+
+<h1>Boundary</h1>
+
+<dl class="docutils">
+<dt>Purpose:</dt>
+<dd><ul class="first last simple">
+<li>Estimate spatial footprint</li>
+<li>Do it quickly</li>
+<li>Balance speed/quality</li>
+<li>Look with <a class="reference external" href="source/../../_build/html/../../../../_build/html/qgis.html#qgis" title="(in Point Cloud Processing and Analysis with PDAL v)"><span>QGIS</span></a></li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/analysis/boundary/boundary.html#boundary" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Boundary Workshop Materials</span></a></p>
+
+
+
+
+</article>
+<article class="slide level-1" id="boundary-command">
+
+<h1>Boundary (command)</h1>
+
+<div class="highlight-python"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+    pdal info \
+    /data/exercises/analysis/density/uncompahgre.laz \
+    --boundary
+
+</pre></div>
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="boundary-command-output">
+
+<h1>Boundary (command output)</h1>
+
+<img alt="_images/boundary-text-output.png" src="_images/boundary-text-output.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="boundary-blizzard">
+
+<h1>Boundary (blizzard)</h1>
+
+<img alt="_images/blizzard-eight.gif" src="_images/blizzard-eight.gif" />
+
+
+
+
+</article>
+<article class="slide level-1" id="boundary-tindex">
+
+<h1>Boundary (tindex)</h1>
+
+<div class="highlight-python"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+    pdal tindex \
+    --tindex /data/exercises/analysis/boundary/boundary.sqlite \
+    --filespec /data/exercises/analysis/density/uncompahgre.laz \
+    -f SQLite
+</pre></div>
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="boundary-tindex-output">
+
+<h1>Boundary (tindex output)</h1>
+
+<img alt="_images/boundary-tindex-run.png" src="_images/boundary-tindex-run.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="boundary-qgis">
+
+<h1>Boundary (QGIS)</h1>
+
+<img alt="_images/density-add-layer.png" src="_images/density-add-layer.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="id2">
+
+<h1>Boundary (QGIS)</h1>
+
+<img alt="_images/boundary-qgis-view.png" src="_images/boundary-qgis-view.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="next">
+
+<h1>Next</h1>
+
+<p>On to <a class="reference internal" href="clipping.html#clipping"><span>Cliping data with polygons</span></a></p>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>

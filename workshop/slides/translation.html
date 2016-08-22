@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Translation &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
+    <link rel="next" title="Analysis" href="analysis.html" />
+    <link rel="prev" title="Basic Information" href="basic_info.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="translation">
+
+<h1>Translation</h1>
+
+<ul class="simple">
+<li>Convert one format to another</li>
+<li>Do stuff along the way</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="compression">
+
+<h1>Compression</h1>
+
+<dl class="docutils">
+<dt>Purpose:</dt>
+<dd><ul class="first last simple">
+<li>Output a compressed <a class="reference external" href="http://laszip.org">LAZ</a></li>
+<li>Learn about point cloud metadata</li>
+<li>Learn about <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a></li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/translation/compression.html#compression" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Compression Workshop Materials</span></a></p>
+
+
+
+
+</article>
+<article class="slide level-1" id="laszip">
+
+<h1>LASzip</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> data model</li>
+<li>Typical 5:1 to 10:1 ratios</li>
+<li>Incremental, interruptable, and chunkable</li>
+<li>Unencumbered open source</li>
+<li>C++ and JavaScript</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="command-compression">
+
+<h1>Command (compression)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+    pdal translate /data/exercises/translation/interesting.las \
+    /data/exercises/translation/interesting.laz
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>PDAL chooses option based on filename extension</li>
+<li>Not all extensions work</li>
+<li>Imprecise. Use <a class="reference external" href="http://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.2.0)"><span>Pipeline</span></a> if you need
+to be explicit</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="verify-compression">
+
+<h1>Verify (compression)</h1>
+
+<img alt="_images/compression-verify.png" src="_images/compression-verify.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="reprojection">
+
+<h1>Reprojection</h1>
+
+<dl class="docutils">
+<dt>Purpose:</dt>
+<dd><ul class="first last simple">
+<li>Transform data in one coordinate system
+to another</li>
+<li>Utilize driver options</li>
+<li>Scale output data</li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/translation/reprojection.html#reprojection" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Reprojection Workshop Materials</span></a></p>
+
+
+
+
+</article>
+<article class="slide level-1" id="command-reproject">
+
+<h1>Command (reproject)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+    pdal translate /data/exercises/analysis/ground/CSite1_orig-utm.laz \
+    /data/exercises/translation/csite-dd.laz \
+    reprojection \
+    --filters.reprojection.out_srs=&quot;EPSG:4326&quot;
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>We tell <code class="docutils literal"><span class="pre">filters.reprojection</span></code> to output to <code class="docutils literal"><span class="pre">EPSG:4326</span></code></li>
+<li>Add <code class="docutils literal"><span class="pre">reprojection</span></code> filter directly to <code class="docutils literal"><span class="pre">translate</span></code> command</li>
+<li>Define reprojection filter option via command line</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="command-bad-scale">
+
+<h1>Command (bad scale)</h1>
+
+<img alt="_images/reprojection-wrong-scale.png" src="_images/reprojection-wrong-scale.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="command-scale">
+
+<h1>Command (scale)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+    pdal translate \
+    /data/exercises/analysis/ground/CSite1_orig-utm.laz \
+    /data/exercises/translation/csite-dd.laz \
+    reprojection \
+    --filters.reprojection.out_srs=&quot;EPSG:4326&quot; \
+    --writers.las.scale_x=0.0000001 \
+    --writers.las.scale_y=0.0000001 \
+    --writers.las.offset_x=&quot;auto&quot; \
+    --writers.las.offset_y=&quot;auto&quot;
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Scale set to <code class="docutils literal"><span class="pre">1e-7</span></code></li>
+<li>Offset to <code class="docutils literal"><span class="pre">auto</span></code> (PDAL calculates minimum)</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="command-verify">
+
+<h1>Command (verify)</h1>
+
+<img alt="_images/reprojection-proper-scale.png" src="_images/reprojection-proper-scale.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="next">
+
+<h1>Next</h1>
+
+<p>On to <a class="reference internal" href="analysis.html#analysis"><span>Analysis</span></a></p>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Georeferencing &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
+    <link rel="next" title="Boundary" href="boundary.html" />
+    <link rel="prev" title="Analysis" href="analysis.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="georeferencing">
+
+<h1>Georeferencing</h1>
+
+<p>Purpose:</p>
+<ul class="simple">
+<li>Transform airborne or mobile LiDAR points into usable point clouds.</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="components">
+
+<h1>Components</h1>
+
+<ul>
+<li><dl class="first docutils">
+<dt>LiDAR point stream</dt>
+<dd><ul class="first last simple">
+<li>X, Y, Z</li>
+<li>Timestamp</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GNSS/IMU point stream</dt>
+<dd><ul class="first last simple">
+<li>GPS X, Y, Z</li>
+<li>IMU roll, pitch, yaw</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Lever arm and boresight matrix</p>
+</li>
+<li><p class="first">Combine with the georeferencing equation:</p>
+</li>
+</ul>
+<div class="figure">
+<img alt="_images/georeferencing.png" src="_images/georeferencing.png" />
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="caveats">
+
+<h1>Caveats</h1>
+
+<ul class="simple">
+<li>Generic georeferencing is <strong>not yet</strong> implemented in PDAL.</li>
+<li>The <a class="reference external" href="http://www.pdal.io/stages/readers.optech.html#readers-optech" title="(in PDAL v1.2.0)"><span class="xref std std-ref">readers.optech</span></a> includes built-in georeferencing, which automatically projects data to WGS84.</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="command">
+
+<h1>Command</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+    pdal translate \
+    /data/exercises/georeferencing/S1C1_csd_004.csd \
+    /data/exercises/georeferencing/S1C1_csd_004.laz \
+    reprojection range \
+    --filters.reprojection.out_srs=&quot;EPSG:32614&quot; \
+    --filters.range.limits=&quot;Intensity[0:500]&quot;
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>In order to display the data easily in plas.io, we must reproject to UTM.</li>
+<li>There are some spurious points close to the sensor that skew the intensity distribution.
+By filtering these points, we will improve the default display in plas.io.</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="verify">
+
+<h1>Verify</h1>
+
+<div class="figure">
+<img alt="_images/georeferencing-run-command.png" src="_images/georeferencing-run-command.png" />
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="visualize">
+
+<h1>Visualize</h1>
+
+<div class="figure">
+<img alt="_images/georeference-plasio.png" src="_images/georeference-plasio.png" />
+</div>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>

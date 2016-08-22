@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Generating a DTM &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
+    <link rel="prev" title="Identifying ground" href="ground.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="generating-a-dtm">
+
+<h1>Generating a DTM</h1>
+
+<dl class="docutils">
+<dt>Purpose:</dt>
+<dd><ul class="first last simple">
+<li>Generate a DTM from ground-filtered data</li>
+<li>Data was created in <a class="reference internal" href="ground.html#ground"><span>Identifying ground</span></a></li>
+<li>Visualize DTM using <a class="reference external" href="source/../../_build/html/../../../../_build/html/qgis.html#qgis" title="(in Point Cloud Processing and Analysis with PDAL v)"><span>QGIS</span></a></li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/analysis/dtm/dtm.html#dtm" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">DTM Workshop Materials</span></a></p>
+
+
+
+
+</article>
+<article class="slide level-1" id="writers-p2g">
+
+<h1>writers.p2g</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="http://www.pdal.io/stages/writers.p2g.html#writers-p2g" title="(in PDAL v1.2.0)"><span class="xref std std-ref">writers.p2g</span></a></li>
+<li>Generated using points2grid (OpenTopography)</li>
+<li>Write TIFF/ASCII raster</li>
+<li>Control pixel size</li>
+</ul>
+
+
+
+
+</article>
+<article class="slide level-1" id="dtm-pipeline">
+
+<h1>DTM (pipeline)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;/data/exercises/analysis/ground/ground-filtered.laz&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;/data/exercises/analysis/dtm/dtm&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;output_format&quot;</span><span class="p">:</span><span class="s2">&quot;tif&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;grid_dist_x&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;grid_dist_y&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.p2g&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+</pre></div>
+</td></tr></table></div>
+
+
+
+
+</article>
+<article class="slide level-1" id="dtm-execution">
+
+<h1>DTM (execution)</h1>
+
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
+       pdal pipeline \
+       /data/exercises/analysis/dtm/p2g.json
+</pre></div>
+</td></tr></table></div>
+
+
+
+
+</article>
+<article class="slide level-1" id="dtm-command">
+
+<h1>DTM (command)</h1>
+
+<img alt="_images/dtm-run-command.png" src="_images/dtm-run-command.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="dtm-visualization">
+
+<h1>DTM (visualization)</h1>
+
+<img alt="_images/dtm-add-raster-mean.png" src="_images/dtm-add-raster-mean.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="id1">
+
+<h1>DTM (visualization)</h1>
+
+<img alt="_images/dtm-qgis-classify.png" src="_images/dtm-qgis-classify.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="id2">
+
+<h1>DTM (visualization)</h1>
+
+<img alt="_images/dtm-qgis-colorize-dtm.png" src="_images/dtm-qgis-colorize-dtm.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="id3">
+
+<h1>DTM (visualization)</h1>
+
+<img alt="_images/dtm-qgis-select-hillshade.png" src="_images/dtm-qgis-select-hillshade.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="id4">
+
+<h1>DTM (visualization)</h1>
+
+<img alt="_images/dtm-qgis-gdaldem.png" src="_images/dtm-qgis-gdaldem.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="id5">
+
+<h1>DTM (visualization)</h1>
+
+<img alt="_images/dtm-qgis-hillshade-done.png" src="_images/dtm-qgis-hillshade-done.png" />
+
+
+
+
+</article>
+<article class="slide level-1" id="home">
+
+<h1>Home</h1>
+
+<p><a class="reference internal" href="index.html#home"><span>Home</span></a></p>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>
