@@ -1,0 +1,409 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>filters.outlier &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Filters" href="filters.html"/>
+        <link rel="next" title="filters.pclblock" href="filters.pclblock.html"/>
+        <link rel="prev" title="filters.normal" href="filters.normal.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.attribute.html">filters.attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.chipper.html">filters.chipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.crop.html">filters.crop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.dartsample.html">filters.dartsample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.divider.html">filters.divider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.ground.html">filters.ground</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.height.html">filters.height</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.hexbin.html">filters.hexbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.merge.html">filters.merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.mortonorder.html">filters.mortonorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.movingleastsquares.html">filters.movingleastsquares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">filters.outlier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statistical-method">Statistical Method</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#radius-method">Radius Method</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.pclblock.html">filters.pclblock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.pmf.html">filters.pmf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.poisson.html">filters.poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.predicate.html">filters.predicate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.programmable.html">filters.programmable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.radiusoutlier.html">filters.radiusoutlier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.randomize.html">filters.randomize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.range.html">filters.range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.reprojection.html">filters.reprojection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.sort.html">filters.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.splitter.html">filters.splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.statisticaloutlier.html">filters.statisticaloutlier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.stats.html">filters.stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.transformation.html">filters.transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.voxelgrid.html">filters.voxelgrid</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="filters.html">Filters</a> &raquo;</li>
+      
+    <li>filters.outlier</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="filters-outlier">
+<span id="id1"></span><h1>filters.outlier<a class="headerlink" href="#filters-outlier" title="Permalink to this headline">¶</a></h1>
+<p>The Outlier filter provides two outlier filtering methods: radius and
+statistical. These two approaches are discussed in further detail below.</p>
+<div class="section" id="statistical-method">
+<h2>Statistical Method<a class="headerlink" href="#statistical-method" title="Permalink to this headline">¶</a></h2>
+<p>The default method for identifying outlier points is the statistical outlier method. This method requires two passes through the input <code class="docutils literal"><span class="pre">PointView</span></code>, first to compute a threshold value based on global statistics, and second to identify outliers using the computed threshold.</p>
+<p>In the first pass, for each point <span class="math">\(p_i\)</span> in the input <code class="docutils literal"><span class="pre">PointView</span></code>, compute the mean distance <span class="math">\(\mu_i\)</span> to each of the <span class="math">\(k\)</span> nearest neighbors (where <span class="math">\(k\)</span> is configurable and specified by <code class="docutils literal"><span class="pre">mean_k</span></code>). Then,</p>
+<div class="math">
+\[\overline{\mu} = \frac{1}{N} \sum_{i=1}^N \mu_i\]</div>
+<div class="math">
+\[\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (\mu_i - \overline{\mu})^2}\]</div>
+<p>A global mean <span class="math">\(\overline{\mu}\)</span> of these mean distances is then computed along with the standard deviation <span class="math">\(\sigma\)</span>. From this, the threshold is computed as</p>
+<div class="math">
+\[t = \mu + m\sigma\]</div>
+<p>where <span class="math">\(m\)</span> is a user-defined multiplier specified by <code class="docutils literal"><span class="pre">multiplier</span></code>.</p>
+<p>We now interate over the pre-computed mean distances <span class="math">\(\mu_i\)</span> and compare to computed threshold value. If <span class="math">\(\mu_i\)</span> is greater than the threshold, it is marked as an outlier.</p>
+<div class="math">
+\[\begin{split}outlier_i = \begin{cases}
+    \text{true,} \phantom{false,} \text{if } \mu_i &gt;= t \\
+    \text{false,} \phantom{true,} \text{otherwise} \\
+\end{cases}\end{split}\]</div>
+<p>The <code class="docutils literal"><span class="pre">classify</span></code> and <code class="docutils literal"><span class="pre">extract</span></code> options are used to control whether outlier
+points are labeled as noise, or removed from the output <code class="docutils literal"><span class="pre">PointView</span></code>
+completely.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/filters.statisticaloutlier.img1.png"><img alt="Points before outlier removal" src="../_images/filters.statisticaloutlier.img1.png" style="width: 641.2px; height: 711.2px;" /></a>
+</div>
+<p>Before outlier removal, noise points can be found both above and below the
+scene.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/filters.statisticaloutlier.img2.png"><img alt="Points after outlier removal" src="../_images/filters.statisticaloutlier.img2.png" style="width: 640.8px; height: 525.6px;" /></a>
+</div>
+<p>After outlier removal, the noise points are removed.</p>
+<p>See <a class="reference internal" href="filters.statisticaloutlier.html#rusu2008" id="id2">[Rusu2008]</a> for more information.</p>
+<table class="docutils citation" frame="void" id="rusu2008" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Rusu2008]</a></td><td>Rusu, Radu Bogdan, et al. &#8220;Towards 3D point cloud based object maps for household environments.&#8221; Robotics and Autonomous Systems 56.11 (2008): 927-941.</td></tr>
+</tbody>
+</table>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>In this example, points are marked as outliers if the average distance to each
+of the 12 nearest neighbors is below the computed threshold.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;statistical&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;mean_k&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
+      <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span><span class="mf">2.2</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="radius-method">
+<h2>Radius Method<a class="headerlink" href="#radius-method" title="Permalink to this headline">¶</a></h2>
+<p>For each point <span class="math">\(p_i\)</span> in the input <code class="docutils literal"><span class="pre">PointView</span></code>, this method counts the
+number of neighboring points <span class="math">\(k_i\)</span> within radius <span class="math">\(r\)</span> (specified by
+<code class="docutils literal"><span class="pre">radius</span></code>). If <span class="math">\(k_i&lt;k_{min}\)</span>, where <span class="math">\(k_{min}\)</span> is the minimum number
+of neighbors specified by <code class="docutils literal"><span class="pre">min_k</span></code>, it is marked as an outlier.</p>
+<div class="math">
+\[\begin{split}outlier_i = \begin{cases}
+    \text{true,} \phantom{false,} \text{if } k_i &lt; k_{min} \\
+    \text{false,} \phantom{true,} \text{otherwise} \\
+\end{cases}\end{split}\]</div>
+<p>The <code class="docutils literal"><span class="pre">classify</span></code> and <code class="docutils literal"><span class="pre">extract</span></code> options are used to control whether outlier
+points are labeled as noise, or removed from the output <code class="docutils literal"><span class="pre">PointView</span></code>
+completely.</p>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>The following example will mark points as outliers when there are fewer than
+four neighbors within a radius of 1.0.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span>
+      <span class="nt">&quot;min_k&quot;</span><span class="p">:</span><span class="mi">4</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>method</dt>
+<dd>The outlier removal method. [Default: <strong>statistical</strong>]</dd>
+<dt>min_k</dt>
+<dd>Minimum number of neighbors in radius (radius method only). [Default: <strong>2</strong>]</dd>
+<dt>radius</dt>
+<dd>Radius (radius method only). [Default: <strong>1.0</strong>]</dd>
+<dt>mean_k</dt>
+<dd>Mean number of neighbors (statistical method only). [Default: <strong>8</strong>]</dd>
+<dt>multiplier</dt>
+<dd>Standard deviation threshold (statistical method only). [Default: <strong>2.0</strong>]</dd>
+<dt>classify</dt>
+<dd>Apply classification value of 18 (LAS high noise)? [Default: <strong>true</strong>]</dd>
+<dt>extract</dt>
+<dd>Extract inlier returns only? [Default: <strong>false</strong>]</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="filters.pclblock.html" class="btn btn-neutral float-right" title="filters.pclblock" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="filters.normal.html" class="btn btn-neutral" title="filters.normal" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Aug 27, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.3.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Aug 27, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

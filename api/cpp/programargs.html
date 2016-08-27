@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.2.0
+                1.3.0
               </div>
             
           
@@ -187,7 +187,7 @@
 <dt id="_CPPv2N4pdal11ProgramArgsE">
 <span id="pdal::ProgramArgs"></span><span class="target" id="apiclasspdal_1_1ProgramArgs"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">ProgramArgs</code><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgsE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses command lines, provides validation and stores found values in bound variables. </p>
-<p>Add arguments with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. When all arguments have been added, use <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1adee27f02db225373ca2a1a37f3de8a96"><span class="std std-ref">parse</span></a> to validate command line and assign values to variables bound with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. </p>
+<p>Add arguments with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. When all arguments have been added, use <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1ac7f7e89523bebc44ea9e04e49cd573c4"><span class="std std-ref">parse</span></a> to validate command line and assign values to variables bound with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. </p>
 <div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -267,8 +267,8 @@
 <dt>
 <em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
 <dt id="_CPPv2N4pdal11ProgramArgs3addERKNSt6stringEKNSt6stringER1T1T">
-<span id="pdal::ProgramArgs::add__ssCR.ssC.TR.T"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1af89216c111cd7bb6dcd701285f848d0e"></span>Arg &amp;<code class="descname">add</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, <em class="property">const</em> std::string <em>description</em>, T &amp;<em>var</em>, T <em>def</em> = T()<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs3addERKNSt6stringEKNSt6stringER1T1T" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add an argument to the list of arguments. </p>
+<span id="pdal::ProgramArgs::add__ssCR.ssC.TR.T"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1ad843d78ddaad1f77688ebf2f1963ae08"></span>Arg &amp;<code class="descname">add</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, <em class="property">const</em> std::string <em>description</em>, T &amp;<em>var</em>, T <em>def</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs3addERKNSt6stringEKNSt6stringER1T1T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an argument to the list of arguments with a default. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>Reference to the new argument. </dd>
@@ -289,34 +289,21 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal11ProgramArgs5parseEiA_Pc">
-<span id="pdal::ProgramArgs::parse__i.cPA"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1adee27f02db225373ca2a1a37f3de8a96"></span>void <code class="descname">parse</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs5parseEiA_Pc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse a command line as specified by its argument list. </p>
-<p>Parsing validates the argument vector and assigns values to variables bound to added arguments.</p>
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
+<dt id="_CPPv2N4pdal11ProgramArgs3addERKNSt6stringEKNSt6stringER1T">
+<span id="pdal::ProgramArgs::add__ssCR.ssC.TR"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1a1fb2ad902b4a37df963e74a45f537cf2"></span>Arg &amp;<code class="descname">add</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, <em class="property">const</em> std::string <em>description</em>, T &amp;<em>var</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs3addERKNSt6stringEKNSt6stringER1T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an argument to the list of arguments. </p>
 <p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Reference to the new argument. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">argc</span></code> - <p>Number of entries in the argument list. </p>
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>Name of argument. Argument names are specified as &#8220;longname[,shortname]&#8221;, where shortname is an optional one-character abbreviation. </p>
 </li>
-<li><code class="first docutils literal"><span class="pre">argv</span></code> - <p>List of strings that constitute the argument list. </p>
+<li><code class="first docutils literal"><span class="pre">description</span></code> - <p>Description of the argument. </p>
 </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal11ProgramArgs11parseSimpleEiA_Pc">
-<span id="pdal::ProgramArgs::parseSimple__i.cPA"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1a7213f2c75e9f5343f87bdb31d35e9dfd"></span>void <code class="descname">parseSimple</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs11parseSimpleEiA_Pc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse a command line as specified by its argument vector. </p>
-<p>No validation occurs and no exceptions are raised, but assignments are made to bound variables where possible.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">argc</span></code> - <p>Number of entries in the argument list. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">argv</span></code> - <p>List of strings that constitute the argument list. </p>
+<li><code class="first docutils literal"><span class="pre">var</span></code> - <p>Reference to variable to bind to argument. </p>
 </li>
 </ul>
 </dd>
@@ -370,7 +357,7 @@
 
 <dl class="function">
 <dt id="_CPPv2N4pdal11ProgramArgs4dumpERNSt7ostreamE6size_t6size_t">
-<span id="pdal::ProgramArgs::dump__osR.s.s"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1acc9c9fcf196451a9dbe366886bc52cde"></span>void <code class="descname">dump</code><span class="sig-paren">(</span>std::ostream &amp;<em>out</em>, size_t <em>indent</em>, size_t <em>totalWidth</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs4dumpERNSt7ostreamE6size_t6size_t" title="Permalink to this definition">¶</a></dt>
+<span id="pdal::ProgramArgs::dump__osR.s.s"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1a735375940de6cf77c210986dbadb5ae2"></span>void <code class="descname">dump</code><span class="sig-paren">(</span>std::ostream &amp;<em>out</em>, size_t <em>indent</em>, size_t <em>totalWidth</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs4dumpERNSt7ostreamE6size_t6size_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write a formatted description of arguments to an output stream. </p>
 <p>Write a list of the names and descriptions of arguments suitable for display as help information.</p>
 <p><dl class="docutils">
@@ -381,6 +368,28 @@
 <li><code class="first docutils literal"><span class="pre">indent</span></code> - <p>Number of characters to indent all text. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">totalWidth</span></code> - <p>Total width to assume for formatting output. Typically this is the width of a terminal window. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal11ProgramArgs5dump2ERNSt7ostreamE6size_t6size_t6size_t">
+<span id="pdal::ProgramArgs::dump2__osR.s.s.s"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1ae2a1be6e688b4bcf822c20c2b6d836ea"></span>void <code class="descname">dump2</code><span class="sig-paren">(</span>std::ostream &amp;<em>out</em>, size_t <em>nameIndent</em>, size_t <em>descripIndent</em>, size_t <em>totalWidth</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs5dump2ERNSt7ostreamE6size_t6size_t6size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a verbose description of arguments to an output stream. </p>
+<p>Each argument is on its own line. The argument&#8217;s description follows on subsequent lines.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">out</span></code> - <p>Stream to which output should be written. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">nameIndent</span></code> - <p>Number of characters to indent argument lines. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">descripIndent</span></code> - <p>Number of characters to indent description lines. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">totalWidth</span></code> - <p>Total line width. </p>
 </li>
 </ul>
 </dd>
@@ -417,7 +426,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 22, 2016.
+      Last updated on Aug 27, 2016.
 
     </p>
   </div> 
@@ -438,7 +447,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -472,7 +481,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 22, 2016.
+                    on Aug 27, 2016.
         </div>
     </div>
 

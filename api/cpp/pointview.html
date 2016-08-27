@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.2.0
+                1.3.0
               </div>
             
           
@@ -232,7 +232,7 @@
 <dl class="function">
 <dt id="_CPPv2N4pdal9PointView11appendPointERK9PointView7PointId">
 <span id="pdal::PointView::appendPoint__PointViewCR.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a43021c7d1b385adfb249c0e476cac379"></span>void <code class="descname">appendPoint</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal9PointViewE" title="pdal::PointView">PointView</a> &amp;<em>buffer</em>, PointId <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView11appendPointERK9PointView7PointId" title="Permalink to this definition">¶</a></dt>
-<dd><p>void PointView::setFieldInternal(<a class="reference internal" href="dimension.html#apinamespacepdal_1_1Dimension_1_1Id_1a9b75e27f75c02c26ee25fa60561f59e5"><span class="std std-ref">Dimension::Id::Enum</span></a> dim, PointId idx, const void *value) { PointId rawId = 0; if (idx == <a class="reference internal" href="#apiclasspdal_1_1PointView_1a4c2fba9b5d7a61f19a558bb08405555d"><span class="std std-ref">size()</span></a>) { rawId = m_pointTable.addPoint(); m_index.push_back(rawId); m_size++; assert(m_temps.empty()); } else if (idx &gt; <a class="reference internal" href="#apiclasspdal_1_1PointView_1a4c2fba9b5d7a61f19a558bb08405555d"><span class="std std-ref">size()</span></a>) { std::cerr &lt;&lt; &#8220;Point index must increment.\n&#8221;; error - throw? return; } else { rawId = m_index[idx]; } m_pointTable.setFieldInternal(dim, rawId, value); } </p>
+<dd><p>void PointView::setFieldInternal(Dimension::Id dim, PointId idx, const void *value) { PointId rawId = 0; if (idx == <a class="reference internal" href="#apiclasspdal_1_1PointView_1a4c2fba9b5d7a61f19a558bb08405555d"><span class="std std-ref">size()</span></a>) { rawId = m_pointTable.addPoint(); m_index.push_back(rawId); m_size++; assert(m_temps.empty()); } else if (idx &gt; <a class="reference internal" href="#apiclasspdal_1_1PointView_1a4c2fba9b5d7a61f19a558bb08405555d"><span class="std std-ref">size()</span></a>) { std::cerr &lt;&lt; &#8220;Point index must increment.\n&#8221;; error - throw? return; } else { rawId = m_index[idx]; } m_pointTable.setFieldInternal(dim, rawId, value); } </p>
 </dd></dl>
 
 <dl class="function">
@@ -254,42 +254,42 @@
 <dl class="function">
 <dt>
 <em class="property">template </em>&lt;<em class="property">class</em> T&gt;</dt>
-<dt id="_CPPv2N4pdal9PointView10getFieldAsEN9Dimension2Id4EnumE7PointId">
-<span id="pdal::PointView::getFieldAs__Dimension::Id::Enum.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a4b5c456b1d8c6df87093b9be17ab6daf"></span>T <code class="descname">getFieldAs</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>dim</em>, PointId <em>pointIndex</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView10getFieldAsEN9Dimension2Id4EnumE7PointId" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView10getFieldAsEN9Dimension2IdE7PointId">
+<span id="pdal::PointView::getFieldAs__Dimension::Id.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a4c594a6d2a469e594988194ccf125a15"></span>T <code class="descname">getFieldAs</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>dim</em>, PointId <em>pointIndex</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView10getFieldAsEN9Dimension2IdE7PointId" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal9PointView8getFieldEPcN9Dimension2Id4EnumEN9Dimension4Type4EnumE7PointId">
-<span id="pdal::PointView::getField__cP.Dimension::Id::Enum.Dimension::Type::Enum.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a47c40658417858fb79e7d2172f9e4774"></span>void <code class="descname">getField</code><span class="sig-paren">(</span>char *<em>pos</em>, <a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>d</em>, <a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4TypeE" title="pdal::Dimension::Type">Type</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4Type4EnumE" title="pdal::Dimension::Type::Enum">Enum</a> <em>type</em>, PointId <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView8getFieldEPcN9Dimension2Id4EnumEN9Dimension4Type4EnumE7PointId" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
-<dt id="_CPPv2N4pdal9PointView8setFieldEN9Dimension2Id4EnumE7PointId1T">
-<span id="pdal::PointView::setField__Dimension::Id::Enum.PointId.T"></span><span class="target" id="apiclasspdal_1_1PointView_1ad2d8129b14f8630fc2d03c1c1723ecea"></span>void <code class="descname">setField</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>dim</em>, PointId <em>idx</em>, T <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView8setFieldEN9Dimension2Id4EnumE7PointId1T" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal9PointView8setFieldEN9Dimension2Id4EnumEN9Dimension4Type4EnumE7PointIdPKv">
-<span id="pdal::PointView::setField__Dimension::Id::Enum.Dimension::Type::Enum.PointId.voidCP"></span><span class="target" id="apiclasspdal_1_1PointView_1a1a39a83a778bca02ec2cebad514ee6ae"></span>void <code class="descname">setField</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>dim</em>, <a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4TypeE" title="pdal::Dimension::Type">Type</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4Type4EnumE" title="pdal::Dimension::Type::Enum">Enum</a> <em>type</em>, PointId <em>idx</em>, <em class="property">const</em> void *<em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView8setFieldEN9Dimension2Id4EnumEN9Dimension4Type4EnumE7PointIdPKv" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView8getFieldEPcN9Dimension2IdEN9Dimension4TypeE7PointId">
+<span id="pdal::PointView::getField__cP.Dimension::Id.Dimension::Type.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a36a167de5ffe22d59a5db002250ec2a2"></span>void <code class="descname">getField</code><span class="sig-paren">(</span>char *<em>pos</em>, <a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>d</em>, <a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4TypeE" title="pdal::Dimension::Type">Type</a> <em>type</em>, PointId <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView8getFieldEPcN9Dimension2IdEN9Dimension4TypeE7PointId" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt>
 <em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
-<dt id="_CPPv2N4pdal9PointView7compareEN9Dimension2Id4EnumE7PointId7PointId">
-<span id="pdal::PointView::compare__Dimension::Id::Enum.PointId.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a548b2d359aa9d18b314b31686f6d7d5a"></span>bool <code class="descname">compare</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>dim</em>, PointId <em>id1</em>, PointId <em>id2</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView7compareEN9Dimension2Id4EnumE7PointId7PointId" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView8setFieldEN9Dimension2IdE7PointId1T">
+<span id="pdal::PointView::setField__Dimension::Id.PointId.T"></span><span class="target" id="apiclasspdal_1_1PointView_1a7931019cfba92e9c3a93592a2fbf4a0f"></span>void <code class="descname">setField</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>dim</em>, PointId <em>idx</em>, T <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView8setFieldEN9Dimension2IdE7PointId1T" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal9PointView7compareEN9Dimension2Id4EnumE7PointId7PointId">
-<span id="pdal::PointView::compare__Dimension::Id::Enum.PointId.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1add7d7d942cf01ffcf30c81d651aa4d90"></span>bool <code class="descname">compare</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>dim</em>, PointId <em>id1</em>, PointId <em>id2</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView7compareEN9Dimension2Id4EnumE7PointId7PointId" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView8setFieldEN9Dimension2IdEN9Dimension4TypeE7PointIdPKv">
+<span id="pdal::PointView::setField__Dimension::Id.Dimension::Type.PointId.voidCP"></span><span class="target" id="apiclasspdal_1_1PointView_1a10fef6e2a138f1e17d46de08ca079afa"></span>void <code class="descname">setField</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>dim</em>, <a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4TypeE" title="pdal::Dimension::Type">Type</a> <em>type</em>, PointId <em>idx</em>, <em class="property">const</em> void *<em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView8setFieldEN9Dimension2IdEN9Dimension4TypeE7PointIdPKv" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal9PointView11getRawFieldEN9Dimension2Id4EnumE7PointIdPv">
-<span id="pdal::PointView::getRawField__Dimension::Id::Enum.PointId.voidP"></span><span class="target" id="apiclasspdal_1_1PointView_1a915ab9b4a6c41898215047a5dc9c3913"></span>void <code class="descname">getRawField</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>dim</em>, PointId <em>idx</em>, void *<em>buf</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView11getRawFieldEN9Dimension2Id4EnumE7PointIdPv" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
+<dt id="_CPPv2N4pdal9PointView7compareEN9Dimension2IdE7PointId7PointId">
+<span id="pdal::PointView::compare__Dimension::Id.PointId.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a657bc229e515e78d5fdcc3171c63839e"></span>bool <code class="descname">compare</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>dim</em>, PointId <em>id1</em>, PointId <em>id2</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView7compareEN9Dimension2IdE7PointId7PointId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9PointView7compareEN9Dimension2IdE7PointId7PointId">
+<span id="pdal::PointView::compare__Dimension::Id.PointId.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a454710963d5e2cb7d80f6b02cd1685b5"></span>bool <code class="descname">compare</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>dim</em>, PointId <em>id1</em>, PointId <em>id2</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView7compareEN9Dimension2IdE7PointId7PointId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9PointView11getRawFieldEN9Dimension2IdE7PointIdPv">
+<span id="pdal::PointView::getRawField__Dimension::Id.PointId.voidP"></span><span class="target" id="apiclasspdal_1_1PointView_1a574f9db2265bec1df0ce2144d09e16bc"></span>void <code class="descname">getRawField</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>dim</em>, PointId <em>idx</em>, void *<em>buf</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView11getRawFieldEN9Dimension2IdE7PointIdPv" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -320,18 +320,18 @@ method. Otherwise, an exception will be thrown.</p>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal9PointView6hasDimEN9Dimension2Id4EnumE">
-<span id="pdal::PointView::hasDim__Dimension::Id::Enum"></span><span class="target" id="apiclasspdal_1_1PointView_1a0bfed6d992ba944370045348643aeeb0"></span>bool <code class="descname">hasDim</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView6hasDimEN9Dimension2Id4EnumE" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView6hasDimEN9Dimension2IdE">
+<span id="pdal::PointView::hasDim__Dimension::Id"></span><span class="target" id="apiclasspdal_1_1PointView_1aead96a4cd5514f632bca8993bc75e6ae"></span>bool <code class="descname">hasDim</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView6hasDimEN9Dimension2IdE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal9PointView7dimNameEN9Dimension2Id4EnumE">
-<span id="pdal::PointView::dimName__Dimension::Id::Enum"></span><span class="target" id="apiclasspdal_1_1PointView_1aa71b03e72b8b102327477e2b95da786c"></span>std::string <code class="descname">dimName</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView7dimNameEN9Dimension2Id4EnumE" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView7dimNameEN9Dimension2IdE">
+<span id="pdal::PointView::dimName__Dimension::Id"></span><span class="target" id="apiclasspdal_1_1PointView_1a1d99a5876514964ae9cd17ffc04d26b6"></span>std::string <code class="descname">dimName</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView7dimNameEN9Dimension2IdE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N4pdal9PointView4dimsEv">
-<span id="pdal::PointView::dims"></span><span class="target" id="apiclasspdal_1_1PointView_1aa0ea88bef58126dcdfeb11bdc570a918"></span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension6IdListE" title="pdal::Dimension::IdList">IdList</a> <code class="descname">dims</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView4dimsEv" title="Permalink to this definition">¶</a></dt>
+<span id="pdal::PointView::dims"></span><span class="target" id="apiclasspdal_1_1PointView_1aa0ea88bef58126dcdfeb11bdc570a918"></span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::IdList <code class="descname">dims</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView4dimsEv" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -340,13 +340,13 @@ method. Otherwise, an exception will be thrown.</p>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal9PointView7dimSizeEN9Dimension2Id4EnumE">
-<span id="pdal::PointView::dimSize__Dimension::Id::Enum"></span><span class="target" id="apiclasspdal_1_1PointView_1ac7b06113fcbc111aa970ef372b257dfa"></span>std::size_t <code class="descname">dimSize</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView7dimSizeEN9Dimension2Id4EnumE" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView7dimSizeEN9Dimension2IdE">
+<span id="pdal::PointView::dimSize__Dimension::Id"></span><span class="target" id="apiclasspdal_1_1PointView_1a09b66bdff714129c693eb2108c93847f"></span>std::size_t <code class="descname">dimSize</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView7dimSizeEN9Dimension2IdE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal9PointView7dimTypeEN9Dimension2Id4EnumE">
-<span id="pdal::PointView::dimType__Dimension::Id::Enum"></span><span class="target" id="apiclasspdal_1_1PointView_1ad0e03ed7e8970cf0a19a5d5555b40ff2"></span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4TypeE" title="pdal::Dimension::Type">Type</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4Type4EnumE" title="pdal::Dimension::Type::Enum">Enum</a> <code class="descname">dimType</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2IdE" title="pdal::Dimension::Id">Id</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension2Id4EnumE" title="pdal::Dimension::Id::Enum">Enum</a> <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView7dimTypeEN9Dimension2Id4EnumE" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N4pdal9PointView7dimTypeEN9Dimension2IdE">
+<span id="pdal::PointView::dimType__Dimension::Id"></span><span class="target" id="apiclasspdal_1_1PointView_1a0405a3d0ce51028c3cd039d5e9b21da0"></span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::<a class="reference internal" href="dimension.html#_CPPv2N4pdal9Dimension4TypeE" title="pdal::Dimension::Type">Type</a> <code class="descname">dimType</code><span class="sig-paren">(</span><a class="reference internal" href="dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension">Dimension</a>::Id <em>id</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4pdal9PointView7dimTypeEN9Dimension2IdE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -474,7 +474,7 @@ method. Otherwise, an exception will be thrown.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 22, 2016.
+      Last updated on Aug 27, 2016.
 
     </p>
   </div> 
@@ -495,7 +495,7 @@ method. Otherwise, an exception will be thrown.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -529,7 +529,7 @@ method. Otherwise, an exception will be thrown.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 22, 2016.
+                    on Aug 27, 2016.
         </div>
     </div>
 

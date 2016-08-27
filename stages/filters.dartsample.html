@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.2.0
+                1.3.0
               </div>
             
           
@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.attribute.html">filters.attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.chipper.html">filters.chipper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
@@ -110,16 +111,22 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.divider.html">filters.divider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.ground.html">filters.ground</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.height.html">filters.height</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hexbin.html">filters.hexbin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.merge.html">filters.merge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.mortonorder.html">filters.mortonorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.movingleastsquares.html">filters.movingleastsquares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.outlier.html">filters.outlier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.pclblock.html">filters.pclblock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.pmf.html">filters.pmf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.poisson.html">filters.poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.predicate.html">filters.predicate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.programmable.html">filters.programmable</a></li>
@@ -127,6 +134,7 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.randomize.html">filters.randomize</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.range.html">filters.range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.reprojection.html">filters.reprojection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.sort.html">filters.sort</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.splitter.html">filters.splitter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.statisticaloutlier.html">filters.statisticaloutlier</a></li>
@@ -193,8 +201,8 @@
   <div class="section" id="filters-dartsample">
 <span id="id1"></span><h1>filters.dartsample<a class="headerlink" href="#filters-dartsample" title="Permalink to this headline">¶</a></h1>
 <p>The practice of performing Poisson sampling via &#8220;Dart Throwing&#8221; was introduced
-in the mid-1980&#8217;s by <a class="reference internal" href="#cook1986" id="id2">[Cook1986]</a> and <a class="reference internal" href="#dippe1985" id="id3">[Dippe1985]</a>, and has been applied to
-point clouds in other software <a class="reference internal" href="#mesh2009" id="id4">[Mesh2009]</a>. Our implementation is a brute force
+in the mid-1980&#8217;s by <a class="reference internal" href="filters.sample.html#cook1986" id="id2">[Cook1986]</a> and <a class="reference internal" href="filters.sample.html#dippe1985" id="id3">[Dippe1985]</a>, and has been applied to
+point clouds in other software <a class="reference internal" href="filters.sample.html#mesh2009" id="id4">[Mesh2009]</a>. Our implementation is a brute force
 approach that randomly selects points from the input <code class="docutils literal"><span class="pre">PointView</span></code>, adding them
 to the output <code class="docutils literal"><span class="pre">PointView</span></code> subject to the minimum distance constraint (the
 <code class="docutils literal"><span class="pre">radius</span></code>). The full layout (i.e., the dimensions) of the input <code class="docutils literal"><span class="pre">PointView</span></code>
@@ -255,7 +263,7 @@ decimation.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 22, 2016.
+      Last updated on Aug 27, 2016.
 
     </p>
   </div> 
@@ -276,7 +284,7 @@ decimation.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -310,7 +318,7 @@ decimation.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 22, 2016.
+                    on Aug 27, 2016.
         </div>
     </div>
 

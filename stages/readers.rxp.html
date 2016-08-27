@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.2.0
+                1.3.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ply.html">readers.ply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pts.html">readers.pts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.qfit.html">readers.qfit</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.rxp</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
@@ -252,27 +253,18 @@ You could also use <a class="reference internal" href="filters.predicate.html#fi
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>File to read from [Required if rdtp is not provided]</dd>
+<dd>File to read from, or rdtp URI for network-accessible scanner. [Required]</dd>
 <dt>rdtp</dt>
-<dd>URI for a network-assessable scanner [Required if filename is not provided]</dd>
+<dd>Boolean to switch from file-based reading to RDTP-based. [default: false]</dd>
 <dt>sync_to_pps</dt>
 <dd>If &#8220;true&#8221;, ensure all incoming points have a valid pps timestamp, usually provided by some sort of GPS clock.
 If &#8220;false&#8221;, use the scanner&#8217;s internal time.
-Defaults to &#8220;true&#8221;</dd>
+[default: true]</dd>
 <dt>minimal</dt>
 <dd>If &#8220;true&#8221;, only write X, Y, Z, and time values to the data stream.
 If &#8220;false&#8221;, write all available values as derived from the rxp file.
 Use this feature to reduce the memory footprint of a PDAL run, if you don&#8217;t need any values but the points themselves.
-Defaults to &#8220;false&#8221;.</dd>
-<dt>inclination_fix</dt>
-<dd><em>EXPERIMENTAL</em>: If &#8220;true&#8221;, use inclination values in the rxp file to dynamically correct for inclination changes throughout the scan, using a moving average of 2 * <code class="docutils literal"><span class="pre">inclination_fix_window</span></code> inclination readings (see below).
-This is an experimental feature that will remove some points from the data stream and modify many others.
-Use with caution.
-If &#8220;false&#8221;, disable this feature.
-Defaults to &#8220;false&#8221;.</dd>
-<dt>inclination_fix_window</dt>
-<dd><em>EXPERIMENTAL</em>: Sets the half-size of the inclination fix window (see above).
-Use of this feature should be considered highly experimental.</dd>
+[default: false]</dd>
 </dl>
 </div>
 </div>
@@ -301,7 +293,7 @@ Use of this feature should be considered highly experimental.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 22, 2016.
+      Last updated on Aug 27, 2016.
 
     </p>
   </div> 
@@ -322,7 +314,7 @@ Use of this feature should be considered highly experimental.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -356,7 +348,7 @@ Use of this feature should be considered highly experimental.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 22, 2016.
+                    on Aug 27, 2016.
         </div>
     </div>
 

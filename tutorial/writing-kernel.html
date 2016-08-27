@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.2.0
+                1.3.0
               </div>
             
           
@@ -317,13 +317,7 @@ methods declared for the plugin interface to be satisfied:</p>
 55
 56
 57
-58
-59
-60
-61
-62
-63
-64</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyKernel.cpp</span>
+58</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyKernel.cpp</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;MyKernel.hpp&quot;</span><span class="cp"></span>
 
@@ -364,24 +358,18 @@ methods declared for the plugin interface to be satisfied:</p>
     <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
     <span class="n">StageFactory</span> <span class="n">f</span><span class="p">;</span>
 
-    <span class="n">Stage</span> <span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">readerOptions</span><span class="p">;</span>
-    <span class="n">readerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_input_file</span><span class="p">);</span>
-    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">readerOptions</span><span class="p">);</span>
+    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">makeReader</span><span class="p">(</span><span class="n">m_input_file</span><span class="p">,</span> <span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
 
-    <span class="n">Stage</span> <span class="o">*</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">);</span>
+    <span class="c1">// Options should be added in the call to makeFilter, makeReader,</span>
+    <span class="c1">// or makeWriter so that the system can override them with those</span>
+    <span class="c1">// provided on the command line when applicable.</span>
     <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
     <span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">filterOptions</span><span class="p">);</span>
-    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">reader</span><span class="p">);</span>
+    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">makeFilter</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="p">,</span> <span class="n">filterOptions</span><span class="p">);</span>
 
-    <span class="n">Stage</span> <span class="o">*</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">writerOptions</span><span class="p">;</span>
-    <span class="n">writerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_output_file</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">writerOptions</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">filter</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">makeWriter</span><span class="p">(</span><span class="n">m_output_file</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
+    <span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
   <span class="p">}</span>
@@ -414,37 +402,35 @@ stages that will be used within the kernel.</p>
 <a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>, and is specified by the stage name, in this
 case an LAS reader. For brevity, we provide the reader a single option, the
 filename of the file to be read.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">readerOptions</span><span class="p">;</span>
-    <span class="n">readerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_input_file</span><span class="p">);</span>
-    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">readerOptions</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">makeReader</span><span class="p">(</span><span class="n">m_input_file</span><span class="p">,</span> <span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Options should be added in the call to makeFilter, makeReader,</span>
+    <span class="c1">// or makeWriter so that the system can override them with those</span>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> is also created from the
 <a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>.  Here, we create a decimation filter that will
 pass every tenth point to subsequent stages. We also specify the input to this
 stage, which is the reader.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
     <span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">filterOptions</span><span class="p">);</span>
-    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">reader</span><span class="p">);</span>
+    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">makeFilter</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="p">,</span> <span class="n">filterOptions</span><span class="p">);</span>
+
+    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">makeWriter</span><span class="p">(</span><span class="n">m_output_file</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Finally, the <a class="reference internal" href="../api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a> is created from the
 <a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>. This <a class="reference internal" href="../stages/writers.text.html#writers-text"><span class="std std-ref">writers.text</span></a>, takes as input the previous
 stage (the <a class="reference internal" href="../stages/filters.decimation.html#filters-decimation"><span class="std std-ref">filters.decimation</span></a>) and the output filename as its sole option.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span> <span class="o">*</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
-    <span class="n">Options</span> <span class="n">writerOptions</span><span class="p">;</span>
-    <span class="n">writerOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">m_output_file</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">writerOptions</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="o">*</span><span class="n">filter</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
 </pre></div>
 </div>
 <p>The final two steps are to prepare and execute the pipeline. This is achieved
 by calling prepare and execute on the final stage.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="p">}</span> <span class="c1">// namespace pdal</span>
 </pre></div>
 </div>
 <p>When compiled, a dynamic library file will be created; in this case,
@@ -481,7 +467,7 @@ commands.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 22, 2016.
+      Last updated on Aug 27, 2016.
 
     </p>
   </div> 
@@ -502,7 +488,7 @@ commands.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -536,7 +522,7 @@ commands.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 22, 2016.
+                    on Aug 27, 2016.
         </div>
     </div>
 

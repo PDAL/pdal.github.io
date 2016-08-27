@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.2.0
+                1.3.0
               </div>
             
           
@@ -219,8 +219,7 @@ the elements that make up a point a dimension.  PDAL predefines the dimensions
 that are in common use by the formats that it currently supports.  Readers may
 register their use of a predefined dimension or may have PDAL create a
 dimension with a name and type as requested.  Dimensions are described by the
-enumeration pdal::Dimension::Id::Enum and associated functions in
-Dimension.hpp.</p>
+enumeration pdal::Dimension::Id and associated functions in Dimension.hpp.</p>
 <p>PDAL has a default type (Double, Float, Signed32, etc.) for each of its
 predefined dimensions which is believed to be sufficient to accurately
 hold the necessary data.  Only when the default data type is deemed
@@ -229,7 +228,7 @@ is no facility to &#8220;downsize&#8221; a dimension type to save memory.  Dimen
 can be examined to determine the default storage type of each predefined
 dimension.  In most cases knowledge of the storage data type for
 a dimension isn&#8217;t required.  PDAL properly converts data to and from the
-internal storage type transparently.  Invalid conversion raise an exception.</p>
+internal storage type transparently.  Invalid conversions raise an exception.</p>
 <p>When a storage type is explicitly requested for a dimension, PDAL examines the
 existing storage type and requested type and chooses the storage type so
 that it can hold both types.  In some cases this results in a storage type
@@ -241,9 +240,10 @@ requested type is a 16 bit unsigned integer (Unsigned16), PDAL will use a
 </div>
 <div class="section" id="point-layout">
 <h4>Point Layout<a class="headerlink" href="#point-layout" title="Permalink to this headline">¶</a></h4>
-<p>PDAL stores orientation information in a point layout structure (PointLayout
-object).  This structure contains information about what dimensions are stored
-in a structure containing points, like their names, types, and offsets.</p>
+<p>PDAL stores the set of dimension information in a point layout structure
+(PointLayout object).  It stores information about the physical layout of
+data of each point in memory and also stores the type and name of each
+dimension.</p>
 </div>
 <div class="section" id="point-table">
 <h4>Point Table<a class="headerlink" href="#point-table" title="Permalink to this headline">¶</a></h4>
@@ -252,8 +252,8 @@ point table has an associated point layout describing its format.  All
 points in a single point table have the same dimensions and all operations on
 a PDAL pipeline make use of a single point table.  In addition to storing
 points, a point table also stores pipeline metadata that may get created as
-pipeline stages are executed.  Most functions receive a PointTablePtr object,
-which refers to the active point table.  A PointTablePtr can be stored
+pipeline stages are executed.  Most functions receive a PointTableRef object,
+which refers to the active point table.  A PointTableRef can be stored
 or copied cheaply.</p>
 </div>
 <div class="section" id="point-view">
@@ -324,22 +324,26 @@ allows an exception to be thrown in the case of an invalid option that can
 be properly interpreted by the pipeline.</p>
 </div></blockquote>
 </li>
-<li><p class="first">void initialize()</p>
+<li><p class="first">void initialize() OR void initialize(PointTableRef)</p>
 <blockquote>
 <div><p>Some stages, particularly readers, may need to do things such as open files
 to extract header information before the next step in processing.  Other
 general processing that needs to take place before any stage is executed
-should occur at this time.  Initialization that can be deferred until the
-execution stage should be performed in the ready() method (see below).</p>
+should occur at this time.  If the initialization requires knowledge of
+the point table, implement the function that accepts one, otherwise
+implement the no-argument version.  Whether to place initialization code
+at this step or in prepared() or ready() (see below) is a judgement call,
+but detection of errors earlier in the process allows faster termination of
+a pipeline.</p>
 </div></blockquote>
 </li>
 <li><p class="first">void addDimensions(PointLayoutPtr layout)</p>
 <blockquote>
 <div><p>This method allows stages to inform a point table&#8217;s layout of the dimensions
-that it would like as part of the record of each point.  Normally, only
+that it would like as part of the record of each point.  Usually, only
 readers add dimensions to a point table, but there is no prohibition on
 filters or writers from adding dimensions if necessary.  Dimensions should
-not be added to the layout of a pipeline’s point table except in this
+not be added to the layout of a pipeline’s point layout except in this
 method.</p>
 </div></blockquote>
 </li>
@@ -397,7 +401,7 @@ If dimensions are determined as named entities from a point cloud source,
 it may not be known whether the dimensions are predefined or not.  In this
 case the function registerOrAssignDim() can be used.  When a dimension is
 assigned, rather than registered, the reader needs to inform PDAL of the
-type of the variable using the enumeration Dimension::Type::Enum.</p>
+type of the variable using the enumeration Dimension::Type.</p>
 <p>In this example, the reader informs the point table&#8217;s layout that it will
 reference the dimensions X, Y and Z.</p>
 <blockquote>
@@ -420,7 +424,7 @@ precision floating point.</p>
     <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">di</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">di</span> <span class="o">!=</span> <span class="n">header</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">di</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="n">dimName</span> <span class="o">=</span> <span class="o">*</span><span class="n">di</span><span class="p">;</span>
-        <span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span><span class="p">::</span><span class="n">Enum</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerOrAssignDim</span><span class="p">(</span>
+        <span class="n">Dimension</span><span class="p">::</span><span class="n">Id</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">registerOrAssignDim</span><span class="p">(</span>
             <span class="n">dimName</span><span class="p">,</span>
             <span class="n">Dimension</span><span class="p">::</span><span class="n">Type</span><span class="p">::</span><span class="n">Double</span><span class="p">);</span>
     <span class="p">}</span>
@@ -603,7 +607,7 @@ call to ready().</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 22, 2016.
+      Last updated on Aug 27, 2016.
 
     </p>
   </div> 
@@ -624,7 +628,7 @@ call to ready().</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -658,7 +662,7 @@ call to ready().</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 22, 2016.
+                    on Aug 27, 2016.
         </div>
     </div>
 
