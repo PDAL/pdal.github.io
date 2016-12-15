@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -208,9 +208,8 @@ algorithm provided by PDAL, the <cite>Progressive Morphological Filter</cite> te
 generate a ground surface.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">PMF is implemented in PCL. PCL is then linked to PDAL. You can read more
-about the specifics of the algorithm from the <a class="reference external" href="http://users.cis.fiu.edu/~chens/PDF/TGRS.pdf">paper</a>, and you can read more
-about the PCL implementation in the source code on <a class="reference external" href="https://github.com/PointCloudLibrary/pcl/blob/master/filters/include/pcl/filters/morphological_filter.h">github</a>.</p>
+<p class="last">You can read more about the specifics of the PMF algorithm from the <a class="reference external" href="http://users.cis.fiu.edu/~chens/PDF/TGRS.pdf">paper</a>, and you can read more
+about the PDAL implementation in the source code on <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/filters/PMFFilter.cpp">github</a>.</p>
 </div>
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
@@ -225,7 +224,7 @@ Quickstart Terminal</cite>:</p>
        <span class="n">pdal</span> <span class="n">ground</span> \
        <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
        <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> \
-       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">ground</span><span class="o">.</span><span class="n">classify</span><span class="o">=</span><span class="n">true</span> \
+       <span class="o">--</span><span class="n">classify</span><span class="o">=</span><span class="n">true</span> \
        <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
@@ -241,9 +240,8 @@ generate a terrain surface.</p>
 <h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
 <p>We do not yet have a satisfactory surface for generating a DTM.  When we
 visualize the output of this ground operation, we notice there&#8217;s still some
-noise. PCL also has its own <a class="reference internal" href="../../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> concept, and we can stack the
-call to PMF with a call to a the <cite>filters.statisticaloutlier</cite> technique we
-learned about in <a class="reference internal" href="../denoising/denoising.html#denoising"><span class="std std-ref">Removing noise</span></a>.</p>
+noise. We can stack the call to PMF with a call to a the <cite>filters.outlier</cite>
+technique we learned about in <a class="reference internal" href="../denoising/denoising.html#denoising"><span class="std std-ref">Removing noise</span></a>.</p>
 <ol class="arabic simple">
 <li>Let us start by removing the non-ground data:</li>
 </ol>
@@ -252,29 +250,24 @@ learned about in <a class="reference internal" href="../denoising/denoising.html
 3
 4
 5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
        <span class="n">pdal</span> <span class="n">ground</span> \
        <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
        <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
-       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">ground</span><span class="o">.</span><span class="n">classify</span><span class="o">=</span><span class="n">true</span> \
-<span class="hll">       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">ground</span><span class="o">.</span><span class="n">extract</span><span class="o">=</span><span class="n">true</span> \
-</span>       <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
-</pre></div>
+       <span class="o">--</span><span class="n">classify</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">extract</span><span class="o">=</span><span class="n">true</span> \
+<span class="hll">       <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+</span></pre></div>
 </td></tr></table></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal"><span class="pre">filters.ground.extract=true</span></code> item causes all data except
+<p class="last">The <code class="docutils literal"><span class="pre">filters.pmf.extract=true</span></code> item causes all data except
 ground-classified points to be removed from the set.</p>
 </div>
 <p>Buildings and other non-ground points are removed with the <code class="docutils literal"><span class="pre">extract</span></code> option
-of <a class="reference internal" href="../../../../stages/filters.ground.html#filters-ground"><span class="std std-ref">filters.ground</span></a></p>
+of <a class="reference internal" href="../../../../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a></p>
 <img alt="../../../../_images/ground-ground-only-view.png" src="../../../../_images/ground-ground-only-view.png" />
-<ol class="arabic simple" start="2">
-<li>Now we will remove the noise. PDAL has the <a class="reference internal" href="../../../../apps/pcl.html#pcl-command"><span class="std std-ref">pcl</span></a> to allow you
-to pass <a class="reference external" href="http://pointclouds.org">PCL</a> pipelines for processing. We will use this to combine
-the PMF and StatisticalOutlierRemoval filters into a single operation.</li>
-</ol>
+<p>2. Now we will remove the noise, using the <a class="reference internal" href="../../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> to stack the
+<a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> and <a class="reference internal" href="../../../../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a> stages:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -285,51 +278,21 @@ the PMF and StatisticalOutlierRemoval filters into a single operation.</li>
  8
  9
 10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
-      <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.5</span>
-    <span class="p">}]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
+       <span class="n">pdal</span> <span class="n">translate</span> \
+       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+       <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
+       <span class="n">outlier</span> <span class="n">pmf</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">pmf</span><span class="o">.</span><span class="n">cell_size</span><span class="o">=</span><span class="mf">1.5</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">pmf</span><span class="o">.</span><span class="n">extract</span><span class="o">=</span><span class="n">true</span> \
+       <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<dl class="last docutils">
-<dt>This pipeline is available in your workshop materials in the</dt>
-<dd><code class="docutils literal"><span class="pre">./exercises/analysis/ground/filter.json</span></code> file.</dd>
-</dl>
-</div>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-   <span class="n">pdal</span> <span class="n">pcl</span> \
-   <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
-   <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">-</span><span class="n">filtered</span><span class="o">.</span><span class="n">laz</span> \
-   <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="nb">filter</span><span class="o">.</span><span class="n">json</span>
-</pre></div>
-</td></tr></table></div>
-<p>The <a class="reference internal" href="../../../../apps/pcl.html#pcl-command"><span class="std std-ref">pcl</span></a> allows you to use <a class="reference internal" href="../../../../tutorial/pcl_spec.html#pcl-json-specification"><span class="std std-ref">1&nbsp;&nbsp;&nbsp;Draft PCL JSON Specification</span></a> operations in
-succession over data.</p>
+<p>The result is a more accurate representation of the ground returns.</p>
 <img alt="../../../../_images/ground-filtered.png" src="../../../../_images/ground-filtered.png" />
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This pipeline is available in your workshop materials in the
-<code class="docutils literal"><span class="pre">./exercises/analysis/ground/filter.json</span></code> file.</p>
-</div>
 </div>
 </div>
 </div>
@@ -358,7 +321,7 @@ succession over data.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -379,7 +342,7 @@ succession over data.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -413,7 +376,7 @@ succession over data.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

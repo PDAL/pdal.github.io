@@ -1,0 +1,379 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>writers.gdal &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Writers" href="writers.html"/>
+        <link rel="next" title="writers.geowave" href="writers.geowave.html"/>
+        <link rel="prev" title="writers.derivative" href="writers.derivative.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.derivative.html">writers.derivative</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">writers.gdal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-example">Basic Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.matlab.html">writers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.p2g.html">writers.p2g</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.rialto.html">writers.rialto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="writers.html">Writers</a> &raquo;</li>
+      
+    <li>writers.gdal</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writers-gdal">
+<span id="id1"></span><h1>writers.gdal<a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="http://gdal.org">GDAL</a> writer creates a raster from a point cloud using an interpolation
+algorithm.  Output is produced using GDAL and can therefore use any <a class="reference external" href="http://www.gdal.org/formats_list.html">driver
+that supports creation of rasters</a>.</p>
+<p>The technique used to create the raster is a simple interpolation where
+each point that falls within a given radius of a raster cell center
+potentially contributes to the raster&#8217;s value.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If a circle with the provided radius doesn&#8217;t encompass the entire cell,
+it is possible that some points will not be considered at all, including
+those that may be within the bounds of the raster cell.</p>
+</div>
+<p>The GDAL writer creates rasters using the data specified in the <code class="docutils literal"><span class="pre">dimension</span></code>
+option (defaults to <cite>Z</cite>).The writer will creates up to six rasters based on
+different statistics in the output dataset.  The order of the layers in the
+dataset is as follows:</p>
+<dl class="docutils">
+<dt>min</dt>
+<dd>Give the cell the minimum value of all points within the given radius.</dd>
+<dt>max</dt>
+<dd>Give the cell the maximum value of all points within the given radius.</dd>
+<dt>mean</dt>
+<dd>Give the cell the mean value of all points within the given radius.</dd>
+<dt>idw</dt>
+<dd>Cells are assigned a value based on <a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_distance_weighting">Shepard&#8217;s inverse distance weighting</a>
+algorithm, considering all points within the given radius.</dd>
+<dt>count</dt>
+<dd>Give the cell the number of points that lie within the given radius.</dd>
+<dt>stdev</dt>
+<dd>Give the cell the population standard deviation of the points that lie
+within the given radius.</dd>
+</dl>
+<p>If no points fall within the circle about a raster cell, a secondary
+algorithm can be used to attempt to provide a value after the standard
+interpolation is complete.  If the <a class="reference internal" href="#window-size">window_size</a> option is set to a non-zero
+value, a square of rasters surrounding an empty cell, and the value of each
+non-empty surrounding is averaged using inverse distance weighting to provide
+a value for the subject cell.  The value provided for window_size is the
+maximum horizontal or vertical distance that a donor cell may be in order to
+contribute to the subject cell (A window_size of 1 essentially creates a 3x3
+array around the subject cell.  A window_size of 2 creates a 5x5 array, and
+so on.)</p>
+<p>Cells that have no value after interpolation are given the empty value of -9999.</p>
+<div class="section" id="basic-example">
+<h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
+<p>This  pipeline reads the file autzen_trim.las and creates a Geotiff dataset
+called outputfile.tif.  Since output_type isn&#8217;t specified, it creates six
+raster bands (&#8220;min&#8221;, &#8220;max&#8221;, &#8220;mean&#8221;, &#8220;idx&#8221;, &#8220;count&#8221; and &#8220;stdev&#8221;) in the output
+dataset.  The raster cells are 10x10 and the radius used to locate points
+whose values contribute to the cell value is 14.14.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;pdal/test/data/las/autzen_trim.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;radius&quot;</span><span class="p">:</span> <span class="mf">14.14</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.tif&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>Name of output file. [Required]</dd>
+<dt>resolution</dt>
+<dd>Length of raster cell edges in X/Y units.  [Required]</dd>
+<dt>radius</dt>
+<dd>Radius about cell center bounding points to use to calculate a cell value.
+[Required]</dd>
+<dt>gdaldriver</dt>
+<dd>Name of the GDAL driver to use to write the output. [Default: &#8220;GTiff&#8221;]</dd>
+<dt>gdalopts</dt>
+<dd><p class="first">A list of key/value options to pass directly to the GDAL driver.  The
+format is name=value,name=value,...  The option may be specified
+any number of times.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The INTERLEAVE GDAL driver option is not supported.  writers.gdal
+always uses BAND interleaving.</p>
+</div>
+</dd>
+</dl>
+<dl class="docutils" id="output-type">
+<dt>output_type</dt>
+<dd>A comma separated list of statistics for which to produce raster layers.
+The supported values are &#8220;min&#8221;, &#8220;max&#8221;, &#8220;mean&#8221;, &#8220;idw&#8221;, &#8220;count&#8221;, &#8220;stdev&#8221;
+and &#8220;all&#8221;.  The option may be specified more than once. [Default: &#8220;all&#8221;]</dd>
+</dl>
+<dl class="docutils" id="window-size">
+<dt>window_size</dt>
+<dd>The maximum distance from a donor cell to a target cell when applying
+the fallback interpolation method.  See the stage description for more
+information. [Default: 0]</dd>
+<dt>dimension</dt>
+<dd>A dimension name to use for the interpolation. [Default: <code class="docutils literal"><span class="pre">Z</span></code>]</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writers.geowave.html" class="btn btn-neutral float-right" title="writers.geowave" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="writers.derivative.html" class="btn btn-neutral" title="writers.derivative" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Dec 15, 2016.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2016
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Dec 15, 2016.
+        </div>
+    </div>
+
+</body>
+</html>

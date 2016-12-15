@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -214,50 +214,28 @@ For help building PDAL with optional libraries, see <a class="reference external
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example rescales the points, given in the scanner&#8217;s own coordinate system, to values that can be written to a las file.
-Only points with a valid gps time, as determined by a pps pulse, are read from the rxp, since the <code class="docutils literal"><span class="pre">sync_to_pps</span></code> option is &#8220;true&#8221;.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="k">def</span> <span class="nf">reflectance_to_intensity</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span> <span class="n">outs</span><span class="p">):</span>
-    <span class="n">ref</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s2">&quot;Reflectance&quot;</span><span class="p">]</span>
-    <span class="nb">min</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
-    <span class="nb">max</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
-    <span class="n">outs</span><span class="p">[</span><span class="s2">&quot;Intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">65535</span> <span class="o">*</span> <span class="p">(</span><span class="n">ref</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">True</span>
-</pre></div>
-</div>
+Only points with a valid gps time, as determined by a pps pulse, are read from the rxp, since the <code class="docutils literal"><span class="pre">sync_to_pps</span></code> option is &#8220;true&#8221;.
+Reflectance values are mapped to intensity values using sensible defaults.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;120304_204030.rxp&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;sync_to_pps&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;120304_204030.rxp&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;sync_to_pps&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;reflectance_as_intensity&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.programmable&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="s2">&quot;filter_rxp.py&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="s2">&quot;reflectance_to_intensity&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;add_dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Intensity&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="s2">&quot;filter_rxp&quot;</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
-      <span class="s2">&quot;discard_high_return_numbers&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;outputfile.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;discard_high_return_numbers&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>A few things to note:</p>
-<ul class="simple">
-<li>We use a <a class="reference internal" href="filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a> to remap Reflectance values to Intensity values, scaling them so the entire range of Reflectance values fit into the Intensity field.
-This is analogous to the &#8220;Export reflectance as intensity&#8221; option in RiSCAN Pro.
-You could also explicitly set the minimum and maximum Reflectance values as you would in RiSCAN Pro using the same programmable filter.
-You could also use &#8220;Amplitude&#8221; instead of &#8220;Reflectance&#8221;.
-If you do not need Intensity values in your output file, you can delete the programmable filter.</li>
-<li>We set the <code class="docutils literal"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal"><span class="pre">true</span></code> on the <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.
+<p>We set the <code class="docutils literal"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal"><span class="pre">true</span></code> on the <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.
 RXP files can contain more returns per shot than is supported by las, and so we need to explicitly tell the las writer to ignore those high return number points.
-You could also use <a class="reference internal" href="filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a> to filter those points earlier in the pipeline, or modify the return values with a <a class="reference internal" href="filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a>.</li>
-</ul>
+You could also use <a class="reference internal" href="filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a> to filter those points earlier in the pipeline, or modify the return values with a <a class="reference internal" href="filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a>.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
@@ -275,6 +253,15 @@ If &#8220;false&#8221;, use the scanner&#8217;s internal time.
 If &#8220;false&#8221;, write all available values as derived from the rxp file.
 Use this feature to reduce the memory footprint of a PDAL run, if you don&#8217;t need any values but the points themselves.
 [default: false]</dd>
+<dt>reflectance_as_intensity</dt>
+<dd>If &#8220;true&#8221;, maps reflectance values onto intensity values using a range from -25dB to 5dB.
+[default: true]</dd>
+<dt>min_reflectance</dt>
+<dd>The low end of the reflectance-to-intensity map.
+[default: -25.0]</dd>
+<dt>max_reflectance</dt>
+<dd>The high end of the reflectance-to-intensity map.
+[default: 5.0]</dd>
 </dl>
 </div>
 </div>
@@ -303,7 +290,7 @@ Use this feature to reduce the memory footprint of a PDAL run, if you don&#8217;
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -324,7 +311,7 @@ Use this feature to reduce the memory footprint of a PDAL run, if you don&#8217;
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -358,7 +345,7 @@ Use this feature to reduce the memory footprint of a PDAL run, if you don&#8217;
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

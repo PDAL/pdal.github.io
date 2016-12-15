@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -416,10 +416,12 @@ that corresponds to the data field for easier lookup.</p>
 94
 95
 96
-97</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyWriter.cpp</span>
+97
+98</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyWriter.cpp</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;MyWriter.hpp&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;pdal/pdal_macros.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/util/FileUtils.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;pdal/util/ProgramArgs.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">pdal</span>
@@ -517,7 +519,8 @@ that corresponds to the data field for easier lookup.</p>
 </td></tr></table></div>
 <p>In the writer implementation, we will use a macro defined in pdal_macros,
 which is included in the include chain we are using.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="s">&quot;writers.mywriter&quot;</span><span class="p">,</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span>
+    <span class="s">&quot;writers.mywriter&quot;</span><span class="p">,</span>
     <span class="s">&quot;My Awesome Writer&quot;</span><span class="p">,</span>
     <span class="s">&quot;http://path/to/documentation&quot;</span> <span class="p">);</span>
 
@@ -542,7 +545,9 @@ also possible, but requires some extra steps and will not be covered here.</p>
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="p">{</span>
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="k">struct</span> <span class="n">FileStreamDeleter</span>
+  <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="n">T</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span>
     <span class="p">{</span>
@@ -562,7 +567,9 @@ also possible, but requires some extra steps and will not be covered here.</p>
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="p">{</span>
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
+  <span class="p">{</span>
     <span class="c1">// setPositional() Makes the argument required.</span>
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;Output filename&quot;</span><span class="p">,</span> <span class="n">m_filename</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>  
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;newline&quot;</span><span class="p">,</span> <span class="s">&quot;Line terminator&quot;</span><span class="p">,</span> <span class="n">m_newline</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
@@ -573,7 +580,8 @@ also possible, but requires some extra steps and will not be covered here.</p>
 </td></tr></table></div>
 <p>This method defines the arguments the writer provides and binds them to
 private variables.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>      <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">out</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">out</span><span class="p">;</span>
       <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;writers.mywriter couldn&#39;t open &#39;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_filename</span> <span class="o">&lt;&lt;</span>
         <span class="s">&quot;&#39; for output.&quot;</span><span class="p">;</span>
       <span class="k">throw</span> <span class="nf">pdal_error</span><span class="p">(</span><span class="n">out</span><span class="p">.</span><span class="n">str</span><span class="p">());</span>
@@ -589,7 +597,6 @@ private variables.</p>
     <span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="o">==</span> <span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Unknown</span><span class="p">)</span>
     <span class="p">{</span>
       <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
-      <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Dimension not found with name &#39;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_datafield</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&#39;&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>This method initializes our file stream in preparation for writing.</p>
@@ -608,7 +615,8 @@ private variables.</p>
 13
 14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="p">{</span>
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">)</span>
+  <span class="p">{</span>
     <span class="n">m_stream</span><span class="o">-&gt;</span><span class="n">precision</span><span class="p">(</span><span class="n">m_precision</span><span class="p">);</span>
     <span class="o">*</span><span class="n">m_stream</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">fixed</span><span class="p">;</span>
 
@@ -623,7 +631,6 @@ private variables.</p>
     <span class="n">m_dataDim</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
 
     <span class="o">*</span><span class="n">m_stream</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;#X:Y:Z:MyData&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_newline</span><span class="p">;</span>
-  <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <p>The ready method is used to prepare the writer for any number of PointViews that
@@ -645,7 +652,9 @@ and writing the header of the output file.</p>
 13
 14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="p">{</span>
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">write</span><span class="p">(</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
+  <span class="p">{</span>
       <span class="k">for</span> <span class="p">(</span><span class="n">PointId</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span>
       <span class="p">{</span>
         <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
@@ -678,7 +687,9 @@ values from the PointView, and then writing those in whatever necessary format
 to the output stream.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="p">{</span>
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">done</span><span class="p">(</span><span class="n">PointTableRef</span><span class="p">)</span>
+  <span class="p">{</span>
     <span class="n">m_stream</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
   <span class="p">}</span>
 </pre></div>
@@ -690,23 +701,25 @@ up the output stream by resetting it.</p>
 <h2>Compiling and Usage<a class="headerlink" href="#compiling-and-usage" title="Permalink to this headline">¶</a></h2>
 <p>To compile this reader, we will use cmake.  Here is the CMakeLists.txt file we
 will use for this process:</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span>cmake_minimum_required(VERSION 2.8.12)
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>cmake_minimum_required(VERSION 2.8.12)
 project(WriterTutorial)
 
 find_package(PDAL 1.0.0 REQUIRED CONFIG)
-include_directories(${PDAL_INCLUDE_DIRS})
 
 set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)
 add_library(pdal_plugin_writer_mywriter SHARED MyWriter.cpp)
-target_link_libraries(pdal_plugin_writer_mywriter ${PDAL_LIBRARIES})
+target_link_libraries(pdal_plugin_writer_mywriter PRIVATE ${PDAL_LIBRARIES})
+target_include_directories(pdal_plugin_writer_mywriter PRIVATE
+    ${PDAL_INCLUDE_DIRS})
 </pre></div>
 </td></tr></table></div>
 <p>If this file is in the directory with the MyWriter.hpp and MyWriter.cpp files,
@@ -750,7 +763,7 @@ in the previous tutorial, as well.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -771,7 +784,7 @@ in the previous tutorial, as well.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -805,7 +818,7 @@ in the previous tutorial, as well.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -117,7 +117,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">C++ API</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="algorithm.html"><code class="docutils literal"><span class="pre">pdal::Algorithm</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="bounds.html"><code class="docutils literal"><span class="pre">pdal::BOX2D</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="charbuf.html"><code class="docutils literal"><span class="pre">pdal::Charbuf</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="dimension.html"><code class="docutils literal"><span class="pre">pdal::Dimension</span></code></a></li>
@@ -192,117 +191,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="pdal-stagefactory">
-<span id="cpp-pdal-stagefactory"></span><h1><a class="reference internal" href="#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a><a class="headerlink" href="#pdal-stagefactory" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="_CPPv2N4pdal12StageFactoryE">
-<span id="pdal::StageFactory"></span><span class="target" id="apiclasspdal_1_1StageFactory"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">StageFactory</code><a class="headerlink" href="#_CPPv2N4pdal12StageFactoryE" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class provides a mechanism for creating <a class="reference internal" href="stage.html#apiclasspdal_1_1Stage"><span class="std std-ref">Stage</span></a> objects given a driver name. </p>
-<p>Creates stages are owned by the factory and destroyed when the factory is destroyed. Stages can be explicitly destroyed with <a class="reference internal" href="#apiclasspdal_1_1StageFactory_1a2d3a812bd2b1a63d788d82e18c29ff55"><span class="std std-ref">destroyStage()</span></a> if desired.</p>
-<p><dl class="docutils">
-<dt><strong>Note</strong></dt>
-<dd><a class="reference internal" href="stage.html#apiclasspdal_1_1Stage"><span class="std std-ref">Stage</span></a> creation is thread-safe. </dd>
-</dl>
-</p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4pdal12StageFactory12StageFactoryEb">
-<span id="pdal::StageFactory::StageFactory__b"></span><span class="target" id="apiclasspdal_1_1StageFactory_1aa06733f74043861f6216f5097b06cf52"></span><code class="descname">StageFactory</code><span class="sig-paren">(</span>bool <em>no_plugins</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory12StageFactoryEb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a stage factory. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">no_plugins</span></code> - <p>Don&#8217;t load plugins or allowed them to be created with this factory. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal12StageFactory11createStageERKNSt6stringE">
-<span id="pdal::StageFactory::createStage__ssCR"></span><span class="target" id="apiclasspdal_1_1StageFactory_1a75a98bab87877e3754fe6864f236ebf1"></span><a class="reference internal" href="stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage">Stage</a> *<code class="descname">createStage</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory11createStageERKNSt6stringE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a stage and return a pointer to the created stage. </p>
-<p>The factory takes ownership of any successfully created stage.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Pointer to created stage. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">stage_name</span></code> - <p>Type of stage to by created. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal12StageFactory12destroyStageEP5Stage">
-<span id="pdal::StageFactory::destroyStage__StageP"></span><span class="target" id="apiclasspdal_1_1StageFactory_1a2d3a812bd2b1a63d788d82e18c29ff55"></span>void <code class="descname">destroyStage</code><span class="sig-paren">(</span><a class="reference internal" href="stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage">Stage</a> *<em>stage</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory12destroyStageEP5Stage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Destroy a stage created by this factory. </p>
-<p>This doesn&#8217;t need to be called unless you specifically want to destroy a stage as all stages are destroyed when the factory is destroyed.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">stage</span></code> - <p>Pointer to stage to destroy. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
+<span id="cpp-pdal-stagefactory"></span><h1><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code><a class="headerlink" href="#pdal-stagefactory" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenclass: Cannot find class &#8220;pdal::StageFactory&#8221; in doxygen xml output for project &#8220;api&#8221; from directory: doxygen/xml</p>
 </div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4pdal12StageFactory10extensionsERKNSt6stringE">
-<span id="pdal::StageFactory::extensions__ssCR"></span><span class="target" id="apiclasspdal_1_1StageFactory_1a9c1ef87ed52c794eb33c89c61dc01e81"></span><em class="property">static</em> StringList <code class="descname">extensions</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>driver</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory10extensionsERKNSt6stringE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the file extensions associated with a driver. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">driver</span></code> - <p>Name of the driver whose extensions should be returned. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal12StageFactory17inferReaderDriverERKNSt6stringE">
-<span id="pdal::StageFactory::inferReaderDriver__ssCR"></span><span class="target" id="apiclasspdal_1_1StageFactory_1a9027948717cef2ff163bbb03e3eab71f"></span><em class="property">static</em> std::string <code class="descname">inferReaderDriver</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory17inferReaderDriverERKNSt6stringE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Infer the reader to use based on a filename. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Driver name or empty string if no reader can be inferred from the filename. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Filename that should be analyzed to determine a driver. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal12StageFactory17inferWriterDriverERKNSt6stringE">
-<span id="pdal::StageFactory::inferWriterDriver__ssCR"></span><span class="target" id="apiclasspdal_1_1StageFactory_1a5cbca1b198a359af4365cc6f488a7fee"></span><em class="property">static</em> std::string <code class="descname">inferWriterDriver</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory17inferWriterDriverERKNSt6stringE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Infer the writer to use based on filename extension. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Driver name or empty string if no writer can be inferred from the filename. </dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
 </div>
 
 
@@ -329,7 +222,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -350,7 +243,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -384,7 +277,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

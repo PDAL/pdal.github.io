@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -108,9 +108,10 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.attribute.html">filters.attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.chipper.html">filters.chipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.computerange.html">filters.computerange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.crop.html">filters.crop</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.dartsample.html">filters.dartsample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.divider.html">filters.divider</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
@@ -118,11 +119,14 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.ground.html">filters.ground</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.height.html">filters.height</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hexbin.html">filters.hexbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.iqr.html">filters.iqr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.kdistance.html">filters.kdistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.merge.html">filters.merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.mongus.html">filters.mongus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.mortonorder.html">filters.mortonorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.movingleastsquares.html">filters.movingleastsquares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
@@ -138,14 +142,14 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.poisson.html">filters.poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.predicate.html">filters.predicate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.programmable.html">filters.programmable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.radiusoutlier.html">filters.radiusoutlier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.radialdensity.html">filters.radialdensity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.randomize.html">filters.randomize</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.range.html">filters.range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.reprojection.html">filters.reprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.smrf.html">filters.smrf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.sort.html">filters.sort</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.splitter.html">filters.splitter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.statisticaloutlier.html">filters.statisticaloutlier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.stats.html">filters.stats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.transformation.html">filters.transformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.voxelgrid.html">filters.voxelgrid</a></li>
@@ -218,21 +222,22 @@
 between PDAL and PCL point cloud representations.</p>
 <p>This filter is under active development. The current implementation serves as a
 proof of concept for linking PCL into PDAL and converting data. The PCL Block
-filter creates a PCL <code class="docutils literal"><span class="pre">Pipeline</span></code> object and passes it a single argument, the JSON
-file containing the PCL block definition. After filtering, the resulting indices
-can be retrieved and used to create a new PDAL <code class="docutils literal"><span class="pre">PointView</span></code> containing only
-those points that passed the filtering stages.</p>
+filter creates a PCL <code class="docutils literal"><span class="pre">Pipeline</span></code> object and passes it a single argument, the
+JSON file containing the PCL block definition. After filtering, the resulting
+indices can be retrieved and used to create a new PDAL <code class="docutils literal"><span class="pre">PointView</span></code> containing
+only those points that passed the filtering stages.</p>
 <p>At this stage in its development, the PCL <code class="docutils literal"><span class="pre">Pipeline</span></code> does not allow complex
-operations that may change the point type (e.g., <code class="docutils literal"><span class="pre">PointXYZ</span></code> to <code class="docutils literal"><span class="pre">PointNormal</span></code>) or
-alter points.  We will continue to look into use cases that are of value and
-feasible, but for now are limited primarily to PCL functions that filter or
-segment the point cloud, returning a list of indices of the filtered points
-(e.g., ground or object, noise or signal). The main reason for this design
-decision is that we want to avoid converting all <code class="docutils literal"><span class="pre">PointView</span></code> dimensions to the
-PCL <code class="docutils literal"><span class="pre">PointCloud</span></code>. In the case of an LAS reader, we may very well not want to
-operate on fields such as return number, but we do not want to lose this
-information post PCL filtering. The easy solution is to simply retain the index
-between the <code class="docutils literal"><span class="pre">PointView</span></code> and <code class="docutils literal"><span class="pre">PointCloud</span></code> objects and update as necessary.</p>
+operations that may change the point type (e.g., <code class="docutils literal"><span class="pre">PointXYZ</span></code> to
+<code class="docutils literal"><span class="pre">PointNormal</span></code>) or alter points.  We will continue to look into use cases that
+are of value and feasible, but for now are limited primarily to PCL functions
+that filter or segment the point cloud, returning a list of indices of the
+filtered points (e.g., ground or object, noise or signal). The main reason for
+this design decision is that we want to avoid converting all <code class="docutils literal"><span class="pre">PointView</span></code>
+dimensions to the PCL <code class="docutils literal"><span class="pre">PointCloud</span></code>. In the case of an LAS reader, we may very
+well not want to operate on fields such as return number, but we do not want to
+lose this information post PCL filtering. The easy solution is to simply retain
+the index between the <code class="docutils literal"><span class="pre">PointView</span></code> and <code class="docutils literal"><span class="pre">PointCloud</span></code> objects and update as
+necessary.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p>See <a class="reference internal" href="../tutorial/pcl_block_tutorial.html#pcl-block-tutorial"><span class="std std-ref">Filtering data with PCL</span></a> for more on using the PCL Block including
@@ -244,37 +249,30 @@ and the filters available.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>JSON file to read [Required]</dd>
+<dd>Path to external PCL JSON file describing the pipeline</dd>
+<dt>methods</dt>
+<dd>Raw PCL JSON array describing the pipeline</dd>
 </dl>
 </div>
 <div class="section" id="pcl-block-schema">
 <h2>PCL Block Schema<a class="headerlink" href="#pcl-block-schema" title="Permalink to this headline">¶</a></h2>
 <p>The PCL Block json object describes the filter chain to be constructed within
 PCL. Here is an example:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PCL-Block-Name&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;This is an example pipeline with two filters.&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;mpg&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
-        <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;FilterOne&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setFooParameter&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;FilterTwo&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setBarParameter&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                <span class="nt">&quot;setBounds&quot;</span><span class="p">:</span>
-                <span class="p">{</span>
-                    <span class="nt">&quot;upper&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-                    <span class="nt">&quot;lower&quot;</span><span class="p">:</span> <span class="mi">17</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;FilterOne&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setFooParameter&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;FilterTwo&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setBarParameter&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;setBounds&quot;</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;upper&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+            <span class="nt">&quot;lower&quot;</span><span class="p">:</span> <span class="mi">17</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -291,12 +289,8 @@ of the filters and their parameters, see the <a class="reference internal" href=
 <dt>ApproximateProgressiveMorphologicalFilter</dt>
 <dd>faster (and potentially less accurate) version of the
 <strong>ProgressiveMorphologicalFilter</strong></dd>
-<dt>ConditionalRemoval</dt>
-<dd>filters the data to remove normals outside of a given Z range</dd>
 <dt>GridMinimum</dt>
 <dd>assembles a local 2D grid over a given PointCloud, then downsamples the data</dd>
-<dt>NormalEstimation</dt>
-<dd>computes the surfaces normals of the points in the input</dd>
 <dt>PassThrough</dt>
 <dd>allows the user to set min/max bounds on one dimension of the data</dd>
 <dt>ProgressiveMorphologicalFilter</dt>
@@ -353,7 +347,7 @@ independently verified.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -374,7 +368,7 @@ independently verified.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -408,7 +402,7 @@ independently verified.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

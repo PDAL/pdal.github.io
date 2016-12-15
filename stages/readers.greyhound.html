@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -195,14 +195,16 @@
             
   <div class="section" id="readers-greyhound">
 <span id="id1"></span><h1>readers.greyhound<a class="headerlink" href="#readers-greyhound" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>Greyhound Reader</strong> allows you to read point data from a <a class="reference external" href="https://github.com/hobu/greyhound">Greyhound</a> server.</p>
+<p>The <strong>Greyhound Reader</strong> allows you to query point data from a <a class="reference external" href="https://github.com/hobu/greyhound">Greyhound</a>
+server.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;data.greyhound.io/resource/autzen&quot;</span>
+      <span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;data.greyhound.io&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="s2">&quot;autzen&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
@@ -216,8 +218,57 @@
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>url</dt>
+<dt><span class="target" id="url">url</span></dt>
 <dd>Greyhound server URL string. [Required]</dd>
+<dt><span class="target" id="resource">resource</span></dt>
+<dd>Name of the Greyhound resource to access. [Required]</dd>
+<dt><span class="target" id="bounds">bounds</span></dt>
+<dd>Spatial bounds to query, expressed as a string, e.g.
+<em>([xmin, xmax], [ymin, ymax])</em> or
+<em>([xmin, xmax], [ymin, ymax], [zmin, zmax])</em>.  By default, the entire resource
+is queried.</dd>
+<dt><span class="target" id="depth-begin">depth_begin</span></dt>
+<dd>Beginning octree depth to query, inclusive.  Lower depth values have coarser
+resolution, so a depth range of <em>[0, 8)</em> could provide a low-resolution
+overview of the entire resource, for example.  [Default: <strong>0</strong>]</dd>
+<dt><span class="target" id="depth-end">depth_end</span></dt>
+<dd>Ending octree depth to query, non-inclusive.  A value of <strong>0</strong> will search all
+depths greater-than or equal-to <em>depth_begin</em>.  If non-zero, this value should
+be greater than <em>depth_begin</em> or the result will always be empty.
+[Default: <strong>0</strong>]</dd>
+<dt><span class="target" id="tile-path">tile_path</span></dt>
+<dd>A Greyhound resource may be an aggregation of multiple input files.  If a
+<em>tile_path</em> option is present, then only points belonging to that file will
+be queried.  This search is spatially optimized, so no <a class="reference internal" href="#bounds">bounds</a> option needs
+to be present to limit the query bounds.</dd>
+<dt><span class="target" id="filter">filter</span></dt>
+<dd><p class="first">Server-side filtering may be requested which may further limit the data
+selected by the query.  The filter is represented as JSON, and performs
+filtering on dimensions present in the resource, or the pseudo-dimension
+<em>Path</em>, corresponding to <a class="reference internal" href="#tile-path">tile_path</a> values.</p>
+<p class="last">Arbitrary logic combinations may be created using <a class="reference external" href="https://docs.mongodb.com/manual/reference/operator/query-comparison/">comparison</a> and
+<a class="reference external" href="https://docs.mongodb.com/manual/reference/operator/query-logical/">logical</a> query operators with syntax matching that of MongoDB.  Some sample
+filters follow.</p>
+</dd>
+</dl>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;Path&quot;</span><span class="p">:{</span><span class="nt">&quot;$in&quot;</span><span class="p">:[</span><span class="s2">&quot;tile-845.laz&quot;</span><span class="p">,</span> <span class="s2">&quot;tile-846.laz&quot;</span><span class="p">]},</span>
+    <span class="nt">&quot;Classification&quot;</span><span class="p">:{</span><span class="nt">&quot;$ne&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;$or&quot;</span><span class="p">:[</span>
+    <span class="p">{</span><span class="nt">&quot;Red&quot;</span><span class="p">:{</span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="mi">200</span><span class="p">}},</span>
+    <span class="p">{</span><span class="nt">&quot;Blue&quot;</span><span class="p">:{</span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="nt">&quot;$lt&quot;</span><span class="p">:</span><span class="mi">130</span><span class="p">}},</span>
+    <span class="p">{</span><span class="nt">&quot;Classification&quot;</span><span class="p">:{</span><span class="nt">&quot;$nin&quot;</span><span class="p">:[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]}}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><span class="target" id="threads">threads</span></dt>
+<dd>Because Greyhound resources are accessed by combination of multiple HTTP
+requests, threaded operation can greatly increase throughput.  This option
+sets the number of concurrent requests allowed.  [Default: <strong>4</strong>]</dd>
 </dl>
 </div>
 </div>
@@ -246,7 +297,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -267,7 +318,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -301,7 +352,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

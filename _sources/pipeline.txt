@@ -55,7 +55,7 @@ writer from filenames, and able to be specified as a set of sequential steps:
       "pipeline":[
           "input.las",
           {
-              "type":"filters.crop",
+              "type":"crop",
               "bounds":"([0,100],[0,100])"
           },
           "output.bpf"
@@ -182,7 +182,8 @@ For more on PDAL stages and their options, check the PDAL documentation on
   a string. The ``type`` must specify a valid PDAL filter name.
 
 * A stage object may have additional members with names corresponding to
-  stage-specific option names and their respective values.
+  stage-specific option names and their respective values. Values provided as
+  JSON objects or arrays will be stringified and parsed within the stage.
 
 Filename Globbing
 ................................................................................
@@ -230,7 +231,7 @@ written back into the Z dimension for further analysis.
 
 .. seealso::
 
-    :ref:`filters.height` describes using a specific filter to do
+    :ref:`filters.hag` describes using a specific filter to do
     this job in more detail.
 
 .. code-block:: json
@@ -257,7 +258,7 @@ DTM
 
 A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
-segmentation filter using :ref:`filters.ground`, and then creates the DTM using
+segmentation filter using :ref:`filters.pmf`, and then creates the DTM using
 the :ref:`writers.p2g` with only the ground returns.
 
 .. code-block:: json
@@ -343,7 +344,7 @@ spatial reference system.
               "spatialreference":"EPSG:2027"
           },
           {
-              "type":"merge"
+              "type":"filters.merge"
           },
           {
               "type":"reprojection",
@@ -363,9 +364,6 @@ multiple input LAS files from a given directory.
   {
       "pipeline":[
           "/path/to/data/\*.las",
-          {
-              "type":"merge"
-          },
           "output.las"
       ]
   }
@@ -496,6 +494,3 @@ for the :ref:`writers.las` :cpp:class:`pdal::Stage`.
         }
       ]
     }
-
-
-

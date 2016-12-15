@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -117,7 +117,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">C++ API</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="algorithm.html"><code class="docutils literal"><span class="pre">pdal::Algorithm</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="bounds.html"><code class="docutils literal"><span class="pre">pdal::BOX2D</span></code></a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="docutils literal"><span class="pre">pdal::Charbuf</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="dimension.html"><code class="docutils literal"><span class="pre">pdal::Dimension</span></code></a></li>
@@ -192,78 +191,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="pdal-charbuf">
-<span id="cpp-pdal-charbuf"></span><h1><a class="reference internal" href="#_CPPv2N4pdal7CharbufE" title="pdal::Charbuf"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Charbuf</span></code></a><a class="headerlink" href="#pdal-charbuf" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="_CPPv2N4pdal7CharbufE">
-<span id="pdal::Charbuf"></span><span class="target" id="apiclasspdal_1_1Charbuf"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">Charbuf</code><a class="headerlink" href="#_CPPv2N4pdal7CharbufE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allow a data buffer to be used at a std::streambuf. </p>
-<p>Inherits from streambuf</p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4pdal7Charbuf7CharbufEv">
-<span id="pdal::Charbuf::Charbuf"></span><span class="target" id="apiclasspdal_1_1Charbuf_1a526c9382a8f4967a636e5c2fbda0bd89"></span>PDAL_DLL <code class="descname">Charbuf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7Charbuf7CharbufEv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct an empty <a class="reference internal" href="#apiclasspdal_1_1Charbuf"><span class="std std-ref">Charbuf</span></a>. </p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal7Charbuf7CharbufERNSt6vectorIcEE8pos_type">
-<span id="pdal::Charbuf::Charbuf__std::vector:c:R.pos_type"></span><span class="target" id="apiclasspdal_1_1Charbuf_1aa3c7d6f5d13cba88d2acec84ece28686"></span>PDAL_DLL <code class="descname">Charbuf</code><span class="sig-paren">(</span>std::vector&lt;char&gt; &amp;<em>v</em>, pos_type <em>bufOffset</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7Charbuf7CharbufERNSt6vectorIcEE8pos_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct a <a class="reference internal" href="#apiclasspdal_1_1Charbuf"><span class="std std-ref">Charbuf</span></a> that wraps a byte vector. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">v</span></code> - <p>Byte vector to back streambuf. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">bufOffset</span></code> - <p>Offset in vector (ignore bytes before offset). </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4pdal7Charbuf7CharbufEPc6size_t8pos_type">
-<span id="pdal::Charbuf::Charbuf__cP.s.pos_type"></span><span class="target" id="apiclasspdal_1_1Charbuf_1a1083cbadcee9cca50c845ae9d20bb7de"></span>PDAL_DLL <code class="descname">Charbuf</code><span class="sig-paren">(</span>char *<em>buf</em>, size_t <em>count</em>, pos_type <em>bufOffset</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal7Charbuf7CharbufEPc6size_t8pos_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct a <a class="reference internal" href="#apiclasspdal_1_1Charbuf"><span class="std std-ref">Charbuf</span></a> that wraps a byte buffer. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Buffer to back streambuf. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">count</span></code> - <p>Size of buffer. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">bufOffset</span></code> - <p>Offset in vector (ignore bytes before offset). </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apiclasspdal_1_1Charbuf_1add177ac66628d7f9ecf30fa90d402019"></span><code class="descname">PDAL_DLL void pdal::Charbuf::initialize(char * buf, size_t count, pos_type bufOffset = 0)</code></dt>
-<dd><p>Set a buffer to back a <a class="reference internal" href="#apiclasspdal_1_1Charbuf"><span class="std std-ref">Charbuf</span></a>. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">buf</span></code> - <p>Buffer to back streambuf. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">count</span></code> - <p>Size of buffer. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">bufOffset</span></code> - <p>Offset in vector (ignore bytes before offset). </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
+<span id="cpp-pdal-charbuf"></span><h1><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Charbuf</span></code><a class="headerlink" href="#pdal-charbuf" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenclass: Cannot find class &#8220;pdal::Charbuf&#8221; in doxygen xml output for project &#8220;api&#8221; from directory: doxygen/xml</p>
 </div>
-</dd></dl>
-
 </div>
 
 
@@ -290,7 +222,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -311,7 +243,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -345,7 +277,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

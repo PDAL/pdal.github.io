@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -117,7 +117,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">C++ API</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="algorithm.html"><code class="docutils literal"><span class="pre">pdal::Algorithm</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="bounds.html"><code class="docutils literal"><span class="pre">pdal::BOX2D</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="charbuf.html"><code class="docutils literal"><span class="pre">pdal::Charbuf</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="dimension.html"><code class="docutils literal"><span class="pre">pdal::Dimension</span></code></a></li>
@@ -193,404 +192,10 @@
             
   <div class="section" id="pdal-fileutils">
 <span id="cpp-pdal-fileutils"></span><h1><code class="docutils literal"><span class="pre">pdal::FileUtils</span></code><a class="headerlink" href="#pdal-fileutils" title="Permalink to this headline">¶</a></h1>
-<dl class="type">
-<dt id="_CPPv2N4pdal9FileUtilsE">
-<span id="pdal::FileUtils"></span><span class="target" id="apinamespacepdal_1_1FileUtils"></span><em class="property">namespace </em><code class="descclassname">pdal::</code><code class="descname">FileUtils</code><a class="headerlink" href="#_CPPv2N4pdal9FileUtilsE" title="Permalink to this definition">¶</a></dt>
-<dd><div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a51e58aa04d1978172797c5da51dd64ed"></span><code class="descname">PDAL_DLL std::istream* pdal::FileUtils::openFile(std::string const &amp; filename, bool asBinary = true)</code></dt>
-<dd><p>Open an existing file for reading. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Pointer to opened stream. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Filename. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">asBinary</span></code> - <p>Read as binary file (don&#8217;t convert /r/n to /n) </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a9dea22c0f0a318697ac506d41c7446b7"></span><code class="descname">PDAL_DLL std::ostream* pdal::FileUtils::createFile(std::string const &amp; filename, bool asBinary = true)</code></dt>
-<dd><p>Create a file and open for writing. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Point to opened stream. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Filename. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">asBinary</span></code> - <p>Write as binary file (don&#8217;t convert /n to /r/n) </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1aaec7e776a9951fa6baf41e85d379f3e5"></span><code class="descname">PDAL_DLL bool pdal::FileUtils::directoryExists(const std::string &amp; dirname)</code></dt>
-<dd><p>Determine if a directory exists. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Whether a directory exists. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">dirname</span></code> - <p>Name of directory. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a6f6d309bed6212470ebfdf29cb7af79a"></span><code class="descname">PDAL_DLL bool pdal::FileUtils::createDirectory(const std::string &amp; dirname)</code></dt>
-<dd><p>Create a directory. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Whether the directory was created. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">dirname</span></code> - <p>Directory name. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1abd135d6fb35872a00fe3c52e9f847dca"></span><code class="descname">PDAL_DLL void pdal::FileUtils::deleteDirectory(const std::string &amp; dirname)</code></dt>
-<dd><p>Delete a directory and its contents. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">dirname</span></code> - <p>Directory name. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a3df8fc0fd2fd27bdb38f1a3f032a68ee"></span><code class="descname">PDAL_DLL StringList pdal::FileUtils::directoryList(const std::string &amp; dirname)</code></dt>
-<dd><p>List the contents of a directory. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>List of entries in the directory. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">dirname</span></code> - <p>Name of directory to list. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a885b4f3bb92988e5f7caf846b893e517"></span><code class="descname">PDAL_DLL void pdal::FileUtils::closeFile(std::ostream * ofs)</code></dt>
-<dd><p>Close a file created with createFile. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">ofs</span></code> - <p>Pointer to stream to close. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a39646a97019a8165475f066a744c4f68"></span><code class="descname">PDAL_DLL void pdal::FileUtils::closeFile(std::istream * ifs)</code></dt>
-<dd><p>Close a file created with openFile. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">ifs</span></code> - <p>Pointer to stream to close. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a380affe1f2cf9d4d0ea73126449392cc"></span><code class="descname">PDAL_DLL bool pdal::FileUtils::deleteFile(const std::string &amp; filename)</code></dt>
-<dd><p>Delete a file. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd><code class="docutils literal"><span class="pre">true</span></code> if successful, <code class="docutils literal"><span class="pre">false</span></code> otherwise </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Name of file to delete. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a81b74e534decb0eba867b88365ab955c"></span><code class="descname">PDAL_DLL void pdal::FileUtils::renameFile(const std::string &amp; dest, const std::string &amp; src)</code></dt>
-<dd><p>Rename a file. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">dest</span></code> - <p>Desired filename. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">src</span></code> - <p>Source filename. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a028bc49967aa2c99c22f3e21d35e3b95"></span><code class="descname">PDAL_DLL bool pdal::FileUtils::fileExists(const std::string &amp; filename)</code></dt>
-<dd><p>Determine if a file exists. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Whether the file exists. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">Filename.</span></code> - <p></p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a3de92f87a31b95948de7c767c07e024d"></span><code class="descname">PDAL_DLL uintmax_t pdal::FileUtils::fileSize(const std::string &amp; filename)</code></dt>
-<dd><p>Get the size of a file. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Size of file. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Filename. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a183613921413dc5f8fe3efe45763945c"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::readFileIntoString(const std::string &amp; filename)</code></dt>
-<dd><p>Read a file into a string. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>File contents as a string </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Filename. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1aaefff27887e79bd57731bd3b79d988d2"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::getcwd()</code></dt>
-<dd><p>Get the current working directory with trailing separator. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>The current working directory. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a0d150fac3c099a0646763f1b862cac73"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::getFilename(const std::string &amp; path)</code></dt>
-<dd><p>Return the file component of the given path, e.g. </p>
-<p>&#8220;d:/foo/bar/a.c&#8221; -&gt; &#8220;a.c&#8221;</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>File part of path. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path from which to extract file component. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a91f713b85c7b5a9d14174f5a4e313a9c"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::getDirectory(const std::string &amp; path)</code></dt>
-<dd><p>Return the directory component of the given path, e.g. </p>
-<p>&#8220;d:/foo/bar/a.c&#8221; -&gt; &#8220;d:/foo/bar/&#8221;</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Directory part of path. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path from which to extract directory component. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a829b5f24496efa4ae21b7f893fc3ce02"></span><code class="descname">PDAL_DLL bool pdal::FileUtils::isAbsolutePath(const std::string &amp; path)</code></dt>
-<dd><p>Determine if the path is an absolute path. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Whether the path is absolute. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to test. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1acfbe324737d031ab2650a56c6d50c776"></span><code class="descname">PDAL_DLL bool pdal::FileUtils::isDirectory(const std::string &amp; path)</code></dt>
-<dd><p>Determine if path is a directory. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Whether the path represents a directory. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Directory to check. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a538c47da3e98daa37d68b568ca849ac9"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::toAbsolutePath(const std::string &amp; filename)</code></dt>
-<dd><p>If the filename is an absolute path, just return it otherwise, make it absolute (relative to current working dir) and return it. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Absolute version of provided filename. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Name of file to convert to absolute path. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1aa0668a548da37d8d6cc60c374fea1b6a"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::toAbsolutePath(const std::string &amp; filename, const std::string base)</code></dt>
-<dd><p>If the filename is an absolute path, just return it otherwise, make it absolute (relative to base dir) and return that. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Absolute version of provided filename relative to base. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Name of file to convert to absolute path. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">base</span></code> - <p>Base name to use. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a048c339cf27b437f7d0b371a2e81845b"></span><code class="descname">PDAL_DLL void pdal::FileUtils::fileTimes(const std::string &amp; filename, struct tm * createTime, struct tm * modTime)</code></dt>
-<dd><p>Get the file creation and modification times. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">filename</span></code> - <p>Filename. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">createTime</span></code> - <p>Pointer to creation time structure. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">modTime</span></code> - <p>Pointer to modification time structure. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a940dcd0dfe36ad4f1790445bb6b91e28"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::extension(const std::string &amp; path)</code></dt>
-<dd><p>Return the extension of the filename, including the separator (.). </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Extension of filename. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>File path from which to extract extension. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="apinamespacepdal_1_1FileUtils_1a3bdadae2f0ef6896942c02e9a9c81e00"></span><code class="descname">PDAL_DLL std::string pdal::FileUtils::stem(const std::string &amp; path)</code></dt>
-<dd><p>Return the filename stripped of the extension. </p>
-<p>. and .. are returned unchanged.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>Stem of filename. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>File path from which to extract file stem. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygennamespace: Cannot find namespace &#8220;pdal::FileUtils&#8221; in doxygen xml output for project &#8220;api&#8221; from directory: doxygen/xml</p>
 </div>
-</dd></dl>
-
 </div>
 
 
@@ -617,7 +222,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -638,7 +243,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -672,7 +277,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

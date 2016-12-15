@@ -37,8 +37,8 @@
   
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Filters" href="filters.html"/>
-        <link rel="next" title="filters.mortonorder" href="filters.mortonorder.html"/>
-        <link rel="prev" title="filters.hexbin" href="filters.hexbin.html"/> 
+        <link rel="next" title="filters.mongus" href="filters.mongus.html"/>
+        <link rel="prev" title="filters.mad" href="filters.mad.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -108,9 +108,10 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.attribute.html">filters.attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.chipper.html">filters.chipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.computerange.html">filters.computerange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.crop.html">filters.crop</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.dartsample.html">filters.dartsample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.divider.html">filters.divider</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
@@ -118,14 +119,18 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.ground.html">filters.ground</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.height.html">filters.height</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hexbin.html">filters.hexbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.iqr.html">filters.iqr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.kdistance.html">filters.kdistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">filters.merge</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1">Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2">Example 2</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="filters.mongus.html">filters.mongus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.mortonorder.html">filters.mortonorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.movingleastsquares.html">filters.movingleastsquares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
@@ -135,14 +140,14 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.poisson.html">filters.poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.predicate.html">filters.predicate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.programmable.html">filters.programmable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.radiusoutlier.html">filters.radiusoutlier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.radialdensity.html">filters.radialdensity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.randomize.html">filters.randomize</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.range.html">filters.range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.reprojection.html">filters.reprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.smrf.html">filters.smrf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.sort.html">filters.sort</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.splitter.html">filters.splitter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.statisticaloutlier.html">filters.statisticaloutlier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.stats.html">filters.stats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.transformation.html">filters.transformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.voxelgrid.html">filters.voxelgrid</a></li>
@@ -211,30 +216,68 @@
   <div class="section" id="filters-merge">
 <span id="id1"></span><h1>filters.merge<a class="headerlink" href="#filters-merge" title="Permalink to this headline">¶</a></h1>
 <p>The merge filter combines input from multiple sources into a single output.
-No checks are made to ensure that points from the various sources have similar
-dimensions or are generally compatible.  Notably, dimensions are not
-initialized when points merged from various sources do not have dimensions in
-common.</p>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+In most cases, this happens automatically on output and use of the merge
+filter is unnecessary.  However, there may be special cases where
+merging points prior to a particular filter or writer is necessary
+or desirable.</p>
+<p>The merge filter will log a warning if its input point sets are based on
+different spatial references.  No checks are made to ensure that points
+from various sources being merged have similar dimensions or are generally
+compatible.  Notably, dimensions are not initialized when points merged
+from various sources do not have dimensions in common.</p>
+<div class="section" id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>This pipeline will create an output file &#8220;output.las&#8221; that contcatenates
+the points from &#8220;file1&#8221;, &#8220;file2&#8221; and &#8220;file3&#8221;.  Note that the explicit
+use of the merge filter is unnecessary in this case (removing the merge
+filter will yield the same result).</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;file1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file3&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;/Users/hobu/dev/git/pdal/test/data/las/1.2-with-color.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.merge&quot;</span>
     <span class="p">},</span>
+    <span class="s2">&quot;output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-2">
+<h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>Here are a pair of unlikely pipelines that show one way in which a merge filter
+might be used.  The first pipeline simply reads the input files &#8220;utm1.las&#8221;,
+&#8220;utm2.las&#8221; and &#8220;utm3.las&#8221;.  Since the points from each input set are
+carried separately through the pipeline, three files are created as output,
+&#8220;out1.las&#8221;, &#8220;out2.las&#8221; and &#8220;out3.las&#8221;.  &#8220;out1.las&#8221; contains the points
+in &#8220;utm1.las&#8221;.  &#8220;out2.las&#8221; contains the points in &#8220;utm2.las&#8221; and &#8220;out3.las&#8221;
+contains the points in &#8220;utm3.las&#8221;.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;utm1.las&quot;</span>
+    <span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;out#.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is the same pipeline with a merge filter added.  The merge filter will
+combine the points in its input: &#8220;utm1.las&#8221; and &#8220;utm2.las&#8221;.  Then the result
+of the merge filter is passed to the writer along with &#8220;utm3.las&#8221;.  This
+results in two output files: &#8220;out1.las&#8221; contains the points from &#8220;utm1.las&#8221;
+and &#8220;utm2.las&#8221;, while &#8220;out2.las&#8221; contains the points from &#8220;utm3.las&#8221;.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;utm1.las&quot;</span>
+    <span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;/Users/hobu/dev/git/pdal/test/data/las/1.2-with-color.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;B&quot;</span>
+        <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;filters.merge&quot;</span>
     <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.merge&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">]</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;output.las&quot;</span>
-    <span class="p">}</span>
+    <span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;out#.las&quot;</span>
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -249,10 +292,10 @@ common.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.mortonorder.html" class="btn btn-neutral float-right" title="filters.mortonorder" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.mongus.html" class="btn btn-neutral float-right" title="filters.mongus" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.hexbin.html" class="btn btn-neutral" title="filters.hexbin" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.mad.html" class="btn btn-neutral" title="filters.mad" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -266,7 +309,7 @@ common.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -287,7 +330,7 @@ common.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -321,7 +364,7 @@ common.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

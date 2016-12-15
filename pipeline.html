@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -231,7 +231,7 @@ writer from filenames, and able to be specified as a set of sequential steps:</p
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
         <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.crop&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;crop&quot;</span><span class="p">,</span>
             <span class="nt">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([0,100],[0,100])&quot;</span>
         <span class="p">},</span>
         <span class="s2">&quot;output.bpf&quot;</span>
@@ -341,7 +341,8 @@ name.</li>
 <li>A filter stage object must have a member with the name <code class="docutils literal"><span class="pre">type</span></code> whose value is
 a string. The <code class="docutils literal"><span class="pre">type</span></code> must specify a valid PDAL filter name.</li>
 <li>A stage object may have additional members with names corresponding to
-stage-specific option names and their respective values.</li>
+stage-specific option names and their respective values. Values provided as
+JSON objects or arrays will be stringified and parsed within the stage.</li>
 </ul>
 </div>
 <div class="section" id="filename-globbing">
@@ -387,7 +388,7 @@ the Z values to a surface model. These height above ground values are then
 written back into the Z dimension for further analysis.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="stages/filters.height.html#filters-height"><span class="std std-ref">filters.height</span></a> describes using a specific filter to do
+<p class="last"><a class="reference internal" href="stages/filters.hag.html#filters-hag"><span class="std std-ref">filters.hag</span></a> describes using a specific filter to do
 this job in more detail.</p>
 </div>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -413,7 +414,7 @@ this job in more detail.</p>
 <h3>DTM<a class="headerlink" href="#dtm" title="Permalink to this headline">¶</a></h3>
 <p>A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
-segmentation filter using <a class="reference internal" href="stages/filters.ground.html#filters-ground"><span class="std std-ref">filters.ground</span></a>, and then creates the DTM using
+segmentation filter using <a class="reference internal" href="stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a>, and then creates the DTM using
 the <a class="reference internal" href="stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a> with only the ground returns.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
@@ -492,7 +493,7 @@ spatial reference system.</p>
             <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:2027&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;merge&quot;</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.merge&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;reprojection&quot;</span><span class="p">,</span>
@@ -510,9 +511,6 @@ multiple input LAS files from a given directory.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
         <span class="s2">&quot;/path/to/data/\*.las&quot;</span><span class="p">,</span>
-        <span class="p">{</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;merge&quot;</span>
-        <span class="p">},</span>
         <span class="s2">&quot;output.las&quot;</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -529,19 +527,19 @@ more.</p>
 </div>
 <div class="section" id="api-considerations">
 <h2>API Considerations<a class="headerlink" href="#api-considerations" title="Permalink to this headline">¶</a></h2>
-<p>A <cite>Pipeline</cite> is composed as an array of <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> , with the
+<p>A <cite>Pipeline</cite> is composed as an array of <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code> , with the
 first stage at the beginning and the last at the end.  There are two primary
-building blocks in PDAL, <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> and
-<a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a>. <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>,
-<a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, and <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> are all subclasses of
-<a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>.</p>
-<p><a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a> is the substrate that flows between stages in a
+building blocks in PDAL, <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code> and
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code>. <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code>,
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code>, and <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code> are all subclasses of
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code>.</p>
+<p><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code> is the substrate that flows between stages in a
 pipeline and transfers the actual data as it moves through the pipeline. A
-<a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a> contains a <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTablePtr</span></code>, which
-itself contains a list of <a class="reference internal" href="api/cpp/dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></code></a> objects that define the
-actual channels that are stored in the <a class="reference internal" href="api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="pdal::PointView"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code></a>.</p>
-<p>PDAL provides four types of stages &#8211; <a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>,
-<a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, <a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a>, and
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code> contains a <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTablePtr</span></code>, which
+itself contains a list of <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></code> objects that define the
+actual channels that are stored in the <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointView</span></code>.</p>
+<p>PDAL provides four types of stages &#8211; <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code>,
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code>, <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code>, and
 <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::MultiFilter</span></code> &#8211; with the latter being hardly used (just
 <a class="reference internal" href="stages/filters.merge.html#filters-merge"><span class="std std-ref">filters.merge</span></a>) at this point. A Reader is a producer of data, a Writer
 is a consumer of data, and a Filter is an actor on data.</p>
@@ -588,8 +586,8 @@ currently possible operations.</p>
 </div>
 <div class="section" id="stage-types">
 <h3>Stage Types<a class="headerlink" href="#stage-types" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a>, <a class="reference internal" href="api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a>, and
-<a class="reference internal" href="api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> are the C++ classes that define the stage types in
+<p><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code>, <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code>, and
+<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code> are the C++ classes that define the stage types in
 PDAL. Readers follow the pattern of <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">readers.las</span></a> or
 <a class="reference internal" href="stages/readers.oci.html#readers-oci"><span class="std std-ref">readers.oci</span></a>, Writers follow the pattern of <a class="reference internal" href="stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> or
 <a class="reference internal" href="stages/readers.oci.html#readers-oci"><span class="std std-ref">readers.oci</span></a>, with Filters using <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> or
@@ -607,11 +605,11 @@ stages and their options. See <a class="reference internal" href="apps/info.html
 </div>
 <div class="section" id="options">
 <h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
-<p>Options are the mechanism that PDAL uses to inform <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>
+<p>Options are the mechanism that PDAL uses to inform <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code>
 entities how to process data. The following example sorts the data using a
 <a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton ordering</a> using <a class="reference internal" href="stages/filters.mortonorder.html#filters-mortonorder"><span class="std std-ref">filters.mortonorder</span></a> and writes out a <a class="reference external" href="http://www.laszip.org">LASzip</a>
 file as the result. We use options to define the <code class="docutils literal"><span class="pre">compression</span></code> function
-for the <a class="reference internal" href="stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>.</p>
+for the <a class="reference internal" href="stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code>.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;uncompressed.las&quot;</span><span class="p">,</span>
@@ -655,7 +653,7 @@ for the <a class="reference internal" href="stages/writers.las.html#writers-las"
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -676,7 +674,7 @@ for the <a class="reference internal" href="stages/writers.las.html#writers-las"
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -710,7 +708,7 @@ for the <a class="reference internal" href="stages/writers.las.html#writers-las"
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 

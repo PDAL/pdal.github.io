@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -342,24 +342,17 @@ this example, we apply a single PCL filter to the PointView. The
 <a class="reference external" href="http://pointclouds.org/documentation/tutorials/passthrough.php">PassThrough</a> filter removes points that lie outside a given range for the
 specified dimension. Here, we are asking PCL to crop the input point cloud,
 returning only those points with z values in the range 100 to 200.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThroughExample&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
-        <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span>
-                <span class="p">{</span>
-                    <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mf">410.0</span><span class="p">,</span>
-                    <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mf">440.0</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mf">410.0</span><span class="p">,</span>
+            <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mf">440.0</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <p>(This example is taken from the unit test
@@ -373,34 +366,24 @@ field identifies the PCL filter by its class name, and furthermore that as of
 now only a handful of the PCL filtering options are accessible through the PCL
 Block. Similarly, select parameters of these classes can be set by specifying
 their public member functions by name.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CombinedExample&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;Apply passthrough filter followed by statistical outlier removal&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Bradley J Chambers&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
-        <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;filter z values to the range [410,440]&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span>
-                <span class="p">{</span>
-                    <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mf">410.0</span><span class="p">,</span>
-                    <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mf">440.0</span>
-                <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;apply outlier removal&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-                <span class="nt">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">0.2</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PassThrough&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;filter z values to the range [410,440]&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setFilterFieldName&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setFilterLimits&quot;</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="mf">410.0</span><span class="p">,</span>
+            <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="mf">440.0</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;apply outlier removal&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="nt">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">0.2</span>
     <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <p>(This example is taken from the unit test
@@ -416,40 +399,26 @@ Progressive Morphological Filter for Removing Nonground Measurements from
 Airborne LIDAR Data&#8221;</a> by K.
 Zhang, S.  Chen, D. Whitman, M. Shyu, J. Yan, and C. Zhang.</p>
 <p>To run the PMF with default settings, the PCL Block JSON is simply:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterExample&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
-        <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span>
-                <span class="s2">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span>
+        <span class="s2">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <p>Additional parameters can be set by advanced users:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilterAdvancedExample&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filters&quot;</span><span class="p">:</span>
-        <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-                <span class="nt">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-                <span class="nt">&quot;setSlope&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-                <span class="nt">&quot;setInitialDistance&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-                <span class="nt">&quot;setMaxDistance&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
-                <span class="nt">&quot;setExponential&quot;</span><span class="p">:</span> <span class="kc">true</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&quot;setMaxWindowSize&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nt">&quot;setSlope&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&quot;setInitialDistance&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="nt">&quot;setMaxDistance&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="nt">&quot;setExponential&quot;</span><span class="p">:</span> <span class="kc">true</span>
     <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <p>(These examples are taken from the unit tests
@@ -484,7 +453,7 @@ explanation of the PMF parameters.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 03, 2016.
+      Last updated on Dec 15, 2016.
 
     </p>
   </div> 
@@ -505,7 +474,7 @@ explanation of the PMF parameters.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -539,7 +508,7 @@ explanation of the PMF parameters.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 03, 2016.
+                    on Dec 15, 2016.
         </div>
     </div>
 
