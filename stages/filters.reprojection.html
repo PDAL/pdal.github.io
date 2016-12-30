@@ -140,7 +140,8 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.randomize.html">filters.randomize</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.range.html">filters.range</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">filters.reprojection</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1">Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examle-2">Examle 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -230,8 +231,12 @@ the information into a limited address space. When changing projections, the
 coordinate values will change, which may change the optimal scale and offset
 for storing the data.</p>
 </div>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>This pipeline reprojecs terrain points with Z-values between 0 and 100 by first
+applying a range filter and then specifing both the input and output spatial
+reference as EPSG-codes. The X and Y dimensions are scaled to allow enough
+precision in the output coordinates.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
@@ -263,16 +268,46 @@ for storing the data.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="examle-2">
+<h2>Examle 2<a class="headerlink" href="#examle-2" title="Permalink to this headline">¶</a></h2>
+<p>In some cases it is not possible to use a EPSG-code as a spatial reference.
+Instead <a class="reference external" href="http:/proj4.org">Proj.4</a> parameters can be used to define a spatial reference.
+In this example the vertical component of points in a laz file is converted from
+geometric (ellipsoidal) heights to orthometric heights by using the <code class="docutils literal"><span class="pre">geoidgrids</span></code>
+parameter from Proj.4.
+Here we change the vertical datum from the GRS80 ellipsoid to DVR90,
+the vertical datum in Denmark. In the writing stage of the pipeline the spatial
+reference of the file is set to EPSG:7416. The last step is needed since PDAL will
+otherwise reference the vertical datum as &#8220;Unnamed Vertical Datum&#8221; in the spatial
+reference VLR.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;./1km_6135_632.laz&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;in_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:25832&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span><span class="s2">&quot;+init=epsg:25832 +geoidgrids=C:/data/geoids/dvr90.gtx&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;a_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:7416&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;1km_6135_632_DVR90.laz&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>in_srs</dt>
 <dd>Spatial reference system of the input data. Express as an EPSG string (eg
-&#8220;EPSG:4326&#8221; for WGS86 geographic) or a well-known text string. [Required if
+&#8220;EPSG:4326&#8221; for WGS84 geographic), Proj.4 string or a well-known text string. [Required if
 input reader does not supply SRS information]</dd>
 <dt>out_srs</dt>
 <dd>Spatial reference system of the output data. Express as an EPSG string (eg
-&#8220;EPSG:4326&#8221; for WGS86 geographic) or a well-known text string. [Required]</dd>
+&#8220;EPSG:4326&#8221; for WGS84 geographic), Proj.4 string or a well-known text string. [Required]</dd>
 </dl>
 </div>
 </div>
@@ -301,7 +336,7 @@ input reader does not supply SRS information]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Dec 29, 2016.
+      Last updated on Dec 30, 2016.
 
     </p>
   </div> 
@@ -356,7 +391,7 @@ input reader does not supply SRS information]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Dec 29, 2016.
+                    on Dec 30, 2016.
         </div>
     </div>
 
