@@ -401,15 +401,15 @@ main code.  This will not be described here.  Using this as a shared plugin
 will be described later.</p>
 </div>
 <p>To build up a processing pipeline in this example, we need to create two
-objects: the <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTable</span></code> and the
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>. The latter is used to create the various
+objects: the <a class="reference internal" href="../api/cpp/pointtable.html#_CPPv2N4pdal10PointTableE" title="pdal::PointTable"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTable</span></code></a> and the
+<a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>. The latter is used to create the various
 stages that will be used within the kernel.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
     <span class="n">StageFactory</span> <span class="n">f</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>The <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code> is created from the
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>, and is specified by the stage name, in this
+<p>The <a class="reference internal" href="../api/cpp/reader.html#_CPPv2N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Reader</span></code></a> is created from the
+<a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>, and is specified by the stage name, in this
 case an LAS reader. For brevity, we provide the reader a single option, the
 filename of the file to be read.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">makeReader</span><span class="p">(</span><span class="n">m_input_file</span><span class="p">,</span> <span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
@@ -418,8 +418,8 @@ filename of the file to be read.</p>
     <span class="c1">// or makeWriter so that the system can override them with those</span>
 </pre></div>
 </div>
-<p>The <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code> is also created from the
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>.  Here, we create a decimation filter that will
+<p>The <a class="reference internal" href="../api/cpp/filter.html#_CPPv2N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Filter</span></code></a> is also created from the
+<a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>.  Here, we create a decimation filter that will
 pass every tenth point to subsequent stages. We also specify the input to this
 stage, which is the reader.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
@@ -429,8 +429,8 @@ stage, which is the reader.</p>
     <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">makeWriter</span><span class="p">(</span><span class="n">m_output_file</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Finally, the <code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code> is created from the
-<code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code>. This <a class="reference internal" href="../stages/writers.text.html#writers-text"><span class="std std-ref">writers.text</span></a>, takes as input the previous
+<p>Finally, the <a class="reference internal" href="../api/cpp/writer.html#_CPPv2N4pdal6WriterE" title="pdal::Writer"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Writer</span></code></a> is created from the
+<a class="reference internal" href="../api/cpp/stagefactory.html#_CPPv2N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::StageFactory</span></code></a>. This <a class="reference internal" href="../stages/writers.text.html#writers-text"><span class="std std-ref">writers.text</span></a>, takes as input the previous
 stage (the <a class="reference internal" href="../stages/filters.decimation.html#filters-decimation"><span class="std std-ref">filters.decimation</span></a>) and the output filename as its sole option.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
 
@@ -477,7 +477,7 @@ commands.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jan 15, 2017.
+      Last updated on Jan 19, 2017.
 
     </p>
   </div> 
@@ -532,7 +532,7 @@ commands.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jan 15, 2017.
+                    on Jan 19, 2017.
         </div>
     </div>
 
