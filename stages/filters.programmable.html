@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Filters" href="filters.html"/>
         <link rel="next" title="filters.radialdensity" href="filters.radialdensity.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -106,8 +114,9 @@
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.attribute.html">filters.attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.assign.html">filters.assign</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.chipper.html">filters.chipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.cluster.html">filters.cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.computerange.html">filters.computerange</a></li>
@@ -115,14 +124,17 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.divider.html">filters.divider</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.elm.html">filters.elm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.groupby.html">filters.groupby</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hexbin.html">filters.hexbin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.iqr.html">filters.iqr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.kdistance.html">filters.kdistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.locate.html">filters.locate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.merge.html">filters.merge</a></li>
@@ -131,12 +143,19 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.movingleastsquares.html">filters.movingleastsquares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.outlier.html">filters.outlier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.overlay.html">filters.overlay</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.pclblock.html">filters.pclblock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.pmf.html">filters.pmf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.poisson.html">filters.poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.predicate.html">filters.predicate</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">filters.programmable</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-globals">Module Globals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#updating-metadata">Updating metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#passing-python-objects">Passing Python objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standard-output-and-error">Standard output and error</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -153,7 +172,12 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.voxelgrid.html">filters.voxelgrid</a></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -215,14 +239,19 @@
             
   <div class="section" id="filters-programmable">
 <span id="id1"></span><h1>filters.programmable<a class="headerlink" href="#filters-programmable" title="Permalink to this headline">¶</a></h1>
-<p>The programmable filter takes a stream of points and applies a <a class="reference external" href="http://python.org/">Python</a>
-function to each point in the stream.</p>
-<p>The function must have two <a class="reference external" href="http://www.numpy.org/">NumPy</a> arrays as arguments, <cite>ins</cite> and <cite>outs</cite>. The
-<cite>ins</cite> array represents input points, the <cite>outs</cite> array represents output points.
-Each array contains all the dimensions of the point schema, for a number of
-points (depending on how large a point buffer the pipeline is processing at the
-time, a run-time consideration). Individual arrays for each dimension can be
-read from the input point and written to the output point.</p>
+<p>The programmable filter allows <a class="reference external" href="http://python.org/">Python</a> software to be embedded in a
+<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> that interacts with a <a class="reference external" href="http://www.numpy.org/">NumPy</a> array of the data and allows
+you to modify those points. Additionally, some global <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a> is also
+available that Python functions can interact with.</p>
+<p>The function must have two <a class="reference external" href="http://www.numpy.org/">NumPy</a> arrays as arguments, <code class="docutils literal"><span class="pre">ins</span></code> and <code class="docutils literal"><span class="pre">outs</span></code>.
+The <code class="docutils literal"><span class="pre">ins</span></code> array represents the points before the <code class="docutils literal"><span class="pre">filters.programmable</span></code>
+filter and the <code class="docutils literal"><span class="pre">outs</span></code> array represents the points after filtering.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Each array contains all the <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> of the incoming <code class="docutils literal"><span class="pre">ins</span></code> point schema.
+Each array in the <code class="docutils literal"><span class="pre">outs</span></code> list match <a class="reference external" href="http://www.numpy.org/">NumPy</a> array of the
+same type as provided as <code class="docutils literal"><span class="pre">ins</span></code> for shape and type.</p>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="k">def</span> <span class="nf">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
@@ -232,12 +261,17 @@ read from the input point and written to the output point.</p>
     <span class="k">return</span> <span class="bp">True</span>
 </pre></div>
 </div>
-<p>Note that the function always returns <cite>True</cite>. If the function returned <cite>False</cite>,
-an error would be thrown and the translation shut down.</p>
-<p>If you want to write a dimension that might not be available, use can use one
-or more <cite>add_dimension</cite> options.</p>
-<p>To filter points based on a <a class="reference external" href="http://python.org/">Python</a> function, use the
+<ol class="arabic simple">
+<li>The function must always return <cite>True</cite> upon success. If the function returned <cite>False</cite>,
+an error would be thrown and the <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> exited.</li>
+<li>If you want to write a dimension that might not be available, use can use one
+or more <code class="docutils literal"><span class="pre">add_dimension</span></code> options.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To filter points based on a <a class="reference external" href="http://python.org/">Python</a> function, use the
 <a class="reference internal" href="filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a> filter.</p>
+</div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -272,6 +306,77 @@ which scales up the Z coordinate by a factor of 10.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="module-globals">
+<h2>Module Globals<a class="headerlink" href="#module-globals" title="Permalink to this headline">¶</a></h2>
+<p>Three global variables are added to the Python module as it is run to allow
+you to get <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a>, <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a>, and coordinate system information.
+Additionally, the <code class="docutils literal"><span class="pre">metadata</span></code> object can be set by the function to modify metadata
+for the in-scope <a class="reference internal" href="#filters-programmable"><span class="std std-ref">filters.programmable</span></a> <a class="reference internal" href="../api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;schema: &#39;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;srs: &#39;</span><span class="p">,</span> <span class="n">spatialreference</span><span class="p">)</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;metadata: &#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+    <span class="n">outs</span> <span class="o">=</span> <span class="n">ins</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</div>
+<div class="section" id="updating-metadata">
+<h3>Updating metadata<a class="headerlink" href="#updating-metadata" title="Permalink to this headline">¶</a></h3>
+<p>The filter can update the global <code class="docutils literal"><span class="pre">metadata</span></code> dictionary as needed, define it as a
+<strong>global</strong> Python variable for the function&#8217;s scope, and the updates will be
+reflected back into the pipeline from that stage forward.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
+  <span class="k">global</span> <span class="n">metadata</span>
+  <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;a string&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;filters.programmable&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a filter description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;readers.faux&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;another string&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a reader description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[]}]}</span>
+  <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="passing-python-objects">
+<h3>Passing Python objects<a class="headerlink" href="#passing-python-objects" title="Permalink to this headline">¶</a></h3>
+<p>As of PDAL 1.5, it is possible to pass an option to <a class="reference internal" href="#filters-programmable"><span class="std std-ref">filters.programmable</span></a> and
+<a class="reference internal" href="filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a> of JSON representing a Python dictionary containing objects
+you want to use in your function. This feature is useful in situations where you
+wish to call <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> with substitutions.</p>
+<p>If we needed to be able to provide the Z scaling factor of <a class="reference internal" href="#example">Example</a> with a
+Python argument, we can place that in a dictionary and pass that to the filter
+as a separate argument. This feature allows us to be able easily reuse the same
+basic Python function while substituting values as necessary.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.programmable&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="s2">&quot;anything&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="s2">&quot;filter&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="s2">&quot;arguments.py&quot;</span>
+      <span class="s2">&quot;pdalargs&quot;</span><span class="p">:</span><span class="s2">&quot;{\&quot;factor\&quot;:0.3048,\&quot;an_argument\&quot;:42, \&quot;another\&quot;: \&quot;a string\&quot;}&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;output.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With that option set, you can now fetch the <code class="docutils literal"><span class="pre">pdalargs</span></code> dictionary in your
+Python script and use it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">pdalargs</span><span class="p">[</span><span class="s1">&#39;factor&#39;</span><span class="p">])</span>
+    <span class="n">outs</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="standard-output-and-error">
+<h3>Standard output and error<a class="headerlink" href="#standard-output-and-error" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal"><span class="pre">redirector</span></code> module is available for scripts to output to PDAL&#8217;s log stream
+explicitly. The module handles redirecting <code class="docutils literal"><span class="pre">sys.stderr</span></code> and <code class="docutils literal"><span class="pre">sys.stdout</span></code> for you
+transparently, but it can be used directly by scripts. See the PDAL source
+code for more details.</p>
+</div>
+</div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
@@ -286,6 +391,9 @@ from. [Example: functions.py]</dd>
 <dd>The literal <a class="reference external" href="http://python.org/">Python</a> code to execute, when the script option is not being used.</dd>
 <dt>add_dimension</dt>
 <dd>The name of a dimension to add to the pipeline that does not already exist.</dd>
+<dt>pdalargs</dt>
+<dd>A JSON dictionary of items you wish to pass into the modules globals as the
+<code class="docutils literal"><span class="pre">pdalargs</span></code> object.</dd>
 </dl>
 </div>
 </div>
@@ -314,7 +422,7 @@ from. [Example: functions.py]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -335,7 +443,7 @@ from. [Example: functions.py]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -344,7 +452,7 @@ from. [Example: functions.py]</dd>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -369,7 +477,7 @@ from. [Example: functions.py]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="next" title="delta" href="delta.html"/>
         <link rel="prev" title="Quickstart" href="../quickstart.html"/> 
@@ -66,7 +71,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -88,6 +93,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -120,7 +128,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -180,8 +193,8 @@
             
   <div class="section" id="applications">
 <span id="apps"></span><h1>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h1>
-<p>PDAL contains consists of a single application, called <code class="docutils literal"><span class="pre">pdal</span></code>.  Applications
-are run by invoking the <code class="docutils literal"><span class="pre">pdal</span></code> application along with the command name:</p>
+<p>PDAL contains consists of a single application, called <code class="docutils literal"><span class="pre">pdal</span></code>.  Operations
+are run by invoking the <code class="docutils literal"><span class="pre">pdal</span></code> application along with a command name:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal info myfile.las
 $ pdal translate input.las output.las
 $ pdal pipeline --stdin &lt; myxml.xml
@@ -195,6 +208,12 @@ $ pdal translate --drivers
 $ pdal pipeline --options writers.las
 </pre></div>
 </div>
+<p>All commands support the following options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">developer</span><span class="o">-</span><span class="n">debug</span>   <span class="n">Enable</span> <span class="n">developer</span> <span class="n">debug</span> <span class="p">(</span><span class="n">don</span><span class="s1">&#39;t trap exceptions).</span>
+<span class="o">--</span><span class="n">label</span>             <span class="n">A</span> <span class="n">string</span> <span class="n">to</span> <span class="n">use</span> <span class="k">as</span> <span class="n">a</span> <span class="n">process</span> <span class="n">label</span><span class="o">.</span>
+<span class="o">--</span><span class="n">driver</span>            <span class="n">Name</span> <span class="n">of</span> <span class="n">driver</span> <span class="n">to</span> <span class="n">use</span> <span class="n">to</span> <span class="n">override</span> <span class="n">that</span> <span class="n">inferred</span> <span class="kn">from</span> <span class="nn">file</span> <span class="nb">type</span><span class="o">.</span>
+</pre></div>
+</div>
 <p>Additional driver-specific options may be specified by using a
 namespace-prefixed option name. For example, it is possible to set the LAS day
 of year at translation time with the following option:</p>
@@ -206,8 +225,7 @@ of year at translation time with the following option:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Driver specific options can be identified using the <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></code>
-invocation.</p>
+<p class="last">Driver-specific options can be identified using the <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">&lt;command&gt;</span> <span class="pre">--help</span></code> invocation.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
@@ -227,7 +245,10 @@ invocation.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="merge.html">merge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pcl.html">pcl</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html">pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html#substitutions">Substitutions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l1"><a class="reference internal" href="split.html">split</a><ul>
@@ -245,6 +266,7 @@ invocation.</p>
 <li class="toctree-l2"><a class="reference internal" href="translate.html#example-1">Example 1:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="translate.html#example-2">Example 2:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="translate.html#example-3">Example 3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translate.html#example-4">Example 4:</a></li>
 </ul>
 </li>
 </ul>
@@ -275,7 +297,7 @@ invocation.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -296,7 +318,7 @@ invocation.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -305,7 +327,7 @@ invocation.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -330,7 +352,7 @@ invocation.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

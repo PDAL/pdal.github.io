@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Applications" href="index.html"/>
         <link rel="next" title="Community" href="../community.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -113,6 +121,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#example-1">Example 1:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-2">Example 2:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-3">Example 3:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-4">Example 4:</a></li>
 </ul>
 </li>
 </ul>
@@ -126,7 +135,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -197,7 +211,7 @@ from the command-line.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">input</span><span class="p">,</span> <span class="o">-</span><span class="n">i</span>        <span class="n">Input</span> <span class="n">filename</span>
 <span class="o">--</span><span class="n">output</span><span class="p">,</span> <span class="o">-</span><span class="n">o</span>       <span class="n">Output</span> <span class="n">filename</span>
 <span class="o">--</span><span class="nb">filter</span><span class="p">,</span> <span class="o">-</span><span class="n">f</span>       <span class="n">Filter</span> <span class="nb">type</span>
-<span class="o">--</span><span class="n">json</span>             <span class="n">JSON</span> <span class="n">array</span> <span class="n">of</span> <span class="n">filters</span>
+<span class="o">--</span><span class="n">json</span>             <span class="n">PDAL</span> <span class="n">pipeline</span> <span class="kn">from</span> <span class="nn">which</span> <span class="n">to</span> <span class="n">extract</span> <span class="n">filters</span><span class="o">.</span>
 <span class="o">--</span><span class="n">pipeline</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span>     <span class="n">Pipeline</span> <span class="n">output</span>
 <span class="o">--</span><span class="n">metadata</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span>     <span class="n">Dump</span> <span class="n">metadata</span> <span class="n">output</span> <span class="n">to</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">file</span>
 <span class="o">--</span><span class="n">reader</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span>       <span class="n">Reader</span> <span class="nb">type</span>
@@ -205,15 +219,18 @@ from the command-line.</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">--input</span></code> and <code class="docutils literal"><span class="pre">--output</span></code> file names are required options.</p>
-<p>The <code class="docutils literal"><span class="pre">--pipeline</span></code> file name is optional. If given, the pipeline constructed
-from the command-line arguments will be written to disk for reuse in the
-<a class="reference internal" href="pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a>.</p>
-<p>The <code class="docutils literal"><span class="pre">--json</span></code> flag can use used to specify a JSON array of filters
-as if they were being specified in a <a class="reference internal" href="pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a>.  If a filename
-follows the flag, the file is opened and it is assumed that the file
-contains a valid JSON array of filter specifications.  If the flag value
-is not a filename, the value is taken to be a literal JSON string that is
-the array of filters.  The flag
+<p>If provided, the <code class="docutils literal"><span class="pre">--pipeline</span></code> option will write the pipeline constructed
+from the command-line arguments to the specified file.  The translate
+command will not actually run when this argument is given.</p>
+<p>The <code class="docutils literal"><span class="pre">--json</span></code> flag can use used to specify a PDAL pipeline from which
+filters will be extracted.  If a reader or writer exist in the pipeline,
+they will be removed and replaced with the input and output provided on
+the command lines.  If a reader/writer stage referenced tags in the
+provided pipeline, the overriding files will assume those tags.  If the
+argument to the <code class="docutils literal"><span class="pre">--json</span></code> option references an existing file, it is assumed
+that the file contains the pipeline to be processed.  If the argument value
+is not a filename, it is taken to be a literal JSON string that is
+the pipeline.  The flag
 can&#8217;t be used if filters are listed on the command line or explicitly
 with the <code class="docutils literal"><span class="pre">--filter</span></code> option.</p>
 <p>The <code class="docutils literal"><span class="pre">--filter</span></code> flag is optional. It is used to specify drivers used to
@@ -226,7 +243,8 @@ associated with the execution of the translate operation.</p>
 the correct drivers from the input and output file name extensions respectively.</p>
 <div class="section" id="example-1">
 <h2>Example 1:<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">translate</span></code> command can be augmented by specifying full-path options at
+<p>The <code class="docutils literal"><span class="pre">translate</span></code> command can be augmented by specifying fully specified
+options at
 the command-line invocation. For example, the following invocation will
 translate <code class="docutils literal"><span class="pre">1.2-with-color.las</span></code> to <code class="docutils literal"><span class="pre">output.laz</span></code> while doing the following:</p>
 <ul class="simple">
@@ -265,7 +283,16 @@ stage-specific parameters as shown.</p>
 output (including the output from the stats filter) is written to the file
 &#8220;meta.json&#8221;.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate myfile output.las --metadata=meta.json -r readers.text \
-    --json=&quot;[ { \&quot;type\&quot;:\&quot;filters.stats\&quot; } ]&quot;
+    --json=&quot;{ \&quot;pipeline\&quot;: [ { \&quot;type\&quot;:\&quot;filters.stats\&quot; } ] }&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-4">
+<h2>Example 4:<a class="headerlink" href="#example-4" title="Permalink to this headline">¶</a></h2>
+<p>This command reprojects the points in the file &#8220;input.las&#8221; to another spatial
+reference system and writes the result to the file &#8220;output.las&#8221;.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate input.las output.las -f filters.reprojection \
+  --filters.reprojection.out_srs=&quot;EPSG:4326&quot;
 </pre></div>
 </div>
 </div>
@@ -295,7 +322,7 @@ output (including the output from the stats filter) is written to the file
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -316,7 +343,7 @@ output (including the output from the stats filter) is written to the file
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -325,7 +352,7 @@ output (including the output from the stats filter) is written to the file
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -350,7 +377,7 @@ output (including the output from the stats filter) is written to the file
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

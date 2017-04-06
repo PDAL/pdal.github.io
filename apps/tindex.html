@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Applications" href="index.html"/>
         <link rel="next" title="translate" href="translate.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -127,7 +135,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -200,6 +213,19 @@ spatial index file that meet some criteria (usually a geographic region filter).
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal tindex &lt;tindex&gt; &lt;filespec&gt;
 </pre></div>
 </div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">tindex</span>               <span class="n">OGR</span><span class="o">-</span><span class="n">readable</span><span class="o">/</span><span class="n">writeable</span> <span class="n">tile</span> <span class="n">index</span> <span class="n">output</span>
+<span class="o">--</span><span class="n">filespec</span>             <span class="n">Build</span><span class="p">:</span> <span class="n">Pattern</span> <span class="n">of</span> <span class="n">files</span> <span class="n">to</span> <span class="n">index</span><span class="o">.</span> <span class="n">Merge</span><span class="p">:</span> <span class="n">Output</span> <span class="n">filename</span>
+<span class="o">--</span><span class="n">fast_boundary</span>        <span class="n">Use</span> <span class="n">extent</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">exact</span> <span class="n">boundary</span>
+<span class="o">--</span><span class="n">lyr_name</span>             <span class="n">OGR</span> <span class="n">layer</span> <span class="n">name</span> <span class="n">to</span> <span class="n">write</span> <span class="n">into</span> <span class="n">datasource</span>
+<span class="o">--</span><span class="n">tindex_name</span>          <span class="n">Tile</span> <span class="n">index</span> <span class="n">column</span> <span class="n">name</span>
+<span class="o">--</span><span class="n">ogrdriver</span><span class="p">,</span> <span class="o">-</span><span class="n">f</span>        <span class="n">OGR</span> <span class="n">driver</span> <span class="n">name</span> <span class="n">to</span> <span class="n">use</span>
+<span class="o">--</span><span class="n">t_srs</span>                <span class="n">Target</span> <span class="n">SRS</span> <span class="n">of</span> <span class="n">tile</span> <span class="n">index</span>
+<span class="o">--</span><span class="n">a_srs</span>                <span class="n">Assign</span> <span class="n">SRS</span> <span class="n">of</span> <span class="n">tile</span> <span class="k">with</span> <span class="n">no</span> <span class="n">SRS</span> <span class="n">to</span> <span class="n">this</span> <span class="n">value</span>
+<span class="o">--</span><span class="n">write_absolute_path</span>  <span class="n">Write</span> <span class="n">absolute</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">relative</span> <span class="n">file</span> <span class="n">paths</span>
+<span class="o">--</span><span class="n">merge</span>                <span class="n">Whether</span> <span class="n">we</span><span class="s1">&#39;re merging the entries in a tindex file.</span>
+<span class="o">--</span><span class="n">stdin</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span>            <span class="n">Read</span> <span class="n">filespec</span> <span class="n">pattern</span> <span class="kn">from</span> <span class="nn">standard</span> <span class="nb">input</span>
+</pre></div>
+</div>
 <p>This command will index the files referred to by <code class="docutils literal"><span class="pre">filespec</span></code> and place the
 result in <code class="docutils literal"><span class="pre">tindex</span></code>.  The <code class="docutils literal"><span class="pre">tindex</span></code> is a vector file or database that
 will be created by <code class="docutils literal"><span class="pre">pdal</span></code> as necessary to store the file index.
@@ -211,22 +237,6 @@ Shapefile&#8221;.  Any filetype that can be handled by
 <p>In vector file-speak, each file specified by <code class="docutils literal"><span class="pre">filespec</span></code> is stored as a
 feature in a layer in the index file. The <code class="docutils literal"><span class="pre">filespec</span></code> is a <a class="reference external" href="http://man7.org/linux/man-pages/man7/glob.7.html">glob pattern</a>.  and normally needs to be
 quoted to prevent shell expansion of wildcard characters.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">tindex</span>                   <span class="n">Non</span><span class="o">-</span><span class="n">positional</span> <span class="n">option</span> <span class="k">for</span> <span class="n">specifying</span> <span class="n">the</span> <span class="n">index</span> <span class="n">file</span> <span class="n">name</span><span class="o">.</span>
-<span class="o">--</span><span class="n">filespec</span>                 <span class="n">Non</span><span class="o">-</span><span class="n">positional</span> <span class="n">option</span> <span class="k">for</span> <span class="n">specifying</span> <span class="n">pattern</span> <span class="n">of</span> <span class="n">files</span> <span class="n">to</span>
-                           <span class="n">be</span> <span class="n">indexed</span><span class="o">.</span>
-<span class="o">--</span><span class="n">lyr_name</span>                 <span class="n">Name</span> <span class="n">of</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">which</span> <span class="n">to</span> <span class="n">store</span> <span class="n">the</span> <span class="n">features</span><span class="o">.</span> <span class="n">Defaults</span> <span class="n">to</span>
-                           <span class="n">the</span> <span class="n">base</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">first</span> <span class="n">file</span> <span class="n">indexed</span><span class="o">.</span>
-<span class="o">--</span><span class="n">tindex_name</span>              <span class="n">Name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">which</span> <span class="n">to</span> <span class="n">store</span> <span class="n">the</span>
-                           <span class="n">indexed</span> <span class="n">file</span> <span class="n">name</span><span class="o">.</span> <span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span>
-<span class="o">--</span><span class="n">ogrdriver</span>                <span class="n">OGR</span> <span class="n">driver</span> <span class="n">name</span><span class="o">.</span> <span class="p">[</span><span class="s2">&quot;ESRI Shapefile&quot;</span><span class="p">]</span>
-<span class="o">--</span><span class="n">t_srs</span>                    <span class="n">Spatial</span> <span class="n">reference</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">which</span> <span class="n">to</span> <span class="n">store</span> <span class="n">index</span> <span class="n">vector</span>
-                           <span class="n">data</span><span class="o">.</span> <span class="p">[</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">]</span>
-<span class="o">--</span><span class="n">a_srs</span>                    <span class="n">Spatial</span> <span class="n">reference</span> <span class="n">assumed</span> <span class="n">to</span> <span class="n">be</span> <span class="n">the</span> <span class="n">reference</span> <span class="k">for</span> <span class="n">the</span>
-                           <span class="n">source</span> <span class="n">data</span><span class="o">.</span>  <span class="n">If</span> <span class="n">the</span> <span class="n">source</span> <span class="n">data</span> <span class="n">includes</span> <span class="n">spatial</span> <span class="n">reference</span>
-                           <span class="n">information</span><span class="p">,</span> <span class="n">this</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">IGNORED</span><span class="o">.</span> <span class="p">[</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">]</span>
-<span class="o">--</span><span class="n">write_absolute_path</span> <span class="n">arg</span>  <span class="n">Write</span> <span class="n">absolute</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">relative</span> <span class="n">file</span> <span class="n">paths</span> <span class="p">[</span><span class="n">false</span><span class="p">]</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="tindex-merge-mode">
 <h2>tindex Merge Mode<a class="headerlink" href="#tindex-merge-mode" title="Permalink to this headline">¶</a></h2>
@@ -238,15 +248,14 @@ points in the indexed files that pass any filter that might be specified,
 writing the output to the point cloud file specified in <code class="docutils literal"><span class="pre">filespec</span></code>.
 The type of the output file is determined automatically from the filename
 extension.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">tindex</span>    <span class="n">Non</span><span class="o">-</span><span class="n">positional</span> <span class="n">option</span> <span class="k">for</span> <span class="n">specifying</span> <span class="n">the</span> <span class="n">index</span> <span class="n">filename</span><span class="o">.</span>
-<span class="o">--</span><span class="n">filespec</span>  <span class="n">Non</span><span class="o">-</span><span class="n">positional</span> <span class="n">option</span> <span class="k">for</span> <span class="n">specifying</span> <span class="n">the</span> <span class="n">merge</span> <span class="n">output</span> <span class="n">filename</span><span class="o">.</span>
-<span class="o">--</span><span class="n">polygon</span>   <span class="n">Well</span><span class="o">-</span><span class="n">known</span> <span class="n">text</span> <span class="n">representation</span> <span class="n">of</span> <span class="n">geometric</span> <span class="nb">filter</span><span class="o">.</span>  <span class="n">Only</span>
-            <span class="n">points</span> <span class="n">inside</span> <span class="n">the</span> <span class="nb">object</span> <span class="n">will</span> <span class="n">be</span> <span class="n">written</span> <span class="n">to</span> <span class="n">the</span> <span class="n">output</span> <span class="n">file</span><span class="o">.</span>
-<span class="o">--</span><span class="n">bounds</span>    <span class="n">Bounding</span> <span class="n">box</span> <span class="k">for</span> <span class="n">clipping</span> <span class="n">points</span><span class="o">.</span>  <span class="n">Only</span> <span class="n">points</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">box</span>
-            <span class="n">will</span> <span class="n">be</span> <span class="n">written</span> <span class="n">to</span> <span class="n">the</span> <span class="n">output</span> <span class="n">file</span><span class="o">.</span>
-            <span class="o">--</span><span class="n">bounds</span> <span class="s2">&quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;</span>
-<span class="o">--</span><span class="n">t_srs</span>     <span class="n">Spatial</span> <span class="n">reference</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">which</span> <span class="n">the</span> <span class="n">output</span> <span class="n">data</span> <span class="n">should</span> <span class="n">be</span>
-            <span class="n">represented</span><span class="o">.</span> <span class="p">[</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">tindex</span>         <span class="n">OGR</span><span class="o">-</span><span class="n">readable</span><span class="o">/</span><span class="n">writeable</span> <span class="n">tile</span> <span class="n">index</span> <span class="n">output</span>
+<span class="o">--</span><span class="n">filespec</span>       <span class="n">Build</span><span class="p">:</span> <span class="n">Pattern</span> <span class="n">of</span> <span class="n">files</span> <span class="n">to</span> <span class="n">index</span><span class="o">.</span> <span class="n">Merge</span><span class="p">:</span> <span class="n">Output</span> <span class="n">filename</span>
+<span class="o">--</span><span class="n">lyr_name</span>       <span class="n">OGR</span> <span class="n">layer</span> <span class="n">name</span> <span class="n">to</span> <span class="n">write</span> <span class="n">into</span> <span class="n">datasource</span>
+<span class="o">--</span><span class="n">tindex_name</span>    <span class="n">Tile</span> <span class="n">index</span> <span class="n">column</span> <span class="n">name</span>
+<span class="o">--</span><span class="n">ogrdriver</span><span class="p">,</span> <span class="o">-</span><span class="n">f</span>  <span class="n">OGR</span> <span class="n">driver</span> <span class="n">name</span> <span class="n">to</span> <span class="n">use</span>
+<span class="o">--</span><span class="n">t_srs</span>          <span class="n">Target</span> <span class="n">SRS</span> <span class="n">of</span> <span class="n">tile</span> <span class="n">index</span>
+<span class="o">--</span><span class="n">bounds</span>         <span class="n">Extent</span> <span class="p">(</span><span class="ow">in</span> <span class="n">XYZ</span><span class="p">)</span> <span class="n">to</span> <span class="n">clip</span> <span class="n">output</span> <span class="n">to</span>
+<span class="o">--</span><span class="n">polygon</span>        <span class="n">Well</span><span class="o">-</span><span class="n">known</span> <span class="n">text</span> <span class="n">of</span> <span class="n">polygon</span> <span class="n">to</span> <span class="n">clip</span> <span class="n">output</span>
 </pre></div>
 </div>
 </div>
@@ -294,7 +303,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -315,7 +324,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -324,7 +333,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -349,7 +358,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

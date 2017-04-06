@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Filters" href="filters.html"/>
         <link rel="next" title="filters.reprojection" href="filters.reprojection.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -106,8 +114,9 @@
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.attribute.html">filters.attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.assign.html">filters.assign</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.chipper.html">filters.chipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.cluster.html">filters.cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.computerange.html">filters.computerange</a></li>
@@ -115,14 +124,17 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.divider.html">filters.divider</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.elm.html">filters.elm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.groupby.html">filters.groupby</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hexbin.html">filters.hexbin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.iqr.html">filters.iqr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.kdistance.html">filters.kdistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.locate.html">filters.locate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.merge.html">filters.merge</a></li>
@@ -131,6 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.movingleastsquares.html">filters.movingleastsquares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.outlier.html">filters.outlier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.overlay.html">filters.overlay</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.pclblock.html">filters.pclblock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.pmf.html">filters.pmf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.poisson.html">filters.poisson</a></li>
@@ -142,6 +155,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#pipeline-example">Pipeline Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#command-line-example">Command-line Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ranges">Ranges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-1">Example 1:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2">Example 2:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-3">Example 3:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-4">Example 4:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-5">Example 5:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filters.reprojection.html">filters.reprojection</a></li>
@@ -154,7 +175,12 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.voxelgrid.html">filters.voxelgrid</a></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -215,11 +241,30 @@
            <div itemprop="articleBody">
             
   <div class="section" id="filters-range">
-<span id="id1"></span><h1>filters.range<a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1><a class="toc-backref" href="#id3">filters.range</a><a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#filters-range" id="id3">filters.range</a><ul>
+<li><a class="reference internal" href="#pipeline-example" id="id4">Pipeline Example</a></li>
+<li><a class="reference internal" href="#command-line-example" id="id5">Command-line Example</a></li>
+<li><a class="reference internal" href="#options" id="id6">Options</a></li>
+<li><a class="reference internal" href="#ranges" id="id7">Ranges</a><ul>
+<li><a class="reference internal" href="#example-1" id="id8">Example 1:</a></li>
+<li><a class="reference internal" href="#example-2" id="id9">Example 2:</a></li>
+<li><a class="reference internal" href="#example-3" id="id10">Example 3:</a></li>
+<li><a class="reference internal" href="#example-4" id="id11">Example 4:</a></li>
+<li><a class="reference internal" href="#example-5" id="id12">Example 5:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <p>The range filter applies rudimentary filtering to the input point cloud
 based on a set of criteria on the given dimensions.</p>
 <div class="section" id="pipeline-example">
-<h2>Pipeline Example<a class="headerlink" href="#pipeline-example" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Pipeline Example</a><a class="headerlink" href="#pipeline-example" title="Permalink to this headline">¶</a></h2>
 <p>This example passes through all points whose Z value is in the range [0,100]
 and whose classification equals 2 (corresponding to ground in LAS).</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -239,17 +284,17 @@ and whose classification equals 2 (corresponding to ground in LAS).</p>
 </div>
 </div>
 <div class="section" id="command-line-example">
-<h2>Command-line Example<a class="headerlink" href="#command-line-example" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Command-line Example</a><a class="headerlink" href="#command-line-example" title="Permalink to this headline">¶</a></h2>
 <p>The equivalent pipeline invoked via the PDAL <code class="docutils literal"><span class="pre">translate</span></code> command would be</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ pdal translate -i input.las -o filtered.las -f range --filters.range.limits<span class="o">=</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Options</a><a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>limits</dt>
-<dd><p class="first">A comma-separated list of <a class="reference internal" href="ranges.html#ranges"><span class="std std-ref">Ranges</span></a>.  If more than one range is
+<dd><p class="first">A comma-separated list of <a class="reference internal" href="#ranges"><span class="std std-ref">Ranges</span></a>.  If more than one range is
 specified for a dimension, the criteria are treated as being logically
 ORed together.  Ranges for different dimensions are treated as being
 logically ANDed.</p>
@@ -262,6 +307,51 @@ logically ANDed.</p>
 1-50 or 75-255.  In this case, all values are inclusive.</p>
 </dd>
 </dl>
+</div>
+<div class="section" id="ranges">
+<span id="id2"></span><h2><a class="toc-backref" href="#id7">Ranges</a><a class="headerlink" href="#ranges" title="Permalink to this headline">¶</a></h2>
+<p>A range specification is a dimension name, followed by an optional negation
+character (&#8216;!&#8217;), and a starting and ending value separated by a colon,
+surrounded by parentheses or square brackets.  Either the starting or ending
+values can be omitted.  Parentheses indicate an open endpoint that doesn&#8217;t
+include the adjacent value.  Square brackets indicate a closed endpoint
+that includes the adjacent value.</p>
+<div class="section" id="example-1">
+<h3><a class="toc-backref" href="#id8">Example 1:</a><a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Z</span><span class="p">[</span><span class="mi">10</span><span class="p">:]</span>
+</pre></div>
+</div>
+<p>Selects all points with a Z value greater than or equal to 10.</p>
+</div>
+<div class="section" id="example-2">
+<h3><a class="toc-backref" href="#id9">Example 2:</a><a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Classification</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Selects all points with a classification of 2.</p>
+</div>
+<div class="section" id="example-3">
+<h3><a class="toc-backref" href="#id10">Example 3:</a><a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Red!(20:40]
+</pre></div>
+</div>
+<p>Selects all points with red values less than or equal to 20 and those with
+values greater than 40</p>
+</div>
+<div class="section" id="example-4">
+<h3><a class="toc-backref" href="#id11">Example 4:</a><a class="headerlink" href="#example-4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Blue</span><span class="p">[:</span><span class="mi">255</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Selects all points with a blue value less than 255.</p>
+</div>
+<div class="section" id="example-5">
+<h3><a class="toc-backref" href="#id12">Example 5:</a><a class="headerlink" href="#example-5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Intensity![25:25]
+</pre></div>
+</div>
+<p>Selects all points with an intensity not equal to 25.</p>
+</div>
 </div>
 </div>
 
@@ -289,7 +379,7 @@ logically ANDed.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -310,7 +400,7 @@ logically ANDed.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -319,7 +409,7 @@ logically ANDed.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -344,7 +434,7 @@ logically ANDed.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="pdal.io" href="../../index.html"/>
         <link rel="up" title="Compilation" href="index.html"/>
         <link rel="next" title="Building Under Windows" href="windows.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,7 +113,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorials</a></li>
@@ -115,6 +128,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">PDAL Architecture Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Compilation</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Unix Compilation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#using-unix-makefiles-on-linux">Using &#8220;Unix Makefiles&#8221; on Linux</a></li>
@@ -123,12 +137,12 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="windows.html">Building Under Windows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="python.html">Python installation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../conventions.html">Coding Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributors.html">Contributors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../docs.html">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docker.html">Building Docker Containers for PDAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../goals.html">Project Goals</a></li>
@@ -217,7 +231,9 @@ PDAL is known to compile on Linux 2.6&#8217;s of various flavors and OSX with XC
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../../quickstart.html#docker"><span class="std std-ref">Install Docker</span></a> contains an automated way to build PDAL and all of
-its dependencies.</p>
+its dependencies. The <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/scripts/docker/Dockerfile">Dockerfile</a> for PDAL build on Xenial is an
+excellent script describing how to build PDAL and all of its
+dependencies.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -300,11 +316,11 @@ substituting accordingly, to values that match your system layout.</p>
 <td>GDAL_CONFIG</td>
 <td>/usr/local/bin/gdal-config</td>
 </tr>
-<tr class="row-even"><td>&nbsp;</td>
+<tr class="row-even"><td>&#160;</td>
 <td>GDAL_INCLUDE_DIR</td>
 <td>/usr/local/include</td>
 </tr>
-<tr class="row-odd"><td>&nbsp;</td>
+<tr class="row-odd"><td>&#160;</td>
 <td>GDAL_LIBRARY</td>
 <td>/usr/local/lib/libgdal.so</td>
 </tr>
@@ -312,7 +328,7 @@ substituting accordingly, to values that match your system layout.</p>
 <td>GEOTIFF_INCLUDE_DIR</td>
 <td>/usr/local/include</td>
 </tr>
-<tr class="row-odd"><td>&nbsp;</td>
+<tr class="row-odd"><td>&#160;</td>
 <td>GEOTIFF_LIBRARY</td>
 <td>/usr/local/lib/libgeotiff.so</td>
 </tr>
@@ -320,19 +336,19 @@ substituting accordingly, to values that match your system layout.</p>
 <td>ORACLE_INCLUDE_DIR</td>
 <td>/home/oracle/sdk/include</td>
 </tr>
-<tr class="row-odd"><td>&nbsp;</td>
+<tr class="row-odd"><td>&#160;</td>
 <td>ORACLE_NNZ_LIBRARY</td>
 <td>/home/oracle/libnnz10.so</td>
 </tr>
-<tr class="row-even"><td>&nbsp;</td>
+<tr class="row-even"><td>&#160;</td>
 <td>ORACLE_OCCI_LIBRARY</td>
 <td>/home/oracle/libocci.so</td>
 </tr>
-<tr class="row-odd"><td>&nbsp;</td>
+<tr class="row-odd"><td>&#160;</td>
 <td>ORACLE_OCIEI_LIBRARY</td>
 <td>/home/oracle/libociei.so</td>
 </tr>
-<tr class="row-even"><td>&nbsp;</td>
+<tr class="row-even"><td>&#160;</td>
 <td>ORACLE_OCI_LIBRARY</td>
 <td>/home/oracle/libclntsh.so</td>
 </tr>
@@ -505,7 +521,7 @@ configure your <a class="reference internal" href="dependencies.html#dependencie
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -526,7 +542,7 @@ configure your <a class="reference internal" href="dependencies.html#dependencie
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -535,7 +551,7 @@ configure your <a class="reference internal" href="dependencies.html#dependencie
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -560,7 +576,7 @@ configure your <a class="reference internal" href="dependencies.html#dependencie
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

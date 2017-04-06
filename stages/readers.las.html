@@ -35,9 +35,14 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
-        <link rel="next" title="readers.mrsid" href="readers.mrsid.html"/>
+        <link rel="next" title="readers.mbio" href="readers.mbio.html"/>
         <link rel="prev" title="readers.ilvis2" href="readers.ilvis2.html"/> 
 
   
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -115,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
@@ -133,7 +142,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -209,7 +223,7 @@ the two supported decompressors, <a class="reference external" href="http://www.
 input LAS file to an output LAS file will frequently want to use the same
 scale factors and offsets in the output file as existed in the input
 file in order to
-maintain the precision of the data.  Use the &#8216;forward&#8217; option on the
+maintain the precision of the data.  Use the <cite>forward</cite> option on the
 <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> to facilitate transfer of header information from
 source to destination LAS/LAZ files.</p>
 </div>
@@ -227,15 +241,26 @@ cause PDAL to create dimensions Bar0, Bar1 and Bar2.  See the information
 on the extra bytes VLR in the <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf">LAS Specification</a> for more information
 on the extra bytes VLR and array datatypes.</p>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
 <p class="last">LAS 1.4 files that use the extra bytes VLR and datatype 0 will be accepted,
 but the data associated with a dimension of datatype 0 will be ignored
 (no PDAL dimension will be created).</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
@@ -248,7 +273,7 @@ but the data associated with a dimension of datatype 0 will be ignored
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
@@ -256,13 +281,17 @@ but the data associated with a dimension of datatype 0 will be ignored
 <dt><span class="target" id="filename">filename</span></dt>
 <dd>LAS file to read [Required]</dd>
 <dt><span class="target" id="extra-dims">extra_dims</span></dt>
-<dd>Extra dimensions to be read as part of each point beyond those specified by
+<dd><p class="first">Extra dimensions to be read as part of each point beyond those specified by
 the LAS point format.  The format of the option is
 &lt;dimension_name&gt;=&lt;type&gt;, ... where type is one of:
-int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double
-&#8216;_t&#8217; may be added to any of the type names as well (e.g., uint32_t).  NOTE:
-the presence of an extra bytes VLR causes when reading a version 1.4 LAS
-file causes this option to be ignored.</dd>
+int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double.
+<cite>_t</cite> may be added to any of the type names as well (e.g., uint32_t).</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The presence of an extra bytes VLR causes when reading a version 1.4 LAS file
+causes this option to be ignored.</p>
+</div>
+</dd>
 </dl>
 <dl class="docutils">
 <dt><span class="target" id="compression">compression</span></dt>
@@ -282,7 +311,7 @@ doesn&#8217;t support version 1 LAZ files or version 1.4 of LAS.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="readers.mrsid.html" class="btn btn-neutral float-right" title="readers.mrsid" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.mbio.html" class="btn btn-neutral float-right" title="readers.mbio" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.ilvis2.html" class="btn btn-neutral" title="readers.ilvis2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -299,7 +328,7 @@ doesn&#8217;t support version 1 LAZ files or version 1.4 of LAS.
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -320,7 +349,7 @@ doesn&#8217;t support version 1 LAZ files or version 1.4 of LAS.
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -329,7 +358,7 @@ doesn&#8217;t support version 1 LAZ files or version 1.4 of LAS.
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -354,7 +383,7 @@ doesn&#8217;t support version 1 LAZ files or version 1.4 of LAS.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

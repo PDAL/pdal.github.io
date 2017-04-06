@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="about.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="pdal.io" href="index.html"/>
         <link rel="next" title="Applications" href="apps/index.html"/>
         <link rel="prev" title="Download" href="download.html"/> 
@@ -66,7 +71,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -88,6 +93,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
 </ul>
 <ul class="current">
@@ -116,7 +124,12 @@
 <li class="toctree-l1"><a class="reference internal" href="stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorials</a></li>
@@ -187,6 +200,20 @@ to be able to run.</p>
 <p>This exercise will print the first point of an <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">ASPRS LAS</span></a> file.
 It will utilize the PDAL <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">command line application</span></a> to inspect the
 file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>While Docker is convenient, it is not for everyone. You can also obtain the
+software by installing a Linux package from <a class="reference internal" href="download.html#download"><span class="std std-ref">Download</span></a> or compiling it
+yourself from <a class="reference internal" href="development/compilation/index.html#building"><span class="std std-ref">Compilation</span></a>.</p>
+<p>Docker is not required to use PDAL, and there are packages available on
+Linux (Debian, RPM) and OSX (<a class="reference external" href="http://brew.sh">Homebrew</a>). See <a class="reference internal" href="download.html#download"><span class="std std-ref">Download</span></a> to obtain
+them. If you are a developer looking to leverage PDAL, you will need access
+to the library in your environment, but this quick start document is for
+those looking to quickly interact with data using PDAL&#8217;s <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">command line
+applications</span></a> and <a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>.</p>
+<p class="last">If you need to compile your own copy of PDAL, see <a class="reference internal" href="development/compilation/index.html#building"><span class="std std-ref">Compilation</span></a> for
+more details.</p>
+</div>
 </div>
 <div class="section" id="install-docker">
 <span id="docker"></span><h2>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this headline">¶</a></h2>
@@ -224,18 +251,19 @@ a simple <cite>info</cite> command to verify that things are operating correctly
 <div class="section" id="obtain-pdal-image">
 <h3>Obtain PDAL Image<a class="headerlink" href="#obtain-pdal-image" title="Permalink to this headline">¶</a></h3>
 <p>A PDAL image based on the latest release, including all recent patches, is
-pushed to <a class="reference external" href="http://hub.docker.com">Docker Hub</a> with every code change on the PDAL maintenance branch.
+pushed to <a class="reference external" href="http://hub.docker.com">Docker Hub</a> with every code change on the PDAL maintenance branch (find
+out more about that at <a class="reference internal" href="development/docker.html#development-docker"><span class="std std-ref">here</span></a>).
 We need to pull it locally so we can use it to run PDAL commands. Once it is
 pulled, we don&#8217;t have to pull it again unless we want to refresh it for
 whatever reason.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span><span class="p">:</span><span class="mf">1.4</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span><span class="p">:</span><span class="mf">1.5</span>
 </pre></div>
 </div>
 <img alt="_images/docker-quickstart-pull.png" src="_images/docker-quickstart-pull.png" />
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Other PDAL versions are provided at the same <a class="reference external" href="http://hub.docker.com">Docker Hub</a> location,
-with an expected tag name (ie <code class="docutils literal"><span class="pre">pdal/pdal:1.4</span></code>, or <code class="docutils literal"><span class="pre">pdal/pdal:1.x</span></code>) for
+with an expected tag name (ie <code class="docutils literal"><span class="pre">pdal/pdal:1.5</span></code>, or <code class="docutils literal"><span class="pre">pdal/pdal:1.x</span></code>) for
 major PDAL versions. The PDAL Docker hub location at
 <a class="reference external" href="https://hub.docker.com/u/pdal/">https://hub.docker.com/u/pdal/</a> has images and more information
 on this topic.</p>
@@ -257,7 +285,7 @@ Inside your terminal, issue the following command:</p>
 </div>
 <div class="section" id="print-the-first-point">
 <h2>Print the first point<a class="headerlink" href="#print-the-first-point" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span><span class="p">:</span><span class="mf">1.4</span> <span class="n">pdal</span> <span class="n">info</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">autzen</span><span class="o">.</span><span class="n">laz</span> <span class="o">-</span><span class="n">p</span> <span class="mi">0</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span><span class="p">:</span><span class="mf">1.5</span> <span class="n">pdal</span> <span class="n">info</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">autzen</span><span class="o">.</span><span class="n">laz</span> <span class="o">-</span><span class="n">p</span> <span class="mi">0</span>
 </pre></div>
 </div>
 <p>Here&#8217;s a summary of what&#8217;s going on with that command invocation</p>
@@ -275,7 +303,7 @@ commands will start with the <code class="docutils literal"><span class="pre">do
 document describes mounting volumes in more detail.</p>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">pdal/pdal:1.4</span></code>: This is the Docker image we are going to run. We fetched it
+<li><p class="first"><code class="docutils literal"><span class="pre">pdal/pdal:1.5</span></code>: This is the Docker image we are going to run. We fetched it
 with the command above. If it were not already fetched, Docker would attempt
 to fetch it when we run this command.</p>
 </li>
@@ -305,6 +333,8 @@ many tasks with PDAL.</li>
 <li><a class="reference internal" href="workshop/index.html#workshop"><span class="std std-ref">The PDAL workshop</span></a> contains numerous hands-on examples with screenshots and
 example data of how to use PDAL <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">Applications</span></a> to tackle point cloud data
 processing tasks.</li>
+<li><a class="reference internal" href="python.html#python"><span class="std std-ref">Python</span></a> describes how PDAL embeds and extends Python and
+how you can leverage these capabilities in your own programs.</li>
 </ul>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -337,7 +367,7 @@ processing tasks.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -358,7 +388,7 @@ processing tasks.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -367,7 +397,7 @@ processing tasks.</li>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -392,7 +422,7 @@ processing tasks.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

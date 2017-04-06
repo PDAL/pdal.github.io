@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../../../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
     <link rel="top" title="pdal.io" href="../../../../index.html"/>
         <link rel="up" title="Exercises" href="../../index.html"/>
         <link rel="next" title="Georeferencing" href="../../georeferencing/index.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,7 +113,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/index.html">Tutorials</a></li>
@@ -114,7 +127,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Workshop</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../../agenda.html">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../lidar-introduction.html">Introduction to LiDAR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../pdal-introduction.html">Introduction to PDAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../software.html">Software Installation</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Exercises</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#basic-information">Basic Information</a></li>
@@ -193,7 +205,7 @@
   <div class="section" id="generating-a-dtm">
 <span id="dtm"></span><h1>Generating a DTM<a class="headerlink" href="#generating-a-dtm" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This exercise uses PDAL to generate an elevation model surface using the
-output from the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise, PDAL&#8217;s <a class="reference internal" href="../../../../stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a> operation,
+output from the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise, PDAL&#8217;s <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> operation,
 and <a class="reference external" href="http://gdal.org/">GDAL</a> to generate an elevation and hillshade surface from point cloud
 data.</p>
 <div class="section" id="exercise">
@@ -209,7 +221,7 @@ file by following that exercise before starting this one.</p>
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Docker
 Quickstart Terminal</cite>:</p>
-<p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a>
+<p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 stage. There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we
 must use a pipeline.</p>
 </div>
@@ -224,7 +236,7 @@ must use a pipeline.</p>
             <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
             <span class="s2">&quot;grid_dist_x&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
             <span class="s2">&quot;grid_dist_y&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.p2g&quot;</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.gdal&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -241,8 +253,8 @@ must use a pipeline.</p>
 <p><code class="docutils literal"><span class="pre">ground-filtered.laz</span></code> is the <a class="reference external" href="http://laszip.org">LASzip</a> file we will clip. You should have
 created this output as part of the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise.</p>
 </div>
-<div class="section" id="writers-p2g">
-<h4>2. <a class="reference internal" href="../../../../stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a><a class="headerlink" href="#writers-p2g" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="writers-gdal">
+<h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h4>
 <p>The <a class="reference external" href="https://github.com/CRREL/points2grid">Points2grid</a> writer that bins the point cloud data into an elevation
 surface.</p>
 </div>
@@ -253,7 +265,7 @@ surface.</p>
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
        <span class="n">pdal</span> <span class="n">pipeline</span> \
-       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">p2g</span><span class="o">.</span><span class="n">json</span>
+       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </td></tr></table></div>
 <img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" />
@@ -327,7 +339,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -348,7 +360,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -357,7 +369,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
       <script type="text/javascript" src="../../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -382,7 +394,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Applications" href="index.html"/>
         <link rel="next" title="sort" href="sort.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -121,7 +129,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -192,18 +205,15 @@ each of the x, y, and z dimensions.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal random &lt;output&gt;
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">output</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span><span class="p">]</span> <span class="n">arg</span>   <span class="n">Non</span><span class="o">-</span><span class="n">positional</span> <span class="n">argument</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">output</span> <span class="n">file</span> <span class="n">name</span><span class="o">.</span>
-<span class="o">--</span><span class="n">compress</span> <span class="p">[</span><span class="o">-</span><span class="n">z</span><span class="p">]</span>     <span class="n">Compress</span> <span class="n">output</span> <span class="n">data</span> <span class="p">(</span><span class="k">if</span> <span class="n">supported</span> <span class="n">by</span> <span class="n">output</span> <span class="nb">format</span><span class="p">)</span>
-<span class="o">--</span><span class="n">count</span> <span class="n">arg</span>         <span class="n">Number</span> <span class="n">of</span> <span class="n">points</span> <span class="ow">in</span> <span class="n">created</span> <span class="n">point</span> <span class="n">cloud</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span>
-<span class="o">--</span><span class="n">bounds</span> <span class="n">arg</span>        <span class="n">Extent</span> <span class="p">(</span><span class="ow">in</span> <span class="n">XYZ</span> <span class="n">to</span> <span class="n">clip</span> <span class="n">output</span> <span class="n">to</span><span class="p">):</span>
-                    <span class="o">--</span><span class="n">bounds</span> <span class="s2">&quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;</span>
-<span class="o">--</span><span class="n">mean</span> <span class="n">arg</span>          <span class="n">List</span> <span class="n">of</span> <span class="n">means</span> <span class="p">(</span><span class="k">for</span> <span class="o">--</span><span class="n">distribution</span> <span class="n">normal</span><span class="p">)</span>
-                    <span class="o">--</span><span class="n">mean</span> <span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span>
-                    <span class="o">--</span><span class="n">mean</span> <span class="s2">&quot;0.0 0.0 0.0&quot;</span>
-<span class="o">--</span><span class="n">stdev</span> <span class="n">arg</span>         <span class="n">List</span> <span class="n">of</span> <span class="n">standard</span> <span class="n">deviations</span> <span class="p">(</span><span class="k">for</span> <span class="o">--</span><span class="n">distribution</span> <span class="n">normal</span><span class="p">)</span>
-                    <span class="o">--</span><span class="n">stdev</span> <span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span>
-                    <span class="o">--</span><span class="n">stdev</span> <span class="s2">&quot;0.0 0.0 0.0&quot;</span>
-<span class="o">--</span><span class="n">distribution</span> <span class="n">arg</span>  <span class="n">Distribution</span> <span class="nb">type</span> <span class="p">(</span><span class="n">uniform</span> <span class="ow">or</span> <span class="n">normal</span><span class="p">)</span> <span class="p">[</span><span class="n">uniform</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span>--output, -o       Output file name
+--compress, -z     Compress output data (if supported by output format)
+--count            How many points should we write?
+--bounds           Extent (in XYZ to clip output to)
+--mean             A comma-separated or quoted, space-separated list of means
+    (normal mode): --mean 0.0,0.0,0.0 --mean &quot;0.0 0.0 0.0&quot;
+--stdev            A comma-separated or quoted, space-separated list of
+    standard deviations (normal mode): --stdev 0.0,0.0,0.0 --stdev &quot;0.0 0.0 0.0&quot;
+--distribution     Distribution (uniform / normal)
 </pre></div>
 </div>
 </div>
@@ -232,7 +242,7 @@ each of the x, y, and z dimensions.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -253,7 +263,7 @@ each of the x, y, and z dimensions.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -262,7 +272,7 @@ each of the x, y, and z dimensions.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -287,7 +297,7 @@ each of the x, y, and z dimensions.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

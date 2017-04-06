@@ -1,0 +1,374 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="about.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="pdal.io" href="index.html"/>
+        <link rel="next" title="Tutorials" href="tutorial/index.html"/>
+        <link rel="prev" title="Dimensions" href="dimensions.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages/filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dimensions.html">Dimensions</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#versions">Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#embed">Embed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extend">Extend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-from-local">Install from local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-from-repository">Install from repository</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Home</a> &raquo;</li>
+      
+    <li>Python</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python">
+<span id="id1"></span><h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">PDAL provides Python support in two significant ways. First it <a class="reference external" href="https://docs.python.org/3/extending/embedding.html">embeds</a> Python
+to allow you to write Python programs that interact with data using
+<a class="reference internal" href="stages/filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a> and <a class="reference internal" href="stages/filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a> filters. Second,
+it <a class="reference external" href="https://docs.python.org/3/extending/extending.html">extends</a> Python by providing an extension that Python programmers
+can use to leverage PDAL capabilities in their own applications.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">PDAL&#8217;s Python story always revolves around <a class="reference external" href="http://www.numpy.org/">Numpy</a> support. PDAL&#8217;s
+data is provided to both the filters ands the extension as
+Numpy arrays.</p>
+</div>
+<div class="section" id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
+<p>PDAL supports both Python 2.7 and Python 3.4+. <a class="reference internal" href="development/integration.html#integration"><span class="std std-ref">Continuous Integration</span></a> tests Python
+2.7 on both Linux and Windows. Python 3 is used by a number of developers
+for adhoc development and testing.</p>
+</div>
+<div class="section" id="embed">
+<h2>Embed<a class="headerlink" href="#embed" title="Permalink to this headline">¶</a></h2>
+<p id="index-1">PDAL allows users to embed Python functions inline with other <a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>
+processing operations. The purpose of this capability is to allow users to
+write small programs that implement interesting actions without requiring a
+full C++ development activity of building a PDAL stage to implement it. A
+Python filter is an opportunity to interactively and iteratively prototype a
+data operation without strong considerations of performance or generality.  If
+something works well enough, maybe one takes on the effort to formalize it, but
+that isn&#8217;t necessary. PDAL&#8217;s embed of Python allows you to be as grimy as you
+need to get the job done.</p>
+<div class="figure" id="id2">
+<img alt="_images/python-pdal-pipeline.png" src="_images/python-pdal-pipeline.png" />
+<p class="caption"><span class="caption-text">Embedding a Python function to take Z values read from a
+<a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">readers.las</span></a> and then output them to a <a class="reference internal" href="stages/writers.bpf.html#writers-bpf"><span class="std std-ref">writers.bpf</span></a>.</span></p>
+</div>
+</div>
+<div class="section" id="extend">
+<h2>Extend<a class="headerlink" href="#extend" title="Permalink to this headline">¶</a></h2>
+<p id="index-2">PDAL provides a Python extension that gives users access to executing
+<a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> instantiations and capturing the results as <a class="reference external" href="http://www.numpy.org/">Numpy</a> arrays.
+This mode of operation is useful if you are looking to have PDAL simply act as
+your data format and processing handler.</p>
+<p>Python extension users are expected to construct their own JSON <a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>
+using Python&#8217;s <code class="docutils literal"><span class="pre">json</span></code> library, or whatever other libraries they wish to
+manipulate JSON. They then feed it into the extension and get back the
+results as <a class="reference external" href="http://www.numpy.org/">Numpy</a> arrays:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">json</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">{</span>
+<span class="s2">  &quot;pipeline&quot;: [</span>
+<span class="s2">    &quot;1.2-with-color.las&quot;,</span>
+<span class="s2">    {</span>
+<span class="s2">        &quot;type&quot;: &quot;filters.sort&quot;,</span>
+<span class="s2">        &quot;dimension&quot;: &quot;X&quot;</span>
+<span class="s2">    }</span>
+<span class="s2">  ]</span>
+<span class="s2">}&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pdal</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pdal</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span> <span class="c1"># check if our JSON and options were good</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">loglevel</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1">#really noisy</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="n">arrays</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">arrays</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">metadata</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>PDAL Python bindings require a working PDAL install (<a class="reference internal" href="development/compilation/index.html#building"><span class="std std-ref">PDAL</span></a>)
+and then installation of the Python extension. The extension lives on <a class="reference external" href="https://pypi.python.org/pypi/PDAL">PyPI</a>
+at <a class="reference external" href="https://pypi.python.org/pypi/PDAL">https://pypi.python.org/pypi/PDAL</a> and you should use that version as your
+canonical Python extension install.</p>
+<div class="section" id="install-from-local">
+<h4>Install from local<a class="headerlink" href="#install-from-local" title="Permalink to this headline">¶</a></h4>
+<p>In the source code of PDAL there is a <code class="docutils literal"><span class="pre">python</span></code> folder, you have to enter
+there and run</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span>
+<span class="c1"># this should be run as administrator/super user</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-from-repository">
+<h4>Install from repository<a class="headerlink" href="#install-from-repository" title="Permalink to this headline">¶</a></h4>
+<p id="index-3">The second method to install the PDAL Python extension is to use <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a>
+or <a class="reference external" href="https://pypi.python.org/pypi/setuptools">easy_install</a>, you have to run the command as administrator.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">PDAL</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To install pip please read
+<a class="reference external" href="https://pip.pypa.io/en/stable/installing/">here</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial/index.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dimensions.html" class="btn btn-neutral" title="Dimensions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 06, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 06, 2017.
+        </div>
+    </div>
+
+</body>
+</html>

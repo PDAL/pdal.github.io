@@ -35,9 +35,14 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="pdal.io" href="../../index.html"/>
         <link rel="up" title="Compilation" href="index.html"/>
-        <link rel="next" title="Python installation" href="python.html"/>
+        <link rel="next" title="Coding Conventions" href="../conventions.html"/>
         <link rel="prev" title="Building Under Windows" href="windows.html"/> 
 
   
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,7 +113,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorials</a></li>
@@ -115,6 +128,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">PDAL Architecture Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Compilation</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="unix.html">Unix Compilation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="windows.html">Building Under Windows</a></li>
@@ -123,12 +137,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#optional-dependencies">Optional Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="python.html">Python installation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../conventions.html">Coding Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributors.html">Contributors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../docs.html">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docker.html">Building Docker Containers for PDAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../goals.html">Project Goals</a></li>
@@ -228,9 +242,6 @@ and Windows has the <a class="reference external" href="http://trac.osgeo.org/os
 to use the GDAL 1.9 package.</p>
 </div>
 </div>
-</div>
-<div class="section" id="optional-dependencies">
-<h2>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="geotiff">
 <h3>GeoTIFF<a class="headerlink" href="#geotiff" title="Permalink to this headline">¶</a></h3>
 <p>PDAL uses GeoTIFF in conjunction with GDAL for GeoTIFF key support in the
@@ -262,6 +273,9 @@ transformation support. Otherwise, older versions should be
 sufficient.</p>
 </div>
 </div>
+</div>
+<div class="section" id="optional-dependencies">
+<h2>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="libxml2">
 <h3>libxml2<a class="headerlink" href="#libxml2" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://xmlsoft.org">libxml2</a> is used to serialize PDAL dimension descriptions into XML for the
@@ -299,13 +313,6 @@ ln -s libociei.so.11.1 libociei.so
 <p class="first admonition-title">Note</p>
 <p class="last">MSVC should only require the oci.lib and oci.dll library and dlls.</p>
 </div>
-</div>
-<div class="section" id="points2grid">
-<h3>Points2Grid<a class="headerlink" href="#points2grid" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://github.com/CRREL/points2grid">Points2Grid</a> is a library with a simple <cite>CMake</cite>-based build system that
-provides simple, out-of-process interpolation of large point sets using
-<a class="reference external" href="http://www.boost.org">Boost</a>. It can be obtained via github.com at <a class="reference external" href="https://github.com/CRREL/points2grid">https://github.com/CRREL/points2grid</a>
-It is used by <a class="reference internal" href="../../stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a> to output point cloud interpolation.</p>
 </div>
 <div class="section" id="hexer">
 <h3>Hexer<a class="headerlink" href="#hexer" title="Permalink to this headline">¶</a></h3>
@@ -363,7 +370,7 @@ off <a class="reference external" href="http://vtk.org">VTK</a> support dependin
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="python.html" class="btn btn-neutral float-right" title="Python installation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../conventions.html" class="btn btn-neutral float-right" title="Coding Conventions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="windows.html" class="btn btn-neutral" title="Building Under Windows" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -380,7 +387,7 @@ off <a class="reference external" href="http://vtk.org">VTK</a> support dependin
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -401,7 +408,7 @@ off <a class="reference external" href="http://vtk.org">VTK</a> support dependin
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -410,7 +417,7 @@ off <a class="reference external" href="http://vtk.org">VTK</a> support dependin
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -435,7 +442,7 @@ off <a class="reference external" href="http://vtk.org">VTK</a> support dependin
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

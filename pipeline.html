@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="about.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="pdal.io" href="index.html"/>
         <link rel="next" title="Readers" href="stages/readers.html"/>
         <link rel="prev" title="Community" href="community.html"/> 
@@ -66,7 +71,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -88,6 +93,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
 </ul>
 <ul>
@@ -102,8 +110,8 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-example">Simple Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reprojection-example">Reprojection Example</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#pipeline-objects">Pipeline Objects</a><ul>
@@ -124,7 +132,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#api-considerations">API Considerations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stage-types">Stage Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 </ul>
@@ -132,7 +139,12 @@
 <li class="toctree-l1"><a class="reference internal" href="stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorials</a></li>
@@ -192,10 +204,11 @@
             
   <div class="section" id="pipeline">
 <span id="id1"></span><h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h1>
-<p>Pipelines are the operative construct in PDAL. PDAL constructs a pipeline to
+<p>Pipelines are the operative construct in PDAL, and it is how data are modeled
+from reading, processing, and writing. PDAL internally constructs a pipeline to
 perform data translation operations using <a class="reference internal" href="apps/translate.html#translate-command"><span class="std std-ref">translate</span></a>, for
 example. While specific <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">applications</span></a> are useful in many contexts,
-a pipeline provides some useful advantages for more complex things:</p>
+a pipeline provides useful advantages for more complex things:</p>
 <ol class="arabic simple">
 <li>You have a record of the operation(s) applied to the data</li>
 <li>You can construct a skeleton of an operation and substitute specific
@@ -210,21 +223,17 @@ via the command line.</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">As of PDAL 1.2, <a class="reference external" href="http://www.json.org/">JSON</a> is now the preferred specification language
-for PDAL pipelines. XML read support is still available at 1.2, but
-JSON is preferred. XML support will be dropped in a future release.</p>
+<p class="last">As of PDAL 1.2, <a class="reference external" href="http://www.json.org/">JSON</a> is the preferred specification language
+for PDAL pipelines. XML read support is still available at 1.5, but
+XML support will be dropped at the 1.6 release.</p>
 </div>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>A PDAL JSON object represents a processing pipeline.</p>
-<p>A complete PDAL JSON data structure is always an object (in JSON terms). In PDAL
-JSON, an object consists of a collection of name/value pairs &#8211; also called
-members. For each member, the name is always a string. Member values are either
-a string, number, object, array or one of the literals: &#8220;true&#8221;, &#8220;false&#8221;, and
-&#8220;null&#8221;. An array consists of elements where each element is a value as
-described above.</p>
-<div class="section" id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>A JSON object represents a PDAL processing pipeline.  The structure is always a
+JSON object, with the primary object called <code class="docutils literal"><span class="pre">pipeline</span></code> being an array of
+inferred or explicit PDAL <a class="reference internal" href="#stage-object"><span class="std std-ref">Stage Objects</span></a> representations.</p>
+<div class="section" id="simple-example">
+<h3>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h3>
 <p>A simple PDAL pipeline, inferring the appropriate drivers for the reader and
 writer from filenames, and able to be specified as a set of sequential steps:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -244,9 +253,12 @@ writer from filenames, and able to be specified as a set of sequential steps:</p
 <p class="caption"><span class="caption-text">A simple pipeline to convert <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">LAS</span></a> to <a class="reference internal" href="stages/readers.bpf.html#readers-bpf"><span class="std std-ref">BPF</span></a>
 while only keeping points inside the box <span class="math">\([0 \leq x \leq 100, 0 \leq y \leq 100]\)</span>.</span></p>
 </div>
-<p>A more complex PDAL pipeline, that reprojects the stage tagged <code class="docutils literal"><span class="pre">A1</span></code>, merges
-the result with <code class="docutils literal"><span class="pre">B</span></code>, and writes the merged output with the <a class="reference internal" href="stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a>
-plugin.:</p>
+</div>
+<div class="section" id="reprojection-example">
+<h3>Reprojection Example<a class="headerlink" href="#reprojection-example" title="Permalink to this headline">¶</a></h3>
+<p>A more complex PDAL pipeline reprojects the stage tagged <code class="docutils literal"><span class="pre">A1</span></code>, merges
+the result with <code class="docutils literal"><span class="pre">B</span></code>, and writes the merged output to a GeoTIFF file
+with the <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
         <span class="p">{</span>
@@ -272,7 +284,7 @@ plugin.:</p>
             <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.p2g&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
             <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.tif&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
@@ -285,18 +297,6 @@ plugin.:</p>
 <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> to transform the coordinate system of
 file <code class="docutils literal"><span class="pre">B.las</span></code> from <a class="reference external" href="http://spatialreference.org/ref/epsg/nad83-utm-zone-16n/">UTM</a> to <a class="reference external" href="http://spatialreference.org/ref/epsg/4326/">Geographic</a>.</span></p>
 </div>
-</div>
-<div class="section" id="definitions">
-<h3>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>JavaScript Object Notation (JSON), and the terms object, name, value, array,
-and number, are defined in IETF RTC 4627, at
-<a class="reference external" href="http://www.ietf.org/rfc/rfc4627.txt">http://www.ietf.org/rfc/rfc4627.txt</a>.</li>
-<li>The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;,
-&#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this documention are to
-be interpreted as described in IETF RFC 2119, at
-<a class="reference external" href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.</li>
-</ul>
 </div>
 </div>
 <div class="section" id="pipeline-objects">
@@ -343,6 +343,8 @@ a string. The <code class="docutils literal"><span class="pre">type</span></code
 <li>A stage object may have additional members with names corresponding to
 stage-specific option names and their respective values. Values provided as
 JSON objects or arrays will be stringified and parsed within the stage.</li>
+<li>Applications can place a <code class="docutils literal"><span class="pre">user_data</span></code> node on any stage object and it will be
+carried through to any serialized pipeline output.</li>
 </ul>
 </div>
 <div class="section" id="filename-globbing">
@@ -385,7 +387,8 @@ reading the input file, the ferry filter is used to copy the Z dimension into a
 new height above ground (HAG) dimension. Next, the <a class="reference internal" href="stages/filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a>
 is used with a Python script to compute height above ground values by comparing
 the Z values to a surface model. These height above ground values are then
-written back into the Z dimension for further analysis.</p>
+written back into the Z dimension for further analysis. See the Python
+code at <a class="reference external" href="https://raw.githubusercontent.com/PDAL/PDAL/master/test/data/autzen/hag.py.in">hag.py</a>.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="stages/filters.hag.html#filters-hag"><span class="std std-ref">filters.hag</span></a> describes using a specific filter to do
@@ -415,7 +418,7 @@ this job in more detail.</p>
 <p>A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
 segmentation filter using <a class="reference internal" href="stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a>, and then creates the DTM using
-the <a class="reference internal" href="stages/writers.p2g.html#writers-p2g"><span class="std std-ref">writers.p2g</span></a> with only the ground returns.</p>
+the <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> with only the ground returns.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
         <span class="s2">&quot;autzen-full.las&quot;</span><span class="p">,</span>
@@ -431,7 +434,7 @@ the <a class="reference internal" href="stages/writers.p2g.html#writers-p2g"><sp
             <span class="nt">&quot;classify&quot;</span><span class="p">:</span><span class="kc">false</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.p2g&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
             <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;autzen-surface.tif&quot;</span><span class="p">,</span>
             <span class="nt">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;min&quot;</span><span class="p">,</span>
             <span class="nt">&quot;output_format&quot;</span><span class="p">:</span><span class="s2">&quot;tif&quot;</span><span class="p">,</span>
@@ -603,29 +606,6 @@ descriptions of their options.</p>
 stages and their options. See <a class="reference internal" href="apps/info.html#info-command"><span class="std std-ref">info</span></a> for more.</p>
 </div>
 </div>
-<div class="section" id="options">
-<h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
-<p>Options are the mechanism that PDAL uses to inform <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>
-entities how to process data. The following example sorts the data using a
-<a class="reference external" href="http://en.wikipedia.org/wiki/Z-order_curve">Morton ordering</a> using <a class="reference internal" href="stages/filters.mortonorder.html#filters-mortonorder"><span class="std std-ref">filters.mortonorder</span></a> and writes out a <a class="reference external" href="http://www.laszip.org">LASzip</a>
-file as the result. We use options to define the <code class="docutils literal"><span class="pre">compression</span></code> function
-for the <a class="reference internal" href="stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> <a class="reference internal" href="api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
-    <span class="s2">&quot;uncompressed.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.mortonorder&quot;</span>
-    <span class="p">}</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;compressed.laz&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 
@@ -653,7 +633,7 @@ for the <a class="reference internal" href="stages/writers.las.html#writers-las"
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -674,7 +654,7 @@ for the <a class="reference internal" href="stages/writers.las.html#writers-las"
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -683,7 +663,7 @@ for the <a class="reference internal" href="stages/writers.las.html#writers-las"
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -708,7 +688,7 @@ for the <a class="reference internal" href="stages/writers.las.html#writers-las"
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

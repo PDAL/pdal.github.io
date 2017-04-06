@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Calculating Normalized Heights" href="calculating-normalized-heights.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,7 +113,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
@@ -113,6 +126,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="las.html">LAS Reading and Writing with PDAL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pcl_block_tutorial.html">Filtering data with PCL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pcl_ground.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Clipping with Geometries</a><ul>
@@ -239,10 +253,10 @@ following two files:</p>
 <div class="section" id="stage-operations">
 <h2>Stage Operations<a class="headerlink" href="#stage-operations" title="Permalink to this headline">¶</a></h2>
 <p>This operation depends on two <a class="reference internal" href="../stages/index.html#stage-index"><span class="std std-ref">stages</span></a> PDAL provides.
-The first is the <a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span class="std std-ref">filters.attribute</span></a> stage, which allows you to assign
-point values based on polygons read from <a class="reference external" href="http://www.gdal.org">OGR</a>. The second is the <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>,
-which allows you to keep or reject points from the set that match given
-criteria.</p>
+The first is the <a class="reference internal" href="../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a> stage, which allows you to assign
+point values based on polygons read from <a class="reference external" href="http://www.gdal.org">OGR</a>. The second is the
+<a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>, which allows you to keep or reject points from the
+set that match given criteria.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../stages/filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a> allows you to construct sophisticated logic
@@ -298,7 +312,7 @@ as they are read, filtered, and written.</p>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;autzen.laz&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.attribute&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span>
       <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
       <span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.vrt&quot;</span><span class="p">,</span>
       <span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="p">,</span>
@@ -316,7 +330,7 @@ as they are read, filtered, and written.</p>
 <ul class="simple">
 <li><a class="reference internal" href="../stages/readers.las.html#readers-las"><span class="std std-ref">readers.las</span></a>: Define a reader that can read <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> or <a class="reference external" href="http://laszip.org">LASzip</a>
 data.</li>
-<li><a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span class="std std-ref">filters.attribute</span></a>: Using the VRT we defined in <a class="reference internal" href="#data-preparation">Data Preparation</a>,
+<li><a class="reference internal" href="../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a>: Using the VRT we defined in <a class="reference internal" href="#data-preparation">Data Preparation</a>,
 read attribute polygons out of the data source and assign the values from the
 <code class="docutils literal"><span class="pre">CLS</span></code> column to the <code class="docutils literal"><span class="pre">Classification</span></code> field.</li>
 <li><a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>: Given that we have set the <code class="docutils literal"><span class="pre">Classification</span></code> values
@@ -328,7 +342,7 @@ we&#8217;re only keeping those points with a classification value of 5.</li>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You don&#8217;t have to use only <code class="docutils literal"><span class="pre">Classification</span></code> to set the attributes
-with <a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span class="std std-ref">filters.attribute</span></a>. Any valid dimension name could work, but
+with <a class="reference internal" href="../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a>. Any valid dimension name could work, but
 most LiDAR softwares will display categorical coloring for the
 <code class="docutils literal"><span class="pre">Classification</span></code> field, and we can leverage that behavior in this
 scenario.</p>
@@ -358,7 +372,7 @@ or <a class="reference external" href="http://www.danielgm.net/cc/">CloudCompare
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>PDAL allows the composition of point cloud operations. This tutorial demonstrated
-how to use the <a class="reference internal" href="../stages/filters.attribute.html#filters-attribute"><span class="std std-ref">filters.attribute</span></a> and <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> stages to clip
+how to use the <a class="reference internal" href="../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a> and <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> stages to clip
 points with shapefiles.</p>
 </div>
 </div>
@@ -387,7 +401,7 @@ points with shapefiles.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -408,7 +422,7 @@ points with shapefiles.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -417,7 +431,7 @@ points with shapefiles.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -442,7 +456,7 @@ points with shapefiles.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

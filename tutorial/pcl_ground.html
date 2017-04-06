@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Clipping with Geometries" href="clipping-with-shapefile.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,7 +113,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
@@ -113,6 +126,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="las.html">LAS Reading and Writing with PDAL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pcl_block_tutorial.html">Filtering data with PCL</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#background">Background</a></li>
@@ -231,21 +245,14 @@ and save it somewhere to disk.</p>
 <p>The <a class="reference internal" href="../apps/ground.html#ground-command"><span class="std std-ref">pdal ground</span></a> kernel can be used to filter ground
 returns, allowing the user to tweak filtering parameters at the command-line.</p>
 <p>Let&#8217;s start by running <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">ground</span></code> with the default parameters.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz --visualize
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In this tutorial, we use <code class="docutils literal"><span class="pre">--visualize</span></code> to visualize results, but this is
-only available if PCL is built with VTK and visualization support. If your
-install does not support VTK/visualization, simply drop <code class="docutils literal"><span class="pre">--visualize</span></code> and
-visualize the result with the viewer of your choice.</p>
 </div>
 <p>To get an idea of what&#8217;s happening during each iteration, you can optionally
 increase the verbosity of the output. We&#8217;ll try <code class="docutils literal"><span class="pre">-v4</span></code>.  Here we see a summary
 of the parameters, along with height threshold, window size, and number of
 remaining ground points.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz --visualize -v4
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -v4
 
 --------------------------------------------------------------------------------
 NAME:    ()
@@ -297,7 +304,7 @@ specified with <code class="docutils literal"><span class="pre">-p</span></code>
 
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf.json --visualize -v4
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf.json -v4
 
 --------------------------------------------------------------------------------
 NAME:   Progressive Morphological Filter with Outlier Removal (1.0)
@@ -352,7 +359,7 @@ increasing the cell size, we can do a better job of removing such features.</p>
 
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf2.json --visualize -v4
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf2.json -v4
 
 --------------------------------------------------------------------------------
 NAME:   Progressive Morphological Filter with Outlier Removal (1.0)
@@ -414,7 +421,7 @@ process tile 0 through the pipeline
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -435,7 +442,7 @@ process tile 0 through the pipeline
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -444,7 +451,7 @@ process tile 0 through the pipeline
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -469,7 +476,7 @@ process tile 0 through the pipeline
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

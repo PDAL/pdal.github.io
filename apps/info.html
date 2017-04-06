@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Applications" href="index.html"/>
         <link rel="next" title="merge" href="merge.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -125,7 +133,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -187,7 +200,7 @@
             
   <div class="section" id="info">
 <span id="info-command"></span><h1>info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h1>
-<p>Dumps information about a point cloud file, such as:</p>
+<p>Displays information about a point cloud file, such as:</p>
 <ul class="simple">
 <li>basic properties (extents, number of points, point format)</li>
 <li>coordinate reference system</li>
@@ -199,26 +212,19 @@ to retransform the output into whatever they want with ease</li>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal info &lt;input&gt;
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">input</span> <span class="n">arg</span>       <span class="n">Non</span><span class="o">-</span><span class="n">positional</span> <span class="n">argument</span> <span class="n">to</span> <span class="n">specify</span> <span class="nb">input</span> <span class="n">filename</span><span class="o">.</span>
-<span class="o">--</span><span class="n">point</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">]</span> <span class="n">arg</span>  <span class="n">Display</span> <span class="n">points</span> <span class="k">for</span> <span class="n">particular</span> <span class="n">points</span><span class="o">.</span>  <span class="n">Points</span> <span class="n">can</span> <span class="n">be</span> <span class="n">specified</span> <span class="ow">in</span>
-                  <span class="n">a</span> <span class="nb">range</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">:</span> <span class="mi">4</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">255</span><span class="o">-</span><span class="mf">300.</span>
-<span class="o">--</span><span class="n">query</span> <span class="n">arg</span>       <span class="n">Add</span> <span class="n">a</span> <span class="n">listing</span> <span class="n">of</span> <span class="n">points</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">provided</span>
-                  <span class="n">location</span><span class="o">.</span>  <span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">points</span> <span class="n">returned</span> <span class="n">can</span> <span class="n">be</span> <span class="n">limited</span> <span class="n">by</span>
-                  <span class="n">providing</span> <span class="n">an</span> <span class="n">optional</span> <span class="n">count</span><span class="o">.</span>
-                  <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;25.34,35.123/3&quot;</span> <span class="ow">or</span> <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;11532.23 -10e23 1.234/10&quot;</span>
-<span class="o">--</span><span class="n">stats</span>           <span class="n">Display</span> <span class="n">the</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">average</span> <span class="ow">and</span> <span class="n">count</span> <span class="n">of</span> <span class="n">each</span>
-                  <span class="n">dimension</span><span class="o">.</span>
-<span class="o">--</span><span class="n">boundary</span>        <span class="n">Compute</span> <span class="n">a</span> <span class="n">hexagonal</span> <span class="n">boundary</span> <span class="n">that</span> <span class="n">contains</span> <span class="nb">all</span> <span class="n">points</span><span class="o">.</span>
-<span class="o">--</span><span class="n">dimensions</span> <span class="n">arg</span>  <span class="n">Use</span> <span class="k">with</span> <span class="o">--</span><span class="n">stats</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">the</span> <span class="n">dimensions</span> <span class="n">on</span> <span class="n">which</span> <span class="n">statistics</span>
-                  <span class="n">should</span> <span class="n">be</span> <span class="n">computed</span><span class="o">.</span>
-                  <span class="o">--</span><span class="n">dimensions</span> <span class="s2">&quot;X, Y,Red&quot;</span>
-<span class="o">--</span><span class="n">schema</span>          <span class="n">Dump</span> <span class="n">the</span> <span class="n">schema</span> <span class="n">of</span> <span class="n">the</span> <span class="n">internal</span> <span class="n">point</span> <span class="n">storage</span><span class="o">.</span>
-<span class="o">--</span><span class="n">pipeline</span><span class="o">-</span><span class="n">serialization</span>
-                  <span class="n">Create</span> <span class="n">a</span> <span class="n">JSON</span> <span class="n">representation</span> <span class="n">of</span> <span class="n">the</span> <span class="n">pipeline</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span>
-                  <span class="n">the</span> <span class="n">output</span><span class="o">.</span>
-<span class="o">--</span><span class="n">summary</span>         <span class="n">Dump</span> <span class="n">the</span> <span class="n">point</span> <span class="n">count</span><span class="p">,</span> <span class="n">spatial</span> <span class="n">reference</span><span class="p">,</span> <span class="n">extrema</span> <span class="ow">and</span> <span class="n">dimension</span>
-                  <span class="n">names</span><span class="o">.</span>
-<span class="o">--</span><span class="n">metadata</span>        <span class="n">Dump</span> <span class="n">the</span> <span class="n">metadata</span> <span class="n">associated</span> <span class="k">with</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">file</span><span class="o">.</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">input</span><span class="p">,</span> <span class="o">-</span><span class="n">i</span>               <span class="n">Input</span> <span class="n">file</span> <span class="n">name</span>
+<span class="o">--</span><span class="nb">all</span>                     <span class="n">Dump</span> <span class="n">statistics</span><span class="p">,</span> <span class="n">schema</span> <span class="ow">and</span> <span class="n">metadata</span>
+<span class="o">--</span><span class="n">point</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span>               <span class="n">Point</span> <span class="n">to</span> <span class="n">dump</span> <span class="o">--</span><span class="n">point</span><span class="o">=</span><span class="s2">&quot;1-5,10,100-200&quot;</span> <span class="p">(</span><span class="mi">0</span> <span class="n">indexed</span><span class="p">)</span>
+<span class="o">--</span><span class="n">query</span>                   <span class="n">Return</span> <span class="n">points</span> <span class="ow">in</span> <span class="n">order</span> <span class="n">of</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span>
+    <span class="n">specified</span> <span class="n">location</span> <span class="p">(</span><span class="mi">2</span><span class="n">D</span> <span class="ow">or</span> <span class="mi">3</span><span class="n">D</span><span class="p">)</span> <span class="o">--</span><span class="n">query</span> <span class="n">Xcoord</span><span class="p">,</span><span class="n">Ycoord</span><span class="p">[,</span><span class="n">Zcoord</span><span class="p">][</span><span class="o">/</span><span class="n">count</span><span class="p">]</span>
+<span class="o">--</span><span class="n">stats</span>                   <span class="n">Dump</span> <span class="n">stats</span> <span class="n">on</span> <span class="nb">all</span> <span class="n">points</span> <span class="p">(</span><span class="n">reads</span> <span class="n">entire</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="o">--</span><span class="n">boundary</span>                <span class="n">Compute</span> <span class="n">a</span> <span class="n">hexagonal</span> <span class="n">hull</span><span class="o">/</span><span class="n">boundary</span> <span class="n">of</span> <span class="n">dataset</span>
+<span class="o">--</span><span class="n">dimensions</span>              <span class="n">Dimensions</span> <span class="n">on</span> <span class="n">which</span> <span class="n">to</span> <span class="n">compute</span> <span class="n">statistics</span>
+<span class="o">--</span><span class="n">schema</span>                  <span class="n">Dump</span> <span class="n">the</span> <span class="n">schema</span>
+<span class="o">--</span><span class="n">pipeline</span><span class="o">-</span><span class="n">serialization</span>  <span class="n">Output</span> <span class="n">filename</span> <span class="k">for</span> <span class="n">pipeline</span> <span class="n">serialization</span>
+<span class="o">--</span><span class="n">summary</span>                 <span class="n">Dump</span> <span class="n">summary</span> <span class="n">of</span> <span class="n">the</span> <span class="n">info</span>
+<span class="o">--</span><span class="n">metadata</span>                <span class="n">Dump</span> <span class="n">file</span> <span class="n">metadata</span> <span class="n">info</span>
+<span class="o">--</span><span class="n">stdin</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span>               <span class="n">Read</span> <span class="n">a</span> <span class="n">pipeline</span> <span class="n">file</span> <span class="kn">from</span> <span class="nn">standard</span> <span class="nb">input</span>
 </pre></div>
 </div>
 <p>If no options are provided, <code class="docutils literal"><span class="pre">--stats</span></code> is assumed.</p>
@@ -347,7 +353,7 @@ to retransform the output into whatever they want with ease</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -368,7 +374,7 @@ to retransform the output into whatever they want with ease</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -377,7 +383,7 @@ to retransform the output into whatever they want with ease</li>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -402,7 +408,7 @@ to retransform the output into whatever they want with ease</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

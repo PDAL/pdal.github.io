@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/> 
 
   
@@ -64,7 +69,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -86,6 +91,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -102,7 +110,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Tutorials</a></li>
@@ -188,7 +201,19 @@ both GeoJSON and TopoJSON.</p>
 <li><a class="reference internal" href="#definitions" id="id4">2.2&nbsp;&nbsp;&nbsp;Definitions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#pcl-json-objects" id="id5">3&nbsp;&nbsp;&nbsp;PCL JSON Objects</a></li>
+<li><a class="reference internal" href="#pcl-json-objects" id="id5">3&nbsp;&nbsp;&nbsp;PCL JSON Objects</a><ul class="auto-toc">
+<li><a class="reference internal" href="#filters" id="id6">3.1&nbsp;&nbsp;&nbsp;Filters</a><ul class="auto-toc">
+<li><a class="reference internal" href="#approximateprogressivemorphologicalfilter-apmf" id="id7">3.1.1&nbsp;&nbsp;&nbsp;ApproximateProgressiveMorphologicalFilter (APMF)</a></li>
+<li><a class="reference internal" href="#gridminimum" id="id8">3.1.2&nbsp;&nbsp;&nbsp;GridMinimum</a></li>
+<li><a class="reference internal" href="#passthrough" id="id9">3.1.3&nbsp;&nbsp;&nbsp;PassThrough</a></li>
+<li><a class="reference internal" href="#progressivemorphologicalfilter-pmf" id="id10">3.1.4&nbsp;&nbsp;&nbsp;ProgressiveMorphologicalFilter (PMF)</a></li>
+<li><a class="reference internal" href="#radiusoutlierremoval" id="id11">3.1.5&nbsp;&nbsp;&nbsp;RadiusOutlierRemoval</a></li>
+<li><a class="reference internal" href="#statisticaloutlierremoval" id="id12">3.1.6&nbsp;&nbsp;&nbsp;StatisticalOutlierRemoval</a></li>
+<li><a class="reference internal" href="#voxelgrid" id="id13">3.1.7&nbsp;&nbsp;&nbsp;VoxelGrid</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -283,11 +308,15 @@ be interpreted as described in IETF RFC 2119, at
 filter (as documented below).</li>
 <li>A PCL JSON object may have any number of members (name/value pairs).</li>
 </ul>
+<div class="section" id="filters">
+<h2>3.1&nbsp;&nbsp;&nbsp;Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>A filter is any of the PCL filters that has been exposed through the PCL
 pipeline class.</p>
 <p>In the following descriptions, all parameters are optional unless otherwise
 noted.</p>
 <p>Any JSON keys not recognized by the spec are blissfully ignored.</p>
+<div class="section" id="approximateprogressivemorphologicalfilter-apmf">
+<h3>3.1.1&nbsp;&nbsp;&nbsp;ApproximateProgressiveMorphologicalFilter (APMF)<a class="headerlink" href="#approximateprogressivemorphologicalfilter-apmf" title="Permalink to this headline">¶</a></h3>
 <p>This filter removes nonground points to produce a bare-earth point cloud. It is
 similar to the ProgressiveMorphologicalFilter, but is potentially faster (and
 correspondingly less accurate).</p>
@@ -333,6 +362,9 @@ considered a ground return. [default: 0.15]</dd>
 <dd>If set to false, include all points indicated by the indices (treat as
 &#8220;inliers&#8221;). If true, include the &#8220;outlier&#8221; points. [default: false]</dd>
 </dl>
+</div>
+<div class="section" id="gridminimum">
+<h3>3.1.2&nbsp;&nbsp;&nbsp;GridMinimum<a class="headerlink" href="#gridminimum" title="Permalink to this headline">¶</a></h3>
 <p>This filter assembles a local 2D grid over a given PointCloud, then downsamples
 the data.</p>
 <p>PCL details: <a class="reference external" href="http://docs.pointclouds.org/trunk/classpcl_1_1_grid_minimum.html">http://docs.pointclouds.org/trunk/classpcl_1_1_grid_minimum.html</a></p>
@@ -350,6 +382,9 @@ the data.</p>
 <dt>setResolution: float</dt>
 <dd>Set the grid resolution. [default: 1.0]</dd>
 </dl>
+</div>
+<div class="section" id="passthrough">
+<h3>3.1.3&nbsp;&nbsp;&nbsp;PassThrough<a class="headerlink" href="#passthrough" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <p>This filter allows the user to set min/max bounds on one dimension of the data.</p>
 <p>PCL details: <a class="reference external" href="http://docs.pointclouds.org/trunk/classpcl_1_1_pass_through_3_01pcl_1_1_p_c_l_point_cloud2_01_4.html">http://docs.pointclouds.org/trunk/classpcl_1_1_pass_through_3_01pcl_1_1_p_c_l_point_cloud2_01_4.html</a></p>
@@ -387,6 +422,9 @@ requires the names be given in lower case (&#8220;z&#8221;, &#8220;intensity&#82
 <dd>Set the numerical limits for the field for filtering data.
 [default: <cite>{&#8220;min&#8221;: -FLT_MAX, &#8220;max&#8221;: +FLT_MAX}</cite>]</dd>
 </dl>
+</div>
+<div class="section" id="progressivemorphologicalfilter-pmf">
+<h3>3.1.4&nbsp;&nbsp;&nbsp;ProgressiveMorphologicalFilter (PMF)<a class="headerlink" href="#progressivemorphologicalfilter-pmf" title="Permalink to this headline">¶</a></h3>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a> implements support for this operation as a
@@ -436,6 +474,9 @@ considered a ground return. [default: 0.15]</dd>
 <dd>If set to false, include all points indicated by the indices (treat as
 &#8220;inliers&#8221;). If true, include the &#8220;outlier&#8221; points. [default: false]</dd>
 </dl>
+</div>
+<div class="section" id="radiusoutlierremoval">
+<h3>3.1.5&nbsp;&nbsp;&nbsp;RadiusOutlierRemoval<a class="headerlink" href="#radiusoutlierremoval" title="Permalink to this headline">¶</a></h3>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> implements support for this operation
@@ -464,6 +505,9 @@ classified as an inlier. [default: 2]</dd>
 <dd>Set te radius of the sphere that will determine which points are neighbors.
 [default: 1.0]</dd>
 </dl>
+</div>
+<div class="section" id="statisticaloutlierremoval">
+<h3>3.1.6&nbsp;&nbsp;&nbsp;StatisticalOutlierRemoval<a class="headerlink" href="#statisticaloutlierremoval" title="Permalink to this headline">¶</a></h3>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> implements support for this
@@ -491,6 +535,9 @@ operation as a PDAL filter</p>
 <dd>Set the standard deviation multiplier for the distance threshold
 calculation. [default: 0.0]</dd>
 </dl>
+</div>
+<div class="section" id="voxelgrid">
+<h3>3.1.7&nbsp;&nbsp;&nbsp;VoxelGrid<a class="headerlink" href="#voxelgrid" title="Permalink to this headline">¶</a></h3>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../stages/filters.voxelgrid.html#filters-voxelgrid"><span class="std std-ref">filters.voxelgrid</span></a> implements support for this operation as a
@@ -519,6 +566,8 @@ and filters the data.</p>
 <dd>Set the voxel grid leaf size. [default: <cite>{&#8220;x&#8221;: 1.0, &#8220;y&#8221;: 1.0, &#8220;z&#8221;: 1.0}</cite>]</dd>
 </dl>
 </div>
+</div>
+</div>
 
 
            </div>
@@ -535,7 +584,7 @@ and filters the data.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -556,7 +605,7 @@ and filters the data.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -565,7 +614,7 @@ and filters the data.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -590,7 +639,7 @@ and filters the data.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

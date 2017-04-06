@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Writers" href="writers.html"/>
         <link rel="next" title="writers.matlab" href="writers.matlab.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,10 +113,10 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.derivative.html">writers.derivative</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.las</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vlrs">VLRs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
@@ -117,17 +125,20 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.p2g.html">writers.p2g</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.rialto.html">writers.rialto</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -194,7 +205,39 @@ interchange file format for LIDAR data.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Scale/offset are not preserved from an input LAS file.  See below for
-information on the scale/offset options and the &#8216;forward&#8217; option.</p>
+information on the scale/offset options and the <cite>forward</cite> option.</p>
+</div>
+<div class="section" id="vlrs">
+<h2>VLRs<a class="headerlink" href="#vlrs" title="Permalink to this headline">¶</a></h2>
+<p>VLRs can be created by providing a JSON node called <cite>vlrs</cite> with objects
+containing <cite>user_id</cite> and <cite>data</cite> items.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;vlrs&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A description under 32 bytes&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;record_id&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+                <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;hobu&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;dGhpcyBpcyBzb21lIHRleHQ=&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A description under 32 bytes&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;record_id&quot;</span><span class="p">:</span> <span class="mi">43</span><span class="p">,</span>
+                <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;hobu&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;dGhpcyBpcyBzb21lIG1vcmUgdGV4dA==&quot;</span>
+                <span class="p">}</span>
+              <span class="p">],</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -218,7 +261,7 @@ information on the scale/offset options and the &#8216;forward&#8217; option.</p
 <dl class="docutils">
 <dt>filename</dt>
 <dd>LAS file to read. The writer will accept a filename containing
-a single placeholder character (&#8216;#&#8217;).  If input to the writer consists
+a single placeholder character (<cite>#</cite>).  If input to the writer consists
 of multiple PointViews, each will be written to a separate file, where
 the placeholder will be replaced with an incrementing integer.  If no
 placeholder is found, all PointViews provided to the writer are
@@ -231,23 +274,25 @@ the result of using <a class="reference internal" href="filters.splitter.html#fi
 LAS file.  The
 option can be specified multiple times, which has the same effect as
 listing values separated by a comma.  The following values are valid:
-&#8216;major_version&#8217;, &#8216;minor_version&#8217;, &#8216;dataformat_id&#8217;, &#8216;filesource_id&#8217;,
-&#8216;global_encoding&#8217;, &#8216;project_id&#8217;, &#8216;system_id&#8217;, &#8216;software_id&#8217;, &#8216;creation_doy&#8217;,
-&#8216;creation_year&#8217;, &#8216;scale_x&#8217;, &#8216;scale_y&#8217;, &#8216;scale_z&#8217;, &#8216;offset_x&#8217;, &#8216;offset_y&#8217;,
-&#8216;offset_z&#8217;.  In addition, the special value &#8216;header&#8217; can be specified,
+<code class="docutils literal"><span class="pre">major_version</span></code>, <code class="docutils literal"><span class="pre">minor_version</span></code>, <code class="docutils literal"><span class="pre">dataformat_id</span></code>, <code class="docutils literal"><span class="pre">filesource_id</span></code>,
+<code class="docutils literal"><span class="pre">global_encoding</span></code>, <code class="docutils literal"><span class="pre">project_id</span></code>, <code class="docutils literal"><span class="pre">system_id</span></code>, <code class="docutils literal"><span class="pre">software_id</span></code>, <code class="docutils literal"><span class="pre">creation_doy</span></code>,
+<code class="docutils literal"><span class="pre">creation_year</span></code>, <code class="docutils literal"><span class="pre">scale_x</span></code>, <code class="docutils literal"><span class="pre">scale_y</span></code>, <code class="docutils literal"><span class="pre">scale_z</span></code>, <code class="docutils literal"><span class="pre">offset_x</span></code>, <code class="docutils literal"><span class="pre">offset_y</span></code>,
+<code class="docutils literal"><span class="pre">offset_z</span></code>.  In addition, the special value <code class="docutils literal"><span class="pre">header</span></code> can be specified,
 which is equivalent to specifying all the values EXCEPT the scale and
 offset values.  Scale and offset values can be forwarded as a group by
-using the special values &#8216;scale&#8217; and &#8216;offset&#8217; respectively.  The special
-value &#8216;all&#8217; is equivalent to specifying &#8216;header&#8217;, &#8216;scale&#8217;, &#8216;offset&#8217; and
-&#8216;vlr&#8217; (see below).
+using the special values <code class="docutils literal"><span class="pre">scale</span></code> and <code class="docutils literal"><span class="pre">offset</span></code> respectively.  The special
+value <code class="docutils literal"><span class="pre">all</span></code> is equivalent to specifying <code class="docutils literal"><span class="pre">header</span></code>, <code class="docutils literal"><span class="pre">scale</span></code>, <code class="docutils literal"><span class="pre">offset</span></code> and
+<code class="docutils literal"><span class="pre">vlr</span></code> (see below).
 If a header option is specified explicitly, it will override any forwarded
 header value.
 If a LAS file is the result of multiple LAS input files, the header values
 to be forwarded must match or they will be ignored and a default will
 be used instead.</p>
-<p class="last">VLRs can be forwarded by using the special value &#8216;vlr&#8217;.  VLRs containing
-the following User IDs are NOT forwarded: &#8216;LASF_Projection&#8217;, &#8216;LASF_Spec&#8217;,
-&#8216;liblas&#8217;, &#8216;laszip encoded&#8217;.  These VLRs are known to contain information
+<p class="last">VLRs can be forwarded by using the special value <code class="docutils literal"><span class="pre">vlr</span></code>.  VLRs containing
+the following User IDs are NOT forwarded: <code class="docutils literal"><span class="pre">LASF_Projection</span></code>,
+<code class="docutils literal"><span class="pre">liblas</span></code>, <code class="docutils literal"><span class="pre">laszip</span> <span class="pre">encoded</span></code>.  VLRs with the User ID <code class="docutils literal"><span class="pre">LASF_Spec</span></code> and
+a record ID other than 0 or 3 are also not forwarded.  These VLRs are known
+to contain information
 regarding the formatting of the data and will be rebuilt properly in the
 output file as necessary.  Unlike header values, VLRs from multiple input
 files are accumulated and each is written to the output file.  Forwarded
@@ -284,7 +329,8 @@ information in the LAS file. [Default: 3]</p>
 <dt>system_id</dt>
 <dd>String identifying the system that created this LAS file. [Default: &#8220;PDAL&#8221;]</dd>
 <dt>a_srs</dt>
-<dd>The spatial reference system of the file to be written. Can be an EPSG string (e.g. &#8220;EPSG:268910&#8221;) or a WKT string. [Default: Not set]</dd>
+<dd>The spatial reference system of the file to be written. Can be an EPSG string
+(e.g. &#8220;EPSG:268910&#8221;) or a WKT string. [Default: Not set]</dd>
 <dt>global_encoding</dt>
 <dd>Various indicators to describe the data.  See the LAS documentation.  Note
 that PDAL will always set bit four when creating LAS version 1.4 output.
@@ -298,14 +344,14 @@ and &#8220;laszip&#8221; (or &#8220;true&#8221;) selects the LasZip compressor. 
 been built with support for the requested compressor.  [Default: &#8220;none&#8221;]</dd>
 <dt>scale_x, scale_y, scale_z</dt>
 <dd><p class="first">Scale to be divided from the X, Y and Z nominal values, respectively, after
-the offset has been applied.  The special value &#8220;auto&#8221; can be specified,
+the offset has been applied.  The special value <code class="docutils literal"><span class="pre">auto</span></code> can be specified,
 which causes the writer to select a scale to set the stored values of the
 dimensions to range from [0, 2147483647].  [Default: .01]</p>
 <p class="last">Note: written value = (nominal value - offset) / scale.</p>
 </dd>
 <dt>offset_x, offset_y, offset_z</dt>
 <dd><p class="first">Offset to be subtracted from the X, Y and Z nominal values, respectively,
-before the value is scaled.  The special value &#8220;auto&#8221; can be specified,
+before the value is scaled.  The special value <code class="docutils literal"><span class="pre">auto</span></code> can be specified,
 which causes the writer to set the offset to the minimum value of the
 dimension.  [Default: 0]</p>
 <p class="last">Note: written value = (nominal value - offset) / scale.</p>
@@ -322,15 +368,19 @@ supported by the point format (5 for formats 0-5, 15 for formats 6-10).
 by the LAS point format.  The format of the option is
 &lt;dimension_name&gt;=&lt;type&gt;, ... where type is one of:
 int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double
-&#8216;_t&#8217; may be added to any of the type names as well (e.g., uint32_t).  When
+<code class="docutils literal"><span class="pre">_t</span></code> may be added to any of the type names as well (e.g., uint32_t).  When
 the version of the output file is specified as 1.4 or greater, an extra
 bytes VLR (User ID: LASF_Spec, Record ID: 4), is created that describes the
 extra dimensions specified by this option.</p>
-<p class="last">The special value &#8216;all&#8217; can be used in place of a dimension/type list
-to request
-that all dimensions that can&#8217;t be stored in the predefined LAS point
-record get added as extra data at the end of each point record.</p>
+<p>The special value <code class="docutils literal"><span class="pre">all</span></code> can be used in place of a dimension/type list
+to request that all dimensions that can&#8217;t be stored in the predefined
+LAS point record get added as extra data at the end of each point record.</p>
+<p class="last">Setting &#8211;verbose=Info will provide output on the names, types and order
+of dimensions being written as part of the LAS extra bytes.</p>
 </dd>
+<dt>pdal_metadata</dt>
+<dd>Write two VLRs containing <a class="reference external" href="http://www.json.org/">JSON</a> output with both the <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a> and
+<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> serialization. [Default: <strong>false</strong>]</dd>
 </dl>
 </div>
 </div>
@@ -359,7 +409,7 @@ record get added as extra data at the end of each point record.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -380,7 +430,7 @@ record get added as extra data at the end of each point record.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -389,7 +439,7 @@ record get added as extra data at the end of each point record.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -414,7 +464,7 @@ record get added as extra data at the end of each point record.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

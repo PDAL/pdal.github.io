@@ -35,9 +35,14 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Development" href="index.html"/>
-        <link rel="next" title="Errors and Error Handling" href="errorhandling.html"/>
+        <link rel="next" title="Building Docker Containers for PDAL" href="docker.html"/>
         <link rel="prev" title="Contributors" href="contributors.html"/> 
 
   
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,7 +113,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -115,6 +128,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">PDAL Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation/index.html">Compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conventions.html">Coding Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributors.html">Contributors</a></li>
@@ -131,6 +145,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#building-with-docker">Building With Docker</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Building Docker Containers for PDAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="goals.html">Project Goals</a></li>
@@ -279,6 +294,16 @@ issuing the following command:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">tree</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">w</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">doc</span> <span class="n">pdal</span><span class="o">/</span><span class="n">docs</span> <span class="n">make</span> <span class="n">html</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal"><span class="pre">pdal/docs</span></code> container can be refreshed on DockerHub by tagging a <code class="docutils literal"><span class="pre">docbuild</span></code>
+tag and force-pushing it to the main repository:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git tag -f docbuild
+$ git push origin -f refs/tags/docbuild
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">pdal/docs</span></code> container is constructed from the <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/scripts/docker/docbuild/Dockerfile">Dockerfile</a> at whatever revision the <code class="docutils literal"><span class="pre">docbuild</span></code> tag points to.</p>
+</div>
 </div>
 </div>
 
@@ -289,7 +314,7 @@ issuing the following command:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="errorhandling.html" class="btn btn-neutral float-right" title="Errors and Error Handling" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="docker.html" class="btn btn-neutral float-right" title="Building Docker Containers for PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="contributors.html" class="btn btn-neutral" title="Contributors" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -306,7 +331,7 @@ issuing the following command:</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -327,7 +352,7 @@ issuing the following command:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -336,7 +361,7 @@ issuing the following command:</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -361,7 +386,7 @@ issuing the following command:</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

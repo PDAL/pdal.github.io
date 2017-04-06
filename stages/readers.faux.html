@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
         <link rel="next" title="readers.gdal" href="readers.gdal.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -115,6 +123,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
@@ -133,7 +142,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -195,8 +209,28 @@
             
   <div class="section" id="readers-faux">
 <span id="id1"></span><h1>readers.faux<a class="headerlink" href="#readers-faux" title="Permalink to this headline">¶</a></h1>
-<p>The &#8220;<strong>faux reader</strong>&#8221; is used for testing pipelines. It does not read from a
+<p>The faux reader is used for testing pipelines. It does not read from a
 file or database, but generates synthetic data to feed into the pipeline.</p>
+<p>The faux reader requires a mode argume to define the method in which points
+should be generated.  Valid modes are as follows:</p>
+<dl class="docutils">
+<dt>constant</dt>
+<dd>The values provided as the minimums to the bounds argument are
+used for the X, Y and Z value, respectively, for every point.</dd>
+<dt>random</dt>
+<dd>Random values are chosen within the provided bounds.</dd>
+<dt>ramp</dt>
+<dd>Value increase uniformly from the minimum values to the maximum values.</dd>
+<dt>uniform</dt>
+<dd>Random values of each dimension are uniformly distributed in the
+provided ranges.</dd>
+<dt>normal</dt>
+<dd>Random values of each dimension are normally distributed in the
+provided ranges.</dd>
+<dt>grid</dt>
+<dd>Creates points with integer-valued coordinates in the range provided
+(excluding the upper bound).</dd>
+</dl>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -231,11 +265,7 @@ form &#8220;([xmin,xmax],[ymin,ymax],[zmin,zmax])&#8221;. [Default: unit cube]</
 <dd>Standard deviation in the x, y, or z dimension respectively. (Normal mode
 only) [Default: 1]</dd>
 <dt>mode</dt>
-<dd>How to generate synthetic points. One of &#8220;constant&#8221; (repeat single value),
-&#8220;random&#8221; (random values within bounds), &#8220;ramp&#8221; (steadily increasing values
-within the bounds), &#8220;uniform&#8221; (uniformly distributed within bounds), or
-&#8220;normal&#8221; (normal distribution with given mean and standard deviation).
-[Required]</dd>
+<dd>&#8220;constant&#8221;, &#8220;random&#8221;, &#8220;ramp&#8221;, &#8220;uniform&#8221;, &#8220;normal&#8221; or &#8220;grid&#8221; [Required]</dd>
 </dl>
 </div>
 </div>
@@ -264,7 +294,7 @@ within the bounds), &#8220;uniform&#8221; (uniformly distributed within bounds),
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -285,7 +315,7 @@ within the bounds), &#8220;uniform&#8221; (uniformly distributed within bounds),
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -294,7 +324,7 @@ within the bounds), &#8220;uniform&#8221; (uniformly distributed within bounds),
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -319,7 +349,7 @@ within the bounds), &#8220;uniform&#8221; (uniformly distributed within bounds),
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

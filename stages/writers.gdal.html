@@ -35,10 +35,15 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Writers" href="writers.html"/>
         <link rel="next" title="writers.geowave" href="writers.geowave.html"/>
-        <link rel="prev" title="writers.derivative" href="writers.derivative.html"/> 
+        <link rel="prev" title="writers.bpf" href="writers.bpf.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -105,7 +113,6 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.derivative.html">writers.derivative</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.gdal</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-example">Basic Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
@@ -117,17 +124,20 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.p2g.html">writers.p2g</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.rialto.html">writers.rialto</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -201,6 +211,12 @@ potentially contributes to the raster&#8217;s value.</p>
 it is possible that some points will not be considered at all, including
 those that may be within the bounds of the raster cell.</p>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If no <a class="reference internal" href="#radius">radius</a> is provided, it is set to the product of the <a class="reference internal" href="#resolution">resolution</a> and
+the square root of two. This is consistent with the original <a class="reference external" href="http://www.opentopography.org/otsoftware/points2grid">Points2Grid</a>
+application from which this algorithm has its roots.</p>
+</div>
 <p>The GDAL writer creates rasters using the data specified in the <code class="docutils literal"><span class="pre">dimension</span></code>
 option (defaults to <cite>Z</cite>).The writer will creates up to six rasters based on
 different statistics in the output dataset.  The order of the layers in the
@@ -257,11 +273,15 @@ whose values contribute to the cell value is 14.14.</p>
 <dl class="docutils">
 <dt>filename</dt>
 <dd>Name of output file. [Required]</dd>
+</dl>
+<dl class="docutils" id="resolution">
 <dt>resolution</dt>
 <dd>Length of raster cell edges in X/Y units.  [Required]</dd>
+</dl>
+<dl class="docutils" id="radius">
 <dt>radius</dt>
 <dd>Radius about cell center bounding points to use to calculate a cell value.
-[Required]</dd>
+[Default: <code class="docutils literal"><span class="pre">resolution</span></code> * sqrt(2)]</dd>
 <dt>gdaldriver</dt>
 <dd>Name of the GDAL driver to use to write the output. [Default: &#8220;GTiff&#8221;]</dd>
 <dt>gdalopts</dt>
@@ -302,7 +322,7 @@ information. [Default: 0]</dd>
         <a href="writers.geowave.html" class="btn btn-neutral float-right" title="writers.geowave" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writers.derivative.html" class="btn btn-neutral" title="writers.derivative" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="writers.bpf.html" class="btn btn-neutral" title="writers.bpf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -316,7 +336,7 @@ information. [Default: 0]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -337,7 +357,7 @@ information. [Default: 0]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -346,7 +366,7 @@ information. [Default: 0]</dd>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -371,7 +391,7 @@ information. [Default: 0]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

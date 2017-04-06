@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Applications" href="index.html"/>
         <link rel="next" title="random" href="random.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -104,7 +112,10 @@
 <li class="toctree-l2"><a class="reference internal" href="info.html">info</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge.html">merge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pcl.html">pcl</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pipeline</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#substitutions">Substitutions</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="random.html">random</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l2"><a class="reference internal" href="split.html">split</a></li>
@@ -121,7 +132,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -188,30 +204,56 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pipeline &lt;input&gt;
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">developer</span><span class="o">-</span><span class="n">debug</span>         <span class="n">Enable</span> <span class="n">developer</span> <span class="n">debug</span> <span class="p">(</span><span class="n">don</span><span class="s1">&#39;t trap exceptions)</span>
-<span class="o">--</span><span class="n">label</span>                   <span class="n">A</span> <span class="n">string</span> <span class="n">to</span> <span class="n">label</span> <span class="n">the</span> <span class="n">process</span> <span class="k">with</span>
-<span class="o">--</span><span class="n">driver</span>                  <span class="n">Override</span> <span class="n">reader</span> <span class="n">driver</span>
-<span class="o">--</span><span class="nb">input</span><span class="p">,</span> <span class="o">-</span><span class="n">i</span>               <span class="nb">input</span> <span class="n">file</span> <span class="n">name</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">input</span><span class="p">,</span> <span class="o">-</span><span class="n">i</span>               <span class="n">Input</span> <span class="n">filename</span>
 <span class="o">--</span><span class="n">pipeline</span><span class="o">-</span><span class="n">serialization</span>  <span class="n">Output</span> <span class="n">file</span> <span class="k">for</span> <span class="n">pipeline</span> <span class="n">serialization</span>
-<span class="o">--</span><span class="n">validate</span>                <span class="n">Validate</span> <span class="n">the</span> <span class="n">pipeline</span> <span class="p">(</span><span class="n">including</span> <span class="n">serialization</span><span class="p">),</span> <span class="n">but</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">write</span>
-                          <span class="n">points</span>
-<span class="o">--</span><span class="n">progress</span>                <span class="n">Name</span> <span class="n">of</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">FIFO</span> <span class="n">to</span> <span class="n">which</span> <span class="n">stages</span> <span class="n">should</span> <span class="n">write</span> <span class="n">progress</span>
-                          <span class="n">information</span><span class="o">.</span> <span class="n">The</span> <span class="n">file</span><span class="o">/</span><span class="n">FIFO</span> <span class="n">must</span> <span class="n">exist</span><span class="o">.</span> <span class="n">PDAL</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">create</span> <span class="n">the</span> <span class="n">progress</span> <span class="n">file</span><span class="o">.</span>
+<span class="o">--</span><span class="n">validate</span>                <span class="n">Validate</span> <span class="n">the</span> <span class="n">pipeline</span> <span class="p">(</span><span class="n">including</span> <span class="n">serialization</span><span class="p">),</span>
+    <span class="n">but</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">write</span> <span class="n">points</span>
+<span class="o">--</span><span class="n">progress</span>                <span class="n">Name</span> <span class="n">of</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">FIFO</span> <span class="n">to</span> <span class="n">which</span> <span class="n">stages</span> <span class="n">should</span> <span class="n">write</span>
+    <span class="n">progress</span> <span class="n">information</span><span class="o">.</span> <span class="n">The</span> <span class="n">file</span><span class="o">/</span><span class="n">FIFO</span> <span class="n">must</span> <span class="n">exist</span><span class="o">.</span> <span class="n">PDAL</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">create</span> <span class="n">the</span>
+    <span class="n">progress</span> <span class="n">file</span><span class="o">.</span>
 <span class="o">--</span><span class="n">stdin</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span>               <span class="n">Read</span> <span class="n">pipeline</span> <span class="kn">from</span> <span class="nn">standard</span> <span class="nb">input</span>
+<span class="o">--</span><span class="n">stream</span>                  <span class="n">Attempt</span> <span class="n">to</span> <span class="n">run</span> <span class="n">pipeline</span> <span class="ow">in</span> <span class="n">streaming</span> <span class="n">mode</span><span class="o">.</span>
+<span class="o">--</span><span class="n">metadata</span>                <span class="n">Metadata</span> <span class="n">filename</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The <code class="docutils literal"><span class="pre">pipeline</span></code> command can accept option substitutions, and they replace
+<div class="section" id="substitutions">
+<h2>Substitutions<a class="headerlink" href="#substitutions" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">pipeline</span></code> command can accept command-line option substitutions and
+they replace
 existing options that are specified in the input JSON pipeline.  If
 multiple stages of the same name exist in the pipeline, <cite>all</cite> stages would
 be overridden. For example, to set the output and input LAS files for a
 pipeline that does a translation, the <code class="docutils literal"><span class="pre">filename</span></code> for the reader and the
 writer can be overridden:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span>$ pdal pipeline translate.json --writers.las.filename=output.laz \
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pipeline translate.json --writers.las.filename=output.laz \
     --readers.las.filename=input.las
 </pre></div>
 </div>
+<p>Option substitution can also refer to the tag of an individual stage.
+This can be done by using the syntax &#8211;stage.&lt;tagname&gt;.&lt;option&gt;.  This
+allows options to be set on individual stages, even if there are multiple
+stages of the same type.  For example, if a pipeline contained two LAS
+readers with tags <code class="docutils literal"><span class="pre">las1</span></code> and <code class="docutils literal"><span class="pre">las2</span></code> respectively, the following
+command would allow assignment of different filenames to each stage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>{
+    &quot;pipeline&quot; : [
+        {
+            &quot;tag&quot; : &quot;las1&quot;,
+            &quot;type&quot; : &quot;readers.las&quot;
+        },
+        {
+            &quot;tag&quot; : &quot;las2&quot;,
+            &quot;type&quot; : &quot;readers.las&quot;
+        },
+        &quot;placeholder.laz&quot;
+    ]
+}
+
+$ pdal pipeline translate.json --writers.las.filename=output.laz \
+    --stage.las1.filename=file1.las --stage.las2.filename=file2.las
+</pre></div>
+</div>
+<p>Options specified by tag names override options specified by stage types.</p>
 </div>
 </div>
 
@@ -239,7 +281,7 @@ writer can be overridden:</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -260,7 +302,7 @@ writer can be overridden:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -269,7 +311,7 @@ writer can be overridden:</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -294,7 +336,7 @@ writer can be overridden:</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 

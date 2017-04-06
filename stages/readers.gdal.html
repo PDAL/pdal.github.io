@@ -35,6 +35,11 @@
   
 
   
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
         <link rel="next" title="readers.geowave" href="readers.geowave.html"/>
@@ -67,7 +72,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -89,6 +94,9 @@
             
             
                 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
 </ul>
 <ul>
@@ -116,6 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
@@ -134,7 +143,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -200,16 +214,28 @@
 <p>Each pixel is given an X and Y coordinate (and corresponding PDAL dimensions)
 that are center pixel, and each band is represented by &#8220;band-1&#8221;, &#8220;band-2&#8221;, or
 &#8220;band-n&#8221;. The user must know what the bands correspond to, and use
-<a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> to copy data into known dimensions as needed.</p>
+<a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> to copy data into known <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> as needed.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> is needed because raster data do not map to
-typical dimension names. For output to formats such as <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">LAS</span></a>,
-this mapping is required.</p>
+<p class="last"><a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> is needed to map GDAL output to typical <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a>
+names. For output to formats such as <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">LAS</span></a>, this mapping
+is required.</p>
 </div>
 <div class="section" id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<p>Simply writing every pixel of a JPEG to a text file is not very useful.</p>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.gdal&quot;</span><span class="p">,</span>
@@ -222,12 +248,28 @@ this mapping is required.</p>
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="section" id="las-example">
 <h2>LAS Example<a class="headerlink" href="#las-example" title="Permalink to this headline">¶</a></h2>
-<p>The following example writes a JPG as an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> file.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<p>The following example assigns the bands from a JPG to the
+RGB values of an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> file using <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.</p>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.gdal&quot;</span><span class="p">,</span>
@@ -244,13 +286,13 @@ this mapping is required.</p>
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>GDALOpen&#8217;able raster file to read [Required]</dd>
+<dd><a class="reference external" href="http://www.gdal.org/gdal_8h.html#a6836f0f810396c5e45622c8ef94624d4">GDALOpen</a> &#8216;able raster file to read [Required]</dd>
 </dl>
 </div>
 </div>
@@ -279,7 +321,7 @@ this mapping is required.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 18, 2017.
+      Last updated on Apr 06, 2017.
 
     </p>
   </div> 
@@ -300,7 +342,7 @@ this mapping is required.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0',
+            VERSION:'1.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -309,7 +351,7 @@ this mapping is required.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -334,7 +376,7 @@ this mapping is required.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 18, 2017.
+                    on Apr 06, 2017.
         </div>
     </div>
 
