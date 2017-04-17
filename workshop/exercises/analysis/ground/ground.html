@@ -266,19 +266,17 @@ technique we learned about in <a class="reference internal" href="../denoising/d
        <span class="n">pdal</span> <span class="n">ground</span> \
        <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
        <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
-       <span class="o">--</span><span class="n">classify</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">extract</span><span class="o">=</span><span class="n">true</span> \
-<span class="hll">       <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
-</span></pre></div>
+<span class="hll">       <span class="o">--</span><span class="n">extract</span><span class="o">=</span><span class="n">true</span> \
+</span>       <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+</pre></div>
 </td></tr></table></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal"><span class="pre">filters.pmf.extract=true</span></code> item causes all data except
-ground-classified points to be removed from the set.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">--extract=true</span></code> option causes all data except ground-classified
+points to be removed from the set.</p>
 </div>
-<p>Buildings and other non-ground points are removed with the <code class="docutils literal"><span class="pre">extract</span></code> option
-of <a class="reference internal" href="../../../../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a></p>
 <img alt="../../../../_images/ground-ground-only-view.png" src="../../../../_images/ground-ground-only-view.png" />
-<p>2. Now we will remove the noise, using the <a class="reference internal" href="../../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> to stack the
+<p>2. Now we will instead use the <a class="reference internal" href="../../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> command to stack the
 <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> and <a class="reference internal" href="../../../../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a> stages:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -290,19 +288,26 @@ of <a class="reference internal" href="../../../../stages/filters.pmf.html#filte
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
        <span class="n">pdal</span> <span class="n">translate</span> \
        <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
        <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
-       <span class="n">outlier</span> <span class="n">pmf</span> \
+       <span class="n">outlier</span> <span class="n">pmf</span> <span class="nb">range</span> \
        <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> \
        <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> \
        <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> \
        <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">pmf</span><span class="o">.</span><span class="n">cell_size</span><span class="o">=</span><span class="mf">1.5</span> \
-       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">pmf</span><span class="o">.</span><span class="n">extract</span><span class="o">=</span><span class="n">true</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">pmf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span> \
+       <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> \
        <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
+<p>In this invocation, we have more control over the process. First the outlier
+filter merely classifies outliers with a <code class="docutils literal"><span class="pre">Classification</span></code> value of 7. These
+outliers are then ignored during PMF processing with the <code class="docutils literal"><span class="pre">ignore</span></code> option.
+Finally, we add a range filter to extract only the ground returns (i.e.,
+<code class="docutils literal"><span class="pre">Classification</span></code> value of 2).</p>
 <p>The result is a more accurate representation of the ground returns.</p>
 <img alt="../../../../_images/ground-filtered.png" src="../../../../_images/ground-filtered.png" />
 </div>
@@ -333,7 +338,7 @@ of <a class="reference internal" href="../../../../stages/filters.pmf.html#filte
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 06, 2017.
+      Last updated on Apr 17, 2017.
 
     </p>
   </div> 
@@ -388,7 +393,7 @@ of <a class="reference internal" href="../../../../stages/filters.pmf.html#filte
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 06, 2017.
+                    on Apr 17, 2017.
         </div>
     </div>
 

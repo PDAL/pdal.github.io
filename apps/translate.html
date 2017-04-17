@@ -267,12 +267,13 @@ translate <code class="docutils literal"><span class="pre">1.2-with-color.las</s
 <div class="section" id="example-2">
 <h2>Example 2:<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>Given these tools, we can now construct a custom pipeline on-the-fly. The
-example below uses a simple LAS reader and writer, but stages a PCL-based
-voxel grid filter, followed by the PMF filter. We can even set
+example below uses a simple LAS reader and writer, but stages a PCL-based voxel
+grid filter, followed by the PMF filter and a range filter. We can even set
 stage-specific parameters as shown.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate input.las output.las pclblock pmf \
-    --filters.pclblock.json=&quot;{\&quot;pipeline\&quot;:{\&quot;filters\&quot;:[{\&quot;name\&quot;:\&quot;VoxelGrid\&quot;}]}}&quot; \
-    --filters.pmf.approximate=true --filters.pmf.extract=true
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate input.las output.las pclblock pmf range \
+    --filters.pclblock.methods=&quot;[{\&quot;name\&quot;:\&quot;VoxelGrid\&quot;}]&quot; \
+    --filters.pmf.approximate=true \
+    --filters.range.limits=&quot;Classification[2:2]&quot;
 </pre></div>
 </div>
 </div>
@@ -322,7 +323,7 @@ reference system and writes the result to the file &#8220;output.las&#8221;.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 06, 2017.
+      Last updated on Apr 17, 2017.
 
     </p>
   </div> 
@@ -377,7 +378,7 @@ reference system and writes the result to the file &#8220;output.las&#8221;.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 06, 2017.
+                    on Apr 17, 2017.
         </div>
     </div>
 

@@ -263,25 +263,33 @@ represents a 1:1 or 45º.</li>
 flat surface if you have an uncertainty of around 15 cm, you set
 <code class="docutils literal"><span class="pre">initial_distance</span></code> large enough to not exclude these points from the ground.</li>
 <li>For a given iteration, the height threshold is determined by multiplying
-<code class="docutils literal"><span class="pre">slope</span></code> by <code class="docutils literal"><span class="pre">cell_size</span></code> by the difference in window size between the current
-and last iteration, plus the <code class="docutils literal"><span class="pre">initial_distance</span></code>. This height threshold is
-constant across all cells and is maxed out at the <code class="docutils literal"><span class="pre">max_distance</span></code> value. If
-the difference in elevation between a point and its “opened” value (from the
-morphological operator) exceeds the height threshold, it is treated as
-non-ground.  So, bigger slope leads to bigger height thresholds, and these
-grow with each iteration (not to exceed the max).  With flat terrain,
-keep this low, the thresholds are small, and stuff is more aggressively
-dumped into non-ground class.  In rugged terrain, open things up
+<code class="docutils literal"><span class="pre">slope</span></code> by <code class="docutils literal"><span class="pre">cell_size</span></code> by the difference in window size between the
+current and last iteration, plus the <code class="docutils literal"><span class="pre">initial_distance</span></code>. This height
+threshold is constant across all cells and is maxed out at the
+<code class="docutils literal"><span class="pre">max_distance</span></code> value. If the difference in elevation between a point and its
+“opened” value (from the morphological operator) exceeds the height threshold,
+it is treated as non-ground.  So, bigger slope leads to bigger height
+thresholds, and these grow with each iteration (not to exceed the max).  With
+flat terrain, keep this low, the thresholds are small, and stuff is more
+aggressively dumped into non-ground class.  In rugged terrain, open things up
 a little, but then you can start missing buildings, veg, etc.</li>
 <li>Very large <code class="docutils literal"><span class="pre">max_window_size</span></code> values will result in a lot of potentially
 extra iteration. This parameter can have a strongly negative impact on
 computation performance.</li>
+<li>This filter will mark all returns deemed to be ground returns with a
+classification value of 2 (per the LAS specification). To extract only these
+returns, users can add a <a class="reference internal" href="filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> to the pipeline.</li>
 </ul>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[2:2]&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="../references.html#zhang2003" id="id3">[Zhang2003]</a> describes the consequences and relationships of the
-parameters in more detail and is the canonnical resource on the
-topic.</p>
+<p class="last"><a class="reference internal" href="../references.html#zhang2003" id="id3">[Zhang2003]</a> describes the consequences and relationships of the parameters
+in more detail and is the canonnical resource on the topic.</p>
 </div>
 </div>
 <div class="section" id="options">
@@ -297,12 +305,13 @@ topic.</p>
 <dd>Initial distance. [Default: <strong>0.15</strong>]</dd>
 <dt>cell_size</dt>
 <dd>Cell Size. [Default: <strong>1</strong>]</dd>
-<dt>classify</dt>
-<dd>Apply classification labels? [Default: <strong>true</strong>]</dd>
-<dt>extract</dt>
-<dd>Extract ground returns? [Default: <strong>false</strong>]</dd>
 <dt>approximate</dt>
-<dd>Use approximate algorithm? [Default:: <strong>false</strong>]</dd>
+<dd>Use approximate algorithm? [Default: <strong>false</strong>]</dd>
+<dt>ignore</dt>
+<dd>Optional range of values to ignore.</dd>
+<dt>last</dt>
+<dd>Consider only last returns (when return information is available)? [Default:
+<strong>true</strong>]</dd>
 </dl>
 </div>
 </div>
@@ -331,7 +340,7 @@ topic.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 06, 2017.
+      Last updated on Apr 17, 2017.
 
     </p>
   </div> 
@@ -386,7 +395,7 @@ topic.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 06, 2017.
+                    on Apr 17, 2017.
         </div>
     </div>
 

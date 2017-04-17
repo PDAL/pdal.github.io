@@ -417,8 +417,9 @@ this job in more detail.</p>
 <h3>DTM<a class="headerlink" href="#dtm" title="Permalink to this headline">¶</a></h3>
 <p>A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
-segmentation filter using <a class="reference internal" href="stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a>, and then creates the DTM using
-the <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> with only the ground returns.</p>
+segmentation filter using <a class="reference internal" href="stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a>, filters out all points but the
+ground returns (classification value of 2) using the <a class="reference internal" href="stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>, and
+then creates the DTM using the <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
         <span class="s2">&quot;autzen-full.las&quot;</span><span class="p">,</span>
@@ -429,9 +430,11 @@ the <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><
             <span class="nt">&quot;slope&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span>
             <span class="nt">&quot;max_distance&quot;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span>
             <span class="nt">&quot;initial_distance&quot;</span><span class="p">:</span><span class="mf">0.15</span><span class="p">,</span>
-            <span class="nt">&quot;cell_size&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span>
-            <span class="nt">&quot;extract&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-            <span class="nt">&quot;classify&quot;</span><span class="p">:</span><span class="kc">false</span>
+            <span class="nt">&quot;cell_size&quot;</span><span class="p">:</span><span class="mf">1.0</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;range&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[2:2]&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
@@ -633,7 +636,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 06, 2017.
+      Last updated on Apr 17, 2017.
 
     </p>
   </div> 
@@ -688,7 +691,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 06, 2017.
+                    on Apr 17, 2017.
         </div>
     </div>
 

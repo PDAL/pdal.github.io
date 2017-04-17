@@ -242,6 +242,16 @@
 <span id="id1"></span><h1>filters.outlier<a class="headerlink" href="#filters-outlier" title="Permalink to this headline">¶</a></h1>
 <p>The Outlier filter provides two outlier filtering methods: radius and
 statistical. These two approaches are discussed in further detail below.</p>
+<p>It is worth noting that both filtering methods simply apply a classification
+value of 7 to the noise points (per the LAS specification). To remove the noise
+points altogether, users can add a <a class="reference internal" href="filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> to their
+pipeline, downstream from the outlier filter.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification![7:7]&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <div class="section" id="statistical-method">
 <h2>Statistical Method<a class="headerlink" href="#statistical-method" title="Permalink to this headline">¶</a></h2>
 <p>The default method for identifying outlier points is the statistical outlier method. This method requires two passes through the input <code class="docutils literal"><span class="pre">PointView</span></code>, first to compute a threshold value based on global statistics, and second to identify outliers using the computed threshold.</p>
@@ -260,9 +270,6 @@ statistical. These two approaches are discussed in further detail below.</p>
     \text{true,} \phantom{false,} \text{if } \mu_i &gt;= t \\
     \text{false,} \phantom{true,} \text{otherwise} \\
 \end{cases}\end{split}\]</div>
-<p>The <code class="docutils literal"><span class="pre">classify</span></code> and <code class="docutils literal"><span class="pre">extract</span></code> options are used to control whether outlier
-points are labeled as noise, or removed from the output <code class="docutils literal"><span class="pre">PointView</span></code>
-completely.</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/filters.statisticaloutlier.img1.png"><img alt="Points before outlier removal" src="../_images/filters.statisticaloutlier.img1.png" style="width: 641.2px; height: 711.2px;" /></a>
 </div>
@@ -304,9 +311,6 @@ of neighbors specified by <code class="docutils literal"><span class="pre">min_k
     \text{true,} \phantom{false,} \text{if } k_i &lt; k_{min} \\
     \text{false,} \phantom{true,} \text{otherwise} \\
 \end{cases}\end{split}\]</div>
-<p>The <code class="docutils literal"><span class="pre">classify</span></code> and <code class="docutils literal"><span class="pre">extract</span></code> options are used to control whether outlier
-points are labeled as noise, or removed from the output <code class="docutils literal"><span class="pre">PointView</span></code>
-completely.</p>
 <div class="section" id="id3">
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The following example will mark points as outliers when there are fewer than
@@ -330,6 +334,8 @@ four neighbors within a radius of 1.0.</p>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
+<dt>class</dt>
+<dd>The classification value to apply to outliers. [Default: <strong>7</strong>]</dd>
 <dt>method</dt>
 <dd>The outlier removal method. [Default: <strong>statistical</strong>]</dd>
 <dt>min_k</dt>
@@ -340,10 +346,6 @@ four neighbors within a radius of 1.0.</p>
 <dd>Mean number of neighbors (statistical method only). [Default: <strong>8</strong>]</dd>
 <dt>multiplier</dt>
 <dd>Standard deviation threshold (statistical method only). [Default: <strong>2.0</strong>]</dd>
-<dt>classify</dt>
-<dd>Apply classification value of 18 (LAS high noise)? [Default: <strong>true</strong>]</dd>
-<dt>extract</dt>
-<dd>Extract inlier returns only? [Default: <strong>false</strong>]</dd>
 </dl>
 </div>
 </div>
@@ -372,7 +374,7 @@ four neighbors within a radius of 1.0.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 06, 2017.
+      Last updated on Apr 17, 2017.
 
     </p>
   </div> 
@@ -427,7 +429,7 @@ four neighbors within a radius of 1.0.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 06, 2017.
+                    on Apr 17, 2017.
         </div>
     </div>
 

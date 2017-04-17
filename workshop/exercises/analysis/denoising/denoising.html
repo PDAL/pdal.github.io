@@ -229,7 +229,7 @@ the following commands to increase the available memory:</p>
 </div>
 <div class="section" id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
-<p>PDAL provides a <a class="reference internal" href="../../../../stages/filters.html#filters"><span class="std std-ref">filter</span></a> through <a class="reference external" href="http://pointclouds.org">PCL</a> to apply a statistical
+<p>PDAL provides the <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">outlier filter</span></a> to apply a statistical
 filter to data.</p>
 <p>Because this operation is somewhat complex, we are going to use a pipeline to
 define it.</p>
@@ -239,13 +239,12 @@ define it.</p>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
             <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;statistical&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;extract&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
             <span class="s2">&quot;multiplier&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
             <span class="s2">&quot;mean_k&quot;</span><span class="p">:</span> <span class="mi">8</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;limits&quot;</span><span class="p">:</span> <span class="s2">&quot;Z[-100:3000]&quot;</span>
+            <span class="s2">&quot;limits&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification![7:7],Z[-100:3000]&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
@@ -275,11 +274,11 @@ point cloud file we&#8217;re going to read.</p>
 </div>
 <div class="section" id="filters-outlier">
 <h4>2. <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a><a class="headerlink" href="#filters-outlier" title="Permalink to this headline">¶</a></h4>
-<p>The <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> PDAL filter does most of the work for this operation.</p>
+<p>The PDAL <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">outlier filter</span></a> does most of the work for this
+operation.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
     <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;statistical&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;extract&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
     <span class="s2">&quot;multiplier&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
     <span class="s2">&quot;mean_k&quot;</span><span class="p">:</span> <span class="mi">8</span>
 <span class="p">},</span>
@@ -288,14 +287,21 @@ point cloud file we&#8217;re going to read.</p>
 </div>
 <div class="section" id="filters-range">
 <h4>3. <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a><a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h4>
+<p>At this point, the outliers have been classified per the LAS specification as
+low/noise points with a classification value of 7. The <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">range
+filter</span></a> can remove these noise points by constructing a
+<a class="reference internal" href="../../../../stages/filters.range.html#ranges"><span class="std std-ref">range</span></a> with the value <code class="docutils literal"><span class="pre">Classification![7:7]</span></code>, which passes
+every point with a <code class="docutils literal"><span class="pre">Classification</span></code> value <strong>not</strong> equal to 7.</p>
 <p>Even with the <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> operation, there is still a cluster of
 points with extremely negative <code class="docutils literal"><span class="pre">Z</span></code> values. These are some artifact or
-miscomputation of processing, and we don&#8217;t want these points. We are going to
-use :<a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> to keep only points that are within the range
+miscomputation of processing, and we don&#8217;t want these points. We can construct
+another <a class="reference internal" href="../../../../stages/filters.range.html#ranges"><span class="std std-ref">range</span></a> to keep only points that are within the range
 <code class="docutils literal"><span class="pre">-100</span> <span class="pre">&lt;=</span> <span class="pre">Z</span> <span class="pre">&lt;=</span> <span class="pre">3000</span></code>.</p>
+<p>Both <a class="reference internal" href="../../../../stages/filters.range.html#ranges"><span class="std std-ref">ranges</span></a> are passed as a comma-separated list to the
+<a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> via the <code class="docutils literal"><span class="pre">limits</span></code> option.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;limits&quot;</span><span class="p">:</span> <span class="s2">&quot;Z[-100:3000]&quot;</span>
+    <span class="s2">&quot;limits&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification![7:7],Z[-100:3000]&quot;</span>
 <span class="p">},</span>
 </pre></div>
 </div>
@@ -382,7 +388,7 @@ process. If you have really large files, you are going to need to
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 06, 2017.
+      Last updated on Apr 17, 2017.
 
     </p>
   </div> 
@@ -437,7 +443,7 @@ process. If you have really large files, you are going to need to
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 06, 2017.
+                    on Apr 17, 2017.
         </div>
     </div>
 
