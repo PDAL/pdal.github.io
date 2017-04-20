@@ -498,6 +498,17 @@ the available flags type:</p>
 </div>
 <p>Key among these flags are the ability to list tests (<code class="docutils literal"><span class="pre">--gtest_list_tests</span></code>)
 and to run only select tests (<code class="docutils literal"><span class="pre">--gtest_filter</span></code>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If the PostgreSQL PointCloud plugin was enabled on the CMake command line
+(with <code class="docutils literal"><span class="pre">-DBUILD_PLUGIN_PGPOINTCLOUD=ON</span></code>) then <cite>ctest</cite> will attempt to run
+the <code class="docutils literal"><span class="pre">pgpointcloud``&nbsp;tests.</span> <span class="pre">And</span> <span class="pre">you</span> <span class="pre">will</span> <span class="pre">get</span> <span class="pre">PostgreSQL&nbsp;connection</span> <span class="pre">errors</span>
+<span class="pre">if</span> <span class="pre">the</span> <span class="pre">`libpq</span> <span class="pre">environment</span> <span class="pre">variables`_</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">correctly</span> <span class="pre">set</span> <span class="pre">in</span> <span class="pre">your</span> <span class="pre">shell.</span>
+<span class="pre">This</span> <span class="pre">is</span> <span class="pre">for</span> <span class="pre">example</span> <span class="pre">how</span> <span class="pre">you</span> <span class="pre">can</span> <span class="pre">run</span> <span class="pre">the</span> <span class="pre">``pgpointcloud</span></code> tests:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span>$ PGUSER=pdal PGPASSWORD=pdal PGHOST=localhost ctest -R pgpointcloudtest
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="test-data">
 <h2>Test Data<a class="headerlink" href="#test-data" title="Permalink to this headline">¶</a></h2>
@@ -537,7 +548,7 @@ be helpful for debugging).</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 17, 2017.
+      Last updated on Apr 20, 2017.
 
     </p>
   </div> 
@@ -592,7 +603,7 @@ be helpful for debugging).</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 17, 2017.
+                    on Apr 20, 2017.
         </div>
     </div>
 
