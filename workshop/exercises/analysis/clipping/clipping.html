@@ -214,7 +214,7 @@
 <p>The <code class="docutils literal"><span class="pre">autzen.laz</span></code> file is a staple in PDAL and libLAS examples. We will
 use this file to demonstrate clipping points with a geometry. We&#8217;re going to
 clip out the stadium into a new LAS file.</p>
-<img alt="../../../../_images/clipping-autzen-view.png" src="../../../../_images/clipping-autzen-view.png" />
+<a class="reference external image-reference" href="../../../../_images/clipping-autzen-view.png"><img alt="../../../../_images/clipping-autzen-view.png" src="../../../../_images/clipping-autzen-view.png" /></a>
 <div class="section" id="data-preparation">
 <h3>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h3>
 <p>The data are mixed in two different coordinate systems. The <a class="reference internal" href="../../../../stages/readers.las.html#readers-las"><span class="std std-ref">LAZ</span></a> file is in <a class="reference external" href="http://www.oregon.gov/DAS/CIO/GEO/pages/coordination/projections/projections.aspx">Oregon State Plane Ft.</a> and the <a class="reference external" href="http://geojson.org">GeoJSON</a> defining
@@ -243,7 +243,7 @@ is a kind of &#8220;virtual&#8221; data source definition type that combines a
 definition of data and a processing operation into a single, readable data
 stream.</p>
 </div>
-<img alt="../../../../_images/clipping-view-polygons.png" src="../../../../_images/clipping-view-polygons.png" />
+<a class="reference external image-reference" href="../../../../_images/clipping-view-polygons.png"><img alt="../../../../_images/clipping-view-polygons.png" src="../../../../_images/clipping-view-polygons.png" /></a>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The GeoJSON file does not have an externally-defined coordinate system,
@@ -256,10 +256,10 @@ See the <a class="reference external" href="http://www.gdal.org/drv_vrt.html">OG
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
 <div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;/data/exercises/analysis/clipping/autzen.laz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/clipping/autzen.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
             <span class="s2">&quot;column&quot;</span><span class="p">:</span> <span class="s2">&quot;CLS&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;/data/exercises/analysis/clipping/attributes.vrt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/clipping/attributes.vrt&quot;</span><span class="p">,</span>
             <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
             <span class="s2">&quot;layer&quot;</span><span class="p">:</span> <span class="s2">&quot;OGRGeoJSON&quot;</span><span class="p">,</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.overlay&quot;</span>
@@ -268,7 +268,7 @@ See the <a class="reference external" href="http://www.gdal.org/drv_vrt.html">OG
             <span class="s2">&quot;limits&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification[6:6]&quot;</span><span class="p">,</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.range&quot;</span>
         <span class="p">},</span>
-        <span class="s2">&quot;/data/exercises/analysis/clipping/stadium.las&quot;</span>
+        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/clipping/stadium.las&quot;</span>
     <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -304,16 +304,13 @@ assign the values from the <code class="docutils literal"><span class="pre">CLS<
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Docker
-Quickstart Terminal</cite>:</p>
+<p>Invoke the following command, substituting accordingly, in your <cite>OSGeo4W Shell</cite>:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-       <span class="n">pdal</span> <span class="n">pipeline</span> \
-       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">clipping</span><span class="o">.</span><span class="n">json</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">clipping</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </td></tr></table></div>
-<img alt="../../../../_images/clipping-run-command.png" src="../../../../_images/clipping-run-command.png" />
+<a class="reference external image-reference" href="../../../../_images/clipping-run-command.png"><img alt="../../../../_images/clipping-run-command.png" src="../../../../_images/clipping-run-command.png" /></a>
 </div>
 <div class="section" id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
@@ -321,7 +318,7 @@ Quickstart Terminal</cite>:</p>
 your <code class="docutils literal"><span class="pre">c:\Users\Howard\PDAL\exercises\analysis\clipping\stadium.las</span></code> output.
 In the example below, we simply opened the file using the <a class="reference external" href="http://plas.io">http://plas.io</a>
 website.</p>
-<img alt="../../../../_images/clipping-stadium-clipped.png" src="../../../../_images/clipping-stadium-clipped.png" />
+<a class="reference external image-reference" href="../../../../_images/clipping-stadium-clipped.png"><img alt="../../../../_images/clipping-stadium-clipped.png" src="../../../../_images/clipping-stadium-clipped.png" /></a>
 </div>
 </div>
 <div class="section" id="notes">
@@ -358,7 +355,7 @@ that is read.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 12, 2017.
+      Last updated on May 19, 2017.
 
     </p>
   </div> 
@@ -413,7 +410,7 @@ that is read.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 12, 2017.
+                    on May 19, 2017.
         </div>
     </div>
 

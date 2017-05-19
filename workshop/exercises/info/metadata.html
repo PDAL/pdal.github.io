@@ -202,10 +202,8 @@
 <div class="section" id="exercise">
 <span id="index-0"></span><h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>This exercise uses PDAL to print metadata information. Issue the
-following command in your <cite>Docker Quickstart Terminal</cite>.</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-    <span class="n">pdal</span> <span class="n">info</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
+following command in your <cite>OSGeo4W Shell</cite>.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
 </pre></div>
 </td></tr></table></div>
 <img alt="../../../_images/info-interesting-metadata.png" src="../../../_images/info-interesting-metadata.png" />
@@ -225,6 +223,41 @@ software to selectively access and manipulate values.</p>
 <li><a class="reference external" href="https://stedolan.github.io/jq/">jq</a> (command line processor for JSON)</li>
 <li><a class="reference external" href="http://ruby-doc.org/stdlib-2.0.0/libdoc/json/rdoc/JSON.html">Ruby JSON library</a></li>
 </ul>
+</div>
+<div class="section" id="structured-metadata-output">
+<h3>Structured Metadata Output<a class="headerlink" href="#structured-metadata-output" title="Permalink to this headline">¶</a></h3>
+<p>Many command-line utilities output their data in a human-readable custom
+format. The downsides to this approach are significant. PDAL was designed to be
+used in the context of other software tools driving it. For example, it is
+quite common for PDAL to be used in data validation scenarios. Other programs
+might need to inspect information in PDAL&#8217;s output and then act based on the
+values. A human-readable format would mean that downstream program would need
+to write a parser to consume PDAL&#8217;s special format.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON</a> provides a nice balance between human- and machine- readable, but
+even then it can be quite hard to find what you&#8217;re looking for, especially
+if the output is long. <code class="docutils literal"><span class="pre">pdal</span></code> command output used in conjunction with a
+JSON parsing tool like <code class="docutils literal"><span class="pre">jq</span></code> provide a powerful inspection combination.</p>
+<p>For example, we might only care about the <code class="docutils literal"><span class="pre">system_id</span></code> and <code class="docutils literal"><span class="pre">compressed</span></code>
+flag for this particular file. Our simple <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--metadata</span></code> command
+gives us that, but it also gives us a bunch of other stuff we don&#8217;t need
+at the moment either. Let&#8217;s focus on extracting what we want using the
+<code class="docutils literal"><span class="pre">jq</span></code> command.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> <span class="o">^</span>
+    <span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="../../../_images/info-interesting-metadata-jq.png" src="../../../_images/info-interesting-metadata-jq.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">PDAL&#8217;s JSON output is very powerfully combined with the processing
+capabilities of other programming languages such as JavaScript or Python.
+Both of these languages have excellent built-in tools for consuming
+JSON, along with plenty of other features to allow you to do something
+with the data inside the data structures. As we will see later
+in the workshop, this PDAL feature is one that makes construction
+of custom data processing workflows with PDAL very convenient.</p>
+</div>
 </div>
 </div>
 <div class="section" id="notes">
@@ -269,7 +302,7 @@ in PDAL.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 12, 2017.
+      Last updated on May 19, 2017.
 
     </p>
   </div> 
@@ -324,7 +357,7 @@ in PDAL.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 12, 2017.
+                    on May 19, 2017.
         </div>
     </div>
 

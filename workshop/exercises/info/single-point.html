@@ -202,62 +202,36 @@
 <div class="section" id="exercise">
 <span id="index-0"></span><h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>This exercise uses PDAL to print information from the first point. Issue the
-following command in your <cite>Docker Quickstart Terminal</cite>.</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-    <span class="n">pdal</span> <span class="n">info</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">-</span><span class="n">p</span> <span class="mi">0</span>
+following command in your <cite>OSGeo4W Shell</cite>.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">-</span><span class="n">p</span> <span class="mi">0</span>
 </pre></div>
 </td></tr></table></div>
 <p>Here&#8217;s a summary of what&#8217;s going on with that command invocation</p>
-<ol class="arabic">
-<li><p class="first"><code class="docutils literal"><span class="pre">docker</span></code>: We are running PDAL within the context of docker, so all of our
-commands will start with the <code class="docutils literal"><span class="pre">docker</span></code> command.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">run</span></code>: Tells docker we&#8217;re going to run an image</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">-v</span> <span class="pre">/c/Users/Howard/PDAL:/data</span></code>: Maps our workshop directory to a directory called
-<code class="docutils literal"><span class="pre">/data</span></code> inside the container.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">The <a class="reference external" href="https://docs.docker.com/engine/userguide/dockervolumes/">Docker Volume</a>
-document describes mounting volumes in more detail.</p>
-</div>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">pdal/pdal</span></code>: This is the Docker image we are going to run. We fetched it in the
-<a class="reference internal" href="../../../quickstart.html#docker"><span class="std std-ref">Install Docker</span></a> portion of the workshop.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">pdal</span></code>: We&#8217;re finally going to run the <code class="docutils literal"><span class="pre">pdal</span></code> application :)</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">info</span></code>: We want to run <a class="reference internal" href="../../../apps/info.html#info-command"><span class="std std-ref">info</span></a> on the data. All commands
-are run by the <code class="docutils literal"><span class="pre">pdal</span></code> application.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">/data/exercises/info/interesting.las</span></code>: The <code class="docutils literal"><span class="pre">pdal</span></code> command is now
-running in the context of our container, which we mounted a <code class="docutils literal"><span class="pre">/data</span></code>
-directory in with the volume mount operation in Step #3. Our
-<code class="docutils literal"><span class="pre">interesting.las</span></code> file resides there.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">-p</span> <span class="pre">0</span></code>: <code class="docutils literal"><span class="pre">-p</span></code> corresponds to &#8220;print a point&#8221;, and <code class="docutils literal"><span class="pre">0</span></code> means to print
-the first one (computer people count from 0).</p>
-</li>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">pdal</span></code>: The <code class="docutils literal"><span class="pre">pdal</span></code> application :)</li>
+<li><code class="docutils literal"><span class="pre">info</span></code>: We want to run <a class="reference internal" href="../../../apps/info.html#info-command"><span class="std std-ref">info</span></a> on the data. All commands
+are run by the <code class="docutils literal"><span class="pre">pdal</span></code> application.</li>
+<li><code class="docutils literal"><span class="pre">c:/Users/hobu/PDAL/exercises/info/interesting.las</span></code>: The file we
+are running the command on. PDAL will be able to identify this file
+is an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> file from the extension, <code class="docutils literal"><span class="pre">.las</span></code>, but not every
+file type is easily identified. You can use a <a class="reference internal" href="../../../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a>
+to override which <a class="reference internal" href="../../../stages/readers.html#readers"><span class="std std-ref">reader</span></a> PDAL will use to
+open the file.</li>
+<li><code class="docutils literal"><span class="pre">-p</span> <span class="pre">0</span></code>: <code class="docutils literal"><span class="pre">-p</span></code> corresponds to &#8220;print a point&#8221;, and <code class="docutils literal"><span class="pre">0</span></code> means to print
+the first one (computer people count from 0).</li>
 </ol>
-<img alt="../../../_images/info-interesting-single-point.png" src="../../../_images/info-interesting-single-point.png" />
+<a class="reference external image-reference" href="../../../_images/info-interesting-single-point.png"><img alt="../../../_images/info-interesting-single-point.png" src="../../../_images/info-interesting-single-point.png" /></a>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple" id="index-1">
 <li>PDAL uses <a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON</a> as the exchange format when printing information from <a class="reference internal" href="../../../apps/info.html#info-command"><span class="std std-ref">info</span></a>.
 JSON is a structured, human-readable format that is much simpler than its <a class="reference external" href="https://en.wikipedia.org/wiki/XML">XML</a> cousin.</li>
-</ol>
-<ol class="arabic simple" id="index-2" start="2">
 <li>You can use the <a class="reference internal" href="../../../stages/writers.text.html#writers-text"><span class="std std-ref">writers.text</span></a> writer to output point attributes to <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> format for
 other processing.</li>
 <li>Output help information on the command line by issuing the <code class="docutils literal"><span class="pre">--help</span></code> option</li>
 <li>A common query with <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span></code> is <code class="docutils literal"><span class="pre">--all</span></code>, which will print all header,
 metadata, and statistics about a file.</li>
-<li>In the command, we add the <code class="docutils literal"><span class="pre">\</span></code> character for line continuation. All items on the
-<code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> command must be on the same line. You will see this convention
-throughout the workshop to make the command easier to read, but remember
-that everything needs to be on one line.</li>
 </ol>
 </div>
 </div>
@@ -286,7 +260,7 @@ that everything needs to be on one line.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 12, 2017.
+      Last updated on May 19, 2017.
 
     </p>
   </div> 
@@ -341,7 +315,7 @@ that everything needs to be on one line.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 12, 2017.
+                    on May 19, 2017.
         </div>
     </div>
 

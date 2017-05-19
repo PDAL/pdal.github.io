@@ -219,15 +219,13 @@ directory.</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-    <span class="n">pdal</span> <span class="n">info</span> \
-    <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
-    <span class="o">--</span><span class="n">boundary</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">^</span>
+<span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">boundary</span>
 
 </pre></div>
 </td></tr></table></div>
-<img alt="../../../../_images/boundary-text-output.png" src="../../../../_images/boundary-text-output.png" />
+<a class="reference external image-reference" href="../../../../_images/boundary-text-output.png"><img alt="../../../../_images/boundary-text-output.png" src="../../../../_images/boundary-text-output.png" /></a>
 <p>... a giant blizzard of coordinate output scrolls across our terminal. Not very
 useful.</p>
 <p>Instead, let&#8217;s generate some kind of vector output we can visualize with
@@ -239,21 +237,19 @@ file.</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-    <span class="n">pdal</span> <span class="n">tindex</span> \
-    <span class="o">--</span><span class="n">tindex</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> \
-    <span class="o">--</span><span class="n">filespec</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
-    <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">tindex</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">tindex</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">filespec</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
 </pre></div>
 </td></tr></table></div>
-<img alt="../../../../_images/boundary-tindex-run.png" src="../../../../_images/boundary-tindex-run.png" />
+<a class="reference external image-reference" href="../../../../_images/boundary-tindex-run.png"><img alt="../../../../_images/boundary-tindex-run.png" src="../../../../_images/boundary-tindex-run.png" /></a>
 <p>Once we&#8217;ve run the <a class="reference internal" href="../../../../apps/tindex.html#tindex-command"><span class="std std-ref">tindex</span></a>, we can now visualize our output:</p>
 <p>Open <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> and select <cite>Add Vector Layer</cite>:</p>
-<img alt="../../../../_images/density-add-layer.png" src="../../../../_images/density-add-layer.png" />
+<a class="reference external image-reference" href="../../../../_images/density-add-layer.png"><img alt="../../../../_images/density-add-layer.png" src="../../../../_images/density-add-layer.png" /></a>
 <p>Navigate to the <code class="docutils literal"><span class="pre">exercises/analysis/boundary</span></code> directory and
 then open the <code class="docutils literal"><span class="pre">boundary.sqlite</span></code> file:</p>
-<img alt="../../../../_images/boundary-qgis-view.png" src="../../../../_images/boundary-qgis-view.png" />
+<a class="reference external image-reference" href="../../../../_images/boundary-qgis-view.png"><img alt="../../../../_images/boundary-qgis-view.png" src="../../../../_images/boundary-qgis-view.png" /></a>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
@@ -297,7 +293,7 @@ application. You can also use this command to merge data together
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 12, 2017.
+      Last updated on May 19, 2017.
 
     </p>
   </div> 
@@ -352,7 +348,7 @@ application. You can also use this command to merge data together
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 12, 2017.
+                    on May 19, 2017.
         </div>
     </div>
 

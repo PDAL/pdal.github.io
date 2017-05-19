@@ -214,13 +214,12 @@ data.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">The primary input for <a class="reference external" href="https://en.wikipedia.org/wiki/Digital_elevation_model">Digital Terrain Model</a> generation is a point cloud
 with ground classifications. We created this file, called
-<code class="docutils literal"><span class="pre">ground-filtered.laz</span></code>, in the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise. Please produce that
+<code class="docutils literal"><span class="pre">denoised-ground-only.laz</span></code>, in the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise. Please produce that
 file by following that exercise before starting this one.</p>
 </div>
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Docker
-Quickstart Terminal</cite>:</p>
+<p>Invoke the following command, substituting accordingly, in your <cite>OSGeo4W Shell</cite>:</p>
 <p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 stage. There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we
 must use a pipeline.</p>
@@ -229,9 +228,9 @@ must use a pipeline.</p>
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;/data/exercises/analysis/ground/ground-filtered.laz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/ground/denoised-ground-only.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;/data/exercises/analysis/dtm/dtm&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/dtm/dtm.tif&quot;</span><span class="p">,</span>
             <span class="s2">&quot;output_format&quot;</span><span class="p">:</span><span class="s2">&quot;tif&quot;</span><span class="p">,</span>
             <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
             <span class="s2">&quot;grid_dist_x&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
@@ -245,30 +244,29 @@ must use a pipeline.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">this pipeline is available in your workshop materials in the
-<code class="docutils literal"><span class="pre">./exercises/analysis/dtm/dtm.json</span></code> file.</p>
+<p class="last">This pipeline is available in your workshop materials in the
+<code class="docutils literal"><span class="pre">./exercises/analysis/dtm/dtm.json</span></code> file. Make sure to edit the
+filenames to match your paths.</p>
 </div>
 <div class="section" id="reader">
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">ground-filtered.laz</span></code> is the <a class="reference external" href="http://laszip.org">LASzip</a> file we will clip. You should have
+<p><code class="docutils literal"><span class="pre">denoised-ground-only</span></code> is the <a class="reference external" href="http://laszip.org">LASzip</a> file we will clip. You should have
 created this output as part of the <a class="reference internal" href="../ground/ground.html#ground"><span class="std std-ref">Identifying ground</span></a> exercise.</p>
 </div>
 <div class="section" id="writers-gdal">
 <h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h4>
-<p>The <a class="reference external" href="https://github.com/CRREL/points2grid">Points2grid</a> writer that bins the point cloud data into an elevation
+<p>The <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer that bins the point cloud data into an elevation
 surface.</p>
 </div>
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-       <span class="n">pdal</span> <span class="n">pipeline</span> \
-       <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
+   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </td></tr></table></div>
-<img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" />
+<a class="reference external image-reference" href="../../../../_images/dtm-run-command.png"><img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" /></a>
 </div>
 <div class="section" id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
@@ -276,30 +274,39 @@ surface.</p>
 see what was produced. Let us use <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> to visualize the output.</p>
 <ol class="arabic">
 <li><p class="first">Open <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> and <cite>Add Raster Layer</cite>:</p>
-<img alt="../../../../_images/dtm-add-raster-layer.png" src="../../../../_images/dtm-add-raster-layer.png" />
+<a class="reference external image-reference" href="../../../../_images/dtm-add-raster-layer.png"><img alt="../../../../_images/dtm-add-raster-layer.png" src="../../../../_images/dtm-add-raster-layer.png" /></a>
 </li>
-<li><p class="first">Add the <cite>dtm.idw.tif</cite> file from your <code class="docutils literal"><span class="pre">./PDAL/exercises/analysis/dtm</span></code>
+<li><p class="first">Add the <cite>dtm.tif</cite> file from your <code class="docutils literal"><span class="pre">./PDAL/exercises/analysis/dtm</span></code>
 directory.</p>
-<img alt="../../../../_images/dtm-add-raster-mean.png" src="../../../../_images/dtm-add-raster-mean.png" />
-<img alt="../../../../_images/dtm-qgis-added.png" src="../../../../_images/dtm-qgis-added.png" />
+<a class="reference external image-reference" href="../../../../_images/dtm-add-raster-mean.png"><img alt="../../../../_images/dtm-add-raster-mean.png" src="../../../../_images/dtm-add-raster-mean.png" /></a>
+<a class="reference external image-reference" href="../../../../_images/dtm-qgis-added.png"><img alt="../../../../_images/dtm-qgis-added.png" src="../../../../_images/dtm-qgis-added.png" /></a>
 </li>
-<li><p class="first">Classify the DTM by right-clicking on the <cite>dtm.idw.tif</cite> and choosing
+<li><p class="first">Classify the DTM by right-clicking on the <cite>dtm.tif</cite> and choosing
 <cite>Properties</cite>. Pick the pseudocolor rendering type, and then
 choose a color ramp and click <cite>Classify</cite>.</p>
-<img alt="../../../../_images/dtm-qgis-classify.png" src="../../../../_images/dtm-qgis-classify.png" />
-<img alt="../../../../_images/dtm-qgis-colorize-dtm.png" src="../../../../_images/dtm-qgis-colorize-dtm.png" />
+<a class="reference external image-reference" href="../../../../_images/dtm-qgis-classify.png"><img alt="../../../../_images/dtm-qgis-classify.png" src="../../../../_images/dtm-qgis-classify.png" /></a>
+<a class="reference external image-reference" href="../../../../_images/dtm-qgis-colorize-dtm.png"><img alt="../../../../_images/dtm-qgis-colorize-dtm.png" src="../../../../_images/dtm-qgis-colorize-dtm.png" /></a>
 </li>
 <li><p class="first"><a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> provides access to <a class="reference external" href="http://gdal.org/">GDAL</a> processing tools, and we
 are going to use that to create a hillshade of our surface.
 Choose <cite>Raster&#8211;&gt;Analysis&#8211;&gt;Dem</cite>:</p>
-<img alt="../../../../_images/dtm-qgis-select-hillshade.png" src="../../../../_images/dtm-qgis-select-hillshade.png" />
+<a class="reference external image-reference" href="../../../../_images/dtm-qgis-select-hillshade.png"><img alt="../../../../_images/dtm-qgis-select-hillshade.png" src="../../../../_images/dtm-qgis-select-hillshade.png" /></a>
 </li>
 <li><p class="first">Click the window for the <cite>Output file</cite> and select a location
 to save the <code class="docutils literal"><span class="pre">hillshade.tif</span></code> file.</p>
-<img alt="../../../../_images/dtm-qgis-gdaldem.png" src="../../../../_images/dtm-qgis-gdaldem.png" />
+<a class="reference external image-reference" href="../../../../_images/dtm-qgis-gdaldem.png"><img alt="../../../../_images/dtm-qgis-gdaldem.png" src="../../../../_images/dtm-qgis-gdaldem.png" /></a>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">^</span>
+    <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
+    <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
+    <span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> <span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
+</pre></div>
+</td></tr></table></div>
 </li>
 <li><p class="first">Click <cite>OK</cite> and the hillshade of your DTM is now available</p>
-<img alt="../../../../_images/dtm-qgis-hillshade-done.png" src="../../../../_images/dtm-qgis-hillshade-done.png" />
+<a class="reference external image-reference" href="../../../../_images/dtm-qgis-hillshade-done.png"><img alt="../../../../_images/dtm-qgis-hillshade-done.png" src="../../../../_images/dtm-qgis-hillshade-done.png" /></a>
 </li>
 </ol>
 </div>
@@ -309,8 +316,8 @@ to save the <code class="docutils literal"><span class="pre">hillshade.tif</span
 <ol class="arabic simple">
 <li><a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a>, which powers the <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> DEM tools, is a very powerful
 command line utility you can use for processing data.</li>
-<li><a class="reference external" href="https://github.com/CRREL/points2grid">Points2grid</a> can be used for large data, but it does not interplate
-typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triangulated_irregular_network">TIN</a> surface model before interpolating.</li>
+<li><a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> can be used for large data, but it does not interpolate a
+typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triangulated_irregular_network">TIN</a> surface model.</li>
 </ol>
 </div>
 </div>
@@ -339,7 +346,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 12, 2017.
+      Last updated on May 19, 2017.
 
     </p>
   </div> 
@@ -394,7 +401,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 12, 2017.
+                    on May 19, 2017.
         </div>
     </div>
 

@@ -206,11 +206,11 @@ scenario is a simple one &#8211; we want to find the two points nearest the midp
 of the bounding cube of our <code class="docutils literal"><span class="pre">interesting.las</span></code> data file.</p>
 <p>First we need to find the midpoint of the bounding cube. To do that, we need to
 print the <code class="docutils literal"><span class="pre">--all</span></code> info for the file and look for the <code class="docutils literal"><span class="pre">bbox</span></code> output:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-    <span class="n">pdal</span> <span class="n">info</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="nb">all</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="nb">all</span> <span class="o">^</span>
+    <span class="o">|</span> <span class="n">jq</span> <span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">native</span><span class="o">.</span><span class="n">bbox</span>
 </pre></div>
 </div>
-<img alt="../../../_images/info-near-bbox.png" src="../../../_images/info-near-bbox.png" />
+<a class="reference external image-reference" href="../../../_images/info-near-bbox.png"><img alt="../../../_images/info-near-bbox.png" src="../../../_images/info-near-bbox.png" /></a>
 <p>Find the average the <code class="docutils literal"><span class="pre">X</span></code>, <code class="docutils literal"><span class="pre">Y</span></code>, and <code class="docutils literal"><span class="pre">Z</span></code> values:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">635619.85</span> <span class="o">+</span> <span class="p">(</span><span class="mf">638982.55</span> <span class="o">-</span> <span class="mf">635619.85</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">=</span> <span class="mf">637301.20</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mf">848899.70</span> <span class="o">+</span> <span class="p">(</span><span class="mf">853535.43</span> <span class="o">-</span> <span class="mf">848899.70</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">=</span> <span class="mf">851217.57</span>
@@ -219,8 +219,7 @@ print the <code class="docutils literal"><span class="pre">--all</span></code> i
 </div>
 <p>With our &#8220;center point&#8221;, issue the <code class="docutils literal"><span class="pre">--query</span></code> option to <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span></code>
 and return the three nearest points to it:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Howard</span><span class="o">/</span><span class="n">PDAL</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="o">-</span><span class="n">t</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span> \
-    <span class="n">pdal</span> <span class="n">info</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> \
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">^</span>
     <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;637301.20, 851217.57, 496.49/3&quot;</span>
 </pre></div>
 </div>
@@ -230,7 +229,7 @@ and return the three nearest points to it:</p>
 command to give us the 3 nearest points. Adjust this value to
 return data in closest-distance ordering.</p>
 </div>
-<img alt="../../../_images/info-near-point.png" src="../../../_images/info-near-point.png" />
+<a class="reference external image-reference" href="../../../_images/info-near-point.png"><img alt="../../../_images/info-near-point.png" src="../../../_images/info-near-point.png" /></a>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
@@ -270,7 +269,7 @@ solution.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 12, 2017.
+      Last updated on May 19, 2017.
 
     </p>
   </div> 
@@ -325,7 +324,7 @@ solution.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 12, 2017.
+                    on May 19, 2017.
         </div>
     </div>
 
