@@ -1,4 +1,4 @@
-.. _dtm:
+.. _workshop-dtm:
 
 Generating a DTM
 ================================================================================
@@ -91,6 +91,8 @@ see what was produced. Let us use :ref:`qgis` to visualize the output.
 
    .. image:: ../../../images/dtm-add-raster-mean.png
         :target: ../../../../_images/dtm-add-raster-mean.png
+
+.. raw:: pdf PageBreak
 
    .. image:: ../../../images/dtm-qgis-added.png
         :target: ../../../../_images/dtm-qgis-added.png

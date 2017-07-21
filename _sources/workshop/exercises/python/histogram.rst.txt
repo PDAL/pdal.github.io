@@ -72,14 +72,16 @@ Run ``pdal pipeline``
 .. literalinclude:: ./histogram-command.txt
    :linenos:
 
-Output
-................................................................................
-
 .. image:: ../../images/python-histogram-command.png
     :target: ../../../_images/python-histogram-command.png
 
+
+Output
+................................................................................
+
 .. image:: ../../images/python-histogram.png
     :target: ../../../_images/python-histogram.png
+
 
 Notes
 --------------------------------------------------------------------------------

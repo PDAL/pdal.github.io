@@ -26,6 +26,7 @@ Translation
 
    translation/compression
    translation/reprojection
+   translation/greyhound
 
 
 .. _analysisa:
