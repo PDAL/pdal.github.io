@@ -20,7 +20,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2016.03.23',
+        VERSION:     '2017.07.25',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,6 +37,8 @@
     <script type="text/javascript" src="_static/init.js"></script>
     
     
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
     <link rel="next" title="Analysis" href="analysis.html" />
     <link rel="prev" title="Basic Information" href="basic_info.html" /> 
@@ -69,13 +71,13 @@
 <dl class="docutils">
 <dt>Purpose:</dt>
 <dd><ul class="first last simple">
-<li>Output a compressed <a class="reference external" href="http://laszip.org">LAZ</a></li>
+<li>Output a compressed <a class="reference external" href="http://laszip.org">LASzip</a></li>
 <li>Learn about point cloud metadata</li>
 <li>Learn about <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a></li>
 </ul>
 </dd>
 </dl>
-<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/translation/compression.html#compression" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Compression Workshop Materials</span></a></p>
+<p><a class="reference external" href="https://www.pdal.io/workshop/exercises/translation/compression.html#compression" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Compression Workshop Materials</span></a></p>
 
 
 
@@ -101,17 +103,17 @@
 
 <h1>Command (compression)</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-    pdal translate /data/exercises/translation/interesting.las \
-    /data/exercises/translation/interesting.laz
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">laz</span>
 </pre></div>
 </td></tr></table></div>
 <ul class="simple">
 <li>PDAL chooses option based on filename extension</li>
 <li>Not all extensions work</li>
-<li>Imprecise. Use <a class="reference external" href="http://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.2.0)"><span>Pipeline</span></a> if you need
+<li>Imprecise. Use <a class="reference external" href="https://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.5.0)"><span>Pipeline</span></a> if you need
 to be explicit</li>
 </ul>
 
@@ -143,7 +145,7 @@ to another</li>
 </ul>
 </dd>
 </dl>
-<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/translation/reprojection.html#reprojection" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Reprojection Workshop Materials</span></a></p>
+<p><a class="reference external" href="https://www.pdal.io/workshop/exercises/translation/reprojection.html#reprojection" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Reprojection Workshop Materials</span></a></p>
 
 
 
@@ -153,19 +155,14 @@ to another</li>
 
 <h1>Command (reproject)</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-    pdal translate /data/exercises/analysis/ground/CSite1_orig-utm.laz \
-    /data/exercises/translation/csite-dd.laz \
-    reprojection \
-    --filters.reprojection.out_srs=&quot;EPSG:4326&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+    <span class="n">reprojection</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <ul class="simple">
-<li>We tell <code class="docutils literal"><span class="pre">filters.reprojection</span></code> to output to <code class="docutils literal"><span class="pre">EPSG:4326</span></code></li>
+<li>We tell <a class="reference external" href="https://www.pdal.io/stages/filters.reprojection.html#filters-reprojection" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.reprojection</span></a> to output to <code class="docutils literal"><span class="pre">EPSG:4326</span></code></li>
 <li>Add <code class="docutils literal"><span class="pre">reprojection</span></code> filter directly to <code class="docutils literal"><span class="pre">translate</span></code> command</li>
 <li>Define reprojection filter option via command line</li>
 </ul>
@@ -188,27 +185,17 @@ to another</li>
 
 <h1>Command (scale)</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-    pdal translate \
-    /data/exercises/analysis/ground/CSite1_orig-utm.laz \
-    /data/exercises/translation/csite-dd.laz \
-    reprojection \
-    --filters.reprojection.out_srs=&quot;EPSG:4326&quot; \
-    --writers.las.scale_x=0.0000001 \
-    --writers.las.scale_y=0.0000001 \
-    --writers.las.offset_x=&quot;auto&quot; \
-    --writers.las.offset_y=&quot;auto&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+    <span class="n">reprojection</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_x</span><span class="o">=</span><span class="mf">0.0000001</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_y</span><span class="o">=</span><span class="mf">0.0000001</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_x</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_y</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <ul class="simple">
 <li>Scale set to <code class="docutils literal"><span class="pre">1e-7</span></code></li>
 <li>Offset to <code class="docutils literal"><span class="pre">auto</span></code> (PDAL calculates minimum)</li>
@@ -232,7 +219,7 @@ to another</li>
 
 <h1>Next</h1>
 
-<p>On to <a class="reference internal" href="analysis.html#analysis"><span>Analysis</span></a></p>
+<p>On to <a class="reference internal" href="analysis.html#analysis"><span class="std std-ref">Analysis</span></a></p>
 
 
 

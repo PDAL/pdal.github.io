@@ -20,7 +20,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2016.03.23',
+        VERSION:     '2017.07.25',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,6 +37,8 @@
     <script type="text/javascript" src="_static/init.js"></script>
     
     
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
     <link rel="next" title="Software installation" href="software.html" />
     <link rel="prev" title="Introduction to LiDAR" href="lidar_intro.html" /> 
@@ -74,11 +76,12 @@
 <h1>Open Source</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="https://opensource.org/licenses/BSD-2-Clause">BSD</a> license</li>
+<li><a class="reference external" href="https://pdal.io">https://pdal.io</a></li>
 <li><a class="reference external" href="https://github.com/PDAL/PDAL">https://github.com/PDAL/PDAL</a></li>
 <li><a class="reference external" href="http://travis-ci.org/PDAL/PDAL/builds/">Tested with every commit</a></li>
 <li>30+ <a class="reference external" href="https://github.com/PDAL/PDAL/graphs/contributors">contributors</a></li>
 <li>Driven by real world use</li>
+<li><a class="reference external" href="https://opensource.org/licenses/BSD-2-Clause">BSD</a> license</li>
 </ul>
 
 
@@ -122,20 +125,18 @@
 
 <h1>Processing Pipeline</h1>
 
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
-<dt><a class="reference external" href="http://www.pdal.io/api/index.html#api" title="(in PDAL v1.2.0)"><span class="xref std std-ref">C++ core library</span></a> implementation</dt>
-<dd><ul class="first last simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/index.html#stage-index" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Stages</span></a> specialize implementation</li>
-<li><a class="reference external" href="http://www.pdal.io/api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="(in PDAL v1.2.0)"><code class="xref cpp cpp-class docutils literal"><span class="pre">PointView</span></code></a> transits data</li>
+<dt><a class="reference external" href="https://www.pdal.io/api/index.html#api" title="(in PDAL v1.5.0)"><span class="xref std std-ref">C++ core library</span></a> implementation</dt>
+<dd><ul class="first last">
+<li><a class="reference external" href="https://www.pdal.io/stages/index.html#stage-index" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Stages</span></a> specialize implementation</li>
+<li><a class="reference external" href="https://www.pdal.io/api/cpp/pointview.html#_CPPv2N4pdal9PointViewE" title="(in PDAL v1.5.0)"><code class="xref cpp cpp-class docutils literal"><span class="pre">PointView</span></code></a> transits data</li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p class="first"><a class="reference external" href="http://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Pipelines</span></a> orchestrate operations</p>
-</li>
-<li><p class="first"><a class="reference external" href="http://www.pdal.io/apps.html#apps" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Applications</span></a> invoke pipelines</p>
-</li>
+<li><a class="reference external" href="https://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Pipelines</span></a> orchestrate operations</li>
+<li><a class="reference external" href="https://www.pdal.io/apps/index.html#apps" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Applications</span></a> invoke pipelines</li>
 </ul>
 
 
@@ -146,7 +147,7 @@
 
 <h1>Pipeline Architecture</h1>
 
-<img alt="_images/pdal-reader-writer.png" src="_images/pdal-reader-writer.png" />
+<img alt="_images/las-crop-bpf-pipeline.png" src="_images/las-crop-bpf-pipeline.png" />
 
 
 
@@ -167,14 +168,14 @@
 <h1>Readers (file)</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.las.html#readers-las" title="(in PDAL v1.2.0)"><span class="xref std std-ref">ASPRS LAS</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.bpf.html#readers-bpf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">BPF</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.mrsid.html#readers-mrsid" title="(in PDAL v1.2.0)"><span class="xref std std-ref">MrSID</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.text.html#readers-text" title="(in PDAL v1.2.0)"><span class="xref std std-ref">text</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.pcd.html#readers-pcd" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PCD (PCL)</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.ply.html#readers-ply" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PLY</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.ilvis2.html#readers-ilvis2" title="(in PDAL v1.2.0)"><span class="xref std std-ref">ILVIS2</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.nitf.html#readers-nitf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">NITF</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.las.html#readers-las" title="(in PDAL v1.5.0)"><span class="xref std std-ref">ASPRS LAS</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.bpf.html#readers-bpf" title="(in PDAL v1.5.0)"><span class="xref std std-ref">BPF</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.mrsid.html#readers-mrsid" title="(in PDAL v1.5.0)"><span class="xref std std-ref">MrSID</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.text.html#readers-text" title="(in PDAL v1.5.0)"><span class="xref std std-ref">text</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.pcd.html#readers-pcd" title="(in PDAL v1.5.0)"><span class="xref std std-ref">PCD (PCL)</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.ply.html#readers-ply" title="(in PDAL v1.5.0)"><span class="xref std std-ref">PLY</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.ilvis2.html#readers-ilvis2" title="(in PDAL v1.5.0)"><span class="xref std std-ref">ILVIS2</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.nitf.html#readers-nitf" title="(in PDAL v1.5.0)"><span class="xref std std-ref">NITF</span></a></li>
 </ul>
 
 
@@ -186,9 +187,9 @@
 <h1>Readers (database)</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.pgpointcloud.html#readers-pgpointcloud" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PostgreSQL</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.oci.html#readers-oci" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Oracle</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.sqlite.html#readers-sqlite" title="(in PDAL v1.2.0)"><span class="xref std std-ref">SQLite</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.pgpointcloud.html#readers-pgpointcloud" title="(in PDAL v1.5.0)"><span class="xref std std-ref">PostgreSQL</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.oci.html#readers-oci" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Oracle</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.sqlite.html#readers-sqlite" title="(in PDAL v1.5.0)"><span class="xref std std-ref">SQLite</span></a></li>
 </ul>
 
 
@@ -200,12 +201,12 @@
 <h1>Writers (file)</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.las.html#writers-las" title="(in PDAL v1.2.0)"><span class="xref std std-ref">ASPRS LAS</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.bpf.html#writers-bpf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">BPF</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.text.html#writers-text" title="(in PDAL v1.2.0)"><span class="xref std std-ref">text</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.pcd.html#writers-pcd" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PCD (PCL)</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.ply.html#writers-ply" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PLY</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.nitf.html#writers-nitf" title="(in PDAL v1.2.0)"><span class="xref std std-ref">NITF</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.las.html#writers-las" title="(in PDAL v1.5.0)"><span class="xref std std-ref">ASPRS LAS</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.bpf.html#writers-bpf" title="(in PDAL v1.5.0)"><span class="xref std std-ref">BPF</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.text.html#writers-text" title="(in PDAL v1.5.0)"><span class="xref std std-ref">text</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.pcd.html#writers-pcd" title="(in PDAL v1.5.0)"><span class="xref std std-ref">PCD (PCL)</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.ply.html#writers-ply" title="(in PDAL v1.5.0)"><span class="xref std std-ref">PLY</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.nitf.html#writers-nitf" title="(in PDAL v1.5.0)"><span class="xref std std-ref">NITF</span></a></li>
 </ul>
 
 
@@ -217,9 +218,9 @@
 <h1>Writers (database)</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.pgpointcloud.html#writers-pgpointcloud" title="(in PDAL v1.2.0)"><span class="xref std std-ref">PostgreSQL</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.oci.html#writers-oci" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Oracle</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.sqlite.html#writers-sqlite" title="(in PDAL v1.2.0)"><span class="xref std std-ref">SQLite</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.pgpointcloud.html#writers-pgpointcloud" title="(in PDAL v1.5.0)"><span class="xref std std-ref">PostgreSQL</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.oci.html#writers-oci" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Oracle</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.sqlite.html#writers-sqlite" title="(in PDAL v1.5.0)"><span class="xref std std-ref">SQLite</span></a></li>
 </ul>
 
 
@@ -231,12 +232,12 @@
 <h1>Filters</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.attribute.html#filters-attribute" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Attribute assignment</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.crop.html#filters-crop" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Polygon clipping</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.chipper.html#filters-chipper" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Splitting by volume</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.divider.html#filters-divider" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Splitting by geometry</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.splitter.html#filters-splitter" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Splitting by count</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.colorization.html#filters-colorization" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Coloring with imagery</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.overlay.html#filters-overlay" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Geographic attribute assignment</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.crop.html#filters-crop" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Polygon clipping</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.chipper.html#filters-chipper" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Splitting by volume</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.divider.html#filters-divider" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Splitting by geometry</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.splitter.html#filters-splitter" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Splitting by count</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.colorization.html#filters-colorization" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Coloring with imagery</span></a></li>
 </ul>
 
 
@@ -248,12 +249,12 @@
 <h1>Filters (cont)</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.ground.html#filters-ground" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Ground classification</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.height.html#filters-height" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Normalized heights</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.sort.html#filters-sort" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Sorting</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.mortonorder.html#filters-mortonorder" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Spatial curve sorting</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.statisticaloutlier.html#filters-statisticaloutlier" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Noise filtering</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.merge.html#filters-merge" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Merge</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.smrf.html#filters-smrf" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Ground classification</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.hag.html#filters-hag" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Normalized heights</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.sort.html#filters-sort" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Sorting</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.mortonorder.html#filters-mortonorder" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Spatial curve sorting</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.outlier.html#filters-outlier" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Noise filtering</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.merge.html#filters-merge" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Merge</span></a></li>
 </ul>
 
 
@@ -265,14 +266,14 @@
 <h1>Filters (cont)</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.reprojection.html#filters-reprojection" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Reprojection</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.mortonorder.html#filters-mortonorder" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Statistics</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.crop.html#filters-crop" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Cropping</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.voxelgrid.html#filters-voxelgrid" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Voxel sampling</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.poisson.html#filters-poisson" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Poisson sampling</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Range filter</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.decimation.html#filters-decimation" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Rank decimation</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.hexbin.html#filters-hexbin" title="(in PDAL v1.2.0)"><span class="xref std std-ref">Boundary computation</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.reprojection.html#filters-reprojection" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Reprojection</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.mortonorder.html#filters-mortonorder" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Statistics</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.crop.html#filters-crop" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Cropping</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.voxelgrid.html#filters-voxelgrid" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Voxel sampling</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.poisson.html#filters-poisson" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Poisson sampling</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Range filter</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.decimation.html#filters-decimation" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Rank decimation</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.hexbin.html#filters-hexbin" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Boundary computation</span></a></li>
 </ul>
 
 
@@ -289,7 +290,7 @@
 </ul>
 </li>
 <li>Embed<ul>
-<li>Use Python inline with <a class="reference external" href="http://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.2.0)"><span class="xref std std-ref">pipeline</span></a> operations</li>
+<li>Use Python inline with <a class="reference external" href="https://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.5.0)"><span class="xref std std-ref">pipeline</span></a> operations</li>
 </ul>
 </li>
 </ul>
@@ -302,25 +303,41 @@
 
 <h1>Python (cont)</h1>
 
-<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
    <span class="c1"># Keep only points with classification 1 or 2</span>
-   <span class="n">cls</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s1">&#39;Classification&#39;</span><span class="p">]</span>
+   <span class="bp">cls</span> <span class="o">=</span> <span class="n">ins</span><span class="p">[</span><span class="s1">&#39;Classification&#39;</span><span class="p">]</span>
 
    <span class="n">keep_classes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
 
    <span class="c1"># Use the first test for our base array.</span>
-   <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+   <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
    <span class="c1"># For 1:n, test each predicate and join back</span>
    <span class="c1"># to our existing predicate array</span>
    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">keep_classes</span><span class="p">)):</span>
-       <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+       <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">keep_classes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
        <span class="n">keep</span> <span class="o">=</span> <span class="n">keep</span> <span class="o">+</span> <span class="n">t</span>
 
    <span class="n">outs</span><span class="p">[</span><span class="s1">&#39;Mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keep</span>
-   <span class="k">return</span> <span class="bp">True</span>
+   <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
+
+
+
+
+</article>
+<article class="slide level-1" id="matlab">
+
+<h1>Matlab</h1>
+
+<ul class="simple">
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.matlab.html#writers-matlab" title="(in PDAL v1.5.0)"><span class="xref std std-ref">writers.matlab</span></a> and <span class="xref std std-ref">readers.matlab</span> for i/o</li>
+<li>Embed<ul>
+<li>Use Matlab scripts inline with <a class="reference external" href="https://www.pdal.io/pipeline.html#pipeline" title="(in PDAL v1.5.0)"><span class="xref std std-ref">pipeline</span></a> operations</li>
+</ul>
+</li>
+</ul>
 
 
 
@@ -330,7 +347,7 @@
 
 <h1>Next</h1>
 
-<p>On to <a class="reference internal" href="software.html#software"><span>Software installation</span></a></p>
+<p>On to <a class="reference internal" href="software.html#software"><span class="std std-ref">Software installation</span></a></p>
 
 
 

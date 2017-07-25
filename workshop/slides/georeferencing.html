@@ -20,7 +20,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2016.03.23',
+        VERSION:     '2017.07.25',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,6 +37,8 @@
     <script type="text/javascript" src="_static/init.js"></script>
     
     
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
     <link rel="next" title="Boundary" href="boundary.html" />
     <link rel="prev" title="Analysis" href="analysis.html" /> 
@@ -66,10 +68,10 @@
 
 <h1>Components</h1>
 
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt>LiDAR point stream</dt>
-<dd><ul class="first last simple">
+<dd><ul class="first last">
 <li>X, Y, Z</li>
 <li>Timestamp</li>
 </ul>
@@ -78,17 +80,15 @@
 </li>
 <li><dl class="first docutils">
 <dt>GNSS/IMU point stream</dt>
-<dd><ul class="first last simple">
+<dd><ul class="first last">
 <li>GPS X, Y, Z</li>
 <li>IMU roll, pitch, yaw</li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p class="first">Lever arm and boresight matrix</p>
-</li>
-<li><p class="first">Combine with the georeferencing equation:</p>
-</li>
+<li>Lever arm and boresight matrix</li>
+<li>Combine with the georeferencing equation:</li>
 </ul>
 <div class="figure">
 <img alt="_images/georeferencing.png" src="_images/georeferencing.png" />
@@ -104,7 +104,7 @@
 
 <ul class="simple">
 <li>Generic georeferencing is <strong>not yet</strong> implemented in PDAL.</li>
-<li>The <a class="reference external" href="http://www.pdal.io/stages/readers.optech.html#readers-optech" title="(in PDAL v1.2.0)"><span class="xref std std-ref">readers.optech</span></a> includes built-in georeferencing, which automatically projects data to WGS84.</li>
+<li>The <a class="reference external" href="https://www.pdal.io/stages/readers.optech.html#readers-optech" title="(in PDAL v1.5.0)"><span class="xref std std-ref">readers.optech</span></a> includes built-in georeferencing, which automatically projects data to WGS84.</li>
 </ul>
 
 
@@ -115,19 +115,17 @@
 
 <h1>Command</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-    pdal translate \
-    /data/exercises/georeferencing/S1C1_csd_004.csd \
-    /data/exercises/georeferencing/S1C1_csd_004.laz \
-    reprojection range \
-    --filters.reprojection.out_srs=&quot;EPSG:32614&quot; \
-    --filters.range.limits=&quot;Intensity[0:500]&quot;
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">csd</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+    <span class="n">reprojection</span> <span class="nb">range</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:32614&quot;</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Intensity[0:500]&quot;</span>
 </pre></div>
 </td></tr></table></div>
 <ul class="simple">

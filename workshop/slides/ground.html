@@ -20,7 +20,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2016.03.23',
+        VERSION:     '2017.07.25',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,6 +37,8 @@
     <script type="text/javascript" src="_static/init.js"></script>
     
     
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
     <link rel="next" title="Generating a DTM" href="dtm.html" />
     <link rel="prev" title="Thinning" href="thinning.html" /> 
@@ -60,7 +62,7 @@
 </ul>
 </dd>
 </dl>
-<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/analysis/ground/ground.html#ground" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Ground Workshop Materials</span></a></p>
+<p><span class="xref std std-ref">Ground Workshop Materials</span></p>
 
 
 
@@ -90,17 +92,17 @@
 
 <h1>Ground (execution)</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-       pdal ground \
-       /data/exercises/analysis/ground/CSite1_orig-utm.laz \
-       -o /data/exercises/analysis/ground/ground.laz \
-       --filters.ground.classify=true \
-       --writers.las.compression=true -v 4
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+   <span class="o">-</span><span class="n">o</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+   <span class="n">smrf</span> <span class="o">^</span>
+   <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
+
 </pre></div>
 </td></tr></table></div>
 
@@ -133,19 +135,21 @@
 
 <h1>Ground (ground only)</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-       pdal ground \
-       /data/exercises/analysis/ground/CSite1_orig-utm.laz \
-       -o /data/exercises/analysis/ground/ground-only.laz \
-       --filters.ground.classify=true \
-<span class="hll">       --filters.ground.extract=true \
-</span>       --writers.las.compression=true -v 4
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+   <span class="o">-</span><span class="n">o</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+   <span class="n">smrf</span> <span class="o">^</span>
+   <span class="nb">range</span> <span class="o">^</span>
+<span class="hll">   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> <span class="o">^</span>
+</span>   <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
+
 </pre></div>
 </td></tr></table></div>
 
@@ -153,11 +157,11 @@
 
 
 </article>
-<article class="slide level-1" id="ground-pcl-pipeline">
+<article class="slide level-1" id="ground-denoised-first">
 
-<h1>Ground (PCL pipeline)</h1>
+<h1>Ground (denoised first)</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -166,24 +170,16 @@
  7
  8
  9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
-      <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.5</span>
-    <span class="p">}]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+   <span class="o">-</span><span class="n">o</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+   <span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span> <span class="o">^</span>
+   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> <span class="o">^</span>
+   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">^</span>
+   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> <span class="o">^</span>
+   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span> <span class="o">^</span>
+   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> <span class="o">^</span>
+   <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
 
@@ -192,26 +188,6 @@
 
 </article>
 <article class="slide level-1" id="id2">
-
-<h1>Ground (PCL pipeline)</h1>
-
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-   pdal pcl \
-   /data/exercises/analysis/ground/CSite1_orig-utm.laz \
-   -o /data/exercises/analysis/ground/ground-filtered.laz \
-<span class="hll">   -p /data/exercises/analysis/ground/filter.json
-</span></pre></div>
-</td></tr></table></div>
-
-
-
-
-</article>
-<article class="slide level-1" id="id3">
 
 <h1>Ground (view)</h1>
 
@@ -225,7 +201,7 @@
 
 <h1>Next</h1>
 
-<p>On to <a class="reference internal" href="dtm.html#dtm"><span>Generating a DTM</span></a></p>
+<p>On to <a class="reference internal" href="dtm.html#dtm"><span class="std std-ref">Generating a DTM</span></a></p>
 
 
 

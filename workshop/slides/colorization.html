@@ -20,7 +20,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2016.03.23',
+        VERSION:     '2017.07.25',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,6 +37,8 @@
     <script type="text/javascript" src="_static/init.js"></script>
     
     
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" />
     <link rel="next" title="Removing noise" href="denoising.html" />
     <link rel="prev" title="Cliping data with polygons" href="clipping.html" /> 
@@ -62,7 +64,7 @@
 </ul>
 </dd>
 </dl>
-<p><a class="reference external" href="source/../../_build/html/../../../../_build/html/exercises/analysis/colorization/colorization.html#colorization" title="(in Point Cloud Processing and Analysis with PDAL v)"><span class="xref std std-ref">Colorizing Workshop Materials</span></a></p>
+<p><a class="reference external" href="https://www.pdal.io/workshop/exercises/analysis/colorization/colorization.html#colorization" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Colorizing Workshop Materials</span></a></p>
 
 
 
@@ -86,10 +88,10 @@
 <h1>Pipeline</h1>
 
 <ol class="arabic simple">
-<li><a class="reference external" href="http://www.pdal.io/stages/readers.las.html#readers-las" title="(in PDAL v1.2.0)"><span class="xref std std-ref">readers.las</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.colorization.html#filters-colorization" title="(in PDAL v1.2.0)"><span class="xref std std-ref">filters.colorization</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.2.0)"><span class="xref std std-ref">filters.range</span></a></li>
-<li><a class="reference external" href="http://www.pdal.io/stages/writers.las.html#writers-las" title="(in PDAL v1.2.0)"><span class="xref std std-ref">writers.las</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/readers.las.html#readers-las" title="(in PDAL v1.5.0)"><span class="xref std std-ref">readers.las</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.colorization.html#filters-colorization" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.colorization</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.range</span></a></li>
+<li><a class="reference external" href="https://www.pdal.io/stages/writers.las.html#writers-las" title="(in PDAL v1.5.0)"><span class="xref std std-ref">writers.las</span></a></li>
 </ol>
 
 
@@ -113,12 +115,12 @@
 
 <h1>Colorization (pipeline)</h1>
 
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;/data/exercises/analysis/colorization/uncompahgre.laz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/uncompahgre.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.colorization&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;raster&quot;</span><span class="p">:</span> <span class="s2">&quot;/data/exercises/analysis/colorization/casi-2015-04-29-weekly-mosaic.tif&quot;</span>
+            <span class="s2">&quot;raster&quot;</span><span class="p">:</span> <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/casi-2015-04-29-weekly-mosaic.tif&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
@@ -129,7 +131,7 @@
             <span class="s2">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
             <span class="s2">&quot;minor_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
             <span class="s2">&quot;dataformat_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;/data/exercises/analysis/colorization/uncompahgre-colored.laz&quot;</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/uncompahgre-colored.laz&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -145,11 +147,9 @@
 
 <h1>Colorization (command)</h1>
 
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>docker run -v /c/Users/Howard/PDAL:/data -t pdal/pdal \
-       pdal pipeline \
-       /data/exercises/analysis/colorization/colorize.json
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
+    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">colorization</span><span class="o">/</span><span class="n">colorize</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </td></tr></table></div>
 
@@ -211,7 +211,7 @@
 
 <h1>Next</h1>
 
-<p>On to <a class="reference internal" href="denoising.html#denoising"><span>Removing noise</span></a></p>
+<p>On to <a class="reference internal" href="denoising.html#denoising"><span class="std std-ref">Removing noise</span></a></p>
 
 
 
