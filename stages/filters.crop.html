@@ -237,6 +237,13 @@
 box (2D), polygon, or point+distance.  If more than one bounding region is
 specified, the filter will pass all input points through each bounding region,
 creating an output point set for each input crop region.</p>
+<p>The provided bounding regions are assumed to have the same spatial reference
+as the points unless the option <cite>a_srs</cite> provides an explicit spatial reference
+for bounding regions.
+If the point input consists of multiple point views with differing
+spatial references, one is chosen at random and assumed to be the
+spatial reference of the input bounding region.  In this case a warning will
+be logged.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -268,6 +275,10 @@ creating an output point set for each input crop region.</p>
 <dd>An array of WKT or GeoJSON 2D or 3D points. Requires <code class="docutils literal"><span class="pre">distance</span></code>.</dd>
 <dt>distance</dt>
 <dd>Distance in units of common X, Y, and Z <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to crop circle or sphere in combination with <code class="docutils literal"><span class="pre">point</span></code>.</dd>
+<dt>a_srs</dt>
+<dd>Indicates the spatial reference of the bounding regions.  If not provided,
+it is assumed that the spatial reference of the bounding region matches
+that of the points (if possible).</dd>
 </dl>
 </div>
 </div>
@@ -296,7 +307,7 @@ creating an output point set for each input crop region.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jul 21, 2017.
+      Last updated on Aug 11, 2017.
 
     </p>
   </div> 
@@ -351,7 +362,7 @@ creating an output point set for each input crop region.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 21, 2017.
+                    on Aug 11, 2017.
         </div>
     </div>
 
