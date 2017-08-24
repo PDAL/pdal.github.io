@@ -185,14 +185,15 @@ pronounced to rhyme with &#8220;GDAL&#8221;.</p>
 <li><p class="first">Why do I get the error &#8220;Couldn&#8217;t create ... stage of type ...&#8221;?</p>
 <p>In almost all cases this error occurs because you&#8217;re trying to run a stage
 that is built as a plugin and the plugin (a shared library file or DLL)
-can&#8217;t be found by the pdal.  You can verify whether the plugin can
-be found by pdal by running &#8220;pdal &#8211;drivers&#8221;</p>
+can&#8217;t be found by pdal.  You can verify whether the plugin can
+be found by running &#8220;pdal &#8211;drivers&#8221;</p>
 <p>If you&#8217;ve built pdal yourself, make sure you&#8217;ve requested to build the
 plugin in question (set BUILD_PLUGIN_PCL=ON, for example, in CMakeCache.txt).</p>
-<p>If you&#8217;ve successfully built the plugin, you should have created a
+<p>If you&#8217;ve successfully built the plugin, a
 shared object called
-libpdal_plugin_&lt;plugin type&gt;_&lt;plugin name&gt;.&lt;shared library extension&gt; that
-should be installed in a location where pdal can find it.  pdal will search
+libpdal_plugin_&lt;plugin type&gt;_&lt;plugin name&gt;.&lt;shared library extension&gt; should
+have been created that&#8217;s installed in a location where pdal can find it.
+pdal will search
 the following paths for plugins: &#8221;.&#8221;, &#8221;./lib&#8221;, &#8221;../lib&#8221;, &#8221;./bin&#8221;, &#8221;../bin&#8221;.</p>
 <p>You can also override the default search path by setting the environment
 variable PDAL_DRIVER_PATH to a list of directories that pdal should search
