@@ -43,7 +43,7 @@
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Filtering data with PCL" href="pcl_block_tutorial.html"/>
-        <link rel="prev" title="Writing with PDAL" href="writing.html"/> 
+        <link rel="prev" title="Reading with PDAL" href="reading.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -122,31 +122,52 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">LAS Reading and Writing with PDAL</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#las-versions">LAS Versions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#spatial-reference-system">Spatial Reference System</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#point-formats">Point Formats</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#extra-dimensions">Extra Dimensions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#required-header-fields">Required Header Fields</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#coordinate-scaling">Coordinate Scaling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#compression">Compression</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pdal-metadata">PDAL Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LAS Reading and Writing with PDAL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#las-versions">LAS Versions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#version-example">Version Example</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="pcl_block_tutorial.html">Filtering data with PCL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pcl_ground.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clipping-with-shapefile.html">Clipping with Geometries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="calculating-normalized-heights.html">Calculating Normalized Heights</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dart-throwing.html">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="python-filtering.html">Filtering Data with Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spatial-reference-system">Spatial Reference System</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#assignment-example">Assignment Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vertical-datum-example">Vertical Datum Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reprojection-example">Reprojection Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#developing">Developing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#point-formats">Point Formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#point-format-example">Point Format Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#extra-dimensions">Extra Dimensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#extra-dimension-example">Extra Dimension Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#required-header-fields">Required Header Fields</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#header-fields-example">Header Fields Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#coordinate-scaling">Coordinate Scaling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#auto-offset-example">Auto Offset Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compression">Compression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#compression-example">Compression Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variable-length-records">Variable Length Records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vlr-example">VLR Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pdal-metadata">PDAL Metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metadata-example">Metadata Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pcl_block_tutorial.html">Filtering data with PCL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcl_ground/index.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clipping/index.html">Clipping with Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sampling/index.html">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-filtering.html">Filtering Data with Python</a></li>
 </ul>
 </li>
 </ul>
@@ -941,7 +962,7 @@ in the VLRs will not fit in that space.</p>
         <a href="pcl_block_tutorial.html" class="btn btn-neutral float-right" title="Filtering data with PCL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writing.html" class="btn btn-neutral" title="Writing with PDAL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="reading.html" class="btn btn-neutral" title="Reading with PDAL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -955,7 +976,7 @@ in the VLRs will not fit in that space.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -976,7 +997,7 @@ in the VLRs will not fit in that space.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -1010,7 +1031,7 @@ in the VLRs will not fit in that space.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

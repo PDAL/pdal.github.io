@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -150,6 +150,7 @@
 <li class="toctree-l3"><a class="reference internal" href="writer.html"><code class="docutils literal"><span class="pre">pdal::Writer</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../transition/index.html">libLAS C API to PDAL transition guide</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
@@ -212,6 +213,16 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
+<dt id="_CPPv2N4pdal9PointView9PointViewERK9PointView">
+<span id="pdal::PointView::PointView__PointViewCR"></span><span class="target" id="apiclasspdal_1_1PointView_1a53ad1f1ce649f7de1f24b4f8ce172ca3"></span><code class="descname">PointView</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal9PointView9PointViewERK9PointView" title="pdal::PointView::PointView">PointView</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView9PointViewERK9PointView" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9PointViewaSERK9PointView">
+<span id="pdal::PointView::assign-operator__PointViewCR"></span><span class="target" id="apiclasspdal_1_1PointView_1af51926fa938bf3c01015ab3ffa6ec1b6"></span><a class="reference internal" href="#_CPPv2N4pdal9PointViewE" title="pdal::PointView">PointView</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal9PointViewE" title="pdal::PointView">PointView</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointViewaSERK9PointView" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="_CPPv2N4pdal9PointView9PointViewE13PointTableRef">
 <span id="pdal::PointView::PointView__PointTableRef"></span><span class="target" id="apiclasspdal_1_1PointView_1a9e6203699a965f9441b86c3075ee79dc"></span><code class="descname">PointView</code><span class="sig-paren">(</span>PointTableRef <em>pointTable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView9PointViewE13PointTableRef" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -223,7 +234,7 @@
 
 <dl class="function">
 <dt id="_CPPv2N4pdal9PointViewD0Ev">
-<span id="pdal::PointView::~PointView"></span><span class="target" id="apiclasspdal_1_1PointView_1ae4702ffc9bf214878ec8ad3f90936e25"></span><em class="property">virtual</em> <code class="descname">~PointView</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointViewD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<span id="pdal::PointView::~PointView"></span><span class="target" id="apiclasspdal_1_1PointView_1a6ad066293a424793a59e08e0965ce9c5"></span><code class="descname">~PointView</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointViewD0Ev" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -254,8 +265,7 @@
 <dl class="function">
 <dt id="_CPPv2N4pdal9PointView11appendPointERK9PointView7PointId">
 <span id="pdal::PointView::appendPoint__PointViewCR.PointId"></span><span class="target" id="apiclasspdal_1_1PointView_1a43021c7d1b385adfb249c0e476cac379"></span>void <code class="descname">appendPoint</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4pdal9PointViewE" title="pdal::PointView">PointView</a> &amp;<em>buffer</em>, PointId <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView11appendPointERK9PointView7PointId" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>void PointView::setFieldInternal(Dimension::Id dim, PointId idx, const void *value) { PointId rawId = 0; if (idx == <a class="reference internal" href="#apiclasspdal_1_1PointView_1a4c2fba9b5d7a61f19a558bb08405555d"><span class="std std-ref">size()</span></a>) { rawId = m_pointTable.addPoint(); m_index.push_back(rawId); m_size++; assert(m_temps.empty()); } else if (idx &gt; <a class="reference internal" href="#apiclasspdal_1_1PointView_1a4c2fba9b5d7a61f19a558bb08405555d"><span class="std std-ref">size()</span></a>) { std::cerr &lt;&lt; &#8220;Point index must increment.\n&#8221;; error - throw? return; } else { rawId = m_index[idx]; } m_pointTable.setFieldInternal(dim, rawId, value); } </p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N4pdal9PointView6appendERK9PointView">
@@ -447,6 +457,48 @@ method. Otherwise, an exception will be thrown.</p>
 <span id="pdal::PointView::toMetadataC"></span><span class="target" id="apiclasspdal_1_1PointView_1adac12c7986511f00bac0879e2a1b7f5c"></span><a class="reference internal" href="metadata.html#_CPPv2N4pdal12MetadataNodeE" title="pdal::MetadataNode">MetadataNode</a> <code class="descname">toMetadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4pdal9PointView10toMetadataEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
+<dl class="function">
+<dt id="_CPPv2N4pdal9PointView10createMeshERKNSt6stringE">
+<span id="pdal::PointView::createMesh__ssCR"></span><span class="target" id="apiclasspdal_1_1PointView_1a7aeb683bb1cab215d638400a170cec64"></span>TriangularMesh *<code class="descname">createMesh</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView10createMeshERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a mesh with the specified name. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Pointer to the new mesh. Null is returned if the mesh already exists. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">name</span></code>: Name of the mesh. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9PointView4meshERKNSt6stringE">
+<span id="pdal::PointView::mesh__ssCR"></span><span class="target" id="apiclasspdal_1_1PointView_1af8b756b1dfa88e30731fa22732d02f37"></span>TriangularMesh *<code class="descname">mesh</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em> = &quot;&quot;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView4meshERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a pointer to a mesh. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>New mesh. Null is returned if the mesh already exists. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">name</span></code>: Name of the mesh. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9PointView12build3dIndexEv">
+<span id="pdal::PointView::build3dIndex"></span><span class="target" id="apiclasspdal_1_1PointView_1ae9a9adeb2e2b1a5c1e0e2c59c143ffba"></span>KD3Index &amp;<code class="descname">build3dIndex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView12build3dIndexEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal9PointView12build2dIndexEv">
+<span id="pdal::PointView::build2dIndex"></span><span class="target" id="apiclasspdal_1_1PointView_1a0682fa2c3baf55275ca3f523597a8987"></span>KD2Index &amp;<code class="descname">build2dIndex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal9PointView12build2dIndexEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Static Functions</p>
@@ -497,7 +549,7 @@ method. Otherwise, an exception will be thrown.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -518,7 +570,7 @@ method. Otherwise, an exception will be thrown.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -552,7 +604,7 @@ method. Otherwise, an exception will be thrown.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

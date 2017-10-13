@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -124,6 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ogr.html">writers.ogr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
@@ -200,13 +201,17 @@
   <div class="section" id="writers-matlab">
 <span id="id1"></span><h1>writers.matlab<a class="headerlink" href="#writers-matlab" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>Matlab Writer</strong> supports writing Matlab <cite>.mat</cite> files.</p>
-<p>The produced files have two variables, <cite>Dimensions</cite> and <cite>Points</cite>.  <cite>Dimensions</cite>
-is a comma-delimited list of dimension names, and <cite>Points</cite> is a double array of
-all dimensions of every points.  This output array can get very large
-very quickly.</p>
+<p>The produced files has a single variable, <cite>PDAL</cite>, an array struct.</p>
+<img alt="../_images/writers.matlab.png" src="../_images/writers.matlab.png" />
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The Matlab writer requires the Mat-File API from MathWorks.</p>
+<p class="last">The Matlab writer requires the Mat-File API from MathWorks, and
+it must be explicitly enabled at compile time with the <code class="docutils literal"><span class="pre">BUILD_PLUGIN_MATLAB=ON</span></code>
+variable</p>
+</div>
+<div class="admonition plugin" id="plugin-0">
+<p class="first admonition-title">Dynamic Plugin</p>
+<p class="last">This stage requires a dynamic plugin to operate</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -233,6 +238,8 @@ very quickly.</p>
 <dd>Output file name [REQUIRED]</dd>
 <dt>output_dims</dt>
 <dd>Dimensions to include in the output file [OPTIONAL, defaults to all available dimensions]</dd>
+<dt>struct</dt>
+<dd>Array structure name to read [OPTIONAL, defaults <code class="docutils literal"><span class="pre">PDAL</span></code>]</dd>
 </dl>
 </div>
 </div>
@@ -261,7 +268,7 @@ very quickly.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -282,7 +289,7 @@ very quickly.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -316,7 +323,7 @@ very quickly.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -138,6 +138,12 @@
 <li class="toctree-l2"><a class="reference internal" href="goals.html">Project Goals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="integration.html">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-reader.html">Writing a reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-writer.html">Writing a writer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html">Using PDAL with CMake</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
@@ -193,6 +199,10 @@
 <p>Developer documentation, such as how to update the docs, where the test
 frameworks are, who develops the software, and conventions to use when
 developing new code can be found in this section.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Users looking for documentation on how to use PDAL&#8217;s command line applications should look <a class="reference internal" href="../apps/index.html#apps"><span class="std std-ref">here</span></a> and users looking to use the PDAL API in their own applications should look <a class="reference internal" href="../api/index.html#api"><span class="std std-ref">here</span></a>.</p>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">PDAL Architecture Overview</a><ul>
@@ -226,7 +236,7 @@ developing new code can be found in this section.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Building Docker Containers for PDAL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#dependences">Dependences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html#maintenance">Maintenance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html#latest-or-master">Latest (or master)</a></li>
 </ul>
@@ -252,6 +262,40 @@ developing new code can be found in this section.</p>
 <li class="toctree-l2"><a class="reference internal" href="integration.html#status">Status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="integration.html#travis">Travis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="integration.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing.html">Writing with PDAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing.html#compiling-and-running-the-program">Compiling and running the program</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-filter.html">Writing a filter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-filter.html#the-header">The header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-filter.html#the-source">The source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-filter.html#stagefactory">StageFactory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-kernel.html#the-header">The header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-kernel.html#the-source">The source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-reader.html">Writing a reader</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-reader.html#the-header">The header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-reader.html#the-source">The source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-reader.html#compiling-and-usage">Compiling and Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-writer.html">Writing a writer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-writer.html#the-header">The header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-writer.html#the-source">The source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-writer.html#compiling-and-usage">Compiling and Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using PDAL with CMake</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using.html#basic-cmake-configuration">Basic CMake configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#cmakelists-explained">CMakeLists explained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#compiling-the-project">Compiling the project</a></li>
 </ul>
 </li>
 </ul>
@@ -282,7 +326,7 @@ developing new code can be found in this section.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -303,7 +347,7 @@ developing new code can be found in this section.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -337,7 +381,7 @@ developing new code can be found in this section.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

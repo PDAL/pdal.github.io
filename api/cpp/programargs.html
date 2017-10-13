@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -150,6 +150,7 @@
 <li class="toctree-l3"><a class="reference internal" href="writer.html"><code class="docutils literal"><span class="pre">pdal::Writer</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../transition/index.html">libLAS C API to PDAL transition guide</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
@@ -209,7 +210,7 @@
 <dt id="_CPPv2N4pdal11ProgramArgsE">
 <span id="pdal::ProgramArgs"></span><span class="target" id="apiclasspdal_1_1ProgramArgs"></span><em class="property">class </em><code class="descclassname">pdal::</code><code class="descname">ProgramArgs</code><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Parses command lines, provides validation and stores found values in bound variables. </p>
-<p>Add arguments with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. When all arguments have been added, use <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1ac7f7e89523bebc44ea9e04e49cd573c4"><span class="std std-ref">parse</span></a> to validate command line and assign values to variables bound with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. </p>
+<p>Add arguments with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. When all arguments have been added, use <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1ab4b405bda3b9a91e70b6c6ce8154e539"><span class="std std-ref">parse</span></a> to validate command line and assign values to variables bound with <a class="reference internal" href="#apiclasspdal_1_1ProgramArgs_1a9f773618ed928e9cef78aa1bf8278784"><span class="std std-ref">add</span></a>. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -340,7 +341,7 @@
 <dt id="_CPPv2N4pdal11ProgramArgs11parseSimpleERNSt6vectorINSt6stringEEE">
 <span id="pdal::ProgramArgs::parseSimple__std::vector:ss:R"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1a175c2bec357b9d6ee57b8462d41713bb"></span>void <code class="descname">parseSimple</code><span class="sig-paren">(</span>std::vector&lt;std::string&gt; &amp;<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs11parseSimpleERNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Parse a command line as specified by its argument vector. </p>
-<p>No validation occurs and no exceptions are raised, but assignments are made to bound variables where possible.</p>
+<p>No validation occurs and only argument value exceptions are raised, but assignments are made to bound variables where possible.</p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
@@ -352,14 +353,29 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal11ProgramArgs5parseERNSt6vectorINSt6stringEEE">
-<span id="pdal::ProgramArgs::parse__std::vector:ss:R"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1ac7f7e89523bebc44ea9e04e49cd573c4"></span>void <code class="descname">parse</code><span class="sig-paren">(</span>std::vector&lt;std::string&gt; &amp;<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs5parseERNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2N4pdal11ProgramArgs5parseERKNSt6vectorINSt6stringEEE">
+<span id="pdal::ProgramArgs::parse__std::vector:ss:CR"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1ab4b405bda3b9a91e70b6c6ce8154e539"></span>void <code class="descname">parse</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs5parseERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Parse a command line as specified by its argument list. </p>
 <p>Parsing validates the argument vector and assigns values to variables bound to added arguments.</p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
 <li><code class="docutils literal"><span class="pre">s</span></code>: List of strings that constitute the argument list. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal11ProgramArgs10addSynonymERKNSt6stringERKNSt6stringE">
+<span id="pdal::ProgramArgs::addSynonym__ssCR.ssCR"></span><span class="target" id="apiclasspdal_1_1ProgramArgs_1a09463890426136f4ff1264d28ec1c30a"></span>void <code class="descname">addSynonym</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, <em class="property">const</em> std::string &amp;<em>synonym</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal11ProgramArgs10addSynonymERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add a synonym for an argument. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">name</span></code>: Longname of existing arugment. </li>
+<li><code class="docutils literal"><span class="pre">synonym</span></code>: Synonym for argument. </li>
 </ul>
 </dd>
 </dl>
@@ -456,7 +472,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -477,7 +493,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -511,7 +527,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

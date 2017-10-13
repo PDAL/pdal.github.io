@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -209,8 +210,16 @@
             
   <div class="section" id="readers-pgpointcloud">
 <span id="id1"></span><h1>readers.pgpointcloud<a class="headerlink" href="#readers-pgpointcloud" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>PostgreSQL Pointcloud Reader</strong> allows you to read from a PostgreSQL database that the <a class="reference external" href="https://github.com/pramsey/pointcloud">PostgreSQL Pointcloud</a> extension enabled. The Pointcloud extension stores point cloud data in tables that contain rows of patches. Each patch in turn contains a large number of spatially nearby points.</p>
-<p>The reader pulls patches from a table, potentially sub-setting the query on the way with a &#8220;where&#8221; clause.</p>
+<p>The <strong>PostgreSQL Pointcloud Reader</strong> allows you to read from a PostgreSQL
+database that the <a class="reference external" href="https://github.com/pramsey/pointcloud">PostgreSQL Pointcloud</a> extension enabled. The Pointcloud
+extension stores point cloud data in tables that contain rows of patches. Each
+patch in turn contains a large number of spatially nearby points.</p>
+<p>The reader pulls patches from a table, potentially sub-setting the query on the
+way with a &#8220;where&#8221; clause.</p>
+<div class="admonition plugin" id="plugin-0">
+<p class="first admonition-title">Dynamic Plugin</p>
+<p class="last">This stage requires a dynamic plugin to operate</p>
+</div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -244,13 +253,11 @@
 <dt>column</dt>
 <dd>Table column to read patches from. [Default: <strong>pa</strong>]</dd>
 <dt>spatialreference</dt>
-<dd><dl class="first last docutils">
-<dt><span class="target" id="spatialreference">spatialreference</span></dt>
 <dd>Sets the spatial reference for the point data.  Overrides any spatial
 reference information read from the database.  Most text-based formats of
 SRS information are accepted, including WKT and proj.4.</dd>
-</dl>
-</dd>
+<dt>count</dt>
+<dd>Maximum number of points to read [Optional]</dd>
 </dl>
 </div>
 </div>
@@ -279,7 +286,7 @@ SRS information are accepted, including WKT and proj.4.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -300,7 +307,7 @@ SRS information are accepted, including WKT and proj.4.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -334,7 +341,7 @@ SRS information are accepted, including WKT and proj.4.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

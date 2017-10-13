@@ -1,0 +1,478 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Identifying ground returns using ProgressiveMorphologicalFilter segmentation &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="pdal.io" href="../../index.html"/>
+        <link rel="up" title="Tutorials" href="../index.html"/>
+        <link rel="next" title="Clipping with Geometries" href="../clipping/index.html"/>
+        <link rel="prev" title="Filtering data with PCL" href="../pcl_block_tutorial.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Python</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../reading.html">Reading with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../las.html">LAS Reading and Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pcl_block_tutorial.html">Filtering data with PCL</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-ground-kernel">Using the Ground kernel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../clipping/index.html">Clipping with Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sampling/index.html">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python-filtering.html">Filtering Data with Python</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="../index.html">Tutorials</a> &raquo;</li>
+      
+    <li>Identifying ground returns using ProgressiveMorphologicalFilter segmentation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pcl-ground">
+<span id="identifying-ground-returns-using-progressivemorphologicalfilter-segmentation"></span><h1>Identifying ground returns using ProgressiveMorphologicalFilter segmentation<a class="headerlink" href="#pcl-ground" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Bradley Chambers</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">10/28/2015</td>
+</tr>
+</tbody>
+</table>
+<p>Implements the Progressive Morphological Filter for segmentation of ground
+points.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">filters.ground</span></code> required PCL and has since been replaced by
+<a class="reference internal" href="../../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a>, which is a native PDAL filter. <a class="reference internal" href="../../apps/ground.html#ground-command"><span class="std std-ref">ground</span></a> has
+been retained, but now calls <a class="reference internal" href="../../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a> under the hood as opposed to
+<code class="docutils literal"><span class="pre">filters.ground</span></code> and is installed as a native PDAL kernel independent of the
+PCL plugin. As such, the outputs shown in this tutorial may vary slightly, but
+the underlying algorithm is identical.</p>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>A complete description of the algorithm can be found in the article <a class="reference external" href="http://users.cis.fiu.edu/~chens/PDF/TGRS.pdf">&#8220;A
+Progressive Morphological Filter for Removing Nonground Measurements from
+Airborne LIDAR Data&#8221;</a> by K.
+Zhang, S.  Chen, D. Whitman, M. Shyu, J. Yan, and C. Zhang.</p>
+<p>For more information on how to invoke this PCL-based filter programmatically,
+see the <a class="reference external" href="http://pointclouds.org/documentation/tutorials/progressive_morphological_filtering.php">ProgressiveMorphologicalFilter</a> tutorial on the PCL website.</p>
+<p>We have chosen to demonstrate the algorithm using data from the 2003 report
+&#8220;ISPRS Comparison of Filters.&#8221; For more on the data and the study itself,
+please see <a class="reference external" href="http://www.itc.nl/isprswgIII-3/filtertest/">http://www.itc.nl/isprswgIII-3/filtertest/</a> as well as <a class="reference external" href="http://dx.doi.org/10.1016/j.isprsjprs.2004.05.004">&#8220;Experimental
+comparison of filter algorithms for bare-earth extraction from airborne laser
+scanning point clouds&#8221;</a> by
+G. Sithole and G.  Vosselman.</p>
+<p>First, download the dataset <a class="reference external" href="https://raw.github.com/PDAL/data/master/isprs/CSite1_orig-utm.laz">CSite1_orig-utm.laz</a>
+and save it somewhere to disk.</p>
+<a class="reference internal image-reference" href="../../_images/original.png"><img alt="../../_images/original.png" src="../../_images/original.png" style="height: 400px;" /></a>
+</div>
+<div class="section" id="using-the-ground-kernel">
+<h2>Using the Ground kernel<a class="headerlink" href="#using-the-ground-kernel" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../../apps/ground.html#ground-command"><span class="std std-ref">pdal ground</span></a> kernel can be used to filter ground
+returns, allowing the user to tweak filtering parameters at the command-line.</p>
+<p>Let&#8217;s start by running <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">ground</span></code> with the default parameters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz
+</pre></div>
+</div>
+<p>To get an idea of what&#8217;s happening during each iteration, you can optionally
+increase the verbosity of the output. We&#8217;ll try <code class="docutils literal"><span class="pre">-v4</span></code>.  Here we see a summary
+of the parameters, along with height threshold, window size, and number of
+remaining ground points.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal ground -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -v4
+
+--------------------------------------------------------------------------------
+NAME:    ()
+HELP:
+AUTHOR:
+--------------------------------------------------------------------------------
+process tile 0 through the pipeline
+
+   Step 1) ProgressiveMorphologicalFilter
+
+      max window size: 33
+      slope: 1.000000
+      max distance: 2.500000
+      initial distance: 0.150000
+      cell size: 1.000000
+      base: 2.000000
+      exponential: true
+      negative: false
+      Iteration 0 (height threshold = 0.150000, window size = 3.000000)...ground now has 872413  points
+      Iteration 1 (height threshold = 2.150000, window size = 5.000000)...ground now has 833883 points
+      Iteration 2 (height threshold = 2.500000, window size = 9.000000)...ground now has 757030 points
+      Iteration 3 (height threshold = 2.500000, window size = 17.000000)...ground now has 625333 points
+      Iteration 4 (height threshold = 2.500000, window size = 33.000000)...ground now has 580852 points
+      1366408 points filtered to 580852 following progressive morphological filter
+</pre></div>
+</div>
+<p>The resulting filtered cloud can be seen in this top-down and front view. When
+viewed from the side, it is apparent that there are a number of low noise
+points that have fooled the PMF filter.</p>
+<a class="reference internal image-reference" href="../../_images/after-top1.png"><img alt="../../_images/after-top1.png" src="../../_images/after-top1.png" style="height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/after-front1.png"><img alt="../../_images/after-front1.png" src="../../_images/after-front1.png" style="height: 400px;" /></a>
+<p>To address, we introduce an alternate way to call PMF, as part of a PCL
+pipeline, where we preprocess with an outlier removal step. The command is
+nearly identical, replacing <code class="docutils literal"><span class="pre">ground</span></code> with <code class="docutils literal"><span class="pre">pcl</span></code> and adding a pipeline JSON
+specified with <code class="docutils literal"><span class="pre">-p</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span>
+    <span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf.json -v4
+
+--------------------------------------------------------------------------------
+NAME:   Progressive Morphological Filter with Outlier Removal (1.0)
+HELP:
+AUTHOR:
+--------------------------------------------------------------------------------
+process tile 0 through the pipeline
+
+   Step 1) StatisticalOutlierRemoval
+
+      8 neighbors and 3.000000 multiplier
+      1366408 points filtered to 1356744 following outlier removal
+
+   Step 2) ProgressiveMorphologicalFilter
+
+      max window size: 33
+      slope: 1.000000
+      max distance: 2.500000
+      initial distance: 0.150000
+      cell size: 1.000000
+      base: 2.000000
+      exponential: true
+      negative: false
+      Iteration 0 (height threshold = 0.150000, window size = 3.000000)...ground now has 874094 points
+      Iteration 1 (height threshold = 2.150000, window size = 5.000000)...ground now has 837141 points
+      Iteration 2 (height threshold = 2.500000, window size = 9.000000)...ground now has 762213 points
+      Iteration 3 (height threshold = 2.500000, window size = 17.000000)...ground now has 632827 points
+      Iteration 4 (height threshold = 2.500000, window size = 33.000000)...ground now has 596620 points
+      1356744 points filtered to 596620 following progressive morphological filter
+</pre></div>
+</div>
+<p>The result is noticeably cleaner in both the top-down and front views.</p>
+<a class="reference internal image-reference" href="../../_images/after-top2.png"><img alt="../../_images/after-top2.png" src="../../_images/after-top2.png" style="height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/after-front2.png"><img alt="../../_images/after-front2.png" src="../../_images/after-front2.png" style="height: 400px;" /></a>
+<p>Unfortunately, you may notice that we still have a rather large building in the
+lower right of the image. By tweaking the parameters slightly, in this case,
+increasing the cell size, we can do a better job of removing such features.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Progressive Morphological Filter with Outlier Removal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StatisticalOutlierRemoval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setMeanK&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;setStddevMulThresh&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ProgressiveMorphologicalFilter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setCellSize&quot;</span><span class="p">:</span> <span class="mf">1.5</span>
+    <span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pcl -i CSite1_orig-utm.laz -o CSite1_orig-utm-ground.laz -p sor-pmf2.json -v4
+
+--------------------------------------------------------------------------------
+NAME:   Progressive Morphological Filter with Outlier Removal (1.0)
+HELP:
+AUTHOR:
+--------------------------------------------------------------------------------
+process tile 0 through the pipeline
+
+   Step 1) StatisticalOutlierRemoval
+
+      8 neighbors and 3.000000 multiplier
+      1366408 points filtered to 1356744 following outlier removal
+
+   Step 2) ProgressiveMorphologicalFilter
+
+      max window size: 33
+      slope: 1.000000
+      max distance: 2.500000
+      initial distance: 0.150000
+      cell size: 1.500000
+      base: 2.000000
+      exponential: true
+      negative: false
+      Iteration 0 (height threshold = 0.150000, window size = 4.500000)...ground now has 785496 points
+      Iteration 1 (height threshold = 2.500000, window size = 7.500000)...ground now has 728738 points
+      Iteration 2 (height threshold = 2.500000, window size = 13.500000)...ground now has 623385 points
+      Iteration 3 (height threshold = 2.500000, window size = 25.500000)...ground now has 581679 points
+      Iteration 4 (height threshold = 2.500000, window size = 49.500000)...ground now has 551006 points
+      1356744 points filtered to 551006 following progressive morphological filter
+</pre></div>
+</div>
+<p>Once again, the result is noticeably cleaner in both the top-down and front views.</p>
+<a class="reference internal image-reference" href="../../_images/after-top3.png"><img alt="../../_images/after-top3.png" src="../../_images/after-top3.png" style="height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/after-front3.png"><img alt="../../_images/after-front3.png" src="../../_images/after-front3.png" style="height: 400px;" /></a>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../clipping/index.html" class="btn btn-neutral float-right" title="Clipping with Geometries" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../pcl_block_tutorial.html" class="btn btn-neutral" title="Filtering data with PCL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Oct 13, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.6.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Oct 13, 2017.
+        </div>
+    </div>
+
+</body>
+</html>

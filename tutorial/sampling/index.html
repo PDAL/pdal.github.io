@@ -1,0 +1,393 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Performing Poisson Sampling of Point Clouds Using Dart Throwing &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="pdal.io" href="../../index.html"/>
+        <link rel="up" title="Tutorials" href="../index.html"/>
+        <link rel="next" title="Filtering Data with Python" href="../python-filtering.html"/>
+        <link rel="prev" title="Clipping with Geometries" href="../clipping/index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Python</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../reading.html">Reading with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../las.html">LAS Reading and Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pcl_block_tutorial.html">Filtering data with PCL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pcl_ground/index.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clipping/index.html">Clipping with Geometries</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#approach">Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1">Example #1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-filtering.html">Filtering Data with Python</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="../index.html">Tutorials</a> &raquo;</li>
+      
+    <li>Performing Poisson Sampling of Point Clouds Using Dart Throwing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="performing-poisson-sampling-of-point-clouds-using-dart-throwing">
+<span id="dart-throwing-tutorial"></span><h1>Performing Poisson Sampling of Point Clouds Using Dart Throwing<a class="headerlink" href="#performing-poisson-sampling-of-point-clouds-using-dart-throwing" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Bradley Chambers</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">11/13/2015</td>
+</tr>
+</tbody>
+</table>
+<p>This tutorial will describe the creation of a new filter for sampling point
+cloud data, <a class="reference internal" href="../../stages/filters.sample.html#filters-sample"><span class="std std-ref">filters.sample</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">filters.dartsample</span></code> required PCL and has since been replaced by
+<a class="reference internal" href="../../stages/filters.sample.html#filters-sample"><span class="std std-ref">filters.sample</span></a>, which is a native PDAL filter. We leave this tutorial
+as an example of how to create a filter, and of how to work with the PCL
+plugin, but the filter in reference is no longer available.</p>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Sampling of point cloud data can be advantageous for a number of reasons. It
+can be used with care to create a lower resolution version of the point cloud
+for visualization, or to accelerate processing of derivative products at a
+coarser resolution. &#8220;Duplicate&#8221; points can be removed by subsampling. And the
+effects of overlapping and uneven scan patterns can be removed by sampling.</p>
+</div>
+<div class="section" id="approach">
+<h2>Approach<a class="headerlink" href="#approach" title="Permalink to this headline">¶</a></h2>
+<p>We have chosen to implement the dart throwing filter as a PCL filter. The
+reason for this is simple. While it is often the case that we want to create a
+filter that can be included as stage in a PDAL pipeline, there are other, more
+primitive filters, that we may wish to reuse within another filter. While we
+may not want to subsample our point cloud, thus discarding points from our
+output <code class="docutils literal"><span class="pre">PointView</span></code>, we may be perfectly content to subsample the data as a
+transient representation of the data within a filter - for example, to compute
+a coarse estimate of ground returns on 10% of the data to accelerate detection
+of buildings at full resolution.</p>
+<p>Our implementation is a no frills, brute force approach (there are more
+advanced methods that have been published over the years).</p>
+<p>We begin by creating a random permutation of the input <code class="docutils literal"><span class="pre">PointView</span></code> indices.
+The first point in this randomized set is appended to the output <code class="docutils literal"><span class="pre">PointView</span></code>
+and its associated octree. For the remaining points in the input cloud, we
+first test to see if there is a neighbor in the output cloud within the
+specified <code class="docutils literal"><span class="pre">radius</span></code>. If so, we discard the point. If not, it too is added to
+the output <code class="docutils literal"><span class="pre">PointView</span></code> and octree.</p>
+<p>That&#8217;s it! It&#8217;s really that simple.</p>
+</div>
+<div class="section" id="example-1">
+<h2>Example #1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>We will again be working with the autzen dataset. The dart sampling filter is
+easily invoked via the PDAL <code class="docutils literal"><span class="pre">translate</span></code> command. Here, we enforce a minimum
+distance of three feet.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate autzen.laz autzen-dart-sampled.laz dartsample \
+--filters.dartsample.radius=3
+</pre></div>
+</div>
+<p>For comparison, we will process autzen using both <a class="reference internal" href="../../stages/filters.decimation.html#filters-decimation"><span class="std std-ref">filters.decimation</span></a>,
+with a step size of 6, and <a class="reference internal" href="../../stages/filters.voxelgrid.html#filters-voxelgrid"><span class="std std-ref">filters.voxelgrid</span></a>, with a leaf size of 4.5
+feet in X, Y, and Z, to arrive at a subsampled point cloud of roughly 1.6
+million points, which closely approximates the number of points returned in our
+dart sampling run.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate autzen.laz autzen-randomly-sampled.laz decimation \
+--filters.decimation.step=6
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate autzen.laz autzen-voxelgrid-sampled.laz voxelgrid \
+--filters.voxelgrid.leaf_x=4.5 --filters.voxelgrid.leaf_y=4.5 --filters.voxelgrid.leaf_z=4.5
+</pre></div>
+</div>
+<p>First, we inspect a fixture located in the middle of an open field, displaying
+the original point cloud, Poisson (dart sampled), voxel grid, and randomly
+sampled results in clockwise order from top-left.</p>
+<a class="reference internal image-reference" href="../../_images/subsample-ex1.png"><img alt="../../_images/subsample-ex1.png" src="../../_images/subsample-ex1.png" style="height: 400px;" /></a>
+<p>The Poisson and voxel gridded clouds both appear to do a good job retaining key
+elements of the structure, while significantly reducing the number of points
+allocated to the ground plane. The randomly sampled cloud however, exhibits the
+opposite behavior, noticeably degrading the structure, while heavily sampling
+the ground. This is not an unexpected result, as both the Poisson and voxel
+grid approaches take the data and its distribution into account during the
+subsampling process, while random sampling considers only point order (keep
+every N-th point).</p>
+<p>The second example shows a very similar result, this time with a set of point
+pylons and power lines. The random sampling approach severely degrades the
+structures in the scene, while the Poisson and voxel grid techniques both
+preserve signal.</p>
+<a class="reference internal image-reference" href="../../_images/subsample-ex2.png"><img alt="../../_images/subsample-ex2.png" src="../../_images/subsample-ex2.png" style="height: 400px;" /></a>
+<p>In the next example, we can see that there is an increased number of points in
+a scan overlap region. This is not uncommon, as data collectors strive to avoid
+gaps in coverage and overlap datasets to aid in registration of multiple
+passes. The appearance of these denser regions can be distracting to the eye,
+and the Poisson and voxel grid subsampling method can both be used to make the
+collected points appear more uniform by culling those points that are very near
+other other points. The random sampling method preserves this artifact.</p>
+<a class="reference internal image-reference" href="../../_images/subsample-ex3.png"><img alt="../../_images/subsample-ex3.png" src="../../_images/subsample-ex3.png" style="height: 400px;" /></a>
+<p>In this top-down view of a football stadium, we again see that the random
+sampling technique preserves (and perhaps even accentuates) scan pattern and
+overlap artifacts. It also introduces a side effect to the voxel grid approach,
+an aliasing of the data, seen as staircasing in the sloping surfaces of the
+stadium.</p>
+<a class="reference internal image-reference" href="../../_images/subsample-ex4.png"><img alt="../../_images/subsample-ex4.png" src="../../_images/subsample-ex4.png" style="height: 400px;" /></a>
+<p>Our last example once again demonstrates each of the issues we have identified.
+The random sampling result eliminates a majority of points from each of the
+towers and highlights a scan overlap region. The voxel grid method results in
+ringing in the sloped terrain. The Poisson approach preserves a good amount of
+detail in the original signal and does not introduce any visual artifacts.</p>
+<a class="reference internal image-reference" href="../../_images/subsample-ex5.png"><img alt="../../_images/subsample-ex5.png" src="../../_images/subsample-ex5.png" style="height: 400px;" /></a>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../python-filtering.html" class="btn btn-neutral float-right" title="Filtering Data with Python" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../clipping/index.html" class="btn btn-neutral" title="Clipping with Geometries" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Oct 13, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.6.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Oct 13, 2017.
+        </div>
+    </div>
+
+</body>
+</html>

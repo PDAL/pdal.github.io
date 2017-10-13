@@ -42,8 +42,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
-        <link rel="next" title="Writing a filter" href="writing-filter.html"/>
-        <link rel="prev" title="Performing Poisson Sampling of Point Clouds Using Dart Throwing" href="dart-throwing.html"/> 
+        <link rel="next" title="Point Cloud Processing and Analysis with PDAL" href="../workshop/index.html"/>
+        <link rel="prev" title="Performing Poisson Sampling of Point Clouds Using Dart Throwing" href="sampling/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -122,28 +122,24 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#using-pdal">Using PDAL</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="las.html">LAS Reading and Writing with PDAL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pcl_block_tutorial.html">Filtering data with PCL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pcl_ground.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clipping-with-shapefile.html">Clipping with Geometries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="calculating-normalized-heights.html">Calculating Normalized Heights</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dart-throwing.html">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Filtering Data with Python</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-challenge">The Challenge</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#python-filter">Python Filter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pdal-pipeline">PDAL Pipeline</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#docker">Docker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#final-script">Final Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="las.html">LAS Reading and Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcl_block_tutorial.html">Filtering data with PCL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcl_ground/index.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clipping/index.html">Clipping with Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sampling/index.html">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Filtering Data with Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-challenge">The Challenge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#processing-stategy">Processing Stategy</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#python-filter">Python Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdal-pipeline">PDAL Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#final-script">Final Script</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#developing">Developing</a></li>
 </ul>
 </li>
 </ul>
@@ -230,7 +226,7 @@
 </li>
 </ul>
 </div>
-<p>This tutorial will describe using <a class="reference internal" href="../stages/filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a> to identify
+<p>This tutorial will describe using <a class="reference internal" href="../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a> to identify
 outlier points in an LAS file.</p>
 <div class="section" id="introduction">
 <h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -246,9 +242,8 @@ The don&#8217;t, however, identify specific points. Python plus <a class="refere
 be a very quick way to prototype a tool that identified specific points
 we would like to filter.</p>
 <p>PDAL has three different ways to manipulate data with Python. The first is
-<a class="reference internal" href="../stages/filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a>, which we will be using in this tutorial. The
-second is <a class="reference internal" href="../stages/filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a>, which allows you to keep or remove points
-given a Python filtering operation. The third is the Python extension at
+<a class="reference internal" href="../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a>, which we will be using in this tutorial.
+The second is the Python extension at
 <a class="reference external" href="https://pypi.python.org/pypi/PDAL">https://pypi.python.org/pypi/PDAL</a> that allows you to utilize PDAL processing
 operations in your own Python programs.</p>
 <div class="admonition seealso">
@@ -280,12 +275,11 @@ running.</p>
 </div>
 <div class="section" id="python-filter">
 <h2><a class="toc-backref" href="#id4">Python Filter</a><a class="headerlink" href="#python-filter" title="Permalink to this headline">¶</a></h2>
-<p>Through the use of the <a class="reference internal" href="../stages/filters.programmable.html#filters-programmable"><span class="std std-ref">filters.programmable</span></a> and <a class="reference internal" href="../stages/filters.predicate.html#filters-predicate"><span class="std std-ref">filters.predicate</span></a>
-filters, PDAL allows the use of Python and <a class="reference external" href="http://www.numpy.org/">NumPy</a> to process point cloud
-data. This can be very useful in prototyping situations, where PDAL can provide
-convenient data access and the processing logic of software that is still
-taking shape can be constructed with the rapid prototyping tools that Python
-can provide.</p>
+<p>Through the use of the <a class="reference internal" href="../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a>, PDAL allows the use of Python and
+<a class="reference external" href="http://www.numpy.org/">NumPy</a> to process point cloud data. This can be very useful in prototyping
+situations, where PDAL can provide convenient data access and the processing
+logic of software that is still taking shape can be constructed with the rapid
+prototyping tools that Python can provide.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -340,7 +334,7 @@ can provide.</p>
     <span class="c1"># Print our dict to stdout</span>
     <span class="k">print</span> <span class="n">output</span>
 
-    <span class="c1"># filters.predicate must return True to tell</span>
+    <span class="c1"># filters.python must return True to tell</span>
     <span class="c1"># PDAL it successfully completed</span>
     <span class="k">return</span> <span class="bp">True</span>
 </pre></div>
@@ -367,7 +361,7 @@ This will allow our script to work with any format PDAL can identify.</p>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;/data/$filename&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-    <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;filters.programmable&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;filters.python&quot;</span><span class="p">,</span>
     <span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="s2">&quot;mad&quot;</span><span class="p">,</span>
     <span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="s2">&quot;anything&quot;</span><span class="p">,</span>
     <span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="s2">&quot;$script&quot;</span>
@@ -519,7 +513,7 @@ def mad<span class="o">(</span>ins, outs<span class="o">)</span>:
     <span class="c1"># Print our dict to stdout</span>
     print output
 
-    <span class="c1"># filters.predicate must return True to tell</span>
+    <span class="c1"># filters.python must return True to tell</span>
     <span class="c1"># PDAL it successfully completed</span>
     <span class="k">return</span> True
 
@@ -530,7 +524,7 @@ EOF
   <span class="s2">&quot;pipeline&quot;</span>:<span class="o">[</span>
     <span class="s2">&quot;/data/</span><span class="nv">$filename</span><span class="s2">&quot;</span>,
     <span class="o">{</span>
-    <span class="s2">&quot;type&quot;</span> : <span class="s2">&quot;filters.programmable&quot;</span>,
+    <span class="s2">&quot;type&quot;</span> : <span class="s2">&quot;filters.python&quot;</span>,
     <span class="s2">&quot;function&quot;</span>:<span class="s2">&quot;mad&quot;</span>,
     <span class="s2">&quot;module&quot;</span>:<span class="s2">&quot;anything&quot;</span>,
     <span class="s2">&quot;source&quot;</span>:<span class="s2">&quot;</span><span class="nv">$script</span><span class="s2">&quot;</span>
@@ -577,10 +571,10 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="writing-filter.html" class="btn btn-neutral float-right" title="Writing a filter" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../workshop/index.html" class="btn btn-neutral float-right" title="Point Cloud Processing and Analysis with PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dart-throwing.html" class="btn btn-neutral" title="Performing Poisson Sampling of Point Clouds Using Dart Throwing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sampling/index.html" class="btn btn-neutral" title="Performing Poisson Sampling of Point Clouds Using Dart Throwing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -594,7 +588,7 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -615,7 +609,7 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -649,7 +643,7 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -124,6 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ogr.html">writers.ogr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
@@ -200,25 +201,21 @@
   <div class="section" id="writers-gdal">
 <span id="id1"></span><h1>writers.gdal<a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference external" href="http://gdal.org">GDAL</a> writer creates a raster from a point cloud using an interpolation
-algorithm.  Output is produced using GDAL and can therefore use any <a class="reference external" href="http://www.gdal.org/formats_list.html">driver
-that supports creation of rasters</a>.</p>
+algorithm.  Output is produced using GDAL and can use any <a class="reference external" href="http://www.gdal.org/formats_list.html">driver
+that supports creation of rasters</a>.  A <a class="reference internal" href="#data-type">data_type</a> can be specified for the
+raster (double, float, int32, etc.).  If no data type is specified, the
+data type with the largest range supported by the driver is used.</p>
 <p>The technique used to create the raster is a simple interpolation where
-each point that falls within a given radius of a raster cell center
-potentially contributes to the raster&#8217;s value.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If a circle with the provided radius doesn&#8217;t encompass the entire cell,
-it is possible that some points will not be considered at all, including
-those that may be within the bounds of the raster cell.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If no <a class="reference internal" href="#radius">radius</a> is provided, it is set to the product of the <a class="reference internal" href="#resolution">resolution</a> and
-the square root of two. This is consistent with the original <a class="reference external" href="http://www.opentopography.org/otsoftware/points2grid">Points2Grid</a>
-application from which this algorithm has its roots.</p>
-</div>
-<p>The GDAL writer creates rasters using the data specified in the <code class="docutils literal"><span class="pre">dimension</span></code>
-option (defaults to <cite>Z</cite>).The writer will creates up to six rasters based on
+each point that falls within a given <a class="reference internal" href="#radius">radius</a> of a raster cell center
+potentially contributes to the raster&#8217;s value.  If no radius is provided,
+it is set to the product of the <a class="reference internal" href="#resolution">resolution</a> and the square root of two.
+This is consistent with the original <a class="reference external" href="http://www.opentopography.org/otsoftware/points2grid">Points2Grid</a> application from which
+this algorithm has its roots.  If a circle with the provided radius
+doesn&#8217;t encompass the entire cell, it is possible that some points will
+not be considered at all, including those that may be within the bounds
+of the raster cell.</p>
+<p>The GDAL writer creates rasters using the data specified in the <a class="reference internal" href="#dimension">dimension</a>
+option (defaults to <cite>Z</cite>). The writer creates up to six rasters based on
 different statistics in the output dataset.  The order of the layers in the
 dataset is as follows:</p>
 <dl class="docutils">
@@ -239,15 +236,24 @@ within the given radius.</dd>
 </dl>
 <p>If no points fall within the circle about a raster cell, a secondary
 algorithm can be used to attempt to provide a value after the standard
-interpolation is complete.  If the <a class="reference internal" href="#window-size">window_size</a> option is set to a non-zero
-value, a square of rasters surrounding an empty cell, and the value of each
-non-empty surrounding is averaged using inverse distance weighting to provide
-a value for the subject cell.  The value provided for window_size is the
+interpolation is complete.  If the <a class="reference internal" href="#window-size">window_size</a> option is non-zero, the
+values of a square of rasters surrounding an empty cell is applied
+using inverse distance weighting of any non-empty cells.
+The value provided for window_size is the
 maximum horizontal or vertical distance that a donor cell may be in order to
 contribute to the subject cell (A window_size of 1 essentially creates a 3x3
 array around the subject cell.  A window_size of 2 creates a 5x5 array, and
 so on.)</p>
-<p>Cells that have no value after interpolation are given the empty value of -9999.</p>
+<p>Cells that have no value after interpolation are given a value specified by
+the <a class="reference internal" href="#nodata">nodata</a> option.</p>
+<div class="admonition embed" id="embed-0">
+<p class="first admonition-title">Default Embedded Stage </p>
+<p class="last">This stage is enabled by default</p>
+</div>
+<div class="admonition streamable" id="streamable-0">
+<p class="first admonition-title">Streamable Stage</p>
+<p class="last">This stage supports streaming operations</p>
+</div>
 <div class="section" id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
 <p>This  pipeline reads the file autzen_trim.las and creates a Geotiff dataset
@@ -281,7 +287,7 @@ whose values contribute to the cell value is 14.14.</p>
 <dl class="docutils" id="radius">
 <dt>radius</dt>
 <dd>Radius about cell center bounding points to use to calculate a cell value.
-[Default: <code class="docutils literal"><span class="pre">resolution</span></code> * sqrt(2)]</dd>
+[Default: <a class="reference internal" href="#resolution">resolution</a> * sqrt(2)]</dd>
 <dt>gdaldriver</dt>
 <dd>Name of the GDAL driver to use to write the output. [Default: &#8220;GTiff&#8221;]</dd>
 <dt>gdalopts</dt>
@@ -295,6 +301,20 @@ always uses BAND interleaving.</p>
 </div>
 </dd>
 </dl>
+<dl class="docutils" id="data-type">
+<dt>data_type</dt>
+<dd>The data type to use for the output raster (double, float, int32,
+uint16, etc.).  Many GDAL drivers only
+support a limited set of output data types. The default value depends
+on the driver.</dd>
+</dl>
+<dl class="docutils" id="nodata">
+<dt>nodata</dt>
+<dd>The value to use for a raster cell if no data exists in the input data
+with which to compute an output cell value. [Default: depends on the
+<a class="reference internal" href="#data-type">data_type</a>.  -9999 for double, float, int and short, 9999 for
+unsigned int and unsigned short, 255 for unsigned char and -128 for char]</dd>
+</dl>
 <dl class="docutils" id="output-type">
 <dt>output_type</dt>
 <dd>A comma separated list of statistics for which to produce raster layers.
@@ -306,9 +326,20 @@ and &#8220;all&#8221;.  The option may be specified more than once. [Default: &#
 <dd>The maximum distance from a donor cell to a target cell when applying
 the fallback interpolation method.  See the stage description for more
 information. [Default: 0]</dd>
-<dt>dimension</dt>
-<dd>A dimension name to use for the interpolation. [Default: <code class="docutils literal"><span class="pre">Z</span></code>]</dd>
 </dl>
+<dl class="docutils" id="dimension">
+<dt>dimension</dt>
+<dd>A dimension name to use for the interpolation. [Default: &#8220;Z&#8221;]</dd>
+</dl>
+<dl class="docutils" id="bounds">
+<dt>bounds</dt>
+<dd>The bounds of the data to be written.  Points not in bounds are discarded.
+The format is ([minx, maxx],[miny,maxy]).</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <a class="reference internal" href="#bounds">bounds</a> option is required when a pipeline is run in streaming mode.</p>
+</div>
 </div>
 </div>
 
@@ -336,7 +367,7 @@ information. [Default: 0]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -357,7 +388,7 @@ information. [Default: 0]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -391,7 +422,7 @@ information. [Default: 0]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

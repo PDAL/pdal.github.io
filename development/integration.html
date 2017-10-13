@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Development" href="index.html"/>
-        <link rel="next" title="API" href="../api/index.html"/>
+        <link rel="next" title="Writing with PDAL" href="writing.html"/>
         <link rel="prev" title="Testing" href="testing.html"/> 
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -144,6 +144,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#appveyor">AppVeyor</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-reader.html">Writing a reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-writer.html">Writing a writer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html">Using PDAL with CMake</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
@@ -207,26 +213,25 @@ least two continuous integration platforms.</p>
 </div>
 <div class="section" id="travis">
 <span id="id1"></span><h2>Travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h2>
-<p>The Travis continuous integration platform runs the PDAL test suite on Linux.
-The build status and other supporting information can be found at
+<p>The Travis continuous integration platform runs the PDAL test suite on Alpine
+Linux. The build status and other supporting information can be found at
 <a class="reference external" href="https://travis-ci.org/PDAL/PDAL">https://travis-ci.org/PDAL/PDAL</a> Its configuration can be found at
 <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/.travis.yml">https://github.com/PDAL/PDAL/blob/master/.travis.yml</a> All administrators of the
 GitHub <cite>PDAL</cite> group have rights to modify the Travis configuration.</p>
-<p>It uses the <code class="docutils literal"><span class="pre">pdal/dependencies</span></code> <a class="reference internal" href="../quickstart.html#docker"><span class="std std-ref">Install Docker</span></a> image found at
-<a class="reference external" href="https://hub.docker.com/r/pdal/dependencies">https://hub.docker.com/r/pdal/dependencies</a> as a base platform for providing
-prerequisite software and running the test suite. If you want to add new test
-functionality based on a dependency, you will need to update that Docker image
-to do so. See <a class="reference internal" href="docker.html#development-docker"><span class="std std-ref">Building Docker Containers for PDAL</span></a> for more detail on how PDAL builds
-and uses Docker containers for testing.</p>
+<p>It uses the <code class="docutils literal"><span class="pre">alpine:edge</span></code> Docker image found at
+<a class="reference external" href="https://hub.docker.com/_/alpine/">https://hub.docker.com/_/alpine/</a> as a base platform. If you want to add new
+functionality based on a dependency, you will need to ensure that the dependency
+is available in <a class="reference external" href="https://pkgs.alpinelinux.org/packages">https://pkgs.alpinelinux.org/packages</a> and update the Travis
+configuration YAML accordingly.</p>
 </div>
 <div class="section" id="appveyor">
 <span id="id2"></span><h2>AppVeyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h2>
 <p>PDAL uses the AppVeyor continuous integration platform to run the PDAL
 compilation and test suite on Windows. The build status and other supporting
-information can be found at <a class="reference external" href="https://ci.appveyor.com/project/hobu/pdal">https://ci.appveyor.com/project/hobu/pdal</a>
-Its configuration can be found at <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/appveyor.yml">https://github.com/PDAL/PDAL/blob/master/appveyor.yml</a>
-All administrators of the GitHub <cite>PDAL</cite> group have rights to modify the AppVeyor
-configuration.</p>
+information can be found at <a class="reference external" href="https://ci.appveyor.com/project/hobu/pdal">https://ci.appveyor.com/project/hobu/pdal</a> Its
+configuration can be found at
+<a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/appveyor.yml">https://github.com/PDAL/PDAL/blob/master/appveyor.yml</a> All administrators of the
+GitHub <cite>PDAL</cite> group have rights to modify the AppVeyor configuration.</p>
 <p><a class="reference external" href="http://github.com/hobu">Howard Butler</a> currently pays the bill to run in the AppVeyor upper
 performance processing tier. The AppVeyor configuration depends on <a class="reference external" href="http://trac.osgeo.org/osgeo4w/">OSGeo4W64</a>
 for dependencies. If you want to add new test functionality based on a
@@ -241,7 +246,7 @@ dependency, you will need to update OSGeo4W64 with a new package to do so.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/index.html" class="btn btn-neutral float-right" title="API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="writing.html" class="btn btn-neutral float-right" title="Writing with PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="testing.html" class="btn btn-neutral" title="Testing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -258,7 +263,7 @@ dependency, you will need to update OSGeo4W64 with a new package to do so.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -279,7 +284,7 @@ dependency, you will need to update OSGeo4W64 with a new package to do so.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -313,7 +318,7 @@ dependency, you will need to update OSGeo4W64 with a new package to do so.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

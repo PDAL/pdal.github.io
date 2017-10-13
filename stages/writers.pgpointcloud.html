@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -120,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ogr.html">writers.ogr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.pgpointcloud</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
@@ -199,9 +200,20 @@
             
   <div class="section" id="writers-pgpointcloud">
 <span id="id1"></span><h1>writers.pgpointcloud<a class="headerlink" href="#writers-pgpointcloud" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>PostgreSQL Pointcloud Writer</strong> allows you to write to PostgreSQL database that have the <a class="reference external" href="http://github.com/pramsey/pointcloud">PostgreSQL Pointcloud</a> extension enabled. The Pointcloud extension stores point cloud data in tables that contain rows of patches. Each patch in turn contains a large number of spatially nearby points.</p>
-<p>While you can theoretically store the contents of a whole file of points in a single patch, it is more practical to store a table full of smaller patches, where the patches are under the PostgreSQL page size (8kb). For most LIDAR data, this practically means a patch size of between 400 and 600 points.</p>
-<p>In order to create patches of the right size, the Pointcloud writer should be preceded in the pipeline file by <a class="reference internal" href="filters.chipper.html#filters-chipper"><span class="std std-ref">filters.chipper</span></a>.</p>
+<p>The <strong>PostgreSQL Pointcloud Writer</strong> allows you to write to PostgreSQL database
+that have the <a class="reference external" href="http://github.com/pramsey/pointcloud">PostgreSQL Pointcloud</a> extension enabled. The Pointcloud
+extension stores point cloud data in tables that contain rows of patches. Each
+patch in turn contains a large number of spatially nearby points.</p>
+<p>While you can theoretically store the contents of a whole file of points in a
+single patch, it is more practical to store a table full of smaller patches,
+where the patches are under the PostgreSQL page size (8kb). For most LIDAR
+data, this practically means a patch size of between 400 and 600 points.</p>
+<p>In order to create patches of the right size, the Pointcloud writer should be
+preceded in the pipeline file by <a class="reference internal" href="filters.chipper.html#filters-chipper"><span class="std std-ref">filters.chipper</span></a>.</p>
+<div class="admonition plugin" id="plugin-0">
+<p class="first admonition-title">Dynamic Plugin</p>
+<p class="last">This stage requires a dynamic plugin to operate</p>
+</div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -294,7 +306,7 @@ are listed by name and separated by commas.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -315,7 +327,7 @@ are listed by name and separated by commas.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -349,7 +361,7 @@ are listed by name and separated by commas.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

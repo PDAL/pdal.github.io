@@ -1,0 +1,496 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Writing with PDAL &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Development" href="index.html"/>
+        <link rel="next" title="Writing a filter" href="writing-filter.html"/>
+        <link rel="prev" title="Continuous Integration" href="integration.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">PDAL Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation/index.html">Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html">Coding Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs.html">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Building Docker Containers for PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="goals.html">Project Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration.html">Continuous Integration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Writing with PDAL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#includes">Includes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-and-running-the-program">Compiling and running the program</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-reader.html">Writing a reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-writer.html">Writing a writer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html">Using PDAL with CMake</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="index.html">Development</a> &raquo;</li>
+      
+    <li>Writing with PDAL</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-with-pdal">
+<span id="writing"></span><h1>Writing with PDAL<a class="headerlink" href="#writing-with-pdal" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Bradley Chambers</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">01/21/2015</td>
+</tr>
+</tbody>
+</table>
+<p>This tutorial will describe a complete example of using PDAL C++ objects to write
+a LAS file. The example will show fetching data from your own data source rather than
+interacting with a <a class="reference internal" href="../stages/index.html#stage-index"><span class="std std-ref">reader stage</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you implement your own <a class="reference internal" href="../stages/readers.html#readers"><span class="std std-ref">Readers</span></a> that conforms to
+PDAL&#8217;s <a class="reference internal" href="../api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a>, you can implement a simple read-filter-write
+pipeline using <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> and not have to code anything explicit
+yourself.</p>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<p>First, our code.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;io/BufferReader.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">Point</span>
+    <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+
+        <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
+
+    <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
+
+    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+
+    <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+
+    <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+
+    <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
+    <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+
+    <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
+
+    <span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
+    <span class="c1">// stage and facilitate clean up.</span>
+    <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span>
+
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Take a closer look. We will need to include several PDAL headers.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;io/BufferReader.hpp&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p><cite>BufferReader</cite> will not be required by all users. Here is it used to populate a
+bare <cite>PointBuffer</cite>. This will often be accomplished by a <cite>Reader</cite> stage.</p>
+<p>Instead of directly including headers for individual stages, e.g., <cite>LasWriter</cite>,
+we rely on the <cite>StageFactory</cite> which has the ability to query available stages
+at runtime and return pointers to the created stages.</p>
+<p>We proceed by providing a mechanism for generating dummy data for the x, y, and
+z dimensions.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">Point</span>
+    <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+
+        <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
+
+    <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
+
+    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Finally, the main code which creates the dummy data, puts it into a BufferReader
+and sends it to a writer.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+
+    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+
+    <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+
+    <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
+    <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+
+    <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
+
+    <span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
+    <span class="c1">// stage and facilitate clean up.</span>
+    <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span>
+
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compiling-and-running-the-program">
+<h2>Compiling and running the program<a class="headerlink" href="#compiling-and-running-the-program" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Refer to <a class="reference internal" href="compilation/index.html#building"><span class="std std-ref">Compilation</span></a> for information on how to build PDAL.</p>
+</div>
+<p>To build this example, simply copy the files tutorial.cpp and CMakeLists.txt
+from the examples/writing directory of the PDAL source tree.</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">WritingTutorial</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span> <span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">tutorial.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">PRIVATE</span>
+    <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span>
+    <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="s">/pdal</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Refer to <a class="reference internal" href="using.html#using"><span class="std std-ref">Using PDAL with CMake</span></a> for an explanation of the basic CMakeLists.</p>
+</div>
+<p>Begin by configuring your project using CMake (shown here on Unix) and building
+using make.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /PATH/TO/WRITING/TUTORIAL
+$ mkdir build
+$ <span class="nb">cd</span> build
+$ cmake ..
+$ make
+</pre></div>
+</div>
+<p>After the project is built, you can run it by typing:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./tutorial
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writing-filter.html" class="btn btn-neutral float-right" title="Writing a filter" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="integration.html" class="btn btn-neutral" title="Continuous Integration" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Oct 13, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.6.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2017
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Oct 13, 2017.
+        </div>
+    </div>
+
+</body>
+</html>

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.nitf</a><ul>
@@ -232,6 +233,14 @@ to actually read and write the data.</p>
 <p class="last">PDAL uses a fork of the <a class="reference external" href="http://nitro-nitf.sourceforge.net/wikka.php?wakka=HomePage">NITF Nitro</a> library available at
 <a class="reference external" href="https://github.com/hobu/nitro">https://github.com/hobu/nitro</a> for NITF read and write support.</p>
 </div>
+<div class="admonition embed" id="embed-0">
+<p class="first admonition-title">Default Embedded Stage </p>
+<p class="last">This stage is enabled by default</p>
+</div>
+<div class="admonition streamable" id="streamable-0">
+<p class="first admonition-title">Streamable Stage</p>
+<p class="last">This stage supports streaming operations</p>
+</div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -265,6 +274,18 @@ to actually read and write the data.</p>
 <dl class="docutils">
 <dt>filename</dt>
 <dd>Filename to read from [Required]</dd>
+<dt>count</dt>
+<dd>Maximum number of points to read [Optional]</dd>
+<dt>spatialreference</dt>
+<dd>Spatial reference to apply to data</dd>
+<dt>extra_dims</dt>
+<dd>Dimensions to assign to extra byte data</dd>
+<dt>compression</dt>
+<dd>May be set to &#8220;lazperf&#8221; or &#8220;laszip&#8221; to choose either the LazPerf decompressor
+or the LASzip decompressor for LAZ files.  PDAL must have been built with
+support for the decompressor being requested.  The LazPerf decompressor
+doesn&#8217;t support version 1 LAZ files or version 1.4 of LAS.
+[Default: &#8220;laszip&#8221;]</dd>
 </dl>
 </div>
 </div>
@@ -293,7 +314,7 @@ to actually read and write the data.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -314,7 +335,7 @@ to actually read and write the data.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -348,7 +369,7 @@ to actually read and write the data.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

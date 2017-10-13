@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -120,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ogr.html">writers.ogr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.ply</a><ul>
@@ -199,17 +200,19 @@
             
   <div class="section" id="writers-ply">
 <span id="id1"></span><h1>writers.ply<a class="headerlink" href="#writers-ply" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>ply writer</strong> writes the <a class="reference external" href="http://paulbourke.net/dataformats/ply/">polygon file format</a>, a common file format for storing three dimensional models.
-The <a class="reference external" href="http://w3.impa.br/~diego/software/rply/">rply library</a> is included with the PDAL source, so there are no external dependencies.</p>
-<p>Use the <code class="docutils literal"><span class="pre">storage_mode</span></code> option to choose the type of ply file to write.
-You can choose from:</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">default</span></code>: write a binary ply file using your host&#8217;s byte ordering.
-If you do not specify a <code class="docutils literal"><span class="pre">storage_mode</span></code>, this is the default.</li>
-<li><code class="docutils literal"><span class="pre">ascii</span></code>: write an ascii file (warning: these can be HUGE).</li>
-<li><code class="docutils literal"><span class="pre">little</span> <span class="pre">endian</span></code>: write a binary ply file with little endian byte ordering.</li>
-<li><code class="docutils literal"><span class="pre">big</span> <span class="pre">endian</span></code>: write a binary ply file with big endian byte ordering.</li>
-</ul>
+<p>The <strong>ply writer</strong> writes the <a class="reference external" href="http://paulbourke.net/dataformats/ply/">polygon file format</a>, a common file format
+for storing three dimensional models.  The writer emits points as PLY vertices.
+The writer can also emit a mesh as a set of faces.
+<a class="reference internal" href="filters.greedyprojection.html#filters-greedyprojection"><span class="std std-ref">filters.greedyprojection</span></a> and <a class="reference internal" href="filters.poisson.html#filters-poisson"><span class="std std-ref">filters.poisson</span></a> create a
+mesh suitable for output as faces.</p>
+<div class="admonition embed" id="embed-0">
+<p class="first admonition-title">Default Embedded Stage </p>
+<p class="last">This stage is enabled by default</p>
+</div>
+<div class="admonition streamable" id="streamable-0">
+<p class="first admonition-title">Streamable Stage</p>
+<p class="last">This stage supports streaming operations</p>
+</div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -234,7 +237,14 @@ If you do not specify a <code class="docutils literal"><span class="pre">storage
 <dt>filename</dt>
 <dd>ply file to write [Required]</dd>
 <dt>storage_mode</dt>
-<dd>Type of ply file to write [default: host-ordered binary]</dd>
+<dd>Type of ply file to write. Valid values are &#8216;ascii&#8217;, &#8216;little endian&#8217;,
+&#8216;big endian&#8217;, and &#8216;default&#8217;. &#8216;default&#8217; is binary output in the endianness
+of the machine. [Default: &#8216;default&#8217;]</dd>
+<dt>dims</dt>
+<dd>List of dimensions to write as elements. [Default: all dimensions]</dd>
+<dt>faces</dt>
+<dd>Write a mesh as faces in addition to writing points as vertices.
+[Default: false]</dd>
 </dl>
 </div>
 </div>
@@ -263,7 +273,7 @@ If you do not specify a <code class="docutils literal"><span class="pre">storage
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -284,7 +294,7 @@ If you do not specify a <code class="docutils literal"><span class="pre">storage
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -318,7 +328,7 @@ If you do not specify a <code class="docutils literal"><span class="pre">storage
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 

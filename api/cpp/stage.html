@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.5.0
+                1.6.0
               </div>
             
           
@@ -150,6 +150,7 @@
 <li class="toctree-l3"><a class="reference internal" href="writer.html"><code class="docutils literal"><span class="pre">pdal::Writer</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../transition/index.html">libLAS C API to PDAL transition guide</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
@@ -432,14 +433,14 @@ implement the reading API in a PDAL pipeline.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2NK4pdal5Stage13pushLogLeaderEv">
-<span id="pdal::Stage::pushLogLeaderC"></span><span class="target" id="apiclasspdal_1_1Stage_1aa5fa73d367f1cda7df188e85dc06ac03"></span>void <code class="descname">pushLogLeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4pdal5Stage13pushLogLeaderEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2NK4pdal5Stage12startLoggingEv">
+<span id="pdal::Stage::startLoggingC"></span><span class="target" id="apiclasspdal_1_1Stage_1a74cf636cb0f633411e4e40dcd718508a"></span>void <code class="descname">startLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4pdal5Stage12startLoggingEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Push the stage&#8217;s leader into the log. </p>
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2NK4pdal5Stage12popLogLeaderEv">
-<span id="pdal::Stage::popLogLeaderC"></span><span class="target" id="apiclasspdal_1_1Stage_1ae8dc6737d83839e70e300191f68b36f4"></span>void <code class="descname">popLogLeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4pdal5Stage12popLogLeaderEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2NK4pdal5Stage11stopLoggingEv">
+<span id="pdal::Stage::stopLoggingC"></span><span class="target" id="apiclasspdal_1_1Stage_1ae49e996fe285350923a3bf44d027adad"></span>void <code class="descname">stopLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4pdal5Stage11stopLoggingEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Pop the stage&#8217;s leader from the log. </p>
 </dd></dl>
 
@@ -521,6 +522,46 @@ implement the reading API in a PDAL pipeline.</p>
 </dd></dl>
 
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE">
+<span id="pdal::Stage::parseName__ss.std::string::size_typeR"></span><span class="target" id="apiclasspdal_1_1Stage_1aca3009ba4d0e25982ec2ebab343a8873"></span>bool <code class="descname">parseName</code><span class="sig-paren">(</span>std::string <em>o</em>, std::string::size_type &amp;<em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parse a stage name from a string. </p>
+<p>Return the name and update the position in the input string to the end of the stage name.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Whether the parsed name is a valid stage name. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">o</span></code>: Input string to parse. </li>
+<li><code class="docutils literal"><span class="pre">pos</span></code>: Parsing start/end position. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE">
+<span id="pdal::Stage::parseTagName__ss.std::string::size_typeR"></span><span class="target" id="apiclasspdal_1_1Stage_1a2ed4e38b8dc11601c28b66a85624cdb0"></span>bool <code class="descname">parseTagName</code><span class="sig-paren">(</span>std::string <em>o</em>, std::string::size_type &amp;<em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parse a tag name from a string. </p>
+<p>Return the name and update the position in the input string to the end of the tag name.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Whether the parsed name is a valid tag name. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">o</span></code>: Input string to parse. </li>
+<li><code class="docutils literal"><span class="pre">pos</span></code>: Parsing start/end position. </li>
+<li><code class="docutils literal"><span class="pre">tag</span></code>: Parsed tag name. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
 </dd></dl>
 
 </div>
@@ -549,7 +590,7 @@ implement the reading API in a PDAL pipeline.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 29, 2017.
+      Last updated on Oct 13, 2017.
 
     </p>
   </div> 
@@ -570,7 +611,7 @@ implement the reading API in a PDAL pipeline.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.5.0',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -604,7 +645,7 @@ implement the reading API in a PDAL pipeline.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 29, 2017.
+                    on Oct 13, 2017.
         </div>
     </div>
 
