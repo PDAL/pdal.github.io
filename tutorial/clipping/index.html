@@ -265,11 +265,11 @@ for keeping or rejecting points in a more expressive environment (<a class="refe
 <p class="caption"><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span></p>
 </div>
 <p>The data are mixed in two different coordinate systems. The <a class="reference internal" href="../../stages/readers.las.html#readers-las"><span class="std std-ref">LAZ</span></a> file is in <a class="reference external" href="http://www.oregon.gov/DAS/CIO/GEO/pages/coordination/projections/projections.aspx">Oregon State Plane Ft.</a> and the <a class="reference external" href="http://geojson.org">GeoJSON</a> defining
-the polygons is in <a class="reference external" href="http://epsg.io/4326">EPSG:4326</a>. We have two options &#8211; project the point cloud
+the polygons is in <a class="reference external" href="http://epsg.io/4326">EPSG:4326</a>. We have two options – project the point cloud
 into the coordinate system of the attribute polygons, or project the attribute
 polygons into the coordinate system of the points. The latter is preferable in
 this case because it will be less math and therefore less computation. To make
-it convenient, we can utilize <a class="reference external" href="http://www.gdal.org">OGR</a>&#8216;s <a class="reference external" href="http://www.gdal.org/drv_vrt.html">VRT</a> capability to reproject the data
+it convenient, we can utilize <a class="reference external" href="http://www.gdal.org">OGR</a>’s <a class="reference external" href="http://www.gdal.org/drv_vrt.html">VRT</a> capability to reproject the data
 for us on-the-fly:</p>
 <div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;OGRVRTDataSource&gt;</span>
     <span class="nt">&lt;OGRVRTWarpedLayer&gt;</span>
@@ -286,12 +286,12 @@ for us on-the-fly:</p>
 <p class="first admonition-title">Note</p>
 <p class="last">The GeoJSON file does not have an externally-defined coordinate system,
 so we are explictly setting one with the LayerSRS parameter. If your
-data does have coordinate system information, you don&#8217;t need to do that.</p>
+data does have coordinate system information, you don’t need to do that.</p>
 </div>
 <p>Save this VRT definition to a file, called <code class="docutils literal"><span class="pre">attributes.vrt</span></code> in the same location where you
 stored the <code class="docutils literal"><span class="pre">autzen.laz</span></code> and <code class="docutils literal"><span class="pre">attributes.json</span></code> files.</p>
 <p>The attribute GeoJSON file has a couple of features with different attributes.
-For our scenario, we want to clip out the yellow-green polygon, marked number &#8220;5&#8221;,
+For our scenario, we want to clip out the yellow-green polygon, marked number “5”,
 in the upper right hand corner.</p>
 <div class="figure" id="id2">
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-to-clip.png"><img alt="../../_images/autzen-shapes-to-clip.png" src="../../_images/autzen-shapes-to-clip.png" style="width: 693.6px; height: 381.0px;" /></a>
@@ -331,12 +331,12 @@ read attribute polygons out of the data source and assign the values from the
 <li><a class="reference internal" href="../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>: Given that we have set the <code class="docutils literal"><span class="pre">Classification</span></code> values
 for the points that have coincident polygons to 2, 5, and 6, only keep
 <code class="docutils literal"><span class="pre">Classification</span></code> values in the range of <code class="docutils literal"><span class="pre">5:5</span></code>. This functionally means
-we&#8217;re only keeping those points with a classification value of 5.</li>
+we’re only keeping those points with a classification value of 5.</li>
 <li><a class="reference internal" href="../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>: write our content back out using an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> writer.</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You don&#8217;t have to use only <code class="docutils literal"><span class="pre">Classification</span></code> to set the attributes
+<p class="last">You don’t have to use only <code class="docutils literal"><span class="pre">Classification</span></code> to set the attributes
 with <a class="reference internal" href="../../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a>. Any valid dimension name could work, but
 most LiDAR softwares will display categorical coloring for the
 <code class="docutils literal"><span class="pre">Classification</span></code> field, and we can leverage that behavior in this
@@ -396,7 +396,7 @@ points with shapefiles.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Oct 13, 2017.
+      Last updated on Oct 31, 2017.
 
     </p>
   </div> 
@@ -426,7 +426,7 @@ points with shapefiles.</p>
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -451,7 +451,7 @@ points with shapefiles.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 13, 2017.
+                    on Oct 31, 2017.
         </div>
     </div>
 

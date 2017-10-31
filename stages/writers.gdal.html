@@ -207,11 +207,11 @@ raster (double, float, int32, etc.).  If no data type is specified, the
 data type with the largest range supported by the driver is used.</p>
 <p>The technique used to create the raster is a simple interpolation where
 each point that falls within a given <a class="reference internal" href="#radius">radius</a> of a raster cell center
-potentially contributes to the raster&#8217;s value.  If no radius is provided,
+potentially contributes to the raster’s value.  If no radius is provided,
 it is set to the product of the <a class="reference internal" href="#resolution">resolution</a> and the square root of two.
 This is consistent with the original <a class="reference external" href="http://www.opentopography.org/otsoftware/points2grid">Points2Grid</a> application from which
 this algorithm has its roots.  If a circle with the provided radius
-doesn&#8217;t encompass the entire cell, it is possible that some points will
+doesn’t encompass the entire cell, it is possible that some points will
 not be considered at all, including those that may be within the bounds
 of the raster cell.</p>
 <p>The GDAL writer creates rasters using the data specified in the <a class="reference internal" href="#dimension">dimension</a>
@@ -226,7 +226,7 @@ dataset is as follows:</p>
 <dt>mean</dt>
 <dd>Give the cell the mean value of all points within the given radius.</dd>
 <dt>idw</dt>
-<dd>Cells are assigned a value based on <a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_distance_weighting">Shepard&#8217;s inverse distance weighting</a>
+<dd>Cells are assigned a value based on <a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_distance_weighting">Shepard’s inverse distance weighting</a>
 algorithm, considering all points within the given radius.</dd>
 <dt>count</dt>
 <dd>Give the cell the number of points that lie within the given radius.</dd>
@@ -257,8 +257,8 @@ the <a class="reference internal" href="#nodata">nodata</a> option.</p>
 <div class="section" id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
 <p>This  pipeline reads the file autzen_trim.las and creates a Geotiff dataset
-called outputfile.tif.  Since output_type isn&#8217;t specified, it creates six
-raster bands (&#8220;min&#8221;, &#8220;max&#8221;, &#8220;mean&#8221;, &#8220;idx&#8221;, &#8220;count&#8221; and &#8220;stdev&#8221;) in the output
+called outputfile.tif.  Since output_type isn’t specified, it creates six
+raster bands (“min”, “max”, “mean”, “idx”, “count” and “stdev”) in the output
 dataset.  The raster cells are 10x10 and the radius used to locate points
 whose values contribute to the cell value is 14.14.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -289,10 +289,10 @@ whose values contribute to the cell value is 14.14.</p>
 <dd>Radius about cell center bounding points to use to calculate a cell value.
 [Default: <a class="reference internal" href="#resolution">resolution</a> * sqrt(2)]</dd>
 <dt>gdaldriver</dt>
-<dd>Name of the GDAL driver to use to write the output. [Default: &#8220;GTiff&#8221;]</dd>
+<dd>Name of the GDAL driver to use to write the output. [Default: “GTiff”]</dd>
 <dt>gdalopts</dt>
 <dd><p class="first">A list of key/value options to pass directly to the GDAL driver.  The
-format is name=value,name=value,...  The option may be specified
+format is name=value,name=value,…  The option may be specified
 any number of times.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
@@ -318,8 +318,8 @@ unsigned int and unsigned short, 255 for unsigned char and -128 for char]</dd>
 <dl class="docutils" id="output-type">
 <dt>output_type</dt>
 <dd>A comma separated list of statistics for which to produce raster layers.
-The supported values are &#8220;min&#8221;, &#8220;max&#8221;, &#8220;mean&#8221;, &#8220;idw&#8221;, &#8220;count&#8221;, &#8220;stdev&#8221;
-and &#8220;all&#8221;.  The option may be specified more than once. [Default: &#8220;all&#8221;]</dd>
+The supported values are “min”, “max”, “mean”, “idw”, “count”, “stdev”
+and “all”.  The option may be specified more than once. [Default: “all”]</dd>
 </dl>
 <dl class="docutils" id="window-size">
 <dt>window_size</dt>
@@ -329,7 +329,7 @@ information. [Default: 0]</dd>
 </dl>
 <dl class="docutils" id="dimension">
 <dt>dimension</dt>
-<dd>A dimension name to use for the interpolation. [Default: &#8220;Z&#8221;]</dd>
+<dd>A dimension name to use for the interpolation. [Default: “Z”]</dd>
 </dl>
 <dl class="docutils" id="bounds">
 <dt>bounds</dt>
@@ -367,7 +367,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Oct 13, 2017.
+      Last updated on Oct 31, 2017.
 
     </p>
   </div> 
@@ -397,7 +397,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -422,7 +422,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 13, 2017.
+                    on Oct 31, 2017.
         </div>
     </div>
 

@@ -109,7 +109,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#fetch-sample-data">Fetch Sample Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#print-the-first-point">Print the first point</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-s-next">What’s next?</a></li>
 </ul>
 </li>
 </ul>
@@ -191,11 +191,11 @@
 <span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <span id="index-0"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>It&#8217;s a giant pain to build everything yourself. The quickest way to start using
+<p>It’s a giant pain to build everything yourself. The quickest way to start using
 PDAL is to leverage builds that were constructed by the PDAL development team
 using <a class="reference internal" href="#docker">Docker</a>. Docker is a containerization technology that allows you to
 run pre-built software in a way that is isolated from your system. Think of
-it like a binary that doesn&#8217;t depend on your operating system&#8217;s configuration
+it like a binary that doesn’t depend on your operating system’s configuration
 to be able to run.</p>
 <p>This exercise will print the first point of an <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">ASPRS LAS</span></a> file.
 It will utilize the PDAL <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">command line application</span></a> to inspect the
@@ -209,7 +209,7 @@ yourself from <a class="reference internal" href="development/compilation/index.
 Linux (Debian, RPM) and OSX (<a class="reference external" href="http://brew.sh">Homebrew</a>). See <a class="reference internal" href="download.html#download"><span class="std std-ref">Download</span></a> to obtain
 them. If you are a developer looking to leverage PDAL, you will need access
 to the library in your environment, but this quick start document is for
-those looking to quickly interact with data using PDAL&#8217;s <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">command line
+those looking to quickly interact with data using PDAL’s <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">command line
 applications</span></a> and <a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>.</p>
 <p class="last">If you need to compile your own copy of PDAL, see <a class="reference internal" href="development/compilation/index.html#building"><span class="std std-ref">Compilation</span></a> for
 more details.</p>
@@ -227,7 +227,7 @@ them a bit for your platform so you have an idea what to expect.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">We will assume you are running on Windows, but the same commands should
-work in OSX or Linux too &#8211; though definition of file paths might provide
+work in OSX or Linux too – though definition of file paths might provide
 a significant difference.</p>
 </div>
 <div class="section" id="enable-docker-access-to-your-machine">
@@ -254,7 +254,7 @@ a simple <cite>info</cite> command to verify that things are operating correctly
 pushed to <a class="reference external" href="http://hub.docker.com">Docker Hub</a> with every code change on the PDAL maintenance branch (find
 out more about that at <a class="reference internal" href="development/docker.html#development-docker"><span class="std std-ref">here</span></a>).
 We need to pull it locally so we can use it to run PDAL commands. Once it is
-pulled, we don&#8217;t have to pull it again unless we want to refresh it for
+pulled, we don’t have to pull it again unless we want to refresh it for
 whatever reason.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span><span class="p">:</span><span class="mf">1.6</span>
 </pre></div>
@@ -272,7 +272,7 @@ on this topic.</p>
 </div>
 <div class="section" id="fetch-sample-data">
 <h2>Fetch Sample Data<a class="headerlink" href="#fetch-sample-data" title="Permalink to this headline">¶</a></h2>
-<p>We need some sample data to play with, so we&#8217;re going to download
+<p>We need some sample data to play with, so we’re going to download
 the <code class="docutils literal"><span class="pre">autzen.laz</span></code> file to your <code class="docutils literal"><span class="pre">C:/Users/hobu/Downloads</span></code> fold.
 Inside your terminal, issue the following command:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">explorer</span><span class="o">.</span><span class="n">exe</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">liblas</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">samples</span><span class="o">/</span><span class="n">autzen</span><span class="o">/</span><span class="n">autzen</span><span class="o">.</span><span class="n">laz</span>
@@ -288,12 +288,12 @@ Inside your terminal, issue the following command:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="p">:</span><span class="o">/</span><span class="n">data</span> <span class="n">pdal</span><span class="o">/</span><span class="n">pdal</span><span class="p">:</span><span class="mf">1.6</span> <span class="n">pdal</span> <span class="n">info</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">autzen</span><span class="o">.</span><span class="n">laz</span> <span class="o">-</span><span class="n">p</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>Here&#8217;s a summary of what&#8217;s going on with that command invocation</p>
+<p>Here’s a summary of what’s going on with that command invocation</p>
 <ol class="arabic">
 <li><p class="first"><code class="docutils literal"><span class="pre">docker</span></code>: We are running PDAL within the context of docker, so all of our
 commands will start with the <code class="docutils literal"><span class="pre">docker</span></code> command.</p>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">run</span></code>: Tells docker we&#8217;re going to run an image</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">run</span></code>: Tells docker we’re going to run an image</p>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">-v</span> <span class="pre">/c/Users/hobu:/data</span></code>: Maps our home directory to a directory called
 <code class="docutils literal"><span class="pre">/data</span></code> inside the container.</p>
@@ -307,7 +307,7 @@ document describes mounting volumes in more detail.</p>
 with the command above. If it were not already fetched, Docker would attempt
 to fetch it when we run this command.</p>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">pdal</span></code>: We&#8217;re finally going to run the <code class="docutils literal"><span class="pre">pdal</span></code> command :)</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">pdal</span></code>: We’re finally going to run the <code class="docutils literal"><span class="pre">pdal</span></code> command :)</p>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">info</span></code>: We want to run <a class="reference internal" href="apps/info.html#info-command"><span class="std std-ref">info</span></a> on the data</p>
 </li>
@@ -319,7 +319,7 @@ mount operation in Step #3. Our <code class="docutils literal"><span class="pre"
 <img alt="_images/docker-print-one.png" src="_images/docker-print-one.png" />
 </div>
 <div class="section" id="what-s-next">
-<h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
+<h2>What’s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Visit <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">Applications</span></a> to find out how to utilize PDAL applications to process
 data on the command line yourself.</li>
@@ -338,7 +338,7 @@ how you can leverage these capabilities in your own programs.</li>
 </ul>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="community.html#community"><span class="std std-ref">Community</span></a> is a good source to reach out to when you&#8217;re stuck.</p>
+<p class="last"><a class="reference internal" href="community.html#community"><span class="std std-ref">Community</span></a> is a good source to reach out to when you’re stuck.</p>
 </div>
 </div>
 </div>
@@ -367,7 +367,7 @@ how you can leverage these capabilities in your own programs.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Oct 13, 2017.
+      Last updated on Oct 31, 2017.
 
     </p>
   </div> 
@@ -397,7 +397,7 @@ how you can leverage these capabilities in your own programs.</li>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -422,7 +422,7 @@ how you can leverage these capabilities in your own programs.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 13, 2017.
+                    on Oct 31, 2017.
         </div>
     </div>
 

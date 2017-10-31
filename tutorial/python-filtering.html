@@ -238,7 +238,7 @@ many stock options available to you in PDAL to achieve it. These include:</p>
 <li><a class="reference internal" href="../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a></li>
 </ul>
 <p>These filters remove points that are deemed outliers in different ways.
-The don&#8217;t, however, identify specific points. Python plus <a class="reference external" href="http://www.numpy.org/">NumPy</a> would
+The don’t, however, identify specific points. Python plus <a class="reference external" href="http://www.numpy.org/">NumPy</a> would
 be a very quick way to prototype a tool that identified specific points
 we would like to filter.</p>
 <p>PDAL has three different ways to manipulate data with Python. The first is
@@ -248,17 +248,17 @@ The second is the Python extension at
 operations in your own Python programs.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../python.html#python"><span class="std std-ref">Python</span></a> describes PDAL&#8217;s Python story in more detail.</p>
+<p class="last"><a class="reference internal" href="../python.html#python"><span class="std std-ref">Python</span></a> describes PDAL’s Python story in more detail.</p>
 </div>
 </div>
 <div class="section" id="the-challenge">
 <h2><a class="toc-backref" href="#id3">The Challenge</a><a class="headerlink" href="#the-challenge" title="Permalink to this headline">¶</a></h2>
 <p>We have a <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> file that has some points that that are completely out of
-range and have bad <code class="docutils literal"><span class="pre">Y</span></code> values. We don&#8217;t know how those points got in the
+range and have bad <code class="docutils literal"><span class="pre">Y</span></code> values. We don’t know how those points got in the
 file, but we want to identify <strong>which</strong> points they were, because it might be
 some indication about a failure point in our processing operation. We could
 simply use <a class="reference internal" href="../stages/filters.mad.html#filters-mad"><span class="std std-ref">filters.mad</span></a> to remove these with stock PDAL operations,
-but that filter doesn&#8217;t tell us which points it removed. Our own custom Python
+but that filter doesn’t tell us which points it removed. Our own custom Python
 filter can do this for us.</p>
 <div class="section" id="processing-stategy">
 <h3>Processing Stategy<a class="headerlink" href="#processing-stategy" title="Permalink to this headline">¶</a></h3>
@@ -268,8 +268,8 @@ deviations away from the median. We are going to print a <a class="reference ext
 contain our information, which we can then use in some downstream processing
 operation (as filtered with the <a class="reference external" href="https://stedolan.github.io/jq/">jq</a> command line utility).</p>
 <p>We also want to use <a class="reference internal" href="../quickstart.html#docker"><span class="std std-ref">Install Docker</span></a> to process our data with a <a class="reference external" href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a> script. We want to know
-for sure that we&#8217;re using PDAL&#8217;s standard release (<code class="docutils literal"><span class="pre">1.5</span></code> in this case), and
-we&#8217;d like for our operation to be agnostic to the platform on which it is
+for sure that we’re using PDAL’s standard release (<code class="docutils literal"><span class="pre">1.5</span></code> in this case), and
+we’d like for our operation to be agnostic to the platform on which it is
 running.</p>
 </div>
 </div>
@@ -343,7 +343,7 @@ prototyping tools that Python can provide.</p>
 <div class="section" id="pdal-pipeline">
 <h2><a class="toc-backref" href="#id5">PDAL Pipeline</a><a class="headerlink" href="#pdal-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>Our pipeline to apply the filter is straightforward. Because we are going to be
-processing the data with a Bash script, we&#8217;ll use some substitution to push
+processing the data with a Bash script, we’ll use some substitution to push
 our filename (taken from an argument on the command line) and our script itself.
 There is nothing much interesting except for the fact that we substitute our
 filename in its own entry so PDAL can figure out which driver to read it with.
@@ -395,7 +395,7 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
 </div>
 <div class="section" id="final-script">
 <h2><a class="toc-backref" href="#id7">Final Script</a><a class="headerlink" href="#final-script" title="Permalink to this headline">¶</a></h2>
-<p>Here&#8217;s our final script. The junk from lines 53-66 are to get bash to do variable
+<p>Here’s our final script. The junk from lines 53-66 are to get bash to do variable
 substitution into our <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> <a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON</a> without breaking its syntax doing double
 quote and newline substitution.</p>
 <p>Using our script, we can now identify which points have <code class="docutils literal"><span class="pre">Y</span></code> dimensions greater than
@@ -588,7 +588,7 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Oct 13, 2017.
+      Last updated on Oct 31, 2017.
 
     </p>
   </div> 
@@ -618,7 +618,7 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -643,7 +643,7 @@ docker <span class="nb">kill</span> <span class="nv">$container</span> <span cla
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 13, 2017.
+                    on Oct 31, 2017.
         </div>
     </div>
 
