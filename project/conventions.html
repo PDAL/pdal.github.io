@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Errors and Error Handling &mdash; pdal.io</title>
+  <title>Coding Conventions &mdash; pdal.io</title>
   
 
   
@@ -40,10 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="pdal.io" href="../index.html"/>
-        <link rel="up" title="Development" href="index.html"/>
-        <link rel="next" title="Metadata" href="metadata.html"/>
-        <link rel="prev" title="Dependencies" href="compilation/dependencies.html"/> 
+    <link rel="top" title="pdal.io" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -126,24 +123,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Development</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="overview.html">PDAL Architecture Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation/index.html">Compilation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Errors and Error Handling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#exceptions">Exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pdal-position-on-non-conformance">PDAL Position on (Non)conformance</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writing-reader.html">Writing a reader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writing-writer.html">Writing a writer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake.html">CMake</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
@@ -180,9 +161,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Home</a> &raquo;</li>
       
-        <li><a href="index.html">Development</a> &raquo;</li>
-      
-    <li>Errors and Error Handling</li>
+    <li>Coding Conventions</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -194,36 +173,112 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="errors-and-error-handling">
-<span id="development-errorhandling"></span><h1>Errors and Error Handling<a class="headerlink" href="#errors-and-error-handling" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-<p>PDAL typically throws a <code class="docutils literal"><span class="pre">std::runtime_error</span></code> for error conditions that is
-catchable as <code class="docutils literal"><span class="pre">pdal::pdal_error</span></code>.</p>
+  <div class="section" id="coding-conventions">
+<span id="development-conventions"></span><h1>Coding Conventions<a class="headerlink" href="#coding-conventions" title="Permalink to this headline">¶</a></h1>
+<p>To the extent possible and reasonable, we value consistency of source code
+formatting, class and variable naming, and so forth.</p>
+<p>This Note lists some such conventions that we would like to follow, where
+it makes sense to do so.</p>
+<div class="section" id="source-formatting">
+<h2>Source Formatting<a class="headerlink" href="#source-formatting" title="Permalink to this headline">¶</a></h2>
+<p>We use astyle (<a class="reference external" href="http://astyle.sourceforge.net">http://astyle.sourceforge.net</a>) as a tool to reformat C++
+source code files in a consistent fashion.  The file astylerc, at the top
+of the github repo, contains the default settings we use.</p>
+<p>Our conventions are:</p>
+<ul>
+<li><p class="first">LF endings (unix style), not CRLF (windows style)</p>
+</li>
+<li><p class="first">spaces, not tabs</p>
+</li>
+<li><p class="first">indent to four (4) spaces (“Four shalt be the number thou shalt count,
+and the number of the counting shall be four. Three shalt thou not count,
+neither count thou five…”)</p>
+</li>
+<li><p class="first">braces shall be on their own lines, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">foo</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="pdal-position-on-non-conformance">
-<h2>PDAL Position on (Non)conformance<a class="headerlink" href="#pdal-position-on-non-conformance" title="Permalink to this headline">¶</a></h2>
-<p>PDAL proudly and unabashedly supports formal standards/specifications for
-file formats.  We recognize, however, that in some cases files will not
-follow a given standard precisely, due to an unclear spec or simply out of
-carelessness.</p>
-<p>When reading files that are not formatted correctly:</p>
-<ul class="simple">
-<li>PDAL may try to compensate for the error.  This is typically done when as
-a practical matter the market needs support for well-known or pervasive,
-but nonetheless “broken”, upstream implementations.</li>
-<li>PDAL may explicitly reject such files.  This is typically done where we do
-not wish to continue to promote or support mistakes that should be fixed
-upstream.</li>
+</li>
+<li><p class="first">copyright header, license, and author(s) on every file</p>
+</li>
+<li><p class="first">two spaces between major units, e.g. function bodies</p>
+</li>
 </ul>
-<p>PDAL will strive to write correctly formatted files.  In some cases, however,
-PDAL may choose to offer as an option the ability to break the standard if,
-as a practical matter, doing so would significantly aid the market.  Such an
-option would never be the default behavior, however.</p>
-<p>For files that are conformant but which lie, such as the extents in the
-header being wrong, we will generally offer both the ability to propagate
-the “wrong” information and the ability to helpfully correct it on the fly;
-the latter is generally our default position.</p>
+</div>
+<div class="section" id="naming-conventions">
+<h2>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>classes should be names using UpperCamelCase</li>
+<li>functions should be in lowerCamelCase</li>
+<li>member variables should be prefixed with “m_”, followed by the name in
+lowerCamelCase – for example, “m_numberOfPoints”</li>
+<li>there should be only one class per file, and the name of the file should
+match the class name – that is, class PointData should live in files
+PointData.hpp and PointData.cpp</li>
+</ul>
+</div>
+<div class="section" id="other-conventions">
+<h2>Other Conventions<a class="headerlink" href="#other-conventions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>the use of getter and setter methods is preferred to exposing member
+variables</li>
+<li>Surround all code with “namespace pdal {…}”; where justifiable, you
+may introduce a nested namespace.</li>
+<li>Use exceptions for exceptional events that are not going to be handled
+directly within the context of where the event occurs.  Avoid status
+codes.  See pdal_error.hpp for a set of pdal-specific exception types
+you may throw.</li>
+<li>Describe use of “debug” and “verbose” settings.</li>
+<li>Don’t put member function bodies in the class declaration in the
+header file, unless clearly justified for performance reasons.
+Use the “inline” keyword in these cases(?).</li>
+<li>Use const.</li>
+<li>Don’t put “using” declarations in headers.</li>
+<li>Document all public (and protected) member functions using
+doxygen markup.</li>
+</ul>
+</div>
+<div class="section" id="layout-organization-of-source-tree">
+<h2>Layout/Organization of Source Tree<a class="headerlink" href="#layout-organization-of-source-tree" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>public headers in ./include</li>
+<li>private headers alongside source files in src/</li>
+<li>…</li>
+</ul>
+</div>
+<div class="section" id="include-conventions">
+<h2>#include Conventions<a class="headerlink" href="#include-conventions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">For public headers from the ./include/pdal directory, use angle brackets:
+#include &lt;pdal/Stage.h&gt;</p>
+</li>
+<li><p class="first">For private headers (from somehwere in ./src), use quotes:
+#include “support.hpp”</p>
+</li>
+<li><p class="first">#include lines should be grouped and arranged in this order: C++/std headers,
+3rd-party headers (e.g. gdal), pdal headers, local headers.  The
+pdal headers may be further grouped by subdirectory, e.g. drivers/liblas,
+filters, etc.</p>
+</li>
+<li><p class="first">Exception to the above: source files (.cpp) should #include their
+corresponding .hpp file first.  This assures that the header is including
+all the files it needs to.</p>
+</li>
+<li><p class="first">Don’t #include a file where a simple forward declaration will do.
+(Note: this only applies to pdal files; don’t forward declare from system
+or 3rd party headers.)</p>
+</li>
+<li><p class="first">Don’t include a file unless it actually is required to compile the source unit.</p>
+</li>
+<li><p class="first">Don’t use manual include guards. All reasonable compilers support the once pragma:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#pragma once</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 
@@ -231,15 +286,6 @@ the latter is generally our default position.</p>
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="metadata.html" class="btn btn-neutral float-right" title="Metadata" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="compilation/dependencies.html" class="btn btn-neutral" title="Dependencies" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
