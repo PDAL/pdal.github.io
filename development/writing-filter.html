@@ -137,6 +137,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#the-header">The header</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-source">The source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stagefactory">StageFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compilation">Compilation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
@@ -205,7 +206,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">10/26/2016</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">11/02/2017</td>
 </tr>
 </tbody>
 </table>
@@ -520,6 +521,29 @@ Dynamic plugins are registered at runtime.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="compilation">
+<h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
+<p>Set up a <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> file to compile your filter against PDAL:</p>
+<div class="highlight-cmake"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">FilterTutorial</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.6.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">SHARED</span> <span class="s">MyFilter.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span>
+                            <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 </div>
 
 
@@ -546,7 +570,7 @@ Dynamic plugins are registered at runtime.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Nov 02, 2017.
+      Last updated on Nov 15, 2017.
 
     </p>
   </div> 
@@ -601,7 +625,7 @@ Dynamic plugins are registered at runtime.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Nov 02, 2017.
+                    on Nov 15, 2017.
         </div>
     </div>
 
