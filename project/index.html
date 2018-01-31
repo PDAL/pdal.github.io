@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>writers.null &mdash; pdal.io</title>
+  <title>Project &mdash; pdal.io</title>
   
 
   
@@ -41,9 +41,8 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
-        <link rel="up" title="Writers" href="writers.html"/>
-        <link rel="next" title="writers.oci" href="writers.oci.html"/>
-        <link rel="prev" title="writers.nitf" href="writers.nitf.html"/> 
+        <link rel="next" title="Coding Conventions" href="conventions.html"/>
+        <link rel="prev" title="CMake" href="../development/cmake.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -108,31 +107,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
 </ul>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.matlab.html">writers.matlab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">writers.null</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.ogr.html">writers.ogr</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
@@ -146,9 +125,18 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../project/index.html">Project</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html">Coding Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs.html">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Building Docker Containers for PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alpine.html">Alpine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration.html">Continuous Integration</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
@@ -185,9 +173,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Home</a> &raquo;</li>
       
-        <li><a href="writers.html">Writers</a> &raquo;</li>
-      
-    <li>writers.null</li>
+    <li>Project</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -199,43 +185,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="writers-null">
-<span id="id1"></span><h1>writers.null<a class="headerlink" href="#writers-null" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>null writer</strong> discards its input.  No point output is produced when using
-a <strong>null writer</strong>.</p>
-<div class="admonition embed" id="embed-0">
-<p class="first admonition-title">Default Embedded Stage </p>
-<p class="last">This stage is enabled by default</p>
-</div>
-<div class="admonition streamable" id="streamable-0">
-<p class="first admonition-title">Streamable Stage</p>
-<p class="last">This stage supports streaming operations</p>
-</div>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.hexbin&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.null&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>When used with an option that forces metadata output, like
-–pipeline-serialization, this pipeline will create a hex boundary for
-the input file, but no output point data file will be produced.</p>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>The <strong>null writer</strong> discards all passed options.</p>
+  <div class="section" id="project">
+<span id="id1"></span><h1>Project<a class="headerlink" href="#project" title="Permalink to this headline">¶</a></h1>
+<p>Project resources, such as how to update the docs, where the test
+frameworks are, who develops the software, and conventions to use when
+developing new code can be found in this section.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Coding Conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#source-formatting">Source Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#naming-conventions">Naming Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#other-conventions">Other Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#layout-organization-of-source-tree">Layout/Organization of Source Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#include-conventions">#include Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html#engineering-contributors">Engineering Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html#funding-contributors">Funding Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs.html#generation">Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs.html#website">Website</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs.html#building-with-docker">Building With Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Building Docker Containers for PDAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#maintenance">Maintenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#latest-or-master">Latest (or master)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="alpine.html">Alpine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="alpine.html#packages">Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alpine.html#travis">Travis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alpine.html#docker">Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#unit-tests">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#running-the-tests">Running the Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-data">Test Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Continuous Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integration.html#status">Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration.html#travis">Travis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -246,10 +247,10 @@ the input file, but no output point data file will be produced.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="writers.oci.html" class="btn btn-neutral float-right" title="writers.oci" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="conventions.html" class="btn btn-neutral float-right" title="Coding Conventions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writers.nitf.html" class="btn btn-neutral" title="writers.nitf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../development/cmake.html" class="btn btn-neutral" title="CMake" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
