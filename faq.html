@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.6.0
+                1.7.0
               </div>
             
           
@@ -183,6 +183,11 @@
 <p>The proper spelling of the project name is PDAL, in uppercase. It is
 pronounced to rhyme with “GDAL”.</p>
 </li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul>
 <li><p class="first">Why do I get the error “Couldn’t create … stage of type …”?</p>
 <p>In almost all cases this error occurs because you’re trying to run a stage
 that is built as a plugin and the plugin (a shared library file or DLL)
@@ -202,6 +207,19 @@ for plugins.</p>
 </li>
 </ul>
 <ul id="index-1">
+<li><p class="first">Why am I using 100GB of memory when trying to process a 10GB LAZ file?</p>
+<p>If you’re performing an operation that is using
+<a class="reference internal" href="pipeline.html#processing-modes"><span class="std std-ref">standard mode</span></a>, PDAL will read all points into
+memory at once.  Compressed files, like LAZ, can decompress to much larger
+sizes before PDAL can process the data. Furthermore, some operations
+(notably <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">DEM creation</span></a>) can use large amounts of
+additional memory during processing before the output can be written.</p>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul>
 <li><p class="first">What is PDAL’s relationship to PCL?</p>
 <p>PDAL is PCL’s data translation cousin. PDAL is focused on providing a
 declarative pipeline syntax for orchestrating translation operations.
@@ -218,8 +236,15 @@ and <a class="reference internal" href="stages/writers.pcd.html#writers-pcd"><sp
 manipulation. libLAS was also trying to be partially compatible
 with LASlib and LAStools. PDAL, on the other hand, aims to be
 a ultimate library and a set of tools for manipulating and processing
-point clouds and is easily extensible by its users.</p>
+point clouds and is easily extensible by its users. Howard Butler
+talked more about this history in a <a class="reference external" href="http://geohipster.com/2018/03/05/howard-butler-like-good-song-open-source-software-chance-immortal/">GeoHipster interview</a> in
+2018.</p>
 </li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul>
 <li><p class="first">Are there any command line tools in PDAL similar to LAStools?</p>
 <p>Yes. The <code class="docutils literal"><span class="pre">pdal</span></code> command provides a wide range of features which go
 far beyond basic LIDAR data processing. Additionally, PDAL is licensed
@@ -266,7 +291,7 @@ or <code class="docutils literal"><span class="pre">translate</span></code> (see
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 09, 2018.
+      Last updated on Apr 05, 2018.
 
     </p>
   </div> 
@@ -287,7 +312,7 @@ or <code class="docutils literal"><span class="pre">translate</span></code> (see
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.6.0',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -321,7 +346,7 @@ or <code class="docutils literal"><span class="pre">translate</span></code> (see
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 09, 2018.
+                    on Apr 05, 2018.
         </div>
     </div>
 

@@ -1,0 +1,351 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>filters.neighborclassifier &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Filters" href="filters.html"/>
+        <link rel="next" title="filters.normal" href="filters.normal.html"/>
+        <link rel="prev" title="filters.mongus" href="filters.mongus.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="filters.html#create">Create</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.assign.html">filters.assign</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.cluster.html">filters.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.elm.html">filters.elm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.kdistance.html">filters.kdistance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.mongus.html">filters.mongus</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">filters.neighborclassifier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-1">Example 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2">Example 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.outlier.html">filters.outlier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.overlay.html">filters.overlay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.pmf.html">filters.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.radialdensity.html">filters.radialdensity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.smrf.html">filters.smrf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#order">Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#move">Move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#cull">Cull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#new">New</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#join">Join</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#metadata">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#mesh">Mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#languages">Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#other">Other</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/index.html">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="filters.html">Filters</a> &raquo;</li>
+      
+    <li>filters.neighborclassifier</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="filters-neighborclassifier">
+<span id="id1"></span><h1>filters.neighborclassifier<a class="headerlink" href="#filters-neighborclassifier" title="Permalink to this headline">¶</a></h1>
+<p>The neighborclassifier filter allows you update the value of the classification
+for specific points to a value determined by a K-nearest neighbors vote.
+For each point, the k nearest neighbors are queried and if more than half of
+them have the same value, the filter updates the selected point accordingly</p>
+<p>For example, if an automated classification procedure put/left erroneous
+vegetation points near the edges of buildings which were largely classified
+correctly, you could try using this filter to fix that problem.</p>
+<p>Similiarly, some automated classification processes result in prediction for
+only a subset of the original point cloud.  This filter could be used to
+extrapolate those predictions to the original.</p>
+<div class="admonition embed" id="embed-0">
+<p class="first admonition-title">Default Embedded Stage </p>
+<p class="last">This stage is enabled by default</p>
+</div>
+<div class="section" id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>This pipeline updates the Classification of all points with classification
+1 (unclassified) based on the consensus (majority) of its nearest 10 neighbors.</p>
+</div>
+<div class="section" id="example-2">
+<h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>This pipeline moves all the classifications from “pred.txt”
+to src.las.  Any points in src.las that are not in pred.txt will be
+assigned based on the closest point in pred.txt.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>candidate</dt>
+<dd>A filename which points to the point cloud containing the points which
+will do the voting.  If not specified, defaults to the input of the filter.</dd>
+<dt>domain</dt>
+<dd>A <a class="reference internal" href="filters.range.html#ranges"><span class="std std-ref">range</span></a> which selects points to be processed by the filter.
+Can be specified multiple times.  Points satisfying any range will be
+processed</dd>
+<dt>k</dt>
+<dd>An integer which specifies the number of neighbors which vote on each
+selected point.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="filters.normal.html" class="btn btn-neutral float-right" title="filters.normal" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="filters.mongus.html" class="btn btn-neutral" title="filters.mongus" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2018
+                        <a href="https://github.com/abellgithub">Andrew Bell</a>,
+                        <a href="https://github.com/chambbj">Brad Chambers</a>,
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 05, 2018.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2018
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 05, 2018.
+        </div>
+    </div>
+
+</body>
+</html>

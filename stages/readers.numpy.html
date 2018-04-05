@@ -1,0 +1,451 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readers.numpy &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Readers" href="readers.html"/>
+        <link rel="next" title="readers.oci" href="readers.oci.html"/>
+        <link rel="prev" title="readers.nitf" href="readers.nitf.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">readers.numpy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#array-types">Array Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#named-field-arrays">Named Field Arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#two-dimensional-arrays">Two-dimensional Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.ply.html">readers.ply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pts.html">readers.pts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.qfit.html">readers.qfit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/index.html">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="readers.html">Readers</a> &raquo;</li>
+      
+    <li>readers.numpy</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="readers-numpy">
+<span id="id1"></span><h1>readers.numpy<a class="headerlink" href="#readers-numpy" title="Permalink to this headline">¶</a></h1>
+<p>PDAL has support for processing data using <a class="reference internal" href="filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a>, but it is also
+convenient to read data from <a class="reference external" href="http://www.numpy.org/">Numpy</a> for processing in PDAL.</p>
+<p><a class="reference external" href="http://www.numpy.org/">Numpy</a> supports saving files with the <code class="docutils literal"><span class="pre">save</span></code> method, usually with the
+extension <code class="docutils literal"><span class="pre">.npy</span></code>. As of PDAL 1.7.0, <code class="docutils literal"><span class="pre">.npz</span></code> files were not yet supported.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is untested whether the version of Python PDAL was linked against and
+the version that saved the <code class="docutils literal"><span class="pre">.npy</span></code> files can be mixed.</p>
+</div>
+<div class="section" id="array-types">
+<h2>Array Types<a class="headerlink" href="#array-types" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#readers-numpy"><span class="std std-ref">readers.numpy</span></a> supports reading data in two forms:</p>
+<ul class="simple">
+<li>Arrays as named fields all of the same shape (from <a class="reference external" href="https://github.com/laspy/laspy">laspy</a> for example)</li>
+<li>2-dimensional arrays</li>
+</ul>
+<div class="section" id="named-field-arrays">
+<h3>Named Field Arrays<a class="headerlink" href="#named-field-arrays" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/laspy/laspy">laspy</a> provides its <code class="docutils literal"><span class="pre">.points</span></code> Numpy array as a bunch of named fields:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">laspy</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">laspy</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;test/data/autzen/autzen.las&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span> <span class="p">((</span><span class="mi">63608330</span><span class="p">,</span> <span class="mi">84939865</span><span class="p">,</span> <span class="mi">40735</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">7326</span><span class="p">,</span>  <span class="mf">245385.60820904</span><span class="p">),)],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;point&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flag_byte&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;raw_classification&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scan_angle_rank&#39;</span><span class="p">,</span> <span class="s1">&#39;i1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;user_data&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pt_src_id&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;gps_time&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">)])])</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#readers-numpy"><span class="std std-ref">readers.numpy</span></a> supports reading these Numpy arrays and mapping applicable
+names to <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> names. It will try to remove <code class="docutils literal"><span class="pre">_</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, and <code class="docutils literal"><span class="pre">space</span></code> from
+the field name and use that as a dimension name if it can match. Types are also
+preserved when mapped to PDAL.</p>
+</div>
+<div class="section" id="two-dimensional-arrays">
+<h3>Two-dimensional Arrays<a class="headerlink" href="#two-dimensional-arrays" title="Permalink to this headline">¶</a></h3>
+<p>Typical two-dimensional <a class="reference external" href="http://www.numpy.org/">Numpy</a> arrays are also supported, with options to allow
+you to map the values in the cells using the <code class="docutils literal"><span class="pre">dimension</span></code> option. Additionally,
+you can override the <cite>Z</cite> value for the entire array by using the <code class="docutils literal"><span class="pre">assign_z</span></code>
+option to set a single <cite>Z</cite> value for the entire point cloud. Mapping the values to the
+<code class="docutils literal"><span class="pre">Z</span></code> dimension using the <code class="docutils literal"><span class="pre">dimension</span></code> option is also allowed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./perlin.npy&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,)</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">dtype</span>
+<span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, the cell locations are mapped to X and Y dimensions, the cell
+values are mapped to <code class="docutils literal"><span class="pre">Intensity</span></code> using the <code class="docutils literal"><span class="pre">dimension</span></code> option, and the Z
+values are assigned to 4 using the <code class="docutils literal"><span class="pre">assign_z</span></code> option.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">perlin</span><span class="o">.</span><span class="n">npy</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">dimension</span><span class="o">=</span><span class="n">Intensity</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">assign_z</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;perlin.npy&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;pdal_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.6.0 (git-version: 897afd)&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;stats&quot;</span><span class="p">:</span>
+  <span class="p">{</span>
+        <span class="s2">&quot;statistic&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mf">49.995</span><span class="p">,</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.201226882</span><span class="p">,</span>
+            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.0001281084091</span><span class="p">,</span>
+            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">29.16793715</span><span class="p">,</span>
+            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">850.7685575</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.1996846</span><span class="p">,</span>
+            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">8.69273658e-05</span><span class="p">,</span>
+            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">28.87401021</span><span class="p">,</span>
+            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">833.7084657</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="mi">9997</span><span class="p">,</span>
+            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="mf">1.844674407e+21</span><span class="p">,</span>
+            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">0.04000200015</span><span class="p">,</span>
+            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">0.001600160016</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mf">0.01112664759</span><span class="p">,</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5634013693</span><span class="p">,</span>
+            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mf">0.5189296418</span><span class="p">,</span>
+            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5189296418</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Intensity&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1127124452</span><span class="p">,</span>
+            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">0.2024120437</span><span class="p">,</span>
+            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">0.04097063545</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition plugin" id="plugin-0">
+<p class="first admonition-title">Dynamic Plugin</p>
+<p class="last">This stage requires a dynamic plugin to operate</p>
+</div>
+<div class="admonition streamable" id="streamable-0">
+<p class="first admonition-title">Streamable Stage</p>
+<p class="last">This stage supports streaming operations</p>
+</div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>npy file to read [Required]</dd>
+<dt>dimension</dt>
+<dd>Dimension name from <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to map raster values</dd>
+<dt>x</dt>
+<dd>Dimension number (starting from 0) to map to the <code class="docutils literal"><span class="pre">X</span></code> PDAL <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a></dd>
+<dt>y</dt>
+<dd>Dimension number (starting from 0) to map to the <code class="docutils literal"><span class="pre">Y</span></code> PDAL <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a></dd>
+<dt>z</dt>
+<dd>Dimension number (starting from 0) to map to the <code class="docutils literal"><span class="pre">Z</span></code> PDAL <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a></dd>
+<dt>assign_z</dt>
+<dd>A single value to override for <code class="docutils literal"><span class="pre">Z</span></code> values when <code class="docutils literal"><span class="pre">dimension</span></code> is used to assign the
+Numpy values to another dimension</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="readers.oci.html" class="btn btn-neutral float-right" title="readers.oci" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="readers.nitf.html" class="btn btn-neutral" title="readers.nitf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2018
+                        <a href="https://github.com/abellgithub">Andrew Bell</a>,
+                        <a href="https://github.com/chambbj">Brad Chambers</a>,
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 05, 2018.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2018
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 05, 2018.
+        </div>
+    </div>
+
+</body>
+</html>
