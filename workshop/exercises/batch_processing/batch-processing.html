@@ -211,14 +211,14 @@
 <span id="workshop-batch-processing"></span><h1>Batch Processing<a class="headerlink" href="#batch-processing" title="Permalink to this headline">¶</a></h1>
 <p>PDAL doesn’t handle matching multiple file inputs except for glob handling for merge operations,
 but does allow for command line substitution parameters to make batch processing simpler,
-<span class="xref std std-ref">substitutions</span>. Substitions work with both <a class="reference internal" href="../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> operations as well as with
+substitutions. Substitions work with both <a class="reference internal" href="../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> operations as well as with
 other applications such as <span class="xref std std-ref">translate</span>.</p>
 <div class="section" id="operating-system-variations">
 <h2>Operating system variations<a class="headerlink" href="#operating-system-variations" title="Permalink to this headline">¶</a></h2>
 <p>How substitutions are passed generally depends on the operating system and tools available.
 In the unix/linux environments, this is primarily using the <cite>find</cite> and <cite>ls</cite> programs to get
 lists of files (either with directories or just filenames) and the <cite>xargs</cite> program to pass
-those files to the <cite>pdal</cite> application (although <cite>-exec</cite> with <cite>find</cite> can also be used). These
+those files to the <span class="xref std std-ref">pdal</span> application (although <cite>-exec</cite> with <cite>find</cite> can also be used). These
 tools are available in the <cite>docker</cite> environment if you are running <cite>PDAL</cite> under docker. They
 are also available under Windows one installs <cite>Cygwin</cite> or <cite>MinGW</cite>. They are also available if
 Git for Windows is installed. They are also available as win32 command line programs installed
@@ -256,9 +256,9 @@ using the <cite>{}</cite> syntax.</p>
 <div class="section" id="exercise-pipeline-substitions">
 <h2>Exercise - Pipeline Substitions:<a class="headerlink" href="#exercise-pipeline-substitions" title="Permalink to this headline">¶</a></h2>
 <p>For the most flexibility, pipelines are used to apply a series of opertations to a file (or group
-of files). In this excersise, we build on the <cite>dtm</cite> pipeline example, but run this pipline over 4 files and
-reproject, calculate a bare earth using the <cite>filters.srtm</cite> filter, remove those points that aren’t bare earth
-with <cite>filters.range</cite> and then write the output using the <cite>writers.gdal</cite>.</p>
+of files). In this excersise, we build on the <a class="reference internal" href="../analysis/dtm/dtm.html#workshop-dtm"><span class="std std-ref">Generating a DTM</span></a> pipeline example, but run this pipline over 4 files and
+reproject, calculate a bare earth using the <a class="reference internal" href="../../../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a> filter, remove those points that aren’t bare earth
+with <a class="reference internal" href="../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> and then write the output using the <a class="reference internal" href="../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>.</p>
 <p>The pipeline we are using is:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -288,7 +288,13 @@ with <cite>filters.range</cite> and then write the output using the <cite>writer
 </div>
 <p>You might have spotted that this pipeline doesn’t have any input or output file references, or a value for the
 output spatial reference. We will be adding those at the command line, not within the actual pipeline and
-using the <span class="xref std std-ref">substitutions</span> syntax to do this.</p>
+using the substitutions syntax to do this.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span>$env:PATH=&quot;$PATH;C:\OSGeo4W64\bin\&quot;
+$env:GDAL_DATA=&quot;C:\OSGeo4W64\share\gdal\&quot;
+
+PS C:\Users\hobu\exercises\batch&gt; Get-ChildItem  C:\Users\administrator\exercises\batch\ll\*.laz | foreach {pdal pipeline C:\Users\hobu\exercises\batch\batch_srs_gdal.json --readers.las.filename=.\ll\$($_.BaseName).laz --writers.gdal.filename=.\dtm\$($_.BaseName).tif --filters.reprojection.out_srs=epsg:26919}
+</pre></div>
+</div>
 </div>
 </div>
 
