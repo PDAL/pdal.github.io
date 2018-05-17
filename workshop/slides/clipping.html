@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     
     
@@ -64,7 +64,7 @@
 </ul>
 </dd>
 </dl>
-<p><a class="reference external" href="https://www.pdal.io/workshop/exercises/analysis/clipping/clipping.html#workshop-clipping" title="(in PDAL v1.5.0)"><span class="xref std std-ref">Clipping Workshop Materials</span></a></p>
+<p><a class="reference external" href="https://pdal.io/workshop/exercises/analysis/clipping/clipping.html#workshop-clipping" title="(in PDAL v1.7.2)"><span class="xref std std-ref">Clipping Workshop Materials</span></a></p>
 
 
 
@@ -122,23 +122,25 @@
 
 <h1>Clipping (vrt)</h1>
 
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="o">&lt;</span><span class="n">OGRVRTDataSource</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="n">OGRVRTWarpedLayer</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="n">OGRVRTLayer</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="n">SrcDataSource</span><span class="o">&gt;</span><span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">attributes</span><span class="o">.</span><span class="n">json</span><span class="o">&lt;/</span><span class="n">SrcDataSource</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="n">LayerSRS</span><span class="o">&gt;</span><span class="n">EPSG</span><span class="p">:</span><span class="mi">4326</span><span class="o">&lt;/</span><span class="n">LayerSRS</span><span class="o">&gt;</span>
-            <span class="o">&lt;/</span><span class="n">OGRVRTLayer</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="n">TargetSRS</span><span class="o">&gt;+</span><span class="n">proj</span><span class="o">=</span><span class="n">lcc</span> <span class="o">+</span><span class="n">lat_1</span><span class="o">=</span><span class="mi">43</span> <span class="o">+</span><span class="n">lat_2</span><span class="o">=</span><span class="mf">45.5</span> <span class="o">+</span><span class="n">lat_0</span><span class="o">=</span><span class="mf">41.75</span> <span class="o">+</span><span class="n">lon_0</span><span class="o">=-</span><span class="mf">120.5</span> <span class="o">+</span><span class="n">x_0</span><span class="o">=</span><span class="mf">399999.9999999999</span> <span class="o">+</span><span class="n">y_0</span><span class="o">=</span><span class="mi">0</span> <span class="o">+</span><span class="n">ellps</span><span class="o">=</span><span class="n">GRS80</span> <span class="o">+</span><span class="n">units</span><span class="o">=</span><span class="n">ft</span> <span class="o">+</span><span class="n">no_defs</span><span class="o">&lt;/</span><span class="n">TargetSRS</span><span class="o">&gt;</span>
-        <span class="o">&lt;/</span><span class="n">OGRVRTWarpedLayer</span><span class="o">&gt;</span>
-    <span class="o">&lt;/</span><span class="n">OGRVRTDataSource</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">OGRVRTDataSource</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">OGRVRTWarpedLayer</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">OGRVRTLayer</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">SrcDataSource</span><span class="o">&gt;</span><span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">attributes</span><span class="o">.</span><span class="n">json</span><span class="o">&lt;/</span><span class="n">SrcDataSource</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">SrcLayer</span><span class="o">&gt;</span><span class="n">attributes</span><span class="o">&lt;/</span><span class="n">SrcLayer</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">LayerSRS</span><span class="o">&gt;</span><span class="n">EPSG</span><span class="p">:</span><span class="mi">4326</span><span class="o">&lt;/</span><span class="n">LayerSRS</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">OGRVRTLayer</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">TargetSRS</span><span class="o">&gt;+</span><span class="n">proj</span><span class="o">=</span><span class="n">lcc</span> <span class="o">+</span><span class="n">lat_1</span><span class="o">=</span><span class="mi">43</span> <span class="o">+</span><span class="n">lat_2</span><span class="o">=</span><span class="mf">45.5</span> <span class="o">+</span><span class="n">lat_0</span><span class="o">=</span><span class="mf">41.75</span> <span class="o">+</span><span class="n">lon_0</span><span class="o">=-</span><span class="mf">120.5</span> <span class="o">+</span><span class="n">x_0</span><span class="o">=</span><span class="mf">399999.9999999999</span> <span class="o">+</span><span class="n">y_0</span><span class="o">=</span><span class="mi">0</span> <span class="o">+</span><span class="n">ellps</span><span class="o">=</span><span class="n">GRS80</span> <span class="o">+</span><span class="n">units</span><span class="o">=</span><span class="n">ft</span> <span class="o">+</span><span class="n">no_defs</span><span class="o">&lt;/</span><span class="n">TargetSRS</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">OGRVRTWarpedLayer</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">OGRVRTDataSource</span><span class="o">&gt;</span>
 </pre></div>
 </td></tr></table></div>
 
@@ -151,7 +153,7 @@
 <h1>Clipping (pipeline)</h1>
 
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">translate</span></code> not expressive enough</li>
+<li><code class="docutils literal notranslate"><span class="pre">translate</span></code> not expressive enough</li>
 <li>Complex operations (merge, filter, write)</li>
 <li>Repeatable operations with substitution</li>
 </ul>
@@ -164,7 +166,7 @@
 
 <h1>Clipping (pipeline)</h1>
 
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -209,10 +211,10 @@
 <h1>Pipeline</h1>
 
 <ol class="arabic simple">
-<li><a class="reference external" href="https://www.pdal.io/stages/readers.las.html#readers-las" title="(in PDAL v1.5.0)"><span class="xref std std-ref">readers.las</span></a></li>
-<li><a class="reference external" href="https://www.pdal.io/stages/filters.overlay.html#filters-overlay" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.overlay</span></a></li>
-<li><a class="reference external" href="https://www.pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.range</span></a></li>
-<li><a class="reference external" href="https://www.pdal.io/stages/writers.las.html#writers-las" title="(in PDAL v1.5.0)"><span class="xref std std-ref">writers.las</span></a></li>
+<li><a class="reference external" href="https://pdal.io/stages/readers.las.html#readers-las" title="(in PDAL v1.7.2)"><span class="xref std std-ref">readers.las</span></a></li>
+<li><a class="reference external" href="https://pdal.io/stages/filters.overlay.html#filters-overlay" title="(in PDAL v1.7.2)"><span class="xref std std-ref">filters.overlay</span></a></li>
+<li><a class="reference external" href="https://pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.7.2)"><span class="xref std std-ref">filters.range</span></a></li>
+<li><a class="reference external" href="https://pdal.io/stages/writers.las.html#writers-las" title="(in PDAL v1.7.2)"><span class="xref std std-ref">writers.las</span></a></li>
 </ol>
 
 
@@ -264,7 +266,7 @@
 
 <h1>Clipping (command)</h1>
 
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
     <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">clipping</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
@@ -289,9 +291,9 @@
 <h1>Other ways to clip</h1>
 
 <ul>
-<li><p class="first">Clip using multiple <a class="reference external" href="https://www.pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.range</span></a></p>
+<li><p class="first">Clip using multiple <a class="reference external" href="https://pdal.io/stages/filters.range.html#filters-range" title="(in PDAL v1.7.2)"><span class="xref std std-ref">filters.range</span></a></p>
 </li>
-<li><p class="first"><a class="reference external" href="https://www.pdal.io/stages/filters.divider.html#filters-divider" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.divider</span></a> or <a class="reference external" href="https://www.pdal.io/stages/filters.chipper.html#filters-chipper" title="(in PDAL v1.5.0)"><span class="xref std std-ref">filters.chipper</span></a></p>
+<li><p class="first"><a class="reference external" href="https://pdal.io/stages/filters.divider.html#filters-divider" title="(in PDAL v1.7.2)"><span class="xref std std-ref">filters.divider</span></a> or <a class="reference external" href="https://pdal.io/stages/filters.chipper.html#filters-chipper" title="(in PDAL v1.7.2)"><span class="xref std std-ref">filters.chipper</span></a></p>
 <blockquote>
 <div><img alt="_images/filters.chipper.img2.png" src="_images/filters.chipper.img2.png" />
 </div></blockquote>

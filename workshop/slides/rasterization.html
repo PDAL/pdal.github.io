@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rasterizing Attributes &mdash; Point Cloud Processing with PDAL</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    
+    
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2017.07.25',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Point Cloud Processing with PDAL" href="index.html" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  
+<article class="slide level-1" id="rasterizing-attributes">
+
+<h1>Rasterizing Attributes</h1>
+
+<dl class="docutils">
+<dt>Purpose:</dt>
+<dd><ul class="first last simple">
+<li>Utilize <a class="reference external" href="https://pdal.io/stages/readers.greyhound.html#readers-greyhound" title="(in PDAL v1.7.2)"><span class="xref std std-ref">readers.greyhound</span></a></li>
+<li>Interpolate data (Intensity, Classification)</li>
+<li>Use <a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a> to apply color ramps</li>
+<li>Explore <a class="reference external" href="https://pdal.io/stages/writers.gdal.html#writers-gdal" title="(in PDAL v1.7.2)"><span class="xref std std-ref">writers.gdal</span></a> options</li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="https://pdal.io/workshop/exercises/analysis/rasterize/rasterize.html#workshop-rasterize" title="(in PDAL v1.7.2)"><span class="xref std std-ref">Rasterization Workshop Materials</span></a></p>
+
+
+
+
+</article>
+<article class="slide level-1" id="readers-greyhound">
+
+<h1><a class="reference external" href="https://pdal.io/stages/readers.greyhound.html#readers-greyhound" title="(in PDAL v1.7.2)"><span class="xref std std-ref">readers.greyhound</span></a></h1>
+
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na.greyhound.io/resource/dk-z/read?depthBegin=1&amp;depthEnd=29&amp;bounds=[11045777.34375,-11852109.375,223441.40625,11055492.1875,-11842394.53125,233156.25]&amp;compress=true&amp;scale=0.01&amp;offset=[1295630,7596240,-2280]&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;denmark-classification.tif&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;data_type&quot;</span><span class="p">:</span><span class="s2">&quot;uint16_t&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;resolution&quot;</span><span class="p">:</span><span class="mf">30.0</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+
+
+
+
+</article>
+<article class="slide level-1" id="pdal-pipeline">
+
+<h1><a class="reference external" href="https://pdal.io/pipeline.html#pipeline" title="(in PDAL v1.7.2)"><span class="xref std std-ref">pdal pipeline</span></a></h1>
+
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="n">classification</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="yuck">
+
+<h1>Yuck</h1>
+
+<a class="reference internal image-reference" href="_images/rasterization-denmark-no-ramp.png"><img alt="_images/rasterization-denmark-no-ramp.png" src="_images/rasterization-denmark-no-ramp.png" style="width: 648.0px; height: 648.0px;" /></a>
+
+
+
+
+</article>
+<article class="slide level-1" id="color-ramp">
+
+<h1>Color Ramp</h1>
+
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># QGIS Generated Color Map Export File</span>
+<span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">1</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">2</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">3</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">62</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">4</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">5</span><span class="p">,</span><span class="mi">209</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="mi">201</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">6</span><span class="p">,</span><span class="mi">249</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">197</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">8</span><span class="p">,</span><span class="mi">133</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span>
+<span class="mi">10</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span>
+</pre></div>
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="id1">
+
+<h1><a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a></h1>
+
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">color</span><span class="o">-</span><span class="n">relief</span> <span class="o">^</span>
+   <span class="n">denmark</span><span class="o">-</span><span class="n">classification</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
+   <span class="n">ramp</span><span class="o">.</span><span class="n">txt</span> <span class="o">^</span>
+   <span class="n">classified</span><span class="o">-</span><span class="n">color</span><span class="o">.</span><span class="n">png</span> <span class="o">^</span>
+   <span class="o">-</span><span class="n">exact_color_entry</span> <span class="o">^</span>
+   <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
+</pre></div>
+</div>
+
+
+
+
+</article>
+<article class="slide level-1" id="better">
+
+<h1>Better</h1>
+
+<a class="reference internal image-reference" href="_images/rasterization-colored-classification.png"><img alt="_images/rasterization-colored-classification.png" src="_images/rasterization-colored-classification.png" style="width: 648.0px; height: 648.0px;" /></a>
+
+
+
+
+</article>
+<article class="slide level-1" id="intensity">
+
+<h1>Intensity</h1>
+
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="n">classification</span><span class="o">.</span><span class="n">json</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">dimension</span><span class="o">=</span><span class="s2">&quot;Intensity&quot;</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">data_type</span><span class="o">=</span><span class="s2">&quot;float&quot;</span> <span class="o">^</span>
+    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;intensity.tif&quot;</span>
+
+<span class="n">gdal_translate</span> <span class="n">intensity</span><span class="o">.</span><span class="n">tif</span> <span class="n">intensity</span><span class="o">.</span><span class="n">png</span> <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
+</pre></div>
+</td></tr></table></div>
+
+
+
+
+</article>
+<article class="slide level-1" id="intensity-image">
+
+<h1>Intensity Image</h1>
+
+<a class="reference internal image-reference" href="_images/rasterization-colored-intensity.png"><img alt="_images/rasterization-colored-intensity.png" src="_images/rasterization-colored-intensity.png" style="width: 648.0px; height: 648.0px;" /></a>
+
+
+
+
+</article>
+<article class="slide level-1" id="home">
+
+<h1>Home</h1>
+
+<p><a class="reference internal" href="index.html#home"><span class="std std-ref">Home</span></a></p>
+
+
+
+
+</article>
+
+</section>
+
+<section id="slide_notes">
+
+</section>
+
+  </body>
+</html>

@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     
     
@@ -59,7 +59,7 @@
 <dd><ul class="first last simple">
 <li>Generate a DTM from ground-filtered data</li>
 <li>Data was created in <a class="reference internal" href="ground.html#ground"><span class="std std-ref">Identifying ground</span></a></li>
-<li>Visualize DTM using <a class="reference external" href="../../_build/html/../../../../_build/html/qgis.html#qgis" title="(in Point Cloud Processing and Analysis with PDAL v)"><span>QGIS</span></a></li>
+<li>Visualize DTM using <a class="reference external" href="https://pdal.io/workshop/qgis.html#qgis" title="(in PDAL v1.7.2)"><span>QGIS</span></a></li>
 </ul>
 </dd>
 </dl>
@@ -74,7 +74,7 @@
 <h1>writers.gdal</h1>
 
 <ul class="simple">
-<li><a class="reference external" href="https://www.pdal.io/stages/writers.gdal.html#writers-gdal" title="(in PDAL v1.5.0)"><span class="xref std std-ref">writers.gdal</span></a></li>
+<li><a class="reference external" href="https://pdal.io/stages/writers.gdal.html#writers-gdal" title="(in PDAL v1.7.2)"><span class="xref std std-ref">writers.gdal</span></a></li>
 <li>Ported points2grid (OpenTopography)</li>
 <li>IDW available for fill-in</li>
 <li>Write TIFF/ASCII raster</li>
@@ -89,15 +89,14 @@
 
 <h1>DTM (pipeline)</h1>
 
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/ground/denoised-ground-only.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
             <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/dtm/dtm.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;output_format&quot;</span><span class="p">:</span><span class="s2">&quot;tif&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;gdaldriver&quot;</span><span class="p">:</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
             <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grid_dist_x&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grid_dist_y&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resolution&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.gdal&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
@@ -114,7 +113,7 @@
 
 <h1>DTM (execution)</h1>
 
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
