@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.6.0
+                1.7.2
               </div>
             
           
@@ -127,6 +127,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
@@ -298,12 +299,17 @@ int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double.
 <cite>_t</cite> may be added to any of the type names as well (e.g., uint32_t).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The presence of an extra bytes VLR causes when reading a version 1.4 LAS file
+<p class="last">The presence of an extra bytes VLR when reading a version
+1.4 file or a version 1.0 - 1.3 file with <strong>use_eb_vlr</strong> set
 causes this option to be ignored.</p>
 </div>
 </dd>
 </dl>
 <dl class="docutils">
+<dt><span class="target" id="use-eb-vlr">use_eb_vlr</span></dt>
+<dd>If an extra bytes VLR is found in a version 1.0 - 1.3 file, use it as if it
+were in a 1.4 file. This option has no effect when reading a version 1.4 file.
+[Default: false]</dd>
 <dt><span class="target" id="compression">compression</span></dt>
 <dd>May be set to “lazperf” or “laszip” to choose either the LazPerf decompressor
 or the LASzip decompressor for LAZ files.  PDAL must have been built with
@@ -313,7 +319,7 @@ doesn’t support version 1 LAZ files or version 1.4 of LAS.
 <dt><span class="target" id="spatialreference">spatialreference</span></dt>
 <dd>Sets the spatial reference for the file data.  Overrides any spatial
 reference information in the file itself.  Most text-based formats of
-SRS information are accepted, including WKT and proj.4.</dd>
+SRS information are accepted, including WKT and proj.4. [Optional]</dd>
 <dt><span class="target" id="count">count</span></dt>
 <dd>Maximum number of points read [Optional]</dd>
 </dl>
@@ -367,7 +373,7 @@ SRS information are accepted, including WKT and proj.4.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.6.0',
+            VERSION:'1.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

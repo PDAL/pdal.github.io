@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.6.0
+                1.7.2
               </div>
             
           
@@ -243,10 +243,7 @@ reader functions. In this tutorial, we will give a brief example.</p>
 25
 26
 27
-28
-29
-30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyReader.hpp</span>
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyReader.hpp</span>
 
 <span class="cp">#pragma once</span>
 
@@ -260,9 +257,6 @@ reader functions. In this tutorial, we will give a brief example.</p>
   <span class="p">{</span>
   <span class="k">public</span><span class="o">:</span>
     <span class="n">MyReader</span><span class="p">()</span> <span class="o">:</span> <span class="n">Reader</span><span class="p">()</span> <span class="p">{};</span>
-
-    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
-    <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
   <span class="k">private</span><span class="o">:</span>
@@ -279,23 +273,6 @@ reader functions. In this tutorial, we will give a brief example.</p>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>In your MyReader class, you will declare the necessary methods and variables
-needed to make the reader work and meet the plugin specifications.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
-    <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
-</pre></div>
-</td></tr></table></div>
-<p>These methods are required to fulfill the specs for defining a new plugin.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">ILeStream</span><span class="o">&gt;</span> <span class="n">m_stream</span><span class="p">;</span>
-    <span class="n">point_count_t</span> <span class="n">m_index</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">m_scale_z</span><span class="p">;</span>
-</pre></div>
-</td></tr></table></div>
 <p><code class="docutils literal"><span class="pre">m_stream</span></code> is used to process the input, while <code class="docutils literal"><span class="pre">m_index</span></code> is used to track
 the index of the records.  <code class="docutils literal"><span class="pre">m_scale_z</span></code> is specific to MyReader, and will
 be described later.</p>
@@ -303,11 +280,11 @@ be described later.</p>
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">);</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">addDimensions</span><span class="p">(</span><span class="n">PointLayoutPtr</span> <span class="n">layout</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">);</span>
     <span class="k">virtual</span> <span class="n">point_count_t</span> <span class="nf">read</span><span class="p">(</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">,</span> <span class="n">point_count_t</span> <span class="n">count</span><span class="p">);</span>
     <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">done</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">);</span>
-  <span class="p">};</span>
-<span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <p>Various other override methods for the stage.  There are a few others that
@@ -434,20 +411,23 @@ that a reader can override or implement.</p>
 111
 112
 113
-114</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyReader.cpp</span>
+114
+115
+116</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyReader.cpp</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;MyReader.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/pdal_macros.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;pdal/util/ProgramArgs.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">pdal</span>
 <span class="p">{</span>
-  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span>
+  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span>
+  <span class="p">{</span>
     <span class="s">&quot;readers.myreader&quot;</span><span class="p">,</span>
     <span class="s">&quot;My Awesome Reader&quot;</span><span class="p">,</span>
-    <span class="s">&quot;http://link/to/documentation&quot;</span> <span class="p">);</span>
+    <span class="s">&quot;http://link/to/documentation&quot;</span>
+  <span class="p">};</span>
 
-  <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyReader</span><span class="p">,</span> <span class="n">Reader</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
+  <span class="n">CREATE_SHARED_STAGE</span><span class="p">(</span><span class="n">MyReader</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
 
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyReader</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
 
@@ -478,7 +458,8 @@ that a reader can override or implement.</p>
       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bConverted</span><span class="p">)</span>
       <span class="p">{</span>
           <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">oss</span><span class="p">;</span>
-          <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unable to convert &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">[</span><span class="n">fieldno</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, to double&quot;</span><span class="p">;</span>
+          <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unable to convert &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">[</span><span class="n">fieldno</span><span class="p">]</span> <span class="o">&lt;&lt;</span>
+              <span class="s">&quot;, to double&quot;</span><span class="p">;</span>
           <span class="k">throw</span> <span class="nf">pdal_error</span><span class="p">(</span><span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">());</span>
       <span class="p">}</span>
 
@@ -550,31 +531,28 @@ that a reader can override or implement.</p>
 <span class="p">}</span> <span class="c1">//namespace pdal</span>
 </pre></div>
 </td></tr></table></div>
-<p>In your reader implementation, you will use a macro defined in pdal_macros.</p>
+<p>In your reader implementation, you will use a macro to create the plugin.
+This macro registers the plugin with the PDAL PluginManager.  In this case,
+we are declaring this as a SHARED stage, meaning that it will be loaded at
+runtime instead of being linked
+to the main PDAL installation.  The macro is supplied with the class name
+of the plugin and a PluginInfo object.  The PluginInfo objection includes
+the name of the plugin, a description, and a link to documentation.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span>
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span>
+  <span class="p">{</span>
     <span class="s">&quot;readers.myreader&quot;</span><span class="p">,</span>
     <span class="s">&quot;My Awesome Reader&quot;</span><span class="p">,</span>
-    <span class="s">&quot;http://link/to/documentation&quot;</span> <span class="p">);</span>
-</pre></div>
-</td></tr></table></div>
-<p>This macro registers the plugin with the PDAL code.  In this case, we are
-declaring this as a SHARED plugin, meaning that it will be located external
-to the main PDAL installation.  The macro is supplied with a version number
-(major and minor), the class of the plugin, the parent class (in this case,
-to identify it as a reader), and an object with information.  This information
-includes the name of the plugin, a description, and a link to documentation.</p>
-<p>Creating STATIC plugins requires a few more steps which will not be covered
-in this tutorial.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyReader</span><span class="o">::</span><span class="n">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;z_scale&quot;</span><span class="p">,</span> <span class="s">&quot;Z Scaling&quot;</span><span class="p">,</span> <span class="n">m_scale_z</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
-  <span class="p">}</span>
+    <span class="s">&quot;http://link/to/documentation&quot;</span>
+  <span class="p">};</span>
+
+  <span class="n">CREATE_SHARED_STAGE</span><span class="p">(</span><span class="n">MyReader</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <p>This method will process a options for the reader.  In this
@@ -584,6 +562,18 @@ be changed if, for example, the Z values in the file represented mm values,
 and we want to represent them as m in the storage model). <code class="docutils literal"><span class="pre">addArgs</span></code> will
 bind values given for the argument to the <code class="docutils literal"><span class="pre">m_scale_z</span></code> variable of the
 stage.</p>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyReader</span><span class="o">::</span><span class="n">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;z_scale&quot;</span><span class="p">,</span> <span class="s">&quot;Z Scaling&quot;</span><span class="p">,</span> <span class="n">m_scale_z</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This method registers the various dimensions the reader will use.  In our case,
+we are using the X, Y, and Z built-in dimensions, as well as a custom
+dimension MyData.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -599,9 +589,9 @@ stage.</p>
   <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>This method registers the various dimensions the reader will use.  In our case,
-we are using the X, Y, and Z built-in dimensions, as well as a custom
-dimension MyData.</p>
+<p>This method is called when the Reader is ready for use.  It will only be
+called once, regardless of the number of PointViews that are to be
+processed.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -613,9 +603,9 @@ dimension MyData.</p>
   <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>This method is called when the Reader is ready for use.  It will only be
-called once, regardless of the number of PointViews that are to be
-processed.</p>
+<p>This is a helper function, which will convert a string value into the type
+specified when it’s called.  In our example, it will be used to convert
+strings to doubles when reading from the input stream.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -629,7 +619,8 @@ processed.</p>
 11
 12
 13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
   <span class="n">T</span> <span class="n">convert</span><span class="p">(</span><span class="k">const</span> <span class="n">StringList</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">fieldno</span><span class="p">)</span>
   <span class="p">{</span>
       <span class="n">T</span> <span class="n">output</span><span class="p">;</span>
@@ -637,7 +628,8 @@ processed.</p>
       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bConverted</span><span class="p">)</span>
       <span class="p">{</span>
           <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">oss</span><span class="p">;</span>
-          <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unable to convert &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">[</span><span class="n">fieldno</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, to double&quot;</span><span class="p">;</span>
+          <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unable to convert &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">[</span><span class="n">fieldno</span><span class="p">]</span> <span class="o">&lt;&lt;</span>
+              <span class="s">&quot;, to double&quot;</span><span class="p">;</span>
           <span class="k">throw</span> <span class="nf">pdal_error</span><span class="p">(</span><span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">());</span>
       <span class="p">}</span>
 
@@ -645,14 +637,8 @@ processed.</p>
   <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>This is a helper function, which will convert a string value into the type
-specified when it’s called.  In our example, it will be used to convert
-strings to doubles when reading from the input stream.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="n">point_count_t</span> <span class="n">MyReader</span><span class="o">::</span><span class="n">read</span><span class="p">(</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">,</span> <span class="n">point_count_t</span> <span class="n">count</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
 <p>This method is the main processing method for the reader.  It takes a
-pointer to a Point View which we will build as we read from the file.  We
+pointer to a PointView which we will build as we read from the file.  We
 initialize some variables as well, and then reset the input stream with
 the filename used for the reader.  Note that in other readers, the contents
 of this method could be very different depending on the format of the file
@@ -660,13 +646,30 @@ being read, but this should serve as a good start for how to build the
 PointView object.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">PointLayoutPtr</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">layout</span><span class="p">();</span>
+    <span class="n">PointId</span> <span class="n">nextId</span> <span class="o">=</span> <span class="n">view</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">PointId</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">m_index</span><span class="p">;</span>
+    <span class="n">point_count_t</span> <span class="n">numRead</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">m_stream</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">ILeStream</span><span class="p">(</span><span class="n">m_filename</span><span class="p">));</span>
+</pre></div>
+</td></tr></table></div>
+<p>In preparation for reading the file, we prepare to skip some header lines.  In
+our case, the header is only a single line.</p>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="kt">size_t</span> <span class="nf">HEADERSIZE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="kt">size_t</span> <span class="nf">skip_lines</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">HEADERSIZE</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">m_index</span><span class="p">));</span>
     <span class="kt">size_t</span> <span class="nf">line_no</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </td></tr></table></div>
-<p>In preparation for reading the file, we prepare to skip some header lines.  In
-our case, the header is only a single line.</p>
+<p>Here we begin our main loop.  In our example file, the first line is a header,
+and each line thereafter is a single point.  If the file had a different format
+the method of looping and reading would have to change as appropriate.  We make
+sure we are skipping the header lines here before moving on.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -680,10 +683,8 @@ our case, the header is only a single line.</p>
       <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here we begin our main loop.  In our example file, the first line is a header,
-and each line thereafter is a single point.  If the file had a different format
-the method of looping and reading would have to change as appropriate.  We make
-sure we are skipping the header lines here before moving on.</p>
+<p>Here we take the line we read in the for block header, split it, and make sure
+that we have the proper number of fields.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -705,8 +706,14 @@ sure we are skipping the header lines here before moving on.</p>
       <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here we take the line we read in the for block header, split it, and make sure
-that we have the proper number of fields.</p>
+<p>Here we take the values we read and put them into the PointView object.  The
+X and Y fields are simply converted from the file and put into the respective
+fields.  MyData is done likewise with the custom dimension we defined.  The Z
+value is read, and multiplied by the scale_z option (defaulted to 1.0), before
+the converted value is put into the field.</p>
+<p>When putting the value into the PointView object, we pass in the Dimension
+that we are assigning it to, the ID of the point (which is incremented in
+each iteration of the loop), and the dimension value.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -736,28 +743,39 @@ that we have the proper number of fields.</p>
                      <span class="n">convert</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here we take the values we read and put them into the PointView object.  The
-X and Y fields are simply converted from the file and put into the respective
-fields.  MyData is done likewise with the custom dimension we defined.  The Z
-value is read, and multiplied by the scale_z option (defaulted to 1.0), before
-the converted value is put into the field.</p>
-<p>When putting the value into the PointView object, we pass in the Dimension
-that we are assigning it to, the ID of the point (which is incremented in
-each iteration of the loop), and the dimension value.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>      <span class="n">nextId</span><span class="o">++</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">m_cb</span><span class="p">)</span>
-        <span class="n">m_cb</span><span class="p">(</span><span class="o">*</span><span class="n">view</span><span class="p">,</span> <span class="n">nextId</span><span class="p">);</span>
-</pre></div>
-</td></tr></table></div>
 <p>Finally, we increment the nextId and make a call into the progress callback
 if we have one with our nextId.  After the loop is done, we set the index
 and number read, and return that value as the number of points read.
 This could differ in cases where we read multiple streams, but that won’t
 be covered here.</p>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>      <span class="n">nextId</span><span class="o">++</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">m_cb</span><span class="p">)</span>
+        <span class="n">m_cb</span><span class="p">(</span><span class="o">*</span><span class="n">view</span><span class="p">,</span> <span class="n">nextId</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">m_index</span> <span class="o">=</span> <span class="n">nextId</span><span class="p">;</span>
+    <span class="n">numRead</span> <span class="o">=</span> <span class="n">nextId</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">numRead</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
 <p>When the read method is finished, the done method is called for any cleanup.
 In this case, we simply make sure the stream is reset.</p>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyReader</span><span class="o">::</span><span class="n">done</span><span class="p">(</span><span class="n">PointTableRef</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_stream</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+  <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 <div class="section" id="compiling-and-usage">
 <h2>Compiling and Usage<a class="headerlink" href="#compiling-and-usage" title="Permalink to this headline">¶</a></h2>
@@ -844,7 +862,7 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.6.0',
+            VERSION:'1.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

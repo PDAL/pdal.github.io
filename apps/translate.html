@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.6.0
+                1.7.2
               </div>
             
           
@@ -205,7 +205,7 @@
 <span id="translate-command"></span><h1>translate<a class="headerlink" href="#translate" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal"><span class="pre">translate</span></code> command can be used for simple conversion of files based on
 their file extensions. It can also be used for constructing pipelines directly
-from the command-line.</p>
+from the command-line.  Processing is done with stream mode if possible.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate [options] input output [filter]
 </pre></div>
 </div>
@@ -217,6 +217,7 @@ from the command-line.</p>
 <span class="o">--</span><span class="n">metadata</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span>     <span class="n">Dump</span> <span class="n">metadata</span> <span class="n">output</span> <span class="n">to</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">file</span>
 <span class="o">--</span><span class="n">reader</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span>       <span class="n">Reader</span> <span class="nb">type</span>
 <span class="o">--</span><span class="n">writer</span><span class="p">,</span> <span class="o">-</span><span class="n">w</span>       <span class="n">Writer</span> <span class="nb">type</span>
+<span class="o">--</span><span class="n">nostream</span>         <span class="n">Don</span><span class="s1">&#39;t run in stream mode, even if technically possible.</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">--input</span></code> and <code class="docutils literal"><span class="pre">--output</span></code> file names are required options.</p>
@@ -226,7 +227,7 @@ command will not actually run when this argument is given.</p>
 <p>The <code class="docutils literal"><span class="pre">--json</span></code> flag can use used to specify a PDAL pipeline from which
 filters will be extracted.  If a reader or writer exist in the pipeline,
 they will be removed and replaced with the input and output provided on
-the command lines.  If a reader/writer stage referenced tags in the
+the command line.  If a reader/writer stage references tags in the
 provided pipeline, the overriding files will assume those tags.  If the
 argument to the <code class="docutils literal"><span class="pre">--json</span></code> option references an existing file, it is assumed
 that the file contains the pipeline to be processed.  If the argument value
@@ -347,7 +348,7 @@ reference system and writes the result to the file “output.las”.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.6.0',
+            VERSION:'1.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

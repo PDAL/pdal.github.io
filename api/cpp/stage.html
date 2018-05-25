@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.6.0
+                1.7.2
               </div>
             
           
@@ -216,7 +216,7 @@ implement the reading API in a PDAL pipeline.</p>
 <dd><p>A stage performs the actual processing in PDAL. </p>
 <p>Stages may read data, modify or filter read data, create metadata or write processed data.</p>
 <p>Stages are linked with <a class="reference internal" href="#classpdal_1_1Stage_1abfd87d459bea04a919aace286b2e377e"><span class="std std-ref">setInput()</span></a> into a pipeline. The pipeline is run with by calling in sequence <a class="reference internal" href="#classpdal_1_1Stage_1a4b9296a59f8852b3d08630f1086bfbea"><span class="std std-ref">prepare()</span></a> and <a class="reference internal" href="#classpdal_1_1Stage_1a1615c4aa5ec5e48f90d73f0e7a796935"><span class="std std-ref">execute()</span></a> on the stage at the end of the pipeline. PipelineManager can also be used to create and run a pipeline. </p>
-<p>Subclassed by <a class="reference internal" href="filter.html#classpdal_1_1Filter"><span class="std std-ref">pdal::Filter</span></a>, <a class="reference internal" href="reader.html#classpdal_1_1Reader"><span class="std std-ref">pdal::Reader</span></a>, <a class="reference internal" href="writer.html#classpdal_1_1Writer"><span class="std std-ref">pdal::Writer</span></a></p>
+<p>Subclassed by <a class="reference internal" href="filter.html#classpdal_1_1Filter"><span class="std std-ref">pdal::Filter</span></a>, <a class="reference internal" href="reader.html#classpdal_1_1Reader"><span class="std std-ref">pdal::Reader</span></a>, pdal::Streamable, <a class="reference internal" href="writer.html#classpdal_1_1Writer"><span class="std std-ref">pdal::Writer</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -296,16 +296,16 @@ implement the reading API in a PDAL pipeline.</p>
 
 <dl class="function">
 <dt id="_CPPv2N4pdal5Stage7executeER16StreamPointTable">
-<span id="pdal::Stage::execute__StreamPointTableR"></span><span class="target" id="classpdal_1_1Stage_1a0ad1dad6c2194ce9c757e2075cab084a"></span>void <code class="descname">execute</code><span class="sig-paren">(</span>StreamPointTable &amp;<em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage7executeER16StreamPointTable" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Execute a prepared pipeline (linked set of stages) in streaming mode. </p>
-<p>This performs the action associated with the stage by executing the processOne function of each stage in depth first order. Points are processed up to the capacity of the provided StreamPointTable. Not all stages support streaming mode and an exception will be thrown when attempting to <a class="reference internal" href="#classpdal_1_1Stage_1a1615c4aa5ec5e48f90d73f0e7a796935"><span class="std std-ref">execute</span></a> an unsupported stage.</p>
-<p>Streaming points can reduce memory consumption, but may limit access to algorithms that need to operate on full point sets.</p>
+<span id="pdal::Stage::execute__StreamPointTableR"></span><span class="target" id="classpdal_1_1Stage_1a3185b4e77be80b48b13e2baf161e8366"></span><em class="property">virtual</em> void <code class="descname">execute</code><span class="sig-paren">(</span>StreamPointTable &amp;<em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Stage7executeER16StreamPointTable" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4pdal5Stage18pipelineStreamableEv">
+<span id="pdal::Stage::pipelineStreamableC"></span><span class="target" id="classpdal_1_1Stage_1a22d543807e6692ef081132a5a48d0624"></span><em class="property">virtual</em> bool <code class="descname">pipelineStreamable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4pdal5Stage18pipelineStreamableEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Determine if a pipeline with this stage as a sink is streamable. </p>
 <p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">table</span></code>: Streming point table used for stage pipeline. This must be the same table used in the <a class="reference internal" href="#classpdal_1_1Stage_1a4b9296a59f8852b3d08630f1086bfbea"><span class="std std-ref">prepare</span></a> function. </li>
-</ul>
-</dd>
+<dt><strong>Return</strong></dt>
+<dd>Whether the pipeline is streamable. </dd>
 </dl>
 </p>
 </dd></dl>
@@ -614,7 +614,7 @@ implement the reading API in a PDAL pipeline.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.6.0',
+            VERSION:'1.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
