@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.6.0
               </div>
             
           
@@ -140,7 +140,8 @@
 <li class="toctree-l2"><a class="reference internal" href="pcl_block_tutorial.html">Filtering data with PCL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pcl_ground/index.html">Identifying ground returns using ProgressiveMorphologicalFilter segmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clipping/index.html">Clipping with Geometries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ground-filters.html">Ground Filter Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sampling/index.html">Performing Poisson Sampling of Point Clouds Using Dart Throwing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-filtering.html">Filtering Data with Python</a></li>
 </ul>
 </li>
 </ul>
@@ -387,19 +388,6 @@ a pipeline, substituting the input and output as it goes.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">*.</span><span class="n">las</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span><span class="o">.</span> <span class="o">-</span><span class="n">f1</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">P20</span> <span class="o">-</span><span class="n">I</span><span class="p">{}</span> <span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">proj</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="p">{}</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="n">output</span><span class="o">/</span><span class="p">{}</span><span class="o">.</span><span class="n">laz</span>
 </pre></div>
 </div>
-<p>Here is an example doing something similar with Windows PowerShell</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$indir=&quot;Documents\inlas&quot;
-$outdir=&quot;Documents\outlas&quot;
-get-childitem $indir |
-foreach-object {
-    if ($_.extension -ne &quot;.las&quot;) {
-        continue
-    }
-    $outname = $outdir + &quot;\&quot; + $_.name
-    pdal pipeline -i \path\to\proj.json $_.fullname $outname
-}
-</pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -451,7 +439,7 @@ foreach-object {
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

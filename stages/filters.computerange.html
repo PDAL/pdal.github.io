@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>filters.gridprojection &mdash; pdal.io</title>
+  <title>filters.computerange &mdash; pdal.io</title>
   
 
   
@@ -42,8 +42,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Filters" href="filters.html"/>
-        <link rel="next" title="filters.groupby" href="filters.groupby.html"/>
-        <link rel="prev" title="filters.greedyprojection" href="filters.greedyprojection.html"/> 
+        <link rel="next" title="filters.cpd" href="filters.cpd.html"/>
+        <link rel="prev" title="filters.colorization" href="filters.colorization.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -119,7 +119,10 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.cluster.html">filters.cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.computerange.html">filters.computerange</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">filters.computerange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="filters.cpd.html">filters.cpd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.crop.html">filters.crop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
@@ -129,11 +132,7 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">filters.gridprojection</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.groupby.html">filters.groupby</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.hag.html">filters.hag</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.head.html">filters.head</a></li>
@@ -226,7 +225,7 @@
       
         <li><a href="filters.html">Filters</a> &raquo;</li>
       
-    <li>filters.gridprojection</li>
+    <li>filters.computerange</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -238,42 +237,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-gridprojection">
-<span id="id1"></span><h1>filters.gridprojection<a class="headerlink" href="#filters-gridprojection" title="Permalink to this headline">¶</a></h1>
-<p>The Grid Projection filter passes data through the Point Cloud Library (<a class="reference external" href="http://www.pointclouds.org">PCL</a>)
-GridProjection algorithm.</p>
-<p>GridProjection is an implementation of the surface reconstruction method
-described in <a class="reference internal" href="#li2010" id="id2">[Li2010]</a>.</p>
-<table class="docutils citation" frame="void" id="li2010" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[Li2010]</a></td><td>Li, Ruosi, et al. “Polygonizing extremal surfaces with manifold guarantees.” Proceedings of the 14th ACM Symposium on Solid and Physical Modeling. ACM, 2010.</td></tr>
-</tbody>
-</table>
-<div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+  <div class="section" id="filters-computerange">
+<span id="id1"></span><h1>filters.computerange<a class="headerlink" href="#filters-computerange" title="Permalink to this headline">¶</a></h1>
+<p>The Compute Range filter computes the range from the sensor to each of the
+detected returns.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Compute Range filter is specific to raw data from a particular data
+provider, where the sensor coordinates for each frame are encoded as regular
+points, and are identified by the pixel number -5.</p>
+</div>
+<div class="admonition embed" id="embed-0">
+<p class="first admonition-title">Default Embedded Stage </p>
+<p class="last">This stage is enabled by default</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
-    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;input.bpf&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.gridprojection&quot;</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.computerange&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.bpf&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.bpf&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;output_dims&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,Range&quot;</span>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>None at the moment. Relying on defaults within PCL.</p>
 </div>
 </div>
 
@@ -284,10 +278,10 @@ described in <a class="reference internal" href="#li2010" id="id2">[Li2010]</a>.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.groupby.html" class="btn btn-neutral float-right" title="filters.groupby" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.cpd.html" class="btn btn-neutral float-right" title="filters.cpd" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.greedyprojection.html" class="btn btn-neutral" title="filters.greedyprojection" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.colorization.html" class="btn btn-neutral" title="filters.colorization" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

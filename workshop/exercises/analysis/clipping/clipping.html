@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.6.0
               </div>
             
           
@@ -140,8 +140,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../batch_processing/batch-processing.html">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
@@ -233,8 +231,7 @@ capability to reproject the data for us on-the-fly:</p>
 <div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">OGRVRTDataSource</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">OGRVRTWarpedLayer</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="n">OGRVRTLayer</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="n">SrcDataSource</span><span class="o">&gt;</span><span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">attributes</span><span class="o">.</span><span class="n">json</span><span class="o">&lt;/</span><span class="n">SrcDataSource</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="n">SrcLayer</span><span class="o">&gt;</span><span class="n">attributes</span><span class="o">&lt;/</span><span class="n">SrcLayer</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">SrcDataSource</span><span class="o">&gt;</span><span class="n">attributes</span><span class="o">.</span><span class="n">json</span><span class="o">&lt;/</span><span class="n">SrcDataSource</span><span class="o">&gt;</span>
             <span class="o">&lt;</span><span class="n">LayerSRS</span><span class="o">&gt;</span><span class="n">EPSG</span><span class="p">:</span><span class="mi">4326</span><span class="o">&lt;/</span><span class="n">LayerSRS</span><span class="o">&gt;</span>
         <span class="o">&lt;/</span><span class="n">OGRVRTLayer</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="n">TargetSRS</span><span class="o">&gt;+</span><span class="n">proj</span><span class="o">=</span><span class="n">lcc</span> <span class="o">+</span><span class="n">lat_1</span><span class="o">=</span><span class="mi">43</span> <span class="o">+</span><span class="n">lat_2</span><span class="o">=</span><span class="mf">45.5</span> <span class="o">+</span><span class="n">lat_0</span><span class="o">=</span><span class="mf">41.75</span> <span class="o">+</span><span class="n">lon_0</span><span class="o">=-</span><span class="mf">120.5</span> <span class="o">+</span><span class="n">x_0</span><span class="o">=</span><span class="mf">399999.9999999999</span> <span class="o">+</span><span class="n">y_0</span><span class="o">=</span><span class="mi">0</span> <span class="o">+</span><span class="n">ellps</span><span class="o">=</span><span class="n">GRS80</span> <span class="o">+</span><span class="n">units</span><span class="o">=</span><span class="n">ft</span> <span class="o">+</span><span class="n">no_defs</span><span class="o">&lt;/</span><span class="n">TargetSRS</span><span class="o">&gt;</span>
@@ -244,11 +241,8 @@ capability to reproject the data for us on-the-fly:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This VRT file is available in your workshop materials in the
-<code class="docutils literal"><span class="pre">./exercises/analysis/clipping/attributes.vrt</span></code> file. You will need to
-open this file, go to line 4 and replace <code class="docutils literal"><span class="pre">c:/Users/hobu/PDAL/</span></code> with
-the correct path for your machine.</p>
-<p class="last">A GDAL or OGR VRT
+<p class="last">This VRT file is available in your workshop materials in the
+<code class="docutils literal"><span class="pre">./exercises/analysis/clipping/attributes.json</span></code> file. A GDAL or OGR VRT
 is a kind of “virtual” data source definition type that combines a
 definition of data and a processing operation into a single, readable data
 stream.</p>
@@ -286,9 +280,7 @@ See the <a class="reference external" href="http://www.gdal.org/drv_vrt.html">OG
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This pipeline is available in your workshop materials in the
-<code class="docutils literal"><span class="pre">./exercises/analysis/clipping/clipping.json</span></code> file. Remember
-to replace each of the three occurrences of <code class="docutils literal"><span class="pre">c:/Users/Hobu/PDAL/</span></code>
-in this file with the correct location for your machine.</p>
+<code class="docutils literal"><span class="pre">./exercises/analysis/clipping/clipping.json</span></code> file.</p>
 </div>
 <div class="section" id="reader">
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
@@ -308,8 +300,10 @@ assign the values from the <code class="docutils literal"><span class="pre">CLS<
 <code class="docutils literal"><span class="pre">Classification</span></code> values in the range of <code class="docutils literal"><span class="pre">6:6</span></code>.</p>
 </div>
 <div class="section" id="writer">
-<h4>4. Writer<a class="headerlink" href="#writer" title="Permalink to this headline">¶</a></h4>
-<p>We will write our content back out using a <a class="reference internal" href="../../../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.</p>
+<h4>3. Writer<a class="headerlink" href="#writer" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>We will write our content back out using an <a class="reference internal" href="../../../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.</li>
+</ul>
 </div>
 </div>
 <div class="section" id="execution">
@@ -388,7 +382,7 @@ that is read.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.7.2',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

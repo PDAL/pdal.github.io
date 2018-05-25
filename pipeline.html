@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.6.0
               </div>
             
           
@@ -114,7 +114,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#reprojection-example">Reprojection Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#processing-modes">Processing Modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pipeline-objects">Pipeline Objects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pipeline-array">Pipeline Array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stage-objects">Stage Objects</a></li>
@@ -249,7 +248,7 @@ writer from filenames, and able to be specified as a set of sequential steps:</p
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="figure" id="id4">
+<div class="figure" id="id3">
 <img alt="_images/las-crop-bpf-pipeline.png" src="_images/las-crop-bpf-pipeline.png" />
 <p class="caption"><span class="caption-text">A simple pipeline to convert <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">LAS</span></a> to <a class="reference internal" href="stages/readers.bpf.html#readers-bpf"><span class="std std-ref">BPF</span></a>
 while only keeping points inside the box <span class="math">\([0 \leq x \leq 100, 0 \leq y \leq 100]\)</span>.</span></p>
@@ -292,31 +291,13 @@ with the <a class="reference internal" href="stages/writers.gdal.html#writers-gd
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="figure" id="id5">
+<div class="figure" id="id4">
 <img alt="_images/reproject-merge-pipeline.png" src="_images/reproject-merge-pipeline.png" />
 <p class="caption"><span class="caption-text">A more complex pipeline that merges two inputs together but uses
 <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> to transform the coordinate system of
 file <code class="docutils literal"><span class="pre">B.las</span></code> from <a class="reference external" href="http://spatialreference.org/ref/epsg/nad83-utm-zone-16n/">UTM</a> to <a class="reference external" href="http://spatialreference.org/ref/epsg/4326/">Geographic</a>.</span></p>
 </div>
 </div>
-</div>
-<div class="section" id="processing-modes">
-<span id="id2"></span><h2>Processing Modes<a class="headerlink" href="#processing-modes" title="Permalink to this headline">¶</a></h2>
-<p>PDAL process data in one of two ways: standard mode or stream mode.  With
-standard mode, all input is read into memory before it is processed.  Many
-algorithms require standard mode processing because they need access to
-all points. Operations that do sorting or require neighbors of points, for
-example, require access to all points.</p>
-<p>For operations that don’t require access to all points, PDAL provides stream
-mode.  Stream mode processes points through a pipeline in chunks, which
-reduces memory requirements.</p>
-<p>When using <a class="reference internal" href="apps/translate.html#translate-command"><span class="std std-ref">pdal translate</span></a> or
-<a class="reference internal" href="apps/pipeline.html#pipeline-command"><span class="std std-ref">pdal pipeline</span></a>
-PDAL uses stream mode if possible.  If stream mode can’t use used
-the applications fall back to standard mode processing.  Users can explicitly
-choose to use standard mode by using the <code class="docutils literal"><span class="pre">--nostream</span></code> option.</p>
-<p>Users of the PDAL API can explicitly control the selection of the PDAL
-processing mode.</p>
 </div>
 <div class="section" id="pipeline-objects">
 <h2>Pipeline Objects<a class="headerlink" href="#pipeline-objects" title="Permalink to this headline">¶</a></h2>
@@ -327,7 +308,7 @@ as the PDAL JSON object below) represents a processing pipeline.</p>
 <li>The PDAL JSON object must have a <a class="reference internal" href="#pipeline-array"><span class="std std-ref">Pipeline Array</span></a>.</li>
 </ul>
 <div class="section" id="pipeline-array">
-<span id="id3"></span><h3>Pipeline Array<a class="headerlink" href="#pipeline-array" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>Pipeline Array<a class="headerlink" href="#pipeline-array" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>The pipeline array may have any number of string or <a class="reference internal" href="#stage-object"><span class="std std-ref">Stage Objects</span></a>
 elements.</li>
@@ -678,7 +659,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.7.2',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.6.0
               </div>
             
           
@@ -252,7 +252,9 @@ writer functions. In this tutorial, we will give a brief example.</p>
 34
 35
 36
-37</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyWriter.hpp</span>
+37
+38
+39</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyWriter.hpp</span>
 
 <span class="cp">#pragma once</span>
 
@@ -270,6 +272,8 @@ writer functions. In this tutorial, we will give a brief example.</p>
     <span class="n">MyWriter</span><span class="p">()</span>
     <span class="p">{}</span>
 
+    <span class="k">static</span> <span class="kt">void</span>  <span class="o">*</span> <span class="n">create</span><span class="p">();</span>
+    <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
   <span class="k">private</span><span class="o">:</span>
@@ -298,10 +302,12 @@ needed to make the writer work and meet the plugin specifications.</p>
 </td></tr></table></div>
 <p>FileStreamPtr is defined to make the declaration of the stream easier to manage
 later on.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="k">static</span> <span class="kt">void</span>  <span class="o">*</span> <span class="nf">create</span><span class="p">();</span>
+    <span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Every stage must return a unique name.</p>
+<p>These three methods are required to fulfill the specs for defining a new plugin.</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">);</span>
     <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">initialize</span><span class="p">();</span>
     <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">);</span>
@@ -429,19 +435,18 @@ that corresponds to the data field for easier lookup.</p>
 98</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// MyWriter.cpp</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;MyWriter.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;pdal/pdal_macros.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;pdal/util/FileUtils.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;pdal/util/ProgramArgs.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">pdal</span>
 <span class="p">{</span>
-  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span>
-  <span class="p">{</span>
+  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span>
     <span class="s">&quot;writers.mywriter&quot;</span><span class="p">,</span>
     <span class="s">&quot;My Awesome Writer&quot;</span><span class="p">,</span>
-    <span class="s">&quot;http://path/to/documentation&quot;</span>
-  <span class="p">};</span>
+    <span class="s">&quot;http://path/to/documentation&quot;</span> <span class="p">);</span>
 
-  <span class="n">CREATE_SHARED_STAGE</span><span class="p">(</span><span class="n">MyWriter</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
+  <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyWriter</span><span class="p">,</span> <span class="n">Writer</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
 
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
 
@@ -458,10 +463,11 @@ that corresponds to the data field for easier lookup.</p>
     <span class="p">}</span>
   <span class="p">};</span>
 
+
   <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="c1">// setPositional() Makes the argument required.</span>
-    <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;Output filename&quot;</span><span class="p">,</span> <span class="n">m_filename</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>
+    <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;Output filename&quot;</span><span class="p">,</span> <span class="n">m_filename</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>  
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;newline&quot;</span><span class="p">,</span> <span class="s">&quot;Line terminator&quot;</span><span class="p">,</span> <span class="n">m_newline</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;datafield&quot;</span><span class="p">,</span> <span class="s">&quot;Data field&quot;</span><span class="p">,</span> <span class="n">m_datafield</span><span class="p">,</span> <span class="s">&quot;UserData&quot;</span><span class="p">);</span>
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;precision&quot;</span><span class="p">,</span> <span class="s">&quot;Precision&quot;</span><span class="p">,</span> <span class="n">m_precision</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
@@ -479,7 +485,6 @@ that corresponds to the data field for easier lookup.</p>
       <span class="k">throw</span> <span class="nf">pdal_error</span><span class="p">(</span><span class="n">out</span><span class="p">.</span><span class="n">str</span><span class="p">());</span>
     <span class="p">}</span>
   <span class="p">}</span>
-
 
   <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">)</span>
   <span class="p">{</span>
@@ -523,26 +528,28 @@ that corresponds to the data field for easier lookup.</p>
   <span class="p">{</span>
     <span class="n">m_stream</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
   <span class="p">}</span>
+
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <p>In the writer implementation, we will use a macro defined in pdal_macros,
 which is included in the include chain we are using.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span>
-  <span class="p">{</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span> <span class="o">=</span> <span class="n">PluginInfo</span><span class="p">(</span>
     <span class="s">&quot;writers.mywriter&quot;</span><span class="p">,</span>
     <span class="s">&quot;My Awesome Writer&quot;</span><span class="p">,</span>
-    <span class="s">&quot;http://path/to/documentation&quot;</span>
-  <span class="p">};</span>
+    <span class="s">&quot;http://path/to/documentation&quot;</span> <span class="p">);</span>
 
-  <span class="n">CREATE_SHARED_STAGE</span><span class="p">(</span><span class="n">MyWriter</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
+  <span class="n">CREATE_SHARED_PLUGIN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MyWriter</span><span class="p">,</span> <span class="n">Writer</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Here we define a struct with information regarding the writer, such as the
 name, a description, and a path to documentation.  We then use the macro
-to create a SHARED stage, which means it will be external to the main PDAL
-installation.  When using the macro, we specify the name of the Stage and
-the PluginInfo struct we defined earlier.</p>
+to create a SHARED plugin, which means it will be external to the main PDAL
+installation.  When using the macro, we specify the version (major and minor),
+the class of the plugin, the class of the parent (Writer, in this case), and
+the struct we defined earlier.</p>
+<p>Creating STATIC plugins, which would be part of the main PDAL installation, is
+also possible, but requires some extra steps and will not be covered here.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -579,7 +586,7 @@ the PluginInfo struct we defined earlier.</p>
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="c1">// setPositional() Makes the argument required.</span>
-    <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;Output filename&quot;</span><span class="p">,</span> <span class="n">m_filename</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>
+    <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;Output filename&quot;</span><span class="p">,</span> <span class="n">m_filename</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>  
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;newline&quot;</span><span class="p">,</span> <span class="s">&quot;Line terminator&quot;</span><span class="p">,</span> <span class="n">m_newline</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;datafield&quot;</span><span class="p">,</span> <span class="s">&quot;Data field&quot;</span><span class="p">,</span> <span class="n">m_datafield</span><span class="p">,</span> <span class="s">&quot;UserData&quot;</span><span class="p">);</span>
     <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;precision&quot;</span><span class="p">,</span> <span class="s">&quot;Precision&quot;</span><span class="p">,</span> <span class="n">m_precision</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
@@ -588,18 +595,23 @@ the PluginInfo struct we defined earlier.</p>
 </td></tr></table></div>
 <p>This method defines the arguments the writer provides and binds them to
 private variables.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">initialize</span><span class="p">()</span>
-  <span class="p">{</span>
-    <span class="n">m_stream</span> <span class="o">=</span> <span class="n">FileStreamPtr</span><span class="p">(</span><span class="n">FileUtils</span><span class="o">::</span><span class="n">createFile</span><span class="p">(</span><span class="n">m_filename</span><span class="p">,</span> <span class="nb">true</span><span class="p">),</span>
-      <span class="n">FileStreamDeleter</span><span class="p">());</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_stream</span><span class="p">)</span>
-    <span class="p">{</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="p">{</span>
       <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">out</span><span class="p">;</span>
       <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;writers.mywriter couldn&#39;t open &#39;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_filename</span> <span class="o">&lt;&lt;</span>
         <span class="s">&quot;&#39; for output.&quot;</span><span class="p">;</span>
       <span class="k">throw</span> <span class="nf">pdal_error</span><span class="p">(</span><span class="n">out</span><span class="p">.</span><span class="n">str</span><span class="p">());</span>
     <span class="p">}</span>
   <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_stream</span><span class="o">-&gt;</span><span class="n">precision</span><span class="p">(</span><span class="n">m_precision</span><span class="p">);</span>
+    <span class="o">*</span><span class="n">m_stream</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">fixed</span><span class="p">;</span>
+
+    <span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span> <span class="n">d</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">findDim</span><span class="p">(</span><span class="n">m_datafield</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="o">==</span> <span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Unknown</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>This method initializes our file stream in preparation for writing.</p>
@@ -618,8 +630,7 @@ private variables.</p>
 13
 14
 15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">)</span>
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="n">MyWriter</span><span class="o">::</span><span class="n">ready</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">m_stream</span><span class="o">-&gt;</span><span class="n">precision</span><span class="p">(</span><span class="n">m_precision</span><span class="p">);</span>
     <span class="o">*</span><span class="n">m_stream</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">fixed</span><span class="p">;</span>
@@ -635,7 +646,6 @@ private variables.</p>
     <span class="n">m_dataDim</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
 
     <span class="o">*</span><span class="n">m_stream</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;#X:Y:Z:MyData&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_newline</span><span class="p">;</span>
-  <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <p>The ready method is used to prepare the writer for any number of PointViews that
@@ -789,7 +799,7 @@ in the previous tutorial, as well.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
