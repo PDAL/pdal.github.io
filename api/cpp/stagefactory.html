@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.6.0
               </div>
             
           
@@ -221,12 +221,12 @@
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
 <dt id="_CPPv2N4pdal12StageFactory12StageFactoryEb">
-<span id="pdal::StageFactory::StageFactory__b"></span><span class="target" id="classpdal_1_1StageFactory_1a875a9f7c1f31dbf29dd0d1001334457c"></span><code class="descname">StageFactory</code><span class="sig-paren">(</span>bool <em>ignored</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory12StageFactoryEb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="pdal::StageFactory::StageFactory__b"></span><span class="target" id="classpdal_1_1StageFactory_1aa06733f74043861f6216f5097b06cf52"></span><code class="descname">StageFactory</code><span class="sig-paren">(</span>bool <em>no_plugins</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory12StageFactoryEb" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create a stage factory. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ignored</span></code>: Ignored argument. </li>
+<li><code class="docutils literal"><span class="pre">no_plugins</span></code>: Don’t load plugins or allowed them to be created with this factory. </li>
 </ul>
 </dd>
 </dl>
@@ -269,23 +269,29 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Static Functions</p>
 <dl class="function">
+<dt id="_CPPv2N4pdal12StageFactory10extensionsERKNSt6stringE">
+<span id="pdal::StageFactory::extensions__ssCR"></span><span class="target" id="classpdal_1_1StageFactory_1af156913b4629085666e883ec9a26c534"></span>StringList <code class="descname">extensions</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>driver</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory10extensionsERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the file extensions associated with a driver. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">driver</span></code>: Name of the driver whose extensions should be returned. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv2N4pdal12StageFactory17inferReaderDriverERKNSt6stringE">
 <span id="pdal::StageFactory::inferReaderDriver__ssCR"></span><span class="target" id="classpdal_1_1StageFactory_1a51af2cb785aed67c13262ba2a87f3adf"></span>std::string <code class="descname">inferReaderDriver</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory17inferReaderDriverERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Infer the reader to use based on a filename. </p>
-<p>Find the default reader for a file.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
-<dd>Driver name or empty string if no reader can be inferred from the filename.</dd>
-<dt><strong>Return</strong></dt>
-<dd>Name of the reader driver associated with the file. </dd>
+<dd>Driver name or empty string if no reader can be inferred from the filename. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
 <li><code class="docutils literal"><span class="pre">filename</span></code>: Filename that should be analyzed to determine a driver. </li>
-</ul>
-</dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">filename</span></code>: Filename for which to infer a reader. </li>
 </ul>
 </dd>
 </dl>
@@ -296,17 +302,9 @@
 <dt id="_CPPv2N4pdal12StageFactory17inferWriterDriverERKNSt6stringE">
 <span id="pdal::StageFactory::inferWriterDriver__ssCR"></span><span class="target" id="classpdal_1_1StageFactory_1a156f6090f6a1848f2b50050a3b68c19b"></span>std::string <code class="descname">inferWriterDriver</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal12StageFactory17inferWriterDriverERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Infer the writer to use based on filename extension. </p>
-<p>Find the default writer for a file.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
-<dd>Driver name or empty string if no writer can be inferred from the filename.</dd>
-<dt><strong>Return</strong></dt>
-<dd>Name of the writer driver associated with the file. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">filename</span></code>: Filename for which to infer a writer. </li>
-</ul>
-</dd>
+<dd>Driver name or empty string if no writer can be inferred from the filename. </dd>
 </dl>
 </p>
 </dd></dl>
@@ -342,7 +340,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 25, 2018.
+      Last updated on Aug 17, 2018.
 
     </p>
   </div> 
@@ -363,7 +361,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.7.2',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -397,7 +395,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 25, 2018.
+                    on Aug 17, 2018.
         </div>
     </div>
 

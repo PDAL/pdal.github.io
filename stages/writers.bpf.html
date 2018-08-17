@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.6.0
               </div>
             
           
@@ -119,7 +119,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.matlab.html">writers.matlab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
@@ -129,7 +128,6 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
 </ul>
@@ -235,7 +233,7 @@ only supports writing of version 3 BPF format files.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>BPF file to write.  The writer will accept a filename containing
+<dd>BPF file to read.  The writer will accept a filename containing
 a single placeholder character (‘#’).  If input to the writer consists
 of multiple PointViews, each will be written to a separate file, where
 the placeholder will be replaced with an incrementing integer.  If no
@@ -268,10 +266,8 @@ data.  This option can be specified as many times as desired.</dd>
 <dd>Base64-encoded data that will be decoded and written following the
 standard BPF header.</dd>
 <dt>coord_id</dt>
-<dd>The coordinate ID (UTM zone) of the data.  Southern zones take negative
-values.  A value of 0 indicates cartesian instead of UTM coordinates.  A
-value of ‘auto’ will attempt to set the UTM zone from a suitable spatial
-reference, or set to 0 if no such SRS is set.  [Default: 0]</dd>
+<dd>The coordinate ID (UTM zone) of the data.  NOTE: Only the UTM coordinate
+type is currently supported. [Default: 0, with coordinate type set to none]</dd>
 <dt>scale_x, scale_y, scale_z</dt>
 <dd><p class="first">Scale to be divided from the X, Y and Z nominal values, respectively, after
 the offset has been applied.  The special value “auto” can be specified,
@@ -332,7 +328,7 @@ must be explicitly listed.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on May 25, 2018.
+      Last updated on Aug 17, 2018.
 
     </p>
   </div> 
@@ -353,7 +349,7 @@ must be explicitly listed.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.6.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -387,7 +383,7 @@ must be explicitly listed.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 25, 2018.
+                    on Aug 17, 2018.
         </div>
     </div>
 
