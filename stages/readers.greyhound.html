@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.6.0
+                1.7.2
               </div>
             
           
@@ -127,6 +127,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
@@ -223,8 +224,7 @@ server.</p>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;data.greyhound.io&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;resource&quot;</span><span class="p">:</span> <span class="s2">&quot;iowa-z&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;data.greyhound.io/resource/iowa-z&quot;</span><span class="p">,</span>
       <span class="nt">&quot;filter&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;$and&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="nt">&quot;Path&quot;</span><span class="p">:</span> <span class="s2">&quot;02004736.laz&quot;</span><span class="p">},</span>
         <span class="p">{</span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;$ne&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">}}</span>
@@ -246,9 +246,10 @@ server.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Many of the options to this reader are reproductions of Greyhound query parameter options (see Greyhound <a class="reference external" href="https://greyhound.io/clientDevelopment.html#the-read-query">read</a> query documentation).  These options may be specified as query parameters to the <strong>url</strong> parameter or specified separately.  Separately specified parameters take precedence over query-parameter specified parameters.</p>
 <dl class="docutils">
 <dt><span class="target" id="url">url</span></dt>
-<dd>Greyhound server URL, or a full Greyhound <a class="reference external" href="https://github.com/hobu/greyhound/blob/master/doc/clientDevelopment.rst#the-read-query">read</a> query URL.  If specified as a full Greyhound query URL, no other options need to be present.</dd>
+<dd>Greyhound server URL, or a full Greyhound <a class="reference external" href="https://greyhound.io/clientDevelopment.html#the-read-query">read</a> query URL.  If specified as a full Greyhound query URL, no other options need to be present.</dd>
 <dt><span class="target" id="resource">resource</span></dt>
 <dd>Name of the Greyhound resource to access.</dd>
 <dt><span class="target" id="bounds">bounds</span></dt>
@@ -264,11 +265,6 @@ overview of the entire resource, for example.  [Default: <strong>0</strong>]</dd
 depths greater-than or equal-to <em>depth_begin</em>.  If non-zero, this value should
 be greater than <em>depth_begin</em> or the result will always be empty.
 [Default: <strong>0</strong>]</dd>
-<dt><span class="target" id="tile-path">tile_path</span></dt>
-<dd>A Greyhound resource may be an aggregation of multiple input files.  If a
-<em>tile_path</em> option is present, then only points belonging to that file will
-be queried.  This search is spatially optimized, so no <a class="reference internal" href="#bounds">bounds</a> option needs
-to be present to limit the query bounds.</dd>
 <dt><span class="target" id="filter">filter</span></dt>
 <dd><p class="first">Server-side filtering may be requested which may further limit the data
 selected by the query.  The filter is represented as JSON, and performs
@@ -292,6 +288,25 @@ filters follow.</p>
 <span class="p">]}</span>
 </pre></div>
 </div>
+<dl class="docutils">
+<dt><span class="target" id="tile-path">tile_path</span></dt>
+<dd>A Greyhound resource may be an aggregation of multiple input files.  If a
+<em>tile_path</em> option is present, then only points belonging to that file will
+be queried.  This search is spatially optimized, so no <a class="reference internal" href="#bounds">bounds</a> option needs
+to be present to limit the query bounds.  This is a convenience option that
+simply produces a <a class="reference internal" href="#filter">filter</a> of <strong>{“Path”: &lt;value&gt;}</strong>.</dd>
+<dt><span class="target" id="dims">dims</span></dt>
+<dd>A JSON array of the string dimension names which should be read.  By default,
+all native dimensions from the resource’s schema (from the <a class="reference external" href="https://greyhound.io/clientDevelopment.html#the-info-query">info</a> of the
+resource) will be read.</dd>
+<dt><span class="target" id="buffer">buffer</span></dt>
+<dd>A ratio by which to bloat any requested bounds, where the additional enlarged
+area will be masked off from the Greyhound writer.  This parameter may be used
+to eliminate edge effects from a tiled Greyhound reader/writer pipeline by
+bloating each tile by some percentage to introduce an overlap which will be
+read but <em>not</em> written.  For example, a value of <strong>0.15</strong> will bloat the
+bounds by 15%.</dd>
+</dl>
 </div>
 </div>
 
@@ -321,7 +336,7 @@ filters follow.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 17, 2018.
+      Last updated on Aug 21, 2018.
 
     </p>
   </div> 
@@ -342,7 +357,7 @@ filters follow.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.6.0',
+            VERSION:'1.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -376,7 +391,7 @@ filters follow.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 17, 2018.
+                    on Aug 21, 2018.
         </div>
     </div>
 
