@@ -13,11 +13,11 @@ Download
 Current Release(s)
 ------------------------------------------------------------------------------
 
-* **2018-10-12** `PDAL-1.8.0-src.tar.gz`_ `Release Notes`_ (`md5`_)
+* **2018-11-05** `PDAL-1.8.0-src.tar.gz`_ `Release Notes`_ (`md5`_)
 
-.. _`PDAL-1.8.0-src.tar.gz`: http://download.osgeo.org/pdal/PDAL-1.8.0-src.tar.gz
+.. _`PDAL-1.8.0-src.tar.gz`: https://github.com/PDAL/PDAL/releases/download/1.8.0/PDAL-1.8.0-src.tar.gz
 .. _`Release Notes`: https://github.com/PDAL/PDAL/releases/tag/1.8.0
-.. _`md5`: http://download.osgeo.org/pdal/PDAL-1.8.0-src.tar.gz.md5
+.. _`md5`: https://github.com/PDAL/PDAL/releases/download/1.8.0/PDAL-1.8.0-src.tar.gz.md5
 
 
 Past Releases
