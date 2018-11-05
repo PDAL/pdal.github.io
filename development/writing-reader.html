@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -128,7 +128,6 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Development</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="contributors.html">Contributing to PDAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview.html">PDAL Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation/index.html">Compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
@@ -271,6 +270,13 @@ reader functions. In this tutorial, we will give a brief example.</p>
     <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">done</span><span class="p">(</span><span class="n">PointTableRef</span> <span class="n">table</span><span class="p">);</span>
   <span class="p">};</span>
 <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">ILeStream</span><span class="o">&gt;</span> <span class="n">m_stream</span><span class="p">;</span>
+    <span class="n">point_count_t</span> <span class="n">m_index</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">m_scale_z</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p><code class="docutils literal"><span class="pre">m_stream</span></code> is used to process the input, while <code class="docutils literal"><span class="pre">m_index</span></code> is used to track
@@ -477,7 +483,7 @@ that a reader can override or implement.</p>
     <span class="n">m_stream</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">ILeStream</span><span class="p">(</span><span class="n">m_filename</span><span class="p">));</span>
 
     <span class="kt">size_t</span> <span class="nf">HEADERSIZE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="kt">size_t</span> <span class="nf">skip_lines</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">HEADERSIZE</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">m_index</span><span class="p">));</span>
+    <span class="kt">size_t</span> <span class="nf">skip_lines</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">)(</span><span class="n">HEADERSIZE</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">m_index</span><span class="p">));</span>
     <span class="kt">size_t</span> <span class="nf">line_no</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="o">*</span><span class="n">m_stream</span><span class="o">-&gt;</span><span class="n">stream</span><span class="p">(),</span> <span class="n">line</span><span class="p">);</span> <span class="n">line_no</span><span class="o">++</span><span class="p">)</span>
     <span class="p">{</span>
@@ -662,7 +668,7 @@ our case, the header is only a single line.</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="kt">size_t</span> <span class="nf">HEADERSIZE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="kt">size_t</span> <span class="nf">skip_lines</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">HEADERSIZE</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">m_index</span><span class="p">));</span>
+    <span class="kt">size_t</span> <span class="nf">skip_lines</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">)(</span><span class="n">HEADERSIZE</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">m_index</span><span class="p">));</span>
     <span class="kt">size_t</span> <span class="nf">line_no</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </td></tr></table></div>
@@ -841,7 +847,7 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -862,7 +868,7 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -896,7 +902,7 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

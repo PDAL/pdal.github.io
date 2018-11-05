@@ -43,7 +43,7 @@
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
         <link rel="next" title="readers.tindex" href="readers.tindex.html"/>
-        <link rel="prev" title="readers.sqlite" href="readers.sqlite.html"/> 
+        <link rel="prev" title="readers.terrasolid" href="readers.terrasolid.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -131,9 +131,11 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.ply.html">readers.ply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pts.html">readers.pts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.qfit.html">readers.qfit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.text</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-input-file">Example Input File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-pipeline">Example Pipeline</a></li>
@@ -273,17 +275,21 @@ leading/trailing spaces are ignored.</p>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
+<dt>count</dt>
+<dd>Maximum number of points to read</dd>
 <dt>filename</dt>
 <dd>text file to read [Required]</dd>
-<dt>separator</dt>
-<dd>Separator character to override that found in header line.</dd>
 <dt>header</dt>
 <dd>String to use as the file header.  All lines in the file as assumed to be
-records containing point data unless skipped with the ‘skip’ option.</dd>
+records containing point data unless skipped with the ‘skip’ option.
+[Default: None]</dd>
+<dt>separator</dt>
+<dd>Separator character to override that found in header line. [Default: None]</dd>
 <dt>skip</dt>
-<dd>Number of lines to ignore at the beginning of the file.</dd>
-<dt>count</dt>
-<dd>Maximum number of points to read [Optional]</dd>
+<dd>Number of lines to ignore at the beginning of the file. [Default: 0]</dd>
+<dt>spatialreference</dt>
+<dd>Spatial reference for the file data.  Most text-based formats of
+SRS information are accepted, including WKT and proj.4. [Default: None]</dd>
 </dl>
 </div>
 </div>
@@ -298,7 +304,7 @@ records containing point data unless skipped with the ‘skip’ option.</dd>
         <a href="readers.tindex.html" class="btn btn-neutral float-right" title="readers.tindex" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.sqlite.html" class="btn btn-neutral" title="readers.sqlite" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.terrasolid.html" class="btn btn-neutral" title="readers.terrasolid" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -314,7 +320,7 @@ records containing point data unless skipped with the ‘skip’ option.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -335,7 +341,7 @@ records containing point data unless skipped with the ‘skip’ option.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -369,7 +375,7 @@ records containing point data unless skipped with the ‘skip’ option.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

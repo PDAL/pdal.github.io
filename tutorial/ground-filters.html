@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -217,8 +217,8 @@
 </table>
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
-<p>In previous tutorials <span class="xref std std-ref">here</span> and <a class="reference internal" href="pcl_ground/index.html#pcl-ground"><span class="std std-ref">here</span></a>, we have
-introduced our implmentation of the <a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">Progressive Morphological Filter (PMF)</span></a>, a <a class="reference internal" href="../apps/ground.html#ground-command"><span class="std std-ref">ground kernel</span></a> to simplify command-line
+<p>In previous tutorials we introduced our implmentation of the
+<a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">Progressive Morphological Filter (PMF)</span></a>, a <a class="reference internal" href="../apps/ground.html#ground-command"><span class="std std-ref">ground kernel</span></a> to simplify command-line
 access to PMF, and a filter for <a class="reference internal" href="../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">removing outliers</span></a>.</p>
 <p>This tutorial will highlight some recent enhancements to the PDAL library, in
 the context of a ground segmentation workflow. Specifically, we will discuss:</p>
@@ -323,13 +323,13 @@ stages typically assume that units are at least uniform in X, Y, and Z. Because
 data will not always be provided in this way, PDAL pipelines should account for
 any data reprojections and parameter scaling that are required from one dataset
 to the next.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>3
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    {
-      &quot;type&quot;:&quot;filters.reprojection&quot;,
-      &quot;out_srs&quot;:&quot;EPSG:32632&quot;
-    },
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;out_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:32632&quot;</span>
+    <span class="p">},</span>
 </pre></div>
 </td></tr></table></div>
 <p>In this example, we show data being reprojected to <code class="docutils literal"><span class="pre">EPSG:32632</span></code> with X, Y, and
@@ -345,13 +345,13 @@ a given dimension. In our example, a single option has been provided that
 specifies the dimension, range, and value to assign. In this case, we are
 stating that we would like to apply a value of 0 to the <code class="docutils literal"><span class="pre">Classification</span></code>
 dimension for every point.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 7
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    {
-      &quot;type&quot;:&quot;filters.assign&quot;,
-      &quot;assignment&quot;:&quot;Classification[:]=0&quot;
-    },
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.assign&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;assignment&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[:]=0&quot;</span>
+    <span class="p">},</span>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
@@ -368,11 +368,11 @@ low noise points that can adversely affect ground segmentation algorithms. ELM
 was first published in <a class="reference internal" href="../references.html#chen2012" id="id1">[Chen2012]</a> as part of the upward-fusion method of DTM
 generation. Noise points are <strong>classified</strong> with a value of <code class="docutils literal"><span class="pre">7</span></code> in keeping
 with the LAS specification.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>11
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    {
-      &quot;type&quot;:&quot;filters.elm&quot;
-    },
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.elm&quot;</span>
+    <span class="p">},</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -382,11 +382,11 @@ with the LAS specification.</p>
 detection at the moment: <code class="docutils literal"><span class="pre">radius</span></code> and <code class="docutils literal"><span class="pre">statistical</span></code>. Both aim to identify
 points that are isolated and likely arise from noise sources. Noise points are
 <strong>classified</strong> with a value of <code class="docutils literal"><span class="pre">7</span></code> in keeping with the LAS specification.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>14
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    {
-      &quot;type&quot;:&quot;filters.outlier&quot;
-    },
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span>
+    <span class="p">},</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -403,7 +403,7 @@ namely in the area of filling voids. We have reverted the code to match the
 published work, but for now are only using the nearest neighbors approach to
 filling voids. The morphological operations are also accelerated by moving to an
 iterative approach and using a diamond struturing element.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>17
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>17
 18
 19
 20
@@ -411,15 +411,15 @@ iterative approach and using a diamond struturing element.</p>
 22
 23
 24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    {
-      &quot;type&quot;:&quot;filters.smrf&quot;,
-      &quot;last&quot;:true,
-      &quot;ignore&quot;:&quot;Classification[7:7]&quot;,
-      &quot;slope&quot;:0.2,
-      &quot;window&quot;:16,
-      &quot;threshold&quot;:0.45,
-      &quot;scalar&quot;:1.2
-    },
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.smrf&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;last&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;ignore&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[7:7]&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;slope&quot;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span>
+      <span class="s2">&quot;window&quot;</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span>
+      <span class="s2">&quot;threshold&quot;</span><span class="p">:</span><span class="mf">0.45</span><span class="p">,</span>
+      <span class="s2">&quot;scalar&quot;</span><span class="p">:</span><span class="mf">1.2</span>
+    <span class="p">},</span>
 </pre></div>
 </td></tr></table></div>
 <p>In addition to specifying some of the SMRF-specific arguments, our example also
@@ -530,7 +530,7 @@ range filter above.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -551,7 +551,7 @@ range filter above.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -585,7 +585,7 @@ range filter above.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

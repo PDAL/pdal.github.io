@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -118,6 +118,7 @@
 <li class="toctree-l3"><a class="reference internal" href="filters.cluster.html">filters.cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.dem.html">filters.dem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.elm.html">filters.elm</a></li>
@@ -127,6 +128,7 @@
 <li class="toctree-l3"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.mongus.html">filters.mongus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.neighborclassifier.html">filters.neighborclassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.nndistance.html">filters.nndistance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.outlier.html">filters.outlier</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.overlay.html">filters.overlay</a></li>
@@ -180,6 +182,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mesh">Mesh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.delaunay.html">filters.delaunay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.gridprojection.html">filters.gridprojection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.movingleastsquares.html">filters.movingleastsquares</a></li>
@@ -193,6 +196,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#other">Other</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.streamcallback.html">filters.streamcallback</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.voxelgrid.html">filters.voxelgrid</a></li>
 </ul>
 </li>
@@ -314,7 +318,7 @@ to. Points not belonging to a cluster are given a cluster ID of 0.</dd>
 classified as ground/non-ground prior to estimating.</dd>
 <dt><a class="reference internal" href="filters.kdistance.html#filters-kdistance"><span class="std std-ref">filters.kdistance</span></a></dt>
 <dd>Compute pointwise K-Distance (the Euclidean distance to a point’s k-th
-nearest neighbor).</dd>
+nearest neighbor). [Deprecated - use <a class="reference internal" href="filters.nndistance.html#filters-nndistance"><span class="std std-ref">filters.nndistance</span></a>]</dd>
 <dt><a class="reference internal" href="filters.lof.html#filters-lof"><span class="std std-ref">filters.lof</span></a></dt>
 <dd>Compute pointwise Local Outlier Factor (along with K-Distance and Local
 Reachability Distance).</dd>
@@ -322,6 +326,8 @@ Reachability Distance).</dd>
 <dd>Label ground/non-ground returns using <a class="reference internal" href="../references.html#mongus2012" id="id2">[Mongus2012]</a>.</dd>
 <dt><a class="reference internal" href="filters.neighborclassifier.html#filters-neighborclassifier"><span class="std std-ref">filters.neighborclassifier</span></a></dt>
 <dd>Update pointwise classification using k-nearest neighbor consensus voting.</dd>
+<dt><a class="reference internal" href="filters.nndistance.html#filters-nndistance"><span class="std std-ref">filters.nndistance</span></a></dt>
+<dd>Compute a distance metric based on nearest neighbors.</dd>
 <dt><a class="reference internal" href="filters.normal.html#filters-normal"><span class="std std-ref">filters.normal</span></a></dt>
 <dd>Compute pointwise normal and curvature, based on k-nearest neighbors.</dd>
 <dt><a class="reference internal" href="filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a></dt>
@@ -460,6 +466,8 @@ existing KD-tree.</p>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="docutils">
+<dt><a class="reference internal" href="filters.delaunay.html#filters-delaunay"><span class="std std-ref">filters.delaunay</span></a></dt>
+<dd>Create mesh using Delaunay triangulation.</dd>
 <dt><a class="reference internal" href="filters.greedyprojection.html#filters-greedyprojection"><span class="std std-ref">filters.greedyprojection</span></a></dt>
 <dd>Create mesh using the Greedy Projection Triangulation approach.</dd>
 <dt><a class="reference internal" href="filters.gridprojection.html#filters-gridprojection"><span class="std std-ref">filters.gridprojection</span></a></dt>
@@ -491,7 +499,7 @@ These filters will invalidate an existing KD-tree.</p>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="docutils">
-<dt><span class="xref std std-ref">filters.streamcallback</span></dt>
+<dt><a class="reference internal" href="filters.streamcallback.html#filters-streamcallback"><span class="std std-ref">filters.streamcallback</span></a></dt>
 <dd>Provide a hook for a simple point-by-point callback.</dd>
 <dt><a class="reference internal" href="filters.voxelgrid.html#filters-voxelgrid"><span class="std std-ref">filters.voxelgrid</span></a></dt>
 <dd>Create a new point cloud composed of voxel centroids computed from the
@@ -527,7 +535,7 @@ be lost.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -548,7 +556,7 @@ be lost.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -582,7 +590,7 @@ be lost.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

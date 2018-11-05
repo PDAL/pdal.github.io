@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -212,6 +212,14 @@
 <dt id="_CPPv2N4pdal5UtilsE">
 <span id="pdal::Utils"></span><span class="target" id="namespacepdal_1_1Utils"></span><em class="property">namespace </em><code class="descclassname">pdal::</code><code class="descname">Utils</code><a class="headerlink" href="#_CPPv2N4pdal5UtilsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt>
+<span class="target" id="namespacepdal_1_1Utils_1a3f9329e9d513b60313010f83ff548e4c"></span><em class="property">using </em><code class="descname">pdal::Utils::BacktraceEntries = typedef std::deque&lt;BacktraceEntry&gt;</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt>
@@ -441,9 +449,25 @@
 
 <dl class="function">
 <dt>
+<span class="target" id="namespacepdal_1_1Utils_1ac14e6ee19bd0911ed9f8501ee182a25d"></span><code class="descname">PDAL_DLL std::vector&lt; std::string &gt; pdal::Utils::backtrace()</code></dt>
+<dd><p>Generate a backtrace as a list of strings. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>List of functions at the point of the call. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4pdal5Utils13backtraceImplEv">
+<span id="pdal::Utils::backtraceImpl"></span><span class="target" id="namespacepdal_1_1Utils_1abdeed470a1b867aa71548ea30eef5c75"></span><a class="reference internal" href="#_CPPv2N4pdal5UtilsE" title="pdal::Utils">Utils</a>::BacktraceEntries <code class="descname">backtraceImpl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Utils13backtraceImplEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
 <em class="property">template </em>&lt;<em class="property">class</em> T&gt;</dt>
 <dt>
-<span class="target" id="namespacepdal_1_1Utils_1af9895f466e24147ed204408cc271579d"></span><code class="descname">PDAL_DLL const T&amp; pdal::Utils::clamp(const T &amp; t, const T &amp; min, const T &amp; max)</code></dt>
+<span class="target" id="namespacepdal_1_1Utils_1afa7154a192d427ca0b2d23aab8cdf239"></span><code class="descname">PDAL_DLL const T&amp; pdal::Utils::clamp(const T &amp; t, const T &amp; minimum, const T &amp; maximum)</code></dt>
 <dd><p>Clamp value to given bounds. </p>
 <p>Clamps the input value t to bounds specified by min and max. Used to ensure that row and column indices remain within valid bounds.</p>
 <p><dl class="docutils">
@@ -1005,17 +1029,6 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N4pdal5Utils9backtraceEv">
-<span id="pdal::Utils::backtrace"></span><span class="target" id="namespacepdal_1_1Utils_1af919291c8d8312d8870fdd9fccf1c339"></span>std::vector&lt;std::string&gt; <code class="descname">backtrace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Utils9backtraceEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Generate a backtrace as a list of strings. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>List of functions at the point of the call. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
 <dt>
 <em class="property">template </em>&lt;<em class="property">typename</em> PREDICATE&gt;</dt>
 <dt>
@@ -1268,6 +1281,26 @@
 <span id="pdal::Utils::numericCast__T_IN.T_OUTR"></span><span class="target" id="namespacepdal_1_1Utils_1a33d614ac71aa03aaa5c10a242c4d14ac"></span>bool <code class="descname">numericCast</code><span class="sig-paren">(</span>T_IN <em>in</em>, T_OUT &amp;<em>out</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Utils11numericCastE4T_INR5T_OUT" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Convert a numeric value from one type to another. </p>
 <p>Floating point values are rounded to the nearest integer before a conversion is attempted.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><code class="docutils literal"><span class="pre">true</span></code> if the conversion was successful, <code class="docutils literal"><span class="pre">false</span></code> if the datatypes/input value don’t allow conversion. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">in</span></code>: Value to convert. </li>
+<li><code class="docutils literal"><span class="pre">out</span></code>: Converted value. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;&gt;</dt>
+<dt id="_CPPv2N4pdal5Utils11numericCastEdRf">
+<span id="pdal::Utils::numericCast__double.floatR"></span><span class="target" id="namespacepdal_1_1Utils_1a3931154ba0b92b248e09c3f515fd87be"></span>bool <code class="descname">numericCast</code><span class="sig-paren">(</span>double <em>in</em>, float &amp;<em>out</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Utils11numericCastEdRf" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Convert a numeric value from double to float. </p>
+<p>Specialization to handle NaN.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd><code class="docutils literal"><span class="pre">true</span></code> if the conversion was successful, <code class="docutils literal"><span class="pre">false</span></code> if the datatypes/input value don’t allow conversion. </dd>
@@ -1624,6 +1657,42 @@
 
 </div>
 <dl class="class">
+<dt id="_CPPv2N4pdal5Utils14BacktraceEntryE">
+<span id="pdal::Utils::BacktraceEntry"></span><span class="target" id="structpdal_1_1Utils_1_1BacktraceEntry"></span><em class="property">struct </em><code class="descname">BacktraceEntry</code><a class="headerlink" href="#_CPPv2N4pdal5Utils14BacktraceEntryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;BacktraceImpl.hpp&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4pdal5Utils14BacktraceEntry14BacktraceEntryEv">
+<span id="pdal::Utils::BacktraceEntry::BacktraceEntry"></span><span class="target" id="structpdal_1_1Utils_1_1BacktraceEntry_1a3587f517fb5f990ac5e25780ee5a06a4"></span><code class="descname">BacktraceEntry</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4pdal5Utils14BacktraceEntry14BacktraceEntryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N4pdal5Utils14BacktraceEntry7libnameE">
+<span id="pdal::Utils::BacktraceEntry::libname__ss"></span><span class="target" id="structpdal_1_1Utils_1_1BacktraceEntry_1a6a77bffc08d6d7466a5d37a98a088167"></span>std::string <code class="descname">libname</code><a class="headerlink" href="#_CPPv2N4pdal5Utils14BacktraceEntry7libnameE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4pdal5Utils14BacktraceEntry4addrE">
+<span id="pdal::Utils::BacktraceEntry::addr__voidP"></span><span class="target" id="structpdal_1_1Utils_1_1BacktraceEntry_1a813bb48739b4eeb5cd9b8497780b69ef"></span>void *<code class="descname">addr</code><a class="headerlink" href="#_CPPv2N4pdal5Utils14BacktraceEntry4addrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4pdal5Utils14BacktraceEntry7symnameE">
+<span id="pdal::Utils::BacktraceEntry::symname__ss"></span><span class="target" id="structpdal_1_1Utils_1_1BacktraceEntry_1adce84d2da42235f292e98a2bfbeb002b"></span>std::string <code class="descname">symname</code><a class="headerlink" href="#_CPPv2N4pdal5Utils14BacktraceEntry7symnameE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4pdal5Utils14BacktraceEntry6offsetE">
+<span id="pdal::Utils::BacktraceEntry::offset__i"></span><span class="target" id="structpdal_1_1Utils_1_1BacktraceEntry_1a5c4df13272dbadab1ae30fa2200aa9bf"></span>int <code class="descname">offset</code><a class="headerlink" href="#_CPPv2N4pdal5Utils14BacktraceEntry6offsetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
 <dt id="_CPPv2N4pdal5Utils14RedirectStreamE">
 <span id="pdal::Utils::RedirectStream"></span><span class="target" id="structpdal_1_1Utils_1_1RedirectStream"></span><em class="property">struct </em><code class="descname">RedirectStream</code><a class="headerlink" href="#_CPPv2N4pdal5Utils14RedirectStreamE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;Utils.hpp&gt;</em><div class="breathe-sectiondef docutils container">
@@ -1684,7 +1753,7 @@
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -1705,7 +1774,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -1739,7 +1808,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

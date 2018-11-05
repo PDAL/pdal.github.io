@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -213,6 +213,10 @@ where the patches are under the PostgreSQL page size (8kb). For most LIDAR
 data, this practically means a patch size of between 400 and 600 points.</p>
 <p>In order to create patches of the right size, the Pointcloud writer should be
 preceded in the pipeline file by <a class="reference internal" href="filters.chipper.html#filters-chipper"><span class="std std-ref">filters.chipper</span></a>.</p>
+<p>The pgpointcloud format does not support WKT spatial reference specifications.  A subset of spatial references can be stored by using the ‘srid’ option, which
+allows storage of an <a class="reference external" href="http://www.epsg.org">EPSG code</a> that covers many common spatial references.
+PDAL makes no attempt to reproject data to your specified srid.  Use
+<a class="reference internal" href="filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> for this purpose.</p>
 <div class="admonition plugin" id="plugin-0">
 <p class="first admonition-title">Dynamic Plugin</p>
 <p class="last">This stage requires a dynamic plugin to operate</p>
@@ -258,7 +262,7 @@ preceded in the pipeline file by <a class="reference internal" href="filters.chi
 <ul class="last simple">
 <li><strong>none</strong> applies no compression</li>
 <li><strong>dimensional</strong> applies dynamic compression to each dimension separately</li>
-<li><strong>ght</strong> applies a “geohash tree” compression by sorting the points into a prefix tree</li>
+<li><strong>lazperf</strong> applies a “laz” compression (using the <a class="reference external" href="https://github.com/hobu/laz-perf">laz-perf</a> library in PostgreSQL Pointcloud)</li>
 </ul>
 </dd>
 <dt>overwrite</dt>
@@ -311,7 +315,7 @@ are listed by name and separated by commas.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -332,7 +336,7 @@ are listed by name and separated by commas.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -366,7 +370,7 @@ are listed by name and separated by commas.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="random.html">random</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l2"><a class="reference internal" href="split.html">split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tile.html">tile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tindex.html">tindex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="translate.html">translate</a></li>
 </ul>
@@ -223,13 +224,37 @@ more information.</p>
 <h2>Substitutions<a class="headerlink" href="#substitutions" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">pipeline</span></code> command can accept command-line option substitutions and
 they replace
-existing options that are specified in the input JSON pipeline.  If
-multiple stages of the same name exist in the pipeline, <cite>all</cite> stages would
-be overridden. For example, to set the output and input LAS files for a
+existing options that are specified in the input JSON pipeline.
+For example, to set the output and input LAS files for a
 pipeline that does a translation, the <code class="docutils literal"><span class="pre">filename</span></code> for the reader and the
 writer can be overridden:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pipeline translate.json --writers.las.filename=output.laz \
     --readers.las.filename=input.las
+</pre></div>
+</div>
+<p>If multiple stages of the same name exist in the pipeline, <cite>all</cite> stages would
+be overridden. In the following example, both colorization filters would
+have their <cite>dimensions</cite> option overridden to the value
+“Red:1:1.0, Blue, Green::256.0” by the command shown below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>{
+    &quot;pipeline&quot; : [
+        &quot;input.las&quot;,
+        {
+            &quot;type&quot; : &quot;filters.colorization&quot;,
+            &quot;raster&quot; : &quot;raster1.tiff&quot;
+            &quot;dimensions&quot;: &quot;Red&quot;
+        },
+        {
+            &quot;type&quot; : &quot;filters.colorization&quot;,
+            &quot;raster&quot; : &quot;raster2.tiff&quot;
+            &quot;dimensions&quot;: &quot;Blue&quot;
+        },
+        &quot;placeholder.laz&quot;
+    ]
+}
+
+$ pdal pipeline colorize.json --filters.colorization.dimensions= \
+    &quot;Red:1:1.0, Blue, Green::256.0&quot;
 </pre></div>
 </div>
 <p>Option substitution can also refer to the tag of an individual stage.
@@ -286,7 +311,7 @@ $ pdal pipeline translate.json --writers.las.filename=output.laz \
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -307,7 +332,7 @@ $ pdal pipeline translate.json --writers.las.filename=output.laz \
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -341,7 +366,7 @@ $ pdal pipeline translate.json --writers.las.filename=output.laz \
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

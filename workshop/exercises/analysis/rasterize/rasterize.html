@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../../../../search.html"/>
     <link rel="top" title="pdal.io" href="../../../../index.html"/>
         <link rel="up" title="Exercises" href="../../index.html"/>
-        <link rel="next" title="Batch Processing" href="../../batch_processing/batch-processing.html"/>
+        <link rel="next" title="Plotting a histogram" href="../../python/histogram.html"/>
         <link rel="prev" title="Generating a DTM" href="../dtm/dtm.html"/> 
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -141,7 +141,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Rasterizing Attributes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../batch_processing/batch-processing.html">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
@@ -228,6 +227,24 @@ There is no <a class="reference internal" href="../../../../apps/index.html#apps
 </div>
 <div class="section" id="pipeline-breakdown">
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
+<span class="hll">    <span class="p">{</span>
+</span><span class="hll">        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
+</span><span class="hll">        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na.greyhound.io/resource/dk-z/read?depthBegin=1&amp;depthEnd=29&amp;bounds=[11045777.34375,-11852109.375,223441.40625,11055492.1875,-11842394.53125,233156.25]&amp;compress=true&amp;scale=0.01&amp;offset=[1295630,7596240,-2280]&quot;</span>
+</span><span class="hll">    <span class="p">},</span>
+</span><span class="hll">    <span class="p">{</span>
+</span>      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;denmark-classification.tif&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;data_type&quot;</span><span class="p">:</span><span class="s2">&quot;uint16_t&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;resolution&quot;</span><span class="p">:</span><span class="mf">30.0</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This pipeline is available in your workshop materials in the
@@ -393,7 +410,7 @@ smoothing might produce undesirable results, for example.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../batch_processing/batch-processing.html" class="btn btn-neutral float-right" title="Batch Processing" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../python/histogram.html" class="btn btn-neutral float-right" title="Plotting a histogram" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../dtm/dtm.html" class="btn btn-neutral" title="Generating a DTM" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -412,7 +429,7 @@ smoothing might produce undesirable results, for example.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -433,7 +450,7 @@ smoothing might produce undesirable results, for example.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -467,7 +484,7 @@ smoothing might produce undesirable results, for example.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

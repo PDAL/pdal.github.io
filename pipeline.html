@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -112,13 +112,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#simple-example">Simple Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reprojection-example">Reprojection Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#point-views-and-multiple-outputs">Point Views and Multiple Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#processing-modes">Processing Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Processing Modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pipeline-objects">Pipeline Objects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pipeline-array">Pipeline Array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stage-objects">Stage Objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#filename-globbing">Filename Globbing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#option-files">Option Files</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#extended-examples">Extended Examples</a><ul>
@@ -126,7 +128,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#python-hag">Python HAG</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dtm">DTM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#decimate-colorize">Decimate &amp; Colorize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#merge-reproject">Merge &amp; Reproject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reproject">Reproject</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#globbed-inputs">Globbed Inputs</a></li>
 </ul>
 </li>
@@ -249,7 +251,7 @@ writer from filenames, and able to be specified as a set of sequential steps:</p
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="figure" id="id4">
+<div class="figure" id="id5">
 <img alt="_images/las-crop-bpf-pipeline.png" src="_images/las-crop-bpf-pipeline.png" />
 <p class="caption"><span class="caption-text">A simple pipeline to convert <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">LAS</span></a> to <a class="reference internal" href="stages/readers.bpf.html#readers-bpf"><span class="std std-ref">BPF</span></a>
 while only keeping points inside the box <span class="math">\([0 \leq x \leq 100, 0 \leq y \leq 100]\)</span>.</span></p>
@@ -292,16 +294,44 @@ with the <a class="reference internal" href="stages/writers.gdal.html#writers-gd
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="figure" id="id5">
+<div class="figure" id="id6">
 <img alt="_images/reproject-merge-pipeline.png" src="_images/reproject-merge-pipeline.png" />
 <p class="caption"><span class="caption-text">A more complex pipeline that merges two inputs together but uses
 <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> to transform the coordinate system of
 file <code class="docutils literal"><span class="pre">B.las</span></code> from <a class="reference external" href="http://spatialreference.org/ref/epsg/nad83-utm-zone-16n/">UTM</a> to <a class="reference external" href="http://spatialreference.org/ref/epsg/4326/">Geographic</a>.</span></p>
 </div>
 </div>
+<div class="section" id="point-views-and-multiple-outputs">
+<span id="processing-modes"></span><h3>Point Views and Multiple Outputs<a class="headerlink" href="#point-views-and-multiple-outputs" title="Permalink to this headline">¶</a></h3>
+<p>Some filters produce sets of points as output.  filters.splitter, for example,
+creates a point set for each tile (rectangular area) in which input points
+exist.
+Each of these output sets is called a point view.  Point views are carried
+through a PDAL pipeline individually.  Some writers can produce separate
+output for each input point view.  These writers use a placeholder character
+(#) in the output filename which is replaced by an incrementing integer for
+each input point view.</p>
+<p>The following pipeline provides an example of writing multiple output
+files from a single pipeline.  The crop filter creates two output point views
+(one for each specified geometry) and the writer creates output files
+‘output1.las’ and ‘output2.las’ containing the two sets of points:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+        <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;filters.crop&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;bounds&quot;</span> <span class="p">:</span>
+                <span class="p">[</span> <span class="s2">&quot;([0, 75], [0, 75])&quot;</span><span class="p">,</span> <span class="s2">&quot;([50, 125], [50, 125])&quot;</span> <span class="p">],</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;output#.las&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="processing-modes">
-<span id="id2"></span><h2>Processing Modes<a class="headerlink" href="#processing-modes" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Processing Modes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>PDAL process data in one of two ways: standard mode or stream mode.  With
 standard mode, all input is read into memory before it is processed.  Many
 algorithms require standard mode processing because they need access to
@@ -361,18 +391,47 @@ name.</li>
 a string. The <code class="docutils literal"><span class="pre">type</span></code> must specify a valid PDAL filter name.</li>
 <li>A stage object may have additional members with names corresponding to
 stage-specific option names and their respective values. Values provided as
-JSON objects or arrays will be stringified and parsed within the stage.</li>
-<li>Applications can place a <code class="docutils literal"><span class="pre">user_data</span></code> node on any stage object and it will be
+JSON objects or arrays will be stringified and parsed within the stage.
+Some options allow multiple inputs.  In those cases, provide the option
+values as a JSON array.</li>
+<li>A <code class="docutils literal"><span class="pre">user_data</span></code> option can be added to any stage object and it will be
 carried through to any serialized pipeline output.</li>
+<li>All stages support the <code class="docutils literal"><span class="pre">option_file</span></code> option that allows options to be
+places in a separate file. See <a class="reference internal" href="#option-files"><span class="std std-ref">Option Files</span></a> for details.</li>
 </ul>
 </div>
 <div class="section" id="filename-globbing">
 <h3>Filename Globbing<a class="headerlink" href="#filename-globbing" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>A filename may contain the wildcard character <code class="docutils literal"><span class="pre">*</span></code> to match any string of
+<ul>
+<li><p class="first">A filename may contain the wildcard character <code class="docutils literal"><span class="pre">*</span></code> to match any string of
 characters. This can be useful if working with multiple input files in a
-directory (e.g., merging all files).</li>
+directory (e.g., merging all files).</p>
+<p>Filename globbing ONLY works in pipeline specifications.  It doesn’t work
+when a filename is provided as an option through a command-line application
+like <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> or <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">translate</span></code>.</p>
+</li>
 </ul>
+</div>
+<div class="section" id="option-files">
+<span id="id4"></span><h3>Option Files<a class="headerlink" href="#option-files" title="Permalink to this headline">¶</a></h3>
+<p>All stages accept the <code class="docutils literal"><span class="pre">option</span> <span class="pre">file</span></code> option that allows extra options for a
+stage to be placed in a separate file.  The value of the option is the filename
+in which the additional options are located.</p>
+<p>Option files can be written using either JSON syntax or command line syntax.
+When using the JSON syntax, the format is a block of options just as if the
+options were placed in a pipeline:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;minor_version&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span> <span class="s2">&quot;EPSG_4326&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When using the command line syntax, the options are specified as they would
+be on the command line without the need to qualify the option names with
+the stage name:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>--minor_version=4 --out_srs=&quot;EPSG_4326&quot;
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="extended-examples">
@@ -488,7 +547,7 @@ written as ASCII text.</p>
         <span class="p">{</span>
             <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;colorization&quot;</span><span class="p">,</span>
             <span class="nt">&quot;raster&quot;</span><span class="p">:</span><span class="s2">&quot;autzen.tif&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;Red:1:1, Green:2:1, Blue:3:1&quot;</span>
+            <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Red:1:1&quot;</span><span class="p">,</span> <span class="s2">&quot;Green:2:1&quot;</span><span class="p">,</span> <span class="s2">&quot;Blue:3:1&quot;</span> <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;junk.txt&quot;</span><span class="p">,</span>
@@ -500,11 +559,10 @@ written as ASCII text.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="merge-reproject">
-<h3>Merge &amp; Reproject<a class="headerlink" href="#merge-reproject" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="reproject">
+<h3>Reproject<a class="headerlink" href="#reproject" title="Permalink to this headline">¶</a></h3>
 <p>Our first example with multiple readers, this pipeline infers the reader types,
-and assigns spatial reference information to each. Next, the
-<a class="reference internal" href="stages/filters.merge.html#filters-merge"><span class="std std-ref">filters.merge</span></a> merges points from all previous readers, and the
+and assigns spatial reference information to each.
 <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> filter reprojects data to the specified output
 spatial reference system.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -516,9 +574,6 @@ spatial reference system.</p>
         <span class="p">{</span>
             <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;1.2-with-color.las&quot;</span><span class="p">,</span>
             <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:2027&quot;</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.merge&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;reprojection&quot;</span><span class="p">,</span>
@@ -570,9 +625,9 @@ actual channels that are stored in the <a class="reference internal" href="api/c
 is a consumer of data, and a Filter is an actor on data.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As a C++ API consumer, you are generally not supposed to worry about the underlying
-storage of the PointView, but there might be times when you simply just
-“want the data.” In those situations, you can use the
+<p class="last">As a C++ API consumer, you are generally not supposed to worry about
+the underlying storage of the PointView, but there might be times when
+you simply just “want the data.” In those situations, you can use the
 <code class="xref cpp cpp-func docutils literal"><span class="pre">pdal::PointView::getBytes()</span></code> method to stream out the raw storage.</p>
 </div>
 <div class="section" id="usage">
@@ -619,11 +674,6 @@ PDAL. Readers follow the pattern of <a class="reference internal" href="stages/r
 <a class="reference internal" href="stages/filters.crop.html#filters-crop"><span class="std std-ref">filters.crop</span></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="stages/index.html#stage-index"><span class="std std-ref">Readers, Writers, and Filters</span></a> contains a full listing of possible stages and
-descriptions of their options.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">Issuing the command <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></code> will list all available
 stages and their options. See <a class="reference internal" href="apps/info.html#info-command"><span class="std std-ref">info</span></a> for more.</p>
 </div>
@@ -657,7 +707,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -678,7 +728,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -712,7 +762,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

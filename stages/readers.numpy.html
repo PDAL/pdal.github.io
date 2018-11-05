@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -125,8 +125,9 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.numpy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#array-types">Array Types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#named-field-arrays">Named Field Arrays</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#two-dimensional-arrays">Two-dimensional Arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structured-arrays">Structured Arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standard-non-structured-arrays">Standard (non-structured) Arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#x-y-and-z-mapping">X, Y and Z Mapping</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
@@ -139,9 +140,11 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.ply.html">readers.ply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pts.html">readers.pts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.qfit.html">readers.qfit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
 </ul>
@@ -222,40 +225,41 @@ convenient to read data from <a class="reference external" href="http://www.nump
 extension <code class="docutils literal"><span class="pre">.npy</span></code>. As of PDAL 1.7.0, <code class="docutils literal"><span class="pre">.npz</span></code> files were not yet supported.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">It is untested whether the version of Python PDAL was linked against and
-the version that saved the <code class="docutils literal"><span class="pre">.npy</span></code> files can be mixed.</p>
+<p class="last">It is untested whether problems may occur if the versions of Python used
+in writing the file and for reading the file don’t match.</p>
 </div>
 <div class="section" id="array-types">
 <h2>Array Types<a class="headerlink" href="#array-types" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#readers-numpy"><span class="std std-ref">readers.numpy</span></a> supports reading data in two forms:</p>
 <ul class="simple">
-<li>Arrays as named fields all of the same shape (from <a class="reference external" href="https://github.com/laspy/laspy">laspy</a> for example)</li>
-<li>2-dimensional arrays</li>
+<li>As a <a class="reference external" href="https://docs.scipy.org/doc/numpy/user/basics.rec.html">structured array</a> with specified field names (from <a class="reference external" href="https://github.com/laspy/laspy">laspy</a> for
+example)</li>
+<li>As a standard array that contains data of a single type.</li>
 </ul>
-<div class="section" id="named-field-arrays">
-<h3>Named Field Arrays<a class="headerlink" href="#named-field-arrays" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://github.com/laspy/laspy">laspy</a> provides its <code class="docutils literal"><span class="pre">.points</span></code> Numpy array as a bunch of named fields:</p>
+<div class="section" id="structured-arrays">
+<h3>Structured Arrays<a class="headerlink" href="#structured-arrays" title="Permalink to this headline">¶</a></h3>
+<p>Numpy arrays can be created as structured data, where each entry is a set
+of fields.  Each field has a name.  As an example, <a class="reference external" href="https://github.com/laspy/laspy">laspy</a> provides its
+<code class="docutils literal"><span class="pre">.points</span></code> as an array of named fields:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">laspy</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">laspy</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;test/data/autzen/autzen.las&#39;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span> <span class="p">((</span><span class="mi">63608330</span><span class="p">,</span> <span class="mi">84939865</span><span class="p">,</span> <span class="mi">40735</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">7326</span><span class="p">,</span>  <span class="mf">245385.60820904</span><span class="p">),)],</span>
-      <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;point&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flag_byte&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;raw_classification&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scan_angle_rank&#39;</span><span class="p">,</span> <span class="s1">&#39;i1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;user_data&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pt_src_id&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;gps_time&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">)])])</span>
+<span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;point&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flag_byte&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;raw_classification&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scan_angle_rank&#39;</span><span class="p">,</span> <span class="s1">&#39;i1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;user_data&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pt_src_id&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;gps_time&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">)])])</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#readers-numpy"><span class="std std-ref">readers.numpy</span></a> supports reading these Numpy arrays and mapping applicable
-names to <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> names. It will try to remove <code class="docutils literal"><span class="pre">_</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, and <code class="docutils literal"><span class="pre">space</span></code> from
-the field name and use that as a dimension name if it can match. Types are also
-preserved when mapped to PDAL.</p>
+<p><a class="reference internal" href="#readers-numpy"><span class="std std-ref">readers.numpy</span></a> supports reading these Numpy arrays and mapping
+field names to standard PDAL <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a> names.
+If that fails, the reader retries by removing <code class="docutils literal"><span class="pre">_</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, or <code class="docutils literal"><span class="pre">space</span></code>
+in turn.  If that also fails, the array field names are used to create
+custom PDAL dimensions.</p>
 </div>
-<div class="section" id="two-dimensional-arrays">
-<h3>Two-dimensional Arrays<a class="headerlink" href="#two-dimensional-arrays" title="Permalink to this headline">¶</a></h3>
-<p>Typical two-dimensional <a class="reference external" href="http://www.numpy.org/">Numpy</a> arrays are also supported, with options to allow
-you to map the values in the cells using the <code class="docutils literal"><span class="pre">dimension</span></code> option. Additionally,
-you can override the <cite>Z</cite> value for the entire array by using the <code class="docutils literal"><span class="pre">assign_z</span></code>
-option to set a single <cite>Z</cite> value for the entire point cloud. Mapping the values to the
-<code class="docutils literal"><span class="pre">Z</span></code> dimension using the <code class="docutils literal"><span class="pre">dimension</span></code> option is also allowed.</p>
+<div class="section" id="standard-non-structured-arrays">
+<h3>Standard (non-structured) Arrays<a class="headerlink" href="#standard-non-structured-arrays" title="Permalink to this headline">¶</a></h3>
+<p>Arrays without field information contain a single datatype.  This datatype is
+mapped to a dimension specified by the <code class="docutils literal"><span class="pre">dimension</span></code> option.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./perlin.npy&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,)</span>
 
@@ -266,72 +270,64 @@ option to set a single <cite>Z</cite> value for the entire point cloud. Mapping 
 <span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In this case, the cell locations are mapped to X and Y dimensions, the cell
-values are mapped to <code class="docutils literal"><span class="pre">Intensity</span></code> using the <code class="docutils literal"><span class="pre">dimension</span></code> option, and the Z
-values are assigned to 4 using the <code class="docutils literal"><span class="pre">assign_z</span></code> option.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">perlin</span><span class="o">.</span><span class="n">npy</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">dimension</span><span class="o">=</span><span class="n">Intensity</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">assign_z</span><span class="o">=</span><span class="mi">4</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;perlin.npy&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;pdal_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.6.0 (git-version: 897afd)&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;..\/test\/data\/plang\/perlin.npy&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;pdal_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.7.1 (git-version: 399e19)&quot;</span><span class="p">,</span>
   <span class="s2">&quot;stats&quot;</span><span class="p">:</span>
   <span class="p">{</span>
-        <span class="s2">&quot;statistic&quot;</span><span class="p">:</span>
-        <span class="p">[</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mf">49.995</span><span class="p">,</span>
-            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
-            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.201226882</span><span class="p">,</span>
-            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.0001281084091</span><span class="p">,</span>
-            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">29.16793715</span><span class="p">,</span>
-            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">850.7685575</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
-            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.1996846</span><span class="p">,</span>
-            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">8.69273658e-05</span><span class="p">,</span>
-            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">28.87401021</span><span class="p">,</span>
-            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">833.7084657</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
-            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="mi">9997</span><span class="p">,</span>
-            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="mf">1.844674407e+21</span><span class="p">,</span>
-            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">0.04000200015</span><span class="p">,</span>
-            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">0.001600160016</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mf">0.01112664759</span><span class="p">,</span>
-            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
-            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5634013693</span><span class="p">,</span>
-            <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mf">0.5189296418</span><span class="p">,</span>
-            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5189296418</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Intensity&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-            <span class="s2">&quot;skewness&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1127124452</span><span class="p">,</span>
-            <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">0.2024120437</span><span class="p">,</span>
-            <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">0.04097063545</span>
-          <span class="p">}</span>
-        <span class="p">]</span>
+    <span class="s2">&quot;statistic&quot;</span><span class="p">:</span>
+    <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mf">49.5</span><span class="p">,</span>
+        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+        <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
+        <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">28.86967866</span><span class="p">,</span>
+        <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">833.4583458</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mf">49.5</span><span class="p">,</span>
+        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+        <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
+        <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">28.87633116</span><span class="p">,</span>
+        <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">833.8425015</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="mf">0.01112664759</span><span class="p">,</span>
+        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+        <span class="s2">&quot;maximum&quot;</span><span class="p">:</span> <span class="mf">0.5189296418</span><span class="p">,</span>
+        <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5189296418</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Intensity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;stddev&quot;</span><span class="p">:</span> <span class="mf">0.2024120437</span><span class="p">,</span>
+        <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="mf">0.04097063545</span>
       <span class="p">}</span>
-    <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="x-y-and-z-mapping">
+<h3>X, Y and Z Mapping<a class="headerlink" href="#x-y-and-z-mapping" title="Permalink to this headline">¶</a></h3>
+<p>Unless the X, Y or Z dimension is specified as a field in a structured array,
+the reader will create dimensions X, Y and Z as necessary and populate them
+based on the position of each item of the array.  Although Numpy arrays always
+contain contiguous, linear data, that data can be seen to be arranged in more
+than one dimension.  A two-dimensional array will cause dimensions X and Y
+to be populated.  A three dimensional array will cause X, Y and Z to be
+populated.  An array of more than three dimensions will reuse the X, Y and Z
+indices for each dimension over three.</p>
+<p>When reading data, X Y and Z can be assigned using row-major (C) order or
+column-major (Fortran) order by using the <code class="docutils literal"><span class="pre">order</span></code> option.</p>
 <div class="admonition plugin" id="plugin-0">
 <p class="first admonition-title">Dynamic Plugin</p>
 <p class="last">This stage requires a dynamic plugin to operate</p>
@@ -347,18 +343,22 @@ values are assigned to 4 using the <code class="docutils literal"><span class="p
 <dl class="docutils">
 <dt>filename</dt>
 <dd>npy file to read [Required]</dd>
+<dt>count</dt>
+<dd>Maximum number of points to read. [Default: unlimited]</dd>
 <dt>dimension</dt>
 <dd>Dimension name from <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to map raster values</dd>
-<dt>x</dt>
-<dd>Dimension number (starting from 0) to map to the <code class="docutils literal"><span class="pre">X</span></code> PDAL <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a></dd>
-<dt>y</dt>
-<dd>Dimension number (starting from 0) to map to the <code class="docutils literal"><span class="pre">Y</span></code> PDAL <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a></dd>
-<dt>z</dt>
-<dd>Dimension number (starting from 0) to map to the <code class="docutils literal"><span class="pre">Z</span></code> PDAL <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a></dd>
-<dt>assign_z</dt>
-<dd>A single value to override for <code class="docutils literal"><span class="pre">Z</span></code> values when <code class="docutils literal"><span class="pre">dimension</span></code> is used to assign the
-Numpy values to another dimension</dd>
+<dt>order</dt>
+<dd>Either ‘row’ or ‘column’ to specify assigning the X,Y and Z values
+in a row-major or column-major order. [Default: matches the natural
+order of the array.]</dd>
 </dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The functionality of the ‘assign_z’ option in previous versions is
+provided with <a class="reference internal" href="filters.assign.html#filters-assign"><span class="std std-ref">filters.assign</span></a></p>
+<p class="last">The functionality of the ‘x’, ‘y’, and ‘z’ options in previous versions
+are generally handled with the current ‘order’ option.</p>
+</div>
 </div>
 </div>
 
@@ -388,7 +388,7 @@ Numpy values to another dimension</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -409,7 +409,7 @@ Numpy values to another dimension</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -443,7 +443,7 @@ Numpy values to another dimension</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 

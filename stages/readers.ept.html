@@ -1,0 +1,296 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readers.ept &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pdal.io" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/index.html">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+    <li>readers.ept</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="readers-ept">
+<span id="id1"></span><h1>readers.ept<a class="headerlink" href="#readers-ept" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md">Entwine Point Tile</a> (EPT) is a hierarchical octree-based point cloud format suitable for real-time rendering and lossless archival.  <a class="reference external" href="https://entwine.io/">Entwine</a> is a producer of this format.  The <strong>EPT Reader</strong> supports reading data from the EPT format, including spatially accelerated queries and file reconstruction queries.</p>
+<p>Sample EPT datasets of hundreds of billions of points in size may be viewed at <a class="reference external" href="http://potree.entwine.io">http://potree.entwine.io</a> and <a class="reference external" href="http://speck.ly">http://speck.ly</a>.</p>
+<div class="admonition embed" id="embed-0">
+<p class="first admonition-title">Default Embedded Stage </p>
+<p class="last">This stage is enabled by default</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This example downloads a small area around the the Statue of Liberty from the New York City data set (4.7 billion points) which can be viewed in its entirety in <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a> or <a class="reference external" href="http://speck.ly/?s=http%3A%2F%2Fc%5B0-7%5D.greyhound.io&amp;r=ept%3A%2F%2Fna.entwine.io%2Fnyc&amp;ca=-0&amp;ce=49.06&amp;ct=-8239196%2C4958509.308%2C337&amp;cd=42640.943&amp;cmd=125978.13&amp;ps=2&amp;pa=0.1&amp;ze=1&amp;c0s=remote%3A%2F%2Fimagery%3Furl%3Dhttp%3A%2F%2Fserver.arcgisonline.com%2FArcGIS%2Frest%2Fservices%2FWorld_Imagery%2FMapServer%2Ftile%2F%7B%7Bz%7D%7D%2F%7B%7By%7D%7D%2F%7B%7Bx%7D%7D.jpg">Plasio</a>.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/nyc&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="s2">&quot;([-8242669, -8242529], [4966549, 4966674])&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;statue-of-liberty.las&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>EPT resource from which to read.  Because EPT resources do not have a file extension, to specify an EPT resource as a string, it must be prefixed with <code class="docutils literal"><span class="pre">ept://</span></code>.  For example, <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">translate</span> <span class="pre">ept://http://na.entwine.io/autzen</span> <span class="pre">autzen.laz</span></code>. [Required]</dd>
+<dt>bounds</dt>
+<dd>The extents of the resource to select in 2 or 3 dimensions, expressed as a string, e.g.: <code class="docutils literal"><span class="pre">([xmin,</span> <span class="pre">xmax],</span> <span class="pre">[ymin,</span> <span class="pre">ymax],</span> <span class="pre">[zmin,</span> <span class="pre">zmax])</span></code>.  If omitted, the entire dataset will be selected.</dd>
+<dt>origin</dt>
+<dd><p class="first">EPT datasets are lossless aggregations of potentially multiple source files.  The <em>origin</em> options can be used to select all points from a single source file.  This option may be specified as a string or an integral ID.</p>
+<p>The string form of this option selects a source file by its original file path.  This may be a substring instead of the entire path, but the string must uniquely select only one source file (via substring search).  For example, for an EPT dataset created from source files <em>one.las</em>, <em>two.las</em>, and <em>two.bpf</em>, <cite>“one”</cite> is a sufficient selector, but <cite>“two”</cite> is not.</p>
+<p class="last">The integral form of this option selects a source file by its <code class="docutils literal"><span class="pre">OriginId</span></code> dimension, which can be found via the files position in EPT metadata file <code class="docutils literal"><span class="pre">entwine-files.json</span></code>.</p>
+</dd>
+<dt>threads</dt>
+<dd>Number of worker threads used to download and process EPT data.  A minimum of 4 will be used no matter what value is specified.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2018
+                        <a href="https://github.com/abellgithub">Andrew Bell</a>,
+                        <a href="https://github.com/chambbj">Brad Chambers</a>,
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Nov 05, 2018.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2018
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Nov 05, 2018.
+        </div>
+    </div>
+
+</body>
+</html>

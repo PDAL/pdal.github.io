@@ -1,0 +1,769 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readers.rdb &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Readers" href="readers.html"/>
+        <link rel="next" title="readers.rxp" href="readers.rxp.html"/>
+        <link rel="prev" title="readers.qfit" href="readers.qfit.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.ply.html">readers.ply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pts.html">readers.pts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.qfit.html">readers.qfit</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">readers.rdb</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dimensions">Dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metadata">Metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#object-database">Object “database”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list-dimensions">List “dimensions”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#object-metadata">Object “metadata”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list-transactions">List “transactions”</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/index.html">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="readers.html">Readers</a> &raquo;</li>
+      
+    <li>readers.rdb</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="readers-rdb">
+<span id="id1"></span><h1>readers.rdb<a class="headerlink" href="#readers-rdb" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>RDB reader</strong> reads from files in the RDB format, the in-house format
+used by <a class="reference external" href="http://www.riegl.com">RIEGL Laser Measurement Systems GmbH</a>.</p>
+<div class="admonition plugin" id="plugin-0">
+<p class="first admonition-title">Dynamic Plugin</p>
+<p class="last">This stage requires a dynamic plugin to operate</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To build PDAL with rdb support, <code class="docutils literal"><span class="pre">set</span> <span class="pre">rdb_DIR</span></code> to the path of your local
+rdblib installation. rdblib can be obtained from the <a class="reference external" href="http://www.riegl.com/members-area/software-downloads/libraries/">RIEGL download pages</a>
+with a properly enabled user account. The rdblib files do not need to be
+in a system-level directory, though they could be (e.g. they could be in
+<code class="docutils literal"><span class="pre">/usr/local</span></code>, or just in your home directory somewhere). For help building
+PDAL with optional libraries, see <a class="reference external" href="http://pdal.io/compilation/unix.html#configure-your-optional-libraries">the optional library documentation</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Minimum rdblib version required to build the driver and run the tests: 2.1.6</li>
+<li>This driver was developed and tested on Ubuntu 17.10 using GCC 7.2.0.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This example pipeline reads points from a RDB file and stores them in LAS
+format. Only points classified as “ground points” are read since option
+<code class="docutils literal"><span class="pre">filter</span></code> is set to “riegl.class == 2” (see line 6).</p>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">{</span>
+   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+     <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rdb&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span><span class="p">,</span>
+<span class="hll">       <span class="nt">&quot;filter&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.class == 2&quot;</span>
+</span>     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span>
+     <span class="p">}</span>
+   <span class="p">]</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>Name of file to read
+[Required]</dd>
+<dt>count</dt>
+<dd>Maximum number of points to read
+[Optional]
+[Default: read all points]</dd>
+<dt>filter</dt>
+<dd>Point filter expression string (see RDB SDK documentation for details)
+[Optional]
+[Default: empty string (= no filter)]</dd>
+<dt>extras</dt>
+<dd>Read all available dimensions (<cite>true</cite>) or known PDAL dimensions only (<cite>false</cite>)
+[Optional]
+[Default: false]</dd>
+</dl>
+</div>
+<div class="section" id="dimensions">
+<h2>Dimensions<a class="headerlink" href="#dimensions" title="Permalink to this headline">¶</a></h2>
+<p>The reader maps following default RDB point attributes to PDAL dimensions
+(if they exist in the RDB file):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="53%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">RDB attribute</th>
+<th class="head">PDAL dimension(s)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>riegl.id</td>
+<td>Id::PointId</td>
+</tr>
+<tr class="row-odd"><td>riegl.source_cloud_id</td>
+<td>Id::OriginId</td>
+</tr>
+<tr class="row-even"><td>riegl.timestamp</td>
+<td>Id::InternalTime</td>
+</tr>
+<tr class="row-odd"><td>riegl.xyz</td>
+<td>Id::X,
+Id::Y,
+Id::Z</td>
+</tr>
+<tr class="row-even"><td>riegl.intensity</td>
+<td>Id::Intensity</td>
+</tr>
+<tr class="row-odd"><td>riegl.amplitude</td>
+<td>Id::Amplitude</td>
+</tr>
+<tr class="row-even"><td>riegl.reflectance</td>
+<td>Id::Reflectance</td>
+</tr>
+<tr class="row-odd"><td>riegl.deviation</td>
+<td>Id::Deviation</td>
+</tr>
+<tr class="row-even"><td>riegl.pulse_width</td>
+<td>Id::PulseWidth</td>
+</tr>
+<tr class="row-odd"><td>riegl.background_radiation</td>
+<td>Id::BackgroundRadiation</td>
+</tr>
+<tr class="row-even"><td>riegl.target_index</td>
+<td>Id::ReturnNumber</td>
+</tr>
+<tr class="row-odd"><td>riegl.target_count</td>
+<td>Id::NumberOfReturns</td>
+</tr>
+<tr class="row-even"><td>riegl.scan_direction</td>
+<td>Id::ScanDirectionFlag</td>
+</tr>
+<tr class="row-odd"><td>riegl.scan_angle</td>
+<td>Id::ScanAngleRank</td>
+</tr>
+<tr class="row-even"><td>riegl.class</td>
+<td>Id::Classification</td>
+</tr>
+<tr class="row-odd"><td>riegl.rgba</td>
+<td>Id::Red,
+Id::Green,
+Id::Blue</td>
+</tr>
+<tr class="row-even"><td>riegl.surface_normal</td>
+<td>Id::NormalX,
+Id::NormalY,
+Id::NormalZ</td>
+</tr>
+</tbody>
+</table>
+<p>All other point attributes that may exist in the RDB file are ignored unless
+the option <code class="docutils literal"><span class="pre">extras</span></code> is set to <cite>true</cite>. If so, a custom dimension is defined
+for each additional point attribute, whereas the dimension name is equal to
+the point attribute name.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Point attributes are read “as-is”, no scaling or unit conversion is done
+by the reader. The only exceptions are point coordinates (<code class="docutils literal"><span class="pre">riegl.xyz</span></code>)
+and surface normals (<code class="docutils literal"><span class="pre">riegl.surface_normal</span></code>) which are transformed to
+the RDB file’s SRS by applying the matrix defined in the (optional) RDB
+file metadata object <code class="docutils literal"><span class="pre">riegl.geo_tag</span></code>.</p>
+</div>
+</div>
+<div class="section" id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<p>The reader adds following objects to the stage’s metadata node:</p>
+<div class="section" id="object-database">
+<h3>Object “database”<a class="headerlink" href="#object-database" title="Permalink to this headline">¶</a></h3>
+<p>Contains basic information about the RDB file such as the bounding box,
+number of points and the file ID.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">{</span>
+   <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="nt">&quot;maximum&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;X&quot;</span><span class="p">:</span> <span class="mf">-2504493.762</span><span class="p">,</span>
+       <span class="nt">&quot;Y&quot;</span><span class="p">:</span> <span class="mf">-3846841.252</span><span class="p">,</span>
+       <span class="nt">&quot;Z&quot;</span><span class="p">:</span>  <span class="mf">4413210.394</span>
+     <span class="p">},</span>
+     <span class="nt">&quot;minimum&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;X&quot;</span><span class="p">:</span> <span class="mf">-2505882.459</span><span class="p">,</span>
+       <span class="nt">&quot;Y&quot;</span><span class="p">:</span> <span class="mf">-3848231.393</span><span class="p">,</span>
+       <span class="nt">&quot;Z&quot;</span><span class="p">:</span>  <span class="mf">4412172.548</span>
+     <span class="p">}</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="mi">10653</span><span class="p">,</span>
+   <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;637de54d-7e6b-4004-b6ab-b6bc588ec9ea&quot;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="list-dimensions">
+<h3>List “dimensions”<a class="headerlink" href="#list-dimensions" title="Permalink to this headline">¶</a></h3>
+<p>List of point attribute description objects.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">[{</span>
+   <span class="nt">&quot;compression_options&quot;</span><span class="p">:</span> <span class="s2">&quot;shuffle&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;default_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Cartesian point coordinates wrt. application coordinate system (0: X, 1: Y, 2: Z)&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span> <span class="mi">535000</span><span class="p">,</span>
+   <span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span> <span class="mi">-535000</span><span class="p">,</span>
+   <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.xyz&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
+   <span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="nt">&quot;storage_class&quot;</span><span class="p">:</span> <span class="s2">&quot;variable&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span>
+ <span class="p">},</span>
+ <span class="p">{</span>
+   <span class="nt">&quot;compression_options&quot;</span><span class="p">:</span> <span class="s2">&quot;shuffle&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;default_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Target surface reflectance&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span> <span class="mf">327.67</span><span class="p">,</span>
+   <span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span> <span class="mf">-327.68</span><span class="p">,</span>
+   <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.reflectance&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+   <span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="nt">&quot;storage_class&quot;</span><span class="p">:</span> <span class="s2">&quot;variable&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Reflectance&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;dB&quot;</span>
+ <span class="p">}]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Details about the point attribute properties see RDB SDK documentation.</p>
+</div>
+<div class="section" id="object-metadata">
+<h3>Object “metadata”<a class="headerlink" href="#object-metadata" title="Permalink to this headline">¶</a></h3>
+<p>Contains one sub-object for each metadata object stored in the RDB file.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">{</span>
+   <span class="nt">&quot;riegl.scan_pattern&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="nt">&quot;rectangular&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;phi_start&quot;</span><span class="p">:</span> <span class="mf">45.0</span><span class="p">,</span>
+       <span class="nt">&quot;phi_stop&quot;</span><span class="p">:</span> <span class="mf">270.0</span><span class="p">,</span>
+       <span class="nt">&quot;phi_increment&quot;</span><span class="p">:</span> <span class="mf">0.040</span><span class="p">,</span>
+       <span class="nt">&quot;theta_start&quot;</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
+       <span class="nt">&quot;theta_stop&quot;</span><span class="p">:</span> <span class="mf">130.0</span><span class="p">,</span>
+       <span class="nt">&quot;theta_increment&quot;</span><span class="p">:</span> <span class="mf">0.040</span><span class="p">,</span>
+       <span class="nt">&quot;program&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;High Speed&quot;</span>
+       <span class="p">}</span>
+     <span class="p">}</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;riegl.geo_tag&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="nt">&quot;crs&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;epsg&quot;</span><span class="p">:</span> <span class="mi">4956</span><span class="p">,</span>
+       <span class="nt">&quot;wkt&quot;</span><span class="p">:</span> <span class="s2">&quot;GEOCCS[\&quot;NAD83(HARN) \/ Geocentric\&quot;,DATUM[\&quot;NAD83(HARN)\&quot;,SPHEROID[\&quot;GRS 1980\&quot;,6378137.000,298.257222101,AUTHORITY[\&quot;EPSG\&quot;,\&quot;7019\&quot;]],AUTHORITY[\&quot;EPSG\&quot;,\&quot;6152\&quot;]],PRIMEM[\&quot;Greenwich\&quot;,0.0000000000000000,AUTHORITY[\&quot;EPSG\&quot;,\&quot;8901\&quot;]],UNIT[\&quot;Meter\&quot;,1.00000000000000000000,AUTHORITY[\&quot;EPSG\&quot;,\&quot;9001\&quot;]],AXIS[\&quot;X\&quot;,OTHER],AXIS[\&quot;Y\&quot;,EAST],AXIS[\&quot;Z\&quot;,NORTH],AUTHORITY[\&quot;EPSG\&quot;,\&quot;4956\&quot;]]&quot;</span>
+     <span class="p">},</span>
+     <span class="nt">&quot;pose&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mf">0.837957447</span><span class="p">,</span> <span class="mf">0.379440385</span><span class="p">,</span> <span class="mf">-0.392240121</span><span class="p">,</span> <span class="mf">-2505819.156</span><span class="p">,</span>
+       <span class="mf">-0.545735575</span><span class="p">,</span> <span class="mf">0.582617132</span><span class="p">,</span> <span class="mf">-0.602270669</span><span class="p">,</span> <span class="mf">-3847595.645</span><span class="p">,</span>
+        <span class="mf">0.000000000</span><span class="p">,</span> <span class="mf">0.718736580</span><span class="p">,</span>  <span class="mf">0.695282481</span><span class="p">,</span>  <span class="mf">4412064.882</span><span class="p">,</span>
+        <span class="mf">0.000000000</span><span class="p">,</span> <span class="mf">0.000000000</span><span class="p">,</span>  <span class="mf">0.000000000</span><span class="p">,</span>        <span class="mf">1.000</span>
+     <span class="p">]</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">riegl.geo_tag</span></code> object defines the Spatial Reference System (SRS) of the
+file. The point coordinates are actually stored in a local coordinate system
+(usually horizontally leveled) which is based on the SRS. The transformation
+from the local system to the SRS is defined by the 4x4 matrix <code class="docutils literal"><span class="pre">pose</span></code> which
+is stored in row-wise order. Point coordinates (<code class="docutils literal"><span class="pre">riegl.xyz</span></code>) and surface
+normals (<code class="docutils literal"><span class="pre">riegl.surface_normal</span></code>) are automatically transformed to the SRS
+by the reader.</p>
+<p>Details about the metadata objects see RDB SDK documentation.</p>
+</div>
+<div class="section" id="list-transactions">
+<h3>List “transactions”<a class="headerlink" href="#list-transactions" title="Permalink to this headline">¶</a></h3>
+<p>List of transaction objects describing the history of the file.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">[{</span>
+   <span class="nt">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="nt">&quot;rdb&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="nt">&quot;cache_size&quot;</span><span class="p">:</span> <span class="mi">524288000</span><span class="p">,</span>
+     <span class="nt">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+     <span class="nt">&quot;chunk_size_lod&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+     <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+     <span class="nt">&quot;primary_attribute&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;compression_options&quot;</span><span class="p">:</span> <span class="s2">&quot;shuffle&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;default_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+       <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Cartesian point coordinates wrt. application coordinate system (0: X, 1: Y, 2: Z)&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+       <span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span> <span class="mi">535000</span><span class="p">,</span>
+       <span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span> <span class="mi">-535000</span><span class="p">,</span>
+       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.xyz&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
+       <span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+       <span class="nt">&quot;storage_class&quot;</span><span class="p">:</span> <span class="s2">&quot;variable&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span>
+     <span class="p">}</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.336&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.336&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Database creation&quot;</span>
+ <span class="p">},</span>
+ <span class="p">{</span>
+   <span class="nt">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;rdbconvert&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="nt">&quot;rdb&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.339&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.380&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Import&quot;</span>
+ <span class="p">},</span>
+ <span class="p">{</span>
+   <span class="nt">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;RiSCAN PRO 64 bit v2.6.3&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="nt">&quot;rdb&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:41.666&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:41.666&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Meta data saved&quot;</span>
+ <span class="p">}]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Details about the transaction objects see RDB SDK documentation.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="readers.rxp.html" class="btn btn-neutral float-right" title="readers.rxp" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="readers.qfit.html" class="btn btn-neutral" title="readers.qfit" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2018
+                        <a href="https://github.com/abellgithub">Andrew Bell</a>,
+                        <a href="https://github.com/chambbj">Brad Chambers</a>,
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Nov 05, 2018.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2018
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Nov 05, 2018.
+        </div>
+    </div>
+
+</body>
+</html>

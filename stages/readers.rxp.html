@@ -43,7 +43,7 @@
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
         <link rel="next" title="readers.sbet" href="readers.sbet.html"/>
-        <link rel="prev" title="readers.qfit" href="readers.qfit.html"/> 
+        <link rel="prev" title="readers.rdb" href="readers.rdb.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.8.0
               </div>
             
           
@@ -131,6 +131,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.ply.html">readers.ply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pts.html">readers.pts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.qfit.html">readers.qfit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.rxp</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
@@ -139,6 +140,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
 </ul>
@@ -213,13 +215,15 @@
             
   <div class="section" id="readers-rxp">
 <span id="id1"></span><h1>readers.rxp<a class="headerlink" href="#readers-rxp" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>RXP reader</strong> read from files in the RXP format, the in-house streaming format used by <a class="reference external" href="http://www.riegl.com">RIEGL Laser Measurement Systems</a>.</p>
+<p>The <strong>RXP reader</strong> read from files in the RXP format, the in-house streaming format used by <a class="reference external" href="http://www.riegl.com">RIEGL Laser Measurement Systems GmbH</a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This software has not been developed by RIEGL, and RIEGL will not provide any support for this driver.
-Please do not contact RIEGL with any questions or issues regarding this driver.
-RIEGL is not responsible for damages or other issues that arise from use of this driver.
-This driver has been tested against RiVLib version 1.39 on a Ubuntu 14.04 using gcc43.</p>
+<p class="last">This software has not been developed by RIEGL, and RIEGL will not provide
+any support for this driver.  Please do not contact RIEGL with any
+questions or issues regarding this driver.  RIEGL is not responsible
+for damages or other issues that arise from use of this driver.
+This driver has been tested against RiVLib version 1.39 on a Ubuntu
+14.04 using gcc43.</p>
 </div>
 <div class="admonition plugin" id="plugin-0">
 <p class="first admonition-title">Dynamic Plugin</p>
@@ -227,16 +231,21 @@ This driver has been tested against RiVLib version 1.39 on a Ubuntu 14.04 using 
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>To build PDAL with rxp support, set RiVLib_DIR to the path of your local RiVLib installation.
-RiVLib can be obtained from the <a class="reference external" href="http://www.riegl.com/members-area/software-downloads/libraries/">RIEGL download pages</a> with a properly enabled user account.
-The RiVLib files do not need to be in a system-level directory, though they could be (e.g. they could be in <code class="docutils literal"><span class="pre">/usr/local</span></code>, or just in your home directory somewhere).
-For help building PDAL with optional libraries, see <a class="reference external" href="http://pdal.io/compilation/unix.html#configure-your-optional-libraries">the optional library documentation</a>.</p>
+<p>To build PDAL with rxp support, set RiVLib_DIR to the path of your local
+RiVLib installation.  RiVLib can be obtained from the <a class="reference external" href="http://www.riegl.com/members-area/software-downloads/libraries/">RIEGL download pages</a>
+with a properly enabled user account.  The RiVLib files do not need to be
+in a system-level directory, though they could be (e.g. they could be
+in <code class="docutils literal"><span class="pre">/usr/local</span></code>, or just in your home directory somewhere).  For help
+building PDAL with optional libraries, see
+<a class="reference external" href="http://pdal.io/compilation/unix.html#configure-your-optional-libraries">the optional library documentation</a>.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>This example rescales the points, given in the scanner’s own coordinate system, to values that can be written to a las file.
-Only points with a valid gps time, as determined by a pps pulse, are read from the rxp, since the <code class="docutils literal"><span class="pre">sync_to_pps</span></code> option is “true”.
-Reflectance values are mapped to intensity values using sensible defaults.</p>
+<p>This example rescales the points, given in the scanner’s own coordinate
+system, to values that can be written to a las file.  Only points with a
+valid gps time, as determined by a pps pulse, are read from the rxp, since
+the <code class="docutils literal"><span class="pre">sync_to_pps</span></code> option is “true”.  Reflectance values are mapped to
+intensity values using sensible defaults.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
@@ -254,9 +263,11 @@ Reflectance values are mapped to intensity values using sensible defaults.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>We set the <code class="docutils literal"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal"><span class="pre">true</span></code> on the <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.
-RXP files can contain more returns per shot than is supported by las, and so we need to explicitly tell the las writer to ignore those high return number points.
-You could also use <a class="reference internal" href="filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a> to filter those points earlier in the pipeline.</p>
+<p>We set the <code class="docutils literal"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal"><span class="pre">true</span></code> on the
+<a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.  RXP files can contain more returns per shot than is
+supported by las, and so we need to explicitly tell the las writer to ignore
+those high return number points.  You could also use <a class="reference internal" href="filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a>
+to filter those points earlier in the pipeline.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
@@ -266,16 +277,22 @@ You could also use <a class="reference internal" href="filters.python.html#filte
 <dt>rdtp</dt>
 <dd>Boolean to switch from file-based reading to RDTP-based. [default: false]</dd>
 <dt>sync_to_pps</dt>
-<dd>If “true”, ensure all incoming points have a valid pps timestamp, usually provided by some sort of GPS clock.
-If “false”, use the scanner’s internal time.
+<dd>If “true”, ensure all incoming points have a valid pps timestamp, usually
+provided by some sort of GPS clock.  If “false”, use the scanner’s internal
+time.
 [default: true]</dd>
 <dt>minimal</dt>
 <dd>If “true”, only write X, Y, Z, and time values to the data stream.
 If “false”, write all available values as derived from the rxp file.
-Use this feature to reduce the memory footprint of a PDAL run, if you don’t need any values but the points themselves.
+Use this feature to reduce the memory footprint of a PDAL run, if you
+don’t need any values but the points themselves.
 [default: false]</dd>
 <dt>reflectance_as_intensity</dt>
-<dd>If “true”, maps reflectance values onto intensity values using a range from -25dB to 5dB.
+<dd>If “true”, in addition to storing reflectance values directly, also
+stores the values as Intensity by mapping the reflectance values in the
+range from <cite>min_reflectance</cite> to <cite>max_reflectance</cite> to the range 0-65535.
+Values less than <cite>min_reflectance</cite> are assigned the value 0.
+Values greater <cite>max_reflectance</cite> are assigned the value 65535.
 [default: true]</dd>
 <dt>min_reflectance</dt>
 <dd>The low end of the reflectance-to-intensity map.
@@ -297,7 +314,7 @@ Use this feature to reduce the memory footprint of a PDAL run, if you don’t ne
         <a href="readers.sbet.html" class="btn btn-neutral float-right" title="readers.sbet" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.qfit.html" class="btn btn-neutral" title="readers.qfit" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.rdb.html" class="btn btn-neutral" title="readers.rdb" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -313,7 +330,7 @@ Use this feature to reduce the memory footprint of a PDAL run, if you don’t ne
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Nov 05, 2018.
 
     </p>
   </div> 
@@ -334,7 +351,7 @@ Use this feature to reduce the memory footprint of a PDAL run, if you don’t ne
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.7.2',
+            VERSION:'1.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -368,7 +385,7 @@ Use this feature to reduce the memory footprint of a PDAL run, if you don’t ne
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Nov 05, 2018.
         </div>
     </div>
 
