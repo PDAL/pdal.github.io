@@ -40,7 +40,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="pdal.io" href="../index.html"/> 
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Readers" href="readers.html"/>
+        <link rel="next" title="readers.terrasolid" href="readers.terrasolid.html"/>
+        <link rel="prev" title="readers.sqlite" href="readers.sqlite.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -105,9 +108,45 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.ply.html">readers.ply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.pts.html">readers.pts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.qfit.html">readers.qfit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">readers.slpk</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 </ul>
@@ -162,6 +201,8 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Home</a> &raquo;</li>
       
+        <li><a href="readers.html">Readers</a> &raquo;</li>
+      
     <li>readers.slpk</li>
     <li class="wy-breadcrumbs-aside">
       
@@ -178,15 +219,27 @@
 <span id="id1"></span><h1>readers.slpk<a class="headerlink" href="#readers-slpk" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://github.com/Esri/i3s-spec/blob/master/format/Indexed%203d%20Scene%20Layer%20Format%20Specification.md#_8_1">Scene Layer Packages (SLPK)</a> is a specification created by Esri as a format
 for their 3D Scene Layer and scene services. SLPK is a format that allows you
-to package all the necessary <a class="reference external" href="https://pdal.io/readers.i3s.html">I3S</a> files together and store them locally rather
+to package all the necessary <a class="reference internal" href="readers.i3s.html#readers-i3s"><span class="std std-ref">I3S</span></a> files together and store them locally rather
 than find information through REST.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example will unarchive the slpk file, store it in a temp directory, and traverse it. The data will be output to a las file. This is done through PDAL’s command line interface or through the pipeline.</p>
-<dl class="docutils">
-<dt><a href="#id2"><span class="problematic" id="id3">``</span></a>pdal traslate  PDAL/test/data/i3s/SMALL_AUTZEN_LAS_All.slpk </dt>
-<dd>autzen.las –readers.slpk.bounds=”([-123.075542,-123.06196],[44.049719,44.06278])”``</dd>
-</dl>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.slpk&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;PDAL/test/data/i3s/SMALL_AUTZEN_LAS_All.slpk&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="s2">&quot;([-123.075542,-123.06196],[44.049719,44.06278])&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pdal traslate  PDAL/test/data/i3s/SMALL_AUTZEN_LAS_All.slpk \
+    autzen.las \
+    --readers.slpk.bounds=&quot;([-123.075542,-123.06196],[44.049719,44.06278])&quot;``
+</pre></div>
+</div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
@@ -194,30 +247,68 @@ than find information through REST.</p>
 <dt>filename</dt>
 <dd>SLPK file must have a file extension of .slpk.
 Example: <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">translate</span> <span class="pre">/PDAL/test/data/i3s/SMALL_AUTZEN_LAS_ALL.slpk</span> <span class="pre">output.las</span></code></dd>
-<dt>bounds</dt>
-<dd>The bounds refers to the extents of the resource in X, Y, Z coordinates with the Z dimension being optional. This must be input as a string.
-Example:<code class="docutils literal"><span class="pre">readers.slpk.bounds=&quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;</span></code></dd>
-<dt>dimensions</dt>
-<dd><dl class="first docutils">
-<dt>These are the dimensions that the user would like to use for this read of the SLPK archive. Only these dimensions will be added to the layout. Here is a list of supported dimensions and their corresponding PDAL dimensions:</dt>
-<dd>Esri            Pdal
-=============== ===============
-INTENSITY       Intensity
-CLASS_CODE      ClassFlags
-FLAGS           Flag
-RETURNS         NumberOfReturns
-USER_DATA       UserData
-POINT_SRC_ID    PointSourceId
-GPS_TIME        GpsTime
-SCAN_ANGLE      ScanAngleRank
-RGB             Red</dd>
 </dl>
+<dl class="docutils">
+<dt>count</dt>
+<dd>Maximum number of points to read. [Default: unlimited]</dd>
+<dt>spatialreference</dt>
+<dd>Spatial reference to apply to the data.  Overrides any SRS in the input
+itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
+<dt>bounds</dt>
+<dd><p class="first">The bounds refers to the extents of the resource in X, Y, Z coordinates with the Z dimension being optional. This must be input as a string.</p>
+<p class="last">Example:<code class="docutils literal"><span class="pre">readers.slpk.bounds=&quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;</span></code></p>
+</dd>
+<dt>dimensions</dt>
+<dd><p class="first">Comma-separated list of dimensions that should be read.  Specify the
+Esri name, rather than the PDAL dimension name.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Esri</th>
+<th class="head">Pdal</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>INTENSITY</td>
+<td>Intensity</td>
+</tr>
+<tr class="row-odd"><td>CLASS_CODE</td>
+<td>ClassFlags</td>
+</tr>
+<tr class="row-even"><td>FLAGS</td>
+<td>Flag</td>
+</tr>
+<tr class="row-odd"><td>RETURNS</td>
+<td>NumberOfReturns</td>
+</tr>
+<tr class="row-even"><td>USER_DATA</td>
+<td>UserData</td>
+</tr>
+<tr class="row-odd"><td>POINT_SRC_ID</td>
+<td>PointSourceId</td>
+</tr>
+<tr class="row-even"><td>GPS_TIME</td>
+<td>GpsTime</td>
+</tr>
+<tr class="row-odd"><td>SCAN_ANGLE</td>
+<td>ScanAngleRank</td>
+</tr>
+<tr class="row-even"><td>RGB</td>
+<td>Red</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 <p class="last">Example: <code class="docutils literal"><span class="pre">--readers.slpk.dimensions=&quot;rgb,</span> <span class="pre">intensity&quot;</span></code></p>
 </dd>
 <dt>min_density and max_density</dt>
-<dd>This is the range of density of the points in the nodes that will be selected during the read. The density of a node is calculated by the vertex count divided by the effective area of the node. Nodes do not have a uniform density acrossdepths in the tree, so some sections may be more or less dense than others. Default values for these parameters will select all leaf nodes (the highest resolution).
-Example: <code class="docutils literal"><span class="pre">--readers.slpk.min_density=2</span></code>
-Example: <code class="docutils literal"><span class="pre">--readers.slpk.max_density=2.5</span></code></dd>
+<dd><p class="first">This is the range of density of the points in the nodes that will be selected during the read. The density of a node is calculated by the vertex count divided by the effective area of the node. Nodes do not have a uniform density acrossdepths in the tree, so some sections may be more or less dense than others. Default values for these parameters will select all leaf nodes (the highest resolution)`.</p>
+<p class="last">Example: <code class="docutils literal"><span class="pre">--readers.slpk.min_density=2</span> <span class="pre">--readers.slpk.max_density=2.5</span></code></p>
+</dd>
 </dl>
 </div>
 </div>
@@ -226,6 +317,15 @@ Example: <code class="docutils literal"><span class="pre">--readers.slpk.max_den
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="readers.terrasolid.html" class="btn btn-neutral float-right" title="readers.terrasolid" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="readers.sqlite.html" class="btn btn-neutral" title="readers.sqlite" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

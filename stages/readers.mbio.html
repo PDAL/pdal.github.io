@@ -118,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
@@ -140,6 +141,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
@@ -257,19 +259,25 @@ vary.</p>
 <dl class="docutils">
 <dt>filename</dt>
 <dd>Filename to read from [Required]</dd>
+</dl>
+<dl class="docutils">
+<dt>count</dt>
+<dd>Maximum number of points to read. [Default: unlimited]</dd>
+<dt>spatialreference</dt>
+<dd>Spatial reference to apply to the data.  Overrides any SRS in the input
+itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>format</dt>
 <dd>Name of number of format of file being read.  See MB-System documentation
 for a list of <a class="reference external" href="https://www.ldeo.columbia.edu/res/pi/MB-System/html/mbio.html#lbAI">all formats</a>. [Required]</dd>
+<dt>datatype</dt>
+<dd>Type of data to read.  Either ‘multibeam’ or ‘sidescan’.
+[Default: ‘multibeam’]</dd>
 <dt>timegap</dt>
 <dd>The maximum number of seconds that can elapse between pings before the
 end of the data stream is assumed. [Default: 1.0]</dd>
 <dt>speedmin</dt>
 <dd>The minimum speed that the ship can be moving to before the end of the
 data stream is assumed. [Default: 0]</dd>
-</dl>
-<dl class="docutils">
-<dt>count</dt>
-<dd>Maximum number of points to read [Optional]</dd>
 </dl>
 </div>
 </div>

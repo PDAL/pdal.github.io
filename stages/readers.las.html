@@ -118,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.las</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
@@ -140,6 +141,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
@@ -220,9 +222,9 @@ interchange format for LIDAR data.  The reader does NOT support point formats
 containing waveform data (4, 5, 9 and 10).</p>
 <p>The reader also supports compressed LAS files, known as LAZ files or
 <a class="reference external" href="http://www.laszip.org">LASzip</a> files.
-In order to use compresed LAS, your version of PDAL must be built with one of
-the two supported decompressors, <a class="reference external" href="http://www.laszip.org">LASzip</a> or <a class="reference external" href="https://github.com/verma/laz-perf">LAZperf</a>.  See the
-<a class="reference internal" href="#compression">compression</a> option below for more information.</p>
+In order to use compresed LAS (LAZ), your version of PDAL must be built
+with one of the two supported decompressors, <a class="reference external" href="http://www.laszip.org">LASzip</a> or <a class="reference external" href="https://github.com/verma/laz-perf">LAZperf</a>.
+See the <a class="reference internal" href="#las-compression"><span class="std std-ref">compression</span></a> option below for more information.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">LAS stores X, Y and Z dimensions as scaled integers.  Users converting an
@@ -294,6 +296,13 @@ but the data associated with a dimension of datatype 0 will be ignored
 <dl class="docutils">
 <dt><span class="target" id="filename">filename</span></dt>
 <dd>LAS file to read [Required]</dd>
+</dl>
+<dl class="docutils">
+<dt>count</dt>
+<dd>Maximum number of points to read. [Default: unlimited]</dd>
+<dt>spatialreference</dt>
+<dd>Spatial reference to apply to the data.  Overrides any SRS in the input
+itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt><span class="target" id="extra-dims">extra_dims</span></dt>
 <dd><p class="first">Extra dimensions to be read as part of each point beyond those specified by
 the LAS point format.  The format of the option is
@@ -313,18 +322,13 @@ causes this option to be ignored.</p>
 <dd>If an extra bytes VLR is found in a version 1.0 - 1.3 file, use it as if it
 were in a 1.4 file. This option has no effect when reading a version 1.4 file.
 [Default: false]</dd>
-<dt><span class="target" id="compression">compression</span></dt>
+</dl>
+<dl class="docutils" id="las-compression">
+<dt>compression</dt>
 <dd>May be set to “lazperf” or “laszip” to choose either the LazPerf decompressor
 or the LASzip decompressor for LAZ files.  PDAL must have been built with
 support for the decompressor being requested.  The LazPerf decompressor
-doesn’t support version 1 LAZ files or version 1.4 of LAS.
-[Default: “laszip”]</dd>
-<dt><span class="target" id="spatialreference">spatialreference</span></dt>
-<dd>Sets the spatial reference for the file data.  Overrides any spatial
-reference information in the file itself.  Most text-based formats of
-SRS information are accepted, including WKT and proj.4. [Optional]</dd>
-<dt><span class="target" id="count">count</span></dt>
-<dd>Maximum number of points read [Optional]</dd>
+doesn’t support version 1 LAZ files or version 1.4 of LAS. [Default: ‘none’]</dd>
 </dl>
 </div>
 </div>

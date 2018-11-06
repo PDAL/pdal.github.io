@@ -123,6 +123,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
@@ -141,6 +142,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
@@ -219,14 +221,8 @@
 <p>The <a class="reference external" href="http://gdal.org">GDAL</a> reader reads <a class="reference external" href="http://www.gdal.org/formats_list.html">GDAL readable raster</a> data sources as point clouds.</p>
 <p>Each pixel is given an X and Y coordinate (and corresponding PDAL dimensions)
 that are center pixel, and each band is represented by “band-1”, “band-2”, or
-“band-n”. The user must know what the bands correspond to, and use
-<a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> to copy data into known <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> as needed.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> is needed to map GDAL output to typical <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a>
-names. For output to formats such as <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">LAS</span></a>, this mapping
-is required.</p>
-</div>
+“band-n”.  Using the ‘header’ option allows naming the band data to standard
+PDAL dimensions.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
 <p class="last">This stage is enabled by default</p>
@@ -277,17 +273,13 @@ RGB values of an <a class="reference external" href="http://www.asprs.org/Commit
 11
 12
 13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.gdal&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./pdal/test/data/autzen/autzen.jpg&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;band-1=Red, band-2=Green, band-3=Blue&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./pdal/test/data/autzen/autzen.jpg&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;header&quot;</span><span class="p">,</span> <span class="nt">&quot;Red, Green, Blue&quot;</span>
+
     <span class="p">},</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
@@ -306,7 +298,10 @@ RGB values of an <a class="reference external" href="http://www.asprs.org/Commit
 </dl>
 <dl class="docutils">
 <dt>count</dt>
-<dd>Maximum number of points to read [Optional]</dd>
+<dd>Maximum number of points to read. [Default: unlimited]</dd>
+<dt>spatialreference</dt>
+<dd>Spatial reference to apply to the data.  Overrides any SRS in the input
+itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>header</dt>
 <dd>A comma-separated list of <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> IDs to map
 bands to. The length of the list must match the number

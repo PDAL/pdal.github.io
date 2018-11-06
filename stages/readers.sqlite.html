@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
-        <link rel="next" title="readers.terrasolid" href="readers.terrasolid.html"/>
+        <link rel="next" title="readers.slpk" href="readers.slpk.html"/>
         <link rel="prev" title="readers.sbet" href="readers.sbet.html"/> 
 
   
@@ -118,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
@@ -140,6 +141,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
@@ -248,10 +250,13 @@ patches. Each patch contains a number of spatially contiguous points</p>
 <dl class="docutils">
 <dt>query</dt>
 <dd>SQL statement that selects a schema XML, cloud id, bbox, and extent [Required]</dd>
-<dt>spatialreference</dt>
-<dd>The spatial reference to use for the points. Over-rides the value read from the database.</dd>
+</dl>
+<dl class="docutils">
 <dt>count</dt>
-<dd>Maximum number of points to read [Optional]</dd>
+<dd>Maximum number of points to read. [Default: unlimited]</dd>
+<dt>spatialreference</dt>
+<dd>Spatial reference to apply to the data.  Overrides any SRS in the input
+itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 </dl>
 </div>
 </div>
@@ -263,7 +268,7 @@ patches. Each patch contains a number of spatially contiguous points</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="readers.terrasolid.html" class="btn btn-neutral float-right" title="readers.terrasolid" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.slpk.html" class="btn btn-neutral float-right" title="readers.slpk" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.sbet.html" class="btn btn-neutral" title="readers.sbet" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

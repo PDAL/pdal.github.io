@@ -118,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
@@ -140,6 +141,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
@@ -248,18 +250,7 @@ to actually read and write the data.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.nitf&quot;</span><span class="p">,</span>
@@ -272,25 +263,43 @@ to actually read and write the data.</p>
   <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
 <dd>Filename to read from [Required]</dd>
+</dl>
+<dl class="docutils">
 <dt>count</dt>
-<dd>Maximum number of points to read [Optional]</dd>
+<dd>Maximum number of points to read. [Default: unlimited]</dd>
 <dt>spatialreference</dt>
-<dd>Spatial reference to apply to data</dd>
+<dd>Spatial reference to apply to the data.  Overrides any SRS in the input
+itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>extra_dims</dt>
-<dd>Dimensions to assign to extra byte data</dd>
+<dd><p class="first">Extra dimensions to be read as part of each point beyond those specified by
+the LAS point format.  The format of the option is
+&lt;dimension_name&gt;=&lt;type&gt;, … where type is one of:
+int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double.
+<cite>_t</cite> may be added to any of the type names as well (e.g., uint32_t).</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The presence of an extra bytes VLR when reading a version
+1.4 file or a version 1.0 - 1.3 file with <strong>use_eb_vlr</strong> set
+causes this option to be ignored.</p>
+</div>
+</dd>
+<dt>use_eb_vlr</dt>
+<dd>If an extra bytes VLR is found in a version 1.0 - 1.3 file, use it as if it
+were in a 1.4 file. This option has no effect when reading a version 1.4 file.
+[Default: false]</dd>
 <dt>compression</dt>
 <dd>May be set to “lazperf” or “laszip” to choose either the LazPerf decompressor
 or the LASzip decompressor for LAZ files.  PDAL must have been built with
 support for the decompressor being requested.  The LazPerf decompressor
 doesn’t support version 1 LAZ files or version 1.4 of LAS.
-[Default: “laszip”]</dd>
+[Default: “none”]</dd>
 </dl>
 </div>
 </div>
