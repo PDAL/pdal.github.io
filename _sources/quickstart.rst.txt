@@ -231,7 +231,7 @@ you saved the file).
 
     pdal info C:\Users\hobu\Downloads\autzen.laz -p 0
 
-Here's a summary of what's going on with that command invocation
+Here is a summary of what's going on with that command invocation
 
 1. ``pdal``: We're going to run the ``pdal`` command.
 
