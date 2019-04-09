@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -223,8 +223,9 @@
             
   <div class="section" id="filters-pmf">
 <span id="id1"></span><h1>filters.pmf<a class="headerlink" href="#filters-pmf" title="Permalink to this headline">¶</a></h1>
-<p>The Progressive Morphological Filter (PMF) is a method of segmenting ground and
-non-ground returns. This filter is an implementation of the method described in
+<p>The <strong>Progressive Morphological Filter (PMF)</strong> is a method of
+segmenting ground and non-ground returns. This filter is an implementation
+of the method described in
 <a class="reference internal" href="../references.html#zhang2003" id="id2">[Zhang2003]</a>.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
@@ -232,45 +233,40 @@ non-ground returns. This filter is an implementation of the method described in
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.pmf&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.pmf&quot;</span>
     <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+    <span class="s2">&quot;output.las&quot;</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">slope</span></code> controls the height threshold at each iteration. A slope of <code class="docutils literal"><span class="pre">1.0</span></code>
+<li><a class="reference internal" href="#slope">slope</a> controls the height threshold at each iteration. A slope of 1.0
 represents a 1:1 or 45º.</li>
-<li><code class="docutils literal"><span class="pre">initial_distance</span></code> is _intended_ to be set to account for z noise, so for a
+<li><a class="reference internal" href="#initial-distance">initial_distance</a> is _intended_ to be set to account for z noise, so for a
 flat surface if you have an uncertainty of around 15 cm, you set
-<code class="docutils literal"><span class="pre">initial_distance</span></code> large enough to not exclude these points from the ground.</li>
+<a class="reference internal" href="#initial-distance">initial_distance</a> large enough to not exclude these points from the ground.</li>
 <li>For a given iteration, the height threshold is determined by multiplying
-<code class="docutils literal"><span class="pre">slope</span></code> by <code class="docutils literal"><span class="pre">cell_size</span></code> by the difference in window size between the
-current and last iteration, plus the <code class="docutils literal"><span class="pre">initial_distance</span></code>. This height
+slope by <a class="reference internal" href="#cell-size">cell_size</a> by the difference in window size between the
+current and last iteration, plus the <a class="reference internal" href="#initial-distance">initial_distance</a>. This height
 threshold is constant across all cells and is maxed out at the
-<code class="docutils literal"><span class="pre">max_distance</span></code> value. If the difference in elevation between a point and its
+<a class="reference internal" href="#max-distance">max_distance</a> value. If the difference in elevation between a point and its
 “opened” value (from the morphological operator) exceeds the height threshold,
 it is treated as non-ground.  So, bigger slope leads to bigger height
 thresholds, and these grow with each iteration (not to exceed the max).  With
 flat terrain, keep this low, the thresholds are small, and stuff is more
 aggressively dumped into non-ground class.  In rugged terrain, open things up
 a little, but then you can start missing buildings, veg, etc.</li>
-<li>Very large <code class="docutils literal"><span class="pre">max_window_size</span></code> values will result in a lot of potentially
+<li>Very large <a class="reference internal" href="#max-window-size">max_window_size</a> values will result in a lot of potentially
 extra iteration. This parameter can have a strongly negative impact on
 computation performance.</li>
-<li><code class="docutils literal"><span class="pre">exponential</span></code> is used to control the rate of growth of morphological window
-sizes toward <code class="docutils literal"><span class="pre">max_window_size</span></code>. Linear growth preserves gradually changing
+<li><a class="reference internal" href="#exponential">exponential</a> is used to control the rate of growth of morphological window
+sizes toward <a class="reference internal" href="#max-window-size">max_window_size</a>. Linear growth preserves gradually changing
 topographic features well, but demands considerable compute time. The default
 behavior is to grow the window sizes exponentially, thus reducing the number
 of iterations.</li>
@@ -293,24 +289,24 @@ in more detail and is the canonnical resource on the topic.</p>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>cell_size</dt>
-<dd>Cell Size. [Default: <strong>1</strong>]</dd>
-<dt>exponential</dt>
-<dd>Use exponential growth for window sizes? [Default: <strong>true</strong>]</dd>
-<dt>ignore</dt>
-<dd>Optional range of values to ignore.</dd>
-<dt>initial_distance</dt>
-<dd>Initial distance. [Default: <strong>0.15</strong>]</dd>
+<dt><span class="target" id="cell-size">cell_size</span></dt>
+<dd>Cell Size. [Default: 1]</dd>
+<dt><span class="target" id="exponential">exponential</span></dt>
+<dd>Use exponential growth for window sizes? [Default: true]</dd>
+<dt><span class="target" id="ignore">ignore</span></dt>
+<dd>Range of values to ignore. [Optional]</dd>
+<dt><span class="target" id="initial-distance">initial_distance</span></dt>
+<dd>Initial distance. [Default: 0.15]</dd>
 <dt>returns</dt>
 <dd>Comma-separated list of return types into which data should be segmented.
 Valid groups are “last”, “first”, “intermediate” and “only”. [Default:
-<strong>“last, only”</strong>]</dd>
-<dt>max_distance</dt>
-<dd>Maximum distance. [Default: <strong>2.5</strong>]</dd>
-<dt>max_window_size</dt>
-<dd>Maximum window size. [Default: <strong>33</strong>]</dd>
-<dt>slope</dt>
-<dd>Slope. [Default: <strong>1.0</strong>]</dd>
+“last, only”]</dd>
+<dt><span class="target" id="max-distance">max_distance</span></dt>
+<dd>Maximum distance. [Default: 2.5]</dd>
+<dt><span class="target" id="max-window-size">max_window_size</span></dt>
+<dd>Maximum window size. [Default: 33]</dd>
+<dt><span class="target" id="slope">slope</span></dt>
+<dd>Slope. [Default: 1.0]</dd>
 </dl>
 </div>
 </div>
@@ -341,7 +337,7 @@ Valid groups are “last”, “first”, “intermediate” and “only”. [De
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -362,7 +358,7 @@ Valid groups are “last”, “first”, “intermediate” and “only”. [De
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -396,7 +392,7 @@ Valid groups are “last”, “first”, “intermediate” and “only”. [De
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

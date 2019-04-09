@@ -43,7 +43,7 @@
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Filters" href="filters.html"/>
         <link rel="next" title="filters.sample" href="filters.sample.html"/>
-        <link rel="prev" title="filters.mad" href="filters.mad.html"/> 
+        <link rel="prev" title="filters.mongoexpression" href="filters.mongoexpression.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -123,9 +123,9 @@
 <li class="toctree-l3"><a class="reference internal" href="filters.iqr.html">filters.iqr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.locate.html">filters.locate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.mongoexpression.html">filters.mongoexpression</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">filters.range</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pipeline-example">Pipeline Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#command-line-example">Command-line Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ranges">Ranges</a></li>
 </ul>
@@ -211,27 +211,8 @@
            <div itemprop="articleBody">
             
   <div class="section" id="filters-range">
-<span id="id1"></span><h1><a class="toc-backref" href="#id3">filters.range</a><a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title first">Contents</p>
-<ul class="simple">
-<li><a class="reference internal" href="#filters-range" id="id3">filters.range</a><ul>
-<li><a class="reference internal" href="#pipeline-example" id="id4">Pipeline Example</a></li>
-<li><a class="reference internal" href="#command-line-example" id="id5">Command-line Example</a></li>
-<li><a class="reference internal" href="#options" id="id6">Options</a></li>
-<li><a class="reference internal" href="#ranges" id="id7">Ranges</a><ul>
-<li><a class="reference internal" href="#example-1" id="id8">Example 1:</a></li>
-<li><a class="reference internal" href="#example-2" id="id9">Example 2:</a></li>
-<li><a class="reference internal" href="#example-3" id="id10">Example 3:</a></li>
-<li><a class="reference internal" href="#example-4" id="id11">Example 4:</a></li>
-<li><a class="reference internal" href="#example-5" id="id12">Example 5:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<p>The range filter applies rudimentary filtering to the input point cloud
+<span id="id1"></span><h1>filters.range<a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>Range Filter</strong> applies rudimentary filtering to the input point cloud
 based on a set of criteria on the given dimensions.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
@@ -241,35 +222,31 @@ based on a set of criteria on the given dimensions.</p>
 <p class="first admonition-title">Streamable Stage</p>
 <p class="last">This stage supports streaming operations</p>
 </div>
-<div class="section" id="pipeline-example">
-<h2><a class="toc-backref" href="#id4">Pipeline Example</a><a class="headerlink" href="#pipeline-example" title="Permalink to this headline">¶</a></h2>
-<p>This example passes through all points whose Z value is in the range [0,100]
-and whose classification equals 2 (corresponding to ground in LAS).</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This example passes through all points whose <code class="docutils literal"><span class="pre">Z</span></code> value is in the
+range [0,100]
+and whose <code class="docutils literal"><span class="pre">Classification</span></code> equals 2 (corresponding to ground in LAS).</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;filtered.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;filtered.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="command-line-example">
-<h2><a class="toc-backref" href="#id5">Command-line Example</a><a class="headerlink" href="#command-line-example" title="Permalink to this headline">¶</a></h2>
 <p>The equivalent pipeline invoked via the PDAL <code class="docutils literal"><span class="pre">translate</span></code> command would be</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ pdal translate -i input.las -o filtered.las -f range --filters.range.limits<span class="o">=</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
-<h2><a class="toc-backref" href="#id6">Options</a><a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>limits</dt>
 <dd><p class="first">A comma-separated list of <a class="reference internal" href="#ranges"><span class="std std-ref">Ranges</span></a>.  If more than one range is
@@ -287,7 +264,7 @@ logically ANDed.</p>
 </dl>
 </div>
 <div class="section" id="ranges">
-<span id="id2"></span><h2><a class="toc-backref" href="#id7">Ranges</a><a class="headerlink" href="#ranges" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Ranges<a class="headerlink" href="#ranges" title="Permalink to this headline">¶</a></h2>
 <p>A range specification is a dimension name, followed by an optional negation
 character (‘!’), and a starting and ending value separated by a colon,
 surrounded by parentheses or square brackets.  Either the starting or ending
@@ -295,21 +272,21 @@ values can be omitted.  Parentheses indicate an open endpoint that doesn’t
 include the adjacent value.  Square brackets indicate a closed endpoint
 that includes the adjacent value.</p>
 <div class="section" id="example-1">
-<h3><a class="toc-backref" href="#id8">Example 1:</a><a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h3>
+<h3>Example 1:<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Z</span><span class="p">[</span><span class="mi">10</span><span class="p">:]</span>
 </pre></div>
 </div>
 <p>Selects all points with a Z value greater than or equal to 10.</p>
 </div>
 <div class="section" id="example-2">
-<h3><a class="toc-backref" href="#id9">Example 2:</a><a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
+<h3>Example 2:<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Classification</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Selects all points with a classification of 2.</p>
 </div>
 <div class="section" id="example-3">
-<h3><a class="toc-backref" href="#id10">Example 3:</a><a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h3>
+<h3>Example 3:<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span>Red!(20:40]
 </pre></div>
 </div>
@@ -317,14 +294,14 @@ that includes the adjacent value.</p>
 values greater than 40</p>
 </div>
 <div class="section" id="example-4">
-<h3><a class="toc-backref" href="#id11">Example 4:</a><a class="headerlink" href="#example-4" title="Permalink to this headline">¶</a></h3>
+<h3>Example 4:<a class="headerlink" href="#example-4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Blue</span><span class="p">[:</span><span class="mi">255</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Selects all points with a blue value less than 255.</p>
 </div>
 <div class="section" id="example-5">
-<h3><a class="toc-backref" href="#id12">Example 5:</a><a class="headerlink" href="#example-5" title="Permalink to this headline">¶</a></h3>
+<h3>Example 5:<a class="headerlink" href="#example-5" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span>Intensity![25:25]
 </pre></div>
 </div>
@@ -343,7 +320,7 @@ values greater than 40</p>
         <a href="filters.sample.html" class="btn btn-neutral float-right" title="filters.sample" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.mad.html" class="btn btn-neutral" title="filters.mad" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.mongoexpression.html" class="btn btn-neutral" title="filters.mongoexpression" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -359,7 +336,7 @@ values greater than 40</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -380,7 +357,7 @@ values greater than 40</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -414,7 +391,7 @@ values greater than 40</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

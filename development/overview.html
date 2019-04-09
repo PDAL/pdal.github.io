@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -217,8 +217,9 @@
 </table>
 <p>PDAL is a set of applications and library to facilitate translation of point
 cloud data between various formats.  In addition, it provides some facilities
-for transformation of data between various geometric projections and
-manipulations and can calculate some statistical, boundary and density data.
+for transformation of data between various geometric projections
+and can calculate some statistical, boundary and density data.  PDAL also
+provides point classification algorithms.
 PDAL provides an API that can be used by programmers for integration into their
 own projects or to allow extension of existing capabilities.</p>
 <div class="section" id="the-pdal-model">
@@ -227,11 +228,12 @@ own projects or to allow extension of existing capabilities.</p>
 Point data can be passed through various filters that transform data or create
 metadata.  If desired, points can be written to an output stream using a
 format-specific writer.  PDAL can merge data from various input sources into a
-single output source, preserving attribute data where supported by the input and
-output formats.</p>
+single output source, preserving attribute data where supported by the input
+and output formats.</p>
 <img alt="../_images/pipeline.png" src="../_images/pipeline.png" />
 <p>The above diagram shows a possible arrangement of PDAL readers, filters and
-writers, all of which are known as stages.  Any merge operation or filter may be
+writers, all of which are known as stages.  Any merge operation or filter
+may be
 placed after any reader.  Output filters are distinct from other filters only in
 that they may create more than one set of points to be further filtered or
 written.  The arrangement of readers, filters and writers is called a PDAL
@@ -361,7 +363,8 @@ the point table, implement the function that accepts one, otherwise
 implement the no-argument version.  Whether to place initialization code
 at this step or in prepared() or ready() (see below) is a judgement call,
 but detection of errors earlier in the process allows faster termination of
-a command..</p>
+a command.  Files opened in this step should also be closed before
+returning.</p>
 </div></blockquote>
 </li>
 <li><p class="first">void addDimensions(PointLayoutPtr layout)</p>
@@ -413,9 +416,9 @@ stage.</p>
 <li><p class="first">void done(PointTablePtr table)</p>
 <blockquote>
 <div><p>This function allows a stage to clean up resources not released by a
-stage’s destructor.  It also allows other termination functions, such
-a closing of databases, writing file footers, rewriting headers or
-closing or renaming files.</p>
+stage’s destructor.  It also allows other execution of termination
+functions, such a closing of databases, writing file footers,
+rewriting headers or closing or renaming files.</p>
 </div></blockquote>
 </li>
 </ol>
@@ -718,7 +721,7 @@ call to ready().</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -739,7 +742,7 @@ call to ready().</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -773,7 +776,7 @@ call to ready().</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

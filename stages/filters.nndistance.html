@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -224,39 +224,37 @@
 <span id="id1"></span><h1>filters.nndistance<a class="headerlink" href="#filters-nndistance" title="Permalink to this headline">¶</a></h1>
 <p>The NNDistance filter runs a 3-D nearest neighbor algorithm on the input
 cloud and creates a new dimension, <code class="docutils literal"><span class="pre">NNDistance</span></code>, that contains a distance
-metric described by the mode of the filter.</p>
+metric described by the <a class="reference internal" href="#mode">mode</a> of the filter.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
 <p class="last">This stage is enabled by default</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.nndistance&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="mi">8</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.nndistance&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="mi">8</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.bpf&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;output_dims&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,NNDistance&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.bpf&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;output_dims&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,NNDistance&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>mode</dt>
-<dd>The mode of operation.  Either ‘kth’, in which the distance is the euclidian
-distance of the subject point from the kth remote point or ‘avg’ in which
-the distance is the average euclidian distance from the <em>k</em> nearest points.
+<dt><span class="target" id="mode">mode</span></dt>
+<dd>The mode of operation.  Either “kth”, in which the distance is the euclidian
+distance of the subject point from the kth remote point or “avg” in which
+the distance is the average euclidian distance from the <a class="reference internal" href="#k">k</a> nearest points.
 [Default: ‘kth’]</dd>
-<dt>k</dt>
+<dt><span class="target" id="k">k</span></dt>
 <dd>The number of k nearest neighbors to consider. [Default: <strong>10</strong>]</dd>
 </dl>
 </div>
@@ -288,7 +286,7 @@ the distance is the average euclidian distance from the <em>k</em> nearest point
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -309,7 +307,7 @@ the distance is the average euclidian distance from the <em>k</em> nearest point
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -343,7 +341,7 @@ the distance is the average euclidian distance from the <em>k</em> nearest point
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -123,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="filters.iqr.html">filters.iqr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.locate.html">filters.locate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.mongoexpression.html">filters.mongoexpression</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.range.html">filters.range</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.tail.html">filters.tail</a></li>
@@ -210,8 +211,9 @@
             
   <div class="section" id="filters-voxelcentroidnearestneighbor">
 <span id="id1"></span><h1>filters.voxelcentroidnearestneighbor<a class="headerlink" href="#filters-voxelcentroidnearestneighbor" title="Permalink to this headline">¶</a></h1>
-<p>VoxelCentroidNearestNeighbor is a voxel-based sampling filter. The input point
-cloud is divided into 3D voxels at the given cell size. For each populated
+<p>The <strong>VoxelCentroidNearestNeighbor Filter</strong> is a voxel-based sampling
+filter. The input point cloud is divided into 3D voxels at the given
+cell size. For each populated
 voxel, the centroid of the points within that voxel is computed. This centroid
 is used as the query point in a 3D nearest neighbor search. The nearest neighbor
 is then added to the output point cloud, along with any existing dimensions.</p>
@@ -228,16 +230,14 @@ and the sampled cloud now consists of only XYZ coordinates.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.voxelcentroidnearestneighbor&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;cell&quot;</span><span class="p">:</span><span class="mf">10.0</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.voxelcentroidnearestneighbor&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;cell&quot;</span><span class="p">:</span><span class="mf">10.0</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -250,7 +250,7 @@ the voxel center as opposed to the voxel centroid for the query point.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>cell</dt>
-<dd>Cell size in the X, Y, and Z dimension. [Default: <strong>1.0</strong>]</dd>
+<dd>Cell size in the <code class="docutils literal"><span class="pre">X</span></code>, <code class="docutils literal"><span class="pre">Y</span></code>, and <code class="docutils literal"><span class="pre">Z</span></code> dimension. [Default: 1.0]</dd>
 </dl>
 </div>
 </div>
@@ -281,7 +281,7 @@ the voxel center as opposed to the voxel centroid for the query point.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -302,7 +302,7 @@ the voxel center as opposed to the voxel centroid for the query point.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -336,7 +336,7 @@ the voxel center as opposed to the voxel centroid for the query point.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

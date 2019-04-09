@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -144,6 +144,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.tiledb.html">readers.tiledb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
 </ul>
 </li>
@@ -217,7 +218,9 @@
             
   <div class="section" id="readers-sbet">
 <span id="id1"></span><h1>readers.sbet<a class="headerlink" href="#readers-sbet" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>SBET reader</strong> read from files in the SBET format, used for exchange data from interital measurement units (IMUs).</p>
+<p>The <strong>SBET reader</strong> read from files in the SBET format, used for exchange data from interital measurement units (IMUs).
+SBET files store angles as radians, but by default this reader converts all angle-based measurements to degrees.
+Set <code class="docutils literal"><span class="pre">angles_as_degrees</span></code> to <code class="docutils literal"><span class="pre">false</span></code> to disable this conversion.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
 <p class="last">This stage is enabled by default</p>
@@ -242,6 +245,8 @@
 <dl class="docutils">
 <dt>filename</dt>
 <dd>File to read from [Required]</dd>
+<dt>angles_as_degrees</dt>
+<dd>Convert all angles to degrees. If false, angles are read as radians. [Default: true]</dd>
 </dl>
 <dl class="docutils">
 <dt>count</dt>
@@ -279,7 +284,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -300,7 +305,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -334,7 +339,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

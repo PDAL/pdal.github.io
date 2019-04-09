@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -214,7 +214,7 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial describes how to construct a pipeline that takes in geometries
 and clips out data with given geometry attributes.  It is common to desire
-being able to cut or clip point cloud data with 2D geometries, often from
+to cut or clip point cloud data with 2D geometries, often from
 auxillary data sources such as <a class="reference external" href="http://www.gdal.org">OGR</a>-readable <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefiles</a>.  This tutorial
 describes how to construct a pipeline that takes in geometries and clips out
 point cloud data inside geometries with matching attributes.</p>
@@ -240,7 +240,7 @@ point cloud data inside geometries with matching attributes.</p>
 software (fetch it from <a class="reference internal" href="../../download.html#download"><span class="std std-ref">Download</span></a>), you will need to download the
 following two files:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.liblas.org/samples/autzen/autzen.laz">http://www.liblas.org/samples/autzen/autzen.laz</a></li>
+<li><a class="reference external" href="https://github.com/PDAL/data/autzen/autzen.laz">https://github.com/PDAL/data/autzen/autzen.laz</a></li>
 <li><a class="reference external" href="https://github.com/PDAL/PDAL/raw/master/test/data/autzen/attributes.json">https://github.com/PDAL/PDAL/raw/master/test/data/autzen/attributes.json</a></li>
 </ul>
 </div>
@@ -248,14 +248,13 @@ following two files:</p>
 <h2>Stage Operations<a class="headerlink" href="#stage-operations" title="Permalink to this headline">¶</a></h2>
 <p>This operation depends on two stages PDAL provides.
 The first is the <a class="reference internal" href="../../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a> stage, which allows you to assign
-point values based on polygons read from <a class="reference external" href="http://www.gdal.org">OGR</a>. The second is the
+point values based on polygons read from <a class="reference external" href="http://www.gdal.org">OGR</a>. The second is
 <a class="reference internal" href="../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>, which allows you to keep or reject points from the
 set that match given criteria.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a> or <a class="reference internal" href="../../stages/filters.matlab.html#filters-matlab"><span class="std std-ref">filters.matlab</span></a> allows you to construct sophisticated logic
-for keeping or rejecting points in a more expressive environment (<a class="reference external" href="http://www.python.org">Python</a>) or
-(<a class="reference external" href="http://www.mathworks.com">Matlab</a>)..</p>
+<p class="last"><a class="reference internal" href="../../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a> allow you to construct sophisticated logic
+for keeping or rejecting points in a more expressive environment.</p>
 </div>
 </div>
 <div class="section" id="data-preparation">
@@ -288,10 +287,12 @@ for us on-the-fly:</p>
 so we are explictly setting one with the LayerSRS parameter. If your
 data does have coordinate system information, you don’t need to do that.</p>
 </div>
-<p>Save this VRT definition to a file, called <code class="docutils literal"><span class="pre">attributes.vrt</span></code> in the same location where you
+<p>Save this VRT definition to a file, called <code class="docutils literal"><span class="pre">attributes.vrt</span></code> in the same
+location where you
 stored the <code class="docutils literal"><span class="pre">autzen.laz</span></code> and <code class="docutils literal"><span class="pre">attributes.json</span></code> files.</p>
 <p>The attribute GeoJSON file has a couple of features with different attributes.
-For our scenario, we want to clip out the yellow-green polygon, marked number “5”,
+For our scenario, we want to clip out the yellow-green polygon, marked
+number “5”,
 in the upper right hand corner.</p>
 <div class="figure" id="id2">
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-to-clip.png"><img alt="../../_images/autzen-shapes-to-clip.png" src="../../_images/autzen-shapes-to-clip.png" style="width: 693.6px; height: 381.0px;" /></a>
@@ -301,10 +302,9 @@ view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geo
 </div>
 <div class="section" id="pipeline">
 <h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
-<p>A PDAL <a class="reference internal" href="../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> is how you define a set of actions to happen to data
-as they are read, filtered, and written.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<p>A PDAL <a class="reference internal" href="../../pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> is how you define a set of actions to
+apply to data as they are read, filtered, and written.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;autzen.laz&quot;</span><span class="p">,</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span>
@@ -318,8 +318,7 @@ as they are read, filtered, and written.</p>
       <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[5:5]&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -332,7 +331,7 @@ read attribute polygons out of the data source and assign the values from the
 for the points that have coincident polygons to 2, 5, and 6, only keep
 <code class="docutils literal"><span class="pre">Classification</span></code> values in the range of <code class="docutils literal"><span class="pre">5:5</span></code>. This functionally means
 we’re only keeping those points with a classification value of 5.</li>
-<li><a class="reference internal" href="../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>: write our content back out using an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> writer.</li>
+<li><a class="reference internal" href="../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>: write our content out using an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> writer.</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -345,19 +344,21 @@ scenario.</p>
 </div>
 <div class="section" id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">Save the pipeline to a file called <code class="docutils literal"><span class="pre">shape-clip.json</span></code> in the same directory as
-your <code class="docutils literal"><span class="pre">attributes.json</span></code> and <code class="docutils literal"><span class="pre">autzen.laz</span></code> files.</p>
-</li>
-<li><p class="first">Call <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> on the <a class="reference internal" href="../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>.</p>
+<ol class="arabic simple">
+<li>Save the pipeline to a file called <code class="docutils literal"><span class="pre">shape-clip.json</span></code> in the</li>
+</ol>
+<blockquote>
+<div>same directory as your <code class="docutils literal"><span class="pre">attributes.json</span></code> and <code class="docutils literal"><span class="pre">autzen.laz</span></code> files.</div></blockquote>
+<ol class="arabic" start="2">
+<li><p class="first">Run <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> on the json file.</p>
 <blockquote>
 <div><div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pipeline shape-clip.json
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Visualize <code class="docutils literal"><span class="pre">output.las</span></code> in an environment capable of viewing it. <a class="reference external" href="http://plas.io">http://plas.io</a>
-or <a class="reference external" href="http://www.danielgm.net/cc/">CloudCompare</a> should do the trick.</p>
+<li><p class="first">Visualize <code class="docutils literal"><span class="pre">output.las</span></code> in an environment capable of viewing it.
+<a class="reference external" href="http://plas.io">http://plas.io</a> or <a class="reference external" href="http://www.danielgm.net/cc/">CloudCompare</a> should do the trick.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/autzen-shapes-clipped.png"><img alt="../../_images/autzen-shapes-clipped.png" src="../../_images/autzen-shapes-clipped.png" style="width: 662.4px; height: 447.6px;" /></a>
 </div></blockquote>
@@ -398,7 +399,7 @@ points with shapefiles.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -419,7 +420,7 @@ points with shapefiles.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -453,7 +454,7 @@ points with shapefiles.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -222,7 +222,8 @@
             
   <div class="section" id="filters-approximatecoplanar">
 <span id="id1"></span><h1>filters.approximatecoplanar<a class="headerlink" href="#filters-approximatecoplanar" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal"><span class="pre">filters.approximatecoplanar</span></code> implements a portion of the algorithm presented
+<p>The <strong>approximate coplanar filter</strong> implements a portion of the algorithm
+presented
 in <a class="reference internal" href="../references.html#limberger2015" id="id2">[Limberger2015]</a>. Prior to clustering points, the authors first apply an
 approximate coplanarity test, where points that meet the following criteria are
 labeled as approximately coplanar.</p>
@@ -242,25 +243,23 @@ coplanar (1) or not (0).</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>The sample pipeline presented below estimates the planarity of a point based on
-its eight nearest neighbors using the <code class="docutils literal"><span class="pre">filters.approximatecoplanar</span></code> filter. A
-<code class="docutils literal"><span class="pre">filters.range</span></code> stage then filters out any points that were not deemed to be
-coplanar before writing the result in compressed LAZ.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+its eight nearest neighbors using the approximate coplanar filter. A
+<a class="reference internal" href="filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> stage then filters out any points that were not
+deemed to be coplanar before writing the result in compressed LAZ.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.approximatecoplanar&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>
-      <span class="nt">&quot;thresh1&quot;</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span>
-      <span class="nt">&quot;thresh2&quot;</span><span class="p">:</span><span class="mi">6</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.approximatecoplanar&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>
+        <span class="nt">&quot;thresh1&quot;</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span>
+        <span class="nt">&quot;thresh2&quot;</span><span class="p">:</span><span class="mi">6</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Coplanar[1:1]&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Coplanar[1:1]&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.laz&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -268,11 +267,11 @@ coplanar before writing the result in compressed LAZ.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>knn</dt>
-<dd>The number of k-nearest neighbors. [Default: <strong>8</strong>]</dd>
+<dd>The number of k-nearest neighbors. [Default: 8]</dd>
 <dt>thresh1</dt>
-<dd>The threshold to be applied to the smallest eigenvalue. [Default: <strong>25</strong>]</dd>
+<dd>The threshold to be applied to the smallest eigenvalue. [Default: 25]</dd>
 <dt>thresh2</dt>
-<dd>The threshold to be applied to the second smallest eigenvalue. [Default: <strong>6</strong>]</dd>
+<dd>The threshold to be applied to the second smallest eigenvalue. [Default: 6]</dd>
 </dl>
 </div>
 </div>
@@ -303,7 +302,7 @@ coplanar before writing the result in compressed LAZ.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -324,7 +323,7 @@ coplanar before writing the result in compressed LAZ.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -358,7 +357,7 @@ coplanar before writing the result in compressed LAZ.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

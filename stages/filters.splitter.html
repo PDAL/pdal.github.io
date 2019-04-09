@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -204,11 +204,11 @@
             
   <div class="section" id="filters-splitter">
 <span id="id1"></span><h1>filters.splitter<a class="headerlink" href="#filters-splitter" title="Permalink to this headline">¶</a></h1>
-<p>The splitter filter breaks a point cloud into square tiles of a size that
-you choose.  The origin of the tiles is chosen arbitrarily unless specified
-as an option.</p>
-<p>The splitter takes a single PointView as its input and creates a PointView
-for each tile as its output.</p>
+<p>The <strong>Splitter Filter</strong> breaks a point cloud into square tiles of a
+specified size.  The origin of the tiles is chosen arbitrarily unless specified
+with the <a class="reference internal" href="#origin-x">origin_x</a> and <a class="reference internal" href="#origin-y">origin_y</a> option.</p>
+<p>The splitter takes a single <code class="docutils literal"><span class="pre">PointView</span></code> as its input and creates a
+<code class="docutils literal"><span class="pre">PointView</span></code> for each tile as its output.</p>
 <p>Splitting is usually applied to data read from files (which produce one large
 stream of points) before the points are written to a database (which prefer
 data segmented into smaller blocks).</p>
@@ -218,21 +218,19 @@ data segmented into smaller blocks).</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.splitter&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="s2">&quot;100&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;origin_x&quot;</span><span class="p">:</span><span class="s2">&quot;638900.0&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;origin_y&quot;</span><span class="p">:</span><span class="s2">&quot;835500.0&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.splitter&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="s2">&quot;100&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;origin_x&quot;</span><span class="p">:</span><span class="s2">&quot;638900.0&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;origin_y&quot;</span><span class="p">:</span><span class="s2">&quot;835500.0&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.pgpointcloud&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;dbname=&#39;lidar&#39; user=&#39;user&#39;&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.pgpointcloud&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;dbname=&#39;lidar&#39; user=&#39;user&#39;&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -242,13 +240,13 @@ data segmented into smaller blocks).</p>
 <dt>length</dt>
 <dd>Length of the sides of the tiles that are created to hold points.
 [Default: 1000]</dd>
-<dt>origin_x</dt>
+<dt><span class="target" id="origin-x">origin_x</span></dt>
 <dd>X Origin of the tiles.  [Default: none (chosen arbitarily)]</dd>
-<dt>origin_y</dt>
+<dt><span class="target" id="origin-y">origin_y</span></dt>
 <dd>Y Origin of the tiles.  [Default: none (chosen arbitarily)]</dd>
 <dt>buffer</dt>
-<dd>Amount of overlap to include in each tile. This buffer is added onto length in both the x and the y direction.
-[Default: 0.0]</dd>
+<dd>Amount of overlap to include in each tile. This buffer is added onto
+length in both the x and the y direction.  [Default: 0]</dd>
 </dl>
 </div>
 </div>
@@ -279,7 +277,7 @@ data segmented into smaller blocks).</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -300,7 +298,7 @@ data segmented into smaller blocks).</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -334,7 +332,7 @@ data segmented into smaller blocks).</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

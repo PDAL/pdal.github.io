@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -127,6 +127,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.mongoexpression.html">filters.mongoexpression</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.range.html">filters.range</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.tail.html">filters.tail</a></li>
@@ -210,10 +211,10 @@
             
   <div class="section" id="filters-locate">
 <span id="id1"></span><h1>filters.locate<a class="headerlink" href="#filters-locate" title="Permalink to this headline">¶</a></h1>
-<p>The Locate filter searches the specified <code class="docutils literal"><span class="pre">dimension</span></code> for the minimum or
+<p>The Locate filter searches the specified <a class="reference internal" href="#dimension">dimension</a> for the minimum or
 maximum value and returns a single point at this location. If multiple points
-share the min/max value, the first will be returned. All dimensions of the input
-<code class="docutils literal"><span class="pre">PointView</span></code> will be output, subject to any overriding writer options.</p>
+share the min/max value, the first will be returned. All dimensions of the
+input <code class="docutils literal"><span class="pre">PointView</span></code> will be output, subject to any overriding writer options.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
 <p class="last">This stage is enabled by default</p>
@@ -221,24 +222,22 @@ share the min/max value, the first will be returned. All dimensions of the input
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example returns the point at the highest elevation.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.locate&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;minmax&quot;</span><span class="p">:</span><span class="s2">&quot;max&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.locate&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;minmax&quot;</span><span class="p">:</span><span class="s2">&quot;max&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>dimension</dt>
+<dt><span class="target" id="dimension">dimension</span></dt>
 <dd>Name of the dimension in which to search for min/max value.</dd>
 <dt>minmax</dt>
 <dd>Whether to return the minimum or maximum value in the dimension.</dd>
@@ -272,7 +271,7 @@ share the min/max value, the first will be returned. All dimensions of the input
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -293,7 +292,7 @@ share the min/max value, the first will be returned. All dimensions of the input
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -327,7 +326,7 @@ share the min/max value, the first will be returned. All dimensions of the input
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

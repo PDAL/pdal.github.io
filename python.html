@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -122,9 +122,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#embed">Embed</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#extend">Extend</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#install-from-local">Install from local</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#install-from-repository">Install from repository</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#install-from-conda">Install from Conda</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installation-using-pip">Installation Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installation-from-source">Installation from Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-using-conda">Install using Conda</a></li>
 </ul>
 </li>
 </ul>
@@ -227,17 +227,20 @@ need to get the job done.</p>
 </div>
 <div class="section" id="extend">
 <h2>Extend<a class="headerlink" href="#extend" title="Permalink to this headline">¶</a></h2>
-<p id="index-2">PDAL provides a Python extension that gives users access to executing
-<a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> instantiations and capturing the results as <a class="reference external" href="http://www.numpy.org/">Numpy</a> arrays.
+<p id="index-2">PDAL provides a Python <a class="reference external" href="https://pypi.python.org/pypi/PDAL">extension</a>
+that gives users access to executing
+<a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> instantiations and capturing the results
+as <a class="reference external" href="http://www.numpy.org/">Numpy</a> arrays.
 This mode of operation is useful if you are looking to have PDAL simply act as
 your data format and processing handler.</p>
-<p>Python extension users are expected to construct their own JSON <a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>
+<p>Python extension users are expected to construct their own PDAL
+<a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a>
 using Python’s <code class="docutils literal"><span class="pre">json</span></code> library, or whatever other libraries they wish to
 manipulate JSON. They then feed it into the extension and get back the
 results as <a class="reference external" href="http://www.numpy.org/">Numpy</a> arrays:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">json</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">{</span>
-<span class="s2">  &quot;pipeline&quot;: [</span>
+<span class="s2">  [</span>
 <span class="s2">    &quot;1.2-with-color.las&quot;,</span>
 <span class="s2">    {</span>
 <span class="s2">        &quot;type&quot;: &quot;filters.sort&quot;,</span>
@@ -258,24 +261,13 @@ results as <a class="reference external" href="http://www.numpy.org/">Numpy</a> 
 </div>
 <div class="section" id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
-<p>PDAL Python bindings require a working PDAL install (<a class="reference internal" href="development/compilation/index.html#building"><span class="std std-ref">PDAL</span></a>)
-and then installation of the Python extension. The extension lives on <a class="reference external" href="https://pypi.python.org/pypi/PDAL">PyPI</a>
-at <a class="reference external" href="https://pypi.python.org/pypi/PDAL">https://pypi.python.org/pypi/PDAL</a> and you should use that version as your
-canonical Python extension install.</p>
-<div class="section" id="install-from-local">
-<h4>Install from local<a class="headerlink" href="#install-from-local" title="Permalink to this headline">¶</a></h4>
-<p>In the source code of PDAL there is a <code class="docutils literal"><span class="pre">python</span></code> folder, you have to enter
-there and run</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span>
-<span class="c1"># this should be run as administrator/super user</span>
-<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="install-from-repository">
-<h4>Install from repository<a class="headerlink" href="#install-from-repository" title="Permalink to this headline">¶</a></h4>
-<p id="index-3">The second method to install the PDAL Python extension is to use <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a>
-or <a class="reference external" href="https://pypi.python.org/pypi/setuptools">easy_install</a>, you have to run the command as administrator.</p>
+<p id="index-3">The PDAL Python extension requires a working
+<a class="reference internal" href="download.html#download"><span class="std std-ref">PDAL installation</span></a>.  Unless you choose the Conda installation
+method, make sure that you a current, working version of PDAL before
+installing the extension.</p>
+<div class="section" id="installation-using-pip">
+<h4>Installation Using pip<a class="headerlink" href="#installation-using-pip" title="Permalink to this headline">¶</a></h4>
+<p id="index-4">As administrator, you can install PDAL using pip:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">PDAL</span>
 </pre></div>
 </div>
@@ -285,32 +277,41 @@ or <a class="reference external" href="https://pypi.python.org/pypi/setuptools">
 <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">here</a></p>
 </div>
 </div>
-<div class="section" id="install-from-conda">
-<h4>Install from Conda<a class="headerlink" href="#install-from-conda" title="Permalink to this headline">¶</a></h4>
-<p id="index-4">The final method to install the PDAL Python extension is to use <a class="reference external" href="https://conda.io/docs/">conda</a>. An
-added advantage of using Conda to install the extension is that Conda will also
-install PDAL.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">python</span><span class="o">-</span><span class="n">pdal</span>
+<div class="section" id="installation-from-source">
+<h4>Installation from Source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h4>
+<p id="index-5">The PDAL Python extension is hosted on
+<a class="reference external" href="https://github.com/PDAL/python">GitHub</a>.  If you have a working PDAL
+installation and a working Python installation, you can install the extension
+using the following procedure on Unix.  The procedure on Windows is similar</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git clone https://github.com/PDAL/python pdalextension
+$ cd pdalextension
+$ python setup.py build
+# this should be run as administrator/super user
+$ python setup.py install
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-using-conda">
+<h4>Install using Conda<a class="headerlink" href="#install-using-conda" title="Permalink to this headline">¶</a></h4>
+<p id="index-6">The PDAL Python extension can also be installed using the <a class="reference external" href="https://conda.io/docs/">Conda</a>
+package manager.  An advantage of using Conda to install the extension is
+that Conda will install PDAL. We recommend installing PDAL and the PDAL
+Python extension in an environment other than the base environment.  To
+install in an existing environment, use the following</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="o">&lt;</span><span class="n">environment</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">python</span><span class="o">-</span><span class="n">pdal</span>
+</pre></div>
+</div>
+<p>Use the following command to install PDAL and the PDAL Python extension
+into a new environment and activate that environment</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="o">&lt;</span><span class="n">environment</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">python</span><span class="o">-</span><span class="n">pdal</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="o">&lt;</span><span class="n">environment</span> <span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The official <code class="docutils literal"><span class="pre">pdal</span></code> and <code class="docutils literal"><span class="pre">python-pdal</span></code> packages reside in the
 conda-forge channel, which can be added via <code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span></code> or manually
-specified with the <code class="docutils literal"><span class="pre">-c</span></code> option, as shown in the examples below.</p>
-</div>
-<p>It is recommended that you actually either install PDAL and the Python
-extension either into an existing environment</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="o">&lt;</span><span class="n">environment</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">python</span><span class="o">-</span><span class="n">pdal</span>
-</pre></div>
-</div>
-<p>or create a new environment from scratch</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="o">&lt;</span><span class="n">environment</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">python</span><span class="o">-</span><span class="n">pdal</span>
-</pre></div>
-</div>
-<p>Once the environment has been created, you will be prompted to activate it.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="o">&lt;</span><span class="n">environment</span> <span class="n">name</span><span class="o">&gt;</span>
-</pre></div>
+specified with the <code class="docutils literal"><span class="pre">-c</span></code> option, as shown in the examples above.</p>
 </div>
 </div>
 </div>
@@ -343,7 +344,7 @@ extension either into an existing environment</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -364,7 +365,7 @@ extension either into an existing environment</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -398,7 +399,7 @@ extension either into an existing environment</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.geowave</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
@@ -132,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -203,36 +205,33 @@
             
   <div class="section" id="writers-geowave">
 <span id="id1"></span><h1>writers.geowave<a class="headerlink" href="#writers-geowave" title="Permalink to this headline">¶</a></h1>
-<p id="index-0">The <strong>GeoWave writer</strong> uses <a class="reference external" href="https://ngageoint.github.io/geowave/">GeoWave</a> to write to Accumulo.  GeoWave entries
-are stored using <a class="reference external" href="http://epsg.io/4326/">EPSG:4326</a>.  Instructions for
-configuring the GeoWave plugin can be found <a class="reference external" href="https://ngageoint.github.io/geowave/documentation.html#jace-jni-proxies-2">here</a>.</p>
+<p id="index-0">The <strong>GeoWave writer</strong> uses <a class="reference external" href="https://github.com/locationtech/geowave">GeoWave</a> to write to Accumulo.  GeoWave entries
+are stored using <a class="reference external" href="http://epsg.io/4326/">EPSG:4326</a>.</p>
 <div class="admonition plugin" id="plugin-0">
 <p class="first admonition-title">Dynamic Plugin</p>
 <p class="last">This stage requires a dynamic plugin to operate</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.qfit&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.qi&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;flip_coordinates&quot;</span><span class="p">:</span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;scale_z&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.qfit&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.qi&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;flip_coordinates&quot;</span><span class="p">:</span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_z&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.geowave&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;zookeeper_url&quot;</span><span class="p">:</span><span class="s2">&quot;zookeeper1:2181,zookeeper2:2181,zookeeper3:2181&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;instance_name&quot;</span><span class="p">:</span><span class="s2">&quot;GeoWave&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;pass&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;table_namespace&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Table&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;feature_type_name&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Point&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;data_adapter&quot;</span><span class="p">:</span><span class="s2">&quot;FeatureCollectionDataAdapter&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;points_per_entry&quot;</span><span class="p">:</span><span class="s2">&quot;5000u&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.geowave&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;zookeeper_url&quot;</span><span class="p">:</span><span class="s2">&quot;zookeeper1:2181,zookeeper2:2181,zookeeper3:2181&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;instance_name&quot;</span><span class="p">:</span><span class="s2">&quot;GeoWave&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;pass&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;table_namespace&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Table&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;feature_type_name&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Point&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;data_adapter&quot;</span><span class="p">:</span><span class="s2">&quot;FeatureCollectionDataAdapter&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;points_per_entry&quot;</span><span class="p">:</span><span class="s2">&quot;5000u&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -285,7 +284,7 @@ configuring the GeoWave plugin can be found <a class="reference external" href="
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -306,7 +305,7 @@ configuring the GeoWave plugin can be found <a class="reference external" href="
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -340,7 +339,7 @@ configuring the GeoWave plugin can be found <a class="reference external" href="
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

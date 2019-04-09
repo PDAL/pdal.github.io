@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -122,7 +122,6 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">filters.transformation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -205,14 +204,13 @@
   <div class="section" id="filters-transformation">
 <span id="id1"></span><h1>filters.transformation<a class="headerlink" href="#filters-transformation" title="Permalink to this headline">¶</a></h1>
 <p>The transformation filter applies an arbitrary rotation+translation
-transformation, represented as a 4x4 matrix, to each xyz triplet.</p>
+transformation, represented as a 4x4 <a class="reference internal" href="#matrix">matrix</a>, to each xyz triplet.</p>
 <p>The filter does <em>no</em> checking to ensure the matrix is a valid affine
-transformation — buyer beware.</p>
+transformation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The transformation filter does not apply any spatial reference information
-— if spatial reference information is desired, it must be specified on
-another filter.</p>
+<p class="last">The transformation filter does not apply or consider any spatial
+reference information.</p>
 </div>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
@@ -225,34 +223,28 @@ another filter.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example rotates the points around the z-axis while translating them.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;untransformed.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0 -1  0  1  1  0  0  2  0  0  1  3  0  0  0  1&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0 -1  0  1  1  0  0  2  0  0  1  3  0  0  0  1&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;transformed.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;transformed.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>matrix</dt>
+<dt><span class="target" id="matrix">matrix</span></dt>
 <dd>A whitespace-delimited transformation matrix.
 The matrix is assumed to be presented in row-major order.
 Only matrices with sixteen elements are allowed.</dd>
 </dl>
-</div>
-<div class="section" id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
-<p>The transformation filter does not apply any spatial reference information — if spatial reference information is desired, it must be specified on another filter.</p>
 </div>
 </div>
 
@@ -282,7 +274,7 @@ Only matrices with sixteen elements are allowed.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -303,7 +295,7 @@ Only matrices with sixteen elements are allowed.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -337,7 +329,7 @@ Only matrices with sixteen elements are allowed.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

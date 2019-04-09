@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.greyhound</a><ul>
@@ -132,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -203,40 +205,57 @@
             
   <div class="section" id="writers-greyhound">
 <span id="id1"></span><h1>writers.greyhound<a class="headerlink" href="#writers-greyhound" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>Greyhound writer</strong> allows you to append new dimensions (or update existing appended dimensions) onto a Greyhound resource.  This writer is unique among PDAL writers due to its strict limitation that it may only be used along with a Greyhound reader.  Written points must also match the points that were read in a 1:1 manner (although there is no restriction against reordering), so intermediate filters that cull points are not allowed.</p>
+<p>The <strong>Greyhound writer</strong> allows you to append new dimensions (or update
+existing appended dimensions) onto a Greyhound resource.  The Greyhound writer
+may only be used in a pipeline downstream from a Greyhound reader.
+Written points must also match the points that were read in a 1:1 manner
+(although there is no restriction against reordering), so intermediate
+filters that cull points are not allowed.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>This example runs the <a class="reference external" href="https://pdal.io/stages/filters.smrf.html">SMRF</a> ground-classification algorithm to populate the <strong>Classification</strong> dimension, the <cite>ferry</cite> filter to copy this dimension to a new dimension named <strong>Smrf</strong>, and then adds this dimension to the Greyhound resource.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+<p>This example runs the <a class="reference internal" href="filters.smrf.html#filters-smrf"><span class="std std-ref">SMRF</span></a> ground-classification
+algorithm to populate the <strong>Classification</strong> dimension, the
+<a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">ferry filter</span></a> to copy
+this dimension to a new dimension named <strong>Smrf</strong>, and then adds this
+dimension to the Greyhound resource.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;data.greyhound.io/resource/autzen&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;data.greyhound.io/resource/autzen&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.smrf&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.smrf&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification=Smrf&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification=Smrf&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.greyhound&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MySmrfDimensionSet&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dims&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Smrf&quot;</span><span class="p">]</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.greyhound&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MySmrfDimensionSet&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dims&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Smrf&quot;</span><span class="p">]</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>Many options that affect the behavior of the Greyhound writer are specified as parameters to the <a class="reference external" href="https://pdal.io/stages/readers.greyhound.html">Greyhound reader</a> - which are forwarded to the Greyhound writer.</p>
-<p><span class="target" id="name">name</span>
-A string value for the name of this dimension set.  This setting is used internally by the Greyhound server to group clusters of simultaneously appended dimensions.  For example, a group of multiple classifications with different filter settings like <em>[“SmrfCellSize_1.0”, “SmrfCellSize_1.5”]</em> might be grouped as <em>“SmrfComparison”</em>.</p>
-<p><span class="target" id="dims">dims</span>
-A JSON array of string names of the dimensions to be written to the Greyhound resource.</p>
+<p>Many options that affect the behavior of the Greyhound writer are specified
+as parameters to the <a class="reference internal" href="readers.greyhound.html#readers-greyhound"><span class="std std-ref">Greyhound reader</span></a>, which are
+forwarded to the Greyhound writer.</p>
+<dl class="docutils">
+<dt><span class="target" id="name">name</span></dt>
+<dd>A string value for the name of this dimension set.  This setting is
+used internally by the Greyhound server to group clusters of
+simultaneously appended dimensions.  For example, a group of
+multiple classifications with different filter settings like
+<em>[“SmrfCellSize_1.0”, “SmrfCellSize_1.5”]</em> might be grouped as
+<em>“SmrfComparison”</em>.</dd>
+<dt><span class="target" id="dims">dims</span></dt>
+<dd>A JSON array of string names of the dimensions to be written to
+the Greyhound resource.</dd>
+</dl>
 </div>
 </div>
 
@@ -266,7 +285,7 @@ A JSON array of string names of the dimensions to be written to the Greyhound re
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -287,7 +306,7 @@ A JSON array of string names of the dimensions to be written to the Greyhound re
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -321,7 +340,7 @@ A JSON array of string names of the dimensions to be written to the Greyhound re
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

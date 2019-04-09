@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -127,6 +127,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="filters.locate.html">filters.locate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.mad.html">filters.mad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.mongoexpression.html">filters.mongoexpression</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.range.html">filters.range</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.tail.html">filters.tail</a></li>
@@ -210,9 +211,9 @@
             
   <div class="section" id="filters-iqr">
 <span id="id1"></span><h1>filters.iqr<a class="headerlink" href="#filters-iqr" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal"><span class="pre">filters.iqr</span></code> filter automatically crops the input point cloud based on
-the distribution of points in the specified dimension. Specifically, we choose
-the method of Interquartile Range (IQR). The IQR is defined as the range between
+<p>The <strong>Interquartile Range Filter</strong> automatically crops the input point
+cloud based on the distribution of points in the specified dimension.
+The Interquartile Range (IQR) is defined as the range between
 the first and third quartile (25th and 75th percentile). Upper and lower bounds
 are determined by adding 1.5 times the IQR to the third quartile or subtracting
 1.5 times the IQR from the first quartile. The multiplier, which defaults to
@@ -230,22 +231,20 @@ considerations, it must be used with care.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>The sample pipeline below uses <code class="docutils literal"><span class="pre">filters.iqr</span></code> to automatically crop the Z
+<p>The sample pipeline below uses the filter to automatically crop the Z
 dimension and remove possible outliers. The multiplier to determine high/low
 thresholds has been adjusted to be less agressive and to only crop those
 outliers that are greater than the third quartile plus 3 times the IQR or are
 less than the first quartile minus 3 times the IQR.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.iqr&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="mf">3.0</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.iqr&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="mf">3.0</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.laz&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -253,7 +252,7 @@ less than the first quartile minus 3 times the IQR.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>k</dt>
-<dd>The IQR multiplier used to determine upper/lower bounds. [Default: <strong>1.5</strong>]</dd>
+<dd>The IQR multiplier used to determine upper/lower bounds. [Default: 1.5]</dd>
 <dt>dimension</dt>
 <dd>The name of the dimension to filter.</dd>
 </dl>
@@ -286,7 +285,7 @@ less than the first quartile minus 3 times the IQR.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -307,7 +306,7 @@ less than the first quartile minus 3 times the IQR.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -341,7 +340,7 @@ less than the first quartile minus 3 times the IQR.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

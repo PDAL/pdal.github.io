@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -225,7 +225,7 @@
 <span id="id1"></span><h1>filters.elm<a class="headerlink" href="#filters-elm" title="Permalink to this headline">¶</a></h1>
 <p>The Extended Local Minimum (ELM) filter marks low points as noise. This filter
 is an implementation of the method described in <a class="reference internal" href="../references.html#chen2012" id="id2">[Chen2012]</a>.</p>
-<p>ELM begins by rasterizing the input point cloud data at the given <code class="docutils literal"><span class="pre">cell</span></code> size.
+<p>ELM begins by rasterizing the input point cloud data at the given <a class="reference internal" href="#cell">cell</a> size.
 Within each cell, the lowest point is considered noise if the next lowest point
 is a given threshold above the current point. If it is marked as noise, the
 difference between the next two points is also considered, marking points as
@@ -238,8 +238,10 @@ cell is considered.</p>
 </div>
 <div class="section" id="example-1">
 <h2>Example #1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
-<p>The following PDAL pipeline applies the ELM filter, using a cell size of 20 and
-applying the classification code of 18 to those points determined to be noise.</p>
+<p>The following PDAL pipeline applies the ELM filter, using a <a class="reference internal" href="#cell">cell</a> size of 20
+and
+applying the <a class="reference internal" href="#class"><span class="std std-ref">classification</span></a> code of 18 to those points
+determined to be noise.</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
@@ -258,38 +260,36 @@ applying the classification code of 18 to those points determined to be noise.</
 <h2>Example #2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>This variation of the pipeline begins by assigning a value of 0 to all
 classifications, thus resetting any existing classifications. It then proceeds
-to compute ELM with a threshold value of 2.0, and finishes by extracting all
+to compute ELM with a <a class="reference internal" href="#threshold">threshold</a> value of 2.0, and finishes by extracting all
 returns that are not marked as noise.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.assign&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;assignment&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[:]=0&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.assign&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;assignment&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[:]=0&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.elm&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="mf">2.0</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.elm&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="mf">2.0</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification![7:7]&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification![7:7]&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>cell</dt>
-<dd>Cell size. [Default: <strong>10.0</strong>]</dd>
-<dt>class</dt>
-<dd>Classification value to apply to noise points. [Default: <strong>7</strong>]</dd>
-<dt>threshold</dt>
-<dd>Threshold value to identify low noise points. [Default: <strong>1.0</strong>]</dd>
+<dt><span class="target" id="cell">cell</span></dt>
+<dd>Cell size. [Default: 10.0]</dd>
+<dt><span class="target" id="class">class</span></dt>
+<dd>Classification value to apply to noise points. [Default: 7]</dd>
+<dt><span class="target" id="threshold">threshold</span></dt>
+<dd>Threshold value to identify low noise points. [Default: 1.0]</dd>
 </dl>
 </div>
 </div>
@@ -320,7 +320,7 @@ returns that are not marked as noise.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -341,7 +341,7 @@ returns that are not marked as noise.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -375,7 +375,7 @@ returns that are not marked as noise.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -222,21 +222,21 @@
             
   <div class="section" id="filters-estimaterank">
 <span id="id1"></span><h1>filters.estimaterank<a class="headerlink" href="#filters-estimaterank" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal"><span class="pre">filters.estimaterank</span></code> uses singular value decomposition (SVD) to estimate
-the rank of a set of points. Point sets with rank 1 correspond to linear
-features, while sets with rank 2 correspond to planar features. Rank 3
-corresponds to a full 3D feature. In practice this can be used alone, or
+<p>The <strong>rank estimation filter</strong> uses singular value decomposition (SVD) to
+estimate the rank of a set of points. Point sets with rank 1 correspond
+to linear features, while sets with rank 2 correspond to planar features.
+Rank 3 corresponds to a full 3D feature. In practice this can be used alone, or
 possibly in conjunction with other filters to extract features (e.g.,
 buildings, vegetation).</p>
 <p>Two parameters are required to estimate rank (though the default values will be
-suitable in many cases). First, the <code class="docutils literal"><span class="pre">knn</span></code> parameter defines the number of
+suitable in many cases). First, the <a class="reference internal" href="#knn">knn</a> parameter defines the number of
 points to consider when computing the SVD and estimated rank. Second, the
-<code class="docutils literal"><span class="pre">thresh</span></code> parameter is used to determine when a singular value shall be
+<a class="reference internal" href="#thresh">thresh</a> parameter is used to determine when a singular value shall be
 considered non-zero (when the absolute value of the singular value is greater
 than the threshold).</p>
 <p>The rank estimation is performed on a pointwise basis, meaning for each point
-in the input point cloud, we find its <code class="docutils literal"><span class="pre">knn</span></code> neighbors, compute the SVD, and
-estimate rank. <code class="docutils literal"><span class="pre">filters.estimaterank</span></code> creates a new dimension called <code class="docutils literal"><span class="pre">Rank</span></code>
+in the input point cloud, we find its <a class="reference internal" href="#knn">knn</a> neighbors, compute the SVD, and
+estimate rank. The filter creates a new dimension called <code class="docutils literal"><span class="pre">Rank</span></code>
 that can be used downstream of this filter stage in the pipeline. The type of
 writer used will determine whether or not the <code class="docutils literal"><span class="pre">Rank</span></code> dimension itself can be
 saved to disk.</p>
@@ -246,34 +246,32 @@ saved to disk.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>This sample pipeline estimates the rank of each point using
-<code class="docutils literal"><span class="pre">filters.estimaterank</span></code> and then filters out those points where the rank is
-three using <code class="docutils literal"><span class="pre">filters.range</span></code>.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<p>This sample pipeline estimates the rank of each point using this filter
+and then filters out those points where the rank is three using
+<a class="reference internal" href="filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.estimaterank&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>
-      <span class="nt">&quot;thresh&quot;</span><span class="p">:</span><span class="mf">0.01</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.estimaterank&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>
+        <span class="nt">&quot;thresh&quot;</span><span class="p">:</span><span class="mf">0.01</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Rank![3:3]&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Rank![3:3]&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.laz&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>knn</dt>
-<dd>The number of k-nearest neighbors. [Default: <strong>8</strong>]</dd>
-<dt>thresh</dt>
-<dd>The threshold used to identify nonzero singular values. [Default: <strong>0.01</strong>]</dd>
+<dt><span class="target" id="knn">knn</span></dt>
+<dd>The number of k-nearest neighbors. [Default: 8]</dd>
+<dt><span class="target" id="thresh">thresh</span></dt>
+<dd>The threshold used to identify nonzero singular values. [Default: 0.01]</dd>
 </dl>
 </div>
 </div>
@@ -304,7 +302,7 @@ three using <code class="docutils literal"><span class="pre">filters.range</span
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -325,7 +323,7 @@ three using <code class="docutils literal"><span class="pre">filters.range</span
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -359,7 +357,7 @@ three using <code class="docutils literal"><span class="pre">filters.range</span
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

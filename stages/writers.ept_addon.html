@@ -1,0 +1,383 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>writers.ept_addon &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Writers" href="writers.html"/>
+        <link rel="next" title="writers.gdal" href="writers.gdal.html"/>
+        <link rel="prev" title="writers.bpf" href="writers.bpf.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.9.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">writers.ept_addon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.matlab.html">writers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ogr.html">writers.ogr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/index.html">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="writers.html">Writers</a> &raquo;</li>
+      
+    <li>writers.ept_addon</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writers-ept-addon">
+<span id="id1"></span><h1>writers.ept_addon<a class="headerlink" href="#writers-ept-addon" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>EPT Addon Writer</strong> supports writing additional dimensions to
+<a class="reference external" href="https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md">Entwine Point Tile</a> datasets.  The EPT addon writer may only
+be used in a pipeline with an <a class="reference internal" href="readers.ept.html#readers-ept"><span class="std std-ref">EPT reader</span></a>, and it
+creates additional attributes for an existing dataset rather than
+creating a brand new one.</p>
+<p>The addon dimensions created by this writer are stored independently from the corresponding EPT dataset, therefore write-access to the EPT resource itself is not required to create and use addon dimensions.</p>
+<div class="admonition embed" id="embed-0">
+<p class="first admonition-title">Default Embedded Stage </p>
+<p class="last">This stage is enabled by default</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This example downloads the Autzen dataset (10M points) and runs the <a href="#id2"><span class="problematic" id="id3">:ref:`filters.smrf &lt;SMRF filter&gt;`_</span></a>, which populates the <code class="docutils literal"><span class="pre">Classification</span></code> dimension with ground values, and writes the resulting attribute to an EPT addon dataset on the local filesystem.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.assign&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;assignment&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification[:]=0&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.smrf&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.ept_addon&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;~/entwine/addons/autzen/smrf&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification&quot;</span> <span class="p">}</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+<p>And here is a follow-up example of reading this dataset with the <a href="#id4"><span class="problematic" id="id5">:ref:`readers.ept &lt;EPT reader&gt;`_</span></a> - with the created addon overwriting the <code class="docutils literal"><span class="pre">Classification</span></code> value - and then writing the output to a single file with the <a href="#id6"><span class="problematic" id="id7">:ref:`writers.las &lt;LAS writer&gt;`_</span></a>.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="s2">&quot;~/entwine/addons/autzen/smrf&quot;</span> <span class="p">}</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-ept-smrf.las&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+<p>Here is an example of using multiple mappings in the <code class="docutils literal"><span class="pre">addons</span></code> option, to apply a new color scheme with <a class="reference internal" href="filters.colorinterp.html#filters-colorinterp"><span class="std std-ref">filters.colorinterp</span></a> mapping the Red, Green, and Blue dimensions to new values.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.colorinterp&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.ept_addon&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;~/entwine/addons/autzen/interp/Red&quot;</span><span class="p">:</span>   <span class="s2">&quot;Red&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;~/entwine/addons/autzen/interp/Green&quot;</span><span class="p">:</span> <span class="s2">&quot;Green&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;~/entwine/addons/autzen/interp/Blue&quot;</span><span class="p">:</span>  <span class="s2">&quot;Blue&quot;</span>
+   <span class="p">}</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+<p>And to read the data with the new colors:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;Red&quot;</span><span class="p">:</span>   <span class="s2">&quot;~/entwine/addons/autzen/interp/Red&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Green&quot;</span><span class="p">:</span> <span class="s2">&quot;~/entwine/addons/autzen/interp/Green&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Blue&quot;</span><span class="p">:</span>  <span class="s2">&quot;~/entwine/addons/autzen/interp/Blue&quot;</span>
+   <span class="p">}</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-ept-interp.las&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>addons</dt>
+<dd>A JSON object whose keys represent output paths for each addon dimension,
+and whose corresponding values represent the attributes to be written to
+these addon dimensions. [Required]</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">addons</span></code> option is reversed between the EPT reader and addon-writer: in each case, the right-hand side represents an assignment to the left-hand side.  In the writer, the dimension value is assigned to an addon path.  In the reader, the addon path is assigned to a dimension.</p>
+</div>
+<dl class="docutils">
+<dt>threads</dt>
+<dd>Number of worker threads used to write EPT addon data.  A minimum of 4 will be used no matter what value is specified.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writers.gdal.html" class="btn btn-neutral float-right" title="writers.gdal" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="writers.bpf.html" class="btn btn-neutral" title="writers.bpf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2019
+                        <a href="https://github.com/abellgithub">Andrew Bell</a>,
+                        <a href="https://github.com/chambbj">Brad Chambers</a>,
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Apr 09, 2019.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2019
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Apr 09, 2019.
+        </div>
+    </div>
+
+</body>
+</html>

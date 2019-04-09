@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
@@ -132,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -218,18 +220,16 @@ binary-compressed format.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.pcd&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.pcd&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.pcd&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.pcd&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.pcd&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.pcd&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.pcd&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.pcd&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -239,15 +239,16 @@ binary-compressed format.</p>
 <dt>filename</dt>
 <dd>PCD file to write [Required]</dd>
 <dt>compression</dt>
-<dd>Level of PCD compression to use (ascii, binary, compressed) [Default: <strong>ascii</strong>]</dd>
+<dd>Level of PCD compression to use (ascii, binary, compressed)
+[Default: “ascii”]</dd>
 <dt>xyz</dt>
-<dd>Write only XYZ dimension? [Default: <strong>false</strong>]</dd>
+<dd>Write only XYZ dimension? [Default: “false”]</dd>
 <dt>subtract_minimum</dt>
-<dd>Set origin to minimum of XYZ dimension? [Default: <strong>true</strong>]</dd>
+<dd>Set origin to minimum of XYZ dimension? [Default: true]</dd>
 <dt>offset_x, offset_y, offset_z</dt>
-<dd>Offset to be subtracted from XYZ position [Default: <strong>0.0</strong>]</dd>
+<dd>Offset to be subtracted from XYZ position [Default: 0.0]</dd>
 <dt>scale_x, scale_y, scale_z</dt>
-<dd>Scale to divide from XYZ dimension [Default: <strong>1.0</strong>]</dd>
+<dd>Scale to divide from XYZ dimension [Default: 1.0]</dd>
 </dl>
 </div>
 </div>
@@ -278,7 +279,7 @@ binary-compressed format.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -299,7 +300,7 @@ binary-compressed format.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -333,7 +334,7 @@ binary-compressed format.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -144,6 +144,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.tiledb.html">readers.tiledb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.tindex.html">readers.tindex</a></li>
 </ul>
 </li>
@@ -226,33 +227,47 @@
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example downloads a small area around the the Statue of Liberty from the New York City data set (4.7 billion points) which can be viewed in its entirety in <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a> or <a class="reference external" href="http://speck.ly/?s=http%3A%2F%2Fc%5B0-7%5D.greyhound.io&amp;r=ept%3A%2F%2Fna.entwine.io%2Fnyc&amp;ca=-0&amp;ce=49.06&amp;ct=-8239196%2C4958509.308%2C337&amp;cd=42640.943&amp;cmd=125978.13&amp;ps=2&amp;pa=0.1&amp;ze=1&amp;c0s=remote%3A%2F%2Fimagery%3Furl%3Dhttp%3A%2F%2Fserver.arcgisonline.com%2FArcGIS%2Frest%2Fservices%2FWorld_Imagery%2FMapServer%2Ftile%2F%7B%7Bz%7D%7D%2F%7B%7By%7D%7D%2F%7B%7Bx%7D%7D.jpg">Plasio</a>.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
+   <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/nyc&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/nyc/ept.json&quot;</span><span class="p">,</span>
       <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="s2">&quot;([-8242669, -8242529], [4966549, 4966674])&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;statue-of-liberty.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;statue-of-liberty.las&quot;</span>
+<span class="p">]</span>
 </pre></div>
 </div>
+<p>Additional attributes created by the <span class="xref std std-ref">writers.ept_addon</span> can be referenced with the <code class="docutils literal"><span class="pre">addon</span></code> option.  Here is an example that overrides the <code class="docutils literal"><span class="pre">Classification</span></code> dimension with an addon dimension derived from the original dataset:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="s2">&quot;~/entwine/addons/autzen/smrf&quot;</span> <span class="p">}</span>
+<span class="p">},</span> <span class="p">{</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-ept-smrf.las&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+<p>For more details about addon dimensions and how to produce them, see <a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">writers.ept_addon</span></a>.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
 <dd>EPT resource from which to read.  Because EPT resources do not have a file extension, to specify an EPT resource as a string, it must be prefixed with <code class="docutils literal"><span class="pre">ept://</span></code>.  For example, <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">translate</span> <span class="pre">ept://http://na.entwine.io/autzen</span> <span class="pre">autzen.laz</span></code>. [Required]</dd>
-</dl>
-<dl class="docutils">
-<dt>count</dt>
-<dd>Maximum number of points to read. [Default: unlimited]</dd>
 <dt>spatialreference</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>bounds</dt>
 <dd>The extents of the resource to select in 2 or 3 dimensions, expressed as a string, e.g.: <code class="docutils literal"><span class="pre">([xmin,</span> <span class="pre">xmax],</span> <span class="pre">[ymin,</span> <span class="pre">ymax],</span> <span class="pre">[zmin,</span> <span class="pre">zmax])</span></code>.  If omitted, the entire dataset will be selected.</dd>
+<dt>resolution</dt>
+<dd><p class="first">A point resolution limit to select, expressed as a grid cell edge length.  Units correspond to resource coordinate system units.  For example, for a coordinate system expressed in meters, a <code class="docutils literal"><span class="pre">resolution</span></code> value of <code class="docutils literal"><span class="pre">0.1</span></code> will select points up to a ground resolution of 100 points per square meter.</p>
+<p class="last">The resulting resolution may not be exactly this value: the minimum possible resolution that is at <em>least</em> as precise as the requested resolution will be selected.  Therefore the result may be a bit more precise than requested.</p>
+</dd>
+<dt>addons</dt>
+<dd><p class="first">A mapping of assignments of the form <code class="docutils literal"><span class="pre">DimensionName:</span> <span class="pre">AddonPath</span></code>, which assigns dimensions from the specified paths to the named dimensions.  These addon dimensions are created by the <a href="#id2"><span class="problematic" id="id3">:ref:`writers.ept_addon &lt;EPT addon writer&gt;`_</span></a>.  If the dimension names already exist in the EPT <a class="reference external" href="https://entwine.io/entwine-point-tile.html#schema">Schema</a> for the given resource, then their values will be overwritten with those from the appropriate addon.</p>
+<p class="last">Addons may used to override well-known <a href="#id4"><span class="problematic" id="id5">:ref:`dimensions`_</span></a>.  For example, an addon assignment of <code class="docutils literal"><span class="pre">&quot;Classification&quot;:</span> <span class="pre">&quot;~/addons/autzen/MyGroundDimension/&quot;</span></code> will override an existing EPT <code class="docutils literal"><span class="pre">Classification</span></code> dimension with the custom dimension.</p>
+</dd>
 <dt>origin</dt>
 <dd><p class="first">EPT datasets are lossless aggregations of potentially multiple source files.  The <em>origin</em> options can be used to select all points from a single source file.  This option may be specified as a string or an integral ID.</p>
 <p>The string form of this option selects a source file by its original file path.  This may be a substring instead of the entire path, but the string must uniquely select only one source file (via substring search).  For example, for an EPT dataset created from source files <em>one.las</em>, <em>two.las</em>, and <em>two.bpf</em>, <cite>“one”</cite> is a sufficient selector, but <cite>“two”</cite> is not.</p>
@@ -290,7 +305,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -311,7 +326,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -345,7 +360,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

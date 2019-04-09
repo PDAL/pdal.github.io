@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
@@ -132,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -223,26 +225,24 @@ PDAL makes no attempt to reproject data to your specified srid.  Use
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26916&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26916&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.chipper&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;capacity&quot;</span><span class="p">:</span><span class="mi">400</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.chipper&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;capacity&quot;</span><span class="p">:</span><span class="mi">400</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.pgpointcloud&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;host=&#39;localhost&#39; dbname=&#39;lidar&#39; user=&#39;pramsey&#39;&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="s2">&quot;example&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="s2">&quot;dimensional&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;srid&quot;</span><span class="p">:</span><span class="s2">&quot;26916&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.pgpointcloud&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;host=&#39;localhost&#39; dbname=&#39;lidar&#39; user=&#39;pramsey&#39;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="s2">&quot;example&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="s2">&quot;dimensional&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;srid&quot;</span><span class="p">:</span><span class="s2">&quot;26916&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -254,11 +254,11 @@ PDAL makes no attempt to reproject data to your specified srid.  Use
 <dt>table</dt>
 <dd>Database table to write to. [Required]</dd>
 <dt>schema</dt>
-<dd>Database schema to write to. [Default: <strong>public</strong>]</dd>
+<dd>Database schema to write to. [Default: “public”]</dd>
 <dt>column</dt>
-<dd>Table column to put patches into. [Default: <strong>pa</strong>]</dd>
+<dd>Table column to put patches into. [Default: “pa”]</dd>
 <dt>compression</dt>
-<dd><p class="first">Patch compression type to use. [Default: <strong>dimensional</strong>]</p>
+<dd><p class="first">Patch compression type to use. [Default: “”dimensional”“]</p>
 <ul class="last simple">
 <li><strong>none</strong> applies no compression</li>
 <li><strong>dimensional</strong> applies dynamic compression to each dimension separately</li>
@@ -266,15 +266,23 @@ PDAL makes no attempt to reproject data to your specified srid.  Use
 </ul>
 </dd>
 <dt>overwrite</dt>
-<dd>To drop the table before writing set to ‘true’. To append to the table set to ‘false’. [Default: <strong>false</strong>]</dd>
+<dd>To drop the table before writing set to ‘true’. To append to the table
+set to ‘false’. [Default: false]</dd>
 <dt>srid</dt>
-<dd>Spatial reference ID (relative to the <cite>spatial_ref_sys</cite> table in PostGIS) to store with the point cloud schema. [Default: <strong>4326</strong>]</dd>
+<dd>Spatial reference ID (relative to the <cite>spatial_ref_sys</cite> table in PostGIS)
+to store with the point cloud schema. [Default: 4326]</dd>
 <dt>pcid</dt>
-<dd>An optional existing PCID to use for the point cloud schema. If specified, the schema must be present. If not specified, a match will still be looked for, or a new schema will be inserted.</dd>
+<dd>An optional existing PCID to use for the point cloud schema. If specified,
+the schema must be present. If not specified, a match will still be
+looked for, or a new schema will be inserted. [Default: 0]</dd>
 <dt>pre_sql</dt>
-<dd>Optional SQL to execute <em>before</em> running the translation. If the value references a file, the file is read and any SQL inside is executed. Otherwise the value is executed as SQL itself.</dd>
+<dd>SQL to execute <em>before</em> running the translation. If the value
+references a file, the file is read and any SQL inside is executed.
+Otherwise the value is executed as SQL itself. [Optional]</dd>
 <dt>post_sql</dt>
-<dd>Optional SQL to execute <em>after</em> running the translation. If the value references a file, the file is read and any SQL inside is executed. Otherwise the value is executed as SQL itself.</dd>
+<dd>SQL to execute <em>after</em> running the translation. If the value references
+a file, the file is read and any SQL inside is executed. Otherwise the
+value is executed as SQL itself. [Optional]</dd>
 <dt>scale_x, scale_y, scale_z / offset_x, offset_y, offset_z</dt>
 <dd>If ANY of these options are specified the X, Y and Z dimensions are adjusted
 by subtracting the offset and then dividing the values by the specified
@@ -315,7 +323,7 @@ are listed by name and separated by commas.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -336,7 +344,7 @@ are listed by name and separated by commas.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -370,7 +378,7 @@ are listed by name and separated by commas.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -123,13 +123,12 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Reading with PDAL</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-basic-inquiry-example">A basic inquiry example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-conversion-example">A conversion example</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#metadata"><code class="docutils literal"><span class="pre">metadata</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metadata">Metadata</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#a-pipeline-command-example">A <code class="docutils literal"><span class="pre">pipeline_command</span></code> example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-pipeline-example">A Pipeline Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#simple-conversion">Simple conversion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#loop-a-directory-and-filter-it-through-a-pipeline">Loop a directory and filter it through a pipeline</a></li>
 </ul>
@@ -218,42 +217,26 @@
 <p class="topic-title first">Contents</p>
 <ul class="simple">
 <li><a class="reference internal" href="#reading-with-pdal" id="id2">Reading with PDAL</a><ul>
-<li><a class="reference internal" href="#introduction" id="id3">Introduction</a></li>
-<li><a class="reference internal" href="#a-basic-inquiry-example" id="id4">A basic inquiry example</a></li>
-<li><a class="reference internal" href="#a-conversion-example" id="id5">A conversion example</a><ul>
-<li><a class="reference internal" href="#metadata" id="id6"><a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a></a></li>
+<li><a class="reference internal" href="#a-basic-inquiry-example" id="id3">A basic inquiry example</a></li>
+<li><a class="reference internal" href="#a-conversion-example" id="id4">A conversion example</a><ul>
+<li><a class="reference internal" href="#metadata" id="id5">Metadata</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#a-pipeline-command-example" id="id7">A <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> example</a><ul>
-<li><a class="reference internal" href="#simple-conversion" id="id8">Simple conversion</a></li>
-<li><a class="reference internal" href="#loop-a-directory-and-filter-it-through-a-pipeline" id="id9">Loop a directory and filter it through a pipeline</a></li>
+<li><a class="reference internal" href="#a-pipeline-example" id="id6">A Pipeline Example</a><ul>
+<li><a class="reference internal" href="#simple-conversion" id="id7">Simple conversion</a></li>
+<li><a class="reference internal" href="#loop-a-directory-and-filter-it-through-a-pipeline" id="id8">Loop a directory and filter it through a pipeline</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </div>
-<p>This tutorial will be presented in two parts – the first being an introduction
-to the command-line utilities that can be used to perform processing operations
-with PDAL, and the second being an introductory C++ tutorial of how to use the
-<a class="reference internal" href="../api/cpp/index.html#cppapi"><span class="std std-ref">PDAL API</span></a> to accomplish similar tasks.</p>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>PDAL is both a C++ library and a collection of command-line utilities for
-data processing operations.  While it is similar to <a class="reference external" href="http://lastools.org">LAStools</a> in a few
-aspects, and borrows some of its lineage in others, the PDAL library
-is an attempt to construct a library that is primarily intended as a
-data translation library first, and a exploitation and filtering library
-second.  PDAL exists to provide an abstract API for software developers
-wishing to navigate the multitude of point cloud formats that are out there.
-Its value and niche is explicitly modeled after the hugely successful <a class="reference external" href="http://www.gdal.org">GDAL</a>
-library, which provides an abstract API for data formats in the GIS raster
-data space.</p>
-</div>
+<p>This tutorial is an introduction to using PDAL to read data using pdal
+from the command line.</p>
 <div class="section" id="a-basic-inquiry-example">
 <h2>A basic inquiry example<a class="headerlink" href="#a-basic-inquiry-example" title="Permalink to this headline">¶</a></h2>
 <p>Our first example to demonstrate PDAL’s utility will be to simply query an
-<a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">ASPRS LAS</a> file to determine the data that are in it in the very first point.</p>
+<a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">LAS</a> file to determine the data that are in it in the very first point.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/test/data/las/interesting.las?raw=true">interesting.las</a> file in these examples can be found on github.</p>
@@ -294,21 +277,15 @@ data space.</p>
 </div>
 <div class="section" id="a-conversion-example">
 <h2>A conversion example<a class="headerlink" href="#a-conversion-example" title="Permalink to this headline">¶</a></h2>
-<p>Conversion of one file format to another can be a hairy topic. You should
-expect <em>leakage</em> of details of data in the source format as it is converted to
-the destination format. <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a>, file organization, and data themselves
-may not be able to be represented as you move from one format to another.
-Conversion is by definition lossy, if not in terms of the actual data
-themselves, but possibly in terms of the auxiliary data the format also
-carries.</p>
-<p>It is also important to recognize that both fixed and flexible point cloud
-formats exist, and conversion of flexible formats to fixed formats will often
-leak. The dimensions might even match in terms of type or name, but not in
-terms of width or interpretation.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">See <a class="reference internal" href="../api/cpp/dimension.html#_CPPv2N4pdal9DimensionE" title="pdal::Dimension"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Dimension</span></code></a> for details on PDAL dimensions.</p>
-</div>
+<p>Conversion of data from one format to another may be lossy, in that some
+data in the source format may not be representable in the same format or
+at all in the destination format.  For example, some formats don’t support
+spatial references for point data, some have no metadata support and others
+have limited <a class="reference internal" href="../stages/filters.stats.html#dimensions"><span class="std std-ref">dimension</span></a> support.  Even when data types are
+supported in both source and destination formats, there may be limitations
+with regard to data type, precision or , scaling.  PDAL attempts to convert
+data as accurately as possible, but you should make sure that you’re
+aware of the capabilities of the data formats you’re using.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate interesting.las output.txt
 </pre></div>
 </div>
@@ -322,16 +299,16 @@ terms of width or interpretation.</p>
 <span class="o">...</span>
 </pre></div>
 </div>
-<p>The text format, of course, is the ultimate flexible-definition format – at
-least for the point data themselves. For the other header information, like
-the spatial reference system, or the <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">ASPRS LAS</a> <a class="reference external" href="http://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>, the conversion
-leaks. In short, you may need to preserve some more information as part of
+<p>The text format supports all point attributes, but provides no support for
+metadata such as the input spatial reference system or the <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">LAS</a> header
+fields, such as <a class="reference external" href="http://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.
+You may need to preserve some more information as part of
 your conversion to make it useful down the road.</p>
 <div class="section" id="metadata">
-<h3><a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a><a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h3>
-<p>PDAL transmits this other information in the form of <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a> that is
-carried per-stage throughout the PDAL <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">processing pipeline</span></a>.
-We can capture this metadata using the <a class="reference internal" href="../apps/info.html#info-command"><span class="std std-ref">info</span></a> utility.</p>
+<h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h3>
+<p>PDAL carries <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">metadata</span></a> for each stage through the PDAL
+<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">processing pipeline</span></a>.  The metadata can be written in
+JSON form using the pdal <a class="reference internal" href="../apps/info.html#info-command"><span class="std std-ref">info</span></a> command</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal info --metadata interesting.las
 </pre></div>
 </div>
@@ -341,49 +318,38 @@ your <a class="reference external" href="http://www.json.org/">JSON</a> manipula
 For formats that do not have the ability to
 preserve this metadata internally, you can keep a <code class="docutils literal"><span class="pre">.json</span></code> file
 alongside the <code class="docutils literal"><span class="pre">.txt</span></code> file as auxiliary information.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a> contains much more detail of metadata workflow in PDAL.</p>
 </div>
 </div>
-</div>
-<div class="section" id="a-pipeline-command-example">
-<h2>A <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> example<a class="headerlink" href="#a-pipeline-command-example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-pipeline-example">
+<h2>A Pipeline Example<a class="headerlink" href="#a-pipeline-example" title="Permalink to this headline">¶</a></h2>
 <p>The full power of PDAL comes in the form of <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> invocations.
-While <a class="reference internal" href="../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> provides some utility as far as simple conversion of
-one format to another, it does not provide much power to a user to be able
-to filter or alter data as they are converted.  Pipelines are the way to take
-advantage of PDAL’s ability to manipulate data as they are converted. This
-section will provide a basic example and demonstration of <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>,
-but the <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> document contains more detailed exposition of the
+Pipelines allow you to take advantage of PDAL’s ability to manipulate data
+as they are converted. This section will provide a basic example and
+demonstration of pipeline usage.  See the
+<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">pipeline specification</span></a>, for more detailed exposition of the
 topic.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> document contains detailed examples and background
-information.</p>
-</div>
-<p>The <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> PDAL utility is one that takes in a <code class="docutils literal"><span class="pre">.json</span></code> file
-containing <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> description that defines a PDAL
-processing pipeline. Options can be given at each <a class="reference internal" href="../api/cpp/stage.html#_CPPv2N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::Stage</span></code></a> of
-the pipeline to affect different aspects of the processing pipeline, and
-stages may be chained together into multiple combinations to have varying
-effects.</p>
+<p>The <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> describes a series of processing stages to
+be performed in JSON format.  Each stage can be provided a set of options
+that control the details of processing. PDAL is single-threaded and stages
+are executed in a linear order.  Some stages support what is known as
+“stream mode”.  If all stages in a pipeline support stream mode the command
+is run using using stream mode to reduce the memory processing footprint.
+Even when run in stream mode, execution is single-threaded and can be
+thought of as linear.</p>
 <div class="section" id="simple-conversion">
 <h3>Simple conversion<a class="headerlink" href="#simple-conversion" title="Permalink to this headline">¶</a></h3>
-<p>The following <a class="reference external" href="http://www.json.org/">JSON</a> document defines a <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> that takes the <code class="docutils literal"><span class="pre">file.las</span></code>
-<a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">ASPRS LAS</a> file and converts it to a new file called <code class="docutils literal"><span class="pre">output.las</span></code>.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<p>The following <a class="reference external" href="http://www.json.org/">JSON</a> document defines a pipeline that takes the <code class="docutils literal"><span class="pre">file.las</span></code>
+<a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">LAS</a> file and converts it to a new file called <code class="docutils literal"><span class="pre">output.las</span></code>.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file.las&quot;</span><span class="p">,</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="loop-a-directory-and-filter-it-through-a-pipeline">
 <h3>Loop a directory and filter it through a pipeline<a class="headerlink" href="#loop-a-directory-and-filter-it-through-a-pipeline" title="Permalink to this headline">¶</a></h3>
-<p>This little bash script loops through a directory and pushes the las files through
+<p>This bash script loops through a directory and pushes the las files through
 a pipeline, substituting the input and output as it goes.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">*.</span><span class="n">las</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span><span class="o">.</span> <span class="o">-</span><span class="n">f1</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">P20</span> <span class="o">-</span><span class="n">I</span><span class="p">{}</span> <span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">proj</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="p">{}</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="n">output</span><span class="o">/</span><span class="p">{}</span><span class="o">.</span><span class="n">laz</span>
 </pre></div>
@@ -431,7 +397,7 @@ foreach-object {
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -452,7 +418,7 @@ foreach-object {
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -486,7 +452,7 @@ foreach-object {
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

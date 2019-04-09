@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -207,13 +207,16 @@ point cloud collection is. Files generally provide only rectangular bounds, but
 often the points inside the files only fill up a small percentage of the area
 within the bounds.</p>
 <div class="figure" id="id2">
-<a class="reference internal image-reference" href="../_images/filters.hexbin.img1.jpg"><img alt="Hexbin derive from input point buffer" src="../_images/filters.hexbin.img1.jpg" style="width: 464.0px; height: 456.5px;" /></a>
-<p class="caption"><span class="caption-text">Hexbin output shows boundary of actual points in point buffer, not just rectangular extents.</span></p>
+<a class="reference internal image-reference" href="../_images/filters.hexbin.img1.jpg"><img alt="Hexbin derived from input point buffer" src="../_images/filters.hexbin.img1.jpg" style="width: 464.0px; height: 456.5px;" /></a>
+<p class="caption"><span class="caption-text">Hexbin output shows boundary of actual points in point buffer, not
+just rectangular extents.</span></p>
 </div>
 <p>The hexbin filter reads a point stream and writes out a metadata record that
-contains a much tighter data bound, expressed as a well-known text polygon. In
-order to write out the metadata record, the <cite>pdal</cite> pipeline command must be
-invoked using the <cite>–pipeline-serialization</cite> option:</p>
+contains a boundary, expressed as a well-known text polygon. The filter counts
+the points in each hexagonal area to determine if that area should be included
+as part of the boundary.  In
+order to write out the metadata record, the <em>pdal</em> pipeline command must be
+invoked using the “–pipeline-serialization” option:</p>
 <div class="admonition streamable" id="streamable-0">
 <p class="first admonition-title">Streamable Stage</p>
 <p class="last">This stage supports streaming operations</p>
@@ -223,17 +226,15 @@ invoked using the <cite>–pipeline-serialization</cite> option:</p>
 <p>The following pipeline file and command produces an JSON output file
 containing the pipeline’s metadata, which includes the result of running
 the hexbin filter:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>{
-    &quot;pipeline&quot;: [
-        &quot;/Users/me/pdal/test/data/las/autzen_trim.las&quot;,
-        {
-            &quot;type&quot; : &quot;filters.hexbin&quot;
-        }
-    ]
-}
-
-
-$ pdal pipeline hexbin-pipeline.json --metadata hexbin-out.json
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="s2">&quot;/Users/me/pdal/test/data/las/autzen_trim.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;filters.hexbin&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal pipeline hexbin-pipeline.json --metadata hexbin-out.json
 </pre></div>
 </div>
 <div class="highlight-none"><div class="highlight"><pre><span></span>{
@@ -288,16 +289,19 @@ $ pdal pipeline hexbin-pipeline.json --metadata hexbin-out.json
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>edge_size</dt>
+<dt><span class="target" id="edge-size">edge_size</span></dt>
 <dd>If not set, the hexbin filter will estimate a hex size based on a sample of
 the data. If set, hexbin will use the provided size in constructing the
 hexbins to test.</dd>
 <dt>sample_size</dt>
-<dd>How many points to sample when automatically calculating the edge size? [Default: <strong>5000</strong>]</dd>
+<dd>How many points to sample when automatically calculating the edge
+size? Only applies if <a class="reference internal" href="#edge-size">edge_size</a> is not explicitly set. [Default: 5000]</dd>
 <dt>threshold</dt>
-<dd>Number of points that have to fall within a hexbin before it is considered “in” the data set. [Default: <strong>15</strong>]</dd>
+<dd>Number of points that have to fall within a hexagon boundary before it
+is considered “in” the data set. [Default: 15]</dd>
 <dt>precision</dt>
-<dd>Coordinate precision to use in writing out the well-known text of the boundary polygon. [Default: <strong>8</strong>]</dd>
+<dd>Coordinate precision to use in writing out the well-known text
+of the boundary polygon. [Default: 8]</dd>
 </dl>
 </div>
 </div>
@@ -328,7 +332,7 @@ hexbins to test.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -349,7 +353,7 @@ hexbins to test.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -383,7 +387,7 @@ hexbins to test.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

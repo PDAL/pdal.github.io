@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -204,20 +204,18 @@
             
   <div class="section" id="filters-reprojection">
 <span id="id1"></span><h1>filters.reprojection<a class="headerlink" href="#filters-reprojection" title="Permalink to this headline">¶</a></h1>
-<p>The reprojection filter converts the X, Y and/or Z dimensions to a new spatial
-reference system. The old coordinates are replaced by the new ones,
-if you want to preserve the old coordinates for future processing, use a
-<a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> to create a new dimension and stuff them there.</p>
+<p>The <strong>reprojection filter</strong> converts the X, Y and/or Z dimensions to a
+new spatial
+reference system. The old coordinates are replaced by the new ones.
+If you want to preserve the old coordinates for future processing, use a
+<a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a> to create copies of the original dimensions before
+reprojecting.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>X, Y, and Z dimensions in PDAL are carried as doubles, with their
-scale information applied. Set the output scale (<cite>scale_x</cite>, <cite>scale_y</cite>, or
-<cite>scale_z</cite>) on your writer to descale the data on the way out.</p>
-<p class="last">Many LIDAR formats store coordinate information in 32-bit address spaces, and
-use scaling and offsetting to ensure that accuracy is not lost while fitting
-the information into a limited address space. When changing projections, the
-coordinate values will change, which may change the optimal scale and offset
-for storing the data.</p>
+<p class="last">When coordinates are reprojected, it may significantly change the precision
+necessary to represent the values in some output formats.  Make sure
+that you’re familiar with any scaling necessary for your output format
+based on the projection you’ve used.</p>
 </div>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
@@ -233,34 +231,32 @@ for storing the data.</p>
 applying a range filter and then specifing both the input and output spatial
 reference as EPSG-codes. The X and Y dimensions are scaled to allow enough
 precision in the output coordinates.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26916&quot;</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26916&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Z[0:100],Classification[2:2]&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;in_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26916&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:4326&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;in_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26916&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:4326&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;scale_z&quot;</span><span class="p">:</span><span class="s2">&quot;0.01&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;offset_x&quot;</span><span class="p">:</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;offset_y&quot;</span><span class="p">:</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;offset_z&quot;</span><span class="p">:</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;example-geog.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_z&quot;</span><span class="p">:</span><span class="s2">&quot;0.01&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;offset_x&quot;</span><span class="p">:</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;offset_y&quot;</span><span class="p">:</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;offset_z&quot;</span><span class="p">:</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;example-geog.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -275,22 +271,7 @@ from the GRS80 ellipsoid to DVR90, the vertical datum in Denmark. In the
 writing stage of the pipeline the spatial reference of the file is set to
 EPSG:7416. The last step is needed since PDAL will otherwise reference the
 vertical datum as “Unnamed Vertical Datum” in the spatial reference VLR.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;./1km_6135_632.laz&quot;</span><span class="p">,</span>
     <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
@@ -298,25 +279,25 @@ vertical datum as “Unnamed Vertical Datum” in the spatial reference VLR.</p>
         <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span><span class="s2">&quot;+init=epsg:25832 +geoidgrids=C:/data/geoids/dvr90.gtx&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;a_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:7416&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;1km_6135_632_DVR90.laz&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;a_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:7416&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;1km_6135_632_DVR90.laz&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>in_srs</dt>
 <dd>Spatial reference system of the input data. Express as an EPSG string (eg
-“EPSG:4326” for WGS84 geographic), Proj.4 string or a well-known text string. [Required if
-input reader does not supply SRS information]</dd>
+“EPSG:4326” for WGS84 geographic), Proj.4 string or a well-known text
+string. [Required if not part of the input data set]</dd>
 <dt>out_srs</dt>
 <dd>Spatial reference system of the output data. Express as an EPSG string (eg
-“EPSG:4326” for WGS84 geographic), Proj.4 string or a well-known text string. [Required]</dd>
+“EPSG:4326” for WGS84 geographic), Proj.4 string or a well-known text
+string. [Required]</dd>
 </dl>
 </div>
 </div>
@@ -347,7 +328,7 @@ input reader does not supply SRS information]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -368,7 +349,7 @@ input reader does not supply SRS information]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -402,7 +383,7 @@ input reader does not supply SRS information]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -200,7 +200,7 @@
             
   <div class="section" id="filters-merge">
 <span id="id1"></span><h1>filters.merge<a class="headerlink" href="#filters-merge" title="Permalink to this headline">¶</a></h1>
-<p>The merge filter combines input from multiple sources into a single output.
+<p>The <strong>Merge Filter</strong> combines input from multiple sources into a single output.
 In most cases, this happens automatically on output and use of the merge
 filter is unnecessary.  However, there may be special cases where
 merging points prior to a particular filter or writer is necessary
@@ -208,8 +208,7 @@ or desirable.</p>
 <p>The merge filter will log a warning if its input point sets are based on
 different spatial references.  No checks are made to ensure that points
 from various sources being merged have similar dimensions or are generally
-compatible.  Notably, dimensions are not initialized when points merged
-from various sources do not have dimensions in common.</p>
+compatible.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
 <p class="last">This stage is enabled by default</p>
@@ -220,17 +219,15 @@ from various sources do not have dimensions in common.</p>
 the points from “file1”, “file2” and “file3”.  Note that the explicit
 use of the merge filter is unnecessary in this case (removing the merge
 filter will yield the same result).</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;file2&quot;</span><span class="p">,</span>
     <span class="s2">&quot;file3&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.merge&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.merge&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -243,14 +240,12 @@ carried separately through the pipeline, three files are created as output,
 “out1.las”, “out2.las” and “out3.las”.  “out1.las” contains the points
 in “utm1.las”.  “out2.las” contains the points in “utm2.las” and “out3.las”
 contains the points in “utm3.las”.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;utm1.las&quot;</span>
     <span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span>
     <span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span>
     <span class="s2">&quot;out#.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <p>Here is the same pipeline with a merge filter added.  The merge filter will
@@ -258,8 +253,7 @@ combine the points in its input: “utm1.las” and “utm2.las”.  Then the re
 of the merge filter is passed to the writer along with “utm3.las”.  This
 results in two output files: “out1.las” contains the points from “utm1.las”
 and “utm2.las”, while “out2.las” contains the points from “utm3.las”.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;utm1.las&quot;</span>
     <span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
@@ -267,8 +261,7 @@ and “utm2.las”, while “out2.las” contains the points from “utm3.las”
     <span class="p">},</span>
     <span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span>
     <span class="s2">&quot;out#.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -300,7 +293,7 @@ and “utm2.las”, while “out2.las” contains the points from “utm3.las”
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -321,7 +314,7 @@ and “utm2.las”, while “out2.las” contains the points from “utm3.las”
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -355,7 +348,7 @@ and “utm2.las”, while “out2.las” contains the points from “utm3.las”
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

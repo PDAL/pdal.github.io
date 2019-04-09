@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
@@ -132,6 +133,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -211,28 +213,26 @@ that matches the approach of <a class="reference internal" href="readers.pgpoint
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.chipper&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;capacity&quot;</span><span class="p">:</span><span class="mi">50</span>
-    <span class="p">}</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.chipper&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;capacity&quot;</span><span class="p">:</span><span class="mi">50</span>
+    <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.sqlite&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;output.sqlite&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;cloud_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;SIMPLE_CLOUD&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;pre_sql&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;post_sql&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;block_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;SIMPLE_BLOCKS&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;cloud_column_name&quot;</span><span class="p">:</span><span class="s2">&quot;CLOUD&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.pcd&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.sqlite&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;output.sqlite&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;cloud_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;SIMPLE_CLOUD&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;pre_sql&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;post_sql&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;block_table_name&quot;</span><span class="p">:</span><span class="s2">&quot;SIMPLE_BLOCKS&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;cloud_column_name&quot;</span><span class="p">:</span><span class="s2">&quot;CLOUD&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.pcd&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -246,11 +246,12 @@ that matches the approach of <a class="reference internal" href="readers.pgpoint
 <dt>block_table_name</dt>
 <dd>Name of table to store patch information [Required]</dd>
 <dt>cloud_column_name</dt>
-<dd>Name of column to store primary cloud_id key [Default: <strong>cloud</strong>]</dd>
+<dd>Name of column to store primary cloud_id key [Default: “cloud”]</dd>
 <dt>compression</dt>
-<dd>Use <a class="reference external" href="https://github.com/verma/laz-perf">https://github.com/verma/laz-perf</a> compression technique to store patches</dd>
+<dd>Use <a class="reference external" href="https://github.com/hobu/laz-perf">LAZperf</a> compression technique to store patches. [Default: false]</dd>
 <dt>overwrite</dt>
-<dd>To drop the table before writing set to ‘true’. To append to the table set to ‘false’. [Default: <strong>true</strong>]</dd>
+<dd>Drop the table before writing.  To append to the table set to <code class="docutils literal"><span class="pre">false</span></code>.
+[Default: true]</dd>
 <dt>pre_sql</dt>
 <dd>Optional SQL to execute <em>before</em> running the translation. If the value references a file, the file is read and any SQL inside is executed. Otherwise the value is executed as SQL itself.</dd>
 <dt>post_sql</dt>
@@ -295,7 +296,7 @@ are listed by name and separated by commas.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -316,7 +317,7 @@ are listed by name and separated by commas.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -350,7 +351,7 @@ are listed by name and separated by commas.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

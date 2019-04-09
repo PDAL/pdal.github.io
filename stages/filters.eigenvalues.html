@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -222,15 +222,14 @@
             
   <div class="section" id="filters-eigenvalues">
 <span id="id1"></span><h1>filters.eigenvalues<a class="headerlink" href="#filters-eigenvalues" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal"><span class="pre">filters.eigenvalues</span></code> returns the eigenvalues for a given point, based on its
-k-nearest neighbors.</p>
+<p>The <strong>eignvalue filter</strong> returns the eigenvalues for a given point,
+based on its k-nearest neighbors.</p>
 <p>The filter produces three new dimensions (<code class="docutils literal"><span class="pre">Eigenvalue0</span></code>, <code class="docutils literal"><span class="pre">Eigenvalue1</span></code>, and
 <code class="docutils literal"><span class="pre">Eigenvalue2</span></code>), which can be analyzed directly, or consumed by downstream
 stages for more advanced filtering. The eigenvalues are sorted in ascending
 order.</p>
 <p>The eigenvalue decomposition is performed using Eigen’s
-<code class="docutils literal"><span class="pre">SelfAdjointEigenSolver</span></code>. For more information see
-<a class="reference external" href="https://eigen.tuxfamily.org/dox/classEigen_1_1SelfAdjointEigenSolver.html">https://eigen.tuxfamily.org/dox/classEigen_1_1SelfAdjointEigenSolver.html</a>.</p>
+<a class="reference external" href="https://eigen.tuxfamily.org/dox/classEigen_1_1SelfAdjointEigenSolver.html">SelfAdjointEigenSolver</a>.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
 <p class="last">This stage is enabled by default</p>
@@ -239,20 +238,18 @@ order.</p>
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This pipeline demonstrates the calculation of the eigenvalues. The newly created
 dimensions are written out to BPF for further inspection.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.eigenvalues&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.eigenvalues&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.bpf&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.bpf&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;output_dims&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,Eigenvalue0,Eigenvalue1,Eigenvalue2&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.bpf&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.bpf&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;output_dims&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,Eigenvalue0,Eigenvalue1,Eigenvalue2&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -260,7 +257,7 @@ dimensions are written out to BPF for further inspection.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>knn</dt>
-<dd>The number of k-nearest neighbors. [Default: <strong>8</strong>]</dd>
+<dd>The number of k-nearest neighbors. [Default: 8]</dd>
 </dl>
 </div>
 </div>
@@ -291,7 +288,7 @@ dimensions are written out to BPF for further inspection.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -312,7 +309,7 @@ dimensions are written out to BPF for further inspection.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -346,7 +343,7 @@ dimensions are written out to BPF for further inspection.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

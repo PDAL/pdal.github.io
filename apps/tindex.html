@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -106,7 +106,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Applications</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="delta.html">delta</a></li>
 <li class="toctree-l2"><a class="reference internal" href="density.html">density</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diff.html">diff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ground.html">ground</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hausdorff.html">hausdorff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="info.html">info</a></li>
@@ -212,7 +211,7 @@ file that is the result of merging the points from files referred to in a
 spatial index file that meet some criteria (usually a geographic region filter).</p>
 <div class="section" id="tindex-creation-mode">
 <h2>tindex Creation Mode<a class="headerlink" href="#tindex-creation-mode" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal tindex &lt;tindex&gt; &lt;filespec&gt;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal tindex create &lt;tindex&gt; &lt;filespec&gt;
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">tindex</span>               <span class="n">OGR</span><span class="o">-</span><span class="n">readable</span><span class="o">/</span><span class="n">writeable</span> <span class="n">tile</span> <span class="n">index</span> <span class="n">output</span>
@@ -224,7 +223,6 @@ spatial index file that meet some criteria (usually a geographic region filter).
 <span class="o">--</span><span class="n">t_srs</span>                <span class="n">Target</span> <span class="n">SRS</span> <span class="n">of</span> <span class="n">tile</span> <span class="n">index</span>
 <span class="o">--</span><span class="n">a_srs</span>                <span class="n">Assign</span> <span class="n">SRS</span> <span class="n">of</span> <span class="n">tile</span> <span class="k">with</span> <span class="n">no</span> <span class="n">SRS</span> <span class="n">to</span> <span class="n">this</span> <span class="n">value</span>
 <span class="o">--</span><span class="n">write_absolute_path</span>  <span class="n">Write</span> <span class="n">absolute</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">relative</span> <span class="n">file</span> <span class="n">paths</span>
-<span class="o">--</span><span class="n">merge</span>                <span class="n">Whether</span> <span class="n">we</span><span class="s1">&#39;re merging the entries in a tindex file.</span>
 <span class="o">--</span><span class="n">stdin</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span>            <span class="n">Read</span> <span class="n">filespec</span> <span class="n">pattern</span> <span class="kn">from</span> <span class="nn">standard</span> <span class="nb">input</span>
 </pre></div>
 </div>
@@ -242,7 +240,7 @@ quoted to prevent shell expansion of wildcard characters.</p>
 </div>
 <div class="section" id="tindex-merge-mode">
 <h2>tindex Merge Mode<a class="headerlink" href="#tindex-merge-mode" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal tindex --merge &lt;tindex&gt; &lt;filespec&gt;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal tindex merge &lt;tindex&gt; &lt;filespec&gt;
 </pre></div>
 </div>
 <p>This command will read the existing index file <code class="docutils literal"><span class="pre">tindex</span></code> and merge the
@@ -255,9 +253,9 @@ extension.</p>
 <span class="o">--</span><span class="n">lyr_name</span>       <span class="n">OGR</span> <span class="n">layer</span> <span class="n">name</span> <span class="n">to</span> <span class="n">write</span> <span class="n">into</span> <span class="n">datasource</span>
 <span class="o">--</span><span class="n">tindex_name</span>    <span class="n">Tile</span> <span class="n">index</span> <span class="n">column</span> <span class="n">name</span>
 <span class="o">--</span><span class="n">ogrdriver</span><span class="p">,</span> <span class="o">-</span><span class="n">f</span>  <span class="n">OGR</span> <span class="n">driver</span> <span class="n">name</span> <span class="n">to</span> <span class="n">use</span>
-<span class="o">--</span><span class="n">t_srs</span>          <span class="n">Target</span> <span class="n">SRS</span> <span class="n">of</span> <span class="n">tile</span> <span class="n">index</span>
 <span class="o">--</span><span class="n">bounds</span>         <span class="n">Extent</span> <span class="p">(</span><span class="ow">in</span> <span class="n">XYZ</span><span class="p">)</span> <span class="n">to</span> <span class="n">clip</span> <span class="n">output</span> <span class="n">to</span>
 <span class="o">--</span><span class="n">polygon</span>        <span class="n">Well</span><span class="o">-</span><span class="n">known</span> <span class="n">text</span> <span class="n">of</span> <span class="n">polygon</span> <span class="n">to</span> <span class="n">clip</span> <span class="n">output</span>
+<span class="o">--</span><span class="n">t_srs</span>          <span class="n">Spatial</span> <span class="n">reference</span> <span class="n">of</span> <span class="n">the</span> <span class="n">clipping</span> <span class="n">geometry</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>
@@ -265,7 +263,7 @@ extension.</p>
 <h2>Example 1:<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <p>Find all LAS files via <code class="docutils literal"><span class="pre">find</span></code>, send that file list via STDIN to
 <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">tindex</span></code>, and write a SQLite tile index file with a layer named <code class="docutils literal"><span class="pre">pdal</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ find las/ -iname &quot;*.las&quot; | pdal tindex index.sqlite -f &quot;SQLite&quot; \
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ find las/ -iname &quot;*.las&quot; | pdal tindex create index.sqlite -f &quot;SQLite&quot; \
     --stdin --lyr_name pdal
 </pre></div>
 </div>
@@ -274,7 +272,7 @@ extension.</p>
 <h2>Example 2:<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>Glob a list of LAS files, output the SRS for the index entries to EPSG:4326, and
 write out an <a class="reference external" href="http://www.sqlite.org">SQLite</a> file.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal tindex index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; \
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal tindex create index.sqlite &quot;*.las&quot; -f &quot;SQLite&quot; --lyr_name &quot;pdal&quot; \
     --t_srs &quot;EPSG:4326&quot;
 </pre></div>
 </div>
@@ -307,7 +305,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -328,7 +326,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -362,7 +360,7 @@ write out an <a class="reference external" href="http://www.sqlite.org">SQLite</
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

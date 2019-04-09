@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Writers" href="writers.html"/>
-        <link rel="next" title="Filters" href="filters.html"/>
+        <link rel="next" title="readers.tiledb" href="writers.tiledb.html"/>
         <link rel="prev" title="writers.sqlite" href="writers.sqlite.html"/> 
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
@@ -132,6 +133,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -216,21 +218,19 @@ supports both <a class="reference external" href="http://geojson.org">GeoJSON</a
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="s2">&quot;geojson&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;keep_unspecified&quot;</span><span class="p">:</span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.txt&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="s2">&quot;geojson&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;keep_unspecified&quot;</span><span class="p">:</span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.txt&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -240,28 +240,30 @@ supports both <a class="reference external" href="http://geojson.org">GeoJSON</a
 <dt>filename</dt>
 <dd>File to write to, or “STDOUT” to write to standard out [Required]</dd>
 <dt>format</dt>
-<dd>Output format to use. One of “geojson” or “csv”. [Default: <strong>csv</strong>]</dd>
-<dt>precision</dt>
+<dd>Output format to use. One of <code class="docutils literal"><span class="pre">geojson</span></code> or <code class="docutils literal"><span class="pre">csv</span></code>. [Default: “csv”]</dd>
+<dt><span class="target" id="precision">precision</span></dt>
 <dd>Decimal Precision for output of values. This can be overridden for
-individual dimensions using the <strong>order</strong> option. [Default: 3]</dd>
-<dt>order</dt>
+individual dimensions using the order option. [Default: 3]</dd>
+<dt><span class="target" id="order">order</span></dt>
 <dd>Comma-separated list of dimension names in the desired output order.
 For example “X,Y,Z,Red,Green,Blue”. Dimension names
 can optionally be followed with a colon (‘:’) and an integer to indicate the
 precision to use for output. Ex: “X:3, Y:5,Z:0” If no precision is specified
-the value provided with the <strong>precision</strong> option is used. [Default: none]</dd>
+the value provided with the <a class="reference internal" href="#precision">precision</a> option is used. [Default: none]</dd>
 <dt>keep_unspecified</dt>
-<dd>If true, writes all dimensions.  Dimensions specified with the <strong>order</strong>
+<dd>If true, writes all dimensions.  Dimensions specified with the <a class="reference internal" href="#order">order</a>
 option precede those not specified. [Default: <strong>true</strong>]</dd>
 <dt>jscallback</dt>
 <dd>When producing GeoJSON, the callback allows you to wrap the data in
 a function, so the output can be evaluated in a &lt;script&gt; tag.</dd>
 <dt>quote_header</dt>
-<dd>When producing CSV, should the column header named by quoted? [Default: <strong>true</strong>]</dd>
+<dd>When producing CSV, should the column header named by quoted?
+[Default: true]</dd>
 <dt>newline</dt>
-<dd>When producing CSV, what newline character should be used? (For Windows, “\r\n” is common.) [Default: <strong>\n</strong>]</dd>
+<dd>When producing CSV, what newline character should be used? (For Windows,
+<code class="docutils literal"><span class="pre">\\r\\n</span></code> is common.) [Default: “\n”]</dd>
 <dt>delimiter</dt>
-<dd>When producing CSV, what character to use as a delimiter? [Default: <strong>,</strong>]</dd>
+<dd>When producing CSV, what character to use as a delimiter? [Default: “,”]</dd>
 </dl>
 </div>
 </div>
@@ -273,7 +275,7 @@ a function, so the output can be evaluated in a &lt;script&gt; tag.</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.html" class="btn btn-neutral float-right" title="Filters" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="writers.tiledb.html" class="btn btn-neutral float-right" title="readers.tiledb" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="writers.sqlite.html" class="btn btn-neutral" title="writers.sqlite" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -292,7 +294,7 @@ a function, so the output can be evaluated in a &lt;script&gt; tag.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -313,7 +315,7 @@ a function, so the output can be evaluated in a &lt;script&gt; tag.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -347,7 +349,7 @@ a function, so the output can be evaluated in a &lt;script&gt; tag.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

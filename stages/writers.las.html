@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
@@ -133,6 +134,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -209,7 +211,7 @@ interchange file format for LIDAR data.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Scale/offset are not preserved from an input LAS file.  See below for
-information on the scale/offset options and the <code class="docutils literal"><span class="pre">forward</span></code> option.</p>
+information on the scale/offset options and the <a class="reference internal" href="#forward">forward</a> option.</p>
 </div>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
@@ -223,48 +225,43 @@ information on the scale/offset options and the <code class="docutils literal"><
 <h2>VLRs<a class="headerlink" href="#vlrs" title="Permalink to this headline">¶</a></h2>
 <p>VLRs can be created by providing a JSON node called <cite>vlrs</cite> with objects
 containing <cite>user_id</cite> and <cite>data</cite> items.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;vlrs&quot;</span><span class="p">:</span> <span class="p">[{</span>
-                <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A description under 32 bytes&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;record_id&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-                <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;hobu&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;dGhpcyBpcyBzb21lIHRleHQ=&quot;</span>
-               <span class="p">},</span>
-               <span class="p">{</span>
-                <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A description under 32 bytes&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;record_id&quot;</span><span class="p">:</span> <span class="mi">43</span><span class="p">,</span>
-                <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;hobu&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;dGhpcyBpcyBzb21lIG1vcmUgdGV4dA==&quot;</span>
-                <span class="p">}</span>
-              <span class="p">],</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;vlrs&quot;</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A description under 32 bytes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;record_id&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+            <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;hobu&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;dGhpcyBpcyBzb21lIHRleHQ=&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A description under 32 bytes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;record_id&quot;</span><span class="p">:</span> <span class="mi">43</span><span class="p">,</span>
+            <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;hobu&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;dGhpcyBpcyBzb21lIG1vcmUgdGV4dA==&quot;</span>
+            <span class="p">}],</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -281,7 +278,7 @@ aggregated into a single file for output.  Multiple PointViews are usually
 the result of using <a class="reference internal" href="filters.splitter.html#filters-splitter"><span class="std std-ref">filters.splitter</span></a>, <a class="reference internal" href="filters.chipper.html#filters-chipper"><span class="std std-ref">filters.chipper</span></a> or
 <a class="reference internal" href="filters.divider.html#filters-divider"><span class="std std-ref">filters.divider</span></a>.
 [Required]</dd>
-<dt>forward</dt>
+<dt><span class="target" id="forward">forward</span></dt>
 <dd><p class="first">List of header fields whose values should be preserved from a source
 LAS file.  The
 option can be specified multiple times, which has the same effect as
@@ -392,7 +389,7 @@ of dimensions being written as part of the LAS extra bytes.</p>
 </dd>
 <dt>pdal_metadata</dt>
 <dd>Write two VLRs containing <a class="reference external" href="http://www.json.org/">JSON</a> output with both the <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a> and
-<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> serialization. [Default: <strong>false</strong>]</dd>
+<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> serialization. [Default: false]</dd>
 </dl>
 </div>
 </div>
@@ -423,7 +420,7 @@ of dimensions being written as part of the LAS extra bytes.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -444,7 +441,7 @@ of dimensions being written as part of the LAS extra bytes.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -478,7 +475,7 @@ of dimensions being written as part of the LAS extra bytes.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

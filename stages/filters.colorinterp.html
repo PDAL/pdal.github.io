@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -226,12 +226,12 @@
 <p>The color interpolation filter assigns scaled RGB values from an image based on
 a given dimension.  It provides three possible approaches:</p>
 <ol class="arabic simple">
-<li>You provide a <code class="docutils literal"><span class="pre">minimum</span></code> and <code class="docutils literal"><span class="pre">maximum</span></code>, and the data are scaled for the
-given <code class="docutils literal"><span class="pre">dimension</span></code> accordingly.</li>
-<li>You provide a <code class="docutils literal"><span class="pre">k</span></code> and a <code class="docutils literal"><span class="pre">mad</span></code> setting, and the scaling is set based on
+<li>You provide a <a class="reference internal" href="#minimum">minimum</a> and <a class="reference internal" href="#maximum">maximum</a>, and the data are scaled for the
+given <a class="reference internal" href="#dimension">dimension</a> accordingly.</li>
+<li>You provide a <a class="reference internal" href="#k">k</a> and a <a class="reference internal" href="#mad">mad</a> setting, and the scaling is set based on
 Median Absolute Deviation.</li>
-<li>You provide a <code class="docutils literal"><span class="pre">k</span></code> setting and the scaling is set based on the
-<code class="docutils literal"><span class="pre">k</span></code>-number of standard deviations from the median.</li>
+<li>You provide a <a class="reference internal" href="#k">k</a> setting and the scaling is set based on the
+<a class="reference internal" href="#k">k</a>-number of standard deviations from the median.</li>
 </ol>
 <p>You can provide your own <a class="reference external" href="http://www.gdal.org">GDAL</a>-readable image for the scale color factors,
 but a number of pre-defined ramps are embedded in PDAL.  The default ramps
@@ -247,8 +247,7 @@ creating your own scale factors. See <a class="reference internal" href="#defaul
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;uncolored.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.colorinterp&quot;</span><span class="p">,</span>
@@ -258,8 +257,7 @@ creating your own scale factors. See <a class="reference internal" href="#defaul
       <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Z&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;colorized.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <div class="figure" id="id3">
@@ -271,7 +269,7 @@ ramp.</span></p>
 <div class="section" id="default-ramps">
 <h2>Default Ramps<a class="headerlink" href="#default-ramps" title="Permalink to this headline">¶</a></h2>
 <p>PDAL provides a number of default color ramps you can use in addition to
-providing your own. Give the ramp name as the <code class="docutils literal"><span class="pre">ramp</span></code> option to the filter
+providing your own. Give the ramp name as the <a class="reference internal" href="#ramp">ramp</a> option to the filter
 and it will be used. Otherwise, provide a <a class="reference external" href="http://www.gdal.org">GDAL</a>-readable raster filename.</p>
 <div class="section" id="awesome-green">
 <h3><code class="docutils literal"><span class="pre">awesome_green</span></code><a class="headerlink" href="#awesome-green" title="Permalink to this headline">¶</a></h3>
@@ -309,30 +307,31 @@ and it will be used. Otherwise, provide a <a class="reference external" href="ht
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>ramp</dt>
-<dd>The raster file to use for the color ramp. Any format supported by <a class="reference external" href="http://www.gdal.org">GDAL</a> may be read.
-Alternatively, one of the default color ramp names can be used. [Default: <code class="docutils literal"><span class="pre">pestel_shades</span></code>]</dd>
-<dt>dimension</dt>
-<dd>A dimension name to use for the values to interpolate colors. [Default: <code class="docutils literal"><span class="pre">Z</span></code>]</dd>
-<dt>minimum</dt>
+<dt><span class="target" id="ramp">ramp</span></dt>
+<dd>The raster file to use for the color ramp. Any format supported by <a class="reference external" href="http://www.gdal.org">GDAL</a>
+may be read.  Alternatively, one of the default color ramp names can be
+used. [Default: “pestel_shades”]</dd>
+<dt><span class="target" id="dimension">dimension</span></dt>
+<dd>A dimension name to use for the values to interpolate colors. [Default: “Z”]</dd>
+<dt><span class="target" id="minimum">minimum</span></dt>
 <dd>The minimum value to use to scale the data. If none is specified, one is
-computed from the data. If one is specified but a <code class="docutils literal"><span class="pre">k</span></code> value is also
-provided, the <code class="docutils literal"><span class="pre">k</span></code> value will be used.</dd>
-<dt>maximum</dt>
+computed from the data. If one is specified but a <a class="reference internal" href="#k">k</a> value is also
+provided, the <a class="reference internal" href="#k">k</a> value will be used.</dd>
+<dt><span class="target" id="maximum">maximum</span></dt>
 <dd>The maximum value to use to scale the data. If none is specified, one is
-computed from the data. If one is specified but a <code class="docutils literal"><span class="pre">k</span></code> value is also
-provided, the <code class="docutils literal"><span class="pre">k</span></code> value will be used.</dd>
-<dt>invert</dt>
+computed from the data. If one is specified but a <a class="reference internal" href="#k">k</a> value is also
+provided, the <a class="reference internal" href="#k">k</a> value will be used.</dd>
+<dt><span class="target" id="invert">invert</span></dt>
 <dd>Invert the direction of the ramp? [Default: false]</dd>
-<dt>k</dt>
+<dt><span class="target" id="k">k</span></dt>
 <dd>Color based on the given number of standard deviations from the median. If
-set, <code class="docutils literal"><span class="pre">minimum</span></code> and <code class="docutils literal"><span class="pre">maximum</span></code> will be computed from the median and setting
+set, <a class="reference internal" href="#minimum">minimum</a> and <a class="reference internal" href="#maximum">maximum</a> will be computed from the median and setting
 them will have no effect.</dd>
-<dt>mad</dt>
-<dd>If true, <code class="docutils literal"><span class="pre">minimum</span></code> and <code class="docutils literal"><span class="pre">maximum</span></code> will be computed by the median absolute
+<dt><span class="target" id="mad">mad</span></dt>
+<dd>If true, <a class="reference internal" href="#minimum">minimum</a> and <a class="reference internal" href="#maximum">maximum</a> will be computed by the median absolute
 deviation. See <a class="reference internal" href="filters.mad.html#filters-mad"><span class="std std-ref">filters.mad</span></a> for discussion. [Default: false]</dd>
-<dt>mad_multiplier</dt>
-<dd>MAD threshold multiplier. Used in conjunction with <code class="docutils literal"><span class="pre">k</span></code> to threshold the
+<dt><span class="target" id="mad-multiplier">mad_multiplier</span></dt>
+<dd>MAD threshold multiplier. Used in conjunction with <a class="reference internal" href="#k">k</a> to threshold the
 diferencing. [Default: 1.4862]</dd>
 </dl>
 </div>
@@ -364,7 +363,7 @@ diferencing. [Default: 1.4862]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -385,7 +384,7 @@ diferencing. [Default: 1.4862]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -419,7 +418,7 @@ diferencing. [Default: 1.4862]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

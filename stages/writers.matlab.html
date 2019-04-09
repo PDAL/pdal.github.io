@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
@@ -132,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -209,8 +211,8 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The Matlab writer requires the Mat-File API from MathWorks, and
-it must be explicitly enabled at compile time with the <code class="docutils literal"><span class="pre">BUILD_PLUGIN_MATLAB=ON</span></code>
-variable</p>
+it must be explicitly enabled at compile time with the
+<code class="docutils literal"><span class="pre">BUILD_PLUGIN_MATLAB=ON</span></code> variable</p>
 </div>
 <div class="admonition plugin" id="plugin-0">
 <p class="first admonition-title">Dynamic Plugin</p>
@@ -218,19 +220,17 @@ variable</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.las&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.matlab&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;output_dims&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,Intensity&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.mat&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.matlab&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;output_dims&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,Intensity&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.mat&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -238,11 +238,13 @@ variable</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>filename</dt>
-<dd>Output file name [REQUIRED]</dd>
+<dd>Output file name [Required]</dd>
 <dt>output_dims</dt>
-<dd>Dimensions to include in the output file [OPTIONAL, defaults to all available dimensions]</dd>
+<dd>A comma-separated list of dimensions to include in the output file.
+May also be specified as an array of strings. [Default: all available
+dimensions]</dd>
 <dt>struct</dt>
-<dd>Array structure name to read [OPTIONAL, defaults <code class="docutils literal"><span class="pre">PDAL</span></code>]</dd>
+<dd>Array structure name to read [Default: “PDAL”]</dd>
 </dl>
 </div>
 </div>
@@ -273,7 +275,7 @@ variable</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -294,7 +296,7 @@ variable</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -328,7 +330,7 @@ variable</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

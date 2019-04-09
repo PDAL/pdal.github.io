@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -134,7 +134,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Building Under Windows</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#required-compiler">Required Compiler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#prerequiste-libraries">Prerequiste Libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisite-libraries">Prerequisite Libraries</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fetching-the-source">Fetching the Source</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#building">Building</a></li>
@@ -217,26 +217,26 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body">howard at hobu.co</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">11/02/2017</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">03/20/2019</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><a class="reference external" href="https://trac.osgeo.org/osgeo4w/">OSGeo4W</a> contains a pre-built up-to-date 64 bit Windows binary. It
+<p class="last"><a class="reference internal" href="../../download.html#conda"><span class="std std-ref">Conda</span></a> contains a pre-built up-to-date 64 bit Windows binary. It
 is fully-featured, and if you do not need anything custom, it is likely
 the fastest way to get going.</p>
 </div>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Pre-built binary packages for Windows are available via <a class="reference external" href="https://trac.osgeo.org/osgeo4w/">OSGeo4W</a> (64-bit version),
+<p>Pre-built binary packages for Windows are available via <a class="reference internal" href="../../download.html#conda"><span class="std std-ref">Conda</span></a> (64-bit version),
 and all of the prerequisites required for compilation of a fully featured build
 are also available via that packaging system. This document assumes you
-will be using OSGeo4W as your base, and anything more advanced is beyond
+will be using Conda Forge as your base, and anything more advanced is beyond
 the scope of the document.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The AppVeyor build system uses the PDAL project’s configuration on the OSGeo4W
+<p class="last">The AppVeyor build system uses the PDAL project’s configuration on the Conda Forge
 system. It contains a rich resource of known working examples. See
 <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/appveyor.yml">https://github.com/PDAL/PDAL/blob/master/appveyor.yml</a> and
 <a class="reference external" href="https://github.com/PDAL/PDAL/tree/master/scripts/appveyor">https://github.com/PDAL/PDAL/tree/master/scripts/appveyor</a> for inspiration.</p>
@@ -248,45 +248,30 @@ system. It contains a rich resource of known working examples. See
 some source tree adjustments. PDAL makes heavy use of C++11, and a compiler
 with good support for those features is required.</p>
 </div>
-<div class="section" id="prerequiste-libraries">
-<h2>Prerequiste Libraries<a class="headerlink" href="#prerequiste-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisite-libraries">
+<h2>Prerequisite Libraries<a class="headerlink" href="#prerequisite-libraries" title="Permalink to this headline">¶</a></h2>
 <p>PDAL uses the <a class="reference external" href="https://ci.appveyor.com/project/hobu/pdal/history">AppVeyor</a> continuous integration platform for building and
 testing itself on Windows. The configuration that PDAL uses is valuable
 raw materials for configuring your own environment because the PDAL
-team must keep it up to date with both the OSGeo4W environment and
+team must keep it up to date with both the <a class="reference internal" href="../../download.html#conda"><span class="std std-ref">Conda</span></a> environment and
 the Microsoft compiler situation.</p>
 <p>You can see the current AppVeyor configuration at
-<a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/appveyor.yml">https://github.com/PDAL/PDAL/blob/master/appveyor.yml</a> The most interesting
-bits are the <code class="docutils literal"><span class="pre">install</span></code> section, the <code class="docutils literal"><span class="pre">config.cmd</span></code>, and the <code class="docutils literal"><span class="pre">build.cmd</span></code>.</p>
-<p>The AppVeyor configuration installs OSGeo4W and all of PDAL’s prerequisites
-via the command line.</p>
-<p>After downloading the <a class="reference external" href="http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe">OSGeo4W setup</a>, you can invoke it via the command
-line to install PDAL’s prerequisite packages.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">temp</span>\<span class="n">osgeo4w</span><span class="o">-</span><span class="n">setup</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">q</span> <span class="o">-</span><span class="n">k</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">A</span> <span class="o">-</span><span class="n">s</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">osgeo</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">osgeo4w</span><span class="o">/</span> <span class="o">-</span><span class="n">a</span> <span class="n">x86_64</span> <span class="o">^</span>
-      <span class="o">-</span><span class="n">P</span> <span class="n">eigen</span><span class="p">,</span><span class="n">gdal</span><span class="p">,</span><span class="n">geos</span><span class="p">,</span><span class="n">hexer</span><span class="p">,</span><span class="n">iconv</span><span class="p">,</span><span class="n">laszip</span><span class="p">,</span><span class="n">libgeotiff</span><span class="p">,</span><span class="n">libpq</span><span class="p">,</span><span class="n">libtiff</span><span class="p">,</span><span class="o">^</span>
-         <span class="n">libxml2</span><span class="p">,</span><span class="n">msys</span><span class="p">,</span><span class="n">nitro</span><span class="p">,</span><span class="n">laz</span><span class="o">-</span><span class="n">perf</span><span class="p">,</span><span class="n">proj</span><span class="p">,</span><span class="n">zlib</span><span class="p">,</span><span class="n">python3</span><span class="o">-</span><span class="n">core</span><span class="p">,</span><span class="n">python3</span><span class="o">-</span><span class="n">devel</span><span class="p">,</span><span class="o">^</span>
-         <span class="n">python3</span><span class="o">-</span><span class="n">numpy</span><span class="p">,</span><span class="n">oci</span><span class="p">,</span><span class="n">oci</span><span class="o">-</span><span class="n">devel</span><span class="p">,</span><span class="n">laz</span><span class="o">-</span><span class="n">perf</span><span class="p">,</span><span class="n">jsoncpp</span> <span class="o">-</span><span class="n">R</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">OSGeo4W64</span>
+<a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/appveyor.yml">https://github.com/PDAL/PDAL/blob/master/appveyor.yml</a> The most interesting bits
+are the <code class="docutils literal"><span class="pre">install</span></code> section, the <code class="docutils literal"><span class="pre">config.cmd</span></code>, and the <code class="docutils literal"><span class="pre">build.cmd</span></code> scripts.
+The AppVeyor configuration already has Miniconda installed, and the
+<code class="docutils literal"><span class="pre">config.cmd</span></code> script installs all of PDAL’s prerequisites via the command
+line.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">geotiff</span> <span class="n">laszip</span> <span class="n">nitro</span> <span class="n">curl</span> <span class="o">^</span>
+   <span class="n">gdal</span> <span class="n">pcl</span> <span class="n">cmake</span> <span class="n">eigen</span> <span class="n">ninja</span> <span class="n">libgdal</span> <span class="o">^</span>
+   <span class="n">zstd</span> <span class="n">numpy</span> <span class="n">xz</span> <span class="n">libxml2</span> <span class="n">laz</span><span class="o">-</span><span class="n">perf</span> <span class="n">qhull</span> <span class="o">^</span>
+   <span class="n">sqlite</span> <span class="n">hdf5</span> <span class="n">tiledb</span> <span class="n">conda</span><span class="o">-</span><span class="n">build</span> <span class="n">ninja</span> <span class="o">-</span><span class="n">y</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The package list here might change over time. The canonnical location
-to learn the OSGeo4W prerequisite list for PDAL is the <code class="docutils literal"><span class="pre">appveyor.yml</span></code>
+to learn the  prerequisite list for PDAL is the <code class="docutils literal"><span class="pre">scripts/appveyor/test/build.cmd</span></code>
 file in PDAL’s source tree.</p>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">If you don’t wish to run via the command line, you can choose the GUI
-for installation. Visit <a class="reference internal" href="../../workshop/osgeo4w.html#workshop-osgeo4w"><span class="std std-ref">OSGeo4W</span></a> for a description, and then
-choose all of the listed support libraries (minus <code class="docutils literal"><span class="pre">PDAL</span></code> of course)
-to schedule them for installation.</p>
-</div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">There are a number of package scripts that assume <code class="docutils literal"><span class="pre">c:/OSGeo4W64</span></code> as the
-installation path, and it is likely that you will run into some
-trouble attempting to install in other locations. It’s possible it will
-work with some elbow grease, but it might not work out of the box.</p>
 </div>
 </div>
 <div class="section" id="fetching-the-source">
@@ -301,7 +286,7 @@ directory of your choice.</p>
 </div></blockquote>
 <p>Switch to the <code class="docutils literal"><span class="pre">-maintenance</span></code> branch.</p>
 <blockquote>
-<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">:</span>\<span class="n">dev</span><span class="o">&gt;</span> <span class="n">git</span> <span class="n">checkout</span> <span class="mf">1.7</span><span class="o">-</span><span class="n">maintenance</span>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">:</span>\<span class="n">dev</span><span class="o">&gt;</span> <span class="n">git</span> <span class="n">checkout</span> <span class="mf">1.9</span><span class="o">-</span><span class="n">maintenance</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -325,7 +310,7 @@ features, and their locations. There are two places in the source tree
 for inspiration on this topic.</p>
 <ol class="arabic simple">
 <li>The AppVeyor build configuration <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/scripts/appveyor/config.cmd#L26">https://github.com/PDAL/PDAL/blob/master/scripts/appveyor/config.cmd#L26</a></li>
-<li>Howard Butler’s example build configuration <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/cmake/examples/hobu-windows.bat">https://github.com/PDAL/PDAL/blob/master/cmake/examples/hobu-windows.bat</a></li>
+<li>Howard Butler’s example build configuration <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/scripts/conda/wind64.bat">https://github.com/PDAL/PDAL/blob/master/scripts/conda/wind64.bat</a></li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -350,9 +335,8 @@ and chose your configuration to build.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You need to have your OSGeo4W shell active to enable access to
-PDAL’s dependencies. Issue <code class="docutils literal"><span class="pre">c:\osgeo4w64\bin\o4w_env.bat</span></code> in
-your shell to activiate it.</p>
+<p class="last">You may need to have your Conda environment active to enable access to
+PDAL’s dependencies.</p>
 </div>
 </div>
 </div>
@@ -383,7 +367,7 @@ your shell to activiate it.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -404,7 +388,7 @@ your shell to activiate it.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -438,7 +422,7 @@ your shell to activiate it.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

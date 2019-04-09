@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -222,21 +222,23 @@
             
   <div class="section" id="filters-mongus">
 <span id="id1"></span><h1>filters.mongus<a class="headerlink" href="#filters-mongus" title="Permalink to this headline">¶</a></h1>
-<p>Filter ground returns using the approach outlined in <a class="reference internal" href="../references.html#mongus2012" id="id2">[Mongus2012]</a>.</p>
+<p>The <strong>mongus filter</strong> determines ground returns using the approach
+outlined in <a class="reference internal" href="../references.html#mongus2012" id="id2">[Mongus2012]</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Our implmentation of Mongus is in an alpha state. We’d love to have you kick
-the tires and provide feedback, but do not plan on using this in production.</p>
+<p class="last">The mongus filter is deprecated and has been replaced by
+<a class="reference internal" href="filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a> and <a class="reference internal" href="filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a>.</p>
 </div>
-<p>The current implementation of <code class="docutils literal"><span class="pre">filters.mongus</span></code> differs slightly from the
-original paper. We weren’t too happy with the criteria for how control points at
+<p>The current implementation of this filter differs slightly from the
+original paper. We weren’t too happy with the criteria for how control
+points at
 the current level are compared against the TPS at the previous scale and were
 exploring some alternate metrics.</p>
 <p>Some warts about the current implementation:</p>
 <ul class="simple">
-<li>It writes a bunch of intermediate/debugging outputs to the current directory
-while processing. This should be made optional and then eventually go away.</li>
-<li>We require specification of a max level, whereas the original paper
+<li>It writes many intermediate/debugging outputs to the current directory
+while processing.</li>
+<li>We require the specification of a max level, whereas the original paper
 automatically determined an appropriate max level.</li>
 </ul>
 <div class="admonition embed" id="embed-0">
@@ -245,18 +247,16 @@ automatically determined an appropriate max level.</li>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>The sample pipeline below uses <code class="docutils literal"><span class="pre">filters.mongus</span></code> to segment ground and
+<p>The sample pipeline below uses the filter to segment ground and
 non-ground returns, writing only the ground returns to the output file.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.mongus&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;extract&quot;</span><span class="p">:</span><span class="kc">true</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.mongus&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;extract&quot;</span><span class="p">:</span><span class="kc">true</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.laz&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -264,15 +264,16 @@ non-ground returns, writing only the ground returns to the output file.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>cell</dt>
-<dd>Cell size. [Default: <strong>1.0</strong>]</dd>
+<dd>Cell size. [Default: 1.0]</dd>
 <dt>classify</dt>
-<dd>Apply classification labels (i.e., ground = 2)? [Default: <strong>true</strong>]</dd>
+<dd>Apply classification labels (i.e., ground = 2)? [Default: true]</dd>
 <dt>extract</dt>
-<dd>Extract ground returns (non-ground returns are cropped)? [Default: <strong>false</strong>]</dd>
+<dd>Extract ground returns (non-ground returns are cropped)? [Default: false]</dd>
 <dt>k</dt>
-<dd>Standard deviation multiplier to be used when thresholding values. [Default: <strong>3.0</strong>]</dd>
+<dd>Standard deviation multiplier to be used when thresholding
+values. [Default: 3.0]</dd>
 <dt>l</dt>
-<dd>Maximum level in the hierarchical decomposition. [Default: <strong>8</strong>]</dd>
+<dd>Maximum level in the hierarchical decomposition. [Default: 8]</dd>
 </dl>
 </div>
 </div>
@@ -303,7 +304,7 @@ non-ground returns, writing only the ground returns to the output file.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -324,7 +325,7 @@ non-ground returns, writing only the ground returns to the output file.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -358,7 +359,7 @@ non-ground returns, writing only the ground returns to the output file.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

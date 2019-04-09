@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -202,15 +202,12 @@
             
   <div class="section" id="filters-matlab">
 <span id="id1"></span><h1>filters.matlab<a class="headerlink" href="#filters-matlab" title="Permalink to this headline">¶</a></h1>
-<p>This filter allows <a class="reference external" href="https://www.mathworks.com/products/matlab.html">Matlab</a> software to be embedded in a
-<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> that interacts with struct array of the data and allows
+<p>The <strong>Matlab Filter</strong> allows <a class="reference external" href="https://www.mathworks.com/products/matlab.html">Matlab</a> software to be embedded in a
+<a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> that interacts with a struct array of the data and allows
 you to modify those points. Additionally, some global <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a> is also
 available that Matlab functions can interact with.</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="n">Intensity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The interpreter must exit and always set <code class="docutils literal"><span class="pre">ans==true</span></code> upon success. If
-<code class="docutils literal"><span class="pre">ans==false</span></code> an error would be thrown and the <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> exited.</p>
+<p>The Matlab interpreter must exit and always set “ans==true” upon success. If
+“ans==false”, an error would be thrown and the <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> exited.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="writers.matlab.html#writers-matlab"><span class="std std-ref">writers.matlab</span></a> can be used to write <code class="docutils literal"><span class="pre">.mat</span></code> files.</p>
@@ -226,26 +223,22 @@ will require a fully licensed version of Matlab to execute your script.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:</span>
-  <span class="p">[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;test\/data\/las\/1.2-with-color.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.las&quot;</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;test\/data\/las\/1.2-with-color.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.las&quot;</span>
 
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.matlab&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;script&quot;</span><span class="p">:</span> <span class="s2">&quot;matlab.m&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.matlab&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;script&quot;</span><span class="p">:</span> <span class="s2">&quot;matlab.m&quot;</span>
 
     <span class="p">},</span>
-
     <span class="p">{</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;out.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;out.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -254,13 +247,14 @@ will require a fully licensed version of Matlab to execute your script.</p>
 <dl class="docutils">
 <dt>script</dt>
 <dd>When reading a function from a separate <a class="reference external" href="https://www.mathworks.com/products/matlab.html">Matlab</a> file, the file name to read
-from. [Example: <code class="docutils literal"><span class="pre">functions.m</span></code>]</dd>
+from. [Example: “functions.m”]</dd>
 <dt>source</dt>
-<dd>The literal <a class="reference external" href="https://www.mathworks.com/products/matlab.html">Matlab</a> code to execute, when the script option is not being used.</dd>
+<dd>The literal <a class="reference external" href="https://www.mathworks.com/products/matlab.html">Matlab</a> code to execute, when the script option is not
+being used.</dd>
 <dt>add_dimension</dt>
 <dd>The name of a dimension to add to the pipeline that does not already exist.</dd>
 <dt>struct</dt>
-<dd>Array structure name to read [OPTIONAL, defaults <code class="docutils literal"><span class="pre">PDAL</span></code>]</dd>
+<dd>Array structure name to read [Default: “PDAL”]</dd>
 </dl>
 </div>
 </div>
@@ -291,7 +285,7 @@ from. [Example: <code class="docutils literal"><span class="pre">functions.m</sp
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -312,7 +306,7 @@ from. [Example: <code class="docutils literal"><span class="pre">functions.m</sp
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -346,7 +340,7 @@ from. [Example: <code class="docutils literal"><span class="pre">functions.m</sp
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

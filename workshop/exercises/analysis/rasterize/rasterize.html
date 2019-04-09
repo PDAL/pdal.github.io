@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -221,7 +221,6 @@ data online at <a class="reference external" href="http://potree.entwine.io/data
 </div>
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>OSGeo4W Shell</cite>:</p>
 <p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> stage.
 There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we must use a pipeline.</p>
 </div>
@@ -230,11 +229,12 @@ There is no <a class="reference internal" href="../../../../apps/index.html#apps
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
 <span class="hll">    <span class="p">{</span>
-</span><span class="hll">        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na.greyhound.io/resource/dk-z/read?depthBegin=1&amp;depthEnd=29&amp;bounds=[11045777.34375,-11852109.375,223441.40625,11055492.1875,-11842394.53125,233156.25]&amp;compress=true&amp;scale=0.01&amp;offset=[1295630,7596240,-2280]&quot;</span>
+</span><span class="hll">        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+</span><span class="hll">        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na-c.entwine.io/dk&quot;</span><span class="p">,</span>
+</span><span class="hll">        <span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([11045777.34375,11055492.1875],[-11852109.375,-11842394.53125],[223441.40625,233156.25])&quot;</span>
 </span><span class="hll">    <span class="p">},</span>
-</span><span class="hll">    <span class="p">{</span>
-</span>      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
+</span>    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
       <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;denmark-classification.tif&quot;</span><span class="p">,</span>
       <span class="s2">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
       <span class="s2">&quot;data_type&quot;</span><span class="p">:</span><span class="s2">&quot;uint16_t&quot;</span><span class="p">,</span>
@@ -254,10 +254,10 @@ filenames to match your paths.</p>
 <div class="section" id="reader">
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na.greyhound.io/resource/dk-z/read?depthBegin=1&amp;depthEnd=29&amp;bounds=[11045777.34375,-11852109.375,223441.40625,11055492.1875,-11842394.53125,233156.25]&amp;compress=true&amp;scale=0.01&amp;offset=[1295630,7596240,-2280]&quot;</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na-c.entwine.io/dk&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([11045777.34375,11055492.1875],[-11852109.375,-11842394.53125],[223441.40625,233156.25])&quot;</span>
     <span class="p">},</span>
-    <span class="p">{</span>
 </pre></div>
 </div>
 <p>The data is read from a readers.greyhound server that hosts the Denmark data.
@@ -289,8 +289,9 @@ values.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.greyhound&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na.greyhound.io/resource/dk-z/read?depthBegin=1&amp;depthEnd=29&amp;bounds=[11045777.34375,-11852109.375,223441.40625,11055492.1875,-11842394.53125,233156.25]&amp;compress=true&amp;scale=0.01&amp;offset=[1295630,7596240,-2280]&quot;</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://na-c.entwine.io/dk&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([11045777.34375,11055492.1875],[-11852109.375,-11842394.53125],[223441.40625,233156.25])&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
       <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
@@ -429,7 +430,7 @@ smoothing might produce undesirable results, for example.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -450,7 +451,7 @@ smoothing might produce undesirable results, for example.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -484,7 +485,7 @@ smoothing might produce undesirable results, for example.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

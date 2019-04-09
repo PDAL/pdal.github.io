@@ -43,7 +43,7 @@
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Writers" href="writers.html"/>
         <link rel="next" title="writers.geowave" href="writers.geowave.html"/>
-        <link rel="prev" title="writers.bpf" href="writers.bpf.html"/> 
+        <link rel="prev" title="writers.ept_addon" href="writers.ept_addon.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.gdal</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-example">Basic Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
@@ -132,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">readers.tiledb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -203,8 +205,8 @@
             
   <div class="section" id="writers-gdal">
 <span id="id1"></span><h1>writers.gdal<a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference external" href="http://gdal.org">GDAL</a> writer creates a raster from a point cloud using an interpolation
-algorithm.  Output is produced using GDAL and can use any <a class="reference external" href="http://www.gdal.org/formats_list.html">driver
+<p>The <strong>GDAL writer</strong> creates a raster from a point cloud using an interpolation
+algorithm.  Output is produced using <a class="reference external" href="http://gdal.org">GDAL</a> and can use any <a class="reference external" href="http://www.gdal.org/formats_list.html">driver
 that supports creation of rasters</a>.  A <a class="reference internal" href="#data-type">data_type</a> can be specified for the
 raster (double, float, int32, etc.).  If no data type is specified, the
 data type with the largest range supported by the driver is used.</p>
@@ -264,16 +266,14 @@ called outputfile.tif.  Since output_type isn’t specified, it creates six
 raster bands (“min”, “max”, “mean”, “idx”, “count” and “stdev”) in the output
 dataset.  The raster cells are 10x10 and the radius used to locate points
 whose values contribute to the cell value is 14.14.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;pdal/test/data/las/autzen_trim.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="nt">&quot;radius&quot;</span><span class="p">:</span> <span class="mf">14.14</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.tif&quot;</span>
+        <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nt">&quot;radius&quot;</span><span class="p">:</span> <span class="mf">14.14</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.tif&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -366,7 +366,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
         <a href="writers.geowave.html" class="btn btn-neutral float-right" title="writers.geowave" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writers.bpf.html" class="btn btn-neutral" title="writers.bpf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="writers.ept_addon.html" class="btn btn-neutral" title="writers.ept_addon" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -382,7 +382,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -403,7 +403,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -437,7 +437,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -200,42 +200,40 @@
             
   <div class="section" id="filters-stats">
 <span id="id1"></span><h1>filters.stats<a class="headerlink" href="#filters-stats" title="Permalink to this headline">¶</a></h1>
-<p>The stats filter calculates the minimum, maximum and average (mean) values
+<p>The <strong>Stats Filter</strong> calculates the minimum, maximum and average (mean) values
 of dimensions.  On request it will also provide an enumeration of values of
-a dimension.</p>
+a dimension and skewness and kurtosis.</p>
 <p>The output of the stats filter is metadata that can be stored by writers or
 used through the PDAL API.  Output from the stats filter can also be
-quickly obtained in JSON format by using the command <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--stats</span></code>.</p>
+quickly obtained in JSON format by using the command “pdal info –stats”.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.stats&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,Classification&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;enumerate&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.stats&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;X,Y,Z,Classification&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;enumerate&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <div class="section" id="options">
 <h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>dimensions</dt>
+<dt><span class="target" id="dimensions">dimensions</span></dt>
 <dd>A comma-separated list of dimensions whose statistics should be
 processed.  If not provided, statistics for all dimensions are calculated.</dd>
-<dt>enumerate</dt>
+<dt><span class="target" id="enumerate">enumerate</span></dt>
 <dd>A comma-separated list of dimensions whose values should be enumerated.
 Note that this list does not add to the list of dimensions that may be
-provided in the <strong>dimensions</strong> option.</dd>
+provided in the <a class="reference internal" href="#dimensions">dimensions</a> option.</dd>
 <dt>count</dt>
-<dd>Identical to the –enumerate option, but provides a count of the number
+<dd>Identical to the <a class="reference internal" href="#enumerate">enumerate</a> option, but provides a count of the number
 of points in each enumerated category.</dd>
 <dt>global</dt>
 <dd>A comma-separated list of dimensions for which global statistics (median,
@@ -273,7 +271,7 @@ mad, mode) should be calculated.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -294,7 +292,7 @@ mad, mode) should be calculated.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -328,7 +326,7 @@ mad, mode) should be calculated.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

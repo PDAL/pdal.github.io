@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -231,7 +231,7 @@ The ‘from’ dimension must exist.  The ‘to’ dimension can be pre-existing
 will be created by the ferry filter.</p>
 <p>Alternatively, the format =&gt;&lt;to&gt; can be used to create a new dimension without
 copying data from any source.  The values of the ‘to’ dimension are default
-initialized.</p>
+initialized (set to 0).</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
 <p class="last">This stage is enabled by default</p>
@@ -242,58 +242,56 @@ initialized.</p>
 </div>
 <div class="section" id="example-1">
 <h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
-<p>In this scenario, we are making copies of the X and Y dimensions into the
-dimensions StatePlaneX and StatePlaneY.  Since the reprojection filter will
-modify the dimensions X and Y, this allows us to maintain both the
+<p>In this scenario, we are making copies of the <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">Y</span></code> dimensions
+into the
+dimensions <code class="docutils literal"><span class="pre">StatePlaneX</span></code> and <code class="docutils literal"><span class="pre">StatePlaneY</span></code>.  Since the reprojection
+filter will
+modify the dimensions <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">Y</span></code>, this allows us to maintain both the
 pre-reprojection values and the post-reprojection values.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;uncompressed.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:2993&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;../las/1.2-with-color.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:2993&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;../las/1.2-with-color.las&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;X =&gt; StatePlaneX, Y=&gt;StatePlaneY&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;X =&gt; StatePlaneX, Y=&gt;StatePlaneY&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:4326+4326&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:4326+4326&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;colorized.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span><span class="s2">&quot;0.0000001&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;colorized.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example-2">
 <h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
-<p>The ferry filter is being used to add a dimension ‘Classification’ to points
+<p>The ferry filter is being used to add a dimension <code class="docutils literal"><span class="pre">Classification</span></code> to points
 so that the value can be set to ‘2’ and written as a LAS file.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.gdal&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;somefile.tif&quot;</span>
+          <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.gdal&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;somefile.tif&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span> <span class="s2">&quot;=&gt;Classification&quot;</span>
+          <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.ferry&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;dimensions&quot;</span><span class="p">:</span> <span class="s2">&quot;=&gt;Classification&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.assign&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;assignment&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification[:]=2&quot;</span>
+          <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.assign&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;assignment&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification[:]=2&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;out.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -339,7 +337,7 @@ is still supported.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -360,7 +358,7 @@ is still supported.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -394,7 +392,7 @@ is still supported.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -223,10 +223,11 @@
             
   <div class="section" id="filters-outlier">
 <span id="id1"></span><h1>filters.outlier<a class="headerlink" href="#filters-outlier" title="Permalink to this headline">¶</a></h1>
-<p>The Outlier filter provides two outlier filtering methods: radius and
+<p>The <strong>outlier filter</strong> provides two outlier filtering methods: radius and
 statistical. These two approaches are discussed in further detail below.</p>
 <p>It is worth noting that both filtering methods simply apply a classification
-value of 7 to the noise points (per the LAS specification). To remove the noise
+value of 7 to the noise points (per the <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf">LAS specification</a>).
+To remove the noise
 points altogether, users can add a <a class="reference internal" href="filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> to their
 pipeline, downstream from the outlier filter.</p>
 <div class="admonition embed" id="embed-0">
@@ -242,7 +243,7 @@ pipeline, downstream from the outlier filter.</p>
 <div class="section" id="statistical-method">
 <h2>Statistical Method<a class="headerlink" href="#statistical-method" title="Permalink to this headline">¶</a></h2>
 <p>The default method for identifying outlier points is the statistical outlier method. This method requires two passes through the input <code class="docutils literal"><span class="pre">PointView</span></code>, first to compute a threshold value based on global statistics, and second to identify outliers using the computed threshold.</p>
-<p>In the first pass, for each point <span class="math">\(p_i\)</span> in the input <code class="docutils literal"><span class="pre">PointView</span></code>, compute the mean distance <span class="math">\(\mu_i\)</span> to each of the <span class="math">\(k\)</span> nearest neighbors (where <span class="math">\(k\)</span> is configurable and specified by <code class="docutils literal"><span class="pre">mean_k</span></code>). Then,</p>
+<p>In the first pass, for each point <span class="math">\(p_i\)</span> in the input <code class="docutils literal"><span class="pre">PointView</span></code>, compute the mean distance <span class="math">\(\mu_i\)</span> to each of the <span class="math">\(k\)</span> nearest neighbors (where <span class="math">\(k\)</span> is configurable and specified by <a class="reference internal" href="#mean-k">mean_k</a>). Then,</p>
 <div class="math">
 \[\overline{\mu} = \frac{1}{N} \sum_{i=1}^N \mu_i\]</div>
 <div class="math">
@@ -250,7 +251,7 @@ pipeline, downstream from the outlier filter.</p>
 <p>A global mean <span class="math">\(\overline{\mu}\)</span> of these mean distances is then computed along with the standard deviation <span class="math">\(\sigma\)</span>. From this, the threshold is computed as</p>
 <div class="math">
 \[t = \mu + m\sigma\]</div>
-<p>where <span class="math">\(m\)</span> is a user-defined multiplier specified by <code class="docutils literal"><span class="pre">multiplier</span></code>.</p>
+<p>where <span class="math">\(m\)</span> is a user-defined multiplier specified by <a class="reference internal" href="#multiplier">multiplier</a>.</p>
 <p>We now interate over the pre-computed mean distances <span class="math">\(\mu_i\)</span> and compare to computed threshold value. If <span class="math">\(\mu_i\)</span> is greater than the threshold, it is marked as an outlier.</p>
 <div class="math">
 \[\begin{split}outlier_i = \begin{cases}
@@ -271,18 +272,16 @@ scene.</p>
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>In this example, points are marked as outliers if the average distance to each
 of the 12 nearest neighbors is below the computed threshold.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;statistical&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;mean_k&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
-      <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span><span class="mf">2.2</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;statistical&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;mean_k&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span><span class="mf">2.2</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -291,8 +290,8 @@ of the 12 nearest neighbors is below the computed threshold.</p>
 <h2>Radius Method<a class="headerlink" href="#radius-method" title="Permalink to this headline">¶</a></h2>
 <p>For each point <span class="math">\(p_i\)</span> in the input <code class="docutils literal"><span class="pre">PointView</span></code>, this method counts the
 number of neighboring points <span class="math">\(k_i\)</span> within radius <span class="math">\(r\)</span> (specified by
-<code class="docutils literal"><span class="pre">radius</span></code>). If <span class="math">\(k_i&lt;k_{min}\)</span>, where <span class="math">\(k_{min}\)</span> is the minimum number
-of neighbors specified by <code class="docutils literal"><span class="pre">min_k</span></code>, it is marked as an outlier.</p>
+<a class="reference internal" href="#radius">radius</a>). If <span class="math">\(k_i&lt;k_{min}\)</span>, where <span class="math">\(k_{min}\)</span> is the minimum number
+of neighbors specified by <a class="reference internal" href="#min-k">min_k</a>, it is marked as an outlier.</p>
 <div class="math">
 \[\begin{split}outlier_i = \begin{cases}
     \text{true,} \phantom{false,} \text{if } k_i &lt; k_{min} \\
@@ -302,18 +301,16 @@ of neighbors specified by <code class="docutils literal"><span class="pre">min_k
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The following example will mark points as outliers when there are fewer than
 four neighbors within a radius of 1.0.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span>
-      <span class="nt">&quot;min_k&quot;</span><span class="p">:</span><span class="mi">4</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&quot;min_k&quot;</span><span class="p">:</span><span class="mi">4</span>
     <span class="p">},</span>
     <span class="s2">&quot;output.las&quot;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -322,17 +319,18 @@ four neighbors within a radius of 1.0.</p>
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>class</dt>
-<dd>The classification value to apply to outliers. [Default: <strong>7</strong>]</dd>
+<dd>The classification value to apply to outliers. [Default: 7]</dd>
 <dt>method</dt>
-<dd>The outlier removal method. [Default: <strong>statistical</strong>]</dd>
-<dt>min_k</dt>
-<dd>Minimum number of neighbors in radius (radius method only). [Default: <strong>2</strong>]</dd>
-<dt>radius</dt>
-<dd>Radius (radius method only). [Default: <strong>1.0</strong>]</dd>
-<dt>mean_k</dt>
-<dd>Mean number of neighbors (statistical method only). [Default: <strong>8</strong>]</dd>
-<dt>multiplier</dt>
-<dd>Standard deviation threshold (statistical method only). [Default: <strong>2.0</strong>]</dd>
+<dd>The outlier removal method (either “statistical” or “radius”).
+[Default: “statistical”]</dd>
+<dt><span class="target" id="min-k">min_k</span></dt>
+<dd>Minimum number of neighbors in radius (radius method only). [Default: 2]</dd>
+<dt><span class="target" id="radius">radius</span></dt>
+<dd>Radius (radius method only). [Default: 1.0]</dd>
+<dt><span class="target" id="mean-k">mean_k</span></dt>
+<dd>Mean number of neighbors (statistical method only). [Default: 8]</dd>
+<dt><span class="target" id="multiplier">multiplier</span></dt>
+<dd>Standard deviation threshold (statistical method only). [Default: 2.0]</dd>
 </dl>
 </div>
 </div>
@@ -363,7 +361,7 @@ four neighbors within a radius of 1.0.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -384,7 +382,7 @@ four neighbors within a radius of 1.0.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -418,7 +416,7 @@ four neighbors within a radius of 1.0.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 

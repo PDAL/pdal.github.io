@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.9.0
               </div>
             
           
@@ -224,7 +224,7 @@
             
   <div class="section" id="filters-overlay">
 <span id="id1"></span><h1>filters.overlay<a class="headerlink" href="#filters-overlay" title="Permalink to this headline">¶</a></h1>
-<p>The overlay filter allows you to set the values of a selected dimension
+<p>The <strong>overlay filter</strong> allows you to set the values of a selected dimension
 based on an OGR-readable polygon or multi-polygon.</p>
 <div class="admonition embed" id="embed-0">
 <p class="first admonition-title">Default Embedded Stage </p>
@@ -233,7 +233,7 @@ based on an OGR-readable polygon or multi-polygon.</p>
 <div class="section" id="ogr-sql-support">
 <h2>OGR SQL support<a class="headerlink" href="#ogr-sql-support" title="Permalink to this headline">¶</a></h2>
 <p>You can limit your queries based on OGR’s SQL support. If the
-filter has both a <cite>datasource</cite> and a <cite>query</cite> option, those will
+filter has both a <a class="reference internal" href="#datasource">datasource</a> and a <a class="reference internal" href="#query">query</a> option, those will
 be used instead of the entire OGR data source. At this time it is
 not possible to further filter the OGR query based on a geometry
 but that may be added in the future.</p>
@@ -247,26 +247,24 @@ datasource if it can do so.</p>
 <div class="section" id="example-1">
 <h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <p>In this scenario, we are altering the attributes of the dimension
-‘Classification’.  Points from autzen-dd.las that lie within a feature will
-have their classification to match the ‘CLS’ field associated with that
+<code class="docutils literal"><span class="pre">Classification</span></code>.  Points from autzen-dd.las that lie within a feature will
+have their classification to match the <code class="docutils literal"><span class="pre">CLS</span></code> field associated with that
 feature.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;autzen-dd.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.shp&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="s2">&quot;attributes&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;CLS&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.shp&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="s2">&quot;attributes&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;CLS&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;attributed.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span><span class="mf">0.0000001</span><span class="p">,</span>
-      <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span><span class="mf">0.0000001</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;attributed.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span><span class="mf">0.0000001</span><span class="p">,</span>
+        <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span><span class="mf">0.0000001</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -274,21 +272,17 @@ feature.</p>
 <h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>This example sets the Intensity attribute to <code class="docutils literal"><span class="pre">CLS</span></code> values read from the
 <a class="reference external" href="http://www.gdal.org/ogr_sql_sqlite.html">OGR SQL</a> query.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;autzen-dd.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Intensity&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.shp&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="s2">&quot;SELECT CLS FROM attributes where cls!=6&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;CLS&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Intensity&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.shp&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="s2">&quot;SELECT CLS FROM attributes where cls!=6&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;CLS&quot;</span>
     <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;attributed.las&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+    <span class="s2">&quot;attributed.las&quot;</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -297,12 +291,12 @@ feature.</p>
 <dl class="docutils">
 <dt>dimension</dt>
 <dd>Name of the dimension whose value should be altered.  [Required]</dd>
-<dt>datasource</dt>
+<dt><span class="target" id="datasource">datasource</span></dt>
 <dd>OGR-readable datasource for Polygon or MultiPolygon data.  [Required]</dd>
 <dt>column</dt>
 <dd>The OGR datasource column from which to read the attribute.
 [Default: first column]</dd>
-<dt>query</dt>
+<dt><span class="target" id="query">query</span></dt>
 <dd>OGR SQL query to execute on the datasource to fetch geometry and attributes.
 The entire layer is fetched if no query is provided.  [Default: none]</dd>
 <dt>layer</dt>
@@ -337,7 +331,7 @@ The entire layer is fetched if no query is provided.  [Default: none]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Mar 21, 2019.
+      Last updated on Apr 09, 2019.
 
     </p>
   </div> 
@@ -358,7 +352,7 @@ The entire layer is fetched if no query is provided.  [Default: none]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.0',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -392,7 +386,7 @@ The entire layer is fetched if no query is provided.  [Default: none]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2019.
+                    on Apr 09, 2019.
         </div>
     </div>
 
