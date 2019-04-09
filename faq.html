@@ -192,15 +192,18 @@ pronounced to rhyme with “GDAL”.</p>
 <p>In almost all cases this error occurs because you’re trying to run a stage
 that is built as a plugin and the plugin (a shared library file or DLL)
 can’t be found by pdal.  You can verify whether the plugin can
-be found by running “pdal –drivers”</p>
+be found by running <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">--drivers</span></code></p>
 <p>If you’ve built pdal yourself, make sure you’ve requested to build the
 plugin in question (set BUILD_PLUGIN_PCL=ON, for example, in CMakeCache.txt).</p>
 <p>If you’ve successfully built the plugin, a
-shared object called
-libpdal_plugin_&lt;plugin type&gt;_&lt;plugin name&gt;.&lt;shared library extension&gt; should
-have been created that’s installed in a location where pdal can find it.
-pdal will search
-the following paths for plugins: “.”, “./lib”, “../lib”, “./bin”, “../bin”.</p>
+shared object called</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">libpdal_plugin_</span><span class="o">&lt;</span><span class="n">plugin</span> <span class="nb">type</span><span class="o">&gt;</span><span class="n">_</span><span class="o">&lt;</span><span class="n">plugin</span> <span class="n">name</span><span class="o">&gt;.&lt;</span><span class="n">shared</span> <span class="n">library</span> <span class="n">extension</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>should have been created that’s installed in a location where pdal
+can find it.  pdal will search
+the following paths for plugins: <code class="docutils literal"><span class="pre">.</span></code>, <code class="docutils literal"><span class="pre">./lib</span></code>, <code class="docutils literal"><span class="pre">../lib</span></code>, <code class="docutils literal"><span class="pre">./bin</span></code>,
+<code class="docutils literal"><span class="pre">../bin</span></code>.</p>
 <p>You can also override the default search path by setting the environment
 variable <code class="docutils literal"><span class="pre">PDAL_DRIVER_PATH</span></code> to a list of directories that pdal should search
 for plugins.</p>
@@ -214,7 +217,8 @@ memory at once.  Compressed files, like LAZ, can decompress to much larger
 sizes before PDAL can process the data. Furthermore, some operations
 (notably <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">DEM creation</span></a>) can use large amounts of
 additional memory during processing before the output can be written.
-Depending on the operation, PDAL will attempt operate in “stream mode” to
+Depending on the operation, PDAL will attempt operate in
+<a class="reference internal" href="pipeline.html#processing-modes"><span class="std std-ref">stream mode</span></a> to
 limit memory consumption when possible.</p>
 </li>
 </ul>
