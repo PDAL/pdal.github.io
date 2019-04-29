@@ -117,6 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.html#order">Order</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="filters.html#move">Move</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">filters.cpd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#when-to-use-cpd-vs-icp">When to use CPD vs ICP</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
 </ul>
@@ -220,9 +221,22 @@ subsequent inputs are “moving” points.  The output from the change filter ar
 the “moving” points after the calculated transformation has been applied, one
 point view per input.  Any additional information about the cpd registration,
 e.g. the rigid transformation matrix, will be placed in the stage’s metadata.</p>
+<div class="section" id="when-to-use-cpd-vs-icp">
+<h2>When to use CPD vs ICP<a class="headerlink" href="#when-to-use-cpd-vs-icp" title="Permalink to this headline">¶</a></h2>
+<p>Summarized from the <a class="reference external" href="http://graphics.stanford.edu/courses/cs468-07-winter/Papers/nips2006_0613.pdf">Non-rigid point set registration: Coherent Point Drift</a> paper.</p>
+<ul class="simple">
+<li>CPD outperforms the ICP in the presence of noise and outliers by the use of
+a probabilistic assignment of correspondences between pointsets, which is
+innately more robust than the binary assignment used in ICP.</li>
+<li>CPD does not work well for large in-plane rotation, such transformation can
+be first compensated by other well known global registration techniques before
+CPD algorithm is carried out</li>
+<li>CPD is most effective when estimating smooth non-rigid transformations.</li>
+</ul>
 <div class="admonition plugin" id="plugin-0">
 <p class="first admonition-title">Dynamic Plugin</p>
 <p class="last">This stage requires a dynamic plugin to operate</p>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -260,7 +274,8 @@ use the “metadata” option of the pipeline command:</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="filters.transformation.html#filters-transformation"><span class="std std-ref">filters.transformation</span></a> to apply a transform to other points.</p>
+<p class="last"><a class="reference internal" href="filters.transformation.html#filters-transformation"><span class="std std-ref">filters.transformation</span></a> to apply a transform to other points.
+<a class="reference internal" href="filters.icp.html#filters-icp"><span class="std std-ref">filters.icp</span></a> for deterministic binary point pair assignments.</p>
 </div>
 </div>
 <div class="section" id="options">
@@ -313,7 +328,7 @@ Valid values are “rigid”, “affine”, and “nonrigid”.
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Apr 24, 2019.
+      Last updated on Apr 29, 2019.
 
     </p>
   </div> 
@@ -368,7 +383,7 @@ Valid values are “rigid”, “affine”, and “nonrigid”.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 24, 2019.
+                    on Apr 29, 2019.
         </div>
     </div>
 
