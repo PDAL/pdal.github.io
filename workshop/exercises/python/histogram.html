@@ -137,6 +137,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../capstone.html">Final Project</a></li>
@@ -206,10 +207,10 @@
 <p>PDAL doesn’t provide every possible analysis option, but it strives to make it
 convenient to link PDAL to other places with substantial functionality.  One of
 those is the Python/Numpy universe, which is accessed through PDAL’s
-<a class="reference internal" href="../../../python.html#python"><span class="std std-ref">Python</span></a> bindings and <a class="reference internal" href="../../../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a> filter. These tools allow you to manipulate point
-cloud data with convenient Python tools rather than constructing substantial
-C/C++ software to achieve simple tasks, compute simple statistics, or
-investigate data quality issues.</p>
+<a class="reference internal" href="../../../python.html#python"><span class="std std-ref">Python</span></a> bindings and the <a class="reference internal" href="../../../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a> filter. These tools allow
+you to manipulate point cloud data with convenient Python tools rather than
+constructing substantial C/C++ software to achieve simple tasks, compute simple
+statistics, or investigate data quality issues.</p>
 <p>This exercise uses PDAL to create a histogram plot of all of the dimensions of
 a file. <a class="reference external" href="https://matplotlib.org/">matplotlib</a> is a Python package for plotting graphs and figures, and
 we can use it in combination with the <a class="reference internal" href="../../../python.html#python"><span class="std std-ref">Python</span></a> bindings for PDAL to create
@@ -242,28 +243,28 @@ script in a <a class="reference internal" href="../../../stages/filters.python.h
 15
 16
 17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
-                    <span class="p">{</span>
-                        <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercies/python/athletic-fields.laz&quot;</span>
-                    <span class="p">},</span>
-                    <span class="p">{</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.programmable&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;function&quot;</span><span class="p">:</span><span class="s2">&quot;make_plot&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;module&quot;</span><span class="p">:</span><span class="s2">&quot;anything&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;pdalargs&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">filename</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">histogram.png</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;script&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercies/python/histogram.py&quot;</span>
-                    <span class="p">},</span>
-                    <span class="p">{</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.null&quot;</span>
-                    <span class="p">}</span>
-                <span class="p">]</span>
+    <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;./exercises/python/athletic-fields.laz&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.python&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;make_plot&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;anything&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pdalargs&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">filename</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">./exercises/python/histogram.png</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="s2">&quot;./exercises/python/histogram.py&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.null&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This pipeline is available in your workshop materials in the
-<code class="docutils literal"><span class="pre">./exercies/python/histogram.json</span></code> file.</p>
+<code class="docutils literal"><span class="pre">./exercises/python/histogram.json</span></code> file.</p>
 </div>
 </div>
 <div class="section" id="python-script">
@@ -277,7 +278,7 @@ dictionaries.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This Python file is available in your workshop materials in the
-<code class="docutils literal"><span class="pre">./exercies/python/histogram.py</span></code> file.</p>
+<code class="docutils literal"><span class="pre">./exercises/python/histogram.py</span></code> file.</p>
 </div>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -355,10 +356,7 @@ dictionaries.</p>
 74
 75
 76
-77
-78
-79
-80</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># import numpy</span>
+77</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># import numpy</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># import matplotlib stuff and make sure to use the</span>
@@ -378,8 +376,8 @@ dictionaries.</p>
 <span class="c1"># are numpy arrays for each dimension, and the &quot;outs&quot; which</span>
 <span class="c1"># the script can alter/set/adjust to have them updated for</span>
 <span class="c1"># further processing.</span>
-<span class="k">def</span> <span class="nf">make_plot</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span> <span class="n">outs</span><span class="p">):</span>
-
+<span class="hll"><span class="k">def</span> <span class="nf">make_plot</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span> <span class="n">outs</span><span class="p">):</span>
+</span>
     <span class="c1"># figure position and row will increment</span>
     <span class="n">figure_position</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span>
@@ -435,15 +433,12 @@ dictionaries.</p>
     <span class="c1"># filters.programmable scripts need to</span>
     <span class="c1"># return True to tell the filter it was successful.</span>
     <span class="k">return</span> <span class="kc">True</span>
-
-
-
 </pre></div>
 </td></tr></table></div>
 </div>
 <div class="section" id="run-pdal-pipeline">
 <h3>Run <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">pipeline</span></code><a class="headerlink" href="#run-pdal-pipeline" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">histogram</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">histogram</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../_images/python-histogram-command.png"><img alt="../../../_images/python-histogram-command.png" src="../../../_images/python-histogram-command.png" /></a>
@@ -490,7 +485,7 @@ dictionary entry isn’t always valid JSON.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -545,7 +540,7 @@ dictionary entry isn’t always valid JSON.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

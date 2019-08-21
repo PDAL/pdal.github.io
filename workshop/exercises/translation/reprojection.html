@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="pdal.io" href="../../../index.html"/>
         <link rel="up" title="Exercises" href="../index.html"/>
-        <link rel="next" title="Greyhound" href="greyhound.html"/>
+        <link rel="next" title="Entwine" href="entwine.html"/>
         <link rel="prev" title="Compression" href="compression.html"/> 
 
   
@@ -133,12 +133,13 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../index.html#translation">Translation</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="compression.html">Compression</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Reprojection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="greyhound.html">Greyhound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="entwine.html">Entwine</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#analysis">Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../capstone.html">Final Project</a></li>
@@ -206,20 +207,29 @@
 <span class="target" id="index-0"></span><div class="section" id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>This exercise uses PDAL to reproject <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> data</p>
-<p>Issue the following command in your <cite>Anaconda Shell</cite>:</p>
+<p>Issue the following command in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-    <span class="n">reprojection</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+  <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="n">reprojection</span> \
+  <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+  <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="n">reprojection</span> <span class="o">^</span>
+  <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../_images/reprojection-run-command.png"><img alt="../../../_images/reprojection-run-command.png" src="../../../_images/reprojection-run-command.png" /></a>
 <p>Unfortunately this doesn’t produce the intended results for us. Issue the following
 <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span></code> command to see why:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="o">--</span><span class="nb">all</span> <span class="o">^</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="o">--</span><span class="nb">all</span> \
+    <span class="o">|</span> <span class="n">jq</span> <span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">native</span><span class="o">.</span><span class="n">bbox</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="o">--</span><span class="nb">all</span> <span class="o">^</span>
     <span class="o">|</span> <span class="n">jq</span> <span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">native</span><span class="o">.</span><span class="n">bbox</span>
 </pre></div>
 </div>
@@ -244,16 +254,31 @@ to <code class="docutils literal"><span class="pre">auto</span></code> so you do
 5
 6
 7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-    <span class="n">reprojection</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_x</span><span class="o">=</span><span class="mf">0.0000001</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_y</span><span class="o">=</span><span class="mf">0.0000001</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_x</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_y</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> \
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="n">reprojection</span> \
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span> \
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_x</span><span class="o">=</span><span class="mf">0.0000001</span> \
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_y</span><span class="o">=</span><span class="mf">0.0000001</span> \
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_x</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span> \
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_y</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">csite</span><span class="o">-</span><span class="n">dd</span><span class="o">.</span><span class="n">laz</span> <span class="n">reprojection</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_x</span><span class="o">=</span><span class="mf">0.0000001</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">scale_y</span><span class="o">=</span><span class="mf">0.0000001</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_x</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">offset_y</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../_images/reprojection-run-with-scale.png"><img alt="../../../_images/reprojection-run-with-scale.png" src="../../../_images/reprojection-run-with-scale.png" /></a>
@@ -282,7 +307,7 @@ the capability to do both vertical and horizontal datum transformations.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="greyhound.html" class="btn btn-neutral float-right" title="Greyhound" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="entwine.html" class="btn btn-neutral float-right" title="Entwine" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="compression.html" class="btn btn-neutral" title="Compression" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -301,7 +326,7 @@ the capability to do both vertical and horizontal datum transformations.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -356,7 +381,7 @@ the capability to do both vertical and horizontal datum transformations.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

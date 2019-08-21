@@ -140,11 +140,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meshing/meshing.html">Creating surface meshes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
@@ -225,22 +227,27 @@ algorithm provided by PDAL, the <cite>Simple Morphological Filter</cite> techniq
 generate a ground surface.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">You can read more about the specifics of the SMRF algorithm from [Pingle2013]_`</p>
+<p class="last">You can read more about the specifics of the SMRF algorithm from <cite>[Pingle2013]_</cite></p>
 </div>
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Anaconda Shell</cite>:</p>
+<p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
-   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="o">-</span><span class="n">o</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="n">smrf</span> <span class="o">^</span>
-   <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
-
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> \
+<span class="n">smrf</span> \
+<span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="n">smrf</span> <span class="o">^</span>
+<span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../../_images/ground-run-command.png"><img alt="../../../../_images/ground-run-command.png" src="../../../../_images/ground-run-command.png" /></a>
@@ -255,11 +262,40 @@ generate a terrain surface.</p>
 <h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
 <p>We do not yet have a satisfactory surface for generating a DTM.  When we
 visualize the output of this ground operation, we notice there’s still some
-noise. We can stack the call to PMF with a call to a the <cite>filters.outlier</cite>
-technique we learned about in <a class="reference internal" href="../denoising/denoising.html#workshop-denoising"><span class="std std-ref">Removing noise</span></a>.</p>
+noise. We can stack the call to SMRF with a call to a the <cite>filters.outlier</cite>
+technique we learned about in <span class="xref std std-ref">denoising</span>.</p>
 <ol class="arabic simple">
-<li>Let us start by removing the non-ground data:</li>
+<li>Let us start by removing the non-ground data to just view the ground data:</li>
 </ol>
+<div class="highlight-console"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">pdal translate \</span>
+<span class="go">./exercises/analysis/ground/CSite1_orig-utm.laz \</span>
+<span class="go">-o ./exercises/analysis/ground/ground.laz \</span>
+<span class="go">smrf range \</span>
+<span class="hll"><span class="go">--filters.range.limits=&quot;Classification[2:2]&quot; \</span>
+</span><span class="go">-v 4</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-bat"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>pdal translate <span class="se">^</span>
+<span class="se">.</span>/exercises/analysis/ground/CSite1_orig-utm.laz <span class="se">^</span>
+<span class="se">-</span>o ./exercises/analysis/ground/ground.laz <span class="se">^</span>
+<span class="se">s</span>mrf range <span class="se">^</span>
+<span class="hll"><span class="se">-</span>-filters.range.limits=<span class="s2">&quot;Classification[2:2]&quot;</span> <span class="se">^</span>
+</span><span class="se">-</span>v 4
+</pre></div>
+</td></tr></table></div>
+<a class="reference external image-reference" href="../../../../_images/ground-ground-only-view.png"><img alt="../../../../_images/ground-ground-only-view.png" src="../../../../_images/ground-ground-only-view.png" /></a>
+<p>2. Now we will instead use the <a class="reference internal" href="../../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> command to stack the
+<a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> and <a class="reference internal" href="../../../../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a> stages:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -267,43 +303,40 @@ technique we learned about in <a class="reference internal" href="../denoising/d
 5
 6
 7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
-   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="o">-</span><span class="n">o</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="n">smrf</span> <span class="o">^</span>
-<span class="hll">   <span class="nb">range</span> <span class="o">^</span>
-</span>   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> <span class="o">^</span>
-   <span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
-
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
+<span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span>  \
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> \
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> \
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span>  \
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> \
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> \
+<span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
-<a class="reference external image-reference" href="../../../../_images/ground-ground-only-view.png"><img alt="../../../../_images/ground-ground-only-view.png" src="../../../../_images/ground-ground-only-view.png" /></a>
-<p>2. Now we will instead use the <a class="reference internal" href="../../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> command to stack the
-<a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> and <a class="reference internal" href="../../../../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a> stages:</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
-   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="o">-</span><span class="n">o</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span> <span class="o">^</span>
-   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> <span class="o">^</span>
-   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">^</span>
-   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> <span class="o">^</span>
-   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span> <span class="o">^</span>
-   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> <span class="o">^</span>
-   <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span>  <span class="o">^</span>
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span>  <span class="o">^</span>
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
 <p>In this invocation, we have more control over the process. First the outlier
 filter merely classifies outliers with a <code class="docutils literal"><span class="pre">Classification</span></code> value of 7. These
-outliers are then ignored during PMF processing with the <code class="docutils literal"><span class="pre">ignore</span></code> option.
+outliers are then ignored during SMRF processing with the <code class="docutils literal"><span class="pre">ignore</span></code> option.
 Finally, we add a range filter to extract only the ground returns (i.e.,
 <code class="docutils literal"><span class="pre">Classification</span></code> value of 2).</p>
 <p>The result is a more accurate representation of the ground returns.</p>
@@ -338,7 +371,7 @@ Finally, we add a range filter to extract only the ground returns (i.e.,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -393,7 +426,7 @@ Finally, we add a range filter to extract only the ground returns (i.e.,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

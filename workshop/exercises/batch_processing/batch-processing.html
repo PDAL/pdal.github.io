@@ -42,8 +42,8 @@
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="pdal.io" href="../../../index.html"/>
         <link rel="up" title="Exercises" href="../index.html"/>
-        <link rel="next" title="Plotting a histogram" href="../python/histogram.html"/>
-        <link rel="prev" title="Rasterizing Attributes" href="../analysis/rasterize/rasterize.html"/> 
+        <link rel="next" title="Final Project" href="../../capstone.html"/>
+        <link rel="prev" title="Georeferencing" href="../georeferencing/index.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.7.2
+                1.9.1
               </div>
             
           
@@ -131,21 +131,13 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">Exercises</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../index.html#basic-information">Basic Information</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#translation">Translation</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#analysis">Analysis</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../analysis/boundary/boundary.html">Finding the boundary</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/clipping/clipping.html">Clipping data with polygons</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/colorization/colorization.html">Colorizing points with imagery</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/denoising/denoising.html">Removing noise</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/density/density.html">Visualizing acquisition density</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/thinning/thinning.html">Thinning</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/ground/ground.html">Identifying ground</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/dtm/dtm.html">Generating a DTM</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../analysis/rasterize/rasterize.html">Rasterizing Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#python">Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#batch-processing">Batch Processing</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Batch Processing</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#python">Python</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#georeferencing">Georeferencing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../capstone.html">Final Project</a></li>
@@ -212,45 +204,66 @@
 <span id="workshop-batch-processing"></span><h1>Batch Processing<a class="headerlink" href="#batch-processing" title="Permalink to this headline">¶</a></h1>
 <p>PDAL doesn’t handle matching multiple file inputs except for glob handling for merge operations,
 but does allow for command line substitution parameters to make batch processing simpler,
-substitutions. Substitutions work with both <a class="reference internal" href="../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> operations as well as with
+substitutions. Substitions work with both <a class="reference internal" href="../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> operations as well as with
 other applications such as <a class="reference internal" href="../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a>.</p>
 <div class="section" id="operating-system-variations">
 <h2>Operating system variations<a class="headerlink" href="#operating-system-variations" title="Permalink to this headline">¶</a></h2>
 <p>How substitutions are passed generally depends on the operating system and tools available.
-In the unix/linux environments, this is primarily using the <code class="docutils literal"><span class="pre">find</span></code> and <code class="docutils literal"><span class="pre">ls</span></code> programs to get
-lists of files (either with directories or just filenames) and the <code class="docutils literal"><span class="pre">xargs</span></code> program to pass
-those files to the <a class="reference internal" href="../../../apps/index.html#apps"><span class="std std-ref">Applications</span></a> application (although <cite>-exec</cite> with <code class="docutils literal"><span class="pre">find</span></code> can also be used). These
+In the unix/linux environments, this is primarily using the <cite>find</cite> and <cite>ls</cite> programs to get
+lists of files (either with directories or just filenames) and the <cite>xargs</cite> or <cite>parallel</cite> program to pass
+those files to the <code class="docutils literal"><span class="pre">pdal</span></code> application (although <cite>-exec</cite> with <cite>find</cite> can also be used). These
 tools are available in the <cite>docker</cite> environment if you are running <cite>PDAL</cite> under docker. They
 are also available under Windows one installs <cite>Cygwin</cite> or <cite>MinGW</cite>. They are also available if
 Git for Windows is installed. They are also available as win32 command line programs installed
-from the GNU Findutils (<a class="reference external" href="https://www.gnu.org/software/findutils/findutils.html">https://www.gnu.org/software/findutils/findutils.html</a>).</p>
+from the GNU Findutils (<a class="reference external" href="https://www.gnu.org/software/findutils/findutils.html">https://www.gnu.org/software/findutils/findutils.html</a>). They are
+available for MacOS and Linux.</p>
 </div>
 <div class="section" id="windows-native-tools">
 <h2>Windows native tools<a class="headerlink" href="#windows-native-tools" title="Permalink to this headline">¶</a></h2>
-<p>Subtitions can be handled directly in windows using <a class="reference external" href="https://docs.microsoft.com/en-us/powershell/scripting/powershell-scripting?view=powershell-6">PowerShell</a> syntax.</p>
+<p>Subtitions can be handled directly in windows using <cite>PowerShell</cite> syntax.</p>
 <p>While there are a number of ways to generate lists of files, the <cite>Get-ChildItem</cite> is used here,
 along with the <cite>foreach</cite> option to pass each separate filepath to the pdal application.</p>
 </div>
-<div class="section" id="example-batch-compression-of-las-files-to-laz">
-<h2>Example - Batch compression of LAS files to LAZ:<a class="headerlink" href="#example-batch-compression-of-las-files-to-laz" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example-batch-compression-of-las-files-to-laz-powershell">
+<h2>Example - Batch compression of LAS files to LAZ - PowerShell:<a class="headerlink" href="#example-batch-compression-of-las-files-to-laz-powershell" title="Permalink to this headline">¶</a></h2>
 <p>To compress a series of LAS files in one directory into compressed LAZ files in another
-directory, the <a class="reference external" href="https://docs.microsoft.com/en-us/powershell/scripting/powershell-scripting?view=powershell-6">PowerShell</a> syntax would be:</p>
-<div class="highlight-ps1"><div class="highlight"><pre><span></span><span class="nb">Get-ChildItem</span> <span class="p">.\</span><span class="n">DIR1</span><span class="p">\*.</span><span class="n">las</span> <span class="p">|</span> <span class="k">foreach</span> <span class="p">{</span><span class="n">pdal</span> <span class="n">translate</span> <span class="n">-i</span> <span class="p">.\</span><span class="n">DIR1</span><span class="p">\$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">BaseName</span><span class="p">).</span><span class="n">las</span> <span class="n">-o</span> <span class="p">.\</span><span class="n">DIR2</span><span class="p">\$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">BaseName</span><span class="p">).</span><span class="n">laz</span><span class="p">}</span>
+directory, the <cite>PowerShell</cite> syntax would be:</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="nb">Get-ChildItem</span> <span class="p">.\</span><span class="n">DIR1</span><span class="p">\*.</span><span class="n">las</span> <span class="p">|</span> <span class="k">foreach</span> <span class="p">{</span><span class="n">pdal</span> <span class="n">translate</span> <span class="n">-i</span> <span class="p">.\</span><span class="n">DIR1</span><span class="p">\$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">BaseName</span><span class="p">).</span><span class="n">las</span> <span class="p">^</span>
+<span class="n">-o</span> <span class="p">.\</span><span class="n">DIR2</span><span class="p">\$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">BaseName</span><span class="p">).</span><span class="n">laz</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Note the use of the <cite>$($_.BaseName)</cite> syntax for the files passed. This option on the <cite>$($_)</cite> shortcut for
 the full filename, removes the directory and the extension on the file and allows the user to set
 the path and extension manually.</p>
-<p>The resulting 4 DTMs in <a class="reference external" href="https://qgis.org">QGIS</a> look like:</p>
-<a class="reference external image-reference" href="../../images/dtm-batch-result.png"><img alt="../../../_images/dtm-batch-result.png" src="../../../_images/dtm-batch-result.png" /></a>
 </div>
-<div class="section" id="example-parallel-batch-compression-of-las-files-to-laz">
-<h2>Example - Parallel Batch compression of LAS files to LAZ:<a class="headerlink" href="#example-parallel-batch-compression-of-las-files-to-laz" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example-parallel-batch-compression-of-las-files-to-laz-powershell">
+<h2>Example - Parallel Batch compression of LAS files to LAZ - PowerShell:<a class="headerlink" href="#example-parallel-batch-compression-of-las-files-to-laz-powershell" title="Permalink to this headline">¶</a></h2>
 <p>This use of the <cite>PowerShell</cite> syntax doesn’t allow a user to execute more than one process at a
 time. There is a free download of the <cite>xargs</cite> program that provides parallel execution available
 at <a class="reference external" href="http://www.pirosa.co.uk/demo/wxargs/ppx2.exe">http://www.pirosa.co.uk/demo/wxargs/ppx2.exe</a>. For this tool, the file names are passed with
 using the <cite>{}</cite> syntax.</p>
-<div class="highlight-ps1"><div class="highlight"><pre><span></span><span class="nb">Get-ChildItem</span> <span class="p">.\</span><span class="n">dir1</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">BaseName</span> <span class="p">|</span> <span class="p">.\</span><span class="n">ppx2</span><span class="p">.</span><span class="n">exe</span> <span class="n">-P</span> <span class="n">3</span> <span class="n">pdal</span> <span class="n">translate</span> <span class="n">-i</span> <span class="s2">&quot;.\dir1\{}.las&quot;</span> <span class="n">-o</span> <span class="s2">&quot;.\dir2\{}.laz&quot;</span><span class="p">`</span>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="nb">Get-ChildItem</span> <span class="p">.\</span><span class="n">dir1</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">BaseName</span> <span class="p">^</span>
+<span class="p">|</span> <span class="p">.\</span><span class="n">ppx2</span><span class="p">.</span><span class="n">exe</span> <span class="n">-P</span> <span class="n">3</span> <span class="n">pdal</span> <span class="n">translate</span> <span class="n">-i</span> <span class="s2">&quot;.\dir1\{}.las&quot;</span> <span class="n">-o</span> <span class="s2">&quot;.\dir2\{}.laz&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-batch-compression-of-las-files-to-laz-bash">
+<h2>Example - Batch compression of LAS files to LAZ - Bash:<a class="headerlink" href="#example-batch-compression-of-las-files-to-laz-bash" title="Permalink to this headline">¶</a></h2>
+<p>To compress a series of LAS files in one directory into compressed LAZ files in another
+directory, the <cite>Bash</cite> syntax would be:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">ls ./dir1/*.las | parallel -I{} \</span>
+<span class="go">pdal translate -i ./dir1/{/.}.las -o ./dir2/{/.}.laz</span>
+</pre></div>
+</div>
+<p>In <cite>Parallel</cite>, then  <cite>{/.}</cite> syntax means strip the directory and the extension and just use the
+basename of the file. This allows you to easily change the output format and the location.</p>
+</div>
+<div class="section" id="example-parallel-batch-compression-of-las-files-to-laz-bash">
+<h2>Example - Parallel Batch compression of LAS files to LAZ - Bash:<a class="headerlink" href="#example-parallel-batch-compression-of-las-files-to-laz-bash" title="Permalink to this headline">¶</a></h2>
+<p>Parallel, as its name implies, allows paralell operations. Adding the <cite>-j</cite> syntax indicates the number simultaneous
+jobs to run</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">ls ./dir1/*.las | parallel -I{} -j 4 \</span>
+<span class="go">pdal translate -i ./dir1/{/.}.las -o ./dir2/{/.}.laz</span>
 </pre></div>
 </div>
 </div>
@@ -275,7 +288,6 @@ with <a class="reference internal" href="../../../stages/filters.range.html#filt
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
             <span class="s2">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[2:2]&quot;</span>
-
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">&quot;gdaldriver&quot;</span><span class="p">:</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
@@ -290,12 +302,32 @@ with <a class="reference internal" href="../../../stages/filters.range.html#filt
 <p>You might have spotted that this pipeline doesn’t have any input or output file references, or a value for the
 output spatial reference. We will be adding those at the command line, not within the actual pipeline and
 using the substitutions syntax to do this.</p>
-<div class="highlight-shell-session"><div class="highlight"><pre><span></span><span class="gp">$</span>env:PATH<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">;C:\OSGeo4W64\bin\&quot;</span>
-<span class="gp">$</span><span class="s2">env:GDAL_DATA=&quot;</span>C:<span class="se">\O</span>SGeo4W64<span class="se">\s</span>hare<span class="se">\g</span>dal<span class="se">\&quot;</span>
-
-<span class="go">PS C:\Users\hobu\exercises\batch&gt; Get-ChildItem  C:\Users\administrator\exercises\batch\ll\*.laz | foreach {pdal pipeline C:\Users\hobu\exercises\batch\batch_srs_gdal.json --readers.las.filename=.\ll\$($_.BaseName).laz --writers.gdal.filename=.\dtm\$($_.BaseName).tif --filters.reprojection.out_srs=epsg:26919}</span>
+<blockquote>
+<div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">PS ./exercises/batch&gt; Get-ChildItem  ./exercises/batch/source/*.laz | ^</span>
+<span class="go">foreach {pdal pipeline ./exercises/batch/batch_srs_gdal.json ^</span>
+<span class="go">--readers.las.filename=./source/$($_.BaseName).laz ^</span>
+<span class="go">--writers.gdal.filename=./dtm/$($_.BaseName).tif ^</span>
+<span class="go">--filters.reprojection.in_srs=epsg:3794 ^</span>
+<span class="go">--filters.reprojection.in_srs=epsg:32733}</span>
 </pre></div>
 </div>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">ls ./exercises/batch_processing/source/*.laz | \</span>
+<span class="go">parallel -I{} pdal pipeline ./exercises/batch_processing/batch_srs_gdal.json \</span>
+<span class="go"> --readers.las.filename={} \</span>
+<span class="go"> --writers.gdal.filename=./exercises/batch_processing/dtm{/.}.tif \</span>
+<span class="go"> --filters.reprojection.in_srs=epsg:3794 \</span>
+<span class="go"> --filters.reprojection.out_srs=epsg:32733</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Once you have your dtms created with pdal, combine them to a single file with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">gdalbuildvrt  ./exercises/batch_processing/dtm.vrt ./exercises/batch_processing/dtm*.tif</span>
+</pre></div>
+</div>
+<p>You can then visualize the vrt with <cite>qgis</cite>. Add the vrt twice, and set the properties of the lower
+layer to hillshade. Set the upper layer to Singleband PseudoColor and choose a pleasing color ramp.
+Then set the transparency of the upper layer to 50% and you’ll get a nice display of the terrain.</p>
+<a class="reference external image-reference" href="../../../_images/batch-processing-dtm-qgis.png"><img alt="../../../_images/batch-processing-dtm-qgis.png" src="../../../_images/batch-processing-dtm-qgis.png" /></a>
 </div>
 </div>
 
@@ -306,10 +338,10 @@ using the substitutions syntax to do this.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../python/histogram.html" class="btn btn-neutral float-right" title="Plotting a histogram" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../capstone.html" class="btn btn-neutral float-right" title="Final Project" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../analysis/rasterize/rasterize.html" class="btn btn-neutral" title="Rasterizing Attributes" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../georeferencing/index.html" class="btn btn-neutral" title="Georeferencing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -318,14 +350,14 @@ using the substitutions syntax to do this.</p>
 
   <div role="contentinfo">
     <p>
-                    &copy;  2018
+                    &copy;  2019
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2018.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -346,7 +378,7 @@ using the substitutions syntax to do this.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.7.2',
+            VERSION:'1.9.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -374,13 +406,13 @@ using the substitutions syntax to do this.</p>
   
     <div class="footer">
         <div class="container">
-                    &copy;  2018
+                    &copy;  2019
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2018.
+                    on Aug 21, 2019.
         </div>
     </div>
 

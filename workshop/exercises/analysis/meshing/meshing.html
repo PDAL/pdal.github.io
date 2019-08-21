@@ -1,0 +1,400 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating surface meshes &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="pdal.io" href="../../../../index.html"/>
+        <link rel="up" title="Exercises" href="../../index.html"/>
+        <link rel="next" title="Rasterizing Attributes" href="../rasterize/rasterize.html"/>
+        <link rel="prev" title="Generating a DTM" href="../dtm/dtm.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.9.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Workshop</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../agenda.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../lidar-introduction.html">Introduction to LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../software.html">Software Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Exercises</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#basic-information">Basic Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#translation">Translation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#analysis">Analysis</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../boundary/boundary.html">Finding the boundary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../clipping/clipping.html">Clipping data with polygons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../colorization/colorization.html">Colorizing points with imagery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../denoising/denoising.html">Removing noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../density/density.html">Visualizing acquisition density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Creating surface meshes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes.html">Notes</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../project/index.html">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="../../../index.html">Point Cloud Processing and Analysis with PDAL</a> &raquo;</li>
+      
+        <li><a href="../../index.html">Exercises</a> &raquo;</li>
+      
+    <li>Creating surface meshes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-surface-meshes">
+<span id="workshop-meshing"></span><h1>Creating surface meshes<a class="headerlink" href="#creating-surface-meshes" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">This exercise uses PDAL to create surface meshes. PDAL is able to use a number of
+meshing filters: <a class="reference external" href="https://pdal.io/stages/filters.html#mesh">https://pdal.io/stages/filters.html#mesh</a>. Three of these are ‘in
+the box’, without needing plugins compiled. These are 2D Delaunay triangulation,
+Greedy projection meshing and Poisson surface meshing.</p>
+<p>In this exercise we’ll create a Poisson surface mesh - a watertight isosurface -
+from our input point cloud.</p>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>We will create mesh models of a building and its surrounds using an entwine data
+input source.</p>
+<p>After running each command, the output <cite>.ply</cite> file can be viewed in Meshlab or
+CloudCompare.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">PDAL implements Mischa Kazhdan’s Poisson surface reconstruction algorithm. For
+details see <cite>[Kazhdan2006]_</cite></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><cite>writers.ply</cite> will write out mesh vertices by default. In this exercise we
+set the attribute <cite>faces=”true”</cite>. Try using the ply writer without it. Also,
+if you’re using a machine with a lot of processing power, try increasing the
+<cite>depth</cite> parameter for a more detailed mesh.</p>
+</div>
+<div class="section" id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
+ <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="n">mesh</span><span class="o">.</span><span class="n">ply</span> \
+ <span class="n">poisson</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> \
+ <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> \
+ <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
+ <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="n">mesh</span><span class="o">.</span><span class="n">ply</span> <span class="o">^</span>
+ <span class="n">poisson</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> <span class="o">^</span>
+ <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> <span class="o">^</span>
+ <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference external image-reference" href="../../../../_images/meshing.png"><img alt="../../../../_images/meshing.png" src="../../../../_images/meshing.png" /></a>
+<p>You can view the mesh in Cloud Compare, you should see something similar to</p>
+<a class="reference external image-reference" href="../../../../_images/first-mesh.png"><img alt="../../../../_images/first-mesh.png" src="../../../../_images/first-mesh.png" /></a>
+</div>
+<div class="section" id="filtering">
+<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
+<p>If we want to just mesh a building, or just terrain, or both we can apply a <cite>range</cite>
+filter based on point classification. These data have ground labelled as class 2,
+and buildings as 6.</p>
+<p>In this exercise we will create a poisson mesh surface of a building and the ground
+surrounding it, using the same data subset as above and adding a <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>
+stage to limit the set of points used in mesh creation.</p>
+</div>
+<div class="section" id="id1">
+<h3>Command<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
+ <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">building</span><span class="o">-</span><span class="n">exercise</span><span class="o">.</span><span class="n">ply</span> \
+ <span class="nb">range</span> <span class="n">poisson</span> \
+ <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2],Classification[6:6]&quot;</span> \
+ <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> \
+ <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> \
+ <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
+ <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">building</span><span class="o">-</span><span class="n">exercise</span><span class="o">.</span><span class="n">ply</span> <span class="o">^</span>
+ <span class="nb">range</span> <span class="n">poisson</span> <span class="o">^</span>
+ <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2],Classification[6:6]&quot;</span> <span class="o">^</span>
+ <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> <span class="o">^</span>
+ <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> <span class="o">^</span>
+ <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference external image-reference" href="../../../../_images/meshing-buildings.png"><img alt="../../../../_images/meshing-buildings.png" src="../../../../_images/meshing-buildings.png" /></a>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../rasterize/rasterize.html" class="btn btn-neutral float-right" title="Rasterizing Attributes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../dtm/dtm.html" class="btn btn-neutral" title="Generating a DTM" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2019
+                        <a href="https://github.com/abellgithub">Andrew Bell</a>,
+                        <a href="https://github.com/chambbj">Brad Chambers</a>,
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Aug 21, 2019.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.9.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2019
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Aug 21, 2019.
+        </div>
+    </div>
+
+</body>
+</html>

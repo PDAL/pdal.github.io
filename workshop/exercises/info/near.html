@@ -139,6 +139,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../index.html#analysis">Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../capstone.html">Final Project</a></li>
@@ -210,8 +211,7 @@ scenario is a simple one – we want to find the two points nearest the midpoint
 of the bounding cube of our <code class="docutils literal"><span class="pre">interesting.las</span></code> data file.</p>
 <p>First we need to find the midpoint of the bounding cube. To do that, we need to
 print the <code class="docutils literal"><span class="pre">--all</span></code> info for the file and look for the <code class="docutils literal"><span class="pre">bbox</span></code> output:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="nb">all</span> <span class="o">^</span>
-    <span class="o">|</span> <span class="n">jq</span> <span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">native</span><span class="o">.</span><span class="n">bbox</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="nb">all</span> <span class="o">|</span> <span class="n">jq</span> <span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">native</span><span class="o">.</span><span class="n">bbox</span>
 </pre></div>
 </div>
 <a class="reference external image-reference" href="../../../_images/info-near-bbox.png"><img alt="../../../_images/info-near-bbox.png" src="../../../_images/info-near-bbox.png" /></a>
@@ -223,8 +223,7 @@ print the <code class="docutils literal"><span class="pre">--all</span></code> i
 </div>
 <p>With our “center point”, issue the <code class="docutils literal"><span class="pre">--query</span></code> option to <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">info</span></code>
 and return the three nearest points to it:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;637301.20, 851217.57, 496.49/3&quot;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;637301.20, 851217.57, 496.49/3&quot;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -275,7 +274,7 @@ solution.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -330,7 +329,7 @@ solution.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

@@ -43,7 +43,7 @@
     <link rel="top" title="pdal.io" href="../../../../index.html"/>
         <link rel="up" title="Exercises" href="../../index.html"/>
         <link rel="next" title="Clipping data with polygons" href="../clipping/clipping.html"/>
-        <link rel="prev" title="Greyhound" href="../../translation/greyhound.html"/> 
+        <link rel="prev" title="Entwine" href="../../translation/entwine.html"/> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -140,11 +140,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meshing/meshing.html">Creating surface meshes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
@@ -221,11 +223,7 @@ boundary, which means we must first install it on our system.</p>
 <p class="last">We are going to run using the Uncompahgre data in the <code class="docutils literal"><span class="pre">./density</span></code>
 directory.</p>
 </div>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">boundary</span>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">--</span><span class="n">boundary</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../../_images/boundary-text-output.png"><img alt="../../../../_images/boundary-text-output.png" src="../../../../_images/boundary-text-output.png" /></a>
@@ -239,11 +237,16 @@ We can leverage this capability to output a contiguous boundary of the <code cla
 file.</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">tindex</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">tindex</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">filespec</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-    <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">tindex</span> <span class="n">create</span> <span class="o">--</span><span class="n">tindex</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> \
+ <span class="o">--</span><span class="n">filespec</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
+ <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">tindex</span> <span class="n">create</span> <span class="o">--</span><span class="n">tindex</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">^</span>
+ <span class="o">--</span><span class="n">filespec</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+ <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../../_images/boundary-tindex-run.png"><img alt="../../../../_images/boundary-tindex-run.png" src="../../../../_images/boundary-tindex-run.png" /></a>
@@ -282,7 +285,7 @@ application. You can also use this command to merge data together
         <a href="../clipping/clipping.html" class="btn btn-neutral float-right" title="Clipping data with polygons" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../../translation/greyhound.html" class="btn btn-neutral" title="Greyhound" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../../translation/entwine.html" class="btn btn-neutral" title="Entwine" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -298,7 +301,7 @@ application. You can also use this command to merge data together
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -353,7 +356,7 @@ application. You can also use this command to merge data together
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

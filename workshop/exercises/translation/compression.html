@@ -133,12 +133,13 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../index.html#translation">Translation</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Compression</a></li>
 <li class="toctree-l4"><a class="reference internal" href="reprojection.html">Reprojection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="greyhound.html">Greyhound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="entwine.html">Entwine</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#analysis">Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../capstone.html">Final Project</a></li>
@@ -207,23 +208,32 @@
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>This exercise uses PDAL to compress <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> data into <a class="reference external" href="http://laszip.org">LASzip</a>.</p>
 <ol class="arabic">
-<li><p class="first">Issue the following command in your <cite>Anaconda Shell</cite>:</p>
+<li><p class="first">Issue the following command in your <cite>Conda Shell</cite>.</p>
 <blockquote>
-<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">laz</span>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">laz</span> \ 
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span> 
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span>
 </pre></div>
 </div>
 <p>LAS is a very fluffy binary format. Because of the way the data are stored,
 there is ample redundant information, and <a class="reference external" href="http://laszip.org">LASzip</a> is an open source solution
-for compressing this information</p>
+for compressing this information. Note that we are actually inflating the data here.
+Its laz from the workshop and we are converting it to las.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Verify that the data are in fact compressed:</p>
+<li><p class="first">Verify that the laz data is compressed over the las:</p>
 <blockquote>
-<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">dir</span> <span class="n">c</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">hobu</span>\<span class="n">PDAL</span>\<span class="n">exercises</span>\<span class="n">translation</span>\<span class="n">interesting</span><span class="o">.</span><span class="n">laz</span>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">alh</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">laz</span>
 
-<span class="nb">dir</span> <span class="n">c</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">hobu</span>\<span class="n">PDAL</span>\<span class="n">exercises</span>\<span class="n">translation</span>\<span class="n">interesting</span><span class="o">.</span><span class="n">las</span>
+<span class="n">ls</span> <span class="o">-</span><span class="n">alh</span>  <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">dir</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">laz</span>
+
+<span class="nb">dir</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span>
 </pre></div>
 </div>
 <a class="reference external image-reference" href="../../../_images/compression-verify.png"><img alt="../../../_images/compression-verify.png" src="../../../_images/compression-verify.png" /></a>
@@ -274,7 +284,7 @@ point cloud data.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -329,7 +339,7 @@ point cloud data.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

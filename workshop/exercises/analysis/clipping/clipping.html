@@ -140,11 +140,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meshing/meshing.html">Creating surface meshes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
@@ -232,7 +234,7 @@ capability to reproject the data for us on-the-fly:</p>
 <div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">OGRVRTDataSource</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">OGRVRTWarpedLayer</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="n">OGRVRTLayer</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="n">SrcDataSource</span><span class="o">&gt;</span><span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">attributes</span><span class="o">.</span><span class="n">json</span><span class="o">&lt;/</span><span class="n">SrcDataSource</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">SrcDataSource</span><span class="o">&gt;./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">attributes</span><span class="o">.</span><span class="n">json</span><span class="o">&lt;/</span><span class="n">SrcDataSource</span><span class="o">&gt;</span>
             <span class="o">&lt;</span><span class="n">SrcLayer</span><span class="o">&gt;</span><span class="n">attributes</span><span class="o">&lt;/</span><span class="n">SrcLayer</span><span class="o">&gt;</span>
             <span class="o">&lt;</span><span class="n">LayerSRS</span><span class="o">&gt;</span><span class="n">EPSG</span><span class="p">:</span><span class="mi">4326</span><span class="o">&lt;/</span><span class="n">LayerSRS</span><span class="o">&gt;</span>
         <span class="o">&lt;/</span><span class="n">OGRVRTLayer</span><span class="o">&gt;</span>
@@ -245,7 +247,7 @@ capability to reproject the data for us on-the-fly:</p>
 <p class="first admonition-title">Note</p>
 <p>This VRT file is available in your workshop materials in the
 <code class="docutils literal"><span class="pre">./exercises/analysis/clipping/attributes.vrt</span></code> file. You will need to
-open this file, go to line 4 and replace <code class="docutils literal"><span class="pre">c:/Users/hobu/PDAL/</span></code> with
+open this file, go to line 4 and replace <code class="docutils literal"><span class="pre">./</span></code> with
 the correct path for your machine.</p>
 <p class="last">A GDAL or OGR VRT
 is a kind of “virtual” data source definition type that combines a
@@ -265,10 +267,10 @@ See the <a class="reference external" href="http://www.gdal.org/drv_vrt.html">OG
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
 <div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/clipping/autzen.laz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;./exercises/analysis/clipping/autzen.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
             <span class="s2">&quot;column&quot;</span><span class="p">:</span> <span class="s2">&quot;CLS&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/clipping/attributes.vrt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;./exercises/analysis/clipping/attributes.vrt&quot;</span><span class="p">,</span>
             <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
             <span class="s2">&quot;layer&quot;</span><span class="p">:</span> <span class="s2">&quot;OGRGeoJSON&quot;</span><span class="p">,</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.overlay&quot;</span>
@@ -277,7 +279,7 @@ See the <a class="reference external" href="http://www.gdal.org/drv_vrt.html">OG
             <span class="s2">&quot;limits&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification[6:6]&quot;</span><span class="p">,</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.range&quot;</span>
         <span class="p">},</span>
-        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/clipping/stadium.las&quot;</span>
+        <span class="s2">&quot;./exercises/analysis/clipping/stadium.las&quot;</span>
     <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -286,7 +288,7 @@ See the <a class="reference external" href="http://www.gdal.org/drv_vrt.html">OG
 <p class="first admonition-title">Note</p>
 <p class="last">This pipeline is available in your workshop materials in the
 <code class="docutils literal"><span class="pre">./exercises/analysis/clipping/clipping.json</span></code> file. Remember
-to replace each of the three occurrences of <code class="docutils literal"><span class="pre">c:/Users/Hobu/PDAL/</span></code>
+to replace each of the three occurrences of <code class="docutils literal"><span class="pre">./</span></code>
 in this file with the correct location for your machine.</p>
 </div>
 <div class="section" id="reader">
@@ -313,10 +315,10 @@ assign the values from the <code class="docutils literal"><span class="pre">CLS<
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Anaconda Shell</cite>:</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">clipping</span><span class="o">.</span><span class="n">json</span>
+<p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
+<p>The <cite>–nostream</cite> option disables stream mode. The point-in-polygon check (see notes)
+performs poorly in stream mode currently.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">clipping</span><span class="o">/</span><span class="n">clipping</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">nostream</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../../_images/clipping-run-command.png"><img alt="../../../../_images/clipping-run-command.png" src="../../../../_images/clipping-run-command.png" /></a>
@@ -324,7 +326,7 @@ assign the values from the <code class="docutils literal"><span class="pre">CLS<
 <div class="section" id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
 <p>Use one of the point cloud visualization tools you installed to take a look at
-your <code class="docutils literal"><span class="pre">c:/Users/Howard/PDAL/exercises/analysis/clipping/stadium.las</span></code> output.
+your <code class="docutils literal"><span class="pre">./exercises/analysis/clipping/stadium.las</span></code> output.
 In the example below, we opened the file to view it using the <a class="reference external" href="http://plas.io">http://plas.io</a>
 website.</p>
 <a class="reference external image-reference" href="../../../../_images/clipping-stadium-clipped.png"><img alt="../../../../_images/clipping-stadium-clipped.png" src="../../../../_images/clipping-stadium-clipped.png" /></a>
@@ -366,7 +368,7 @@ that is read.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -421,7 +423,7 @@ that is read.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

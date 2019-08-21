@@ -139,6 +139,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../index.html#analysis">Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../capstone.html">Final Project</a></li>
@@ -206,8 +207,8 @@
 <div class="section" id="exercise">
 <span id="index-0"></span><h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>This exercise uses PDAL to print metadata information. Issue the
-following command in your <cite>Anaconda Shell</cite>:</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
+following command in your <cite>Conda Shell</cite>.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
 </pre></div>
 </td></tr></table></div>
 <img alt="../../../_images/info-interesting-metadata.png" src="../../../_images/info-interesting-metadata.png" />
@@ -247,8 +248,13 @@ gives us that, but it also gives us a bunch of other stuff we don’t need
 at the moment either. Let’s focus on extracting what we want using the
 <code class="docutils literal"><span class="pre">jq</span></code> command.</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> <span class="o">^</span>
-    <span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> \
+<span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> <span class="o">^</span>
+<span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
 </pre></div>
 </td></tr></table></div>
 <img alt="../../../_images/info-interesting-metadata-jq.png" src="../../../_images/info-interesting-metadata-jq.png" />
@@ -307,7 +313,7 @@ or are provided via options in PDAL.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -362,7 +368,7 @@ or are provided via options in PDAL.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

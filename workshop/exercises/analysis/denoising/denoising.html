@@ -140,11 +140,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meshing/meshing.html">Creating surface meshes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
@@ -218,7 +220,7 @@ filter to data.</p>
 define it.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/denoising/18TWK820985.laz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;./exercises/analysis/denoising/18TWK820985.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.outlier&quot;</span><span class="p">,</span>
             <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;statistical&quot;</span><span class="p">,</span>
@@ -234,7 +236,7 @@ define it.</p>
             <span class="s2">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
             <span class="s2">&quot;minor_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
             <span class="s2">&quot;dataformat_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/denoising/clean.laz&quot;</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./exercises/analysis/denoising/clean.laz&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -251,7 +253,7 @@ define it.</p>
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
 <p>After our pipeline errata, the first item we define in the pipeline is the
 point cloud file we’re going to read.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/denoising/18TWK820985.laz&quot;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;./exercises/analysis/denoising/18TWK820985.laz&quot;</span><span class="p">,</span>
 </pre></div>
 </div>
 </div>
@@ -298,7 +300,7 @@ add a few options to have finer control over what is written. These include:</p>
     <span class="s2">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
     <span class="s2">&quot;minor_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
     <span class="s2">&quot;dataformat_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/denoising/clean.laz&quot;</span>
+    <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./exercises/analysis/denoising/clean.laz&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -318,9 +320,8 @@ how your LAS files are written.</p>
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Anaconda Shell</cite>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
-   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">denoising</span><span class="o">/</span><span class="n">denoise</span><span class="o">.</span><span class="n">json</span>
+<p>Invoke the following command, substituting accordingly, in your ` Shell`:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">denoising</span><span class="o">/</span><span class="n">denoise</span><span class="o">.</span><span class="n">json</span>
 
 </pre></div>
 </div>
@@ -371,7 +372,7 @@ process. If you have really large files, you are going to need to
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -426,7 +427,7 @@ process. If you have really large files, you are going to need to
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

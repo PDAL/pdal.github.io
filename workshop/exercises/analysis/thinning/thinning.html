@@ -140,11 +140,13 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Thinning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meshing/meshing.html">Creating surface meshes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
@@ -233,17 +235,19 @@ should operate similarly for the <a class="reference internal" href="../../../..
 </div>
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Docker
-Quickstart Terminal</cite>:</p>
+<p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
-   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">thinning</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">-</span><span class="n">thin</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-   <span class="n">sample</span> <span class="o">^</span>
-   <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="mi">20</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">thinning</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">-</span><span class="n">thin</span><span class="o">.</span><span class="n">laz</span> \
+<span class="n">sample</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="mi">20</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">thinning</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">-</span><span class="n">thin</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="n">sample</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="mi">20</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../../_images/thinning-command-run.png"><img alt="../../../../_images/thinning-command-run.png" src="../../../../_images/thinning-command-run.png" /></a>
@@ -302,7 +306,7 @@ are going to use that ability to view both the <code class="docutils literal"><s
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -357,7 +361,7 @@ are going to use that ability to view both the <code class="docutils literal"><s
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

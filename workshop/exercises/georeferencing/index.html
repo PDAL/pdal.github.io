@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="pdal.io" href="../../../index.html"/>
         <link rel="up" title="Exercises" href="../index.html"/>
-        <link rel="next" title="Final Project" href="../../capstone.html"/>
+        <link rel="next" title="Batch Processing" href="../batch_processing/batch-processing.html"/>
         <link rel="prev" title="Plotting a histogram" href="../python/histogram.html"/> 
 
   
@@ -137,6 +137,7 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Georeferencing</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../capstone.html">Final Project</a></li>
@@ -243,13 +244,21 @@ is southwest of Austin, TX.</p>
 </div>
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, into your <cite>Anaconda Shell</cite>:</p>
+<p>Invoke the following command, substituting accordingly, into your ` Conda Shell`:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> \
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">csd</span> \
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">laz</span> \
+<span class="n">reprojection</span> <span class="nb">range</span> \
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:32614&quot;</span> \
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Intensity[0:500]&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">csd</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-    <span class="n">reprojection</span> <span class="nb">range</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:32614&quot;</span> <span class="o">^</span>
-    <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Intensity[0:500]&quot;</span>
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">csd</span> <span class="o">^</span>
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="n">reprojection</span> <span class="nb">range</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">reprojection</span><span class="o">.</span><span class="n">out_srs</span><span class="o">=</span><span class="s2">&quot;EPSG:32614&quot;</span> <span class="o">^</span>
+<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Intensity[0:500]&quot;</span>
 </pre></div>
 </div>
 <a class="reference external image-reference" href="../../../_images/georeferencing-run-command.png"><img alt="../../../_images/georeferencing-run-command.png" src="../../../_images/georeferencing-run-command.png" /></a>
@@ -273,7 +282,7 @@ intensity filtering.</span></p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../capstone.html" class="btn btn-neutral float-right" title="Final Project" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../batch_processing/batch-processing.html" class="btn btn-neutral float-right" title="Batch Processing" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../python/histogram.html" class="btn btn-neutral" title="Plotting a histogram" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -292,7 +301,7 @@ intensity filtering.</span></p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -347,7 +356,7 @@ intensity filtering.</span></p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

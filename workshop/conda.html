@@ -1,0 +1,340 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Conda &mdash; pdal.io</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pdal.io" href="../index.html"/>
+        <link rel="up" title="Software Installation" href="software.html"/>
+        <link rel="next" title="Exercises" href="exercises/index.html"/>
+        <link rel="prev" title="Software Installation" href="software.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDAL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.9.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/index.html">Applications</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Workshop</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="agenda.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar-introduction.html">Introduction to LiDAR</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="software.html">Software Installation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Conda</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-conda">What is Conda</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-will-we-use-conda">How will we use Conda?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-conda">Installing Conda</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/index.html">Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capstone.html">Final Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes.html">Notes</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/index.html">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PDAL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Home</a> &raquo;</li>
+      
+        <li><a href="index.html">Point Cloud Processing and Analysis with PDAL</a> &raquo;</li>
+      
+        <li><a href="software.html">Software Installation</a> &raquo;</li>
+      
+    <li>Conda</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="conda">
+<span id="workshop-conda"></span><h1>Conda<a class="headerlink" href="#conda" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><div class="section" id="what-is-conda">
+<h2>What is Conda<a class="headerlink" href="#what-is-conda" title="Permalink to this headline">¶</a></h2>
+<p>Conda is an open source package management system and environment management system that runs
+on Windows, macOS and Linux. Conda quickly installs, runs and updates packages and their dependencies.
+Conda easily creates, saves, loads and switches between environments on your local computer.
+It was created for Python programs, but it can package and distribute software for any language..</p>
+</div>
+<div class="section" id="how-will-we-use-conda">
+<h2>How will we use Conda?<a class="headerlink" href="#how-will-we-use-conda" title="Permalink to this headline">¶</a></h2>
+<p>PDAL stands on the shoulders of giants. It uses GDAL, GEOS, and
+<a class="reference internal" href="../development/compilation/index.html#building"><span class="std std-ref">many other dependencies</span></a>. Because of this, it is very
+challenging to build it yourself. We could easily burn an entire workshop
+learning the esoteric build mysteries of PDAL and all of its dependencies.
+Fortunately, Conda provides us a fully-featured known
+configuration to run our examples and exercises without having to suffer
+so much, and provides it for Windows, Linux, and macOS.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not everyone uses Conda. Another alternative to get a known configuration
+is to go through the workshop using <span class="xref std std-ref">docker</span> as your platform. A
+previous edition of the workshop was provided as Docker, but it was
+found to be a bit too difficult to follow.</p>
+</div>
+</div>
+<div class="section" id="installing-conda">
+<h2>Installing Conda<a class="headerlink" href="#installing-conda" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Copy the entire contents of your workshop USB key to a <code class="docutils literal"><span class="pre">PDAL</span></code> directory in your
+home directory (something like <code class="docutils literal"><span class="pre">C:\Users\hobu\PDAL</span></code>) or the equivalent for your OS.
+We will refer to this location for the rest of the workshop materials.</p>
+</li>
+<li><p class="first">Download the Conda installer for your OS setup. <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a></p>
+</li>
+<li><p class="first">After installing Conda, create an environment for PDAL with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">pdalworkshop</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Then <em>activate</em> the new environment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">pdalworkshop</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install PDAL, Entwine, and GDAL, and install it from <strong>conda-forge</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">pdal</span> <span class="n">python</span><span class="o">-</span><span class="n">pdal</span> <span class="n">gdal</span> <span class="n">entwine</span> <span class="n">matplotlib</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="exercises/index.html" class="btn btn-neutral float-right" title="Exercises" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="software.html" class="btn btn-neutral" title="Software Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+                    &copy;  2019
+                        <a href="https://github.com/abellgithub">Andrew Bell</a>,
+                        <a href="https://github.com/chambbj">Brad Chambers</a>,
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
+      Last updated on Aug 21, 2019.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.9.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+    <div class="footer">
+        <div class="container">
+                    &copy;  2019
+                        <a href="http://github.com/hobu">Howard Butler</a>,
+                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
+                        and
+                        <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
+                Last updated
+                    on Aug 21, 2019.
+        </div>
+    </div>
+
+</body>
+</html>

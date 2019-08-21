@@ -140,11 +140,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../dtm/dtm.html">Generating a DTM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meshing/meshing.html">Creating surface meshes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
@@ -239,13 +241,12 @@ to define it.</p>
 17
 18
 19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/uncompahgre.laz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;./exercises/analysis/colorization/uncompahgre.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.colorization&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;raster&quot;</span><span class="p">:</span> <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/casi-2015-04-29-weekly-mosaic.tif&quot;</span>
+            <span class="s2">&quot;raster&quot;</span><span class="p">:</span> <span class="s2">&quot;./exercises/analysis/colorization/casi-2015-04-29-weekly-mosaic.tif&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
@@ -256,18 +257,17 @@ to define it.</p>
             <span class="s2">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
             <span class="s2">&quot;minor_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
             <span class="s2">&quot;dataformat_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/uncompahgre-colored.laz&quot;</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./exercises/analysis/colorization/uncompahgre-colored.laz&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
-
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This JSON file is available in your workshop materials in the
 <code class="docutils literal"><span class="pre">./exercises/analysis/colorization/colorize.json</span></code> file. Remember to
-open this file and replace each occurrence of <code class="docutils literal"><span class="pre">c:/Users/hobu/PDAL/</span></code>
+open this file and replace each occurrence of <code class="docutils literal"><span class="pre">./</span></code>
 with the correct path for your machine.</p>
 </div>
 <div class="section" id="pipeline-breakdown">
@@ -276,7 +276,7 @@ with the correct path for your machine.</p>
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
 <p>After our pipeline errata, the first item we define in the pipeline is the
 point cloud file we’re going to read.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/uncompahgre.laz&quot;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;./exercises/analysis/colorization/uncompahgre.laz&quot;</span><span class="p">,</span>
 </pre></div>
 </div>
 </div>
@@ -287,7 +287,7 @@ operation. We’re going to use the default data scaling options. This
 filter will create PDAL dimensions <code class="docutils literal"><span class="pre">Red</span></code>, <code class="docutils literal"><span class="pre">Green</span></code>, and <code class="docutils literal"><span class="pre">Blue</span></code>.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.colorization&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;raster&quot;</span><span class="p">:</span> <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/colorization/casi-2015-04-29-weekly-mosaic.tif&quot;</span>
+    <span class="s2">&quot;raster&quot;</span><span class="p">:</span> <span class="s2">&quot;./exercises/analysis/colorization/casi-2015-04-29-weekly-mosaic.tif&quot;</span>
 <span class="p">},</span>
 </pre></div>
 </div>
@@ -313,7 +313,7 @@ add a few options to have finer control over what is written. These include:</p>
     <span class="s2">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
     <span class="s2">&quot;minor_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
     <span class="s2">&quot;dataformat_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/colorization/analysis/uncompahgre-colored.laz&quot;</span>
+    <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./exercises/colorization/analysis/uncompahgre-colored.laz&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -333,10 +333,8 @@ how your LAS files are written.</p>
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Anaconda Shell</cite>:</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
-    <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">colorization</span><span class="o">/</span><span class="n">colorize</span><span class="o">.</span><span class="n">json</span>
+<p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">colorization</span><span class="o">/</span><span class="n">colorize</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </td></tr></table></div>
 <img alt="../../../../_images/colorize-run-command.png" src="../../../../_images/colorize-run-command.png" />
@@ -390,7 +388,7 @@ for more information.</li>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -445,7 +443,7 @@ for more information.</li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 

@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../../../../search.html"/>
     <link rel="top" title="pdal.io" href="../../../../index.html"/>
         <link rel="up" title="Exercises" href="../../index.html"/>
-        <link rel="next" title="Rasterizing Attributes" href="../rasterize/rasterize.html"/>
+        <link rel="next" title="Creating surface meshes" href="../meshing/meshing.html"/>
         <link rel="prev" title="Identifying ground" href="../ground/ground.html"/> 
 
   
@@ -140,11 +140,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../thinning/thinning.html">Thinning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../ground/ground.html">Identifying ground</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Generating a DTM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meshing/meshing.html">Creating surface meshes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rasterize/rasterize.html">Rasterizing Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#python">Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#georeferencing">Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#batch-processing">Batch Processing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capstone.html">Final Project</a></li>
@@ -224,7 +226,7 @@ file by following that exercise before starting this one.</p>
 </div>
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
-<p>Invoke the following command, substituting accordingly, in your <cite>Anaconda Shell</cite>:</p>
+<p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 stage. There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we
 must use a pipeline.</p>
@@ -233,9 +235,9 @@ must use a pipeline.</p>
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/ground/denoised-ground-only.laz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;./exercises/analysis/ground/denoised-ground-only.laz&quot;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;c:/Users/hobu/PDAL/exercises/analysis/dtm/dtm.tif&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./exercises/analysis/dtm/dtm.tif&quot;</span><span class="p">,</span>
             <span class="s2">&quot;gdaldriver&quot;</span><span class="p">:</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
             <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
             <span class="s2">&quot;resolution&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
@@ -265,9 +267,7 @@ surface.</p>
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">^</span>
-   <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">PDAL</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../../_images/dtm-run-command.png"><img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" /></a>
@@ -280,7 +280,7 @@ see what was produced. Let us use <a class="reference internal" href="../../../q
 <li><p class="first">Open <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> and <cite>Add Raster Layer</cite>:</p>
 <a class="reference external image-reference" href="../../../../_images/dtm-add-raster-layer.png"><img alt="../../../../_images/dtm-add-raster-layer.png" src="../../../../_images/dtm-add-raster-layer.png" /></a>
 </li>
-<li><p class="first">Add the <cite>dtm.tif</cite> file from your <code class="docutils literal"><span class="pre">./PDAL/exercises/analysis/dtm</span></code>
+<li><p class="first">Add the <cite>dtm.tif</cite> file from your <code class="docutils literal"><span class="pre">./exercises/analysis/dtm</span></code>
 directory.</p>
 <a class="reference external image-reference" href="../../../../_images/dtm-add-raster-mean.png"><img alt="../../../../_images/dtm-add-raster-mean.png" src="../../../../_images/dtm-add-raster-mean.png" /></a>
 <a class="reference external image-reference" href="../../../../_images/dtm-qgis-added.png"><img alt="../../../../_images/dtm-qgis-added.png" src="../../../../_images/dtm-qgis-added.png" /></a>
@@ -302,10 +302,19 @@ to save the <code class="docutils literal"><span class="pre">hillshade.tif</span
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">^</span>
-    <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
-    <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hobu</span><span class="o">/</span><span class="n">pdal</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
-    <span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> <span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> \
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> \
+<span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> \
+<span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
+<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
+<span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> <span class="o">^</span>
+<span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
 </pre></div>
 </td></tr></table></div>
 </li>
@@ -333,7 +342,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../rasterize/rasterize.html" class="btn btn-neutral float-right" title="Rasterizing Attributes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../meshing/meshing.html" class="btn btn-neutral float-right" title="Creating surface meshes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../ground/ground.html" class="btn btn-neutral" title="Identifying ground" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -352,7 +361,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jun 07, 2019.
+      Last updated on Aug 21, 2019.
 
     </p>
   </div> 
@@ -407,7 +416,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 07, 2019.
+                    on Aug 21, 2019.
         </div>
     </div>
 
