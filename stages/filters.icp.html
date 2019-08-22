@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Filters" href="filters.html"/>
-        <link rel="next" title="filters.reprojection" href="filters.reprojection.html"/>
+        <link rel="next" title="filters.projpipeline" href="filters.projpipeline.html"/>
         <link rel="prev" title="filters.cpd" href="filters.cpd.html"/> 
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -122,6 +122,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="filters.projpipeline.html">filters.projpipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.reprojection.html">filters.reprojection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.transformation.html">filters.transformation</a></li>
 </ul>
@@ -138,6 +139,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -203,34 +207,30 @@
             
   <div class="section" id="filters-icp">
 <span id="id1"></span><h1>filters.icp<a class="headerlink" href="#filters-icp" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>ICP filter</strong> uses the <a class="reference external" href="http://docs.pointclouds.org/trunk/classpcl_1_1_iterative_closest_point.html">PCL’s Iterative Closest Point (ICP)</a> algorithm to
-calculate a <strong>rigid</strong> (rotation and translation) transformation that best aligns
-two datasets.  The first input to the ICP filter is considered the “fixed”
-points, and all subsequent points are “moving” points.  The output from the
-change filter are the “moving” points after the calculated transformation has
-been applied, one point view per input.  The transformation matrix is inserted
-into the stage’s metadata.</p>
+<p>The <strong>ICP filter</strong> uses the Iterative Closest Point (ICP) algorithm to
+calculate a <strong>rigid</strong> (rotation and translation) transformation that best
+aligns two datasets.  The first input to the ICP filter is considered the
+“fixed” points, and all subsequent points are “moving” points.  The output from
+the filter are the “moving” points after the calculated transformation has been
+applied, one point view per input.  The transformation matrix is inserted into
+the stage’s metadata.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>ICP requires that the initial pose of the two point sets to be adequately
-close, which are not always available, especially when transformation is
-non-rigid. ICP can handle limited nonrigid transformations but be aware
+<p>ICP requires the initial pose of the two point sets to be adequately close,
+which is not always possible, especially when the transformation is
+non-rigid.  ICP can handle limited non-rigid transformations but be aware
 ICP may be unable to escape a local minimum. Consider using CPD instead.</p>
 <p>From [Xuechen2019]:</p>
 <p class="last">ICP starts with an initial guess of the transformation between the two
 point sets and then iterates between finding the correspondence under the
-current transformation and updating the transformation with the newly
-found correspondence. ICP is widely used because it is rather
-straightforward and easy to implement in practice; however, its biggest
-problem is that it does not guarantee finding the globally optimal
-transformation. In fact, ICP converges within a very small basin in the
-parameter space, and it easily becomes trapped in local minima. Therefore,
-the results of ICP are very sensitive to the initialization, especially
-when high levels of noise and large proportions of outliers exist.</p>
-</div>
-<div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+current transformation and updating the transformation with the newly found
+correspondence. ICP is widely used because it is rather straightforward and
+easy to implement in practice; however, its biggest problem is that it does
+not guarantee finding the globally optimal transformation. In fact, ICP
+converges within a very small basin in the parameter space, and it easily
+becomes trapped in local minima. Therefore, the results of ICP are very
+sensitive to the initialization, especially when high levels of noise and
+large proportions of outliers exist.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -269,7 +269,18 @@ from the pipeline command:</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>None.</p>
+<dl class="docutils">
+<dt>max_iter</dt>
+<dd>Maximum number of iterations. [Default: <strong>100</strong>]</dd>
+<dt>max_similar</dt>
+<dd>Max number of similar transforms to consider converged. [Default: <strong>0</strong>]</dd>
+<dt>mse_abs</dt>
+<dd>Absolute threshold for MSE. [Default: <strong>1e-12</strong>]</dd>
+<dt>rt</dt>
+<dd>Rotation threshold. [Default: <strong>0.99999</strong>]</dd>
+<dt>tt</dt>
+<dd>Translation threshold. [Default: <strong>9e-8</strong>]</dd>
+</dl>
 </div>
 </div>
 
@@ -280,7 +291,7 @@ from the pipeline command:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.reprojection.html" class="btn btn-neutral float-right" title="filters.reprojection" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.projpipeline.html" class="btn btn-neutral float-right" title="filters.projpipeline" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="filters.cpd.html" class="btn btn-neutral" title="filters.cpd" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -299,7 +310,7 @@ from the pipeline command:</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -320,7 +331,7 @@ from the pipeline command:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -354,7 +365,7 @@ from the pipeline command:</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

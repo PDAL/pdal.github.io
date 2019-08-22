@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,14 +114,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.nitf</a><ul>
@@ -153,6 +155,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -242,27 +247,25 @@ to actually read and write the data.</p>
 <a class="reference external" href="https://github.com/hobu/nitro">https://github.com/hobu/nitro</a> for NITF read and write support.</p>
 </div>
 <div class="admonition embed" id="embed-0">
-<p class="first admonition-title">Default Embedded Stage </p>
-<p class="last">This stage is enabled by default</p>
+<p class="admonition-title">Default Embedded Stage </p>
+<p>This stage is enabled by default</p>
 </div>
 <div class="admonition streamable" id="streamable-0">
-<p class="first admonition-title">Streamable Stage</p>
-<p class="last">This stage supports streaming operations</p>
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.nitf&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;mynitf.nitf&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.nitf&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;mynitf.nitf&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -275,15 +278,14 @@ to actually read and write the data.</p>
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>extra_dims</dt>
 <dd><p class="first">Extra dimensions to be read as part of each point beyond those specified by
 the LAS point format.  The format of the option is
-&lt;dimension_name&gt;=&lt;type&gt;, … where type is one of:
-int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, double.
-<cite>_t</cite> may be added to any of the type names as well (e.g., uint32_t).</p>
+<code class="docutils literal"><span class="pre">&lt;dimension_name&gt;=&lt;type&gt;[,</span> <span class="pre">...]</span></code>.  Any PDAL <a class="reference internal" href="../types.html#types"><span class="std std-ref">type</span></a> can
+be specified.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The presence of an extra bytes VLR when reading a version
@@ -331,7 +333,7 @@ doesn’t support version 1 LAZ files or version 1.4 of LAS.
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -352,7 +354,7 @@ doesn’t support version 1 LAZ files or version 1.4 of LAS.
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -386,7 +388,7 @@ doesn’t support version 1 LAZ files or version 1.4 of LAS.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

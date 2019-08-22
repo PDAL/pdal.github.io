@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,10 +114,10 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.ilvis2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
@@ -126,6 +126,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -153,6 +155,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -218,35 +223,33 @@
             
   <div class="section" id="readers-ilvis2">
 <span id="id1"></span><h1>readers.ilvis2<a class="headerlink" href="#readers-ilvis2" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>ILVIS2 reader</strong> read from files in the ILVIS2 format. See <a class="reference external" href="http://nsidc.org/data/docs/daac/icebridge/ilvis2/index.html">http://nsidc.org/data/docs/daac/icebridge/ilvis2/index.html</a>
-for more information</p>
+<p>The <strong>ILVIS2 reader</strong> read from files in the ILVIS2 format. See the
+<a class="reference external" href="https://nsidc.org/data/ilvis2">product spec</a> for more information.</p>
 <div class="figure" id="id2">
 <img alt="../_images/readers.ilvis2.metadata.png" src="../_images/readers.ilvis2.metadata.png" />
 <p class="caption"><span class="caption-text">Dimensions provided by the ILVIS2 reader</span></p>
 </div>
 <div class="admonition embed" id="embed-0">
-<p class="first admonition-title">Default Embedded Stage </p>
-<p class="last">This stage is enabled by default</p>
+<p class="admonition-title">Default Embedded Stage </p>
+<p>This stage is enabled by default</p>
 </div>
 <div class="admonition streamable" id="streamable-0">
-<p class="first admonition-title">Streamable Stage</p>
-<p class="last">This stage supports streaming operations</p>
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ilvis2&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ILVIS2_GL2009_0414_R1401_042504.TXT&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="s2">&quot;ILVIS2_GL2009_0414_R1401_042504.xml&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ilvis2&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ILVIS2_GL2009_0414_R1401_042504.TXT&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="s2">&quot;ILVIS2_GL2009_0414_R1401_042504.xml&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -259,12 +262,12 @@ for more information</p>
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>mapping</dt>
 <dd>Which ILVIS2 field type to map to X, Y, Z dimensions
-‘LOW’, ‘CENTROID’, or ‘HIGH’ [‘CENTROID’]</dd>
+‘LOW’, ‘CENTROID’, or ‘HIGH’ [Default: ‘CENTROID’]</dd>
 <dt>metadata</dt>
 <dd>XML metadata file to coincidentally read [Optional]</dd>
 </dl>
@@ -297,7 +300,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -318,7 +321,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -352,7 +355,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

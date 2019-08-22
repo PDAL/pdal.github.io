@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -113,14 +113,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -148,6 +150,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -216,7 +221,7 @@ normalize common dimension types, like X, Y, Z, or Intensity, which are often
 found in LiDAR point clouds. Not all dimension types need to be fixed, however.
 Database drivers typically return unstructured lists of dimensions.  A reader
 might provide a simple file type, like <a class="reference internal" href="readers.text.html#readers-text"><span class="std std-ref">readers.text</span></a>, a complex database
-like <a class="reference internal" href="readers.oci.html#readers-oci"><span class="std std-ref">readers.oci</span></a>, or a network service like <a class="reference internal" href="readers.greyhound.html#readers-greyhound"><span class="std std-ref">readers.greyhound</span></a>.</p>
+like <a class="reference internal" href="readers.oci.html#readers-oci"><span class="std std-ref">readers.oci</span></a>, or a network service like <a class="reference internal" href="readers.ept.html#readers-ept"><span class="std std-ref">readers.ept</span></a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="docutils">
@@ -228,6 +233,8 @@ for point cloud data.</dd>
 than fetching data from a specific reader.</dd>
 <dt><a class="reference internal" href="readers.ept.html#readers-ept"><span class="std std-ref">readers.ept</span></a></dt>
 <dd>Used for reading <a class="reference external" href="https://entwine.io">Entwine Point Tile</a> format.</dd>
+<dt><a class="reference internal" href="readers.e57.html#readers-e57"><span class="std std-ref">readers.e57</span></a></dt>
+<dd>Read point clouds in the E57 format.</dd>
 <dt><a class="reference internal" href="readers.faux.html#readers-faux"><span class="std std-ref">readers.faux</span></a></dt>
 <dd>Used for testing pipelines. It does not read from a file or database, but
 generates synthetic data to feed into the pipeline.</dd>
@@ -235,8 +242,6 @@ generates synthetic data to feed into the pipeline.</dd>
 <dd>Read GDAL readable raster data sources as point clouds.</dd>
 <dt><a class="reference internal" href="readers.geowave.html#readers-geowave"><span class="std std-ref">readers.geowave</span></a></dt>
 <dd>Read point cloud data from Accumulo.</dd>
-<dt><a class="reference internal" href="readers.greyhound.html#readers-greyhound"><span class="std std-ref">readers.greyhound</span></a></dt>
-<dd>Query point cloud data from a Greyhound server.</dd>
 <dt><a class="reference internal" href="readers.i3s.html#readers-i3s"><span class="std std-ref">readers.i3s</span></a></dt>
 <dd>Read data stored in the Esri I3S format.  The data is read from an
 appropriate server.</dd>
@@ -251,6 +256,9 @@ driver if LASzip  or LAZperf are found during compilation.</dd>
 arrays in a MATLAB struct.</dd>
 <dt><a class="reference internal" href="readers.mbio.html#readers-mbio"><span class="std std-ref">readers.mbio</span></a></dt>
 <dd>Read sonar bathymetry data from formats supported by the MB-System library.</dd>
+<dt><a class="reference internal" href="readers.memoryview.html#readers-memoryview"><span class="std std-ref">readers.memoryview</span></a></dt>
+<dd>Read data from memory where dimension data is arranged in rows.  For
+use only with the PDAL API.</dd>
 <dt><a class="reference internal" href="readers.mrsid.html#readers-mrsid"><span class="std std-ref">readers.mrsid</span></a></dt>
 <dd>Read data compressed by the MrSID 4.0 LiDAR Compressor. Requires the
 LizardTech Lidar_DSDK.</dd>
@@ -325,7 +333,7 @@ tindex command.</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -346,7 +354,7 @@ tindex command.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -380,7 +388,7 @@ tindex command.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,14 +114,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -153,6 +155,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -218,34 +223,32 @@
             
   <div class="section" id="readers-pgpointcloud">
 <span id="id1"></span><h1>readers.pgpointcloud<a class="headerlink" href="#readers-pgpointcloud" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>PostgreSQL Pointcloud Reader</strong> allows you to read from a PostgreSQL
-database that the <a class="reference external" href="https://github.com/pramsey/pointcloud">PostgreSQL Pointcloud</a> extension enabled. The Pointcloud
+<p>The <strong>PostgreSQL Pointcloud Reader</strong> allows you to read points from a PostgreSQL
+database with <a class="reference external" href="https://github.com/pramsey/pointcloud">PostgreSQL Pointcloud</a> extension enabled. The Pointcloud
 extension stores point cloud data in tables that contain rows of patches. Each
 patch in turn contains a large number of spatially nearby points.</p>
-<p>The reader pulls patches from a table, potentially sub-setting the query on the
-way with a “where” clause.</p>
+<p>The reader pulls patches from a table, potentially sub-setting the query
+with a “where” clause.</p>
 <div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+<p class="admonition-title">Dynamic Plugin</p>
+<p>This stage requires a dynamic plugin to operate</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.pgpointcloud&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;dbname=&#39;lidar&#39; user=&#39;user&#39;&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="s2">&quot;lidar&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;pa&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26910&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;where&quot;</span><span class="p">:</span><span class="s2">&quot;PC_Intersects(pa, ST_MakeEnvelope(560037.36, 5114846.45, 562667.31, 5118943.24, 26910))&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.pgpointcloud&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="s2">&quot;dbname=&#39;lidar&#39; user=&#39;user&#39;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="s2">&quot;lidar&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;pa&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;spatialreference&quot;</span><span class="p">:</span><span class="s2">&quot;EPSG:26910&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;where&quot;</span><span class="p">:</span><span class="s2">&quot;PC_Intersects(pa, ST_MakeEnvelope(560037.36, 5114846.45, 562667.31, 5118943.24, 26910))&quot;</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.txt&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.txt&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -254,7 +257,7 @@ way with a “where” clause.</p>
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>connection</dt>
@@ -295,7 +298,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -316,7 +319,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -350,7 +353,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,14 +114,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -153,6 +155,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -222,11 +227,11 @@
 PDAL provides a similar concept for PDAL-readable point cloud data. You can use
 the <a class="reference internal" href="../apps/tindex.html#tindex-command"><span class="std std-ref">tindex</span></a> application to generate tile index files in any
 format that <a class="reference external" href="http://gdal.org/ogr/">OGR</a> supports writing. Once you have the tile index, you can then
-use the <a class="reference internal" href="#readers-tindex"><span class="std std-ref">readers.tindex</span></a> driver to automatically merge and query the
-data described by the tiles.</p>
+use the tindex reader to automatically merge and query the data described by
+the tiles.</p>
 <div class="admonition embed" id="embed-0">
-<p class="first admonition-title">Default Embedded Stage </p>
-<p class="last">This stage is enabled by default</p>
+<p class="admonition-title">Default Embedded Stage </p>
+<p>This stage is enabled by default</p>
 </div>
 <div class="section" id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
@@ -238,23 +243,21 @@ data described by the tiles.</p>
     <span class="o">--</span><span class="n">t_srs</span> <span class="s2">&quot;EPSG:4326&quot;</span>
 </pre></div>
 </div>
-<p>Use the following <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> example to read and automatically
+<p>Use the following <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> example to read and automatically
 merge the data.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.tindex&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filter_srs&quot;</span><span class="p">:</span><span class="s2">&quot;+proj=lcc +lat_1=43 +lat_2=45.5 +lat_0=41.75 +lon_0=-120.5 +x_0=399999.9999999999 +y_0=0 +ellps=GRS80 +units=ft +no_defs&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;index.sqlite&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;where&quot;</span><span class="p">:</span><span class="s2">&quot;location LIKE \&#39;%nteresting.las%\&#39;&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;wkt&quot;</span><span class="p">:</span><span class="s2">&quot;POLYGON ((635629.85000000 848999.70000000, 635629.85000000 853535.43000000, 638982.55000000 853535.43000000, 638982.55000000 848999.70000000, 635629.85000000 848999.70000000))&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.tindex&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filter_srs&quot;</span><span class="p">:</span><span class="s2">&quot;+proj=lcc +lat_1=43 +lat_2=45.5 +lat_0=41.75 +lon_0=-120.5 +x_0=399999.9999999999 +y_0=0 +ellps=GRS80 +units=ft +no_defs&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;index.sqlite&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;where&quot;</span><span class="p">:</span><span class="s2">&quot;location LIKE \&#39;%nteresting.las%\&#39;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;wkt&quot;</span><span class="p">:</span><span class="s2">&quot;POLYGON ((635629.85000000 848999.70000000, 635629.85000000 853535.43000000, 638982.55000000 853535.43000000, 638982.55000000 848999.70000000, 635629.85000000 848999.70000000))&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -267,10 +270,10 @@ merge the data.</p>
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
-<dt>lyr_name</dt>
+<dt><span class="target" id="lyr-name">lyr_name</span></dt>
 <dd>The OGR layer name for the data source to use to
 fetch the tile index information.</dd>
 <dt>srs_column</dt>
@@ -284,23 +287,23 @@ the tile index file.
 [Default: <strong>location</strong>]</dd>
 <dt>sql</dt>
 <dd><a class="reference external" href="http://www.gdal.org/ogr_sql.html">OGR SQL</a> to use to define the tile index layer.</dd>
-<dt>bounds</dt>
+<dt><span class="target" id="bounds">bounds</span></dt>
 <dd>A 2D box to pre-filter the tile index. If it is set,
-it will override any <code class="docutils literal"><span class="pre">wkt</span></code> option.</dd>
-<dt>wkt</dt>
+it will override any <a class="reference internal" href="#wkt">wkt</a> option.</dd>
+<dt><span class="target" id="wkt">wkt</span></dt>
 <dd>A geometry to pre-filter the tile index using
 OGR.</dd>
 <dt>t_srs</dt>
 <dd>Reproject the layer SRS, otherwise default to the
 tile index layer’s SRS. [Default: “EPSG:4326”]</dd>
 <dt>filter_srs</dt>
-<dd>Transforms any <code class="docutils literal"><span class="pre">wkt</span></code> or <code class="docutils literal"><span class="pre">boundary</span></code> option to this
+<dd>Transforms any <a class="reference internal" href="#wkt">wkt</a> or <a class="reference internal" href="#bounds">bounds</a> option to this
 coordinate system before filtering or reading data.
 [Default: “EPSG:4326”]</dd>
 <dt>where</dt>
 <dd><a class="reference external" href="http://www.gdal.org/ogr_sql.html">OGR SQL</a> filter clause to use on the layer. It only
 works in combination with tile index layers that are
-defined with <code class="docutils literal"><span class="pre">lyr_name</span></code></dd>
+defined with <a class="reference internal" href="#lyr-name">lyr_name</a></dd>
 <dt>dialect</dt>
 <dd><a class="reference external" href="http://www.gdal.org/ogr_sql.html">OGR SQL</a> dialect to use when querying tile index layer
 [Default: OGRSQL]</dd>
@@ -334,7 +337,7 @@ defined with <code class="docutils literal"><span class="pre">lyr_name</span></c
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -355,7 +358,7 @@ defined with <code class="docutils literal"><span class="pre">lyr_name</span></c
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -389,7 +392,7 @@ defined with <code class="docutils literal"><span class="pre">lyr_name</span></c
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

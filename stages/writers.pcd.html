@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,9 +114,10 @@
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.e57.html">writers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.gltf.html">writers.gltf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.matlab.html">writers.matlab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
@@ -140,6 +141,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -208,15 +212,14 @@
 <p>The <strong>PCD Writer</strong> supports writing to <a class="reference external" href="http://pointclouds.org/documentation/tutorials/pcd_file_format.php">Point Cloud Data (PCD)</a> formatted
 files, which are used by the <a class="reference external" href="http://pointclouds.org">Point Cloud Library (PCL)</a>.</p>
 <p>By default, compression is not enabled, and the PCD writer will output ASCII
-formatted data. When compression is enabled, the output is PCD’s
-binary-compressed format.</p>
-<div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+formatted data.</p>
+<div class="admonition embed" id="embed-0">
+<p class="admonition-title">Default Embedded Stage </p>
+<p>This stage is enabled by default</p>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <cite>PCD Writer</cite> requires linkage of the <a class="reference external" href="http://pointclouds.org">PCL</a> library.</p>
+<div class="admonition streamable" id="streamable-0">
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -239,16 +242,22 @@ binary-compressed format.</p>
 <dt>filename</dt>
 <dd>PCD file to write [Required]</dd>
 <dt>compression</dt>
-<dd>Level of PCD compression to use (ascii, binary, compressed)
-[Default: “ascii”]</dd>
-<dt>xyz</dt>
-<dd>Write only XYZ dimension? [Default: “false”]</dd>
-<dt>subtract_minimum</dt>
-<dd>Set origin to minimum of XYZ dimension? [Default: true]</dd>
-<dt>offset_x, offset_y, offset_z</dt>
-<dd>Offset to be subtracted from XYZ position [Default: 0.0]</dd>
-<dt>scale_x, scale_y, scale_z</dt>
-<dd>Scale to divide from XYZ dimension [Default: 1.0]</dd>
+<dd>Level of PCD compression to use (ascii, binary, compressed) [Default:
+“ascii”]</dd>
+<dt><span class="target" id="precision">precision</span></dt>
+<dd>Decimal Precision for output of values. This can be overridden for individual
+dimensions using the order option. [Default: 3]</dd>
+<dt><span class="target" id="order">order</span></dt>
+<dd>Comma-separated list of dimension names in the desired output order. For
+example “X,Y,Z,Red,Green,Blue”. Dimension names can optionally be followed
+by a PDAL type (e.g., Unsigned32) and dimension-specific precision (used only
+with “ascii” compression).  Ex: “X=Float:2, Y=Float:2, Z=Float:3,
+Intensity=Unsigned32” If no precision is specified the value provided with
+the <a class="reference internal" href="#precision">precision</a> option is used.  The default dimension type is double
+precision float. [Default: none]</dd>
+<dt>keep_unspecified</dt>
+<dd>If true, writes all dimensions. Dimensions specified with the <a class="reference internal" href="#order">order</a> option
+precede those not specified. [Default: <strong>true</strong>]</dd>
 </dl>
 </div>
 </div>
@@ -279,7 +288,7 @@ binary-compressed format.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -300,7 +309,7 @@ binary-compressed format.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -334,7 +343,7 @@ binary-compressed format.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

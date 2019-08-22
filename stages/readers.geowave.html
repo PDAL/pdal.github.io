@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
-        <link rel="next" title="readers.greyhound" href="readers.greyhound.html"/>
+        <link rel="next" title="readers.i3s" href="readers.i3s.html"/>
         <link rel="prev" title="readers.gdal" href="readers.gdal.html"/> 
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.geowave</a><ul>
@@ -121,11 +122,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -153,6 +155,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -218,36 +223,33 @@
             
   <div class="section" id="readers-geowave">
 <span id="id1"></span><h1>readers.geowave<a class="headerlink" href="#readers-geowave" title="Permalink to this headline">¶</a></h1>
-<p id="index-0">The <strong>GeoWave reader</strong> uses <a class="reference external" href="https://ngageoint.github.io/geowave/">GeoWave</a> to read from Accumulo.  GeoWave entries
-are stored using <a class="reference external" href="http://epsg.io/4326/">EPSG:4326</a>.  Instructions for
-configuring the GeoWave plugin can be found <a class="reference external" href="https://ngageoint.github.io/geowave/documentation.html#jace-jni-proxies-2">here</a>.</p>
+<p id="index-0">The <strong>GeoWave reader</strong> uses <a class="reference external" href="https://github.com/locationtech/geowave">GeoWave</a> to read from Accumulo.  GeoWave entries
+are stored using <a class="reference external" href="http://epsg.io/4326/">EPSG:4326</a>.</p>
 <div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+<p class="admonition-title">Dynamic Plugin</p>
+<p>This stage requires a dynamic plugin to operate</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.geowave&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;zookeeper_url&quot;</span><span class="p">:</span><span class="s2">&quot;zookeeper1:2181,zookeeper2:2181,zookeeper3:2181&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;instance_name&quot;</span><span class="p">:</span><span class="s2">&quot;GeoWave&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;pass&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;table_namespace&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Table&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;feature_type_name&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Point&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;data_adapter&quot;</span><span class="p">:</span><span class="s2">&quot;FeatureCollectionDataAdapter&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;points_per_entry&quot;</span><span class="p">:</span><span class="s2">&quot;5000u&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([0,1000000],[0,1000000],[0,100])&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./pdal/test/data/autzen/autzen.jpg&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.geowave&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;zookeeper_url&quot;</span><span class="p">:</span><span class="s2">&quot;zookeeper1:2181,zookeeper2:2181,zookeeper3:2181&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;instance_name&quot;</span><span class="p">:</span><span class="s2">&quot;GeoWave&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;pass&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;table_namespace&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Table&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;feature_type_name&quot;</span><span class="p">:</span><span class="s2">&quot;PDAL_Point&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;data_adapter&quot;</span><span class="p">:</span><span class="s2">&quot;FeatureCollectionDataAdapter&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;points_per_entry&quot;</span><span class="p">:</span><span class="s2">&quot;5000u&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([0,1000000],[0,1000000],[0,100])&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;./pdal/test/data/autzen/autzen.jpg&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.txt&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.txt&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -256,7 +258,7 @@ configuring the GeoWave plugin can be found <a class="reference external" href="
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>zookeeper_url</dt>
@@ -274,7 +276,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>data_adapter</dt>
 <dd>FeatureCollectionDataAdapter stores multiple points per Accumulo entry. FeatureDataAdapter stores a single point per Accumulo entry. [Default: FeatureCollectionDataAdapter]</dd>
 <dt>points_per_entry</dt>
-<dd>Sets the maximum number of points per Accumulo entry when using FeatureCollectionDataAdapter. [Default: 5000u]</dd>
+<dd>Sets the maximum number of points per Accumulo entry when using FeatureCollectionDataAdapter. [Default: 5000]</dd>
 <dt>bounds</dt>
 <dd>The extent of the bounding rectangle to use to query points, expressed as a string, eg: “([xmin,xmax],[ymin,ymax],[zmin,zmax])”. [Default: unit cube]</dd>
 </dl>
@@ -288,7 +290,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="readers.greyhound.html" class="btn btn-neutral float-right" title="readers.greyhound" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.i3s.html" class="btn btn-neutral float-right" title="readers.i3s" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.gdal.html" class="btn btn-neutral" title="readers.gdal" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -307,7 +309,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -328,7 +330,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -362,7 +364,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

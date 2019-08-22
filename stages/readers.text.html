@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,14 +114,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -154,6 +156,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -225,22 +230,22 @@ into a number of fields by a separator.  Each field represents a value for
 a point’s dimension.  Each value needs to be <a class="reference external" href="http://en.cppreference.com/w/cpp/string/basic_string/stof">formatted</a> properly for
 C++ language double-precision values.</p>
 <p>The text reader expects a header line to 1) indicate the separator character
-for the fields and 2) name the dimension for each field in the points.  Any
+for the fields and 2) name the point dimension for each field.  Any
 single non-alphanumeric character can be used as a separator.  The header line
-separator can be overridden by the ‘separator’ option (see below).
-Each line in the file must contain the same number of fields as indicated by
+separator can be overridden by the <a class="reference internal" href="#separator">separator</a> option.  Each line in the
+file must contain the same number of fields as indicated by
 dimension names in the header.  Spaces are generally ignored in the input
 unless used as a separator.  When a space character is used as a separator,
 any number of consecutive spaces are treated as single space and
 leading/trailing spaces are ignored.</p>
 <p>Blank lines are ignored after the header line is read.</p>
 <div class="admonition embed" id="embed-0">
-<p class="first admonition-title">Default Embedded Stage </p>
-<p class="last">This stage is enabled by default</p>
+<p class="admonition-title">Default Embedded Stage </p>
+<p>This stage is enabled by default</p>
 </div>
 <div class="admonition streamable" id="streamable-0">
-<p class="first admonition-title">Streamable Stage</p>
-<p class="last">This stage supports streaming operations</p>
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 <div class="section" id="example-input-file">
 <h2>Example Input File<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
@@ -261,18 +266,16 @@ leading/trailing spaces are ignored.</p>
 </div>
 <div class="section" id="example-pipeline">
 <h2>Example Pipeline<a class="headerlink" href="#example-pipeline" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.text&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.txt&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.text&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;inputfile.txt&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.txt&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.txt&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -285,16 +288,16 @@ leading/trailing spaces are ignored.</p>
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>header</dt>
-<dd>String to use as the file header.  All lines in the file as assumed to be
-records containing point data unless skipped with the ‘skip’ option.
+<dd>String to use as the file header.  All lines in the file are assumed to be
+records containing point data unless skipped with the <a class="reference internal" href="#skip">skip</a> option.
 [Default: None]</dd>
-<dt>separator</dt>
+<dt><span class="target" id="separator">separator</span></dt>
 <dd>Separator character to override that found in header line. [Default: None]</dd>
-<dt>skip</dt>
+<dt><span class="target" id="skip">skip</span></dt>
 <dd>Number of lines to ignore at the beginning of the file. [Default: 0]</dd>
 </dl>
 </div>
@@ -326,7 +329,7 @@ records containing point data unless skipped with the ‘skip’ option.
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -347,7 +350,7 @@ records containing point data unless skipped with the ‘skip’ option.
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -381,7 +384,7 @@ records containing point data unless skipped with the ‘skip’ option.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,14 +114,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -158,6 +160,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -234,7 +239,7 @@ in writing the file and for reading the file don’t match.</p>
 </div>
 <div class="section" id="array-types">
 <h2>Array Types<a class="headerlink" href="#array-types" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="#readers-numpy"><span class="std std-ref">readers.numpy</span></a> supports reading data in two forms:</p>
+<p>readers.numpy supports reading data in two forms:</p>
 <ul class="simple">
 <li>As a <a class="reference external" href="https://docs.scipy.org/doc/numpy/user/basics.rec.html">structured array</a> with specified field names (from <a class="reference external" href="https://github.com/laspy/laspy">laspy</a> for
 example)</li>
@@ -254,7 +259,7 @@ of fields.  Each field has a name.  As an example, <a class="reference external"
 <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;point&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flag_byte&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;raw_classification&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scan_angle_rank&#39;</span><span class="p">,</span> <span class="s1">&#39;i1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;user_data&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pt_src_id&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;gps_time&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">)])])</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#readers-numpy"><span class="std std-ref">readers.numpy</span></a> supports reading these Numpy arrays and mapping
+<p>The numpy reader supports reading these Numpy arrays and mapping
 field names to standard PDAL <a class="reference internal" href="filters.stats.html#dimensions"><span class="std std-ref">dimension</span></a> names.
 If that fails, the reader retries by removing <code class="docutils literal"><span class="pre">_</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, or <code class="docutils literal"><span class="pre">space</span></code>
 in turn.  If that also fails, the array field names are used to create
@@ -333,12 +338,12 @@ indices for each dimension over three.</p>
 <p>When reading data, X Y and Z can be assigned using row-major (C) order or
 column-major (Fortran) order by using the <code class="docutils literal"><span class="pre">order</span></code> option.</p>
 <div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+<p class="admonition-title">Dynamic Plugin</p>
+<p>This stage requires a dynamic plugin to operate</p>
 </div>
 <div class="admonition streamable" id="streamable-0">
-<p class="first admonition-title">Streamable Stage</p>
-<p class="last">This stage supports streaming operations</p>
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 </div>
 </div>
@@ -351,11 +356,11 @@ column-major (Fortran) order by using the <code class="docutils literal"><span c
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>dimension</dt>
-<dd>Dimension name from <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to map raster values</dd>
+<dd><a class="reference internal" href="filters.stats.html#dimensions"><span class="std std-ref">Dimension</span></a> name to map raster values</dd>
 <dt>order</dt>
 <dd>Either ‘row’ or ‘column’ to specify assigning the X,Y and Z values
 in a row-major or column-major order. [Default: matches the natural
@@ -397,7 +402,7 @@ are generally handled with the current ‘order’ option.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -418,7 +423,7 @@ are generally handled with the current ‘order’ option.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -452,7 +457,7 @@ are generally handled with the current ‘order’ option.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

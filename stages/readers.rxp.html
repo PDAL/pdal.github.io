@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,14 +114,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -154,6 +156,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -230,8 +235,12 @@ This driver has been tested against RiVLib version 1.39 on a Ubuntu
 14.04 using gcc43.</p>
 </div>
 <div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+<p class="admonition-title">Dynamic Plugin</p>
+<p>This stage requires a dynamic plugin to operate</p>
+</div>
+<div class="admonition streamable" id="streamable-0">
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -240,8 +249,7 @@ RiVLib installation.  RiVLib can be obtained from the <a class="reference extern
 with a properly enabled user account.  The RiVLib files do not need to be
 in a system-level directory, though they could be (e.g. they could be
 in <code class="docutils literal"><span class="pre">/usr/local</span></code>, or just in your home directory somewhere).  For help
-building PDAL with optional libraries, see
-<a class="reference external" href="http://pdal.io/compilation/unix.html#configure-your-optional-libraries">the optional library documentation</a>.</p>
+building PDAL with optional libraries, see <span class="xref std std-ref">the optional library documentation</span>.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -250,21 +258,19 @@ system, to values that can be written to a las file.  Only points with a
 valid gps time, as determined by a pps pulse, are read from the rxp, since
 the <code class="docutils literal"><span class="pre">sync_to_pps</span></code> option is “true”.  Reflectance values are mapped to
 intensity values using sensible defaults.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;120304_204030.rxp&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;sync_to_pps&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;reflectance_as_intensity&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;120304_204030.rxp&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;sync_to_pps&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;reflectance_as_intensity&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;outputfile.las&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;discard_high_return_numbers&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;outputfile.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;discard_high_return_numbers&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <p>We set the <code class="docutils literal"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal"><span class="pre">true</span></code> on the
@@ -282,29 +288,26 @@ to filter those points earlier in the pipeline.</p>
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>rdtp</dt>
-<dd>Boolean to switch from file-based reading to RDTP-based. [default: false]</dd>
+<dd>Boolean to switch from file-based reading to RDTP-based. [Default: false]</dd>
 <dt>sync_to_pps</dt>
 <dd>If “true”, ensure all incoming points have a valid pps timestamp, usually
 provided by some sort of GPS clock.  If “false”, use the scanner’s internal
-time.
-[default: true]</dd>
+time.  [Default: true]</dd>
 <dt>reflectance_as_intensity</dt>
 <dd>If “true”, in addition to storing reflectance values directly, also
 stores the values as Intensity by mapping the reflectance values in the
 range from <cite>min_reflectance</cite> to <cite>max_reflectance</cite> to the range 0-65535.
 Values less than <cite>min_reflectance</cite> are assigned the value 0.
 Values greater <cite>max_reflectance</cite> are assigned the value 65535.
-[default: true]</dd>
+[Default: true]</dd>
 <dt>min_reflectance</dt>
-<dd>The low end of the reflectance-to-intensity map.
-[default: -25.0]</dd>
+<dd>The low end of the reflectance-to-intensity map.  [Default: -25.0]</dd>
 <dt>max_reflectance</dt>
-<dd>The high end of the reflectance-to-intensity map.
-[default: 5.0]</dd>
+<dd>The high end of the reflectance-to-intensity map.  [Default: 5.0]</dd>
 </dl>
 </div>
 </div>
@@ -335,7 +338,7 @@ Values greater <cite>max_reflectance</cite> are assigned the value 65535.
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -356,7 +359,7 @@ Values greater <cite>max_reflectance</cite> are assigned the value 65535.
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -390,7 +393,7 @@ Values greater <cite>max_reflectance</cite> are assigned the value 65535.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

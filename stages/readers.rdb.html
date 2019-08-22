@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,14 +114,16 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -162,6 +164,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -230,8 +235,12 @@
 <p>The <strong>RDB reader</strong> reads from files in the RDB format, the in-house format
 used by <a class="reference external" href="http://www.riegl.com">RIEGL Laser Measurement Systems GmbH</a>.</p>
 <div class="admonition plugin" id="plugin-0">
-<p class="first admonition-title">Dynamic Plugin</p>
-<p class="last">This stage requires a dynamic plugin to operate</p>
+<p class="admonition-title">Dynamic Plugin</p>
+<p>This stage requires a dynamic plugin to operate</p>
+</div>
+<div class="admonition streamable" id="streamable-0">
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -244,7 +253,8 @@ PDAL with optional libraries, see <a class="reference external" href="http://pda
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
-<li>Minimum rdblib version required to build the driver and run the tests: 2.1.6</li>
+<li>Minimum rdblib version required to build the driver and run
+the tests: 2.1.6</li>
 <li>This driver was developed and tested on Ubuntu 17.10 using GCC 7.2.0.</li>
 </ul>
 </div>
@@ -253,7 +263,7 @@ PDAL with optional libraries, see <a class="reference external" href="http://pda
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example pipeline reads points from a RDB file and stores them in LAS
 format. Only points classified as “ground points” are read since option
-<code class="docutils literal"><span class="pre">filter</span></code> is set to “riegl.class == 2” (see line 6).</p>
+<code class="docutils literal"><span class="pre">filter</span></code> is set to “riegl.class == 2” (see line 5).</p>
 <div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -264,21 +274,17 @@ format. Only points classified as “ground points” are read since option
  8
  9
 10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">{</span>
-   <span class="nt">&quot;pipeline&quot;</span><span class="p">:[</span>
-     <span class="p">{</span>
-       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rdb&quot;</span><span class="p">,</span>
-       <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span><span class="p">,</span>
-<span class="hll">       <span class="nt">&quot;filter&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.class == 2&quot;</span>
-</span>     <span class="p">},</span>
-     <span class="p">{</span>
-       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-       <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span>
-     <span class="p">}</span>
-   <span class="p">]</span>
- <span class="p">}</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rdb&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span><span class="p">,</span>
+<span class="hll">        <span class="nt">&quot;filter&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.class == 2&quot;</span>
+</span>    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -292,7 +298,7 @@ format. Only points classified as “ground points” are read since option
 <dl class="docutils">
 <dt>count</dt>
 <dd>Maximum number of points to read. [Default: unlimited]</dd>
-<dt>spatialreference</dt>
+<dt>override_srs</dt>
 <dd>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <dt>filter</dt>
@@ -713,7 +719,7 @@ by the reader.</p>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -734,7 +740,7 @@ by the reader.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -768,7 +774,7 @@ by the reader.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Readers" href="readers.html"/>
-        <link rel="next" title="readers.faux" href="readers.faux.html"/>
+        <link rel="next" title="readers.e57" href="readers.e57.html"/>
         <link rel="prev" title="readers.buffer" href="readers.buffer.html"/> 
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -118,14 +118,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.greyhound.html">readers.greyhound</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.las.html">readers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.matlab.html">readers.matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html">readers.memoryview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.memoryview.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mbio.html">readers.mbio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
@@ -153,6 +155,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -218,11 +223,16 @@
             
   <div class="section" id="readers-ept">
 <span id="id1"></span><h1>readers.ept<a class="headerlink" href="#readers-ept" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://entwine.io/entwine-point-tile.html">Entwine Point Tile</a> (EPT) is a hierarchical octree-based point cloud format suitable for real-time rendering and lossless archival.  <a class="reference external" href="https://entwine.io/">Entwine</a> is a producer of this format.  The <strong>EPT Reader</strong> supports reading data from the EPT format, including spatially accelerated queries and file reconstruction queries.</p>
-<p>Sample EPT datasets of hundreds of billions of points in size may be viewed at <a class="reference external" href="http://potree.entwine.io">http://potree.entwine.io</a> and <a class="reference external" href="http://speck.ly">http://speck.ly</a>.</p>
+<p><a class="reference external" href="https://entwine.io/entwine-point-tile.html">Entwine Point Tile</a> (EPT) is a hierarchical octree-based point cloud format
+suitable for real-time rendering and lossless archival.  <a class="reference external" href="https://entwine.io/">Entwine</a> is a
+producer of this format.  The EPT Reader supports reading data from the
+EPT format, including spatially accelerated queries and file reconstruction
+queries.</p>
+<p>Sample EPT datasets of hundreds of billions of points in size may be viewed
+with <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a> or <a class="reference external" href="http://speck.ly/?s=http%3A%2F%2Fc%5B0-7%5D.greyhound.io&amp;r=ept%3A%2F%2Fna.entwine.io%2Fnyc&amp;ca=-0&amp;ce=49.06&amp;ct=-8239196%2C4958509.308%2C337&amp;cd=42640.943&amp;cmd=125978.13&amp;ps=2&amp;pa=0.1&amp;ze=1&amp;c0s=remote%3A%2F%2Fimagery%3Furl%3Dhttp%3A%2F%2Fserver.arcgisonline.com%2FArcGIS%2Frest%2Fservices%2FWorld_Imagery%2FMapServer%2Ftile%2F%7B%7Bz%7D%7D%2F%7B%7By%7D%7D%2F%7B%7Bx%7D%7D.jpg">Plasio</a>.</p>
 <div class="admonition embed" id="embed-0">
-<p class="first admonition-title">Default Embedded Stage </p>
-<p class="last">This stage is enabled by default</p>
+<p class="admonition-title">Default Embedded Stage </p>
+<p>This stage is enabled by default</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -237,15 +247,19 @@
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>Additional attributes created by the <span class="xref std std-ref">writers.ept_addon</span> can be referenced with the <code class="docutils literal"><span class="pre">addon</span></code> option.  Here is an example that overrides the <code class="docutils literal"><span class="pre">Classification</span></code> dimension with an addon dimension derived from the original dataset:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[{</span>
-   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="s2">&quot;~/entwine/addons/autzen/smrf&quot;</span> <span class="p">}</span>
-<span class="p">},</span> <span class="p">{</span>
-   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-ept-smrf.las&quot;</span>
-<span class="p">}]</span>
+<p>Additional attributes created by the
+<a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">EPT addon writer</span></a> can be referenced with the <code class="docutils literal"><span class="pre">addon</span></code> option.  Here is an example that overrides the <code class="docutils literal"><span class="pre">Classification</span></code> dimension with an addon dimension derived from the original dataset:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="s2">&quot;~/entwine/addons/autzen/smrf&quot;</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-ept-smrf.las&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 <p>For more details about addon dimensions and how to produce them, see <a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">writers.ept_addon</span></a>.</p>
@@ -265,16 +279,32 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
 <p class="last">The resulting resolution may not be exactly this value: the minimum possible resolution that is at <em>least</em> as precise as the requested resolution will be selected.  Therefore the result may be a bit more precise than requested.</p>
 </dd>
 <dt>addons</dt>
-<dd><p class="first">A mapping of assignments of the form <code class="docutils literal"><span class="pre">DimensionName:</span> <span class="pre">AddonPath</span></code>, which assigns dimensions from the specified paths to the named dimensions.  These addon dimensions are created by the <a href="#id2"><span class="problematic" id="id3">:ref:`writers.ept_addon &lt;EPT addon writer&gt;`_</span></a>.  If the dimension names already exist in the EPT <a class="reference external" href="https://entwine.io/entwine-point-tile.html#schema">Schema</a> for the given resource, then their values will be overwritten with those from the appropriate addon.</p>
-<p class="last">Addons may used to override well-known <a href="#id4"><span class="problematic" id="id5">:ref:`dimensions`_</span></a>.  For example, an addon assignment of <code class="docutils literal"><span class="pre">&quot;Classification&quot;:</span> <span class="pre">&quot;~/addons/autzen/MyGroundDimension/&quot;</span></code> will override an existing EPT <code class="docutils literal"><span class="pre">Classification</span></code> dimension with the custom dimension.</p>
+<dd><p class="first">A mapping of assignments of the form <code class="docutils literal"><span class="pre">DimensionName:</span> <span class="pre">AddonPath</span></code>, which
+assigns dimensions from the specified paths to the named dimensions.
+These addon dimensions are created by the
+<a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">EPT addon writer</span></a>.  If the dimension names
+already exist in the EPT <a class="reference external" href="https://entwine.io/entwine-point-tile.html#schema">Schema</a> for the given resource, then their
+values will be overwritten with those from the appropriate addon.</p>
+<p class="last">Addons may used to override well-known <a class="reference internal" href="filters.stats.html#dimensions"><span class="std std-ref">dimension</span></a>.  For example, an addon assignment of <code class="docutils literal"><span class="pre">&quot;Classification&quot;:</span> <span class="pre">&quot;~/addons/autzen/MyGroundDimension/&quot;</span></code> will override an existing EPT <code class="docutils literal"><span class="pre">Classification</span></code> dimension with the custom dimension.</p>
 </dd>
 <dt>origin</dt>
-<dd><p class="first">EPT datasets are lossless aggregations of potentially multiple source files.  The <em>origin</em> options can be used to select all points from a single source file.  This option may be specified as a string or an integral ID.</p>
-<p>The string form of this option selects a source file by its original file path.  This may be a substring instead of the entire path, but the string must uniquely select only one source file (via substring search).  For example, for an EPT dataset created from source files <em>one.las</em>, <em>two.las</em>, and <em>two.bpf</em>, <cite>“one”</cite> is a sufficient selector, but <cite>“two”</cite> is not.</p>
-<p class="last">The integral form of this option selects a source file by its <code class="docutils literal"><span class="pre">OriginId</span></code> dimension, which can be found via the files position in EPT metadata file <code class="docutils literal"><span class="pre">entwine-files.json</span></code>.</p>
+<dd><p class="first">EPT datasets are lossless aggregations of potentially multiple source
+files.  The <em>origin</em> options can be used to select all points from a
+single source file.  This option may be specified as a string or an
+integral ID.</p>
+<p>The string form of this option selects a source file by its original
+file path.  This may be a substring instead of the entire path, but
+the string must uniquely select only one source file (via substring
+search).  For example, for an EPT dataset created from source files
+<em>one.las</em>, <em>two.las</em>, and <em>two.bpf</em>, “one” is a sufficient selector,
+but “two” is not.</p>
+<p class="last">The integral form of this option selects a source file by its <code class="docutils literal"><span class="pre">OriginId</span></code>
+dimension, which can be determined from  the file’s position in EPT
+metadata file <code class="docutils literal"><span class="pre">entwine-files.json</span></code>.</p>
 </dd>
 <dt>threads</dt>
-<dd>Number of worker threads used to download and process EPT data.  A minimum of 4 will be used no matter what value is specified.</dd>
+<dd>Number of worker threads used to download and process EPT data.  A
+minimum of 4 will be used no matter what value is specified.</dd>
 </dl>
 </div>
 </div>
@@ -286,7 +316,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="readers.faux.html" class="btn btn-neutral float-right" title="readers.faux" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.e57.html" class="btn btn-neutral float-right" title="readers.e57" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.buffer.html" class="btn btn-neutral" title="readers.buffer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -305,7 +335,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -326,7 +356,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -360,7 +390,7 @@ itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 

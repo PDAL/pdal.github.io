@@ -43,7 +43,7 @@
     <link rel="top" title="pdal.io" href="../index.html"/>
         <link rel="up" title="Writers" href="writers.html"/>
         <link rel="next" title="writers.geowave" href="writers.geowave.html"/>
-        <link rel="prev" title="writers.ept_addon" href="writers.ept_addon.html"/> 
+        <link rel="prev" title="writers.e57" href="writers.e57.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.9.1
+                2.0.0
               </div>
             
           
@@ -114,13 +114,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.e57.html">writers.e57</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.gdal</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-example">Basic Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.greyhound.html">writers.greyhound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.gltf.html">writers.gltf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.matlab.html">writers.matlab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
@@ -140,6 +141,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types.html">Types</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
@@ -214,8 +218,7 @@ data type with the largest range supported by the driver is used.</p>
 each point that falls within a given <a class="reference internal" href="#radius">radius</a> of a raster cell center
 potentially contributes to the raster’s value.  If no radius is provided,
 it is set to the product of the <a class="reference internal" href="#resolution">resolution</a> and the square root of two.
-This is consistent with the original <a class="reference external" href="http://www.opentopography.org/otsoftware/points2grid">Points2Grid</a> application from which
-this algorithm has its roots.  If a circle with the provided radius
+If a circle with the provided radius
 doesn’t encompass the entire cell, it is possible that some points will
 not be considered at all, including those that may be within the bounds
 of the raster cell.</p>
@@ -252,12 +255,12 @@ so on.)</p>
 <p>Cells that have no value after interpolation are given a value specified by
 the <a class="reference internal" href="#nodata">nodata</a> option.</p>
 <div class="admonition embed" id="embed-0">
-<p class="first admonition-title">Default Embedded Stage </p>
-<p class="last">This stage is enabled by default</p>
+<p class="admonition-title">Default Embedded Stage </p>
+<p>This stage is enabled by default</p>
 </div>
 <div class="admonition streamable" id="streamable-0">
-<p class="first admonition-title">Streamable Stage</p>
-<p class="last">This stage supports streaming operations</p>
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
 </div>
 <div class="section" id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
@@ -316,10 +319,10 @@ always uses BAND interleaving.</p>
 </dl>
 <dl class="docutils" id="data-type">
 <dt>data_type</dt>
-<dd>The data type to use for the output raster (double, float, int32,
-uint16, etc.).  Many GDAL drivers only
-support a limited set of output data types. The default value depends
-on the driver.</dd>
+<dd>The <a class="reference internal" href="../types.html#types"><span class="std std-ref">data type</span></a> to use for the output raster.
+Many GDAL drivers only
+support a limited set of output data types.
+[Default: depends on the driver]</dd>
 </dl>
 <dl class="docutils" id="nodata">
 <dt>nodata</dt>
@@ -343,15 +346,22 @@ information. [Default: 0]</dd>
 <dl class="docutils" id="dimension">
 <dt>dimension</dt>
 <dd>A dimension name to use for the interpolation. [Default: “Z”]</dd>
-</dl>
-<dl class="docutils" id="bounds">
 <dt>bounds</dt>
 <dd>The bounds of the data to be written.  Points not in bounds are discarded.
-The format is ([minx, maxx],[miny,maxy]).</dd>
+The format is ([minx, maxx],[miny,maxy]). [Optional]</dd>
+<dt>origin_x</dt>
+<dd>X origin (lower left corner) of the grid. [Default: None]</dd>
+<dt>origin_y</dt>
+<dd>Y origin (lower left corner) of the grid. [Default: None]</dd>
+<dt>width</dt>
+<dd>Number of cells in the X direction. [Default: None]</dd>
+<dt>height</dt>
+<dd>Number of cells in the Y direction. [Default: None]</dd>
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <a class="reference internal" href="#bounds">bounds</a> option is required when a pipeline is run in streaming mode.</p>
+<p class="last">You may use the ‘bounds’ option, or ‘origin_x’, ‘origin_y’, ‘width’
+and ‘height’, but not both.</p>
 </div>
 </div>
 </div>
@@ -366,7 +376,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
         <a href="writers.geowave.html" class="btn btn-neutral float-right" title="writers.geowave" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writers.ept_addon.html" class="btn btn-neutral" title="writers.ept_addon" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="writers.e57.html" class="btn btn-neutral" title="writers.e57" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -382,7 +392,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Aug 21, 2019.
+      Last updated on Aug 22, 2019.
 
     </p>
   </div> 
@@ -403,7 +413,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.1',
+            VERSION:'2.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -437,7 +447,7 @@ The format is ([minx, maxx],[miny,maxy]).</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 21, 2019.
+                    on Aug 22, 2019.
         </div>
     </div>
 
