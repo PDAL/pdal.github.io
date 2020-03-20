@@ -16,49 +16,46 @@
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
+  
+  
+    <link rel="canonical" href="https://pdal.io/tutorial/ground-filters.html"/>
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-  
-
-  
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="pdal.io" href="../index.html"/>
-        <link rel="up" title="Tutorials" href="index.html"/>
-        <link rel="next" title="Point Cloud Processing and Analysis with PDAL" href="../workshop/index.html"/>
-        <link rel="prev" title="Clipping with Geometries" href="clipping/index.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Point Cloud Processing and Analysis with PDAL" href="../workshop/index.html" />
+    <link rel="prev" title="Clipping with Geometries" href="clipping/index.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -72,7 +69,7 @@
             
             
               <div class="version">
-                2.0.1
+                2.1.0
               </div>
             
           
@@ -80,7 +77,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -93,7 +90,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
 <ul>
@@ -122,6 +122,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
@@ -170,34 +173,68 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">PDAL</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PDAL</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Home</a> &raquo;</li>
+    
+      <li><a href="../index.html"> Documentation </a> &raquo;</li>
       
-        <li><a href="index.html">Tutorials</a> &raquo;</li>
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
       
-    <li>Ground Filter Tutorial</li>
-    <li class="wy-breadcrumbs-aside">
-      
+      <li>Ground Filter Tutorial</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
         
-      
-    </li>
+            
+            
+              <a href="https://github.com/PDAL/PDAL/edit//master/doc/tutorial/ground-filters.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
   </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="../workshop/index.html" class="btn btn-neutral float-right" title="Point Cloud Processing and Analysis with PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="clipping/index.html" class="btn btn-neutral float-left" title="Clipping with Geometries" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -205,18 +242,17 @@
             
   <div class="section" id="ground-filter-tutorial">
 <span id="ground-filters"></span><h1>Ground Filter Tutorial<a class="headerlink" href="#ground-filter-tutorial" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Bradley Chambers</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">04/17/2017</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Bradley Chambers</p>
+</dd>
+<dt class="field-even">Contact</dt>
+<dd class="field-even"><p><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+</dd>
+<dt class="field-odd">Date</dt>
+<dd class="field-odd"><p>04/17/2017</p>
+</dd>
+</dl>
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>In previous tutorials we introduced our implmentation of the
@@ -225,24 +261,24 @@ access to PMF, and a filter for <a class="reference internal" href="../stages/fi
 <p>This tutorial will highlight some recent enhancements to the PDAL library, in
 the context of a ground segmentation workflow. Specifically, we will discuss:</p>
 <ul class="simple">
-<li>Constructing and executing a “filters-only” pipeline</li>
-<li>Resetting existing classifications prior to processing</li>
-<li>Using Extended Local Minimum (ELM) to identify low outliers</li>
-<li>Using Simple Morphological Filter (SMRF) as an alternative to PMF</li>
-<li>Ignoring outliers during ground segmentation</li>
-<li>Considering only last returns during ground segmentation</li>
-<li>Extracting ground returns as a post-processing step</li>
+<li><p>Constructing and executing a “filters-only” pipeline</p></li>
+<li><p>Resetting existing classifications prior to processing</p></li>
+<li><p>Using Extended Local Minimum (ELM) to identify low outliers</p></li>
+<li><p>Using Simple Morphological Filter (SMRF) as an alternative to PMF</p></li>
+<li><p>Ignoring outliers during ground segmentation</p></li>
+<li><p>Considering only last returns during ground segmentation</p></li>
+<li><p>Extracting ground returns as a post-processing step</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The pipeline discussed in this tutoral requires <a class="reference external" href="https://github.com/PDAL/PDAL/releases/tag/1.5.0">PDAL v1.5</a>.</p>
+<p class="admonition-title">Note</p>
+<p>The pipeline discussed in this tutoral requires <a class="reference external" href="https://github.com/PDAL/PDAL/releases/tag/1.5.0">PDAL v1.5</a>.</p>
 </div>
 </div>
 <div class="section" id="the-pipeline">
 <h2>The Pipeline<a class="headerlink" href="#the-pipeline" title="Permalink to this headline">¶</a></h2>
-<p>Begin by creating a new file called <code class="docutils literal"><span class="pre">pipeline.json</span></code> with the following
+<p>Begin by creating a new file called <code class="docutils literal notranslate"><span class="pre">pipeline.json</span></code> with the following
 contents.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -306,8 +342,8 @@ contents.</p>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For users familiar with PDAL pipelines, this example may seem to be missing
+<p class="admonition-title">Note</p>
+<p>For users familiar with PDAL pipelines, this example may seem to be missing
 a couple of very important stages, namely the reader and writer! A new
 feature of PDAL is the ability to provide a PDAL pipeline with no reader or
 writer stages to the <a class="reference internal" href="../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> command. The input and output
@@ -325,7 +361,7 @@ stages typically assume that units are at least uniform in X, Y, and Z. Because
 data will not always be provided in this way, PDAL pipelines should account for
 any data reprojections and parameter scaling that are required from one dataset
 to the next.</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>3
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>3
 4
 5
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
@@ -334,7 +370,7 @@ to the next.</p>
     <span class="p">},</span>
 </pre></div>
 </td></tr></table></div>
-<p>In this example, we show data being reprojected to <code class="docutils literal"><span class="pre">EPSG:32632</span></code> with X, Y, and
+<p>In this example, we show data being reprojected to <code class="docutils literal notranslate"><span class="pre">EPSG:32632</span></code> with X, Y, and
 Z in meters.</p>
 </div>
 <div class="section" id="assigning-classification-values">
@@ -345,9 +381,9 @@ classifications with your PDAL pipeline.</p>
 <p>PDAL’s <a class="reference internal" href="../stages/filters.assign.html#filters-assign"><span class="std std-ref">assign filter</span></a> has been added to assign values to
 a given dimension. In our example, a single option has been provided that
 specifies the dimension, range, and value to assign. In this case, we are
-stating that we would like to apply a value of 0 to the <code class="docutils literal"><span class="pre">Classification</span></code>
+stating that we would like to apply a value of 0 to the <code class="docutils literal notranslate"><span class="pre">Classification</span></code>
 dimension for every point.</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 7
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 7
  8
  9
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
@@ -357,9 +393,9 @@ dimension for every point.</p>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Previously, you could do the same thing (with a slightly different syntax)
-using <code class="docutils literal"><span class="pre">filters.attribute</span></code>, but this filter has been deprecated and split
+<p class="admonition-title">Note</p>
+<p>Previously, you could do the same thing (with a slightly different syntax)
+using <code class="docutils literal notranslate"><span class="pre">filters.attribute</span></code>, but this filter has been deprecated and split
 into <a class="reference internal" href="../stages/filters.assign.html#filters-assign"><span class="std std-ref">filters.assign</span></a> and <a class="reference internal" href="../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a>.</p>
 </div>
 </div>
@@ -367,10 +403,10 @@ into <a class="reference internal" href="../stages/filters.assign.html#filters-a
 <h3>Extended Local Minimum<a class="headerlink" href="#extended-local-minimum" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="../stages/filters.elm.html#filters-elm"><span class="std std-ref">Extended Local Minimum (ELM) method</span></a> helps to identify
 low noise points that can adversely affect ground segmentation algorithms. ELM
-was first published in <a class="reference internal" href="../references.html#chen2012" id="id1">[Chen2012]</a> as part of the upward-fusion method of DTM
-generation. Noise points are <strong>classified</strong> with a value of <code class="docutils literal"><span class="pre">7</span></code> in keeping
+was first published in <a class="reference internal" href="../references.html#chen2012" id="id1"><span>[Chen2012]</span></a> as part of the upward-fusion method of DTM
+generation. Noise points are <strong>classified</strong> with a value of <code class="docutils literal notranslate"><span class="pre">7</span></code> in keeping
 with the LAS specification.</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>11
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>11
 12
 13</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
       <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.elm&quot;</span>
@@ -381,10 +417,10 @@ with the LAS specification.</p>
 <div class="section" id="outliers">
 <h3>Outliers<a class="headerlink" href="#outliers" title="Permalink to this headline">¶</a></h3>
 <p>PDAL’s <a class="reference internal" href="../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">outlier filter</span></a> provides two methods of outlier
-detection at the moment: <code class="docutils literal"><span class="pre">radius</span></code> and <code class="docutils literal"><span class="pre">statistical</span></code>. Both aim to identify
+detection at the moment: <code class="docutils literal notranslate"><span class="pre">radius</span></code> and <code class="docutils literal notranslate"><span class="pre">statistical</span></code>. Both aim to identify
 points that are isolated and likely arise from noise sources. Noise points are
-<strong>classified</strong> with a value of <code class="docutils literal"><span class="pre">7</span></code> in keeping with the LAS specification.</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>14
+<strong>classified</strong> with a value of <code class="docutils literal notranslate"><span class="pre">7</span></code> in keeping with the LAS specification.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>14
 15
 16</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
       <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.outlier&quot;</span>
@@ -394,7 +430,7 @@ points that are isolated and likely arise from noise sources. Noise points are
 </div>
 <div class="section" id="ground-segmentation">
 <h3>Ground Segmentation<a class="headerlink" href="#ground-segmentation" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">Simple Morphological Filter (SMRF)</span></a> <a class="reference internal" href="../references.html#pingel2013" id="id2">[Pingel2013]</a> is a
+<p>The <a class="reference internal" href="../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">Simple Morphological Filter (SMRF)</span></a> <a class="reference internal" href="../references.html#pingel2013" id="id2"><span>[Pingel2013]</span></a> is a
 newer addition to PDAL that has quietly existed in an alpha state since v1.3.
 With the release of PDAL v1.5, our SMRF implementation is much more complete,
 although it only implements nearest neighbor void filling and not the authors’
@@ -405,7 +441,7 @@ namely in the area of filling voids. We have reverted the code to match the
 published work, but for now are only using the nearest neighbors approach to
 filling voids. The morphological operations are also accelerated by moving to an
 iterative approach and using a diamond struturing element.</p>
-<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>17
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>17
 18
 19
 20
@@ -425,18 +461,18 @@ iterative approach and using a diamond struturing element.</p>
 </pre></div>
 </td></tr></table></div>
 <p>In addition to specifying some of the SMRF-specific arguments, our example also
-demonstrates the use of two optional pre-filtering capabilities: <code class="docutils literal"><span class="pre">ignore</span></code> and
-<code class="docutils literal"><span class="pre">last</span></code>.</p>
-<p>The <code class="docutils literal"><span class="pre">ignore</span></code> option accepts a <a class="reference internal" href="../stages/filters.range.html#ranges"><span class="std std-ref">range</span></a>, here indicating that we
-have points marked as noise (i.e., <code class="docutils literal"><span class="pre">Classification</span></code> of 7) that should be
+demonstrates the use of two optional pre-filtering capabilities: <code class="docutils literal notranslate"><span class="pre">ignore</span></code> and
+<code class="docutils literal notranslate"><span class="pre">last</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ignore</span></code> option accepts a <a class="reference internal" href="../stages/filters.range.html#ranges"><span class="std std-ref">range</span></a>, here indicating that we
+have points marked as noise (i.e., <code class="docutils literal notranslate"><span class="pre">Classification</span></code> of 7) that should be
 excluded from ground segmentation, but are kept as part of the output dataset.</p>
-<p>The <code class="docutils literal"><span class="pre">last</span></code> option, when set to <code class="docutils literal"><span class="pre">true</span></code> indicates that we would like to only
+<p>The <code class="docutils literal notranslate"><span class="pre">last</span></code> option, when set to <code class="docutils literal notranslate"><span class="pre">true</span></code> indicates that we would like to only
 consider last returns for ground segmentation when return information is
 available. Again, returns that are not “last returns” are still retained in the
 output dataset - they are simply ignored for the purposes of ground
 segmentation.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Many lidar systems provide return information. This includes the number of
 returns per pulse and the order of a particular return within the pulse.
 Where the return number and number of returns are equal, we call this a last
@@ -452,17 +488,17 @@ itself. That being said, it stands to reason that any ground segmentation
 approach could be improved by excluding all returns but the so-called last
 returns. Neither PMF nor SMRF make this assertion, but our implementations
 still consider only last returns by default. This behavior can be changed by
-setting <code class="docutils literal"><span class="pre">last=false</span></code>.</p>
-<p class="last">For an example of how to filter on last returns outside the context of SMRF
+setting <code class="docutils literal notranslate"><span class="pre">last=false</span></code>.</p>
+<p>For an example of how to filter on last returns outside the context of SMRF
 and PMF, see <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/test/data/pipeline/predicate-keep-last-return.json.in">this</a>
 within PDAL’s source tree.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">SMRF is not intended to be a replacement for the <a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">Progressive
-Morphological Filter (PMF)</span></a> <a class="reference internal" href="../references.html#zhang2003" id="id3">[Zhang2003]</a>. Rather, it is
+<p class="admonition-title">Note</p>
+<p>SMRF is not intended to be a replacement for the <a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">Progressive
+Morphological Filter (PMF)</span></a> <a class="reference internal" href="../references.html#zhang2003" id="id3"><span>[Zhang2003]</span></a>. Rather, it is
 offered as an alternative. PMF has been a part of PDAL since v1.0, first as
-part of the PCL plugin and now as <code class="docutils literal"><span class="pre">filters.pmf</span></code>. Since PDAL v1.4, we have
+part of the PCL plugin and now as <code class="docutils literal notranslate"><span class="pre">filters.pmf</span></code>. Since PDAL v1.4, we have
 fixed a number of bugs, and have accelerated the approximate mode by
 implementing iterative morphological operations and using a diamond
 structuring element.</p>
@@ -473,7 +509,7 @@ structuring element.</p>
 <p>Any time we have points classified as ground, we may wish to extract just these
 points, e.g., to create a <em>digital terrain model</em> (DTM). In this case, we use a
 <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> as shown.</p>
-<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>26
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>26
 27
 28
 29</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="p">{</span>
@@ -482,14 +518,14 @@ points, e.g., to create a <em>digital terrain model</em> (DTM). In this case, we
     <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> accepts a <code class="docutils literal"><span class="pre">limits</span></code> option that
+<p>The <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> accepts a <code class="docutils literal notranslate"><span class="pre">limits</span></code> option that
 identifies the dimension(s) on which to filter and the <a class="reference internal" href="../stages/filters.range.html#ranges"><span class="std std-ref">range</span></a> of
 values to passthrough. In this case, we are indicating that the filter should
-only pass points whose <code class="docutils literal"><span class="pre">Classification</span></code> value is equal to 2.</p>
+only pass points whose <code class="docutils literal notranslate"><span class="pre">Classification</span></code> value is equal to 2.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The default behavior of both <a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">PMF</span></a> and <a class="reference internal" href="../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">SMRF</span></a> is to classify points, which has not changed from previous
-versions of PDAL. The <code class="docutils literal"><span class="pre">extract</span></code> and <code class="docutils literal"><span class="pre">classify</span></code> options have been removed
+<p class="admonition-title">Note</p>
+<p>The default behavior of both <a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">PMF</span></a> and <a class="reference internal" href="../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">SMRF</span></a> is to classify points, which has not changed from previous
+versions of PDAL. The <code class="docutils literal notranslate"><span class="pre">extract</span></code> and <code class="docutils literal notranslate"><span class="pre">classify</span></code> options have been removed
 in PDAL v1.5. These filters now <strong>only</strong> classify points, such that ground
 points can be identified and filtered downstream, as we have shown with the
 range filter above.</p>
@@ -498,9 +534,9 @@ range filter above.</p>
 </div>
 <div class="section" id="running-the-pipeline">
 <h2>Running the Pipeline<a class="headerlink" href="#running-the-pipeline" title="Permalink to this headline">¶</a></h2>
-<p>Now let’s run our <code class="docutils literal"><span class="pre">pipeline.json</span></code> example, using it to
-<a class="reference internal" href="../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> <code class="docutils literal"><span class="pre">input.las</span></code> to <code class="docutils literal"><span class="pre">output.las</span></code>.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pdal translate input.las output.las --json pipeline.json
+<p>Now let’s run our <code class="docutils literal notranslate"><span class="pre">pipeline.json</span></code> example, using it to
+<a class="reference internal" href="../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> <code class="docutils literal notranslate"><span class="pre">input.las</span></code> to <code class="docutils literal notranslate"><span class="pre">output.las</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pdal translate input.las output.las --json pipeline.json
 </pre></div>
 </div>
 </div>
@@ -508,15 +544,16 @@ range filter above.</p>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../workshop/index.html" class="btn btn-neutral float-right" title="Point Cloud Processing and Analysis with PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../workshop/index.html" class="btn btn-neutral float-right" title="Point Cloud Processing and Analysis with PDAL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="clipping/index.html" class="btn btn-neutral" title="Clipping with Geometries" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="clipping/index.html" class="btn btn-neutral float-left" title="Clipping with Geometries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -524,21 +561,25 @@ range filter above.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>
+    <div class="info">
+      <a class="logo-link" href="https://hobu.co">
+        <div class="hobu-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
                     &copy;  2020
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
-                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jan 17, 2020.
 
-    </p>
-  </div> 
-
+      
+      Last updated on Mar 20, 2020.
+      </div>
+    </div>
 </footer>
-
         </div>
       </div>
 
@@ -548,36 +589,15 @@ range filter above.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'2.0.1',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
   
     <div class="footer">
         <div class="container">
@@ -587,7 +607,7 @@ range filter above.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jan 17, 2020.
+                    on Mar 20, 2020.
         </div>
     </div>
 

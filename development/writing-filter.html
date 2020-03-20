@@ -16,49 +16,46 @@
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
+  
+  
+    <link rel="canonical" href="https://pdal.io/development/writing-filter.html"/>
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-  
-
-  
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="pdal.io" href="../index.html"/>
-        <link rel="up" title="Development" href="index.html"/>
-        <link rel="next" title="Writing a kernel" href="writing-kernel.html"/>
-        <link rel="prev" title="Writing with PDAL" href="writing.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Writing a kernel" href="writing-kernel.html" />
+    <link rel="prev" title="Writing with PDAL" href="writing.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -72,7 +69,7 @@
             
             
               <div class="version">
-                2.0.1
+                2.1.0
               </div>
             
           
@@ -80,7 +77,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -93,7 +90,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
 <ul>
@@ -122,6 +122,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -166,34 +169,68 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">PDAL</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PDAL</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Home</a> &raquo;</li>
+    
+      <li><a href="../index.html"> Documentation </a> &raquo;</li>
       
-        <li><a href="index.html">Development</a> &raquo;</li>
+          <li><a href="index.html">Development</a> &raquo;</li>
       
-    <li>Writing a filter</li>
-    <li class="wy-breadcrumbs-aside">
-      
+      <li>Writing a filter</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
         
-      
-    </li>
+            
+            
+              <a href="https://github.com/PDAL/PDAL/edit//master/doc/development/writing-filter.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
   </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="writing-kernel.html" class="btn btn-neutral float-right" title="Writing a kernel" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="writing.html" class="btn btn-neutral float-left" title="Writing with PDAL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -203,9 +240,9 @@
 <span id="writing-filter"></span><h1>Writing a filter<a class="headerlink" href="#writing-a-filter" title="Permalink to this headline">¶</a></h1>
 <p>PDAL can be extended through the development of filter functions.</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">For more on filters and their role in PDAL, please refer to
-<a class="reference internal" href="overview.html#overview"><span class="std std-ref">PDAL Architecture Overview</span></a>.</p>
+<p class="admonition-title">See also</p>
+<p>For more on filters and their role in PDAL, and their lifecycle
+please refer to <a class="reference internal" href="overview.html#overview"><span class="std std-ref">PDAL Architecture Overview</span></a>.</p>
 </div>
 <p>Every filter stage in PDAL is implemented as a plugin (sometimes referred to as
 a “driver”). Filters native to PDAL, such as <a class="reference internal" href="../stages/filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a>, are
@@ -219,7 +256,7 @@ to make it static or shared.</p>
 <div class="section" id="the-header">
 <h2>The header<a class="headerlink" href="#the-header" title="Permalink to this headline">¶</a></h2>
 <p>First, we provide a full listing of the filter header.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -282,7 +319,7 @@ to make it static or shared.</p>
 </td></tr></table></div>
 <p>This header should be relatively straightforward, but we will point out one
 method that must be declared for the plugin interface to be satisfied.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>In many instances, you should be able to copy this header template verbatim,
@@ -292,7 +329,7 @@ as required by your implementation.</p>
 <div class="section" id="the-source">
 <h2>The source<a class="headerlink" href="#the-source" title="Permalink to this headline">¶</a></h2>
 <p>Again, we start with a full listing of the filter source.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -375,9 +412,9 @@ as required by your implementation.</p>
 </td></tr></table></div>
 <p>For your filter to be available to PDAL at runtime, it must adhere to the PDAL
 plugin interface. As a convenience, we provide macros to do just this.</p>
-<p>We begin by creating a <code class="docutils literal"><span class="pre">PluginInfo</span></code> struct containing three identifying
+<p>We begin by creating a <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code> struct containing three identifying
 elements - the filter name, description, and a link to documentation.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -390,34 +427,34 @@ elements - the filter name, description, and a link to documentation.</p>
 <span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<p>PDAL requires that filter names always begin with <code class="docutils literal"><span class="pre">filters.</span></code>, and end with a
+<p>PDAL requires that filter names always begin with <code class="docutils literal notranslate"><span class="pre">filters.</span></code>, and end with a
 string that uniquely identifies the filter. The description will be displayed
-to users of the PDAL CLI (<code class="docutils literal"><span class="pre">pdal</span> <span class="pre">--drivers</span></code>).  When making a shared plugin,
+to users of the PDAL CLI (<code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">--drivers</span></code>).  When making a shared plugin,
 the name of the shared library must correspond with the name of the filter
 provided here.  The name of the generated shared object must be</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">libpdal_plugin_filter_</span><span class="o">&lt;</span><span class="nb">filter</span> <span class="n">name</span><span class="o">&gt;.&lt;</span><span class="n">shared</span> <span class="n">library</span> <span class="n">extension</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">libpdal_plugin_filter_</span><span class="o">&lt;</span><span class="nb">filter</span> <span class="n">name</span><span class="o">&gt;.&lt;</span><span class="n">shared</span> <span class="n">library</span> <span class="n">extension</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>Next, we pass the following to the <code class="docutils literal"><span class="pre">CREATE_SHARED_STAGE</span></code> macro, passing in
-the name of the stage and the <code class="docutils literal"><span class="pre">PluginInfo</span></code> struct.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">CREATE_SHARED_STAGE</span><span class="p">(</span><span class="n">MyFilter</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
+<p>Next, we pass the following to the <code class="docutils literal notranslate"><span class="pre">CREATE_SHARED_STAGE</span></code> macro, passing in
+the name of the stage and the <code class="docutils literal notranslate"><span class="pre">PluginInfo</span></code> struct.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE_SHARED_STAGE</span><span class="p">(</span><span class="n">MyFilter</span><span class="p">,</span> <span class="n">s_info</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To create a static stage, we simply change <code class="docutils literal"><span class="pre">CREATE_SHARED_STAGE</span></code> to
-<code class="docutils literal"><span class="pre">CREATE_STATC_STAGE</span></code>.</p>
+<p>To create a static stage, we simply change <code class="docutils literal notranslate"><span class="pre">CREATE_SHARED_STAGE</span></code> to
+<code class="docutils literal notranslate"><span class="pre">CREATE_STATC_STAGE</span></code>.</p>
 <p>Finally, we implement a method to get the plugin name, which is primarily used
-by the PDAL CLI when using the <code class="docutils literal"><span class="pre">--drivers</span></code> or <code class="docutils literal"><span class="pre">--options</span></code> arguments.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
+by the PDAL CLI when using the <code class="docutils literal notranslate"><span class="pre">--drivers</span></code> or <code class="docutils literal notranslate"><span class="pre">--options</span></code> arguments.</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <p>Now that the filter has implemented the proper plugin interface, we will begin
-to implement some methods that actually implement the filter. The <code class="docutils literal"><span class="pre">addArgs()</span></code>
+to implement some methods that actually implement the filter. The <code class="docutils literal notranslate"><span class="pre">addArgs()</span></code>
 method is used to register and bind any provided options to the stage. Here, we
-get the value of <code class="docutils literal"><span class="pre">param</span></code>, if provided, else we populate <code class="docutils literal"><span class="pre">m_value</span></code> with the
-default value of <code class="docutils literal"><span class="pre">1.0</span></code>. Option names, descriptions, and default values
-specified in <code class="docutils literal"><span class="pre">addArgs()</span></code> will be displayed via the PDAL CLI with the
-<code class="docutils literal"><span class="pre">--options</span></code> argument.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+get the value of <code class="docutils literal notranslate"><span class="pre">param</span></code>, if provided, else we populate <code class="docutils literal notranslate"><span class="pre">m_value</span></code> with the
+default value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Option names, descriptions, and default values
+specified in <code class="docutils literal notranslate"><span class="pre">addArgs()</span></code> will be displayed via the PDAL CLI with the
+<code class="docutils literal notranslate"><span class="pre">--options</span></code> argument.</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">MyFilter</span><span class="o">::</span><span class="n">addArgs</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
@@ -426,10 +463,10 @@ specified in <code class="docutils literal"><span class="pre">addArgs()</span></
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>In <code class="docutils literal"><span class="pre">addDimensions()</span></code> we make sure that the known <code class="docutils literal"><span class="pre">Intensity</span></code> dimension is
-registered. We can also add a custom dimension, <code class="docutils literal"><span class="pre">MyDimension</span></code>, which will be
-populated within <code class="docutils literal"><span class="pre">run()</span></code>.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<p>In <code class="docutils literal notranslate"><span class="pre">addDimensions()</span></code> we make sure that the known <code class="docutils literal notranslate"><span class="pre">Intensity</span></code> dimension is
+registered. We can also add a custom dimension, <code class="docutils literal notranslate"><span class="pre">MyDimension</span></code>, which will be
+populated within <code class="docutils literal notranslate"><span class="pre">run()</span></code>.</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -442,38 +479,42 @@ populated within <code class="docutils literal"><span class="pre">run()</span></
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Finally, we define <code class="docutils literal"><span class="pre">run()</span></code>, which takes as input a <code class="docutils literal"><span class="pre">PointViewPtr</span></code> and
-returns a <code class="docutils literal"><span class="pre">PointViewSet</span></code>. It is here that we can transform existing
+<p>Finally, we define <code class="docutils literal notranslate"><span class="pre">run()</span></code>, which takes as input a <code class="docutils literal notranslate"><span class="pre">PointViewPtr</span></code> and
+returns a <code class="docutils literal notranslate"><span class="pre">PointViewSet</span></code>. It is here that we can transform existing
 dimensions, add data to new dimensions, or selectively add/remove individual
 points.</p>
 <p>We suggest you take a closer look at our existing filters to get an idea of the
-power of the <code class="docutils literal"><span class="pre">Filter</span></code> stage and inspiration for your own filters!</p>
+power of the <code class="docutils literal notranslate"><span class="pre">Filter</span></code> stage and inspiration for your own filters!</p>
 </div>
 <div class="section" id="compilation">
 <h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
-<p>Set up a <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> file to compile your filter against PDAL:</p>
-<div class="highlight-cmake"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<p>Set up a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to compile your filter against PDAL:</p>
+<div class="highlight-cmake notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">FilterTutorial</span><span class="p">)</span>
 
 <span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.9.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
 
-<span class="nb">set</span> <span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span> 
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span>
 <span class="nb">add_library</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">SHARED</span> <span class="s">MyFilter.cpp</span><span class="p">)</span>
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
 <span class="nb">target_include_directories</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">target_link_directories</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">CMakeLists.txt contents may vary slightly depending on your project
+<p class="admonition-title">Note</p>
+<p>CMakeLists.txt contents may vary slightly depending on your project
 requirements, operating system, and compilter.</p>
 </div>
 </div>
@@ -481,15 +522,16 @@ requirements, operating system, and compilter.</p>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="writing-kernel.html" class="btn btn-neutral float-right" title="Writing a kernel" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="writing-kernel.html" class="btn btn-neutral float-right" title="Writing a kernel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writing.html" class="btn btn-neutral" title="Writing with PDAL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="writing.html" class="btn btn-neutral float-left" title="Writing with PDAL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -497,21 +539,25 @@ requirements, operating system, and compilter.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>
+    <div class="info">
+      <a class="logo-link" href="https://hobu.co">
+        <div class="hobu-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
                     &copy;  2020
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
-                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jan 17, 2020.
 
-    </p>
-  </div> 
-
+      
+      Last updated on Mar 20, 2020.
+      </div>
+    </div>
 </footer>
-
         </div>
       </div>
 
@@ -521,36 +567,15 @@ requirements, operating system, and compilter.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'2.0.1',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
   
     <div class="footer">
         <div class="container">
@@ -560,7 +585,7 @@ requirements, operating system, and compilter.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jan 17, 2020.
+                    on Mar 20, 2020.
         </div>
     </div>
 

@@ -16,49 +16,46 @@
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
+  
+  
+    <link rel="canonical" href="https://pdal.io/stages/filters.crop.html"/>
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-  
-
-  
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="pdal.io" href="../index.html"/>
-        <link rel="up" title="Filters" href="filters.html"/>
-        <link rel="next" title="filters.decimation" href="filters.decimation.html"/>
-        <link rel="prev" title="filters.transformation" href="filters.transformation.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="filters.decimation" href="filters.decimation.html" />
+    <link rel="prev" title="filters.transformation" href="filters.transformation.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -72,7 +69,7 @@
             
             
               <div class="version">
-                2.0.1
+                2.1.0
               </div>
             
           
@@ -80,7 +77,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -93,7 +90,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
 <ul>
@@ -123,6 +123,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.farthestpointsampling.html">filters.farthestpointsampling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.head.html">filters.head</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.iqr.html">filters.iqr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.locate.html">filters.locate</a></li>
@@ -133,6 +134,7 @@
 <li class="toctree-l3"><a class="reference internal" href="filters.tail.html">filters.tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.voxelcenternearestneighbor.html">filters.voxelcenternearestneighbor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filters.voxelcentroidnearestneighbor.html">filters.voxelcentroidnearestneighbor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.voxeldownsize.html">filters.voxeldownsize</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filters.html#new">New</a></li>
@@ -152,6 +154,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -179,34 +184,68 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">PDAL</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PDAL</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Home</a> &raquo;</li>
+    
+      <li><a href="../index.html"> Documentation </a> &raquo;</li>
       
-        <li><a href="filters.html">Filters</a> &raquo;</li>
+          <li><a href="filters.html">Filters</a> &raquo;</li>
       
-    <li>filters.crop</li>
-    <li class="wy-breadcrumbs-aside">
-      
+      <li>filters.crop</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
         
-      
-    </li>
+            
+            
+              <a href="https://github.com/PDAL/PDAL/edit//master/doc/stages/filters.crop.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
   </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="filters.decimation.html" class="btn btn-neutral float-right" title="filters.decimation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="filters.transformation.html" class="btn btn-neutral float-left" title="filters.transformation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -216,7 +255,7 @@
 <span id="id1"></span><h1>filters.crop<a class="headerlink" href="#filters-crop" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>crop filter</strong> removes points that fall outside or inside a
 cropping bounding
-box (2D), polygon, or point+distance.  If more than one bounding region is
+box (2D or 3D), polygon, or point+distance.  If more than one bounding region is
 specified, the filter will pass all input points through each bounding region,
 creating an output point set for each input crop region.</p>
 <div class="admonition embed" id="embed-0">
@@ -236,7 +275,7 @@ spatial reference of the input bounding region.  In this case a warning will
 be logged.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file-input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.crop&quot;</span><span class="p">,</span>
@@ -252,42 +291,52 @@ be logged.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>bounds</dt>
-<dd>The extent of the clipping rectangle in the format
+<dl>
+<dt>bounds</dt><dd><p>The extent of the clipping rectangle in the format
 “([xmin, xmax], [ymin, ymax])”.  This option can be specified more than
-once by placing values in an array.</dd>
-<dt>polygon</dt>
-<dd>The clipping polygon, expressed in a well-known text string,
+once by placing values in an array.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>3D bounds can be given in the form <code class="docutils literal notranslate"><span class="pre">([xmin,</span> <span class="pre">xmax,</span> <span class="pre">zmax],</span> <span class="pre">[ymin,</span> <span class="pre">ymax,</span> <span class="pre">zmax])</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If a 3D bounds is given to the filter, a 3D crop will be attempted, even
+if the Z values are invalid or inconsistent with the data.</p>
+</div>
+</dd>
+<dt>polygon</dt><dd><p>The clipping polygon, expressed in a well-known text string,
 eg: “POLYGON((0 0, 5000 10000, 10000 0, 0 0))”.  This option can be
-specified more than once by placing values in an array.</dd>
-<dt>outside</dt>
-<dd>Invert the cropping logic and only take points outside the cropping
-bounds or polygon. [Default: false]</dd>
-<dt><span class="target" id="point">point</span></dt>
-<dd>An array of WKT or GeoJSON 2D or 3D points. Requires <a class="reference internal" href="#distance">distance</a>.</dd>
-<dt><span class="target" id="distance">distance</span></dt>
-<dd>Distance in units of common X, Y, and Z <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to crop circle
-or sphere in combination with <a class="reference internal" href="#point">point</a>.</dd>
-<dt><span class="target" id="a-srs">a_srs</span></dt>
-<dd>Indicates the spatial reference of the bounding regions.  If not provided,
+specified more than once by placing values in an array.</p>
+</dd>
+<dt>outside</dt><dd><p>Invert the cropping logic and only take points outside the cropping
+bounds or polygon. [Default: false]</p>
+</dd>
+<dt><span class="target" id="point">point</span></dt><dd><p>An array of WKT or GeoJSON 2D or 3D points. Requires <a class="reference internal" href="#distance">distance</a>.</p>
+</dd>
+<dt><span class="target" id="distance">distance</span></dt><dd><p>Distance in units of common X, Y, and Z <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to crop circle
+or sphere in combination with <a class="reference internal" href="#point">point</a>.</p>
+</dd>
+<dt><span class="target" id="a-srs">a_srs</span></dt><dd><p>Indicates the spatial reference of the bounding regions.  If not provided,
 it is assumed that the spatial reference of the bounding region matches
-that of the points.</dd>
+that of the points.</p>
+</dd>
 </dl>
 </div>
 </div>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.decimation.html" class="btn btn-neutral float-right" title="filters.decimation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.decimation.html" class="btn btn-neutral float-right" title="filters.decimation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.transformation.html" class="btn btn-neutral" title="filters.transformation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.transformation.html" class="btn btn-neutral float-left" title="filters.transformation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -295,21 +344,25 @@ that of the points.</dd>
   <hr/>
 
   <div role="contentinfo">
-    <p>
+    <div class="info">
+      <a class="logo-link" href="https://hobu.co">
+        <div class="hobu-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
                     &copy;  2020
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
-                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jan 17, 2020.
 
-    </p>
-  </div> 
-
+      
+      Last updated on Mar 20, 2020.
+      </div>
+    </div>
 </footer>
-
         </div>
       </div>
 
@@ -319,36 +372,15 @@ that of the points.</dd>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'2.0.1',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
   
     <div class="footer">
         <div class="container">
@@ -358,7 +390,7 @@ that of the points.</dd>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jan 17, 2020.
+                    on Mar 20, 2020.
         </div>
     </div>
 

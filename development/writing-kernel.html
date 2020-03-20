@@ -16,49 +16,46 @@
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
+  
+  
+    <link rel="canonical" href="https://pdal.io/development/writing-kernel.html"/>
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-  
-
-  
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="pdal.io" href="../index.html"/>
-        <link rel="up" title="Development" href="index.html"/>
-        <link rel="next" title="Writing a reader" href="writing-reader.html"/>
-        <link rel="prev" title="Writing a filter" href="writing-filter.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Writing a reader" href="writing-reader.html" />
+    <link rel="prev" title="Writing a filter" href="writing-filter.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -72,7 +69,7 @@
             
             
               <div class="version">
-                2.0.1
+                2.1.0
               </div>
             
           
@@ -80,7 +77,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -93,7 +90,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
 <ul>
@@ -122,6 +122,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python.html">Python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials</a></li>
@@ -168,34 +171,68 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">PDAL</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PDAL</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Home</a> &raquo;</li>
+    
+      <li><a href="../index.html"> Documentation </a> &raquo;</li>
       
-        <li><a href="index.html">Development</a> &raquo;</li>
+          <li><a href="index.html">Development</a> &raquo;</li>
       
-    <li>Writing a kernel</li>
-    <li class="wy-breadcrumbs-aside">
-      
+      <li>Writing a kernel</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
         
-      
-    </li>
+            
+            
+              <a href="https://github.com/PDAL/PDAL/edit//master/doc/development/writing-kernel.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
   </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="writing-reader.html" class="btn btn-neutral float-right" title="Writing a reader" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="writing-filter.html" class="btn btn-neutral float-left" title="Writing a filter" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -203,24 +240,23 @@
             
   <div class="section" id="writing-a-kernel">
 <span id="writing-kernel"></span><h1>Writing a kernel<a class="headerlink" href="#writing-a-kernel" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Bradley Chambers</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">11/02/2017</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Bradley Chambers</p>
+</dd>
+<dt class="field-even">Contact</dt>
+<dd class="field-even"><p><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+</dd>
+<dt class="field-odd">Date</dt>
+<dd class="field-odd"><p>11/02/2017</p>
+</dd>
+</dl>
 <p>PDAL’s command-line application can be extended through the development of
 kernel functions. In this tutorial, we will give a brief example.</p>
 <div class="section" id="the-header">
 <h2>The header<a class="headerlink" href="#the-header" title="Permalink to this headline">¶</a></h2>
 <p>First, we provide a full listing of the kernel header.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -276,14 +312,14 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 </pre></div>
 </td></tr></table></div>
 <p>As with other plugins, the MyKernel class needs to return a name.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="the-source">
 <h2>The source<a class="headerlink" href="#the-source" title="Permalink to this headline">¶</a></h2>
 <p>Again, we start with a full listing of the kernel source.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -396,12 +432,12 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 </td></tr></table></div>
 <p>In your kernel implementation, you will use a macro defined in pdal_macros.
 This macro registers the plugin with the PluginManager.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>  <span class="n">CREATE_SHARED_KERNEL</span><span class="p">(</span><span class="n">MyKernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="n">CREATE_SHARED_KERNEL</span><span class="p">(</span><span class="n">MyKernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>To build up a processing pipeline in this example, we need to create two
-objects: the <a class="reference internal" href="../api/cpp/pointtable.html#_CPPv2N4pdal10PointTableE" title="pdal::PointTable"><code class="xref cpp cpp-class docutils literal"><span class="pre">pdal::PointTable</span></code></a>.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>  <span class="kt">int</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">execute</span><span class="p">()</span>
+objects: the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::PointTable</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="kt">int</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">execute</span><span class="p">()</span>
   <span class="p">{</span>
     <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
 
@@ -429,32 +465,38 @@ writes the result to a text file.  The base kernel class provides functions
 The pipeline that has been created can be run by preparing and executing the
 last stage in the pipeline.</p>
 <p>When compiled, a dynamic library file will be created; in this case,
-<code class="docutils literal"><span class="pre">libpdal_plugin_kernel_mykernel.dylib</span></code></p>
-<p>Put this file in whatever directory <code class="docutils literal"><span class="pre">PDAL_DRIVER_PATH</span></code> is pointing to.  Then,
-if you run <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">--drivers</span></code>, you should see <code class="docutils literal"><span class="pre">mykernel</span></code> listed in the
+<code class="docutils literal notranslate"><span class="pre">libpdal_plugin_kernel_mykernel.dylib</span></code></p>
+<p>Put this file in whatever directory <code class="docutils literal notranslate"><span class="pre">PDAL_DRIVER_PATH</span></code> is pointing to.  Then,
+if you run <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">--drivers</span></code>, you should see <code class="docutils literal notranslate"><span class="pre">mykernel</span></code> listed in the
 possible commands.</p>
-<p>To run this kernel, you would use <code class="docutils literal"><span class="pre">pdal</span> <span class="pre">mykernel</span> <span class="pre">-i</span> <span class="pre">&lt;input</span> <span class="pre">las</span> <span class="pre">file&gt;</span> <span class="pre">-o</span>
+<p>To run this kernel, you would use <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">mykernel</span> <span class="pre">-i</span> <span class="pre">&lt;input</span> <span class="pre">las</span> <span class="pre">file&gt;</span> <span class="pre">-o</span>
 <span class="pre">&lt;output</span> <span class="pre">text</span> <span class="pre">file&gt;</span></code>.</p>
 <div class="section" id="compilation">
 <h3>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h3>
-<p>Set up a <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> file to compile your kernel against PDAL:</p>
-<div class="highlight-cmake"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<p>Set up a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to compile your kernel against PDAL:</p>
+<div class="highlight-cmake notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">KernelTutorial</span><span class="p">)</span>
 
 <span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">2.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span>
 
 <span class="nb">add_library</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">SHARED</span> <span class="s">MyKernel.cpp</span><span class="p">)</span>
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
 <span class="nb">target_include_directories</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">PRIVATE</span>
                             <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">target_link_directories</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -463,15 +505,16 @@ possible commands.</p>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="writing-reader.html" class="btn btn-neutral float-right" title="Writing a reader" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="writing-reader.html" class="btn btn-neutral float-right" title="Writing a reader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writing-filter.html" class="btn btn-neutral" title="Writing a filter" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="writing-filter.html" class="btn btn-neutral float-left" title="Writing a filter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -479,21 +522,25 @@ possible commands.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>
+    <div class="info">
+      <a class="logo-link" href="https://hobu.co">
+        <div class="hobu-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
                     &copy;  2020
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
-                        <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
-      Last updated on Jan 17, 2020.
 
-    </p>
-  </div> 
-
+      
+      Last updated on Mar 20, 2020.
+      </div>
+    </div>
 </footer>
-
         </div>
       </div>
 
@@ -503,36 +550,15 @@ possible commands.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'2.0.1',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
   
     <div class="footer">
         <div class="container">
@@ -542,7 +568,7 @@ possible commands.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jan 17, 2020.
+                    on Mar 20, 2020.
         </div>
     </div>
 
