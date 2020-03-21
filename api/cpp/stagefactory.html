@@ -246,11 +246,108 @@
            <div itemprop="articleBody">
             
   <div class="section" id="pdal-stagefactory">
-<span id="cpp-pdal-stagefactory"></span><h1><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::StageFactory</span></code><a class="headerlink" href="#pdal-stagefactory" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /data/doc/doxygen/xml/index.xml</p>
+<span id="cpp-pdal-stagefactory"></span><h1><a class="reference internal" href="#_CPPv4N4pdal12StageFactoryE" title="pdal::StageFactory"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::StageFactory</span></code></a><a class="headerlink" href="#pdal-stagefactory" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv4N4pdal12StageFactoryE">
+<span id="_CPPv3N4pdal12StageFactoryE"></span><span id="_CPPv2N4pdal12StageFactoryE"></span><span id="pdal::StageFactory"></span><span class="target" id="classpdal_1_1StageFactory"></span><em class="property">class </em><code class="descname">StageFactory</code><a class="headerlink" href="#_CPPv4N4pdal12StageFactoryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This class provides a mechanism for creating <a class="reference internal" href="stage.html#classpdal_1_1Stage"><span class="std std-ref">Stage</span></a> objects given a driver name. </p>
+<p>Creates stages are owned by the factory and destroyed when the factory is destroyed. Stages can be explicitly destroyed with <a class="reference internal" href="#classpdal_1_1StageFactory_1a2d3a812bd2b1a63d788d82e18c29ff55"><span class="std std-ref">destroyStage()</span></a> if desired.</p>
+<p><dl class="simple">
+<dt><strong>Note</strong></dt><dd><p><a class="reference internal" href="stage.html#classpdal_1_1Stage"><span class="std std-ref">Stage</span></a> creation is thread-safe. </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N4pdal12StageFactory12StageFactoryEb">
+<span id="_CPPv3N4pdal12StageFactory12StageFactoryEb"></span><span id="_CPPv2N4pdal12StageFactory12StageFactoryEb"></span><span id="pdal::StageFactory::StageFactory__b"></span><span class="target" id="classpdal_1_1StageFactory_1a875a9f7c1f31dbf29dd0d1001334457c"></span><code class="descname">StageFactory</code><span class="sig-paren">(</span>bool <em>ignored</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal12StageFactory12StageFactoryEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a stage factory. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ignored</span></code>: Ignored argument. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N4pdal12StageFactory11createStageERKNSt6stringE">
+<span id="_CPPv3N4pdal12StageFactory11createStageERKNSt6stringE"></span><span id="_CPPv2N4pdal12StageFactory11createStageERKNSt6stringE"></span><span id="pdal::StageFactory::createStage__ssCR"></span><span class="target" id="classpdal_1_1StageFactory_1ac23b3763b84750594c834ec6ea27e334"></span><a class="reference internal" href="stage.html#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a> *<code class="descname">createStage</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal12StageFactory11createStageERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a stage and return a pointer to the created stage. </p>
+<p>The factory takes ownership of any successfully created stage.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Pointer to created stage. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stage_name</span></code>: Type of stage to by created. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N4pdal12StageFactory12destroyStageEP5Stage">
+<span id="_CPPv3N4pdal12StageFactory12destroyStageEP5Stage"></span><span id="_CPPv2N4pdal12StageFactory12destroyStageEP5Stage"></span><span id="pdal::StageFactory::destroyStage__StageP"></span><span class="target" id="classpdal_1_1StageFactory_1a2d3a812bd2b1a63d788d82e18c29ff55"></span>void <code class="descname">destroyStage</code><span class="sig-paren">(</span><a class="reference internal" href="stage.html#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a> *<em>stage</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal12StageFactory12destroyStageEP5Stage" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroy a stage created by this factory. </p>
+<p>This doesn’t need to be called unless you specifically want to destroy a stage as all stages are destroyed when the factory is destroyed.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stage</span></code>: Pointer to stage to destroy. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv4N4pdal12StageFactory17inferReaderDriverERKNSt6stringE">
+<span id="_CPPv3N4pdal12StageFactory17inferReaderDriverERKNSt6stringE"></span><span id="_CPPv2N4pdal12StageFactory17inferReaderDriverERKNSt6stringE"></span><span id="pdal::StageFactory::inferReaderDriver__ssCR"></span><span class="target" id="classpdal_1_1StageFactory_1a51af2cb785aed67c13262ba2a87f3adf"></span>std::string <code class="descname">inferReaderDriver</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal12StageFactory17inferReaderDriverERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Infer the reader to use based on a filename. </p>
+<p>Find the default reader for a file.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Driver name or empty string if no reader can be inferred from the filename.</p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>Name of the reader driver associated with the file. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: Filename that should be analyzed to determine a driver. </p></li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: Filename for which to infer a reader. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N4pdal12StageFactory17inferWriterDriverERKNSt6stringE">
+<span id="_CPPv3N4pdal12StageFactory17inferWriterDriverERKNSt6stringE"></span><span id="_CPPv2N4pdal12StageFactory17inferWriterDriverERKNSt6stringE"></span><span id="pdal::StageFactory::inferWriterDriver__ssCR"></span><span class="target" id="classpdal_1_1StageFactory_1a156f6090f6a1848f2b50050a3b68c19b"></span>std::string <code class="descname">inferWriterDriver</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal12StageFactory17inferWriterDriverERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Infer the writer to use based on filename extension. </p>
+<p>Find the default writer for a file.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Driver name or empty string if no writer can be inferred from the filename.</p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>Name of the writer driver associated with the file. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: Filename for which to infer a writer. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </div>
 
 
