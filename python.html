@@ -245,9 +245,8 @@ Numpy arrays.</p>
 </div>
 <div class="section" id="versions">
 <h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
-<p>PDAL supports both Python 2.7 and Python 3.4+. <a class="reference internal" href="project/integration.html#integration"><span class="std std-ref">Continuous Integration</span></a> tests Python
-2.7 on both Linux and Windows. Python 3 is used by a number of developers
-for adhoc development and testing.</p>
+<p>PDAL supports both Python 3.5+. <a class="reference internal" href="project/integration.html#integration"><span class="std std-ref">Continuous Integration</span></a> tests Python
+Linux, OSX, and Windows.</p>
 </div>
 <div class="section" id="embed">
 <h2>Embed<a class="headerlink" href="#embed" title="Permalink to this headline">¶</a></h2>
@@ -291,8 +290,6 @@ results as <a class="reference external" href="http://www.numpy.org/">Numpy</a> 
 
 <span class="kn">import</span> <span class="nn">pdal</span>
 <span class="n">pipeline</span> <span class="o">=</span> <span class="n">pdal</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span> <span class="c1"># check if our JSON and options were good</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">loglevel</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1">#really noisy</span>
 <span class="n">count</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 <span class="n">arrays</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">arrays</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">metadata</span>
@@ -305,6 +302,14 @@ results as <a class="reference external" href="http://www.numpy.org/">Numpy</a> 
 <a class="reference internal" href="download.html#download"><span class="std std-ref">PDAL installation</span></a>.  Unless you choose the Conda installation
 method, make sure that you a current, working version of PDAL before
 installing the extension.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Previous to PDAL 2.1, Python support was spread across the embedded
+stages (<a class="reference internal" href="stages/readers.numpy.html#readers-numpy"><span class="std std-ref">readers.numpy</span></a> and <a class="reference internal" href="stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a>) which were installed
+by PDAL itself and the PDAL extension that was installed from PyPI.
+As of PDAL 2.1 and PDAL/python 2.3, both the embedded stages and the
+extension are installed from PyPI.</p>
+</div>
 <div class="section" id="installation-using-pip">
 <h4>Installation Using pip<a class="headerlink" href="#installation-using-pip" title="Permalink to this headline">¶</a></h4>
 <p id="index-4">As administrator, you can install PDAL using pip:</p>
@@ -319,21 +324,19 @@ installing the extension.</p>
 </div>
 <div class="section" id="installation-from-source">
 <h4>Installation from Source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h4>
-<p id="index-5">The PDAL Python extension is hosted on
+<p id="index-5">PDAL Python support is hosted in a separate repository than PDAL itself at
 <a class="reference external" href="https://github.com/PDAL/python">GitHub</a>.  If you have a working PDAL
 installation and a working Python installation, you can install the extension
 using the following procedure on Unix.  The procedure on Windows is similar</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/PDAL/python pdalextension
 $ cd pdalextension
-$ python setup.py build
-# this should be run as administrator/super user
-$ python setup.py install
+$ pip install .
 </pre></div>
 </div>
 </div>
 <div class="section" id="install-using-conda">
 <h4>Install using Conda<a class="headerlink" href="#install-using-conda" title="Permalink to this headline">¶</a></h4>
-<p id="index-6">The PDAL Python extension can also be installed using the <a class="reference external" href="https://conda.io/docs/">Conda</a>
+<p id="index-6">The PDAL Python support can also be installed using the <a class="reference external" href="https://conda.io/docs/">Conda</a>
 package manager.  An advantage of using Conda to install the extension is
 that Conda will install PDAL. We recommend installing PDAL and the PDAL
 Python extension in an environment other than the base environment.  To
@@ -392,7 +395,7 @@ specified with the <code class="docutils literal notranslate"><span class="pre">
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Mar 21, 2020.
+      Last updated on Apr 06, 2020.
       </div>
     </div>
 </footer>
@@ -423,7 +426,7 @@ specified with the <code class="docutils literal notranslate"><span class="pre">
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Mar 21, 2020.
+                    on Apr 06, 2020.
         </div>
     </div>
 
