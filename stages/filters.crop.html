@@ -118,8 +118,10 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.html#move">Move</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="filters.html#cull">Cull</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">filters.crop</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-1">Example 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2">Example 2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
@@ -273,8 +275,9 @@ If the point input consists of multiple point views with differing
 spatial references, one is chosen at random and assumed to be the
 spatial reference of the input bounding region.  In this case a warning will
 be logged.</p>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>This example crops an input point cloud using a square polygon.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file-input.las&quot;</span><span class="p">,</span>
     <span class="p">{</span>
@@ -289,11 +292,29 @@ be logged.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="example-2">
+<h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>This example crops all points more than 500 units in any direction from a point.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="s2">&quot;file-input.las&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.crop&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;point&quot;</span><span class="p">:</span><span class="s2">&quot;POINT(0 0 0)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">500</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;file-cropped.las&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl>
 <dt>bounds</dt><dd><p>The extent of the clipping rectangle in the format
-“([xmin, xmax], [ymin, ymax])”.  This option can be specified more than
+<code class="docutils literal notranslate"><span class="pre">&quot;([xmin,</span> <span class="pre">xmax],</span> <span class="pre">[ymin,</span> <span class="pre">ymax])&quot;</span></code>.  This option can be specified more than
 once by placing values in an array.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -306,22 +327,27 @@ if the Z values are invalid or inconsistent with the data.</p>
 </div>
 </dd>
 <dt>polygon</dt><dd><p>The clipping polygon, expressed in a well-known text string,
-eg: “POLYGON((0 0, 5000 10000, 10000 0, 0 0))”.  This option can be
+eg: <code class="docutils literal notranslate"><span class="pre">&quot;POLYGON((0</span> <span class="pre">0,</span> <span class="pre">5000</span> <span class="pre">10000,</span> <span class="pre">10000</span> <span class="pre">0,</span> <span class="pre">0</span> <span class="pre">0))&quot;</span></code>.  This option can be
 specified more than once by placing values in an array.</p>
 </dd>
 <dt>outside</dt><dd><p>Invert the cropping logic and only take points outside the cropping
 bounds or polygon. [Default: false]</p>
 </dd>
-<dt><span class="target" id="point">point</span></dt><dd><p>An array of WKT or GeoJSON 2D or 3D points. Requires <a class="reference internal" href="#distance">distance</a>.</p>
+<dt><span class="target" id="point">point</span></dt><dd><p>An array of WKT or GeoJSON 2D or 3D points (eg: <code class="docutils literal notranslate"><span class="pre">&quot;POINT(0</span> <span class="pre">0</span> <span class="pre">0)&quot;</span></code>). Requires <a class="reference internal" href="#distance">distance</a>.</p>
 </dd>
-<dt><span class="target" id="distance">distance</span></dt><dd><p>Distance in units of common X, Y, and Z <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to crop circle
-or sphere in combination with <a class="reference internal" href="#point">point</a>.</p>
+<dt><span class="target" id="distance">distance</span></dt><dd><p>Distance (radius) in units of common X, Y, and Z <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> in combination with <a class="reference internal" href="#point">point</a>. Passing a 2D point will crop using a circle. Passing a 3D point will crop using a sphere.</p>
 </dd>
 <dt><span class="target" id="a-srs">a_srs</span></dt><dd><p>Indicates the spatial reference of the bounding regions.  If not provided,
 it is assumed that the spatial reference of the bounding region matches
 that of the points.</p>
 </dd>
 </dl>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>See <a class="reference internal" href="../workshop/exercises/analysis/clipping/clipping.html#workshop-clipping"><span class="std std-ref">Clipping data with polygons</span></a>: and <a class="reference internal" href="../tutorial/clipping/index.html#clipping"><span class="std std-ref">Clipping with Geometries</span></a> for example usage scenarios for <a class="reference internal" href="#filters-crop"><span class="std std-ref">filters.crop</span></a>.</p></li>
+</ol>
 </div>
 </div>
 
@@ -359,7 +385,7 @@ that of the points.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 28, 2020.
+      Last updated on May 02, 2020.
       </div>
     </div>
 </footer>
@@ -390,7 +416,7 @@ that of the points.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 28, 2020.
+                    on May 02, 2020.
         </div>
     </div>
 
