@@ -43,7 +43,9 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="copyright" title="Copyright" href="../copyright.html" /> 
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Point Cloud Processing and Analysis with PDAL" href="../workshop/index.html" />
+    <link rel="prev" title="Ground Filter Tutorial" href="ground-filters.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -124,8 +126,38 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../java.html">Java</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Tutorials</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reading.html">Reading with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iowa-entwine.html">Reading data from EPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="las.html">LAS Reading and Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clipping/index.html">Clipping with Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ground-filters.html">Ground Filter Tutorial</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Applying a grid shift to point clouds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#before-we-begin">Before we begin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-conda">Install Conda</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-a-conda-environment">Create a Conda Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-a-datum-transformation-grid-gtx">Step 1: Create a Datum Transformation Grid (GTX)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#option-1-linz-supplied-gtx-file">Option 1 — LINZ supplied GTX file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option-two-create-a-gtx-file">Option two — Create a GTX file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-prepare-a-json-pipeline-file">Step 2: Prepare a JSON Pipeline file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-use-pdal-to-reproject">Step 3: Use PDAL to reproject</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reprojecting-one-file-from-lvd-to-nzvd2016">Reprojecting one file from LVD to NZVD2016</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reprojecting-multiple-files-from-lvd-to-nzvd2016">Reprojecting multiple files from LVD to NZVD2016</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reprojecting-from-nzgd2000-to-nzvd2016">Reprojecting from NZGD2000 to NZVD2016</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nzvd2016-to-nzgd2000-or-lvd">NZVD2016 to NZGD2000 or LVD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../workshop/index.html">Workshop</a></li>
@@ -184,6 +216,8 @@
     
       <li><a href="../index.html"> Documentation </a> &raquo;</li>
       
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+      
       <li>Applying a grid shift to point clouds</li>
     
 
@@ -200,6 +234,15 @@
     
   </ul>
 
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="../workshop/index.html" class="btn btn-neutral float-right" title="Point Cloud Processing and Analysis with PDAL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ground-filters.html" class="btn btn-neutral float-left" title="Ground Filter Tutorial" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
   
   <hr/>
 </div>
@@ -410,6 +453,15 @@
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../workshop/index.html" class="btn btn-neutral float-right" title="Point Cloud Processing and Analysis with PDAL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ground-filters.html" class="btn btn-neutral float-left" title="Ground Filter Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -429,7 +481,7 @@
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jun 25, 2020.
+      Last updated on Jul 09, 2020.
       </div>
     </div>
 </footer>
@@ -460,7 +512,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jun 25, 2020.
+                    on Jul 09, 2020.
         </div>
     </div>
 
