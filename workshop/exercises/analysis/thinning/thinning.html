@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>Thinning &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../../../../about.html" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home"> PDAL
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -174,6 +176,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -269,7 +272,7 @@ provides capability for all three:</p>
 </ul>
 <p>In this exercise, we are going to thin with the Poisson method, but the concept
 should operate similarly for the <span class="xref std std-ref">filters.voxelgrid</span> approach too.</p>
-<div class="figure align-center" id="id1">
+<div class="figure align-default" id="id1">
 <a class="reference external image-reference" href="../../../../_images/thinning-overview.png"><img alt="../../../../_images/thinning-overview.png" src="../../../../_images/thinning-overview.png" /></a>
 <p class="caption"><span class="caption-text">Thinning strategies available in PDAL</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
@@ -297,15 +300,15 @@ should operate similarly for the <span class="xref std std-ref">filters.voxelgri
 <p><a class="reference external" href="http://plas.io">http://plas.io</a> has the ability to switch on/off multiple data sets, and we
 are going to use that ability to view both the <code class="docutils literal notranslate"><span class="pre">uncompahgre.laz</span></code> and the
 <code class="docutils literal notranslate"><span class="pre">uncompahgre-thin.laz</span></code> file.</p>
-<div class="figure align-center" id="id2">
+<div class="figure align-default" id="id2">
 <a class="reference external image-reference" href="../../../../_images/thinning-select-data.png"><img alt="../../../../_images/thinning-select-data.png" src="../../../../_images/thinning-select-data.png" /></a>
 <p class="caption"><span class="caption-text">Selecting multiple data sets in <a class="reference external" href="http://plas.io">http://plas.io</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id3">
+<div class="figure align-default" id="id3">
 <a class="reference external image-reference" href="../../../../_images/thinning-select-data.png"><img alt="../../../../_images/thinning-full-res.png" src="../../../../_images/thinning-full-res.png" /></a>
 <p class="caption"><span class="caption-text">Full resolution Uncompahgre data set</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id4">
+<div class="figure align-default" id="id4">
 <a class="reference external image-reference" href="../../../../_images/thinning-poisson-thin.png"><img alt="../../../../_images/thinning-poisson-thin.png" src="../../../../_images/thinning-poisson-thin.png" /></a>
 <p class="caption"><span class="caption-text">Uncompahgre thinned at a radius of 20m</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
@@ -354,7 +357,7 @@ are going to use that ability to view both the <code class="docutils literal not
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -385,7 +388,7 @@ are going to use that ability to view both the <code class="docutils literal not
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>filters.mortonorder &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,30 +26,27 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="filters.randomize" href="filters.randomize.html" />
-    <link rel="prev" title="filters.smrf" href="filters.smrf.html" /> 
+    <link rel="prev" title="filters.ferry" href="filters.ferry.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -167,6 +169,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -231,7 +234,7 @@
         <a href="filters.randomize.html" class="btn btn-neutral float-right" title="filters.randomize" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.smrf.html" class="btn btn-neutral float-left" title="filters.smrf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.ferry.html" class="btn btn-neutral float-left" title="filters.ferry" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -247,7 +250,7 @@
 representation from the end to the beginning. This way, points are sorted
 with a good dispersement. For example, by successively selecting N
 representative points within tiles:</p>
-<div class="figure align-center">
+<div class="figure align-default">
 <a class="reference internal image-reference" href="../_images/filters.mortonorder.img1.png"><img alt="Reverse Morton indexing" src="../_images/filters.mortonorder.img1.png" style="width: 1785.0px; height: 952.0px;" /></a>
 </div>
 <div class="admonition seealso">
@@ -278,7 +281,20 @@ Reverse Morton algorithm.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>None.</p>
+<dl class="simple">
+<dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a filter.
+Points that don’t pass the
+expression skip the stage but are available to subsequent stages in a pipeline.
+[Default: no filtering]</p>
+</dd>
+<dt>where_merge</dt><dd><p>A strategy for merging points skipped by a ‘<cite>where’</cite> option when running in standard mode.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the skipped points are added to the first point view returned by the skipped
+filter. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, skipped points are placed in their own point view. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>,
+skipped points are merged into the returned point view provided that only one point view
+is returned and it has the same point count as it did when the filter was run.
+[Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -293,7 +309,7 @@ Reverse Morton algorithm.</p>
         <a href="filters.randomize.html" class="btn btn-neutral float-right" title="filters.randomize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.smrf.html" class="btn btn-neutral float-left" title="filters.smrf" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.ferry.html" class="btn btn-neutral float-left" title="filters.ferry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -316,7 +332,7 @@ Reverse Morton algorithm.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -347,7 +363,7 @@ Reverse Morton algorithm.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

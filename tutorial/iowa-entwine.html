@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>Reading data from EPT &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -165,6 +167,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -294,7 +297,7 @@ installation should be good to go.</p>
 <p>PDAL uses the concept of <a class="reference external" href="https://pdal.io/pipeline.html">pipelines</a> to describe the reading, filtering, and writing
 of point cloud data. We will construct a pipeline that will do a number of things
 in succession.</p>
-<div class="figure align-center" id="id5">
+<div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/pipeline-example-overview.png"><img alt="../_images/pipeline-example-overview.png" src="../_images/pipeline-example-overview.png" style="width: 1259.25px; height: 1180.5px;" /></a>
 <p class="caption"><span class="caption-text">Pipeline diagram. The data are read from the <a class="reference external" href="https://entwine.io/entwine-point-tile.html">Entwine Point Tile</a> resource at
 <a class="reference external" href="https://usgs.entwine.io">https://usgs.entwine.io</a> for Iowa using <a class="reference internal" href="../stages/readers.ept.html#readers-ept"><span class="std std-ref">readers.ept</span></a> and filtered through a
@@ -381,7 +384,7 @@ from.</p>
 data for the entire state of Iowa, which is about 160 billion points.
 Maybe you have enough memory for this…</p>
 </div>
-<div class="figure align-center" id="id6">
+<div class="figure align-default" id="id6">
 <a class="reference internal image-reference" href="../_images/pipeline-example-readers.ept.png"><img alt="../_images/pipeline-example-readers.ept.png" src="../_images/pipeline-example-readers.ept.png" style="width: 208.0px; height: 195.5px;" /></a>
 <p class="caption"><span class="caption-text">The EPT reader reads data from an EPT resource with PDAL. Options available
 in PDAL 1.9+ allow users to select data at or above specified resolutions.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
@@ -392,7 +395,7 @@ in PDAL 1.9+ allow users to select data at or above specified resolutions.</span
 <p>The data we are selecting may have noise properly classified, and we can use
 <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> to keep all data that does not have a <code class="docutils literal notranslate"><span class="pre">Classification</span></code> <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a>
 value of <code class="docutils literal notranslate"><span class="pre">7</span></code>.</p>
-<div class="figure align-center" id="id7">
+<div class="figure align-default" id="id7">
 <a class="reference internal image-reference" href="../_images/pipeline-example-filters.range1.png"><img alt="../_images/pipeline-example-filters.range1.png" src="../_images/pipeline-example-filters.range1.png" style="width: 208.0px; height: 181.0px;" /></a>
 <p class="caption"><span class="caption-text">The <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> filter utilizes range selection to allow users to
 select data for processing or removal. The <span class="xref std std-ref">filters.mongoexpression</span>
@@ -405,7 +408,7 @@ filter can be used for even more complex logic operations.</span><a class="heade
 of the classification values in the point data. <a class="reference internal" href="../stages/filters.assign.html#filters-assign"><span class="std std-ref">filters.assign</span></a> takes the
 expression <code class="docutils literal notranslate"><span class="pre">Classification</span> <span class="pre">[:]=0</span></code> and assigns the <code class="docutils literal notranslate"><span class="pre">Classification</span></code> for
 each point to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-<div class="figure align-center" id="id8">
+<div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/pipeline-example-filters.assign.png"><img alt="../_images/pipeline-example-filters.assign.png" src="../_images/pipeline-example-filters.assign.png" style="width: 208.0px; height: 181.0px;" /></a>
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../stages/filters.assign.html#filters-assign"><span class="std std-ref">filters.assign</span></a> can also take in an option to apply assignments
 based on a conditional. If you want to assign values based on a
@@ -417,7 +420,7 @@ bounding geometry, use <a class="reference internal" href="../stages/filters.ove
 <p>The data on the AWS 3DEP Public Dataset are stored in <a class="reference external" href="https://en.wikipedia.org/wiki/Web_Mercator_projection">Web Mercator</a>
 coordinate system, which is not suitable for many operations. We need to
 reproject them into an appropriate UTM coordinate system (<a class="reference external" href="https://epsg.io/32615">EPSG:26915</a>).</p>
-<div class="figure align-center" id="id9">
+<div class="figure align-default" id="id9">
 <a class="reference internal image-reference" href="../_images/pipeline-example-filters.reprojection.png"><img alt="../_images/pipeline-example-filters.reprojection.png" src="../_images/pipeline-example-filters.reprojection.png" style="width: 264.5px; height: 181.0px;" /></a>
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> can also take override the incoming coordinate
 system using the <code class="docutils literal notranslate"><span class="pre">a_srs</span></code> option.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
@@ -427,7 +430,7 @@ system using the <code class="docutils literal notranslate"><span class="pre">a_
 <h4>filters.smrf<a class="headerlink" href="#filters-smrf" title="Permalink to this headline">¶</a></h4>
 <p>The Simple Morphological Filter (<a class="reference internal" href="../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a>) classifies points as ground
 or not-ground.</p>
-<div class="figure align-center" id="id10">
+<div class="figure align-default" id="id10">
 <a class="reference internal image-reference" href="../_images/pipeline-example-filters.smrf.png"><img alt="../_images/pipeline-example-filters.smrf.png" src="../_images/pipeline-example-filters.smrf.png" style="width: 208.0px; height: 181.0px;" /></a>
 <p class="caption"><span class="caption-text"><a class="reference internal" href="../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a> provides a number of tuning options, but the
 defaults tend to work quite well for mixed urban environments on
@@ -439,7 +442,7 @@ flat ground (ie, Iowa).</span><a class="headerlink" href="#id10" title="Permalin
 <p>After we have executed the SMRF filter, we only want to keep points that
 are actually classified as ground in our point stream. Selecting for
 points with <code class="docutils literal notranslate"><span class="pre">Classification[2:2]</span></code> does that for us.</p>
-<div class="figure align-center" id="id11">
+<div class="figure align-default" id="id11">
 <a class="reference internal image-reference" href="../_images/pipeline-example-filters.range2.png"><img alt="../_images/pipeline-example-filters.range2.png" src="../_images/pipeline-example-filters.range2.png" style="width: 208.0px; height: 181.0px;" /></a>
 <p class="caption"><span class="caption-text">Remove any point that is not ground classification for our
 DTM generation.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
@@ -452,7 +455,7 @@ terrain model with <a class="reference internal" href="../stages/writers.gdal.ht
 to set the <code class="docutils literal notranslate"><span class="pre">nodata</span></code> value, specify only outputting the inverse distance
 weighted raster, and assigning a resolution of <code class="docutils literal notranslate"><span class="pre">1</span></code> (m). See <a class="reference internal" href="../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 for more options.</p>
-<div class="figure align-center" id="id12">
+<div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/pipeline-example-writers.gdal.png"><img alt="../_images/pipeline-example-writers.gdal.png" src="../_images/pipeline-example-writers.gdal.png" style="width: 187.0px; height: 324.5px;" /></a>
 <p class="caption"><span class="caption-text">Output a DTM at 1m resolution.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
@@ -461,7 +464,7 @@ for more options.</p>
 <h4>writers.las<a class="headerlink" href="#writers-las" title="Permalink to this headline">¶</a></h4>
 <p>We can also write a LAZ file containing the same points that were used to
 make the elevation model in the section above. See <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> for more options.</p>
-<div class="figure align-center" id="id13">
+<div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/pipeline-example-writers.las.png"><img alt="../_images/pipeline-example-writers.las.png" src="../_images/pipeline-example-writers.las.png" style="width: 189.5px; height: 239.5px;" /></a>
 <p class="caption"><span class="caption-text">Also output the LAZ file as part of our processing pipeline.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
@@ -549,7 +552,7 @@ TIFF</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -580,7 +583,7 @@ TIFF</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

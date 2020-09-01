@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>filters.assign &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,30 +26,27 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="filters.cluster" href="filters.cluster.html" />
-    <link rel="prev" title="filters.approximatecoplanar" href="filters.approximatecoplanar.html" /> 
+    <link rel="next" title="filters.overlay" href="filters.overlay.html" />
+    <link rel="prev" title="filters.reciprocity" href="filters.reciprocity.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -114,40 +116,21 @@
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="filters.html#create">Create</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">filters.assign</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#classification">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#height-above-ground">Height Above Ground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#colorization">Colorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#clustering">Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#pointwise-features">Pointwise Features</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="filters.html#assignment">Assignment</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">filters.assign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assignment-expressions">Assignment Expressions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#example-1">Example 1</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2">Example 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-3">Example 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.overlay.html">filters.overlay</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="filters.cluster.html">filters.cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.covariancefeatures.html">filters.covariancefeatures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.csf.html">filters.csf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.dbscan.html">filters.dbscan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.dem.html">filters.dem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.elm.html">filters.elm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.hag_delaunay.html">filters.hag_delaunay</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.hag_dem.html">filters.hag_dem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.hag_nn.html">filters.hag_nn</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.info.html">filters.info</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.miniball.html">filters.miniball</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.neighborclassifier.html">filters.neighborclassifier</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.nndistance.html">filters.nndistance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.outlier.html">filters.outlier</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.overlay.html">filters.overlay</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.planefit.html">filters.planefit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.pmf.html">filters.pmf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.radialdensity.html">filters.radialdensity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.reciprocity.html">filters.reciprocity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.skewnessbalancing.html">filters.skewnessbalancing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.smrf.html">filters.smrf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dimension-create-copy">Dimension Create/Copy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filters.html#order">Order</a></li>
@@ -194,6 +177,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -255,10 +239,10 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="filters.cluster.html" class="btn btn-neutral float-right" title="filters.cluster" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.overlay.html" class="btn btn-neutral float-right" title="filters.overlay" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.approximatecoplanar.html" class="btn btn-neutral float-left" title="filters.approximatecoplanar" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.reciprocity.html" class="btn btn-neutral float-left" title="filters.reciprocity" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -279,25 +263,10 @@ to a provided value that pass a range filter.</p>
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-<div class="section" id="example-1">
-<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
-<p>This pipeline resets the <code class="docutils literal notranslate"><span class="pre">Classification</span></code> of all points with classifications
-2 or 3 to 0 and all points with classification of 5 to 4.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;autzen-dd.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.assign&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;assignment&quot;</span> <span class="p">:</span> <span class="s2">&quot;Classification[2:3]=0&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;assignment&quot;</span> <span class="p">:</span> <span class="s2">&quot;Classification[5:5]=4&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;attributed.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;scale_x&quot;</span><span class="p">:</span><span class="mf">0.0000001</span><span class="p">,</span>
-        <span class="nt">&quot;scale_y&quot;</span><span class="p">:</span><span class="mf">0.0000001</span>
-    <span class="p">}</span>
-<span class="p">]</span>
-</pre></div>
-</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>assignment</cite> and <cite>condition</cite> options are deprecated and may be removed in a
+future release.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
@@ -309,8 +278,72 @@ to the dimension value as set when the filter began processing. [Required]</p>
 <dt>condition</dt><dd><p>A list of <a class="reference internal" href="filters.range.html#ranges"><span class="std std-ref">ranges</span></a> that a point’s values must pass in order
 for the assignment to be performed. [Default: none]</p>
 </dd>
+<dt>value</dt><dd><p>A list of <a class="reference internal" href="#assignment-expressions"><span class="std std-ref">assignment expressions</span></a> to be applied to points.
+The list of values is evaluated in order. [Default: none]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a filter.
+Points that don’t pass the
+expression skip the stage but are available to subsequent stages in a pipeline.
+[Default: no filtering]</p>
+</dd>
+<dt>where_merge</dt><dd><p>A strategy for merging points skipped by a ‘<cite>where’</cite> option when running in standard mode.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the skipped points are added to the first point view returned by the skipped
+filter. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, skipped points are placed in their own point view. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>,
+skipped points are merged into the returned point view provided that only one point view
+is returned and it has the same point count as it did when the filter was run.
+[Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
+</dd>
 </dl>
 </div>
+</div>
+<div class="section" id="assignment-expressions">
+<span id="id2"></span><h1>Assignment Expressions<a class="headerlink" href="#assignment-expressions" title="Permalink to this headline">¶</a></h1>
+<p>The assignment expression syntax is an expansion on the <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">Expression Syntax</span></a> syntax
+that provides for assignment of values to points. The generic expression is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;values&quot;</span> <span class="p">:</span> <span class="s2">&quot;Dimension = ValueExpression [WHERE ConditionalExpression)]&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Dimension</span></code> is the name of a PDAL dimension.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">ValueExpression</span></code> consists of constants, dimension names and mathematical operators
+that evaluates to a numeric value.  The supported mathematical operations are addition(<cite>+</cite>),
+subtraction(<cite>-</cite>), multiplication(<cite>*</cite>) and division(<cite>\</cite>).</p>
+<p>A <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">ConditionalExpression</span></a> is an optional boolean value that must
+evaluate to <cite>true</cite> for the <code class="docutils literal notranslate"><span class="pre">ValueExpression</span></code> to be applied.</p>
+</div>
+<div class="section" id="example-1">
+<h1>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;value&quot;</span> <span class="p">:</span> <span class="s2">&quot;Red = Red / 256&quot;</span>
+</pre></div>
+</div>
+<p>This scales the <code class="docutils literal notranslate"><span class="pre">Red</span></code> value by 1/256. If the input values are in the range 0 - 65535, the output
+value will be in the range 0 - 255.</p>
+</div>
+<div class="section" id="example-2">
+<h1>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;value&quot;</span> <span class="p">:</span>
+<span class="p">[</span>
+    <span class="s2">&quot;Classification = 2 WHERE HeightAboveGround &lt; 5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Classification = 1 WHERE HeightAboveGround &gt;= 5&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This sets the classification of points to either <code class="docutils literal notranslate"><span class="pre">Ground</span></code> or <code class="docutils literal notranslate"><span class="pre">Unassigned</span></code> depending on the
+value of the <code class="docutils literal notranslate"><span class="pre">HeightAboveGround</span></code> dimension.</p>
+</div>
+<div class="section" id="example-3">
+<h1>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;value&quot;</span> <span class="p">:</span>
+<span class="p">[</span>
+    <span class="s2">&quot;X = 1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;X = 2 WHERE X &gt; 10&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This sets the value of <code class="docutils literal notranslate"><span class="pre">X</span></code> for all points to 1. The second statement is essentially ignored
+since the first statement sets the <code class="docutils literal notranslate"><span class="pre">X</span></code> value of all points to 1 and therefore no points
+the <code class="docutils literal notranslate"><span class="pre">ConditionalExpression</span></code> of the second statement.</p>
 </div>
 
 
@@ -321,10 +354,10 @@ for the assignment to be performed. [Default: none]</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.cluster.html" class="btn btn-neutral float-right" title="filters.cluster" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.overlay.html" class="btn btn-neutral float-right" title="filters.overlay" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.approximatecoplanar.html" class="btn btn-neutral float-left" title="filters.approximatecoplanar" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.reciprocity.html" class="btn btn-neutral float-left" title="filters.reciprocity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -347,7 +380,7 @@ for the assignment to be performed. [Default: none]</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -378,7 +411,7 @@ for the assignment to be performed. [Default: none]</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

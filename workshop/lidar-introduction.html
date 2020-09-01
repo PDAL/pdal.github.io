@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>Introduction to LiDAR &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -163,6 +165,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -317,7 +320,7 @@ complications for georeferencing mobile LiDAR and GNSS/IMU data.</p>
 <div class="section" id="integrating-lidar-and-gnss-imu-data">
 <h3>Integrating LiDAR and GNSS/IMU data<a class="headerlink" href="#integrating-lidar-and-gnss-imu-data" title="Permalink to this headline">¶</a></h3>
 <p>The LiDAR georeferencing equation is well-established; we present a version
-here from <a class="reference internal" href="#glennie2007" id="id1">[Gle07]</a>:</p>
+here from <a class="bibtex reference internal" href="#glennie2007" id="id1">[Gle07]</a>:</p>
 <div class="math notranslate nohighlight" id="equation-georeferencing">
 <span class="eqno">(1)<a class="headerlink" href="#equation-georeferencing" title="Permalink to this equation">¶</a></span>\[\mathbf{p}^l_G = \mathbf{p}^l_{GPS} + \mathbf{R}^l_b \left( \mathbf{R}^b_s \mathbf{r}^s - \mathbf{l}^b \right)\]</div>
 <p>where:</p>
@@ -355,13 +358,13 @@ data is beyond the scope of this class.</p>
 <p>Pulse-based LiDAR systems use the round-trip travel time of a pulse of laser
 energy to measure distances.  The outgoing pulse of a LiDAR system is roughly
 (but not exactly) a Gaussian:</p>
-<div class="figure align-center" id="id2">
+<div class="figure align-default" id="id2">
 <img alt="../_images/reference-pulse.png" src="../_images/reference-pulse.png" />
 <p class="caption"><span class="caption-text">A real-world outgoing LiDAR pulse.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>This pulse can interact with multiple objects in a scene before it is returned to the sensor.
 Here is an example of a LiDAR return:</p>
-<div class="figure align-center" id="id3">
+<div class="figure align-default" id="id3">
 <img alt="../_images/return-pulse.png" src="../_images/return-pulse.png" />
 <p class="caption"><span class="caption-text">A real-world incoming LiDAR return.
 Potential discrete-return peaks are marked in red.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
@@ -376,10 +379,10 @@ Processing full waveform data is beyond the scope of this class.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>PDAL is a discrete-return point cloud processing library.
-It does not have any functionality to analyse or process full waveform data.</p>
+It does not have any functionality to analyze or process full waveform data.</p>
 </div>
 <p id="bibtex-bibliography-workshop/lidar-introduction-0"><dl class="citation">
-<dt class="label" id="glennie2007"><span class="brackets"><a class="fn-backref" href="#id1">Gle07</a></span></dt>
+<dt class="bibtex label" id="glennie2007"><span class="brackets"><a class="fn-backref" href="#id1">Gle07</a></span></dt>
 <dd><p>Craig L. Glennie. Rigorous 3D error analysis of kinematic scanning LIDAR systems. <em>Journal of Applied Geodesy</em>, jan 2007.</p>
 </dd>
 </dl>
@@ -421,7 +424,7 @@ It does not have any functionality to analyse or process full waveform data.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -452,7 +455,7 @@ It does not have any functionality to analyse or process full waveform data.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

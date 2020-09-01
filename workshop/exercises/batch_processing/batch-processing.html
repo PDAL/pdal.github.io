@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>Batch Processing &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> PDAL
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -165,6 +167,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -244,7 +247,7 @@
 <span id="workshop-batch-processing"></span><h1>Batch Processing<a class="headerlink" href="#batch-processing" title="Permalink to this headline">¶</a></h1>
 <p>PDAL doesn’t handle matching multiple file inputs except for glob handling for merge operations,
 but does allow for command line substitution parameters to make batch processing simpler,
-substitutions. Substitions work with both <a class="reference internal" href="../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> operations as well as with
+substitutions. Substitutions work with both <a class="reference internal" href="../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> operations as well as with
 other applications such as <a class="reference internal" href="../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a>.</p>
 <div class="section" id="operating-system-variations">
 <h2>Operating system variations<a class="headerlink" href="#operating-system-variations" title="Permalink to this headline">¶</a></h2>
@@ -300,7 +303,7 @@ basename of the file. This allows you to easily change the output format and the
 </div>
 <div class="section" id="example-parallel-batch-compression-of-las-files-to-laz-bash">
 <h2>Example - Parallel Batch compression of LAS files to LAZ - Bash:<a class="headerlink" href="#example-parallel-batch-compression-of-las-files-to-laz-bash" title="Permalink to this headline">¶</a></h2>
-<p>Parallel, as its name implies, allows paralell operations. Adding the <cite>-j</cite> syntax indicates the number simultaneous
+<p>Parallel, as its name implies, allows parallel operations. Adding the <cite>-j</cite> syntax indicates the number simultaneous
 jobs to run</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ls ./dir1/*.las | parallel -I{} -j 4 \</span>
 <span class="go">pdal translate -i ./dir1/{/.}.las -o ./dir2/{/.}.laz</span>
@@ -309,8 +312,8 @@ jobs to run</p>
 </div>
 <div class="section" id="exercise-pipeline-substitions">
 <h2>Exercise - Pipeline Substitions:<a class="headerlink" href="#exercise-pipeline-substitions" title="Permalink to this headline">¶</a></h2>
-<p>For the most flexibility, pipelines are used to apply a series of opertations to a file (or group
-of files). In this excersise, we build on the <a class="reference internal" href="../analysis/dtm/dtm.html#workshop-dtm"><span class="std std-ref">Generating a DTM</span></a> pipeline example, but run this pipline over 4 files and
+<p>For the most flexibility, pipelines are used to apply a series of operations to a file (or group
+of files). In this exercise, we build on the <a class="reference internal" href="../analysis/dtm/dtm.html#workshop-dtm"><span class="std std-ref">Generating a DTM</span></a> pipeline example, but run this pipeline over 4 files and
 reproject, calculate a bare earth using the <a class="reference internal" href="../../../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a> filter, remove those points that aren’t bare earth
 with <a class="reference internal" href="../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> and then write the output using the <a class="reference internal" href="../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>.</p>
 <p>The pipeline we are using is:</p>
@@ -405,7 +408,7 @@ Then set the transparency of the upper layer to 50% and you’ll get a nice disp
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -436,7 +439,7 @@ Then set the transparency of the upper layer to 50% and you’ll get a nice disp
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

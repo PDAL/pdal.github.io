@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>pdal::Stage &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> PDAL
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -170,6 +172,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -250,28 +253,28 @@
 <p><a class="reference internal" href="#_CPPv4N4pdal5StageE" title="pdal::Stage"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::Stage</span></code></a> is the base class of <a class="reference internal" href="filter.html#_CPPv4N4pdal6FilterE" title="pdal::Filter"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::Filter</span></code></a>,
 <a class="reference internal" href="reader.html#_CPPv4N4pdal6ReaderE" title="pdal::Reader"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::Reader</span></code></a>, and <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::MultiFilter</span></code> classes that
 implement the reading API in a PDAL pipeline.</p>
-<dl class="class">
+<dl class="cpp class">
 <dt id="_CPPv4N4pdal5StageE">
-<span id="_CPPv3N4pdal5StageE"></span><span id="_CPPv2N4pdal5StageE"></span><span id="pdal::Stage"></span><span class="target" id="classpdal_1_1Stage"></span><em class="property">class </em><code class="descname">Stage</code><a class="headerlink" href="#_CPPv4N4pdal5StageE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5StageE"></span><span id="_CPPv2N4pdal5StageE"></span><span id="pdal::Stage"></span><span class="target" id="classpdal_1_1Stage"></span><em class="property">class </em><code class="sig-prename descclassname">pdal<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">Stage</code><a class="headerlink" href="#_CPPv4N4pdal5StageE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A stage performs the actual processing in PDAL. </p>
 <p>Stages may read data, modify or filter read data, create metadata or write processed data.</p>
 <p>Stages are linked with <a class="reference internal" href="#classpdal_1_1Stage_1abfd87d459bea04a919aace286b2e377e"><span class="std std-ref">setInput()</span></a> into a pipeline. The pipeline is run with by calling in sequence <a class="reference internal" href="#classpdal_1_1Stage_1a4b9296a59f8852b3d08630f1086bfbea"><span class="std std-ref">prepare()</span></a> and <a class="reference internal" href="#classpdal_1_1Stage_1a1615c4aa5ec5e48f90d73f0e7a796935"><span class="std std-ref">execute()</span></a> on the stage at the end of the pipeline. PipelineManager can also be used to create and run a pipeline. </p>
 <p>Subclassed by <a class="reference internal" href="filter.html#classpdal_1_1Filter"><span class="std std-ref">pdal::Filter</span></a>, <a class="reference internal" href="reader.html#classpdal_1_1Reader"><span class="std std-ref">pdal::Reader</span></a>, pdal::Streamable, <a class="reference internal" href="writer.html#classpdal_1_1Writer"><span class="std std-ref">pdal::Writer</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage5StageEv">
-<span id="_CPPv3N4pdal5Stage5StageEv"></span><span id="_CPPv2N4pdal5Stage5StageEv"></span><span id="pdal::Stage::Stage"></span><span class="target" id="classpdal_1_1Stage_1a328a062e19310343a6e96ca0feae1f6a"></span><code class="descname">Stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage5StageEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage5StageEv"></span><span id="_CPPv2N4pdal5Stage5StageEv"></span><span id="pdal::Stage::Stage"></span><span class="target" id="classpdal_1_1Stage_1a328a062e19310343a6e96ca0feae1f6a"></span><code class="sig-name descname">Stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage5StageEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5StageD0Ev">
-<span id="_CPPv3N4pdal5StageD0Ev"></span><span id="_CPPv2N4pdal5StageD0Ev"></span><span id="pdal::Stage::~Stage"></span><span class="target" id="classpdal_1_1Stage_1adeac58810357bff99ab4a5fd6537421f"></span><code class="descname">~Stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5StageD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5StageD0Ev"></span><span id="_CPPv2N4pdal5StageD0Ev"></span><span id="pdal::Stage::~Stage"></span><span class="target" id="classpdal_1_1Stage_1adeac58810357bff99ab4a5fd6537421f"></span><code class="sig-name descname">~Stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5StageD0Ev" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage8setInputER5Stage">
-<span id="_CPPv3N4pdal5Stage8setInputER5Stage"></span><span id="_CPPv2N4pdal5Stage8setInputER5Stage"></span><span id="pdal::Stage::setInput__StageR"></span><span class="target" id="classpdal_1_1Stage_1abfd87d459bea04a919aace286b2e377e"></span>void <code class="descname">setInput</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a> &amp;<em>input</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage8setInputER5Stage" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage8setInputER5Stage"></span><span id="_CPPv2N4pdal5Stage8setInputER5Stage"></span><span id="pdal::Stage::setInput__StageR"></span><span class="target" id="classpdal_1_1Stage_1abfd87d459bea04a919aace286b2e377e"></span>void <code class="sig-name descname">setInput</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a> &amp;<em>input</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage8setInputER5Stage" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Add a stage to the input list of this stage. </p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -282,9 +285,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage13setProgressFdEi">
-<span id="_CPPv3N4pdal5Stage13setProgressFdEi"></span><span id="_CPPv2N4pdal5Stage13setProgressFdEi"></span><span id="pdal::Stage::setProgressFd__i"></span><span class="target" id="classpdal_1_1Stage_1a714dfe1f3b91fd41afe8146d94759b29"></span>void <code class="descname">setProgressFd</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage13setProgressFdEi" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage13setProgressFdEi"></span><span id="_CPPv2N4pdal5Stage13setProgressFdEi"></span><span id="pdal::Stage::setProgressFd__i"></span><span class="target" id="classpdal_1_1Stage_1a714dfe1f3b91fd41afe8146d94759b29"></span>void <code class="sig-name descname">setProgressFd</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage13setProgressFdEi" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a file descriptor to which progress information should be written. </p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -295,30 +298,30 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage7previewEv">
-<span id="_CPPv3N4pdal5Stage7previewEv"></span><span id="_CPPv2N4pdal5Stage7previewEv"></span><span id="pdal::Stage::preview"></span><span class="target" id="classpdal_1_1Stage_1a25bb5ef4315f98fb88657876077ae7e4"></span>QuickInfo <code class="descname">preview</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7previewEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage7previewEv"></span><span id="_CPPv2N4pdal5Stage7previewEv"></span><span id="pdal::Stage::preview"></span><span class="target" id="classpdal_1_1Stage_1a25bb5ef4315f98fb88657876077ae7e4"></span>QuickInfo <code class="sig-name descname">preview</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7previewEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Retrieve some basic point information without reading all data when possible. </p>
 <p>Usually implemented only by Readers. </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage7prepareE13PointTableRef">
-<span id="_CPPv3N4pdal5Stage7prepareE13PointTableRef"></span><span id="_CPPv2N4pdal5Stage7prepareE13PointTableRef"></span><span id="pdal::Stage::prepare__PointTableRef"></span><span class="target" id="classpdal_1_1Stage_1a4b9296a59f8852b3d08630f1086bfbea"></span>void <code class="descname">prepare</code><span class="sig-paren">(</span>PointTableRef <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7prepareE13PointTableRef" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage7prepareE13PointTableRef"></span><span id="_CPPv2N4pdal5Stage7prepareE13PointTableRef"></span><span id="pdal::Stage::prepare__PointTableRef"></span><span class="target" id="classpdal_1_1Stage_1a4b9296a59f8852b3d08630f1086bfbea"></span>void <code class="sig-name descname">prepare</code><span class="sig-paren">(</span>PointTableRef <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7prepareE13PointTableRef" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Prepare a stage for execution. </p>
 <p>This function needs to be called on the terminal stage of a pipeline (linked set of stages) before <a class="reference internal" href="#classpdal_1_1Stage_1a1615c4aa5ec5e48f90d73f0e7a796935"><span class="std std-ref">execute</span></a> can be called. Prepare recurses through all input stages.</p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">table</span></code>: <a class="reference internal" href="pointtable.html#classpdal_1_1PointTable"><span class="std std-ref">PointTable</span></a> being used for stage pipeline. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">table</span></code>: PointTable being used for stage pipeline. </p></li>
 </ul>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage7executeE13PointTableRef">
-<span id="_CPPv3N4pdal5Stage7executeE13PointTableRef"></span><span id="_CPPv2N4pdal5Stage7executeE13PointTableRef"></span><span id="pdal::Stage::execute__PointTableRef"></span><span class="target" id="classpdal_1_1Stage_1a1615c4aa5ec5e48f90d73f0e7a796935"></span>PointViewSet <code class="descname">execute</code><span class="sig-paren">(</span>PointTableRef <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7executeE13PointTableRef" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage7executeE13PointTableRef"></span><span id="_CPPv2N4pdal5Stage7executeE13PointTableRef"></span><span id="pdal::Stage::execute__PointTableRef"></span><span class="target" id="classpdal_1_1Stage_1a1615c4aa5ec5e48f90d73f0e7a796935"></span>PointViewSet <code class="sig-name descname">execute</code><span class="sig-paren">(</span>PointTableRef <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7executeE13PointTableRef" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Execute a prepared pipeline (linked set of stages). </p>
 <p>This performs the action associated with the stage by executing the run function of each stage in depth first order. Each stage is run to completion (all points are processed) before the next stages is run.o</p>
 <p><dl class="simple">
@@ -330,14 +333,14 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage7executeER16StreamPointTable">
-<span id="_CPPv3N4pdal5Stage7executeER16StreamPointTable"></span><span id="_CPPv2N4pdal5Stage7executeER16StreamPointTable"></span><span id="pdal::Stage::execute__StreamPointTableR"></span><span class="target" id="classpdal_1_1Stage_1a3185b4e77be80b48b13e2baf161e8366"></span><em class="property">virtual</em> void <code class="descname">execute</code><span class="sig-paren">(</span>StreamPointTable &amp;<em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7executeER16StreamPointTable" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage7executeER16StreamPointTable"></span><span id="_CPPv2N4pdal5Stage7executeER16StreamPointTable"></span><span id="pdal::Stage::execute__StreamPointTableR"></span><span class="target" id="classpdal_1_1Stage_1a3185b4e77be80b48b13e2baf161e8366"></span>void <code class="sig-name descname">execute</code><span class="sig-paren">(</span>StreamPointTable &amp;<em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage7executeER16StreamPointTable" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage18pipelineStreamableEv">
-<span id="_CPPv3NK4pdal5Stage18pipelineStreamableEv"></span><span id="_CPPv2NK4pdal5Stage18pipelineStreamableEv"></span><span id="pdal::Stage::pipelineStreamableC"></span><span class="target" id="classpdal_1_1Stage_1a22d543807e6692ef081132a5a48d0624"></span><em class="property">virtual</em> bool <code class="descname">pipelineStreamable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage18pipelineStreamableEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage18pipelineStreamableEv"></span><span id="_CPPv2NK4pdal5Stage18pipelineStreamableEv"></span><span id="pdal::Stage::pipelineStreamableC"></span><span class="target" id="classpdal_1_1Stage_1aa4eee46b49e82d38a325710463064b11"></span>bool <code class="sig-name descname">pipelineStreamable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage18pipelineStreamableEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Determine if a pipeline with this stage as a sink is streamable. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Whether the pipeline is streamable. </p>
@@ -346,9 +349,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage17findNonstreamableEv">
-<span id="_CPPv3NK4pdal5Stage17findNonstreamableEv"></span><span id="_CPPv2NK4pdal5Stage17findNonstreamableEv"></span><span id="pdal::Stage::findNonstreamableC"></span><span class="target" id="classpdal_1_1Stage_1a127727ca6db2324f4cda9d3e09529cda"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a> *<code class="descname">findNonstreamable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage17findNonstreamableEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage17findNonstreamableEv"></span><span id="_CPPv2NK4pdal5Stage17findNonstreamableEv"></span><span id="pdal::Stage::findNonstreamableC"></span><span class="target" id="classpdal_1_1Stage_1abb0723d544805721bd9bde2c804d903e"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a> *<code class="sig-name descname">findNonstreamable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage17findNonstreamableEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return a pointer to a pipeline’s first non-streamable stage, if one exists. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>nullptr if the stage is streamable, a pointer to this stage otherwise. </p>
@@ -357,9 +360,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage19setSpatialReferenceERK16SpatialReference">
-<span id="_CPPv3N4pdal5Stage19setSpatialReferenceERK16SpatialReference"></span><span id="_CPPv2N4pdal5Stage19setSpatialReferenceERK16SpatialReference"></span><span id="pdal::Stage::setSpatialReference__SpatialReferenceCR"></span><span class="target" id="classpdal_1_1Stage_1af31ff3a4038bceeb17847b567d984ed7"></span>void <code class="descname">setSpatialReference</code><span class="sig-paren">(</span>SpatialReference <em class="property">const</em> &amp;<em>srs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage19setSpatialReferenceERK16SpatialReference" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage19setSpatialReferenceERK16SpatialReference"></span><span id="_CPPv2N4pdal5Stage19setSpatialReferenceERK16SpatialReference"></span><span id="pdal::Stage::setSpatialReference__SpatialReferenceCR"></span><span class="target" id="classpdal_1_1Stage_1af31ff3a4038bceeb17847b567d984ed7"></span>void <code class="sig-name descname">setSpatialReference</code><span class="sig-paren">(</span>SpatialReference <em class="property">const</em> &amp;<em>srs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage19setSpatialReferenceERK16SpatialReference" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set the spatial reference of a stage. </p>
 <p>Set the spatial reference that will override that being carried by the <a class="reference internal" href="pointview.html#classpdal_1_1PointView"><span class="std std-ref">PointView</span></a> being processed. This is usually used when reprojecting data to a new spatial reference. The stage spatial reference will be carried by PointViews processes by this stage to subsequent stages.</p>
 <p>If called by a <a class="reference internal" href="reader.html#classpdal_1_1Reader"><span class="std std-ref">Reader</span></a> whose spatial reference has been set with option ‘spatialreference’ or ‘override_srs’, then this function will have no effect.</p>
@@ -372,9 +375,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage19getSpatialReferenceEv">
-<span id="_CPPv3NK4pdal5Stage19getSpatialReferenceEv"></span><span id="_CPPv2NK4pdal5Stage19getSpatialReferenceEv"></span><span id="pdal::Stage::getSpatialReferenceC"></span><span class="target" id="classpdal_1_1Stage_1a9889b4446f40daa6f4cd7bfe3c567839"></span><em class="property">const</em> SpatialReference &amp;<code class="descname">getSpatialReference</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage19getSpatialReferenceEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage19getSpatialReferenceEv"></span><span id="_CPPv2NK4pdal5Stage19getSpatialReferenceEv"></span><span id="pdal::Stage::getSpatialReferenceC"></span><span class="target" id="classpdal_1_1Stage_1a6d87f622315bdbacacff8962db1b4fcc"></span><em class="property">const</em> SpatialReference &amp;<code class="sig-name descname">getSpatialReference</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage19getSpatialReferenceEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the spatial reference of the stage. </p>
 <p>Get the spatial reference that will override that being carried by the <a class="reference internal" href="pointview.html#classpdal_1_1PointView"><span class="std std-ref">PointView</span></a> being processed. This is usually used when reprojecting data to a new spatial reference. The stage spatial reference will be carried by PointViews processes by this stage to subsequent stages.</p>
 <p><dl class="simple">
@@ -384,9 +387,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage10setOptionsE7Options">
-<span id="_CPPv3N4pdal5Stage10setOptionsE7Options"></span><span id="_CPPv2N4pdal5Stage10setOptionsE7Options"></span><span id="pdal::Stage::setOptions__Options"></span><span class="target" id="classpdal_1_1Stage_1acb2434df20f371f1fec9577de3cf0046"></span>void <code class="descname">setOptions</code><span class="sig-paren">(</span><a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage10setOptionsE7Options" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage10setOptionsE7Options"></span><span id="_CPPv2N4pdal5Stage10setOptionsE7Options"></span><span id="pdal::Stage::setOptions__Options"></span><span class="target" id="classpdal_1_1Stage_1acb2434df20f371f1fec9577de3cf0046"></span>void <code class="sig-name descname">setOptions</code><span class="sig-paren">(</span><a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage10setOptionsE7Options" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a stage’s options. </p>
 <p>Set the options on a stage, clearing all previously set options.</p>
 <p><dl class="simple">
@@ -398,9 +401,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage21addConditionalOptionsERK7Options">
-<span id="_CPPv3N4pdal5Stage21addConditionalOptionsERK7Options"></span><span id="_CPPv2N4pdal5Stage21addConditionalOptionsERK7Options"></span><span id="pdal::Stage::addConditionalOptions__OptionsCR"></span><span class="target" id="classpdal_1_1Stage_1a782c57a2d5646a0a59af94321f9c5ba1"></span>void <code class="descname">addConditionalOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage21addConditionalOptionsERK7Options" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage21addConditionalOptionsERK7Options"></span><span id="_CPPv2N4pdal5Stage21addConditionalOptionsERK7Options"></span><span id="pdal::Stage::addConditionalOptions__OptionsCR"></span><span class="target" id="classpdal_1_1Stage_1a782c57a2d5646a0a59af94321f9c5ba1"></span>void <code class="sig-name descname">addConditionalOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage21addConditionalOptionsERK7Options" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Add options if an option with the same name doesn’t already exist on the stage. </p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -411,9 +414,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage10addAllArgsER11ProgramArgs">
-<span id="_CPPv3N4pdal5Stage10addAllArgsER11ProgramArgs"></span><span id="_CPPv2N4pdal5Stage10addAllArgsER11ProgramArgs"></span><span id="pdal::Stage::addAllArgs__ProgramArgsR"></span><span class="target" id="classpdal_1_1Stage_1a75ff99f7b665c6573e304ed4148dd99e"></span>void <code class="descname">addAllArgs</code><span class="sig-paren">(</span><a class="reference internal" href="programargs.html#_CPPv4N4pdal11ProgramArgsE" title="pdal::ProgramArgs">ProgramArgs</a> &amp;<em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage10addAllArgsER11ProgramArgs" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage10addAllArgsER11ProgramArgs"></span><span id="_CPPv2N4pdal5Stage10addAllArgsER11ProgramArgs"></span><span id="pdal::Stage::addAllArgs__ProgramArgsR"></span><span class="target" id="classpdal_1_1Stage_1a75ff99f7b665c6573e304ed4148dd99e"></span>void <code class="sig-name descname">addAllArgs</code><span class="sig-paren">(</span><a class="reference internal" href="programargs.html#_CPPv4N4pdal11ProgramArgsE" title="pdal::ProgramArgs">ProgramArgs</a> &amp;<em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage10addAllArgsER11ProgramArgs" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Add a stage’s options to a <a class="reference internal" href="programargs.html#classpdal_1_1ProgramArgs"><span class="std std-ref">ProgramArgs</span></a> set. </p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -424,9 +427,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage10addOptionsERK7Options">
-<span id="_CPPv3N4pdal5Stage10addOptionsERK7Options"></span><span id="_CPPv2N4pdal5Stage10addOptionsERK7Options"></span><span id="pdal::Stage::addOptions__OptionsCR"></span><span class="target" id="classpdal_1_1Stage_1ace3043bc318e31d6d88a296c0a8cf62b"></span>void <code class="descname">addOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage10addOptionsERK7Options" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage10addOptionsERK7Options"></span><span id="_CPPv2N4pdal5Stage10addOptionsERK7Options"></span><span id="pdal::Stage::addOptions__OptionsCR"></span><span class="target" id="classpdal_1_1Stage_1ace3043bc318e31d6d88a296c0a8cf62b"></span>void <code class="sig-name descname">addOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage10addOptionsERK7Options" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Add options to the existing option set. </p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -437,9 +440,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage13removeOptionsERK7Options">
-<span id="_CPPv3N4pdal5Stage13removeOptionsERK7Options"></span><span id="_CPPv2N4pdal5Stage13removeOptionsERK7Options"></span><span id="pdal::Stage::removeOptions__OptionsCR"></span><span class="target" id="classpdal_1_1Stage_1ab1fa73224209557248ed896eae7a1f4d"></span>void <code class="descname">removeOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage13removeOptionsERK7Options" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage13removeOptionsERK7Options"></span><span id="_CPPv2N4pdal5Stage13removeOptionsERK7Options"></span><span id="pdal::Stage::removeOptions__OptionsCR"></span><span class="target" id="classpdal_1_1Stage_1ab1fa73224209557248ed896eae7a1f4d"></span>void <code class="sig-name descname">removeOptions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="options.html#_CPPv4N4pdal7OptionsE" title="pdal::Options">Options</a> &amp;<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage13removeOptionsERK7Options" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Remove options from a stage’s option set. </p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -450,9 +453,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage6setLogERK6LogPtr">
-<span id="_CPPv3N4pdal5Stage6setLogERK6LogPtr"></span><span id="_CPPv2N4pdal5Stage6setLogERK6LogPtr"></span><span id="pdal::Stage::setLog__LogPtrCR"></span><span class="target" id="classpdal_1_1Stage_1a60752248e84e919958c52ecff78bf347"></span>void <code class="descname">setLog</code><span class="sig-paren">(</span><em class="property">const</em> LogPtr &amp;<em>log</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage6setLogERK6LogPtr" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage6setLogERK6LogPtr"></span><span id="_CPPv2N4pdal5Stage6setLogERK6LogPtr"></span><span id="pdal::Stage::setLog__LogPtrCR"></span><span class="target" id="classpdal_1_1Stage_1a60752248e84e919958c52ecff78bf347"></span>void <code class="sig-name descname">setLog</code><span class="sig-paren">(</span><em class="property">const</em> LogPtr &amp;<em>log</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage6setLogERK6LogPtr" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set the stage’s log. </p>
 <p><dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -463,9 +466,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage3logEv">
-<span id="_CPPv3NK4pdal5Stage3logEv"></span><span id="_CPPv2NK4pdal5Stage3logEv"></span><span id="pdal::Stage::logC"></span><span class="target" id="classpdal_1_1Stage_1ae8c29817e14d7cda53fdcbb23102d872"></span><em class="property">virtual</em> LogPtr <code class="descname">log</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage3logEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage3logEv"></span><span id="_CPPv2NK4pdal5Stage3logEv"></span><span id="pdal::Stage::logC"></span><span class="target" id="classpdal_1_1Stage_1a5df23cde48c2012d8625f2a964d7350e"></span>LogPtr <code class="sig-name descname">log</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage3logEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return the stage’s log pointer. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><a class="reference internal" href="log.html#classpdal_1_1Log"><span class="std std-ref">Log</span></a> pointer. </p>
@@ -474,21 +477,21 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage12startLoggingEv">
-<span id="_CPPv3NK4pdal5Stage12startLoggingEv"></span><span id="_CPPv2NK4pdal5Stage12startLoggingEv"></span><span id="pdal::Stage::startLoggingC"></span><span class="target" id="classpdal_1_1Stage_1a74cf636cb0f633411e4e40dcd718508a"></span>void <code class="descname">startLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage12startLoggingEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage12startLoggingEv"></span><span id="_CPPv2NK4pdal5Stage12startLoggingEv"></span><span id="pdal::Stage::startLoggingC"></span><span class="target" id="classpdal_1_1Stage_1a6390ff0651dcfdeea3f1e19692cc8430"></span>void <code class="sig-name descname">startLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage12startLoggingEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Push the stage’s leader into the log. </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage11stopLoggingEv">
-<span id="_CPPv3NK4pdal5Stage11stopLoggingEv"></span><span id="_CPPv2NK4pdal5Stage11stopLoggingEv"></span><span id="pdal::Stage::stopLoggingC"></span><span class="target" id="classpdal_1_1Stage_1ae49e996fe285350923a3bf44d027adad"></span>void <code class="descname">stopLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage11stopLoggingEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage11stopLoggingEv"></span><span id="_CPPv2NK4pdal5Stage11stopLoggingEv"></span><span id="pdal::Stage::stopLoggingC"></span><span class="target" id="classpdal_1_1Stage_1a2b0cdf840f45d7e83d07d2016b8ceaef"></span>void <code class="sig-name descname">stopLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage11stopLoggingEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Pop the stage’s leader from the log. </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage7isDebugEv">
-<span id="_CPPv3NK4pdal5Stage7isDebugEv"></span><span id="_CPPv2NK4pdal5Stage7isDebugEv"></span><span id="pdal::Stage::isDebugC"></span><span class="target" id="classpdal_1_1Stage_1aec4fb27c40bb4b032ff003a89a950dd4"></span>bool <code class="descname">isDebug</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage7isDebugEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage7isDebugEv"></span><span id="_CPPv2NK4pdal5Stage7isDebugEv"></span><span id="pdal::Stage::isDebugC"></span><span class="target" id="classpdal_1_1Stage_1a41dce858bb410475b722ca057b69ac0f"></span>bool <code class="sig-name descname">isDebug</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage7isDebugEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Determine whether the stage is in debug mode or not. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The stage’s debug state. </p>
@@ -497,9 +500,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage7getNameEv">
-<span id="_CPPv3NK4pdal5Stage7getNameEv"></span><span id="_CPPv2NK4pdal5Stage7getNameEv"></span><span id="pdal::Stage::getNameC"></span><span class="target" id="classpdal_1_1Stage_1a6c81d6fbbac17ebe4cd63806916cc750"></span><em class="property">virtual</em> std::string <code class="descname">getName</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK4pdal5Stage7getNameEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage7getNameEv"></span><span id="_CPPv2NK4pdal5Stage7getNameEv"></span><span id="pdal::Stage::getNameC"></span><span class="target" id="classpdal_1_1Stage_1a6c81d6fbbac17ebe4cd63806916cc750"></span>std::string <code class="sig-name descname">getName</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK4pdal5Stage7getNameEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return the name of a stage. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The stage’s name. </p>
@@ -508,15 +511,15 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage6setTagERKNSt6stringE">
-<span id="_CPPv3N4pdal5Stage6setTagERKNSt6stringE"></span><span id="_CPPv2N4pdal5Stage6setTagERKNSt6stringE"></span><span id="pdal::Stage::setTag__ssCR"></span><span class="target" id="classpdal_1_1Stage_1a49584fa79b06e1ddb18a6bc837e6b6d8"></span>void <code class="descname">setTag</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>tag</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage6setTagERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage6setTagERKNSt6stringE"></span><span id="_CPPv2N4pdal5Stage6setTagERKNSt6stringE"></span><span id="pdal::Stage::setTag__ssCR"></span><span class="target" id="classpdal_1_1Stage_1a49584fa79b06e1ddb18a6bc837e6b6d8"></span>void <code class="sig-name descname">setTag</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>tag</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage6setTagERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a specific tag name. </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage3tagEv">
-<span id="_CPPv3NK4pdal5Stage3tagEv"></span><span id="_CPPv2NK4pdal5Stage3tagEv"></span><span id="pdal::Stage::tagC"></span><span class="target" id="classpdal_1_1Stage_1a613c8e943622340c46806e8a6feefc13"></span><em class="property">virtual</em> std::string <code class="descname">tag</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage3tagEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage3tagEv"></span><span id="_CPPv2NK4pdal5Stage3tagEv"></span><span id="pdal::Stage::tagC"></span><span class="target" id="classpdal_1_1Stage_1aecc44d763656c9d14afe5aa0f98b7aa7"></span>std::string <code class="sig-name descname">tag</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage3tagEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return the tag name of a stage. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The tag name. </p>
@@ -525,9 +528,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage9getInputsEv">
-<span id="_CPPv3N4pdal5Stage9getInputsEv"></span><span id="_CPPv2N4pdal5Stage9getInputsEv"></span><span id="pdal::Stage::getInputs"></span><span class="target" id="classpdal_1_1Stage_1ae5e297f007d2b4cb380e7f34a6b472cd"></span>std::vector&lt;<a class="reference internal" href="#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a> *&gt; &amp;<code class="descname">getInputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage9getInputsEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage9getInputsEv"></span><span id="_CPPv2N4pdal5Stage9getInputsEv"></span><span id="pdal::Stage::getInputs"></span><span class="target" id="classpdal_1_1Stage_1ae5e297f007d2b4cb380e7f34a6b472cd"></span>std::vector&lt;<a class="reference internal" href="#_CPPv4N4pdal5StageE" title="pdal::Stage">Stage</a>*&gt; &amp;<code class="sig-name descname">getInputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage9getInputsEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return a list of the stage’s inputs. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>A vector pointers to input stages. </p>
@@ -536,9 +539,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage11getMetadataEv">
-<span id="_CPPv3NK4pdal5Stage11getMetadataEv"></span><span id="_CPPv2NK4pdal5Stage11getMetadataEv"></span><span id="pdal::Stage::getMetadataC"></span><span class="target" id="classpdal_1_1Stage_1a03070b4d2496f6c0993fb0dfe16cc8e0"></span><a class="reference internal" href="metadata.html#_CPPv4N4pdal12MetadataNodeE" title="pdal::MetadataNode">MetadataNode</a> <code class="descname">getMetadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage11getMetadataEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage11getMetadataEv"></span><span id="_CPPv2NK4pdal5Stage11getMetadataEv"></span><span id="pdal::Stage::getMetadataC"></span><span class="target" id="classpdal_1_1Stage_1aaa34376712d6c64ddfffd7253850bc6f"></span><a class="reference internal" href="metadata.html#_CPPv4N4pdal12MetadataNodeE" title="pdal::MetadataNode">MetadataNode</a> <code class="sig-name descname">getMetadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage11getMetadataEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the stage’s metadata node. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><a class="reference internal" href="#classpdal_1_1Stage"><span class="std std-ref">Stage</span></a>’s metadata. </p>
@@ -547,9 +550,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4NK4pdal5Stage9serializeE12MetadataNodeRN14PipelineWriter6TagMapE">
-<span id="_CPPv3NK4pdal5Stage9serializeE12MetadataNodeRN14PipelineWriter6TagMapE"></span><span id="_CPPv2NK4pdal5Stage9serializeE12MetadataNodeRN14PipelineWriter6TagMapE"></span><span id="pdal::Stage::serialize__MetadataNode.PipelineWriter::TagMapRC"></span><span class="target" id="classpdal_1_1Stage_1a25b2c486e9aebdddc74443467c47c122"></span>void <code class="descname">serialize</code><span class="sig-paren">(</span><a class="reference internal" href="metadata.html#_CPPv4N4pdal12MetadataNodeE" title="pdal::MetadataNode">MetadataNode</a> <em>root</em>, PipelineWriter::TagMap &amp;<em>tags</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage9serializeE12MetadataNodeRN14PipelineWriter6TagMapE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK4pdal5Stage9serializeE12MetadataNodeRN14PipelineWriter6TagMapE"></span><span id="_CPPv2NK4pdal5Stage9serializeE12MetadataNodeRN14PipelineWriter6TagMapE"></span><span id="pdal::Stage::serialize__MetadataNode.PipelineWriter::TagMapRC"></span><span class="target" id="classpdal_1_1Stage_1aa2fceaf1c2ea1bc8337b604a7fc72e2f"></span>void <code class="sig-name descname">serialize</code><span class="sig-paren">(</span><a class="reference internal" href="metadata.html#_CPPv4N4pdal12MetadataNodeE" title="pdal::MetadataNode">MetadataNode</a> <em>root</em>, PipelineWriter::TagMap &amp;<em>tags</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK4pdal5Stage9serializeE12MetadataNodeRN14PipelineWriter6TagMapE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Serialize a stage by inserting apporpritate data into the provided <a class="reference internal" href="metadata.html#classpdal_1_1MetadataNode"><span class="std std-ref">MetadataNode</span></a>. </p>
 <p>Used to dump a pipeline specification in a portable format.</p>
 <p><dl class="simple">
@@ -565,9 +568,9 @@ implement the reading API in a PDAL pipeline.</p>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Static Functions</p>
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE">
-<span id="_CPPv3N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE"></span><span id="_CPPv2N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE"></span><span id="pdal::Stage::parseName__ss.std::string::size_typeR"></span><span class="target" id="classpdal_1_1Stage_1aca3009ba4d0e25982ec2ebab343a8873"></span>bool <code class="descname">parseName</code><span class="sig-paren">(</span>std::string <em>o</em>, std::string::size_type &amp;<em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE"></span><span id="_CPPv2N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE"></span><span id="pdal::Stage::parseName__ss.std::string::size_typeR"></span><span class="target" id="classpdal_1_1Stage_1aca3009ba4d0e25982ec2ebab343a8873"></span>bool <code class="sig-name descname">parseName</code><span class="sig-paren">(</span>std::string <em>o</em>, std::string::size_type &amp;<em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage9parseNameENSt6stringERNSt6string9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Parse a stage name from a string. </p>
 <p>Return the name and update the position in the input string to the end of the stage name.</p>
 <p><dl class="simple">
@@ -582,9 +585,9 @@ implement the reading API in a PDAL pipeline.</p>
 </p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cpp function">
 <dt id="_CPPv4N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE">
-<span id="_CPPv3N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE"></span><span id="_CPPv2N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE"></span><span id="pdal::Stage::parseTagName__ss.std::string::size_typeR"></span><span class="target" id="classpdal_1_1Stage_1a2ed4e38b8dc11601c28b66a85624cdb0"></span>bool <code class="descname">parseTagName</code><span class="sig-paren">(</span>std::string <em>o</em>, std::string::size_type &amp;<em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE"></span><span id="_CPPv2N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE"></span><span id="pdal::Stage::parseTagName__ss.std::string::size_typeR"></span><span class="target" id="classpdal_1_1Stage_1a2ed4e38b8dc11601c28b66a85624cdb0"></span>bool <code class="sig-name descname">parseTagName</code><span class="sig-paren">(</span>std::string <em>o</em>, std::string::size_type &amp;<em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4pdal5Stage12parseTagNameENSt6stringERNSt6string9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Parse a tag name from a string. </p>
 <p>Return the name and update the position in the input string to the end of the tag name.</p>
 <p><dl class="simple">
@@ -639,7 +642,7 @@ implement the reading API in a PDAL pipeline.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -670,7 +673,7 @@ implement the reading API in a PDAL pipeline.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

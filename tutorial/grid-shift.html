@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>Applying a grid shift to point clouds &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -176,6 +178,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -266,17 +269,17 @@
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>Historically in New Zealand, heights were defined in terms of 13 local vertical datums (LVD) referenced to an estimate of the local mean sea level (MSL).</p>
-<div class="figure align-center">
+<div class="figure align-default">
 <img alt="../_images/nz_lvd.png" src="../_images/nz_lvd.png" />
 </div>
 <p>In 2016, New Zealand Vertical Datum 2016 (NZVD2016), which is defined by the NZGeoid2016 geoid, became the official national vertical datum for New Zealand. The general relationship between the different datums is shown in the diagram below.</p>
-<div class="figure align-center">
+<div class="figure align-default">
 <img alt="../_images/nz_relationships.png" src="../_images/nz_relationships.png" />
 </div>
 <p>Available on the  <a class="reference external" href="https://data.linz.govt.nz">LINZ Data Service</a> (LDS) are <a class="reference external" href="https://data.linz.govt.nz/search/category/geodetic/vertical-datum-2016/?q=NZVD2016+Conversion+Raster">relationship grids</a> which model the difference between the local vertical datums and NZVD2016 (O in the above diagram).</p>
 <p>The <a class="reference external" href="https://data.linz.govt.nz/layer/53447-nz-quasigeoid-2016-raster/">NZ Quasigeoid 2016</a>, also a relationship grid, models the difference between the NZGD2000 ellipsoid and NZVD2016 (N in the above diagram).</p>
 <p>The equations to transform heights using the published values in the relationship grids are:</p>
-<div class="figure align-center">
+<div class="figure align-default">
 <img alt="../_images/nz_formulas.png" src="../_images/nz_formulas.png" />
 </div>
 </div>
@@ -352,7 +355,7 @@
 <p>You can create your own GTX file using the relationship grids available on the LDS. For example, if you intend to convert from Moturiki 1953 to NZVD2016, you have to do the following:</p>
 <ol class="arabic">
 <li><p>Download the <strong>‘Moturiki 1953 to NZVD2016 Conversion Raster’</strong> as a TIFF from the LDS in <strong>‘WGS 84 (EPSG:4326 Geographic)’</strong> Map projection. <a class="reference external" href="https://data.linz.govt.nz/layer/103959-moturiki-1953-to-nzvd2016-conversion-raster/">https://data.linz.govt.nz/layer/103959-moturiki-1953-to-nzvd2016-conversion-raster/</a>.</p>
-<div class="figure align-center">
+<div class="figure align-default">
 <img alt="../_images/nz_lds_screenshot.png" src="../_images/nz_lds_screenshot.png" />
 </div>
 </li>
@@ -481,7 +484,7 @@
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -512,7 +515,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>filters.reprojection &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -116,16 +118,13 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.html#create">Create</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.html#order">Order</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="filters.html#move">Move</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="filters.cpd.html">filters.cpd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.icp.html">filters.icp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.projpipeline.html">filters.projpipeline</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">filters.reprojection</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#example-1">Example 1</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example-2">Example 2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#registration">Registration</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="filters.html#predefined">Predefined</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="filters.projpipeline.html">filters.projpipeline</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">filters.reprojection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.transformation.html">filters.transformation</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="filters.transformation.html">filters.transformation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filters.html#cull">Cull</a></li>
@@ -170,6 +169,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -269,7 +269,7 @@ based on the projection you’ve used.</p>
 <div class="section" id="example-1">
 <h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <p>This pipeline reprojects terrain points with Z-values between 0 and 100 by first
-applying a range filter and then specifing both the input and output spatial
+applying a range filter and then specifying both the input and output spatial
 reference as EPSG-codes. The X and Y dimensions are scaled to allow enough
 precision in the output coordinates.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
@@ -386,7 +386,7 @@ something like “EPSG:4326”.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -417,7 +417,7 @@ something like “EPSG:4326”.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

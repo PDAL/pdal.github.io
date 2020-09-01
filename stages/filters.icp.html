@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>filters.icp &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -116,15 +118,12 @@
 <li class="toctree-l2"><a class="reference internal" href="filters.html#create">Create</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filters.html#order">Order</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="filters.html#move">Move</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="filters.cpd.html">filters.cpd</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">filters.icp</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="filters.html#registration">Registration</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="filters.cpd.html">filters.cpd</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">filters.icp</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="filters.projpipeline.html">filters.projpipeline</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.reprojection.html">filters.reprojection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.transformation.html">filters.transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#predefined">Predefined</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filters.html#cull">Cull</a></li>
@@ -169,6 +168,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -257,7 +257,7 @@ the stage’s metadata.</p>
 which is not always possible, especially when the transformation is
 non-rigid.  ICP can handle limited non-rigid transformations but be aware
 ICP may be unable to escape a local minimum. Consider using CPD instead.</p>
-<p>From <span>[Xuechen2019]</span>:</p>
+<p>From <span class="bibtex" id="id2">[Xuechen2019]</span>:</p>
 <p>ICP starts with an initial guess of the transformation between the two
 point sets and then iterates between finding the correspondence under the
 current transformation and updating the transformation with the newly found
@@ -281,7 +281,7 @@ large proportions of outliers exist.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>To get the transform matrix, you’ll need to use the <code class="docutils literal notranslate"><span class="pre">--metadata</span></code> option
+<p>To get the <code class="docutils literal notranslate"><span class="pre">transform</span></code> matrix, you’ll need to use the <code class="docutils literal notranslate"><span class="pre">--metadata</span></code> option
 from the pipeline command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pdal pipeline icp-pipeline.json --metadata icp-metadata.json
 </pre></div>
@@ -293,14 +293,15 @@ from the pipeline command:</p>
         <span class="nt">&quot;filters.icp&quot;</span><span class="p">:</span>
         <span class="p">{</span>
             <span class="nt">&quot;centroid&quot;</span><span class="p">:</span> <span class="s2">&quot;    583394  5.2831e+06   498.152&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;composed&quot;</span><span class="p">:</span> <span class="s2">&quot;           1  2.60209e-18 -1.97906e-09       -0.374999  8.9407e-08            1  5.58794e-09      -0.614662 6.98492e -10 -5.58794e-09            1   0.033234           0            0            0            1&quot;</span><span class="p">,</span>
             <span class="nt">&quot;converged&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="nt">&quot;fitness&quot;</span><span class="p">:</span> <span class="mf">0.01953125097</span><span class="p">,</span>
             <span class="nt">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;           1  2.60209e-18 -1.97906e-09       -0.375  8.9407e-08            1  5.58794e-09      -0.5625 6.98492e -10 -5.58794e-09            1   0.00411987           0            0            0            1&quot;</span>
         <span class="p">}</span>
 </pre></div>
 </div>
-<p>To apply this transformation to other points, the centroid and transform
-metadata items can by used with filters.transform in another pipeline.  First,
+<p>To apply this transformation to other points, the <code class="docutils literal notranslate"><span class="pre">centroid</span></code> and <code class="docutils literal notranslate"><span class="pre">transform</span></code>
+metadata items can by used with <code class="docutils literal notranslate"><span class="pre">filters.transformation</span></code> in another pipeline.  First,
 move the centroid of the points to (0,0,0), then apply the transform, then move
 the points back to the original location.  For the above metadata, the pipeline
 would be similar to:</p>
@@ -328,6 +329,10 @@ would be similar to:</p>
 <span class="p">]</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">composed</span></code> metadata matrix is a composition of the three transformation steps outlined above, and can be used in a single call to <code class="docutils literal notranslate"><span class="pre">filters.transformation</span></code> as opposed to the three separate calls.</p>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="filters.transformation.html#filters-transformation"><span class="std std-ref">filters.transformation</span></a> to apply a transform to other points.
@@ -346,6 +351,20 @@ would be similar to:</p>
 <dt>rt</dt><dd><p>Rotation threshold. [Default: <strong>0.99999</strong>]</p>
 </dd>
 <dt>tt</dt><dd><p>Translation threshold. [Default: <strong>9e-8</strong>]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a filter.
+Points that don’t pass the
+expression skip the stage but are available to subsequent stages in a pipeline.
+[Default: no filtering]</p>
+</dd>
+<dt>where_merge</dt><dd><p>A strategy for merging points skipped by a ‘<cite>where’</cite> option when running in standard mode.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the skipped points are added to the first point view returned by the skipped
+filter. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, skipped points are placed in their own point view. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>,
+skipped points are merged into the returned point view provided that only one point view
+is returned and it has the same point count as it did when the filter was run.
+[Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
 </div>
@@ -385,7 +404,7 @@ would be similar to:</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -416,7 +435,7 @@ would be similar to:</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

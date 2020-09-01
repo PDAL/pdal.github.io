@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>Dimensions &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> PDAL
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -146,6 +148,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -230,7 +233,7 @@ of the dimension and its description.</p>
 <p>Types are default types. Stage developers should set the dimension type
 explicitly if the default dimension isn’t suitable.</p>
 </div>
-<table class="colwidths-given docutils align-center">
+<table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 18%" />
 <col style="width: 9%" />
@@ -251,33 +254,41 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>float</p></td>
 <td><p>This is the ratio of the received power to the power received at the detection limit expressed in dB</p></td>
 </tr>
-<tr class="row-even"><td><p>Azimuth</p></td>
+<tr class="row-even"><td><p>Anisotropy</p></td>
+<td><p>double</p></td>
+<td><p>Anisotropy of a point; larger values indicate strong variance in multiple dimensions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Azimuth</p></td>
 <td><p>double</p></td>
 <td><p>Scanner azimuth</p></td>
 </tr>
-<tr class="row-odd"><td><p>BackgroundRadiation</p></td>
+<tr class="row-even"><td><p>BackgroundRadiation</p></td>
 <td><p>float</p></td>
 <td><p>A measure of background radiation.</p></td>
 </tr>
-<tr class="row-even"><td><p>Blue</p></td>
+<tr class="row-odd"><td><p>Blue</p></td>
 <td><p>uint16</p></td>
 <td><p>Blue image channel value</p></td>
 </tr>
-<tr class="row-odd"><td><p>ClassFlags</p></td>
+<tr class="row-even"><td><p>ClassFlags</p></td>
 <td><p>uint8</p></td>
 <td><p>Class Flags</p></td>
 </tr>
-<tr class="row-even"><td><p>Classification</p></td>
+<tr class="row-odd"><td><p>Classification</p></td>
 <td><p>uint8</p></td>
 <td><p>ASPRS classification.  0 for no classification.  See LAS specification for details.</p></td>
 </tr>
-<tr class="row-odd"><td><p>ClusterID</p></td>
-<td><p>uint64_t</p></td>
+<tr class="row-even"><td><p>ClusterID</p></td>
+<td><p>int64_t</p></td>
 <td><p>ID assigned to a point by a point-clustering algorithm.</p></td>
 </tr>
-<tr class="row-even"><td><p>Curvature</p></td>
+<tr class="row-odd"><td><p>Curvature</p></td>
 <td><p>double</p></td>
 <td><p>Curvature of surface at this point</p></td>
+</tr>
+<tr class="row-even"><td><p>DemantkeVerticality</p></td>
+<td><p>double</p></td>
+<td><p>Verticality of a point; larger values indicate vertical structure (Demantke’s variation).</p></td>
 </tr>
 <tr class="row-odd"><td><p>Density</p></td>
 <td><p>double</p></td>
@@ -285,7 +296,7 @@ explicitly if the default dimension isn’t suitable.</p>
 </tr>
 <tr class="row-even"><td><p>Deviation</p></td>
 <td><p>float</p></td>
-<td><p>Difference between the shape of the reference pulse and the retun pulse. A larger value for deviation indicates larger distortion.</p></td>
+<td><p>Difference between the shape of the reference pulse and the return pulse. A larger value for deviation indicates larger distortion.</p></td>
 </tr>
 <tr class="row-odd"><td><p>EchoRange</p></td>
 <td><p>double</p></td>
@@ -294,6 +305,14 @@ explicitly if the default dimension isn’t suitable.</p>
 <tr class="row-even"><td><p>EdgeOfFlightLine</p></td>
 <td><p>uint8</p></td>
 <td><p>Indicates the end of scanline before a direction change with a value of 1 - 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>Eigenentropy</p></td>
+<td><p>double</p></td>
+<td><p>Eigenentropy of a point; small values indicate more ordered regions, while large values indicate disorder.</p></td>
+</tr>
+<tr class="row-even"><td><p>EigenvalueSum</p></td>
+<td><p>double</p></td>
+<td><p>Sum of computed eigenvalues.</p></td>
 </tr>
 <tr class="row-odd"><td><p>ElevationCentroid</p></td>
 <td><p>double</p></td>
@@ -351,53 +370,69 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>double</p></td>
 <td><p>Latitude Low</p></td>
 </tr>
-<tr class="row-odd"><td><p>LongitudeCentroid</p></td>
+<tr class="row-odd"><td><p>Linearity</p></td>
+<td><p>double</p></td>
+<td><p>Linearity of a point; larger values indicate more linear regions.</p></td>
+</tr>
+<tr class="row-even"><td><p>LongitudeCentroid</p></td>
 <td><p>double</p></td>
 <td><p>Longitude Centroid</p></td>
 </tr>
-<tr class="row-even"><td><p>LongitudeHigh</p></td>
+<tr class="row-odd"><td><p>LongitudeHigh</p></td>
 <td><p>double</p></td>
 <td><p>Longitude High</p></td>
 </tr>
-<tr class="row-odd"><td><p>LongitudeLow</p></td>
+<tr class="row-even"><td><p>LongitudeLow</p></td>
 <td><p>double</p></td>
 <td><p>Longitude Low</p></td>
 </tr>
-<tr class="row-even"><td><p>LvisLfid</p></td>
+<tr class="row-odd"><td><p>LvisLfid</p></td>
 <td><p>uint64</p></td>
 <td><p>LVIS_LFID</p></td>
 </tr>
-<tr class="row-odd"><td><p>Mark</p></td>
+<tr class="row-even"><td><p>Mark</p></td>
 <td><p>uint8</p></td>
 <td><p>Mark</p></td>
 </tr>
-<tr class="row-even"><td><p>NNDistance</p></td>
+<tr class="row-odd"><td><p>NNDistance</p></td>
 <td><p>double</p></td>
 <td><p>Distance metric related to a point’s nearest neighbors.</p></td>
 </tr>
-<tr class="row-odd"><td><p>NormalX</p></td>
+<tr class="row-even"><td><p>NormalX</p></td>
 <td><p>double</p></td>
 <td><p>X component of a vector normal to surface at this point</p></td>
 </tr>
-<tr class="row-even"><td><p>NormalY</p></td>
+<tr class="row-odd"><td><p>NormalY</p></td>
 <td><p>double</p></td>
 <td><p>Y component of a vector normal to surface at this point</p></td>
 </tr>
-<tr class="row-odd"><td><p>NormalZ</p></td>
+<tr class="row-even"><td><p>NormalZ</p></td>
 <td><p>double</p></td>
 <td><p>Z component of a vector normal to surface at this point</p></td>
 </tr>
-<tr class="row-even"><td><p>NumberOfReturns</p></td>
+<tr class="row-odd"><td><p>NumberOfReturns</p></td>
 <td><p>uint8</p></td>
 <td><p>Total number of returns for a given pulse.</p></td>
 </tr>
-<tr class="row-odd"><td><p>OffsetTime</p></td>
+<tr class="row-even"><td><p>OffsetTime</p></td>
 <td><p>uint32</p></td>
 <td><p>Milliseconds from first acquired point</p></td>
 </tr>
-<tr class="row-even"><td><p>Omit</p></td>
+<tr class="row-odd"><td><p>Omit</p></td>
 <td><p>uint8_t</p></td>
 <td><p>Used to shallowly mark a point as being omitted without removing it</p></td>
+</tr>
+<tr class="row-even"><td><p>Omnivariance</p></td>
+<td><p>double</p></td>
+<td><p>Omnivariance of a point; cube root of the product of all eigenvalues.</p></td>
+</tr>
+<tr class="row-odd"><td><p>OptimalKNN</p></td>
+<td><p>uint64</p></td>
+<td><p>Optimal number of k nearest neighbors, such that eigenentropy is minimized.</p></td>
+</tr>
+<tr class="row-even"><td><p>OptimalRadius</p></td>
+<td><p>double</p></td>
+<td><p>Radius corresponding to optimal k nearest neighbors, such that eigenentropy is minimized.</p></td>
 </tr>
 <tr class="row-odd"><td><p>OriginId</p></td>
 <td><p>uint32</p></td>
@@ -427,49 +462,57 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>float</p></td>
 <td><p>Pitch in degrees</p></td>
 </tr>
-<tr class="row-even"><td><p>PointId</p></td>
+<tr class="row-even"><td><p>Planarity</p></td>
+<td><p>double</p></td>
+<td><p>Planarity of a point; larger values indicate more planar regions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PointId</p></td>
 <td><p>uint32</p></td>
 <td><p>An explicit representation of point ordering within a file, which allows this usually-implicit information to be preserved when reordering points.</p></td>
 </tr>
-<tr class="row-odd"><td><p>PointSourceId</p></td>
+<tr class="row-even"><td><p>PointSourceId</p></td>
 <td><p>uint16</p></td>
 <td><p>File source ID from which the point originated.  Zero indicates that the point originated in the current file</p></td>
 </tr>
-<tr class="row-even"><td><p>PulseWidth</p></td>
+<tr class="row-odd"><td><p>PulseWidth</p></td>
 <td><p>float</p></td>
 <td><p>Laser received pulse width (digitizer samples)</p></td>
 </tr>
-<tr class="row-odd"><td><p>Red</p></td>
+<tr class="row-even"><td><p>Red</p></td>
 <td><p>uint16</p></td>
 <td><p>Red image channel value</p></td>
 </tr>
-<tr class="row-even"><td><p>Reflectance</p></td>
+<tr class="row-odd"><td><p>Reflectance</p></td>
 <td><p>float</p></td>
 <td><p>Ratio of the received power to the power that would be received from a white diffuse target at the same distance expressed in dB. The reflectance represents a range independent property of the target.  The surface normal of this target is assumed to be in parallel to the laser beam direction.</p></td>
 </tr>
-<tr class="row-odd"><td><p>ReflectedPulse</p></td>
+<tr class="row-even"><td><p>ReflectedPulse</p></td>
 <td><p>int32</p></td>
 <td><p>Relative reflected pulse signal strength</p></td>
 </tr>
-<tr class="row-even"><td><p>ReturnNumber</p></td>
+<tr class="row-odd"><td><p>ReturnNumber</p></td>
 <td><p>uint8</p></td>
 <td><p>Pulse return number for a given output pulse. A given output laser pulse can have many returns, and they must be marked in order, starting with 1</p></td>
 </tr>
-<tr class="row-odd"><td><p>Roll</p></td>
+<tr class="row-even"><td><p>Roll</p></td>
 <td><p>float</p></td>
 <td><p>Roll in degrees</p></td>
 </tr>
-<tr class="row-even"><td><p>ScanAngleRank</p></td>
+<tr class="row-odd"><td><p>ScanAngleRank</p></td>
 <td><p>float</p></td>
 <td><p>Angle degree at which the laser point was output from the system, including the roll of the aircraft.  The scan angle is based on being nadir, and -90 the left side of the aircraft in the direction of flight</p></td>
 </tr>
-<tr class="row-odd"><td><p>ScanChannel</p></td>
+<tr class="row-even"><td><p>ScanChannel</p></td>
 <td><p>uint8</p></td>
 <td><p>Scan Channel</p></td>
 </tr>
-<tr class="row-even"><td><p>ScanDirectionFlag</p></td>
+<tr class="row-odd"><td><p>ScanDirectionFlag</p></td>
 <td><p>uint8</p></td>
 <td><p>Direction at which the scanner mirror was traveling at the time of the output pulse. A value of 1 is a positive scan direction, and a bit value of 0 is a negative scan direction, where positive scan direction is a scan moving from the left side of the in-track direction to the right side and negative the opposite</p></td>
+</tr>
+<tr class="row-even"><td><p>Scattering</p></td>
+<td><p>double</p></td>
+<td><p>Scattering of a point; larger values incidate complex (scattered) 3D regions.</p></td>
 </tr>
 <tr class="row-odd"><td><p>ShotNumber</p></td>
 <td><p>uint64</p></td>
@@ -479,9 +522,33 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>int32</p></td>
 <td><p>Relative pulse signal strength</p></td>
 </tr>
+<tr class="row-odd"><td><p>SurfaceVariation</p></td>
+<td><p>double</p></td>
+<td><p>Surface variation of a point; larger values indicate higher surface variation.</p></td>
+</tr>
+<tr class="row-even"><td><p>TextureU</p></td>
+<td><p>double</p></td>
+<td><p>U component of a texture location at this point</p></td>
+</tr>
+<tr class="row-odd"><td><p>TextureV</p></td>
+<td><p>double</p></td>
+<td><p>V component of a texture location at this point</p></td>
+</tr>
+<tr class="row-even"><td><p>TextureW</p></td>
+<td><p>double</p></td>
+<td><p>W component of a texture location at this point</p></td>
+</tr>
 <tr class="row-odd"><td><p>UserData</p></td>
 <td><p>uint8</p></td>
 <td><p>Unspecified user data</p></td>
+</tr>
+<tr class="row-even"><td><p>Verticality</p></td>
+<td><p>double</p></td>
+<td><p>Verticality of a point; larger values indicate vertical structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p>W</p></td>
+<td><p>double</p></td>
+<td><p>W coordinate</p></td>
 </tr>
 <tr class="row-even"><td><p>WanderAngle</p></td>
 <td><p>double</p></td>
@@ -573,7 +640,7 @@ explicitly if the default dimension isn’t suitable.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -604,7 +671,7 @@ explicitly if the default dimension isn’t suitable.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

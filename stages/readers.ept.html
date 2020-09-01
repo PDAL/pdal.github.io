@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>readers.ept &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -186,6 +188,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -267,14 +270,14 @@ producer of this format.  The EPT Reader supports reading data from the
 EPT format, including spatially accelerated queries and file reconstruction
 queries.</p>
 <p>Sample EPT datasets of hundreds of billions of points in size may be viewed
-with <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a> or <a class="reference external" href="http://speck.ly/?s=http%3A%2F%2Fc%5B0-7%5D.greyhound.io&amp;r=ept%3A%2F%2Fna.entwine.io%2Fnyc&amp;ca=-0&amp;ce=49.06&amp;ct=-8239196%2C4958509.308%2C337&amp;cd=42640.943&amp;cmd=125978.13&amp;ps=2&amp;pa=0.1&amp;ze=1&amp;c0s=remote%3A%2F%2Fimagery%3Furl%3Dhttp%3A%2F%2Fserver.arcgisonline.com%2FArcGIS%2Frest%2Fservices%2FWorld_Imagery%2FMapServer%2Ftile%2F%7B%7Bz%7D%7D%2F%7B%7By%7D%7D%2F%7B%7Bx%7D%7D.jpg">Plasio</a>.</p>
+with <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a> or <a href="#id2"><span class="problematic" id="id3">`Plasio`_</span></a>.</p>
 <div class="admonition embed" id="embed-0">
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>This example downloads a small area around the the Statue of Liberty from the New York City data set (4.7 billion points) which can be viewed in its entirety in <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a> or <a class="reference external" href="http://speck.ly/?s=http%3A%2F%2Fc%5B0-7%5D.greyhound.io&amp;r=ept%3A%2F%2Fna.entwine.io%2Fnyc&amp;ca=-0&amp;ce=49.06&amp;ct=-8239196%2C4958509.308%2C337&amp;cd=42640.943&amp;cmd=125978.13&amp;ps=2&amp;pa=0.1&amp;ze=1&amp;c0s=remote%3A%2F%2Fimagery%3Furl%3Dhttp%3A%2F%2Fserver.arcgisonline.com%2FArcGIS%2Frest%2Fservices%2FWorld_Imagery%2FMapServer%2Ftile%2F%7B%7Bz%7D%7D%2F%7B%7By%7D%7D%2F%7B%7Bx%7D%7D.jpg">Plasio</a>.</p>
+<p>This example downloads a small area around the the Statue of Liberty from the New York City data set (4.7 billion points) which can be viewed in its entirety in <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a>.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
    <span class="p">{</span>
       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
@@ -305,7 +308,7 @@ with <a class="reference external" href="http://potree.entwine.io/data/nyc.html"
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl>
-<dt>filename</dt><dd><p>EPT resource from which to read.  Because EPT resources do not have a file extension, to specify an EPT resource as a string, it must be prefixed with <code class="docutils literal notranslate"><span class="pre">ept://</span></code>.  For example, <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">translate</span> <span class="pre">ept://http://na.entwine.io/autzen</span> <span class="pre">autzen.laz</span></code>. [Required]</p>
+<dt>filename</dt><dd><p>Path to the EPT resource from which to read, ending with <code class="docutils literal notranslate"><span class="pre">ept.json</span></code>.  For example, <code class="docutils literal notranslate"><span class="pre">/Users/connor/entwine/autzen/ept.json</span></code> or <code class="docutils literal notranslate"><span class="pre">http://na.entwine.io/autzen/ept.json</span></code>. [Required]</p>
 </dd>
 <dt>spatialreference</dt><dd><p>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</p>
@@ -337,10 +340,22 @@ but “two” is not.</p>
 dimension, which can be determined from  the file’s position in EPT
 metadata file <code class="docutils literal notranslate"><span class="pre">entwine-files.json</span></code>.</p>
 </dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--summary</span></code>, using the <code class="docutils literal notranslate"><span class="pre">origin</span></code> option will cause the resulting bounds to be clipped to those of the selected origin, and the resulting number of points to be an upper bound for this selection.</p>
+</div>
+<dl class="simple">
 <dt>polygon</dt><dd><p>The clipping polygon, expressed in a well-known text string,
 eg: “POLYGON((0 0, 5000 10000, 10000 0, 0 0))”.  This option can be
 specified more than once by placing values in an array.</p>
 </dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--summary</span></code>, using the <code class="docutils literal notranslate"><span class="pre">polygon</span></code> option will cause the resulting bounds to be clipped to the maximal extents of all provided polygons, and the resulting number of points to be an upper bound for this polygon selection.</p>
+</div>
+<dl class="simple">
 <dt>threads</dt><dd><p>Number of worker threads used to download and process EPT data.  A
 minimum of 4 will be used no matter what value is specified.</p>
 </dd>
@@ -390,7 +405,7 @@ JSON object of key/value string pairs.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -421,7 +436,7 @@ JSON object of key/value string pairs.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

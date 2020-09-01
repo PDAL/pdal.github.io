@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>filters.skewnessbalancing &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,30 +26,27 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="filters.smrf" href="filters.smrf.html" />
-    <link rel="prev" title="filters.reciprocity" href="filters.reciprocity.html" /> 
+    <link rel="prev" title="filters.pmf" href="filters.pmf.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> PDAL
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -114,40 +116,18 @@
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="filters.html#create">Create</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="filters.approximatecoplanar.html">filters.approximatecoplanar</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.assign.html">filters.assign</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.cluster.html">filters.cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.colorinterp.html">filters.colorinterp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.colorization.html">filters.colorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.covariancefeatures.html">filters.covariancefeatures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.csf.html">filters.csf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.dbscan.html">filters.dbscan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.dem.html">filters.dem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.eigenvalues.html">filters.eigenvalues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.estimaterank.html">filters.estimaterank</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.elm.html">filters.elm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.ferry.html">filters.ferry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.hag_delaunay.html">filters.hag_delaunay</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.hag_dem.html">filters.hag_dem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.hag_nn.html">filters.hag_nn</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.info.html">filters.info</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.lof.html">filters.lof</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.miniball.html">filters.miniball</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.neighborclassifier.html">filters.neighborclassifier</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.nndistance.html">filters.nndistance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.normal.html">filters.normal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.outlier.html">filters.outlier</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.overlay.html">filters.overlay</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.planefit.html">filters.planefit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.pmf.html">filters.pmf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.radialdensity.html">filters.radialdensity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filters.reciprocity.html">filters.reciprocity</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">filters.skewnessbalancing</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="filters.html#classification">Classification</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="filters.html#ground-unclassified">Ground/Unclassified</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#noise">Noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#consensus">Consensus</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="filters.smrf.html">filters.smrf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#height-above-ground">Height Above Ground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#colorization">Colorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#clustering">Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#pointwise-features">Pointwise Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#assignment">Assignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dimension-create-copy">Dimension Create/Copy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filters.html#order">Order</a></li>
@@ -194,6 +174,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -258,7 +239,7 @@
         <a href="filters.smrf.html" class="btn btn-neutral float-right" title="filters.smrf" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.reciprocity.html" class="btn btn-neutral float-left" title="filters.reciprocity" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.pmf.html" class="btn btn-neutral float-left" title="filters.pmf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -302,6 +283,20 @@ returns to the output file.</p>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a filter.
+Points that don’t pass the
+expression skip the stage but are available to subsequent stages in a pipeline.
+[Default: no filtering]</p>
+</dd>
+<dt>where_merge</dt><dd><p>A strategy for merging points skipped by a ‘<cite>where’</cite> option when running in standard mode.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the skipped points are added to the first point view returned by the skipped
+filter. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, skipped points are placed in their own point view. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>,
+skipped points are merged into the returned point view provided that only one point view
+is returned and it has the same point count as it did when the filter was run.
+[Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
+</dd>
+</dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The Skewness Balancing method is touted as being threshold-free. We may
@@ -323,7 +318,7 @@ points under consideration for filtering.</p>
         <a href="filters.smrf.html" class="btn btn-neutral float-right" title="filters.smrf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.reciprocity.html" class="btn btn-neutral float-left" title="filters.reciprocity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.pmf.html" class="btn btn-neutral float-left" title="filters.pmf" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -346,7 +341,7 @@ points under consideration for filtering.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -377,7 +372,7 @@ points under consideration for filtering.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 

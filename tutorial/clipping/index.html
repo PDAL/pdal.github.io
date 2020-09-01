@@ -2,8 +2,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -11,6 +10,11 @@
   
   <title>Clipping with Geometries &mdash; pdal.io</title>
   
+
+  
+  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
 
   
   
@@ -22,24 +26,21 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -59,7 +60,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> PDAL
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                2.1.0
+                2.2.0
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -163,6 +165,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -254,11 +257,11 @@
 <p>This tutorial describes how to construct a pipeline that takes in geometries
 and clips out data with given geometry attributes.  It is common to desire
 to cut or clip point cloud data with 2D geometries, often from
-auxillary data sources such as <a class="reference external" href="http://www.gdal.org">OGR</a>-readable <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefiles</a>.  This tutorial
+auxiliary data sources such as <a class="reference external" href="http://www.gdal.org">OGR</a>-readable <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefiles</a>.  This tutorial
 describes how to construct a pipeline that takes in geometries and clips out
 point cloud data inside geometries with matching attributes.</p>
 <div class="contents topic" id="contents">
-<p class="topic-title first">Contents</p>
+<p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#clipping-with-geometries" id="id3">Clipping with Geometries</a></p>
 <ul>
@@ -299,7 +302,7 @@ for keeping or rejecting points in a more expressive environment.</p>
 </div>
 <div class="section" id="data-preparation">
 <h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center" id="id1">
+<div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-point-cloud.png"><img alt="../../_images/autzen-shapes-point-cloud.png" src="../../_images/autzen-shapes-point-cloud.png" style="width: 677.4px; height: 400.8px;" /></a>
 <p class="caption"><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
@@ -324,7 +327,7 @@ for us on-the-fly:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The GeoJSON file does not have an externally-defined coordinate system,
-so we are explictly setting one with the LayerSRS parameter. If your
+so we are explicitly setting one with the LayerSRS parameter. If your
 data does have coordinate system information, you don’t need to do that.</p>
 </div>
 <p>Save this VRT definition to a file, called <code class="docutils literal notranslate"><span class="pre">attributes.vrt</span></code> in the same
@@ -334,7 +337,7 @@ stored the <code class="docutils literal notranslate"><span class="pre">autzen.l
 For our scenario, we want to clip out the yellow-green polygon, marked
 number “5”,
 in the upper right hand corner.</p>
-<div class="figure align-center" id="id2">
+<div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-to-clip.png"><img alt="../../_images/autzen-shapes-to-clip.png" src="../../_images/autzen-shapes-to-clip.png" style="width: 693.6px; height: 381.0px;" /></a>
 <p class="caption"><span class="caption-text">We want to clip out the polygon in the upper right hand corner. We can
 view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geometry using something like <a class="reference external" href="http://qgis.org">QGIS</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
@@ -448,7 +451,7 @@ points with shapefiles.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Jul 10, 2020.
+      Last updated on Sep 01, 2020.
       </div>
     </div>
 </footer>
@@ -479,7 +482,7 @@ points with shapefiles.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Jul 10, 2020.
+                    on Sep 01, 2020.
         </div>
     </div>
 
