@@ -277,14 +277,30 @@ through PDAL’s command line interface or through the pipeline.</p>
     <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.slpk&quot;</span><span class="p">,</span>
         <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;PDAL/test/data/i3s/SMALL_AUTZEN_LAS_All.slpk&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="s2">&quot;([-123.075542,-123.06196],[44.049719,44.06278])&quot;</span>
+        <span class="nt">&quot;obb&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mi">636590</span><span class="p">,</span>
+                <span class="mi">849216</span><span class="p">,</span>
+                <span class="mi">460</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;halfSize&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mi">590</span><span class="p">,</span>
+                <span class="mi">281</span><span class="p">,</span>
+                <span class="mi">60</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;quaternion&quot;</span><span class="p">:</span>
+            <span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">1</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pdal traslate  PDAL/test/data/i3s/SMALL_AUTZEN_LAS_All.slpk \
-    autzen.las \
-    --readers.slpk.bounds=&quot;([-123.075542,-123.06196],[44.049719,44.06278])&quot;``
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">traslate</span>  <span class="n">PDAL</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">i3s</span><span class="o">/</span><span class="n">SMALL_AUTZEN_LAS_All</span><span class="o">.</span><span class="n">slpk</span> <span class="n">autzen</span><span class="o">.</span><span class="n">las</span>
 </pre></div>
 </div>
 </div>
@@ -306,10 +322,8 @@ with ‘default_srs’ [Default: none]</p>
 one.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
 with ‘override_srs’ [Default: none]</p>
 </dd>
-<dt>bounds</dt><dd><p>The bounds refers to the extents of the resource in X, Y, Z
-coordinates with the Z dimension being optional. This must be input
-as a string.</p>
-<p>Example:<code class="docutils literal notranslate"><span class="pre">readers.slpk.bounds=&quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;</span></code></p>
+<dt>obb</dt><dd><p>An oriented bounding box used to filter the data being retrieved.  The obb
+is specified as JSON exactly as described by the <a class="reference external" href="https://github.com/Esri/i3s-spec/blob/master/docs/2.0/obb.cmn.md">I3S specification</a>.</p>
 </dd>
 <dt>dimensions</dt><dd><p>Comma-separated list of dimensions that should be read.  Specify the
 Esri name, rather than the PDAL dimension name.</p>
@@ -403,7 +417,7 @@ parameters will select all leaf nodes (the highest resolution).</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Dec 17, 2020.
+      Last updated on Dec 18, 2020.
       </div>
     </div>
 </footer>
@@ -434,7 +448,7 @@ parameters will select all leaf nodes (the highest resolution).</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Dec 17, 2020.
+                    on Dec 18, 2020.
         </div>
     </div>
 

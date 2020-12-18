@@ -264,7 +264,9 @@
             
   <div class="section" id="readers-i3s">
 <span id="id1"></span><h1>readers.i3s<a class="headerlink" href="#readers-i3s" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/Esri/i3s-spec/blob/master/format/Indexed%203d%20Scene%20Layer%20Format%20Specification.md">Indexed 3d Scene Layer (I3S)</a> is a specification created by Esri as a format for their 3D Scene Layer and scene services. The I3S reader handles RESTful webservices in an I3S file structure/format.</p>
+<p><a class="reference external" href="https://github.com/Esri/i3s-spec/blob/master/format/Indexed%203d%20Scene%20Layer%20Format%20Specification.md">Indexed 3d Scene Layer (I3S)</a> is a specification created by Esri as a format for their
+3D Scene Layer and scene services. The I3S reader handles RESTful webservices in an I3S
+file structure/format.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example will download the Autzen dataset from the ArcGIS scene server and output it to a las file. This is done through PDAL’s command line interface or through the pipeline.</p>
@@ -272,15 +274,32 @@
     <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.i3s&quot;</span><span class="p">,</span>
         <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;https://tiles.arcgis.com/tiles/8cv2FuXuWSfF0nbL/arcgis/rest/services/AUTZEN_LiDAR/SceneServer&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="s2">&quot;([-123.075542,-123.06196],[44.049719,44.06278])&quot;</span>
+        <span class="nt">&quot;obb&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mi">636590</span><span class="p">,</span>
+                <span class="mi">849216</span><span class="p">,</span>
+                <span class="mi">460</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;halfSize&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mi">590</span><span class="p">,</span>
+                <span class="mi">281</span><span class="p">,</span>
+                <span class="mi">60</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;quaternion&quot;</span><span class="p">:</span>
+            <span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">1</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="n">i3s</span><span class="p">:</span><span class="o">//</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">tiles</span><span class="o">.</span><span class="n">arcgis</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tiles</span><span class="o">/</span><span class="mi">8</span><span class="n">cv2FuXuWSfF0nbL</span><span class="o">/</span><span class="n">arcgis</span><span class="o">/</span><span class="n">rest</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">AUTZEN_LiDAR</span><span class="o">/</span><span class="n">SceneServer</span> \
     <span class="n">autzen</span><span class="o">.</span><span class="n">las</span> \
-    <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">i3s</span><span class="o">.</span><span class="n">threads</span><span class="o">=</span><span class="mi">64</span> \
-    <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">i3s</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([-123.075542,-123.06196],[44.049719,44.06278])&quot;</span>
+    <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">i3s</span><span class="o">.</span><span class="n">threads</span><span class="o">=</span><span class="mi">64</span>
 </pre></div>
 </div>
 </div>
@@ -305,8 +324,8 @@ reading. The default number of threads to be used is 8. This affects
 the speed at which files are fetched and added to the PDAL view.</p>
 <p>Example: <code class="docutils literal notranslate"><span class="pre">--readers.i3s.threads=64</span></code></p>
 </dd>
-<dt>bounds</dt><dd><p>The bounds refers to the extents of the resource in X, Y, Z coordinates with the Z dimension being optional. This must be input as a string.</p>
-<p>Example:<code class="docutils literal notranslate"><span class="pre">readers.i3s.bounds=&quot;([xmin,xmax],[ymin,ymax],[zmin,zmax])&quot;</span></code></p>
+<dt>obb</dt><dd><p>An oriented bounding box used to filter the data being retrieved.  The obb
+is specified as JSON exactly as described by the <a class="reference external" href="https://github.com/Esri/i3s-spec/blob/master/docs/2.0/obb.cmn.md">I3S specification</a>.</p>
 </dd>
 <dt>dimensions</dt><dd><p>Comma-separated list of dimensions that should be read.  Specify the
 Esri name, rather than the PDAL dimension name.</p>
@@ -395,7 +414,7 @@ Esri name, rather than the PDAL dimension name.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Dec 17, 2020.
+      Last updated on Dec 18, 2020.
       </div>
     </div>
 </footer>
@@ -426,7 +445,7 @@ Esri name, rather than the PDAL dimension name.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Dec 17, 2020.
+                    on Dec 18, 2020.
         </div>
     </div>
 
