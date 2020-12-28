@@ -33,6 +33,7 @@ like :ref:`readers.pgpointcloud`, or a network service like :ref:`readers.ept`.
    readers.mrsid
    readers.nitf
    readers.numpy
+   readers.obj
    readers.oci
    readers.optech
    readers.pcd
@@ -109,6 +110,9 @@ like :ref:`readers.pgpointcloud`, or a network service like :ref:`readers.ept`.
 
 :ref:`readers.numpy`
     Read point cloud data from Numpy ``.npy`` files.
+
+:ref:`readers.obj`
+    Read a mesh from an OBJ file.
 
 :ref:`readers.oci`
     Read data from Oracle point cloud databases. [deprecated]
