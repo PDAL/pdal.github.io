@@ -8,8 +8,6 @@ This reader constructs a mesh from the faces specified in the OBJ file, ignoring
 vertices that are not associated with any face. Faces, vertices, vertex normals and vertex
 textures are read, while all other obj elements (such as lines and curves) are ignored.
 
-.. plugin::
-
 Example
 -------
 This pipeline reads from an example OBJ file outputs
