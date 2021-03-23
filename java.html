@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Java &mdash; pdal.io</title>
   
@@ -20,9 +20,12 @@
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   
+
   
   
     <link rel="canonical" href="https://pdal.io/java.html"/>
+  
+
   
 
   
@@ -35,8 +38,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> PDAL
+            <a href="index.html" class="icon icon-home"> PDAL
           
 
           
@@ -257,7 +258,7 @@ your data format and processing handler.</p>
 execute it, and retrieve points into Java memory:</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">io.pdal._</span>
 
-<span class="k">val</span> <span class="n">json</span> <span class="k">=</span>
+<span class="k">val</span> <span class="n">json</span> <span class="o">=</span>
 <span class="s">&quot;&quot;&quot;</span>
 <span class="s">  |{</span>
 <span class="s">  |  &quot;pipeline&quot;:[</span>
@@ -276,7 +277,7 @@ execute it, and retrieve points into Java memory:</p>
 <span class="s">  |}</span>
 <span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">stripMargin</span>
 
-<span class="k">val</span> <span class="n">pipeline</span> <span class="k">=</span> <span class="nc">Pipeline</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="nc">Pipeline</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">validate</span><span class="o">()</span> <span class="c1">// check if our JSON and options were good</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">setLogLevel</span><span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="c1">// make it really noisy</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">execute</span><span class="o">()</span> <span class="c1">// execute the pipeline</span>
@@ -298,7 +299,7 @@ execute it, and retrieve points into Java memory:</p>
 <span class="k">val</span> <span class="n">mesh</span><span class="k">:</span> <span class="kt">TriangularMesh</span>       <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">getTriangularMesh</span><span class="o">()</span>
 <span class="c1">// the output is an Array of Triangles</span>
 <span class="c1">// Each Triangle contains PointIds from the PDAL point table</span>
-<span class="k">val</span> <span class="n">triangles</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Triangle</span><span class="o">]</span> <span class="k">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">asArray</span>
+<span class="k">val</span> <span class="n">triangles</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Triangle</span><span class="o">]</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">asArray</span>
 
 <span class="n">pv</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
@@ -311,12 +312,12 @@ execute it, and retrieve points into Java memory:</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">io.pdal._</span>
 <span class="k">import</span> <span class="nn">io.pdal.pipeline._</span>
 
-<span class="k">val</span> <span class="n">expression</span> <span class="k">=</span>
-  <span class="nc">ReadLas</span><span class="o">(</span><span class="s">&quot;1.2-with-color.las&quot;</span><span class="o">,</span> <span class="n">spatialreference</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">&quot;EPSG:2993&quot;</span><span class="o">))</span> <span class="o">~</span>
+<span class="k">val</span> <span class="n">expression</span> <span class="o">=</span>
+  <span class="nc">ReadLas</span><span class="o">(</span><span class="s">&quot;1.2-with-color.las&quot;</span><span class="o">,</span> <span class="n">spatialreference</span> <span class="o">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">&quot;EPSG:2993&quot;</span><span class="o">))</span> <span class="o">~</span>
   <span class="nc">FilterReprojection</span><span class="o">(</span><span class="s">&quot;EPSG:3857&quot;</span><span class="o">)</span> <span class="o">~</span>
   <span class="nc">FilterDelaunay</span><span class="o">()</span>
 
-<span class="k">val</span> <span class="n">pipeline</span> <span class="k">=</span> <span class="n">expression</span><span class="o">.</span><span class="n">toPipeline</span>
+<span class="k">val</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">expression</span><span class="o">.</span><span class="n">toPipeline</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">validate</span><span class="o">()</span> <span class="c1">// check if our JSON and options were good</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">setLogLevel</span><span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="c1">// make it really noisy</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">execute</span><span class="o">()</span> <span class="c1">// execute the pipeline</span>
@@ -338,7 +339,7 @@ execute it, and retrieve points into Java memory:</p>
 <span class="k">val</span> <span class="n">mesh</span><span class="k">:</span> <span class="kt">TriangularMesh</span>       <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">getTriangularMesh</span><span class="o">()</span>
 <span class="c1">// the output is an Array of Triangles</span>
 <span class="c1">// Each Triangle contains PointIds from the PDAL point table</span>
-<span class="k">val</span> <span class="n">triangles</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Triangle</span><span class="o">]</span> <span class="k">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">asArray</span>
+<span class="k">val</span> <span class="n">triangles</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Triangle</span><span class="o">]</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">asArray</span>
 
 <span class="n">pv</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
 <span class="n">pipeline</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
@@ -350,7 +351,7 @@ current Scala API you can use <code class="docutils literal notranslate"><span c
 <span class="k">import</span> <span class="nn">io.pdal.pipeline._</span>
 <span class="k">import</span> <span class="nn">io.circe.syntax._</span>
 
-<span class="k">val</span> <span class="n">pipelineWithRawExpr</span> <span class="k">=</span>
+<span class="k">val</span> <span class="n">pipelineWithRawExpr</span> <span class="o">=</span>
   <span class="nc">ReadLas</span><span class="o">(</span><span class="s">&quot;1.2-with-color.las&quot;</span><span class="o">)</span> <span class="o">~</span>
   <span class="nc">RawExpr</span><span class="o">(</span><span class="nc">Map</span><span class="o">(</span><span class="s">&quot;type&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;filters.crop&quot;</span><span class="o">).</span><span class="n">asJson</span><span class="o">)</span> <span class="o">~</span>
   <span class="nc">WriteLas</span><span class="o">(</span><span class="s">&quot;1.2-with-color-out.las&quot;</span><span class="o">)</span>
@@ -447,7 +448,7 @@ Dependency contains bindings for <code class="docutils literal notranslate"><spa
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Feb 20, 2021.
+      Last updated on Mar 23, 2021.
       </div>
     </div>
 </footer>
@@ -478,7 +479,7 @@ Dependency contains bindings for <code class="docutils literal notranslate"><spa
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Feb 20, 2021.
+                    on Mar 23, 2021.
         </div>
     </div>
 

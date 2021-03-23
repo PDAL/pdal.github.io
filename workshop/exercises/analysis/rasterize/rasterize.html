@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Rasterizing Attributes &mdash; pdal.io</title>
   
@@ -20,9 +20,12 @@
   
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
   
+
   
   
     <link rel="canonical" href="https://pdal.io/workshop/exercises/analysis/rasterize/rasterize.html"/>
+  
+
   
 
   
@@ -35,8 +38,6 @@
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
+            <a href="../../../../index.html" class="icon icon-home"> PDAL
           
 
           
@@ -368,29 +369,29 @@ pixel values with values from 0-31 according to the ASPRS LAS specification.</p>
 directly. We can use a color ramp to assign explicit values. <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> allows us to
 create a text file color ramp that gdaldem can consume to apply colors to the
 data.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># QGIS Generated Color Map Export File</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># QGIS Generated Color Map Export File</span>
 <span class="mi">2</span> <span class="mi">139</span> <span class="mi">51</span> <span class="mi">38</span> <span class="mi">255</span> <span class="n">Ground</span>
 <span class="mi">3</span> <span class="mi">143</span> <span class="mi">201</span> <span class="mi">157</span> <span class="mi">255</span> <span class="n">Low</span> <span class="n">Veg</span>
 <span class="mi">4</span> <span class="mi">5</span> <span class="mi">159</span> <span class="mi">43</span> <span class="mi">255</span> <span class="n">Med</span> <span class="n">Veg</span>
@@ -419,7 +420,7 @@ data.</p>
 change the layer to Palatted/Unique Values, and then load the color ramp file:</p>
 <a class="reference external image-reference" href="../../../../_images/rasterization-qgis-load-color-palette.png"><img alt="../../../../_images/rasterization-qgis-load-color-palette.png" src="../../../../_images/rasterization-qgis-load-color-palette.png" /></a>
 <p>With the ramp, we can also use <a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a> to apply it to a new image:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">color</span><span class="o">-</span><span class="n">relief</span> <span class="n">denmark</span><span class="o">-</span><span class="n">classification</span><span class="o">.</span><span class="n">tif</span> <span class="n">ramp</span><span class="o">.</span><span class="n">txt</span> <span class="n">classified</span><span class="o">-</span><span class="n">color</span><span class="o">.</span><span class="n">png</span> <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">color</span><span class="o">-</span><span class="n">relief</span> <span class="n">denmark</span><span class="o">-</span><span class="n">classification</span><span class="o">.</span><span class="n">tif</span> <span class="n">ramp</span><span class="o">.</span><span class="n">txt</span> <span class="n">classified</span><span class="o">-</span><span class="n">color</span><span class="o">.</span><span class="n">png</span> <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference external image-reference" href="../../../../_images/rasterization-colored-classification.png"><img alt="../../../../_images/rasterization-colored-classification.png" src="../../../../_images/rasterization-colored-classification.png" /></a>
@@ -427,13 +428,13 @@ change the layer to Palatted/Unique Values, and then load the color ramp file:</
 <h4>Intensity<a class="headerlink" href="#intensity" title="Permalink to this headline">¶</a></h4>
 <p>With PDAL’s ability to override pipeline via commands, we can generate a
 relative intensity image:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> \
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> \
 <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">dimension</span><span class="o">=</span><span class="s2">&quot;Intensity&quot;</span> \
 <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">data_type</span><span class="o">=</span><span class="s2">&quot;float&quot;</span> \
 <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;intensity.tif&quot;</span> \
@@ -442,13 +443,13 @@ relative intensity image:</p>
 <span class="n">gdal_translate</span> <span class="n">intensity</span><span class="o">.</span><span class="n">tif</span> <span class="n">intensity</span><span class="o">.</span><span class="n">png</span> <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
 </pre></div>
 </td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> <span class="o">^</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> <span class="o">^</span>
 <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">dimension</span><span class="o">=</span><span class="s2">&quot;Intensity&quot;</span> <span class="o">^</span>
 <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">data_type</span><span class="o">=</span><span class="s2">&quot;float&quot;</span> <span class="o">^</span>
 <span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;intensity.tif&quot;</span> <span class="o">^</span>
@@ -508,7 +509,7 @@ smoothing might produce undesirable results, for example.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Feb 20, 2021.
+      Last updated on Mar 23, 2021.
       </div>
     </div>
 </footer>
@@ -539,7 +540,7 @@ smoothing might produce undesirable results, for example.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Feb 20, 2021.
+                    on Mar 23, 2021.
         </div>
     </div>
 

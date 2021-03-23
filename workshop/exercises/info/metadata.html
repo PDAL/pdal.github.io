@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Printing file metadata &mdash; pdal.io</title>
   
@@ -20,9 +20,12 @@
   
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
   
+
   
   
     <link rel="canonical" href="https://pdal.io/workshop/exercises/info/metadata.html"/>
+  
+
   
 
   
@@ -35,8 +38,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
+            <a href="../../../index.html" class="icon icon-home"> PDAL
           
 
           
@@ -251,7 +252,7 @@
 <span id="index-0"></span><h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>This exercise uses PDAL to print metadata information. Issue the
 following command in your <cite>Conda Shell</cite>.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
 </pre></div>
 </td></tr></table></div>
 <img alt="../../../_images/info-interesting-metadata.png" src="../../../_images/info-interesting-metadata.png" />
@@ -290,13 +291,13 @@ flag for this particular file. Our simple <code class="docutils literal notransl
 gives us that, but it also gives us a bunch of other stuff we don’t need
 at the moment either. Let’s focus on extracting what we want using the
 <code class="docutils literal notranslate"><span class="pre">jq</span></code> command.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> \
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> \
 <span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
 </pre></div>
 </td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> <span class="o">^</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> <span class="o">^</span>
 <span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
 </pre></div>
 </td></tr></table></div>
@@ -364,7 +365,7 @@ or are provided via options in PDAL.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Feb 20, 2021.
+      Last updated on Mar 23, 2021.
       </div>
     </div>
 </footer>
@@ -395,7 +396,7 @@ or are provided via options in PDAL.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Feb 20, 2021.
+                    on Mar 23, 2021.
         </div>
     </div>
 

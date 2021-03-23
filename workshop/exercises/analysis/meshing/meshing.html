@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Creating surface meshes &mdash; pdal.io</title>
   
@@ -20,9 +20,12 @@
   
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
   
+
   
   
     <link rel="canonical" href="https://pdal.io/workshop/exercises/analysis/meshing/meshing.html"/>
+  
+
   
 
   
@@ -35,8 +38,6 @@
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> PDAL
+            <a href="../../../../index.html" class="icon icon-home"> PDAL
           
 
           
@@ -281,22 +282,22 @@ if you’re using a machine with a lot of processing power, try increasing the
 <div class="section" id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
  <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="n">mesh</span><span class="o">.</span><span class="n">ply</span> \
  <span class="n">poisson</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> \
  <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> \
  <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
  <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="n">mesh</span><span class="o">.</span><span class="n">ply</span> <span class="o">^</span>
  <span class="n">poisson</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> <span class="o">^</span>
  <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> <span class="o">^</span>
@@ -319,13 +320,13 @@ stage to limit the set of points used in mesh creation.</p>
 <div class="section" id="id1">
 <h3>Command<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
  <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">building</span><span class="o">-</span><span class="n">exercise</span><span class="o">.</span><span class="n">ply</span> \
  <span class="nb">range</span> <span class="n">poisson</span> \
  <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2],Classification[6:6]&quot;</span> \
@@ -334,13 +335,13 @@ stage to limit the set of points used in mesh creation.</p>
  <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
 </td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
  <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">building</span><span class="o">-</span><span class="n">exercise</span><span class="o">.</span><span class="n">ply</span> <span class="o">^</span>
  <span class="nb">range</span> <span class="n">poisson</span> <span class="o">^</span>
  <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2],Classification[6:6]&quot;</span> <span class="o">^</span>
@@ -388,7 +389,7 @@ stage to limit the set of points used in mesh creation.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Feb 20, 2021.
+      Last updated on Mar 23, 2021.
       </div>
     </div>
 </footer>
@@ -419,7 +420,7 @@ stage to limit the set of points used in mesh creation.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Feb 20, 2021.
+                    on Mar 23, 2021.
         </div>
     </div>
 
