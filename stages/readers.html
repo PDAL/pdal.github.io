@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Readers &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -47,7 +51,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="readers.bpf" href="readers.bpf.html" />
-    <link rel="prev" title="Pipeline" href="../pipeline.html" /> 
+    <link rel="prev" title="Stages" href="stages.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Readers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
@@ -120,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.hdf.html">readers.hdf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
@@ -132,8 +136,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -249,7 +251,7 @@
         <a href="readers.bpf.html" class="btn btn-neutral float-right" title="readers.bpf" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../pipeline.html" class="btn btn-neutral float-left" title="Pipeline" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="stages.html" class="btn btn-neutral float-left" title="Stages" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -258,7 +260,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="readers">
+  <section id="readers">
 <span id="id1"></span><h1>Readers<a class="headerlink" href="#readers" title="Permalink to this headline">¶</a></h1>
 <p>Readers provide <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a> to <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a>. PDAL attempts to
 normalize common dimension types, like X, Y, Z, or Intensity, which are often
@@ -283,8 +285,6 @@ than fetching data from a specific reader.</p>
 generates synthetic data to feed into the pipeline.</p>
 </dd>
 <dt><a class="reference internal" href="readers.gdal.html#readers-gdal"><span class="std std-ref">readers.gdal</span></a></dt><dd><p>Read GDAL readable raster data sources as point clouds.</p>
-</dd>
-<dt><a class="reference internal" href="readers.geowave.html#readers-geowave"><span class="std std-ref">readers.geowave</span></a></dt><dd><p>Read point cloud data from Accumulo.</p>
 </dd>
 <dt><a class="reference internal" href="readers.hdf.html#readers-hdf"><span class="std std-ref">readers.hdf</span></a></dt><dd><p>Read data from files in the HDF5 format.</p>
 </dd>
@@ -311,10 +311,6 @@ LizardTech Lidar_DSDK.</p>
 <dt><a class="reference internal" href="readers.nitf.html#readers-nitf"><span class="std std-ref">readers.nitf</span></a></dt><dd><p>Read point cloud data (LAS or LAZ) wrapped in NITF 2.1 files.</p>
 </dd>
 <dt><a class="reference internal" href="readers.numpy.html#readers-numpy"><span class="std std-ref">readers.numpy</span></a></dt><dd><p>Read point cloud data from Numpy <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files.</p>
-</dd>
-<dt><a class="reference internal" href="readers.obj.html#readers-obj"><span class="std std-ref">readers.obj</span></a></dt><dd><p>Read a mesh from an OBJ file.</p>
-</dd>
-<dt><a class="reference internal" href="readers.oci.html#readers-oci"><span class="std std-ref">readers.oci</span></a></dt><dd><p>Read data from Oracle point cloud databases. [deprecated]</p>
 </dd>
 <dt><a class="reference internal" href="readers.optech.html#readers-optech"><span class="std std-ref">readers.optech</span></a></dt><dd><p>Read Optech Corrected Sensor Data (.csd) files.</p>
 </dd>
@@ -353,7 +349,7 @@ data described in tile index files that have been generated using the PDAL
 tindex command.</p>
 </dd>
 </dl>
-</div>
+</section>
 
 
            </div>
@@ -366,7 +362,7 @@ tindex command.</p>
         <a href="readers.bpf.html" class="btn btn-neutral float-right" title="readers.bpf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../pipeline.html" class="btn btn-neutral float-left" title="Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="stages.html" class="btn btn-neutral float-left" title="Stages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -389,7 +385,7 @@ tindex command.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -420,7 +416,7 @@ tindex command.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

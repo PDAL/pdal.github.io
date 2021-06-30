@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.icp &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -243,7 +248,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-icp">
+  <section id="filters-icp">
 <span id="id1"></span><h1>filters.icp<a class="headerlink" href="#filters-icp" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>ICP filter</strong> uses the Iterative Closest Point (ICP) algorithm to
 calculate a <strong>rigid</strong> (rotation and translation) transformation that best
@@ -258,7 +263,7 @@ the stage’s metadata.</p>
 which is not always possible, especially when the transformation is
 non-rigid.  ICP can handle limited non-rigid transformations but be aware
 ICP may be unable to escape a local minimum. Consider using CPD instead.</p>
-<p>From <span id="id2">[<a class="reference internal" href="filters.cpd.html#id7">LLW+19</a>]</span>:</p>
+<p>From <span id="id2">[<a class="reference internal" href="filters.cpd.html#id7" title="missing journal in Xuechen2019">LLW+19</a>]</span>:</p>
 <p>ICP starts with an initial guess of the transformation between the two
 point sets and then iterates between finding the correspondence under the
 current transformation and updating the transformation with the newly found
@@ -270,7 +275,7 @@ becomes trapped in local minima. Therefore, the results of ICP are very
 sensitive to the initialization, especially when high levels of noise and
 large proportions of outliers exist.</p>
 </div>
-<div class="section" id="examples">
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;fixed.las&quot;</span><span class="p">,</span>
@@ -294,10 +299,10 @@ from the pipeline command:</p>
         <span class="nt">&quot;filters.icp&quot;</span><span class="p">:</span>
         <span class="p">{</span>
             <span class="nt">&quot;centroid&quot;</span><span class="p">:</span> <span class="s2">&quot;    583394  5.2831e+06   498.152&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;composed&quot;</span><span class="p">:</span> <span class="s2">&quot;           1  2.60209e-18 -1.97906e-09       -0.374999  8.9407e-08            1  5.58794e-09      -0.614662 6.98492e -10 -5.58794e-09            1   0.033234           0            0            0            1&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;composed&quot;</span><span class="p">:</span> <span class="s2">&quot;           1  2.60209e-18 -1.97906e-09       -0.374999  8.9407e-08            1  5.58794e-09      -0.614662 6.98492e-10 -5.58794e-09            1   0.033234           0            0            0            1&quot;</span><span class="p">,</span>
             <span class="nt">&quot;converged&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="nt">&quot;fitness&quot;</span><span class="p">:</span> <span class="mf">0.01953125097</span><span class="p">,</span>
-            <span class="nt">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;           1  2.60209e-18 -1.97906e-09       -0.375  8.9407e-08            1  5.58794e-09      -0.5625 6.98492e -10 -5.58794e-09            1   0.00411987           0            0            0            1&quot;</span>
+            <span class="nt">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;           1  2.60209e-18 -1.97906e-09       -0.375  8.9407e-08            1  5.58794e-09      -0.5625 6.98492e-10 -5.58794e-09            1   0.00411987           0            0            0            1&quot;</span>
         <span class="p">}</span>
 </pre></div>
 </div>
@@ -317,7 +322,7 @@ would be similar to:</p>
     <span class="p">},</span>
     <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span> <span class="s2">&quot;1  2.60209e-18 -1.97906e-09       -0.375  8.9407e-08            1  5.58794e-09      -0.5625 6.98492e -10 -5.58794e-09            1   0.00411987           0            0            0            1&quot;</span>
+        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span> <span class="s2">&quot;1  2.60209e-18 -1.97906e-09       -0.375  8.9407e-08            1  5.58794e-09      -0.5625 6.98492e-10 -5.58794e-09            1   0.00411987           0            0            0            1&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
@@ -339,8 +344,8 @@ would be similar to:</p>
 <p><a class="reference internal" href="filters.transformation.html#filters-transformation"><span class="std std-ref">filters.transformation</span></a> to apply a transform to other points.
 <a class="reference internal" href="filters.cpd.html#filters-cpd"><span class="std std-ref">filters.cpd</span></a> for the use of a probabilistic assignment of correspondences between pointsets.</p>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>max_iter</dt><dd><p>Maximum number of iterations. [Default: <strong>100</strong>]</p>
@@ -368,8 +373,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -405,7 +410,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -436,7 +441,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

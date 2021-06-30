@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Visualizing acquisition density &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
@@ -253,35 +258,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="visualizing-acquisition-density">
+  <section id="visualizing-acquisition-density">
 <span id="density"></span><h1>Visualizing acquisition density<a class="headerlink" href="#visualizing-acquisition-density" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This exercise uses PDAL to generate a density surface. You can use this
 surface to summarize acquisition quality.</p>
-<div class="section" id="exercise">
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>PDAL provides an <a class="reference internal" href="../../../../apps/density.html#density-command"><span class="std std-ref">application</span></a> to compute a vector
 field of hexagons computed with <a class="reference internal" href="../../../../stages/filters.hexbin.html#filters-hexbin"><span class="std std-ref">filters.hexbin</span></a>. It is a kind of
 simple interpolation, which we will use for visualization in <a class="reference external" href="http://qgis.org">QGIS</a>.</p>
-<div class="section" id="command">
+<section id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your ` Shell`:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">density</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span>  \
-<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">density</span><span class="o">.</span><span class="n">sqlite</span> \
-<span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">density</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span>  \
+<span class="linenos">2</span><span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">density</span><span class="o">.</span><span class="n">sqlite</span> \
+<span class="linenos">3</span><span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">density</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span>  <span class="o">^</span>
-<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">density</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">^</span>
-<span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
-</pre></div>
-</td></tr></table></div>
-<a class="reference external image-reference" href="../../../../_images/density-command-run.png"><img alt="../../../../_images/density-command-run.png" src="../../../../_images/density-command-run.png" /></a>
 </div>
-<div class="section" id="visualization">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">density</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span>  <span class="o">^</span>
+<span class="linenos">2</span><span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">density</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">^</span>
+<span class="linenos">3</span><span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="../../../../_images/density-command-run.png"><img alt="../../../../_images/density-command-run.png" src="../../../../_images/density-command-run.png" /></a>
+</section>
+<section id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
 <p>The command uses GDAL to output a <a class="reference external" href="http://sqlite.org">SQLite</a> file containing hexagon polygons.
 We will now use <a class="reference external" href="http://qgis.org">QGIS</a> to visualize them.</p>
@@ -324,9 +325,9 @@ and then choose <code class="docutils literal notranslate"><span class="pre">Pro
 </div></blockquote>
 </li>
 </ol>
-</div>
-</div>
-<div class="section" id="notes">
+</section>
+</section>
+<section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>You can control how the density hexagon surface is created by
@@ -339,8 +340,8 @@ units.</p>
 </li>
 <li><p>You can generate a contiguous boundary using <a class="reference external" href="https://pdal.io/">PDAL</a>’s <a class="reference internal" href="../../../../apps/tindex.html#tindex-command"><span class="std std-ref">tindex</span></a>.</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -376,7 +377,7 @@ units.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -407,7 +408,7 @@ units.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

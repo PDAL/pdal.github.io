@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Introduction to LiDAR &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,10 +38,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -72,7 +76,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -114,6 +118,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -241,7 +246,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="introduction-to-lidar">
+  <section id="introduction-to-lidar">
 <span id="lidar-introduction"></span><h1>Introduction to LiDAR<a class="headerlink" href="#introduction-to-lidar" title="Permalink to this headline">¶</a></h1>
 <p>LiDAR is a remote sensing technique that uses visible or near-infrared laser
 energy to measure the distance between a sensor and an object.  LiDAR sensors
@@ -249,7 +254,7 @@ are versatile and (often) mobile; they help autonomous cars avoid obstacles and
 make detailed topographic measurements from space.  Before diving into LiDAR
 data processing, we will spend a bit of time reviewing some LiDAR fundamentals
 and discussing some terms of art.</p>
-<div class="section" id="types-of-lidar">
+<section id="types-of-lidar">
 <h2>Types of LiDAR<a class="headerlink" href="#types-of-lidar" title="Permalink to this headline">¶</a></h2>
 <p>LiDAR systems, generally speaking, come in one of three types:</p>
 <ul class="simple">
@@ -279,8 +284,8 @@ significantly less common than linear-mode systems.</p></li>
 <p>Unless otherwise noted, if we talk about a LiDAR scanner in this program,
 we will be referring to a pulse-based (linear) system.</p>
 </div>
-</div>
-<div class="section" id="modes-of-lidar-collection">
+</section>
+<section id="modes-of-lidar-collection">
 <h2>Modes of LiDAR Collection<a class="headerlink" href="#modes-of-lidar-collection" title="Permalink to this headline">¶</a></h2>
 <p>LiDAR collects are generally categorized into four subjective types:</p>
 <ul class="simple">
@@ -303,8 +308,8 @@ the scanning platform.</p>
 <p>As stated in the class description, we will focus on mobile and airborne
 laser scanning (MLS/ALS), though we will also use some TLS data.</p>
 </div>
-<span class="target" id="georeferencing-introduction"></span></div>
-<div class="section" id="georeferencing">
+<span class="target" id="georeferencing-introduction"></span></section>
+<section id="georeferencing">
 <span id="index-0"></span><h2>Georeferencing<a class="headerlink" href="#georeferencing" title="Permalink to this headline">¶</a></h2>
 <p>LiDAR scanners collect information in the Scanner’s Own Coordinate System
 (SOCS); this is a coordinate system centered at the scanner.  The process of
@@ -319,10 +324,10 @@ points with the GNSS/IMU data.  This can be done on-the-fly or as a part of a
 post-processing workflow.  Since this is a common operation for mobile and
 airborne LiDAR collects, we will spend a moment discussing the methods and
 complications for georeferencing mobile LiDAR and GNSS/IMU data.</p>
-<div class="section" id="integrating-lidar-and-gnss-imu-data">
+<section id="integrating-lidar-and-gnss-imu-data">
 <h3>Integrating LiDAR and GNSS/IMU data<a class="headerlink" href="#integrating-lidar-and-gnss-imu-data" title="Permalink to this headline">¶</a></h3>
 <p>The LiDAR georeferencing equation is well-established; we present a version
-here from <span id="id1">[<a class="reference internal" href="#id3">Gle07</a>]</span>:</p>
+here from <span id="id1">[<a class="reference internal" href="#id3" title="Craig L. Glennie. Rigorous 3D error analysis of kinematic scanning LIDAR systems. Journal of Applied Geodesy, jan 2007.">Gle07</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-georeferencing">
 <span class="eqno">(1)<a class="headerlink" href="#equation-georeferencing" title="Permalink to this equation">¶</a></span>\[\mathbf{p}^l_G = \mathbf{p}^l_{GPS} + \mathbf{R}^l_b \left( \mathbf{R}^b_s \mathbf{r}^s - \mathbf{l}^b \right)\]</div>
 <p>where:</p>
@@ -353,24 +358,28 @@ actual LiDAR data of planar surfaces, such as the roof and sides of
 buildings.  The process for determining a boresight calibration from LiDAR
 data is beyond the scope of this class.</p>
 </div>
-</div>
-</div>
-<div class="section" id="discrete-return-vs-full-waveform">
+</section>
+</section>
+<section id="discrete-return-vs-full-waveform">
 <h2>Discrete-Return vs. Full-Waveform<a class="headerlink" href="#discrete-return-vs-full-waveform" title="Permalink to this headline">¶</a></h2>
 <p>Pulse-based LiDAR systems use the round-trip travel time of a pulse of laser
 energy to measure distances.  The outgoing pulse of a LiDAR system is roughly
 (but not exactly) a Gaussian:</p>
-<div class="figure align-default" id="id4">
+<figure class="align-default" id="id4">
 <img alt="../_images/reference-pulse.png" src="../_images/reference-pulse.png" />
-<p class="caption"><span class="caption-text">A real-world outgoing LiDAR pulse.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">A real-world outgoing LiDAR pulse.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>This pulse can interact with multiple objects in a scene before it is returned to the sensor.
 Here is an example of a LiDAR return:</p>
-<div class="figure align-default" id="id5">
+<figure class="align-default" id="id5">
 <img alt="../_images/return-pulse.png" src="../_images/return-pulse.png" />
-<p class="caption"><span class="caption-text">A real-world incoming LiDAR return.
+<figcaption>
+<p><span class="caption-text">A real-world incoming LiDAR return.
 Potential discrete-return peaks are marked in red.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>As you can see, this return pulse can be very complicated.  While there is more
 information contained in the “full waveform” picture displayed above, many
 LiDAR consumers are only interested in detecting the presence or absence of an
@@ -389,8 +398,8 @@ It does not have any functionality to analyze or process full waveform data.</p>
 </dd>
 </dl>
 </p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -426,7 +435,7 @@ It does not have any functionality to analyze or process full waveform data.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -457,7 +466,7 @@ It does not have any functionality to analyze or process full waveform data.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

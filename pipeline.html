@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Pipeline &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
 
   
@@ -35,10 +38,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -47,7 +51,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="next" title="Readers" href="stages/readers.html" />
+    <link rel="next" title="Stages" href="stages/stages.html" />
     <link rel="prev" title="Community" href="community.html" /> 
 </head>
 
@@ -72,7 +76,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -139,6 +143,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/filters.html">Filters</a></li>
@@ -235,7 +240,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="stages/readers.html" class="btn btn-neutral float-right" title="Readers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="stages/stages.html" class="btn btn-neutral float-right" title="Stages" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="community.html" class="btn btn-neutral float-left" title="Community" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -247,7 +252,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pipeline">
+  <section id="pipeline">
 <span id="id1"></span><h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h1>
 <p>Pipelines define the processing of data within PDAL.  They describe how point
 cloud data are read, processed and written.
@@ -267,7 +272,7 @@ facilities of whatever language you want.</p></li>
 <p><a class="reference internal" href="apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> is used to invoke pipeline operations
 via the command line.</p>
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>A PDAL processing pipeline is represented in JSON.  The structure may either:</p>
 <ul class="simple">
@@ -276,7 +281,7 @@ inferred or explicit PDAL <a class="reference internal" href="#stage-object"><sp
 <li><p>a JSON array, being the array described above without being encapsulated by a
 JSON object.</p></li>
 </ul>
-<div class="section" id="simple-example">
+<section id="simple-example">
 <h3>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h3>
 <p>A simple PDAL pipeline, inferring the appropriate drivers for the reader and
 writer from filenames, and able to be specified as a set of sequential steps:</p>
@@ -290,13 +295,15 @@ writer from filenames, and able to be specified as a set of sequential steps:</p
 <span class="p">]</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="id4">
+<figure class="align-default" id="id4">
 <img alt="_images/las-crop-bpf-pipeline.png" src="_images/las-crop-bpf-pipeline.png" />
-<p class="caption"><span class="caption-text">A simple pipeline to convert <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">LAS</span></a> to <a class="reference internal" href="stages/readers.bpf.html#readers-bpf"><span class="std std-ref">BPF</span></a>
+<figcaption>
+<p><span class="caption-text">A simple pipeline to convert <a class="reference internal" href="stages/readers.las.html#readers-las"><span class="std std-ref">LAS</span></a> to <a class="reference internal" href="stages/readers.bpf.html#readers-bpf"><span class="std std-ref">BPF</span></a>
 while only keeping points inside the box <span class="math notranslate nohighlight">\([0 \leq x \leq 100, 0 \leq y \leq 100]\)</span>.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="reprojection-example">
+</figcaption>
+</figure>
+</section>
+<section id="reprojection-example">
 <h3>Reprojection Example<a class="headerlink" href="#reprojection-example" title="Permalink to this headline">¶</a></h3>
 <p>A more complex PDAL pipeline reprojects the stage tagged <code class="docutils literal notranslate"><span class="pre">A1</span></code>, merges
 the result with <code class="docutils literal notranslate"><span class="pre">B</span></code>, and writes the merged output to a GeoTIFF file
@@ -331,14 +338,16 @@ with the <a class="reference internal" href="stages/writers.gdal.html#writers-gd
 <span class="p">]</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="id5">
+<figure class="align-default" id="id5">
 <img alt="_images/reproject-merge-pipeline.png" src="_images/reproject-merge-pipeline.png" />
-<p class="caption"><span class="caption-text">A more complex pipeline that merges two inputs together but uses
+<figcaption>
+<p><span class="caption-text">A more complex pipeline that merges two inputs together but uses
 <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> to transform the coordinate system of
 file <code class="docutils literal notranslate"><span class="pre">B.las</span></code> from <a class="reference external" href="http://spatialreference.org/ref/epsg/nad83-utm-zone-16n/">UTM</a> to <a class="reference external" href="http://spatialreference.org/ref/epsg/4326/">Geographic</a>.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="point-views-and-multiple-outputs">
+</figcaption>
+</figure>
+</section>
+<section id="point-views-and-multiple-outputs">
 <span id="processing-modes"></span><h3>Point Views and Multiple Outputs<a class="headerlink" href="#point-views-and-multiple-outputs" title="Permalink to this headline">¶</a></h3>
 <p>Some filters produce sets of points as output.  <a class="reference internal" href="stages/filters.splitter.html#filters-splitter"><span class="std std-ref">filters.splitter</span></a>,
 for example, creates a point set for each tile (rectangular area) in
@@ -362,9 +371,9 @@ files from a single pipeline.  The crop filter creates two output point views
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="id2">
+</section>
+</section>
+<section id="id2">
 <h2>Processing Modes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>PDAL process data in one of two ways: standard mode or stream mode.  With
 standard mode, all input is read into memory before it is processed.  Many
@@ -381,10 +390,10 @@ the applications fall back to standard mode processing.  Streamable stages are
 tagged in the stage documentation with a blue bar.  Users can explicitly
 choose to use standard mode by using the <code class="docutils literal notranslate"><span class="pre">--nostream</span></code> option.  Users of the PDAL API can explicitly control the selection of the PDAL
 processing mode.</p>
-</div>
-<div class="section" id="pipelines">
+</section>
+<section id="pipelines">
 <h2>Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="pipeline-array">
+<section id="pipeline-array">
 <h3>Pipeline Array<a class="headerlink" href="#pipeline-array" title="Permalink to this headline">¶</a></h3>
 <p>PDAL JSON pipelines are an array of stages.</p>
 <div class="admonition note">
@@ -417,8 +426,8 @@ elements.</p></li>
 the proper driver from the file extension and position in the array. A writer
 stage will only be created if the string is the final element in the array.</p></li>
 </ul>
-</div>
-<div class="section" id="stage-objects">
+</section>
+<section id="stage-objects">
 <span id="stage-object"></span><h3>Stage Objects<a class="headerlink" href="#stage-objects" title="Permalink to this headline">¶</a></h3>
 <p>For more on PDAL stages and their options, check the PDAL documentation on
 <a class="reference internal" href="stages/readers.html#readers"><span class="std std-ref">Readers</span></a>, <a class="reference internal" href="stages/writers.html#writers"><span class="std std-ref">Writers</span></a>, and <a class="reference internal" href="stages/filters.html#filters"><span class="std std-ref">Filters</span></a>.</p>
@@ -451,8 +460,8 @@ carried through to any serialized pipeline output.</p></li>
 <li><p>All stages support the <code class="docutils literal notranslate"><span class="pre">option_file</span></code> option that allows options to be
 places in a separate file. See <a class="reference internal" href="#option-files"><span class="std std-ref">Option Files</span></a> for details.</p></li>
 </ul>
-</div>
-<div class="section" id="filename-globbing">
+</section>
+<section id="filename-globbing">
 <h3>Filename Globbing<a class="headerlink" href="#filename-globbing" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>A filename may contain the wildcard character <code class="docutils literal notranslate"><span class="pre">*</span></code> to match any string of
@@ -463,8 +472,8 @@ work when a filename is provided as an option through a command-line
 application like <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> or <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">translate</span></code>.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="option-files">
+</section>
+<section id="option-files">
 <span id="id3"></span><h3>Option Files<a class="headerlink" href="#option-files" title="Permalink to this headline">¶</a></h3>
 <p>All stages accept the <code class="docutils literal notranslate"><span class="pre">option</span> <span class="pre">file</span></code> option that allows extra options for a
 stage to be placed in a separate file.  The value of the option is the filename
@@ -484,11 +493,11 @@ the stage name:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--minor_version=4 --out_srs=&quot;EPSG_4326&quot;
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="extended-examples">
+</section>
+</section>
+<section id="extended-examples">
 <h2>Extended Examples<a class="headerlink" href="#extended-examples" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="bpf-to-las">
+<section id="bpf-to-las">
 <h3>BPF to LAS<a class="headerlink" href="#bpf-to-las" title="Permalink to this headline">¶</a></h3>
 <p>The following pipeline converts the input file from <a class="reference internal" href="stages/readers.bpf.html#readers-bpf"><span class="std std-ref">BPF</span></a> to
 <a class="reference internal" href="stages/writers.las.html#writers-las"><span class="std std-ref">LAS</span></a>, inferring both the reader and writer type, and
@@ -507,8 +516,8 @@ setting a number of options on the writer stage.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="python-hag">
+</section>
+<section id="python-hag">
 <h3>Python HAG<a class="headerlink" href="#python-hag" title="Permalink to this headline">¶</a></h3>
 <p>In our next example, the reader and writer types are once again inferred. After
 reading the input file, the ferry filter is used to copy the Z dimension into a
@@ -538,8 +547,8 @@ this job in more detail.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dtm">
+</section>
+<section id="dtm">
 <h3>DTM<a class="headerlink" href="#dtm" title="Permalink to this headline">¶</a></h3>
 <p>A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
@@ -570,8 +579,8 @@ then creates the DTM using the <a class="reference internal" href="stages/writer
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="decimate-colorize">
+</section>
+<section id="decimate-colorize">
 <h3>Decimate &amp; Colorize<a class="headerlink" href="#decimate-colorize" title="Permalink to this headline">¶</a></h3>
 <p>This example still infers the reader and writer types while applying options on
 both. The pipeline decimates the input LAS file by keeping every other point,
@@ -600,8 +609,8 @@ written as ASCII text.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="reproject">
+</section>
+<section id="reproject">
 <h3>Reproject<a class="headerlink" href="#reproject" title="Permalink to this headline">¶</a></h3>
 <p>Our first example with multiple readers, this pipeline infers the reader types,
 and assigns spatial reference information to each.
@@ -623,8 +632,8 @@ spatial reference system.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="globbed-inputs">
+</section>
+<section id="globbed-inputs">
 <h3>Globbed Inputs<a class="headerlink" href="#globbed-inputs" title="Permalink to this headline">¶</a></h3>
 <p>Finally, we capture another merge pipeline demonstrating the ability to glob
 multiple input LAS files from a given directory.</p>
@@ -646,9 +655,9 @@ more.</p>
 <p>Issuing the command <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--options</span></code> will list all available
 stages and their options. See <a class="reference internal" href="apps/info.html#info-command"><span class="std std-ref">info</span></a> for more.</p>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -658,7 +667,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="stages/readers.html" class="btn btn-neutral float-right" title="Readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="stages/stages.html" class="btn btn-neutral float-right" title="Stages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="community.html" class="btn btn-neutral float-left" title="Community" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -684,7 +693,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -715,7 +724,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

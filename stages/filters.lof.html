@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.lof &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -258,21 +263,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-lof">
+  <section id="filters-lof">
 <span id="id1"></span><h1>filters.lof<a class="headerlink" href="#filters-lof" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>Local Outlier Factor (LOF) filter</strong> was introduced as a method
 of determining the degree to which an object is an outlier. This filter
 is an implementation of the method
 described in <a class="reference internal" href="../references.html#breunig2000" id="id2"><span>[Breunig2000]</span></a>.</p>
-<p>The filter creates three new dimensions, <code class="docutils literal notranslate"><span class="pre">KDistance</span></code>,
+<p>The filter creates three new dimensions, <code class="docutils literal notranslate"><span class="pre">NNDistance</span></code>,
 <code class="docutils literal notranslate"><span class="pre">LocalReachabilityDistance</span></code> and <code class="docutils literal notranslate"><span class="pre">LocalOutlierFactor</span></code>, all of which are
-double-precision floating values. The <code class="docutils literal notranslate"><span class="pre">KDistance</span></code> dimension records the
+double-precision floating values. The <code class="docutils literal notranslate"><span class="pre">NNDistance</span></code> dimension records the
 Euclidean distance between a point and it’s k-th nearest neighbor (the number
 of k neighbors is set with the <a class="reference internal" href="#minpts">minpts</a> option). The
 <code class="docutils literal notranslate"><span class="pre">LocalReachabilityDistance</span></code> is the inverse of the mean
 of all reachability distances for a neighborhood of points. This reachability
 distance is defined as the max of the Euclidean distance to a neighboring point
-and that neighbor’s own previously computed <code class="docutils literal notranslate"><span class="pre">KDistance</span></code>. Finally, each point
+and that neighbor’s own previously computed <code class="docutils literal notranslate"><span class="pre">NNDistance</span></code>. Finally, each point
 has a <code class="docutils literal notranslate"><span class="pre">LocalOutlierFactor</span></code> which is the mean of all
 <code class="docutils literal notranslate"><span class="pre">LocalReachabilityDistance</span></code> values for the neighborhood. In each case, the
 neighborhood is the set of k nearest neighbors.</p>
@@ -286,11 +291,16 @@ users of this filter should find instructive.</p>
 <p>To inspect the newly created, non-standard dimensions, be sure to write to an
 output format that can support arbitrary dimensions, such as BPF.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In earlier PDAL releases (up to v2.2.0), <code class="docutils literal notranslate"><span class="pre">NNDistance</span></code> was stored in the
+<code class="docutils literal notranslate"><span class="pre">KDistance</span></code> Dimemsion.</p>
+</div>
 <div class="admonition embed" id="embed-0">
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
-<div class="section" id="example">
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>The sample pipeline below computes the LOF with a neighborhood of 20 neighbors,
 followed by a range filter to crop out points whose <code class="docutils literal notranslate"><span class="pre">LocalOutlierFactor</span></code>
@@ -309,8 +319,8 @@ exceeds 1.2 before writing the output.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt><span class="target" id="minpts">minpts</span></dt><dd><p>The number of k nearest neighbors. [Default: 10]</p>
@@ -330,8 +340,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -367,7 +377,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -398,7 +408,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

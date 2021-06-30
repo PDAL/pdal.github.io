@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Writing with PDAL &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -239,7 +244,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="writing-with-pdal">
+  <section id="writing-with-pdal">
 <span id="writing"></span><h1>Writing with PDAL<a class="headerlink" href="#writing-with-pdal" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -262,7 +267,7 @@ PDAL’s <a class="reference internal" href="../api/cpp/stage.html#_CPPv4N4pdal5
 read-filter-write pipeline using <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> and not have to
 code anything explicit yourself.</p>
 </div>
-<div class="section" id="includes">
+<section id="includes">
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
 <p>First, our code.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
@@ -301,7 +306,7 @@ code anything explicit yourself.</p>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">pdal</span><span class="p">;</span>
 
     <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
     <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
@@ -311,7 +316,7 @@ code anything explicit yourself.</p>
     <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
     <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
 
-    <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
 
     <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
 
@@ -372,7 +377,7 @@ z dimensions.</p>
 </div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">pdal</span><span class="p">;</span>
 
     <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
     <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
@@ -384,7 +389,7 @@ z dimensions.</p>
 and sends it to a writer.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">pdal</span><span class="p">;</span>
 
     <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
     <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
@@ -394,7 +399,7 @@ and sends it to a writer.</p>
     <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
     <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
 
-    <span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
 
     <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
 
@@ -414,8 +419,8 @@ and sends it to a writer.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="compiling-and-running-the-program">
+</section>
+<section id="compiling-and-running-the-program">
 <h2>Compiling and running the program<a class="headerlink" href="#compiling-and-running-the-program" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -455,8 +460,8 @@ $ make
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./tutorial
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -492,7 +497,7 @@ $ make
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -523,7 +528,7 @@ $ make
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

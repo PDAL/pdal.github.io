@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>readers.ept &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
@@ -124,7 +129,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.hdf.html">readers.hdf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
@@ -136,8 +140,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -264,7 +266,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="readers-ept">
+  <section id="readers-ept">
 <span id="id1"></span><h1>readers.ept<a class="headerlink" href="#readers-ept" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://entwine.io/entwine-point-tile.html">Entwine Point Tile</a> (EPT) is a hierarchical octree-based point cloud format
 suitable for real-time rendering and lossless archival.  <a class="reference external" href="https://entwine.io/">Entwine</a> is a
@@ -277,7 +279,11 @@ with <a class="reference external" href="http://potree.entwine.io/data/nyc.html"
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
-<div class="section" id="example">
+<div class="admonition streamable" id="streamable-0">
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
+</div>
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example downloads a small area around the the Statue of Liberty from the New York City data set (4.7 billion points) which can be viewed in its entirety in <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a>.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
@@ -306,8 +312,8 @@ with <a class="reference external" href="http://potree.entwine.io/data/nyc.html"
 </pre></div>
 </div>
 <p>For more details about addon dimensions and how to produce them, see <a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">writers.ept_addon</span></a>.</p>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl>
 <dt>filename</dt><dd><p>Path to the EPT resource from which to read, ending with <code class="docutils literal notranslate"><span class="pre">ept.json</span></code>.  For example, <code class="docutils literal notranslate"><span class="pre">/Users/connor/entwine/autzen/ept.json</span></code> or <code class="docutils literal notranslate"><span class="pre">http://na.entwine.io/autzen/ept.json</span></code>. [Required]</p>
@@ -357,9 +363,24 @@ specified more than once by placing values in an array.</p>
 <p class="admonition-title">Note</p>
 <p>When using <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--summary</span></code>, using the <code class="docutils literal notranslate"><span class="pre">polygon</span></code> option will cause the resulting bounds to be clipped to the maximal extents of all provided polygons, and the resulting number of points to be an upper bound for this polygon selection.</p>
 </div>
-<dl class="simple">
-<dt>threads</dt><dd><p>Number of worker threads used to download and process EPT data.  A
-minimum of 4 will be used no matter what value is specified.</p>
+<dl>
+<dt>ogr</dt><dd><p>A JSON object representing an OGR query to fetch polygons to use for filtering. The polygons
+fetched from the query are treated exactly like those specified in the <code class="docutils literal notranslate"><span class="pre">polygon</span></code> option.
+The JSON object takes the looks like the following:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;drivers&quot;</span><span class="p">:</span> <span class="s2">&quot;OGR drivers to use&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;openoptions&quot;</span><span class="p">:</span> <span class="s2">&quot;Options to pass to the OGR open function [optional]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;layer&quot;</span><span class="p">:</span> <span class="s2">&quot;OGR layer from which to fetch polygons [optional]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;sql&quot;</span><span class="p">:</span> <span class="s2">&quot;SQL query to use to filter the polygons in the layer [optional]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;options&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;WKT or GeoJSON geomtry used to filter query [optional]&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>requests</dt><dd><p>Maximum number of simultaneous requests for EPT data. [Minimum: 4] [Default: 15]</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -370,8 +391,8 @@ object of key/value string pairs.</p>
 JSON object of key/value string pairs.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -407,7 +428,7 @@ JSON object of key/value string pairs.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -438,7 +459,7 @@ JSON object of key/value string pairs.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

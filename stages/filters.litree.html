@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.litree &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -250,23 +255,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-litree">
+  <section id="filters-litree">
 <span id="id1"></span><h1>filters.litree<a class="headerlink" href="#filters-litree" title="Permalink to this headline">¶</a></h1>
 <p>The purpose of the Li tree filter is to segment individual trees from an input
 <code class="docutils literal notranslate"><span class="pre">PointView</span></code>. In the output <code class="docutils literal notranslate"><span class="pre">PointView</span></code> points that are deemed to be part of
-a tree are labeled with a <code class="docutils literal notranslate"><span class="pre">TreeID</span></code>. Tree IDs start at 1, with non-tree points
-given a <code class="docutils literal notranslate"><span class="pre">TreeID</span></code> of 0.</p>
+a tree are labeled with a <code class="docutils literal notranslate"><span class="pre">ClusterID</span></code>. Tree IDs start at 1, with non-tree points
+given a <code class="docutils literal notranslate"><span class="pre">ClusterID</span></code> of 0.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The filter differs only slightly from the paper in the addition of a few
 conditions on size of tree, minimum height above ground for tree seeding, and
 flexible radius for non-tree seed insertion.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In earlier PDAL releases (up to v2.2.0), <code class="docutils literal notranslate"><span class="pre">ClusterID</span></code> was stored in the
+<code class="docutils literal notranslate"><span class="pre">TreeID</span></code> Dimemsion.</p>
+</div>
 <div class="admonition embed" id="embed-0">
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
-<div class="section" id="example">
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
@@ -285,8 +295,8 @@ flexible radius for non-tree seed insertion.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>min_points</dt><dd><p>Minimum number of points in a tree cluster. [Default: 10]</p>
@@ -311,8 +321,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -348,7 +358,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -379,7 +389,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

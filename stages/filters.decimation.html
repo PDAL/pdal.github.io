@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.decimation &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -46,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="filters.farthestpointsampling" href="filters.farthestpointsampling.html" />
+    <link rel="next" title="filters.fps" href="filters.fps.html" />
     <link rel="prev" title="filters.crop" href="filters.crop.html" /> 
 </head>
 
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -123,7 +128,8 @@
 <li class="toctree-l3"><a class="reference internal" href="filters.html#spatial">Spatial</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="filters.html#resampling">Resampling</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">filters.decimation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="filters.farthestpointsampling.html">filters.farthestpointsampling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.fps.html">filters.fps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.relaxationdartthrowing.html">filters.relaxationdartthrowing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
 </ul>
 </li>
@@ -235,7 +241,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="filters.farthestpointsampling.html" class="btn btn-neutral float-right" title="filters.farthestpointsampling" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.fps.html" class="btn btn-neutral float-right" title="filters.fps" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="filters.crop.html" class="btn btn-neutral float-left" title="filters.crop" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -247,7 +253,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-decimation">
+  <section id="filters-decimation">
 <span id="id1"></span><h1>filters.decimation<a class="headerlink" href="#filters-decimation" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>decimation filter</strong> retains every Nth point from an input point view.</p>
 <div class="admonition embed" id="embed-0">
@@ -258,7 +264,7 @@
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-<div class="section" id="example">
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
@@ -280,8 +286,8 @@
 <p class="admonition-title">See also</p>
 <p><span class="xref std std-ref">filters.voxelgrid</span> provides grid-style point decimation.</p>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>step</dt><dd><p>Number of points to skip between each sample point.  A step of 1 will skip
@@ -307,8 +313,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -318,7 +324,7 @@ is returned and it has the same point count as it did when the filter was run.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.farthestpointsampling.html" class="btn btn-neutral float-right" title="filters.farthestpointsampling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.fps.html" class="btn btn-neutral float-right" title="filters.fps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="filters.crop.html" class="btn btn-neutral float-left" title="filters.crop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -344,7 +350,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -375,7 +381,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

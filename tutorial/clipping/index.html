@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Clipping with Geometries &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
@@ -240,7 +245,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="clipping-with-geometries">
+  <section id="clipping-with-geometries">
 <span id="clipping"></span><h1>Clipping with Geometries<a class="headerlink" href="#clipping-with-geometries" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -253,7 +258,7 @@
 <dd class="field-odd"><p>11/09/2015</p>
 </dd>
 </dl>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial describes how to construct a pipeline that takes in geometries
 and clips out data with given geometry attributes.  It is common to desire
@@ -277,8 +282,8 @@ point cloud data inside geometries with matching attributes.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="example-data">
+</section>
+<section id="example-data">
 <h2>Example Data<a class="headerlink" href="#example-data" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial utilizes the Autzen dataset. In addition to typical PDAL
 software (fetch it from <a class="reference internal" href="../../download.html#download"><span class="std std-ref">Download</span></a>), you will need to download the
@@ -287,8 +292,8 @@ following two files:</p>
 <li><p><a class="reference external" href="https://github.com/PDAL/data/autzen/autzen.laz">https://github.com/PDAL/data/autzen/autzen.laz</a></p></li>
 <li><p><a class="reference external" href="https://github.com/PDAL/PDAL/raw/master/test/data/autzen/attributes.json">https://github.com/PDAL/PDAL/raw/master/test/data/autzen/attributes.json</a></p></li>
 </ul>
-</div>
-<div class="section" id="stage-operations">
+</section>
+<section id="stage-operations">
 <h2>Stage Operations<a class="headerlink" href="#stage-operations" title="Permalink to this headline">¶</a></h2>
 <p>This operation depends on two stages PDAL provides.
 The first is the <a class="reference internal" href="../../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a> stage, which allows you to assign
@@ -300,13 +305,15 @@ set that match given criteria.</p>
 <p><a class="reference internal" href="../../stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a> allow you to construct sophisticated logic
 for keeping or rejecting points in a more expressive environment.</p>
 </div>
-</div>
-<div class="section" id="data-preparation">
+</section>
+<section id="data-preparation">
 <h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="id1">
+<figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-point-cloud.png"><img alt="../../_images/autzen-shapes-point-cloud.png" src="../../_images/autzen-shapes-point-cloud.png" style="width: 677.4px; height: 400.8px;" /></a>
-<p class="caption"><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>The data are mixed in two different coordinate systems. The <a class="reference internal" href="../../stages/readers.las.html#readers-las"><span class="std std-ref">LAZ</span></a> file is in <a class="reference external" href="http://www.oregon.gov/DAS/CIO/GEO/pages/coordination/projections/projections.aspx">Oregon State Plane Ft.</a> and the <a class="reference external" href="http://geojson.org">GeoJSON</a> defining
 the polygons is in <a class="reference external" href="http://epsg.io/4326">EPSG:4326</a>. We have two options – project the point cloud
 into the coordinate system of the attribute polygons, or project the attribute
@@ -338,13 +345,15 @@ stored the <code class="docutils literal notranslate"><span class="pre">autzen.l
 For our scenario, we want to clip out the yellow-green polygon, marked
 number “5”,
 in the upper right hand corner.</p>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-to-clip.png"><img alt="../../_images/autzen-shapes-to-clip.png" src="../../_images/autzen-shapes-to-clip.png" style="width: 693.6px; height: 381.0px;" /></a>
-<p class="caption"><span class="caption-text">We want to clip out the polygon in the upper right hand corner. We can
+<figcaption>
+<p><span class="caption-text">We want to clip out the polygon in the upper right hand corner. We can
 view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geometry using something like <a class="reference external" href="http://qgis.org">QGIS</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="pipeline">
+</figcaption>
+</figure>
+</section>
+<section id="pipeline">
 <h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
 <p>A PDAL <a class="reference internal" href="../../pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> is how you define a set of actions to
 apply to data as they are read, filtered, and written.</p>
@@ -385,8 +394,8 @@ most LiDAR softwares will display categorical coloring for the
 <code class="docutils literal notranslate"><span class="pre">Classification</span></code> field, and we can leverage that behavior in this
 scenario.</p>
 </div>
-</div>
-<div class="section" id="processing">
+</section>
+<section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Save the pipeline to a file called <code class="docutils literal notranslate"><span class="pre">shape-clip.json</span></code> in the</p></li>
@@ -409,14 +418,14 @@ scenario.</p>
 </div></blockquote>
 </li>
 </ol>
-</div>
-<div class="section" id="conclusion">
+</section>
+<section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>PDAL allows the composition of point cloud operations. This tutorial demonstrated
 how to use the <a class="reference internal" href="../../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a> and <a class="reference internal" href="../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> stages to clip
 points with shapefiles.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -452,7 +461,7 @@ points with shapefiles.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -483,7 +492,7 @@ points with shapefiles.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

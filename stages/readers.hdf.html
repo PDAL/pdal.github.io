@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>readers.hdf &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -47,7 +51,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="readers.i3s" href="readers.i3s.html" />
-    <link rel="prev" title="readers.geowave" href="readers.geowave.html" /> 
+    <link rel="prev" title="readers.gdal" href="readers.gdal.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
@@ -120,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.hdf</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#common-use-cases">Common Use Cases</a></li>
@@ -137,8 +141,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -256,7 +258,7 @@
         <a href="readers.i3s.html" class="btn btn-neutral float-right" title="readers.i3s" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.geowave.html" class="btn btn-neutral float-left" title="readers.geowave" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.gdal.html" class="btn btn-neutral float-left" title="readers.gdal" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -265,7 +267,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="readers-hdf">
+  <section id="readers-hdf">
 <span id="id1"></span><h1>readers.hdf<a class="headerlink" href="#readers-hdf" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>HDF reader</strong> reads data from files in the
 <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">HDF5 format.</a>
@@ -281,7 +283,7 @@ supported at this time.</p>
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-<div class="section" id="example">
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example reads from the Autzen HDF example with all dimension
 properly mapped and then outputs a LAS file.</p>
@@ -332,8 +334,8 @@ etc. are not supported.</p>
 <p class="admonition-title">Warning</p>
 <p>The HDF reader does not set an SRS.</p>
 </div>
-</div>
-<div class="section" id="common-use-cases">
+</section>
+<section id="common-use-cases">
 <h2>Common Use Cases<a class="headerlink" href="#common-use-cases" title="Permalink to this headline">¶</a></h2>
 <p>A possible use case for this driver is reading NASA’s <a class="reference external" href="https://icesat-2.gsfc.nasa.gov/">ICESat-2</a> data.
 This example reads the X, Y, and Z coordinates from the ICESat-2
@@ -360,8 +362,8 @@ This example reads the X, Y, and Z coordinates from the ICESat-2
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>count</dt><dd><p>Maximum number of points to read. [Default: unlimited]</p>
@@ -377,8 +379,8 @@ with ‘override_srs’ [Default: none]</p>
 <dt>dimensions</dt><dd><p>A JSON map with PDAL dimension names as the keys and HDF dataset paths as the values.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -391,7 +393,7 @@ with ‘override_srs’ [Default: none]</p>
         <a href="readers.i3s.html" class="btn btn-neutral float-right" title="readers.i3s" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.geowave.html" class="btn btn-neutral float-left" title="readers.geowave" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.gdal.html" class="btn btn-neutral float-left" title="readers.gdal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -414,7 +416,7 @@ with ‘override_srs’ [Default: none]</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -445,7 +447,7 @@ with ‘override_srs’ [Default: none]</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

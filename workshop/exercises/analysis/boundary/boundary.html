@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Finding the boundary &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
@@ -253,23 +258,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="finding-the-boundary">
+  <section id="finding-the-boundary">
 <span id="boundary"></span><h1>Finding the boundary<a class="headerlink" href="#finding-the-boundary" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This exercise uses PDAL to find a tight-fitting boundary of an aerial scan.
 Printing the coordinates of the boundary for the file is quite simple using a
 single <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span></code> call, but visualizing the boundary is more complicated. To
 complete this exercise, we are going to use <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> to view the
 boundary, which means we must first install it on our system.</p>
-<div class="section" id="exercise">
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We are going to run using the Uncompahgre data in the <code class="docutils literal notranslate"><span class="pre">./density</span></code>
 directory.</p>
 </div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">--</span><span class="n">boundary</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">--</span><span class="n">boundary</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <a class="reference external image-reference" href="../../../../_images/boundary-text-output.png"><img alt="../../../../_images/boundary-text-output.png" src="../../../../_images/boundary-text-output.png" /></a>
 <p>… a giant blizzard of coordinate output scrolls across our terminal. Not very
 useful.</p>
@@ -279,20 +284,16 @@ vector geometry file for each point cloud file it reads. It generates this
 boundary using the same mechanism we invoked above – <a class="reference internal" href="../../../../stages/filters.hexbin.html#filters-hexbin"><span class="std std-ref">filters.hexbin</span></a>.
 We can leverage this capability to output a contiguous boundary of the <code class="docutils literal notranslate"><span class="pre">uncompahgre.laz</span></code>
 file.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">tindex</span> <span class="n">create</span> <span class="o">--</span><span class="n">tindex</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> \
- <span class="o">--</span><span class="n">filespec</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
- <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">tindex</span> <span class="n">create</span> <span class="o">--</span><span class="n">tindex</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> \
+<span class="linenos">2</span> <span class="o">--</span><span class="n">filespec</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
+<span class="linenos">3</span> <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">tindex</span> <span class="n">create</span> <span class="o">--</span><span class="n">tindex</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">^</span>
- <span class="o">--</span><span class="n">filespec</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
- <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">tindex</span> <span class="n">create</span> <span class="o">--</span><span class="n">tindex</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">boundary</span><span class="o">/</span><span class="n">boundary</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">^</span>
+<span class="linenos">2</span> <span class="o">--</span><span class="n">filespec</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="linenos">3</span> <span class="o">-</span><span class="n">f</span> <span class="n">SQLite</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <a class="reference external image-reference" href="../../../../_images/boundary-tindex-run.png"><img alt="../../../../_images/boundary-tindex-run.png" src="../../../../_images/boundary-tindex-run.png" /></a>
 <p>Once we’ve run the <a class="reference internal" href="../../../../apps/tindex.html#tindex-command"><span class="std std-ref">tindex</span></a>, we can now visualize our output:</p>
 <p>Open <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> and select <cite>Add Vector Layer</cite>:</p>
@@ -300,8 +301,8 @@ file.</p>
 <p>Navigate to the <code class="docutils literal notranslate"><span class="pre">exercises/analysis/boundary</span></code> directory and
 then open the <code class="docutils literal notranslate"><span class="pre">boundary.sqlite</span></code> file:</p>
 <a class="reference external image-reference" href="../../../../_images/boundary-qgis-view.png"><img alt="../../../../_images/boundary-qgis-view.png" src="../../../../_images/boundary-qgis-view.png" /></a>
-</div>
-<div class="section" id="notes">
+</section>
+<section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>The PDAL boundary computation is an approximation based on a hexagon
@@ -316,8 +317,8 @@ in LiDAR processing, and PDAL supports it through the <code class="docutils lite
 application. You can also use this command to merge data together
 (query across boundaries, for example).</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -353,7 +354,7 @@ application. You can also use this command to merge data together
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -384,7 +385,7 @@ application. You can also use this command to merge data together
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

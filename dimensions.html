@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Dimensions &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/filters.html">Filters</a></li>
@@ -221,7 +226,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dimensions">
+  <section id="dimensions">
 <span id="id1"></span><h1>Dimensions<a class="headerlink" href="#dimensions" title="Permalink to this headline">¶</a></h1>
 <p>All point data in PDAL is stored as a set of dimensions.  Dimensions
 have a name and a data type.  The data type is determined at runtime, but
@@ -283,33 +288,49 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>int64_t</p></td>
 <td><p>ID assigned to a point by a point-clustering algorithm.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Curvature</p></td>
+<tr class="row-odd"><td><p>Coplanar</p></td>
+<td><p>uint8</p></td>
+<td><p>Indicator of whether or not a point is part of a coplanar neighborhood.</p></td>
+</tr>
+<tr class="row-even"><td><p>Curvature</p></td>
 <td><p>double</p></td>
 <td><p>Curvature of surface at this point</p></td>
 </tr>
-<tr class="row-even"><td><p>DemantkeVerticality</p></td>
+<tr class="row-odd"><td><p>DemantkeVerticality</p></td>
 <td><p>double</p></td>
 <td><p>Verticality of a point; larger values indicate vertical structure (Demantke’s variation).</p></td>
 </tr>
-<tr class="row-odd"><td><p>Density</p></td>
+<tr class="row-even"><td><p>Density</p></td>
 <td><p>double</p></td>
 <td><p>Estimate of point density</p></td>
 </tr>
-<tr class="row-even"><td><p>Deviation</p></td>
+<tr class="row-odd"><td><p>Deviation</p></td>
 <td><p>float</p></td>
 <td><p>Difference between the shape of the reference pulse and the return pulse. A larger value for deviation indicates larger distortion.</p></td>
 </tr>
-<tr class="row-odd"><td><p>EchoRange</p></td>
+<tr class="row-even"><td><p>EchoRange</p></td>
 <td><p>double</p></td>
 <td><p>Echo Range</p></td>
 </tr>
-<tr class="row-even"><td><p>EdgeOfFlightLine</p></td>
+<tr class="row-odd"><td><p>EdgeOfFlightLine</p></td>
 <td><p>uint8</p></td>
 <td><p>Indicates the end of scanline before a direction change with a value of 1 - 0 otherwise</p></td>
 </tr>
-<tr class="row-odd"><td><p>Eigenentropy</p></td>
+<tr class="row-even"><td><p>Eigenentropy</p></td>
 <td><p>double</p></td>
 <td><p>Eigenentropy of a point; small values indicate more ordered regions, while large values indicate disorder.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Eigenvalue0</p></td>
+<td><p>double</p></td>
+<td><p>Smallest eigenvalue obtained form covariance of XYZ coordinates in k-neighborhood.</p></td>
+</tr>
+<tr class="row-even"><td><p>Eigenvalue1</p></td>
+<td><p>double</p></td>
+<td><p>Middle eigenvalue obtained form covariance of XYZ coordinates in k-neighborhood.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Eigenvalue2</p></td>
+<td><p>double</p></td>
+<td><p>Largest eigenvalue obtained form covariance of XYZ coordinates in k-neighborhood.</p></td>
 </tr>
 <tr class="row-even"><td><p>EigenvalueSum</p></td>
 <td><p>double</p></td>
@@ -375,6 +396,14 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>double</p></td>
 <td><p>Linearity of a point; larger values indicate more linear regions.</p></td>
 </tr>
+<tr class="row-even"><td><p>LocalOutlierFactor</p></td>
+<td><p>double</p></td>
+<td><p>Outlier factor based on the LocalReachabilityDistance of a point’s nearest neighbors.</p></td>
+</tr>
+<tr class="row-odd"><td><p>LocalReachabilityDistance</p></td>
+<td><p>double</p></td>
+<td><p>Reachability metric based on the NNDistance of a point’s nearest neighbors.</p></td>
+</tr>
 <tr class="row-even"><td><p>LongitudeCentroid</p></td>
 <td><p>double</p></td>
 <td><p>Longitude Centroid</p></td>
@@ -395,77 +424,85 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>uint8</p></td>
 <td><p>Mark</p></td>
 </tr>
-<tr class="row-odd"><td><p>NNDistance</p></td>
+<tr class="row-odd"><td><p>Miniball</p></td>
+<td><p>double</p></td>
+<td><p>Metric capturing distance from a point to the center of the smallest enclosing ball encapsulating k-nearest neighbors, scaled by radius of the ball.</p></td>
+</tr>
+<tr class="row-even"><td><p>NNDistance</p></td>
 <td><p>double</p></td>
 <td><p>Distance metric related to a point’s nearest neighbors.</p></td>
 </tr>
-<tr class="row-even"><td><p>NormalX</p></td>
+<tr class="row-odd"><td><p>NormalX</p></td>
 <td><p>double</p></td>
 <td><p>X component of a vector normal to surface at this point</p></td>
 </tr>
-<tr class="row-odd"><td><p>NormalY</p></td>
+<tr class="row-even"><td><p>NormalY</p></td>
 <td><p>double</p></td>
 <td><p>Y component of a vector normal to surface at this point</p></td>
 </tr>
-<tr class="row-even"><td><p>NormalZ</p></td>
+<tr class="row-odd"><td><p>NormalZ</p></td>
 <td><p>double</p></td>
 <td><p>Z component of a vector normal to surface at this point</p></td>
 </tr>
-<tr class="row-odd"><td><p>NumberOfReturns</p></td>
+<tr class="row-even"><td><p>NumberOfReturns</p></td>
 <td><p>uint8</p></td>
 <td><p>Total number of returns for a given pulse.</p></td>
 </tr>
-<tr class="row-even"><td><p>OffsetTime</p></td>
+<tr class="row-odd"><td><p>OffsetTime</p></td>
 <td><p>uint32</p></td>
 <td><p>Milliseconds from first acquired point</p></td>
 </tr>
-<tr class="row-odd"><td><p>Omit</p></td>
+<tr class="row-even"><td><p>Omit</p></td>
 <td><p>uint8_t</p></td>
 <td><p>Used to shallowly mark a point as being omitted without removing it</p></td>
 </tr>
-<tr class="row-even"><td><p>Omnivariance</p></td>
+<tr class="row-odd"><td><p>Omnivariance</p></td>
 <td><p>double</p></td>
 <td><p>Omnivariance of a point; cube root of the product of all eigenvalues.</p></td>
 </tr>
-<tr class="row-odd"><td><p>OptimalKNN</p></td>
+<tr class="row-even"><td><p>OptimalKNN</p></td>
 <td><p>uint64</p></td>
 <td><p>Optimal number of k nearest neighbors, such that eigenentropy is minimized.</p></td>
 </tr>
-<tr class="row-even"><td><p>OptimalRadius</p></td>
+<tr class="row-odd"><td><p>OptimalRadius</p></td>
 <td><p>double</p></td>
 <td><p>Radius corresponding to optimal k nearest neighbors, such that eigenentropy is minimized.</p></td>
 </tr>
-<tr class="row-odd"><td><p>OriginId</p></td>
+<tr class="row-even"><td><p>OriginId</p></td>
 <td><p>uint32</p></td>
 <td><p>A file source ID from which the point originated.  This ID is global to a derivative dataset which may be aggregated from multiple files.</p></td>
 </tr>
-<tr class="row-even"><td><p>PassiveSignal</p></td>
+<tr class="row-odd"><td><p>PassiveSignal</p></td>
 <td><p>int32</p></td>
 <td><p>Relative passive signal</p></td>
 </tr>
-<tr class="row-odd"><td><p>PassiveX</p></td>
+<tr class="row-even"><td><p>PassiveX</p></td>
 <td><p>double</p></td>
 <td><p>Passive X footprint</p></td>
 </tr>
-<tr class="row-even"><td><p>PassiveY</p></td>
+<tr class="row-odd"><td><p>PassiveY</p></td>
 <td><p>double</p></td>
 <td><p>Passive Y footprint</p></td>
 </tr>
-<tr class="row-odd"><td><p>PassiveZ</p></td>
+<tr class="row-even"><td><p>PassiveZ</p></td>
 <td><p>double</p></td>
 <td><p>Passive Z footprint</p></td>
 </tr>
-<tr class="row-even"><td><p>Pdop</p></td>
+<tr class="row-odd"><td><p>Pdop</p></td>
 <td><p>float</p></td>
 <td><p>GPS PDOP (dilution of precision)</p></td>
 </tr>
-<tr class="row-odd"><td><p>Pitch</p></td>
+<tr class="row-even"><td><p>Pitch</p></td>
 <td><p>float</p></td>
 <td><p>Pitch in degrees</p></td>
 </tr>
-<tr class="row-even"><td><p>Planarity</p></td>
+<tr class="row-odd"><td><p>Planarity</p></td>
 <td><p>double</p></td>
 <td><p>Planarity of a point; larger values indicate more planar regions.</p></td>
+</tr>
+<tr class="row-even"><td><p>PlaneFit</p></td>
+<td><p>double</p></td>
+<td><p>Metric capturing current point’s point to plane distance compared to those in the same k-neighborhood used to estimate the plane.</p></td>
 </tr>
 <tr class="row-odd"><td><p>PointId</p></td>
 <td><p>uint32</p></td>
@@ -479,133 +516,145 @@ explicitly if the default dimension isn’t suitable.</p>
 <td><p>float</p></td>
 <td><p>Laser received pulse width (digitizer samples)</p></td>
 </tr>
-<tr class="row-even"><td><p>Red</p></td>
+<tr class="row-even"><td><p>RadialDensity</p></td>
+<td><p>double</p></td>
+<td><p>Estimate of radial point density</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rank</p></td>
+<td><p>uint8</p></td>
+<td><p>Estimated rank of neighborhood of points.</p></td>
+</tr>
+<tr class="row-even"><td><p>Reciprocity</p></td>
+<td><p>double</p></td>
+<td><p>Metric capturing percentage of k-nearest neighbors that also contain the current point in their k-neighborhood.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Red</p></td>
 <td><p>uint16</p></td>
 <td><p>Red image channel value</p></td>
 </tr>
-<tr class="row-odd"><td><p>Reflectance</p></td>
+<tr class="row-even"><td><p>Reflectance</p></td>
 <td><p>float</p></td>
 <td><p>Ratio of the received power to the power that would be received from a white diffuse target at the same distance expressed in dB. The reflectance represents a range independent property of the target.  The surface normal of this target is assumed to be in parallel to the laser beam direction.</p></td>
 </tr>
-<tr class="row-even"><td><p>ReflectedPulse</p></td>
+<tr class="row-odd"><td><p>ReflectedPulse</p></td>
 <td><p>int32</p></td>
 <td><p>Relative reflected pulse signal strength</p></td>
 </tr>
-<tr class="row-odd"><td><p>ReturnNumber</p></td>
+<tr class="row-even"><td><p>ReturnNumber</p></td>
 <td><p>uint8</p></td>
 <td><p>Pulse return number for a given output pulse. A given output laser pulse can have many returns, and they must be marked in order, starting with 1</p></td>
 </tr>
-<tr class="row-even"><td><p>Roll</p></td>
+<tr class="row-odd"><td><p>Roll</p></td>
 <td><p>float</p></td>
 <td><p>Roll in degrees</p></td>
 </tr>
-<tr class="row-odd"><td><p>ScanAngleRank</p></td>
+<tr class="row-even"><td><p>ScanAngleRank</p></td>
 <td><p>float</p></td>
 <td><p>Angle degree at which the laser point was output from the system, including the roll of the aircraft.  The scan angle is based on being nadir, and -90 the left side of the aircraft in the direction of flight</p></td>
 </tr>
-<tr class="row-even"><td><p>ScanChannel</p></td>
+<tr class="row-odd"><td><p>ScanChannel</p></td>
 <td><p>uint8</p></td>
 <td><p>Scan Channel</p></td>
 </tr>
-<tr class="row-odd"><td><p>ScanDirectionFlag</p></td>
+<tr class="row-even"><td><p>ScanDirectionFlag</p></td>
 <td><p>uint8</p></td>
 <td><p>Direction at which the scanner mirror was traveling at the time of the output pulse. A value of 1 is a positive scan direction, and a bit value of 0 is a negative scan direction, where positive scan direction is a scan moving from the left side of the in-track direction to the right side and negative the opposite</p></td>
 </tr>
-<tr class="row-even"><td><p>Scattering</p></td>
+<tr class="row-odd"><td><p>Scattering</p></td>
 <td><p>double</p></td>
 <td><p>Scattering of a point; larger values incidate complex (scattered) 3D regions.</p></td>
 </tr>
-<tr class="row-odd"><td><p>ShotNumber</p></td>
+<tr class="row-even"><td><p>ShotNumber</p></td>
 <td><p>uint64</p></td>
 <td><p>Shot Number</p></td>
 </tr>
-<tr class="row-even"><td><p>StartPulse</p></td>
+<tr class="row-odd"><td><p>StartPulse</p></td>
 <td><p>int32</p></td>
 <td><p>Relative pulse signal strength</p></td>
 </tr>
-<tr class="row-odd"><td><p>SurfaceVariation</p></td>
+<tr class="row-even"><td><p>SurfaceVariation</p></td>
 <td><p>double</p></td>
 <td><p>Surface variation of a point; larger values indicate higher surface variation.</p></td>
 </tr>
-<tr class="row-even"><td><p>TextureU</p></td>
+<tr class="row-odd"><td><p>TextureU</p></td>
 <td><p>double</p></td>
 <td><p>U component of a texture location at this point</p></td>
 </tr>
-<tr class="row-odd"><td><p>TextureV</p></td>
+<tr class="row-even"><td><p>TextureV</p></td>
 <td><p>double</p></td>
 <td><p>V component of a texture location at this point</p></td>
 </tr>
-<tr class="row-even"><td><p>TextureW</p></td>
+<tr class="row-odd"><td><p>TextureW</p></td>
 <td><p>double</p></td>
 <td><p>W component of a texture location at this point</p></td>
 </tr>
-<tr class="row-odd"><td><p>UserData</p></td>
+<tr class="row-even"><td><p>UserData</p></td>
 <td><p>uint8</p></td>
 <td><p>Unspecified user data</p></td>
 </tr>
-<tr class="row-even"><td><p>Verticality</p></td>
+<tr class="row-odd"><td><p>Verticality</p></td>
 <td><p>double</p></td>
 <td><p>Verticality of a point; larger values indicate vertical structure.</p></td>
 </tr>
-<tr class="row-odd"><td><p>W</p></td>
+<tr class="row-even"><td><p>W</p></td>
 <td><p>double</p></td>
 <td><p>W coordinate</p></td>
 </tr>
-<tr class="row-even"><td><p>WanderAngle</p></td>
+<tr class="row-odd"><td><p>WanderAngle</p></td>
 <td><p>double</p></td>
 <td><p>Wander Angle</p></td>
 </tr>
-<tr class="row-odd"><td><p>X</p></td>
+<tr class="row-even"><td><p>X</p></td>
 <td><p>double</p></td>
 <td><p>X coordinate</p></td>
 </tr>
-<tr class="row-even"><td><p>XBodyAccel</p></td>
+<tr class="row-odd"><td><p>XBodyAccel</p></td>
 <td><p>double</p></td>
 <td><p>X Body Acceleration</p></td>
 </tr>
-<tr class="row-odd"><td><p>XBodyAngRate</p></td>
+<tr class="row-even"><td><p>XBodyAngRate</p></td>
 <td><p>double</p></td>
 <td><p>X Body Angle Rate</p></td>
 </tr>
-<tr class="row-even"><td><p>XVelocity</p></td>
+<tr class="row-odd"><td><p>XVelocity</p></td>
 <td><p>double</p></td>
 <td><p>X Velocity</p></td>
 </tr>
-<tr class="row-odd"><td><p>Y</p></td>
+<tr class="row-even"><td><p>Y</p></td>
 <td><p>double</p></td>
 <td><p>Y coordinate</p></td>
 </tr>
-<tr class="row-even"><td><p>YBodyAccel</p></td>
+<tr class="row-odd"><td><p>YBodyAccel</p></td>
 <td><p>double</p></td>
 <td><p>Y Body Acceleration</p></td>
 </tr>
-<tr class="row-odd"><td><p>YBodyAngRate</p></td>
+<tr class="row-even"><td><p>YBodyAngRate</p></td>
 <td><p>double</p></td>
 <td><p>Y Body Angle Rate</p></td>
 </tr>
-<tr class="row-even"><td><p>YVelocity</p></td>
+<tr class="row-odd"><td><p>YVelocity</p></td>
 <td><p>double</p></td>
 <td><p>Y Velocity</p></td>
 </tr>
-<tr class="row-odd"><td><p>Z</p></td>
+<tr class="row-even"><td><p>Z</p></td>
 <td><p>double</p></td>
 <td><p>Z coordinate</p></td>
 </tr>
-<tr class="row-even"><td><p>ZBodyAccel</p></td>
+<tr class="row-odd"><td><p>ZBodyAccel</p></td>
 <td><p>double</p></td>
 <td><p>Z Body Acceleration</p></td>
 </tr>
-<tr class="row-odd"><td><p>ZBodyAngRate</p></td>
+<tr class="row-even"><td><p>ZBodyAngRate</p></td>
 <td><p>double</p></td>
 <td><p>Z Body Angle Rate</p></td>
 </tr>
-<tr class="row-even"><td><p>ZVelocity</p></td>
+<tr class="row-odd"><td><p>ZVelocity</p></td>
 <td><p>double</p></td>
 <td><p>Z Velocity</p></td>
 </tr>
 </tbody>
 </table>
-</div>
+</section>
 
 
            </div>
@@ -641,7 +690,7 @@ explicitly if the default dimension isn’t suitable.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -672,7 +721,7 @@ explicitly if the default dimension isn’t suitable.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

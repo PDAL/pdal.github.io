@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Identifying ground &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
@@ -253,7 +258,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="workshop-ground">
+  <section id="workshop-ground">
 <span id="identifying-ground"></span><h1>Identifying ground<a class="headerlink" href="#workshop-ground" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This exercise uses PDAL to classify ground returns using the <cite>Simple
 Morphological Filter (SMRF)</cite> technique.</p>
@@ -263,7 +268,7 @@ Morphological Filter (SMRF)</cite> technique.</p>
 PDAL website by Brad Chambers. You can find more detail and example
 invocations there.</p>
 </div>
-<div class="section" id="exercise">
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>The primary input for <a class="reference external" href="https://en.wikipedia.org/wiki/Digital_elevation_model">Digital Terrain Model</a> generation is a point cloud with
 ground vs. not-ground classifications. In this example, we will use an
@@ -273,27 +278,21 @@ generate a ground surface.</p>
 <p class="admonition-title">See also</p>
 <p>You can read more about the specifics of the SMRF algorithm from <cite>[Pingle2013]_</cite></p>
 </div>
-<div class="section" id="command">
+<section id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
-<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> \
-<span class="n">smrf</span> \
-<span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+<span class="linenos">2</span><span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> \
+<span class="linenos">3</span><span class="n">smrf</span> \
+<span class="linenos">4</span><span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-<span class="n">smrf</span> <span class="o">^</span>
-<span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="linenos">2</span><span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">ground</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="linenos">3</span><span class="n">smrf</span> <span class="o">^</span>
+<span class="linenos">4</span><span class="o">-</span><span class="n">v</span> <span class="mi">4</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <a class="reference external image-reference" href="../../../../_images/ground-run-command.png"><img alt="../../../../_images/ground-run-command.png" src="../../../../_images/ground-run-command.png" /></a>
 <p>As we can see, the algorithm does a great job of discriminating the points, but
 there’s a few issues.</p>
@@ -301,8 +300,8 @@ there’s a few issues.</p>
 <p>There’s noise underneath the main surface that will cause us trouble when we
 generate a terrain surface.</p>
 <a class="reference external image-reference" href="../../../../_images/ground-classified-included-side.png"><img alt="../../../../_images/ground-classified-included-side.png" src="../../../../_images/ground-classified-included-side.png" /></a>
-</div>
-<div class="section" id="filtering">
+</section>
+<section id="filtering">
 <h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
 <p>We do not yet have a satisfactory surface for generating a DTM.  When we
 visualize the output of this ground operation, we notice there’s still some
@@ -311,73 +310,47 @@ technique we learned about in <span class="xref std std-ref">denoising</span>.</
 <ol class="arabic simple">
 <li><p>Let us start by removing the non-ground data to just view the ground data:</p></li>
 </ol>
-<div class="highlight-console notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">pdal translate \</span>
-<span class="go">./exercises/analysis/ground/CSite1_orig-utm.laz \</span>
-<span class="go">-o ./exercises/analysis/ground/ground.laz \</span>
-<span class="go">smrf range \</span>
-<span class="hll"><span class="go">--filters.range.limits=&quot;Classification[2:2]&quot; \</span>
-</span><span class="go">-v 4</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">pdal translate \</span>
+<span class="linenos">2</span><span class="go">./exercises/analysis/ground/CSite1_orig-utm.laz \</span>
+<span class="linenos">3</span><span class="go">-o ./exercises/analysis/ground/ground.laz \</span>
+<span class="linenos">4</span><span class="go">smrf range \</span>
+<span class="hll"><span class="linenos">5</span><span class="go">--filters.range.limits=&quot;Classification[2:2]&quot; \</span>
+</span><span class="linenos">6</span><span class="go">-v 4</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-bat notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>pdal translate <span class="se">^</span>
-<span class="se">.</span>/exercises/analysis/ground/CSite1_orig-utm.laz <span class="se">^</span>
-<span class="se">-</span>o ./exercises/analysis/ground/ground.laz <span class="se">^</span>
-<span class="se">s</span>mrf range <span class="se">^</span>
-<span class="hll"><span class="se">-</span>-filters.range.limits=<span class="s2">&quot;Classification[2:2]&quot;</span> <span class="se">^</span>
-</span><span class="se">-</span>v 4
+</div>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>pdal translate <span class="se">^</span>
+<span class="linenos">2</span><span class="se">.</span>/exercises/analysis/ground/CSite1_orig-utm.laz <span class="se">^</span>
+<span class="linenos">3</span><span class="se">-</span>o ./exercises/analysis/ground/ground.laz <span class="se">^</span>
+<span class="linenos">4</span><span class="se">s</span>mrf range <span class="se">^</span>
+<span class="hll"><span class="linenos">5</span><span class="se">-</span>-filters.range.limits=<span class="s2">&quot;Classification[2:2]&quot;</span> <span class="se">^</span>
+</span><span class="linenos">6</span><span class="se">-</span>v 4
 </pre></div>
-</td></tr></table></div>
+</div>
 <a class="reference external image-reference" href="../../../../_images/ground-ground-only-view.png"><img alt="../../../../_images/ground-ground-only-view.png" src="../../../../_images/ground-ground-only-view.png" /></a>
 <p>2. Now we will instead use the <a class="reference internal" href="../../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> command to stack the
 <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a> and <a class="reference internal" href="../../../../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a> stages:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
-<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
-<span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span>  \
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> \
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> \
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span>  \
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> \
-<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> \
-<span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> \
+<span class="linenos">2</span><span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> \
+<span class="linenos">3</span><span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span>  \
+<span class="linenos">4</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> \
+<span class="linenos">5</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> \
+<span class="linenos">6</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span>  \
+<span class="linenos">7</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> \
+<span class="linenos">8</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> \
+<span class="linenos">9</span><span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-<span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-<span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span>  <span class="o">^</span>
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> <span class="o">^</span>
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> <span class="o">^</span>
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span>  <span class="o">^</span>
-<span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> <span class="o">^</span>
-<span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">^</span>
-<span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">CSite1_orig</span><span class="o">-</span><span class="n">utm</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="linenos">2</span><span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">ground</span><span class="o">/</span><span class="n">denoised</span><span class="o">-</span><span class="n">ground</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="linenos">3</span><span class="n">outlier</span> <span class="n">smrf</span> <span class="nb">range</span>  <span class="o">^</span>
+<span class="linenos">4</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;statistical&quot;</span> <span class="o">^</span>
+<span class="linenos">5</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">mean_k</span><span class="o">=</span><span class="mi">8</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">outlier</span><span class="o">.</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">3.0</span> <span class="o">^</span>
+<span class="linenos">6</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">smrf</span><span class="o">.</span><span class="n">ignore</span><span class="o">=</span><span class="s2">&quot;Classification[7:7]&quot;</span>  <span class="o">^</span>
+<span class="linenos">7</span><span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2]&quot;</span> <span class="o">^</span>
+<span class="linenos">8</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">las</span><span class="o">.</span><span class="n">compression</span><span class="o">=</span><span class="n">true</span> <span class="o">^</span>
+<span class="linenos">9</span><span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>In this invocation, we have more control over the process. First the outlier
 filter merely classifies outliers with a <code class="docutils literal notranslate"><span class="pre">Classification</span></code> value of 7. These
 outliers are then ignored during SMRF processing with the <code class="docutils literal notranslate"><span class="pre">ignore</span></code> option.
@@ -385,9 +358,9 @@ Finally, we add a range filter to extract only the ground returns (i.e.,
 <code class="docutils literal notranslate"><span class="pre">Classification</span></code> value of 2).</p>
 <p>The result is a more accurate representation of the ground returns.</p>
 <img alt="../../../../_images/ground-filtered.png" src="../../../../_images/ground-filtered.png" />
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -423,7 +396,7 @@ Finally, we add a range filter to extract only the ground returns (i.e.,
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -454,7 +427,7 @@ Finally, we add a range filter to extract only the ground returns (i.e.,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

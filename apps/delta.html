@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>delta &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -47,7 +51,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="density" href="density.html" />
-    <link rel="prev" title="Applications" href="index.html" /> 
+    <link rel="prev" title="chamfer" href="chamfer.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -107,12 +111,14 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="chamfer.html">chamfer</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">delta</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-1">Example 1:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-2">Example 2:</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="density.html">density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eval.html">eval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ground.html">ground</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hausdorff.html">hausdorff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="info.html">info</a></li>
@@ -132,6 +138,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -233,7 +240,7 @@
         <a href="density.html" class="btn btn-neutral float-right" title="density" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Applications" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="chamfer.html" class="btn btn-neutral float-left" title="chamfer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -242,7 +249,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="delta">
+  <section id="delta">
 <span id="delta-command"></span><h1>delta<a class="headerlink" href="#delta" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">delta</span></code> command is used to select a nearest point from a candidate file
 for each point in the source file.</p>
@@ -255,7 +262,7 @@ for each point in the source file.</p>
 <span class="o">--</span><span class="n">alldims</span>          <span class="n">Compute</span> <span class="n">diffs</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">dimensions</span> <span class="p">(</span><span class="ow">not</span> <span class="n">just</span> <span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="example-1">
+<section id="example-1">
 <h2>Example 1:<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pdal delta ../../test/data/las/1.2-with-color.las \
     ../../test/data/las/1.2-with-color.las
@@ -274,8 +281,8 @@ Delta summary for
 ----------- --------------- --------------- --------------
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-2">
+</section>
+<section id="example-2">
 <h2>Example 2:<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pdal delta test/data/1.2-with-color.las \
     test/data/1.2-with-color.las --detail
@@ -288,8 +295,8 @@ Delta summary for
 5,0.00,0.00,0.00
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -302,7 +309,7 @@ Delta summary for
         <a href="density.html" class="btn btn-neutral float-right" title="density" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="chamfer.html" class="btn btn-neutral float-left" title="chamfer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -325,7 +332,7 @@ Delta summary for
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -356,7 +363,7 @@ Delta summary for
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

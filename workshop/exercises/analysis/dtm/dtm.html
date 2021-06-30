@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Generating a DTM &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
@@ -253,13 +258,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="generating-a-dtm">
+  <section id="generating-a-dtm">
 <span id="workshop-dtm"></span><h1>Generating a DTM<a class="headerlink" href="#generating-a-dtm" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This exercise uses PDAL to generate an elevation model surface using the
 output from the <a class="reference internal" href="../ground/ground.html#workshop-ground"><span class="std std-ref">Identifying ground</span></a> exercise, PDAL’s <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 operation, and <a class="reference external" href="http://gdal.org/">GDAL</a> to generate an elevation and hillshade surface from
 point cloud data.</p>
-<div class="section" id="exercise">
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -268,14 +273,14 @@ with ground classifications. We created this file, called
 <code class="docutils literal notranslate"><span class="pre">denoised-ground-only.laz</span></code>, in the <a class="reference internal" href="../ground/ground.html#workshop-ground"><span class="std std-ref">Identifying ground</span></a> exercise. Please produce that
 file by following that exercise before starting this one.</p>
 </div>
-<div class="section" id="command">
+<section id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 stage. There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we
 must use a pipeline.</p>
-</div>
-<div class="section" id="pipeline-breakdown">
+</section>
+<section id="pipeline-breakdown">
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -298,25 +303,25 @@ must use a pipeline.</p>
 <code class="docutils literal notranslate"><span class="pre">./exercises/analysis/dtm/dtm.json</span></code> file. Make sure to edit the
 filenames to match your paths.</p>
 </div>
-<div class="section" id="reader">
+<section id="reader">
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">denoised-ground-only</span></code> is the <a class="reference external" href="http://laszip.org">LASzip</a> file we will clip. You should have
 created this output as part of the <a class="reference internal" href="../ground/ground.html#workshop-ground"><span class="std std-ref">Identifying ground</span></a> exercise.</p>
-</div>
-<div class="section" id="writers-gdal">
+</section>
+<section id="writers-gdal">
 <h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h4>
 <p>The <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer that bins the point cloud data into an elevation
 surface.</p>
-</div>
-</div>
-<div class="section" id="execution">
+</section>
+</section>
+<section id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
-</td></tr></table></div>
-<a class="reference external image-reference" href="../../../../_images/dtm-run-command.png"><img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" /></a>
 </div>
-<div class="section" id="visualization">
+<a class="reference external image-reference" href="../../../../_images/dtm-run-command.png"><img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" /></a>
+</section>
+<section id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
 <p>Something happened, and some files were written, but we cannot really
 see what was produced. Let us use <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> to visualize the output.</p>
@@ -343,32 +348,26 @@ Choose <cite>Raster–&gt;Analysis–&gt;Dem</cite>:</p>
 <li><p>Click the window for the <cite>Output file</cite> and select a location
 to save the <code class="docutils literal notranslate"><span class="pre">hillshade.tif</span></code> file.</p>
 <a class="reference external image-reference" href="../../../../_images/dtm-qgis-gdaldem.png"><img alt="../../../../_images/dtm-qgis-gdaldem.png" src="../../../../_images/dtm-qgis-gdaldem.png" /></a>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> \
-<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> \
-<span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> \
-<span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> \
+<span class="linenos">2</span><span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> \
+<span class="linenos">3</span><span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> \
+<span class="linenos">4</span><span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
-<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
-<span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> <span class="o">^</span>
-<span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">gdaldem</span> <span class="n">hillshade</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">dtm</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
+<span class="linenos">2</span><span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">hillshade</span><span class="o">.</span><span class="n">tif</span> <span class="o">^</span>
+<span class="linenos">3</span><span class="o">-</span><span class="n">z</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">s</span> <span class="mf">1.0</span> <span class="o">-</span><span class="n">az</span> <span class="mf">315.0</span> <span class="o">-</span><span class="n">alt</span> <span class="mf">45.0</span> <span class="o">^</span>
+<span class="linenos">4</span><span class="o">-</span><span class="n">of</span> <span class="n">GTiff</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </li>
 <li><p>Click <cite>OK</cite> and the hillshade of your DTM is now available</p>
 <a class="reference external image-reference" href="../../../../_images/dtm-qgis-hillshade-done.png"><img alt="../../../../_images/dtm-qgis-hillshade-done.png" src="../../../../_images/dtm-qgis-hillshade-done.png" /></a>
 </li>
 </ol>
-</div>
-</div>
-<div class="section" id="notes">
+</section>
+</section>
+<section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a>, which powers the <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> DEM tools, is a very powerful
@@ -376,8 +375,8 @@ command line utility you can use for processing data.</p></li>
 <li><p><a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> can be used for large data, but it does not interpolate a
 typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triangulated_irregular_network">TIN</a> surface model.</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -413,7 +412,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -444,7 +443,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

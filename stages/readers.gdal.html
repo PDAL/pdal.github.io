@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>readers.gdal &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -46,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="readers.geowave" href="readers.geowave.html" />
+    <link rel="next" title="readers.hdf" href="readers.hdf.html" />
     <link rel="prev" title="readers.faux" href="readers.faux.html" /> 
 </head>
 
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
@@ -125,7 +130,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.hdf.html">readers.hdf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
@@ -137,8 +141,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -253,7 +255,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="readers.geowave.html" class="btn btn-neutral float-right" title="readers.geowave" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.hdf.html" class="btn btn-neutral float-right" title="readers.hdf" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.faux.html" class="btn btn-neutral float-left" title="readers.faux" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -265,7 +267,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="readers-gdal">
+  <section id="readers-gdal">
 <span id="id1"></span><h1>readers.gdal<a class="headerlink" href="#readers-gdal" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference external" href="http://gdal.org">GDAL</a> reader reads <a class="reference external" href="http://www.gdal.org/formats_list.html">GDAL readable raster</a> data sources as point clouds.</p>
 <p>Each pixel is given an X and Y coordinate (and corresponding PDAL dimensions)
@@ -276,7 +278,7 @@ PDAL dimensions.</p>
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
-<div class="section" id="basic-example">
+<section id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
 <p>Simply writing every pixel of a JPEG to a text file is not very useful.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
@@ -291,8 +293,8 @@ PDAL dimensions.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="las-example">
+</section>
+<section id="las-example">
 <h2>LAS Example<a class="headerlink" href="#las-example" title="Permalink to this headline">¶</a></h2>
 <p>The following example assigns the bands from a JPG to the
 RGB values of an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> file using <a class="reference internal" href="writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.</p>
@@ -303,14 +305,14 @@ RGB values of an <a class="reference external" href="http://www.asprs.org/Commit
         <span class="nt">&quot;header&quot;</span><span class="p">:</span> <span class="s2">&quot;Red, Green, Blue&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.text&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.txt&quot;</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.las&quot;</span>
     <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>filename</dt><dd><p><a class="reference external" href="https://gdal.org/api/raster_c_api.html#gdal_8h_1aca05455472359964151f9c891d678d5e">GDALOpen</a> ‘able raster file to read [Required]</p>
@@ -332,8 +334,8 @@ bands to. The length of the list must match the number
 of bands in the raster.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -343,7 +345,7 @@ of bands in the raster.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="readers.geowave.html" class="btn btn-neutral float-right" title="readers.geowave" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.hdf.html" class="btn btn-neutral float-right" title="readers.hdf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.faux.html" class="btn btn-neutral float-left" title="readers.faux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -369,7 +371,7 @@ of bands in the raster.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -400,7 +402,7 @@ of bands in the raster.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

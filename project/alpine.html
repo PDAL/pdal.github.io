@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Alpine &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -237,11 +242,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="alpine">
+  <section id="alpine">
 <span id="development-alpine"></span><h1>Alpine<a class="headerlink" href="#alpine" title="Permalink to this headline">¶</a></h1>
 <p>This page is intended to provide information about Alpine that may be useful
 for PDAL developers, especially when it comes to adding new PDAL dependencies.</p>
-<div class="section" id="packages">
+<section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
 <p>When adding a dependency to PDAL, you will need to update our Travis
 configuration for continuous integration and testing, and Dockerfiles for
@@ -255,15 +260,15 @@ contents to determine exactly what you are getting with a particular package.</p
 <p>If a package does not yet exist, you’ll need to consult
 <a class="reference external" href="https://wiki.alpinelinux.org/wiki/Creating_an_Alpine_package">https://wiki.alpinelinux.org/wiki/Creating_an_Alpine_package</a> or phone a friend.
 Alpine developers can frequently be found on the IRC channel #alpine-devel.</p>
-</div>
-<div class="section" id="travis">
+</section>
+<section id="travis">
 <h2>Travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h2>
 <p>We currently run our Travis CI builds by first pulling <code class="docutils literal notranslate"><span class="pre">alpine:3.6</span></code> and then
 running a script within the Alpine container. Any new dependencies that are
 required for PDAL to be built and tested will need to be added to
 <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/scripts/ci/script.sh">https://github.com/PDAL/PDAL/blob/master/scripts/ci/script.sh</a>.</p>
-</div>
-<div class="section" id="docker">
+</section>
+<section id="docker">
 <h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
 <p>Our Docker automated builds are built from the Dockerfiles located in
 <a class="reference external" href="https://github.com/PDAL/PDAL/tree/master/scripts/docker">https://github.com/PDAL/PDAL/tree/master/scripts/docker</a>. There are folders for
@@ -272,8 +277,8 @@ Ubuntu based images. In the Alpine Dockerfiles, any development dependencies
 should be added in the <code class="docutils literal notranslate"><span class="pre">apk</span> <span class="pre">add</span></code> step that uses the <code class="docutils literal notranslate"><span class="pre">--virtual</span></code> switch, as
 these will be deleted after compilation. Any runtime dependencies should be
 added to the regular <code class="docutils literal notranslate"><span class="pre">apk</span> <span class="pre">add</span></code> step.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -309,7 +314,7 @@ added to the regular <code class="docutils literal notranslate"><span class="pre
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -340,7 +345,7 @@ added to the regular <code class="docutils literal notranslate"><span class="pre
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

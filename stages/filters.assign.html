@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.assign &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -252,7 +257,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-assign">
+  <section id="filters-assign">
 <span id="id1"></span><h1>filters.assign<a class="headerlink" href="#filters-assign" title="Permalink to this headline">¶</a></h1>
 <p>The assign filter allows you set the value of a dimension for all points
 to a provided value that pass a range filter.</p>
@@ -269,15 +274,15 @@ to a provided value that pass a range filter.</p>
 <p>The <cite>assignment</cite> and <cite>condition</cite> options are deprecated and may be removed in a
 future release.</p>
 </div>
-<div class="section" id="options">
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>assignment</dt><dd><p>A <a class="reference internal" href="filters.range.html#ranges"><span class="std std-ref">range</span></a> followed by an assignment of a value (see example).
 Can be specified multiple times.  The assignments are applied sequentially
 to the dimension value as set when the filter began processing. [Required]</p>
 </dd>
-<dt>condition</dt><dd><p>A list of <a class="reference internal" href="filters.range.html#ranges"><span class="std std-ref">ranges</span></a> that a point’s values must pass in order
-for the assignment to be performed. [Default: none]</p>
+<dt>condition</dt><dd><p>A single <a class="reference internal" href="filters.range.html#ranges"><span class="std std-ref">ranges</span></a> that a point’s values must pass in order
+for the assignment to be performed. [Default: none] [Deprecated - use ‘value’]</p>
 </dd>
 <dt>value</dt><dd><p>A list of <a class="reference internal" href="#assignment-expressions"><span class="std std-ref">assignment expressions</span></a> to be applied to points.
 The list of values is evaluated in order. [Default: none]</p>
@@ -297,9 +302,9 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="assignment-expressions">
+</section>
+</section>
+<section id="assignment-expressions">
 <span id="id2"></span><h1>Assignment Expressions<a class="headerlink" href="#assignment-expressions" title="Permalink to this headline">¶</a></h1>
 <p>The assignment expression syntax is an expansion on the <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">Expression Syntax</span></a> syntax
 that provides for assignment of values to points. The generic expression is:</p>
@@ -312,16 +317,16 @@ that evaluates to a numeric value.  The supported mathematical operations are ad
 subtraction(<cite>-</cite>), multiplication(<cite>*</cite>) and division(<cite>\</cite>).</p>
 <p>A <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">ConditionalExpression</span></a> is an optional boolean value that must
 evaluate to <cite>true</cite> for the <code class="docutils literal notranslate"><span class="pre">ValueExpression</span></code> to be applied.</p>
-</div>
-<div class="section" id="example-1">
+</section>
+<section id="example-1">
 <h1>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;value&quot;</span> <span class="p">:</span> <span class="s2">&quot;Red = Red / 256&quot;</span>
 </pre></div>
 </div>
 <p>This scales the <code class="docutils literal notranslate"><span class="pre">Red</span></code> value by 1/256. If the input values are in the range 0 - 65535, the output
 value will be in the range 0 - 255.</p>
-</div>
-<div class="section" id="example-2">
+</section>
+<section id="example-2">
 <h1>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;value&quot;</span> <span class="p">:</span>
 <span class="p">[</span>
@@ -332,8 +337,8 @@ value will be in the range 0 - 255.</p>
 </div>
 <p>This sets the classification of points to either <code class="docutils literal notranslate"><span class="pre">Ground</span></code> or <code class="docutils literal notranslate"><span class="pre">Unassigned</span></code> depending on the
 value of the <code class="docutils literal notranslate"><span class="pre">HeightAboveGround</span></code> dimension.</p>
-</div>
-<div class="section" id="example-3">
+</section>
+<section id="example-3">
 <h1>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;value&quot;</span> <span class="p">:</span>
 <span class="p">[</span>
@@ -345,7 +350,7 @@ value of the <code class="docutils literal notranslate"><span class="pre">Height
 <p>This sets the value of <code class="docutils literal notranslate"><span class="pre">X</span></code> for all points to 1. The second statement is essentially ignored
 since the first statement sets the <code class="docutils literal notranslate"><span class="pre">X</span></code> value of all points to 1 and therefore no points
 the <code class="docutils literal notranslate"><span class="pre">ConditionalExpression</span></code> of the second statement.</p>
-</div>
+</section>
 
 
            </div>
@@ -381,7 +386,7 @@ the <code class="docutils literal notranslate"><span class="pre">ConditionalExpr
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -412,7 +417,7 @@ the <code class="docutils literal notranslate"><span class="pre">ConditionalExpr
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

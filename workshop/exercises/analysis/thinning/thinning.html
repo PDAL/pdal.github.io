@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Thinning &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
@@ -253,12 +258,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="thinning">
+  <section id="thinning">
 <span id="workshop-thinning"></span><h1>Thinning<a class="headerlink" href="#thinning" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This exercise uses PDAL to subsample or thin point cloud data. This might be
 done to accelerate processing (less data), normalize point density, or ease
 visualization.</p>
-<div class="section" id="exercise">
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>As we showed in the <a class="reference internal" href="../density/density.html#density"><span class="std std-ref">Visualizing acquisition density</span></a> exercise, the points in the <cite>uncompahgre.laz</cite> file
 are not evenly distributed across the entire collection. While we will not get into
@@ -272,57 +277,61 @@ provides capability for all three:</p>
 <li><p>Voxel using <span class="xref std std-ref">filters.voxelgrid</span></p></li>
 </ul>
 <p>In this exercise, we are going to thin with the Poisson method, but the concept
-should operate similarly for the <span class="xref std std-ref">filters.voxelgrid</span> approach too.</p>
-<div class="figure align-default" id="id1">
+should operate similarly for the <span class="xref std std-ref">filters.voxelgrid</span> approach.</p>
+<figure class="align-default" id="id1">
 <a class="reference external image-reference" href="../../../../_images/thinning-overview.png"><img alt="../../../../_images/thinning-overview.png" src="../../../../_images/thinning-overview.png" /></a>
-<p class="caption"><span class="caption-text">Thinning strategies available in PDAL</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="command">
+<figcaption>
+<p><span class="caption-text">Thinning strategies available in PDAL</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<section id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
-<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">thinning</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">-</span><span class="n">thin</span><span class="o">.</span><span class="n">laz</span> \
-<span class="n">sample</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="mi">20</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> \
+<span class="linenos">2</span><span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">thinning</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">-</span><span class="n">thin</span><span class="o">.</span><span class="n">laz</span> \
+<span class="linenos">3</span><span class="n">sample</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="mi">20</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-<span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">thinning</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">-</span><span class="n">thin</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
-<span class="n">sample</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="mi">20</span>
-</pre></div>
-</td></tr></table></div>
-<a class="reference external image-reference" href="../../../../_images/thinning-command-run.png"><img alt="../../../../_images/thinning-command-run.png" src="../../../../_images/thinning-command-run.png" /></a>
 </div>
-<div class="section" id="visualization">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">density</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="linenos">2</span><span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">thinning</span><span class="o">/</span><span class="n">uncompahgre</span><span class="o">-</span><span class="n">thin</span><span class="o">.</span><span class="n">laz</span> <span class="o">^</span>
+<span class="linenos">3</span><span class="n">sample</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="mi">20</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="../../../../_images/thinning-command-run.png"><img alt="../../../../_images/thinning-command-run.png" src="../../../../_images/thinning-command-run.png" /></a>
+</section>
+<section id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://plas.io">http://plas.io</a> has the ability to switch on/off multiple data sets, and we
 are going to use that ability to view both the <code class="docutils literal notranslate"><span class="pre">uncompahgre.laz</span></code> and the
 <code class="docutils literal notranslate"><span class="pre">uncompahgre-thin.laz</span></code> file.</p>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <a class="reference external image-reference" href="../../../../_images/thinning-select-data.png"><img alt="../../../../_images/thinning-select-data.png" src="../../../../_images/thinning-select-data.png" /></a>
-<p class="caption"><span class="caption-text">Selecting multiple data sets in <a class="reference external" href="http://plas.io">http://plas.io</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="id3">
+<figcaption>
+<p><span class="caption-text">Selecting multiple data sets in <a class="reference external" href="http://plas.io">http://plas.io</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id3">
 <a class="reference external image-reference" href="../../../../_images/thinning-select-data.png"><img alt="../../../../_images/thinning-full-res.png" src="../../../../_images/thinning-full-res.png" /></a>
-<p class="caption"><span class="caption-text">Full resolution Uncompahgre data set</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="id4">
+<figcaption>
+<p><span class="caption-text">Full resolution Uncompahgre data set</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id4">
 <a class="reference external image-reference" href="../../../../_images/thinning-poisson-thin.png"><img alt="../../../../_images/thinning-poisson-thin.png" src="../../../../_images/thinning-poisson-thin.png" /></a>
-<p class="caption"><span class="caption-text">Uncompahgre thinned at a radius of 20m</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="notes">
+<figcaption>
+<p><span class="caption-text">Uncompahgre thinned at a radius of 20m</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Poisson sampling is non-destructive. Points that are filtered with
 <a class="reference internal" href="../../../../stages/filters.sample.html#filters-sample"><span class="std std-ref">filters.sample</span></a> will retain all attribute information.</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -358,7 +367,7 @@ are going to use that ability to view both the <code class="docutils literal not
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -389,7 +398,7 @@ are going to use that ability to view both the <code class="docutils literal not
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

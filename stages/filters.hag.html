@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.hag &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -69,7 +73,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -111,6 +115,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -210,7 +215,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-hag">
+  <section id="filters-hag">
 <span id="id1"></span><h1>filters.hag<a class="headerlink" href="#filters-hag" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -232,15 +237,15 @@ also be referred to as <em>height above ground</em> (HAG) or <em>above ground le
 heights. In the end, it is simply a measure of a point’s relative height as
 opposed to its raw elevation value.</p>
 <p>There are two modes of operation:</p>
-<div class="section" id="weighted-nearest-point">
+<section id="weighted-nearest-point">
 <h2>Weighted Nearest Point<a class="headerlink" href="#weighted-nearest-point" title="Permalink to this headline">¶</a></h2>
 <p>This default method finds the <a class="reference internal" href="#count">count</a> ground points nearest the
 non-ground point under consideration.  It calculates an average ground
 height weighted by the distance of each ground point from the non-ground
 point.  The <code class="docutils literal notranslate"><span class="pre">HeightAboveGround</span></code> is the difference between the <code class="docutils literal notranslate"><span class="pre">Z</span></code> value
 of the non-ground point and the interpolated ground height.</p>
-</div>
-<div class="section" id="triangulated-interpolation">
+</section>
+<section id="triangulated-interpolation">
 <h2>Triangulated Interpolation<a class="headerlink" href="#triangulated-interpolation" title="Permalink to this headline">¶</a></h2>
 <p>Used when the <a class="reference internal" href="#delaunay">delaunay</a> option is set to true.  It requires a <a class="reference internal" href="#count">count</a>
 of at least 3.</p>
@@ -260,8 +265,8 @@ one side of that non-ground point, finding a containing triangle will fail.</p>
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
-</div>
-<div class="section" id="example-1">
+</section>
+<section id="example-1">
 <h2>Example #1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <p>Using the autzen dataset (here shown colored by elevation)</p>
 <a class="reference internal image-reference" href="../_images/autzen-elevation.png"><img alt="../_images/autzen-elevation.png" src="../_images/autzen-elevation.png" style="height: 400px;" /></a>
@@ -287,8 +292,8 @@ one side of that non-ground point, finding a containing triangle will fail.</p>
 <p>In either case, the result, when colored by the normalized height instead of
 elevation is</p>
 <a class="reference internal image-reference" href="../_images/autzen-height.png"><img alt="../_images/autzen-height.png" src="../_images/autzen-height.png" style="height: 400px;" /></a>
-</div>
-<div class="section" id="example-2">
+</section>
+<section id="example-2">
 <h2>Example #2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>In the previous example, we chose a <a class="reference internal" href="writers.bpf.html#writers-bpf"><span class="std std-ref">writer</span></a> that could
 output custom dimensions. If you’d instead like to overwrite your Z values, then
@@ -308,8 +313,8 @@ follow the height filter with <a class="reference internal" href="filters.ferry.
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-3">
+</section>
+<section id="example-3">
 <h2>Example #3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h2>
 <p>If you don’t yet have points classified as ground, start with <a class="reference internal" href="filters.pmf.html#filters-pmf"><span class="std std-ref">filters.pmf</span></a>
 or <a class="reference internal" href="filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a> to label ground returns, as shown</p>
@@ -336,8 +341,8 @@ or <a class="reference internal" href="filters.smrf.html#filters-smrf"><span cla
     --filters.hag.count=4
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt><span class="target" id="count">count</span></dt><dd><p>The number of ground neighbors to consider when determining the height
@@ -362,8 +367,8 @@ value.
 [Default: false]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -390,7 +395,7 @@ value.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -421,7 +426,7 @@ value.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

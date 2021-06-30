@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>libLAS C API to PDAL transition guide &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
@@ -241,7 +246,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="liblas-c-api-to-pdal-transition-guide">
+  <section id="liblas-c-api-to-pdal-transition-guide">
 <span id="liblas-to-pdal"></span><h1>libLAS C API to PDAL transition guide<a class="headerlink" href="#liblas-c-api-to-pdal-transition-guide" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -257,7 +262,7 @@
 <p>This page shows how to port code using libLAS C API to PDAL API
 (which is C++). The new code is not using full power of PDAL but
 it uses just what is necessary to read content of a LAS file.</p>
-<div class="section" id="includes">
+<section id="includes">
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
 <p>libLAS include:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;liblas/capi/liblas.h&gt;</span><span class="cp"></span>
@@ -273,8 +278,8 @@ which will be useful later:</p>
 <span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="initial-steps">
+</section>
+<section id="initial-steps">
 <h2>Initial steps<a class="headerlink" href="#initial-steps" title="Permalink to this headline">¶</a></h2>
 <p>Opening the dataset in libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">LASReaderH</span> <span class="n">LAS_reader</span><span class="p">;</span>
@@ -286,7 +291,7 @@ which will be useful later:</p>
 </div>
 <p>The higher level of abstraction in PDAL requires a little bit more code
 for the initial steps:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="n">las_opt</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">in_opt</span><span class="o">-&gt;</span><span class="n">answer</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span><span class="o">::</span><span class="n">Option</span> <span class="nf">las_opt</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">in_opt</span><span class="o">-&gt;</span><span class="n">answer</span><span class="p">);</span>
 <span class="n">pdal</span><span class="o">::</span><span class="n">Options</span> <span class="n">las_opts</span><span class="p">;</span>
 <span class="n">las_opts</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">las_opt</span><span class="p">);</span>
 <span class="n">pdal</span><span class="o">::</span><span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
@@ -320,8 +325,8 @@ in <code class="docutils literal notranslate"><span class="pre">try-catch</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dataset-properties">
+</section>
+<section id="dataset-properties">
 <h2>Dataset properties<a class="headerlink" href="#dataset-properties" title="Permalink to this headline">¶</a></h2>
 <p>We assume we defined all the following variables as <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
 <p>The general properties from the LAS file are retrieved from the
@@ -388,8 +393,8 @@ with:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">IdList</span> <span class="n">dims</span> <span class="o">=</span> <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">dims</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="iterating-over-points">
+</section>
+<section id="iterating-over-points">
 <h2>Iterating over points<a class="headerlink" href="#iterating-over-points" title="Permalink to this headline">¶</a></h2>
 <p>libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">((</span><span class="n">LAS_point</span> <span class="o">=</span> <span class="n">LASReader_GetNextPoint</span><span class="p">(</span><span class="n">LAS_reader</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
@@ -403,8 +408,8 @@ with:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="point-validity">
+</section>
+<section id="point-validity">
 <h2>Point validity<a class="headerlink" href="#point-validity" title="Permalink to this headline">¶</a></h2>
 <p>The correct usage of libLAS required to test point validity:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">LASPoint_IsValid</span><span class="p">(</span><span class="n">LAS_point</span><span class="p">)</span>
@@ -412,8 +417,8 @@ with:</p>
 </div>
 <p>In PDAL, there is no need to do that and the caller can assume that
 all the points provided by PDAL are valid.</p>
-</div>
-<div class="section" id="coordinates">
+</section>
+<section id="coordinates">
 <h2>Coordinates<a class="headerlink" href="#coordinates" title="Permalink to this headline">¶</a></h2>
 <p>libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">LASPoint_GetX</span><span class="p">(</span><span class="n">LAS_point</span><span class="p">);</span>
@@ -422,15 +427,15 @@ all the points provided by PDAL are valid.</p>
 </pre></div>
 </div>
 <p>In PDAL, point coordinates are one of the dimensions:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <span class="nn">pdal</span><span class="o">::</span><span class="nn">Dimension</span><span class="p">;</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Thanks to <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span> <span class="pre">pdal::Dimension</span></code> we can just write <code class="docutils literal notranslate"><span class="pre">Id::X</span></code> etc.</p>
-</div>
-<div class="section" id="returns">
+</section>
+<section id="returns">
 <h2>Returns<a class="headerlink" href="#returns" title="Permalink to this headline">¶</a></h2>
 <p>libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">return_no</span> <span class="o">=</span> <span class="n">LASPoint_GetReturnNumber</span><span class="p">(</span><span class="n">LAS_point</span><span class="p">);</span>
@@ -442,8 +447,8 @@ all the points provided by PDAL are valid.</p>
 <span class="kt">int</span> <span class="n">n_returns</span> <span class="o">=</span> <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Id</span><span class="o">::</span><span class="n">NumberOfReturns</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="classes">
+</section>
+<section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
 <p>libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">point_class</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">LASPoint_GetClassification</span><span class="p">(</span><span class="n">LAS_point</span><span class="p">);</span>
@@ -453,8 +458,8 @@ all the points provided by PDAL are valid.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">point_class</span> <span class="o">=</span> <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Id</span><span class="o">::</span><span class="n">Classification</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="color">
+</section>
+<section id="color">
 <h2>Color<a class="headerlink" href="#color" title="Permalink to this headline">¶</a></h2>
 <p>libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">LASColorH</span> <span class="n">LAS_color</span> <span class="o">=</span> <span class="n">LASPoint_GetColor</span><span class="p">(</span><span class="n">LAS_point</span><span class="p">);</span>
@@ -473,8 +478,8 @@ all the points provided by PDAL are valid.</p>
 format supports RGB. However, in general, you can test use
 <code class="docutils literal notranslate"><span class="pre">hasDim(Id::Red)</span></code>, <code class="docutils literal notranslate"><span class="pre">hasDim(Id::Green)</span></code> and <code class="docutils literal notranslate"><span class="pre">hasDim(Id::Blue)</span></code>
 method calls on the point, to see if the color was defined.</p>
-</div>
-<div class="section" id="time">
+</section>
+<section id="time">
 <h2>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h2>
 <p>libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">time</span> <span class="o">=</span> <span class="n">LASPoint_GetTime</span><span class="p">(</span><span class="n">LAS_point</span><span class="p">);</span>
@@ -484,8 +489,8 @@ method calls on the point, to see if the color was defined.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">time</span> <span class="o">=</span> <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Id</span><span class="o">::</span><span class="n">GpsTime</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="other-point-attributes">
+</section>
+<section id="other-point-attributes">
 <h2>Other point attributes<a class="headerlink" href="#other-point-attributes" title="Permalink to this headline">¶</a></h2>
 <p>libLAS:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">LASPoint_GetIntensity</span><span class="p">(</span><span class="n">LAS_point</span><span class="p">)</span>
@@ -505,8 +510,8 @@ method calls on the point, to see if the color was defined.</p>
 <span class="n">point_view</span><span class="o">-&gt;</span><span class="n">getFieldAs</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Id</span><span class="o">::</span><span class="n">UserData</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="memory-management">
+</section>
+<section id="memory-management">
 <h2>Memory management<a class="headerlink" href="#memory-management" title="Permalink to this headline">¶</a></h2>
 <p>In libLAS C API, we need to explicitly take care of freeing the memory:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">LASSRS_Destroy</span><span class="p">(</span><span class="n">LAS_srs</span><span class="p">);</span>
@@ -518,8 +523,8 @@ method calls on the point, to see if the color was defined.</p>
 when they go out of scope. When using smart pointers, they will take
 care of the memory they manage. This does not apply to special cases
 such as <code class="docutils literal notranslate"><span class="pre">exit()</span></code> function calls.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -555,7 +560,7 @@ such as <code class="docutils literal notranslate"><span class="pre">exit()</spa
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -586,7 +591,7 @@ such as <code class="docutils literal notranslate"><span class="pre">exit()</spa
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

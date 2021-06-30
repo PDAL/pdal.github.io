@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Unix Compilation &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stages/filters.html">Filters</a></li>
@@ -246,7 +251,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="unix-compilation">
+  <section id="unix-compilation">
 <span id="building-unix"></span><h1>Unix Compilation<a class="headerlink" href="#unix-compilation" title="Permalink to this headline">¶</a></h1>
 <p>PDAL comes with support for building with <a class="reference external" href="https://cmake.org">CMake</a>.  PDAL requires at
 least version 3.5 of CMake.
@@ -257,7 +262,7 @@ only with <a class="reference external" href="https://ninja-build.org/">Ninja</a
 so the following instructions use that build tool, though building with
 GNU Makefiles works similarly (simply replace “ninja” with “make” when
 running the build tool).</p>
-<div class="section" id="dependencies">
+<section id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <p>Building PDAL successfully depends on having other libraries configured
 and installed.  These <a class="reference internal" href="dependencies.html#dependencies"><span class="std std-ref">dependencies</span></a> can be built
@@ -279,15 +284,15 @@ OR
 $ brew install gdal
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-ninja-on-linux-or-osx">
+</section>
+<section id="using-ninja-on-linux-or-osx">
 <h2>Using Ninja on Linux or OSX<a class="headerlink" href="#using-ninja-on-linux-or-osx" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="get-the-source-code">
+<section id="get-the-source-code">
 <h3>Get the source code<a class="headerlink" href="#get-the-source-code" title="Permalink to this headline">¶</a></h3>
 <p>PDAL can be cloned from <a class="reference internal" href="../../download.html#source"><span class="std std-ref">GitHub</span></a> or you can download a
 <a class="reference internal" href="../../download.html#download"><span class="std std-ref">release bundle</span></a></p>
-</div>
-<div class="section" id="prepare-a-build-directory">
+</section>
+<section id="prepare-a-build-directory">
 <h3>Prepare a build directory<a class="headerlink" href="#prepare-a-build-directory" title="Permalink to this headline">¶</a></h3>
 <p>CMake allows you to generate different builders for a project.  Here we’re
 using Mac OSX, but the procedure and output are nearly identical on Linux
@@ -297,8 +302,8 @@ $ mkdir build
 $ cd build
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-cmake">
+</section>
+<section id="run-cmake">
 <h3>Run CMake<a class="headerlink" href="#run-cmake" title="Permalink to this headline">¶</a></h3>
 <p>Running CMake uses the specified generator to create
 an environment suitable for building PDAL with the requested tool.
@@ -336,8 +341,8 @@ an environment suitable for building PDAL with the requested tool.
 -- Build files have been written to: /home/foo/pdal/build
 </pre></div>
 </div>
-</div>
-<div class="section" id="issue-the-ninja-command">
+</section>
+<section id="issue-the-ninja-command">
 <h3>Issue the <cite>ninja</cite> command<a class="headerlink" href="#issue-the-ninja-command" title="Permalink to this headline">¶</a></h3>
 <p>If cmake runs to completion (reports that build files have been written),
 you can run Ninja to build PDAL.</p>
@@ -356,8 +361,8 @@ lib/libpdalcpp.dylib
 lib/libpdalcpp.9.0.0.dylib
 </pre></div>
 </div>
-</div>
-<div class="section" id="checking-the-build-and-running-pdal-tests">
+</section>
+<section id="checking-the-build-and-running-pdal-tests">
 <h3>Checking the build and running PDAL tests<a class="headerlink" href="#checking-the-build-and-running-pdal-tests" title="Permalink to this headline">¶</a></h3>
 <p>You can quickly check that PDAL has built properly by running the <cite>pdal info</cite>
 command.</p>
@@ -413,17 +418,17 @@ Total Test time (real) =  39.54 sec
 <p>Failed tests may not indicate problems other than a lack of support for some
 feature on your system.  For example, tests for database drivers will fail if
 the database isn’t installed or configured properly.</p>
-</div>
-<div class="section" id="install-pdal">
+</section>
+<section id="install-pdal">
 <h3>Install PDAL<a class="headerlink" href="#install-pdal" title="Permalink to this headline">¶</a></h3>
 <p>PDAL can be installed to the default location (usually subdirectories of
 /usr/local) using Ninja.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ninja install
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -459,7 +464,7 @@ the database isn’t installed or configured properly.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -490,7 +495,7 @@ the database isn’t installed or configured properly.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

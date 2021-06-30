@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.reprojection &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -244,7 +249,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-reprojection">
+  <section id="filters-reprojection">
 <span id="id1"></span><h1>filters.reprojection<a class="headerlink" href="#filters-reprojection" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>reprojection filter</strong> converts the X, Y and/or Z dimensions to a
 new spatial
@@ -267,7 +272,7 @@ based on the projection you’ve used.</p>
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-<div class="section" id="example-1">
+<section id="example-1">
 <h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <p>This pipeline reprojects terrain points with Z-values between 0 and 100 by first
 applying a range filter and then specifying both the input and output spatial
@@ -301,8 +306,8 @@ precision in the output coordinates.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-2">
+</section>
+<section id="example-2">
 <h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>In some cases it is not possible to use a EPSG-code as a spatial reference.
 Instead <a class="reference external" href="http:/proj4.org">Proj.4</a> parameters can be used to define a spatial
@@ -328,8 +333,8 @@ vertical datum as “Unnamed Vertical Datum” in the spatial reference VLR.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>in_srs</dt><dd><p>Spatial reference system of the input data. Express as an EPSG string (eg
@@ -349,9 +354,12 @@ something like “EPSG:4326”.</p>
 “2, 1” for example would swap X and Y, which may be commonly needed for
 something like “EPSG:4326”.</p>
 </dd>
+<dt>error_on_failure</dt><dd><p>If true and reprojection of any point fails, throw an exception that terminates
+PDAL . [Default: false]</p>
+</dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -387,7 +395,7 @@ something like “EPSG:4326”.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -418,7 +426,7 @@ something like “EPSG:4326”.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

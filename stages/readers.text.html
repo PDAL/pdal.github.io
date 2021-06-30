@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>readers.text &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
@@ -120,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.gdal.html">readers.gdal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.geowave.html">readers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.hdf.html">readers.hdf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.i3s.html">readers.i3s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ilvis2.html">readers.ilvis2</a></li>
@@ -132,8 +136,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.oci.html">readers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -268,7 +270,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="readers-text">
+  <section id="readers-text">
 <span id="id1"></span><h1>readers.text<a class="headerlink" href="#readers-text" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>text reader</strong> reads data from ASCII text files.  Each point is
 represented in the file as a single line.  Each line is expected to be divided
@@ -277,7 +279,7 @@ a point’s dimension.  Each value needs to be <a class="reference external" hre
 C++ language double-precision values.</p>
 <p>The text reader expects a header line to indicate the dimensions are
 in each subsequent line.  There are two types of header lines.</p>
-<div class="section" id="quoted-dimension-names">
+<section id="quoted-dimension-names">
 <h2>Quoted dimension names<a class="headerlink" href="#quoted-dimension-names" title="Permalink to this headline">¶</a></h2>
 <p>When the first character of the header is a double quote, each dimension name
 is assumed to be surrounded by double quotes.  A single separator character
@@ -287,8 +289,8 @@ if it differs from that in the header.  Note that PDAL requires dimension
 names that consist only of alphabetic characters and underscores.  Edit
 the header line or use the <a class="reference internal" href="#header">header</a> option to set the dimension names to
 ones that PDAL understands.</p>
-</div>
-<div class="section" id="unquoted-dimension-names">
+</section>
+<section id="unquoted-dimension-names">
 <h2>Unquoted dimension names<a class="headerlink" href="#unquoted-dimension-names" title="Permalink to this headline">¶</a></h2>
 <p>The first non alpha-numeric character encountered is treated as a separator
 between dimension names.  The separator in the header line can be overridden
@@ -308,8 +310,8 @@ leading/trailing spaces are ignored.</p>
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-</div>
-<div class="section" id="example-input-file">
+</section>
+<section id="example-input-file">
 <h2>Example Input File<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
 <p>This input file contains X, Y and Z value for 10 points.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span>
@@ -325,8 +327,8 @@ leading/trailing spaces are ignored.</p>
 <span class="mf">289818.50</span><span class="p">,</span><span class="mf">4320980.59</span><span class="p">,</span><span class="mf">170.58</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-1">
+</section>
+<section id="example-1">
 <h2>Example #1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
@@ -340,8 +342,8 @@ leading/trailing spaces are ignored.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-2">
+</section>
+<section id="example-2">
 <h2>Example #2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>This reads the data in the input file as Red, Green and Blue instead of
 as X, Y and Z.</p>
@@ -359,8 +361,8 @@ as X, Y and Z.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>filename</dt><dd><p>text file to read [Required]</p>
@@ -386,8 +388,8 @@ records containing point data unless skipped with the <a class="reference intern
 <dt><span class="target" id="skip">skip</span></dt><dd><p>Number of lines to ignore at the beginning of the file. [Default: 0]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -423,7 +425,7 @@ records containing point data unless skipped with the <a class="reference intern
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -454,7 +456,7 @@ records containing point data unless skipped with the <a class="reference intern
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

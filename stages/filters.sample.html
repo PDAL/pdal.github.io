@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.sample &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -47,7 +51,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="filters.dem" href="filters.dem.html" />
-    <link rel="prev" title="filters.farthestpointsampling" href="filters.farthestpointsampling.html" /> 
+    <link rel="prev" title="filters.relaxationdartthrowing" href="filters.relaxationdartthrowing.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -123,7 +128,8 @@
 <li class="toctree-l3"><a class="reference internal" href="filters.html#spatial">Spatial</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="filters.html#resampling">Resampling</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="filters.farthestpointsampling.html">filters.farthestpointsampling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.fps.html">filters.fps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.relaxationdartthrowing.html">filters.relaxationdartthrowing</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">filters.sample</a></li>
 </ul>
 </li>
@@ -238,7 +244,7 @@
         <a href="filters.dem.html" class="btn btn-neutral float-right" title="filters.dem" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.farthestpointsampling.html" class="btn btn-neutral float-left" title="filters.farthestpointsampling" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.relaxationdartthrowing.html" class="btn btn-neutral float-left" title="filters.relaxationdartthrowing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -247,32 +253,83 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-sample">
+  <section id="filters-sample">
 <span id="id1"></span><h1>filters.sample<a class="headerlink" href="#filters-sample" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>Sample Filter</strong> performs Poisson sampling of the input <code class="docutils literal notranslate"><span class="pre">PointView</span></code>. The
 The practice of performing Poisson sampling via “Dart Throwing” was introduced
 in the mid-1980’s by <a class="reference internal" href="../references.html#cook1986" id="id2"><span>[Cook1986]</span></a> and <a class="reference internal" href="../references.html#dippe1985" id="id3"><span>[Dippe1985]</span></a>, and has been applied to
 point clouds in other software <a class="reference internal" href="../references.html#mesh2009" id="id4"><span>[Mesh2009]</span></a>.</p>
-<p>The sampling can be performed in a single pass through the point cloud.
-To begin,
-each input point is assumed to be kept. As we iterate through the kept points,
-we retrieve all neighbors within a given <code class="docutils literal notranslate"><span class="pre">radius</span></code>, and mark these neighbors as
-points to be discarded. All remaining kept points are appended to the output
-<code class="docutils literal notranslate"><span class="pre">PointView</span></code>. The full layout (i.e., the dimensions) of the input <code class="docutils literal notranslate"><span class="pre">PointView</span></code>
-is kept in tact (the same cannot be said for <span class="xref std std-ref">filters.voxelgrid</span>).</p>
+<p>Our implementation of Poisson sampling is made streamable by voxelizing the
+space and only adding points to the output <code class="docutils literal notranslate"><span class="pre">PointView</span></code> if they do not violate
+the minimum distance criterion (as specified by <code class="docutils literal notranslate"><span class="pre">radius</span></code>). The voxelization
+allows several optimizations, first by checking for existing points within the
+same voxel as the point under consideration, which are mostly likely to
+violate the minimum distance criterion. Furthermore, we can easily visit
+neighboring voxels (limiting the search to those that are populated) without
+the need to create a KD-tree from the entire input <code class="docutils literal notranslate"><span class="pre">PointView</span></code> first and
+performing costly spatial searches.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="filters.decimation.html#filters-decimation"><span class="std std-ref">filters.decimation</span></a> and <span class="xref std std-ref">filters.voxelgrid</span> also perform
-decimation.</p>
+<p><a class="reference internal" href="filters.decimation.html#filters-decimation"><span class="std std-ref">filters.decimation</span></a>, <a class="reference internal" href="filters.fps.html#filters-fps"><span class="std std-ref">filters.fps</span></a>,
+<a class="reference internal" href="filters.relaxationdartthrowing.html#filters-relaxationdartthrowing"><span class="std std-ref">filters.relaxationdartthrowing</span></a>,
+<a class="reference internal" href="filters.voxelcenternearestneighbor.html#filters-voxelcenternearestneighbor"><span class="std std-ref">filters.voxelcenternearestneighbor</span></a>,
+<a class="reference internal" href="filters.voxelcentroidnearestneighbor.html#filters-voxelcentroidnearestneighbor"><span class="std std-ref">filters.voxelcentroidnearestneighbor</span></a>, and <span class="xref std std-ref">voxeldownsize</span> also
+perform decimation.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Starting with PDAL v2.3, the <code class="docutils literal notranslate"><span class="pre">filters.sample</span></code> now supports streaming
+mode. As a result, there is no longer an option to <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> points (or
+to provide a <code class="docutils literal notranslate"><span class="pre">seed</span></code> for the shuffle).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Starting with PDAL v2.3, a <code class="docutils literal notranslate"><span class="pre">cell</span></code> option has been added that works with
+the existing <code class="docutils literal notranslate"><span class="pre">radius</span></code>. The user must provide one or the other, but not
+both. The provided option will be used to automatically compute the other.
+The relationship between <code class="docutils literal notranslate"><span class="pre">cell</span></code> and <code class="docutils literal notranslate"><span class="pre">radius</span></code> is such that the
+<code class="docutils literal notranslate"><span class="pre">radius</span></code> defines the radius of a sphere that circumscribes a voxel with
+edge length defined by <code class="docutils literal notranslate"><span class="pre">cell</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Care must be taken with selection of the <code class="docutils literal notranslate"><span class="pre">cell</span></code>/<code class="docutils literal notranslate"><span class="pre">radius</span></code> option.
+Although the filter can now operate in streaming mode, if the extents of
+the point cloud are large (or conversely, if the cell size is small) the
+voxel occupancy map which grows as a function of these variables can still
+require a large memory footprint.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To operate in streaming mode, the filter will typically retain the first
+point to occupy a voxel (subject to the minimum distance criterion set
+forth earlier). This means that point ordering matters, and in fact, it is
+quite possible that points in the incoming stream can be ordered in such a
+way as to introduce undesirable artifacts (e.g., related to previous tiling
+of the data). In our experience, processing data that is still in scan
+order (ordered by GpsTime, if available) does produce reliable results,
+although to require this sort either internally or by inserting
+<a class="reference internal" href="filters.sort.html#filters-sort"><span class="std std-ref">filters.sort</span></a> prior to sampling would break our ability to stream the
+data.</p>
 </div>
 <div class="admonition embed" id="embed-0">
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
-<div class="section" id="options">
+<div class="admonition streamable" id="streamable-0">
+<p class="admonition-title">Streamable Stage</p>
+<p>This stage supports streaming operations</p>
+</div>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
-<dt>radius</dt><dd><p>Minimum distance between samples. [Default: 1.0]</p>
+<dt>cell</dt><dd><p>Voxel cell size. If <code class="docutils literal notranslate"><span class="pre">radius</span></code> is set, <code class="docutils literal notranslate"><span class="pre">cell</span></code> is automatically computed
+such that the cell is circumscribed by the sphere defined by <code class="docutils literal notranslate"><span class="pre">radius</span></code>.</p>
+</dd>
+<dt>radius</dt><dd><p>Minimum distance between samples. If <code class="docutils literal notranslate"><span class="pre">cell</span></code> is set, <code class="docutils literal notranslate"><span class="pre">radius</span></code> is
+automatically computed to defined a sphere that circumscribes the voxel cell.
+Whether specified or derived, <code class="docutils literal notranslate"><span class="pre">radius</span></code> defines the minimum allowable
+distance between points.</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -289,8 +346,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -303,7 +360,7 @@ is returned and it has the same point count as it did when the filter was run.
         <a href="filters.dem.html" class="btn btn-neutral float-right" title="filters.dem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.farthestpointsampling.html" class="btn btn-neutral float-left" title="filters.farthestpointsampling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.relaxationdartthrowing.html" class="btn btn-neutral float-left" title="filters.relaxationdartthrowing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -326,7 +383,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -357,7 +414,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

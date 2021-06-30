@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>&lt;no title&gt; &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -69,7 +73,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -111,6 +115,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -210,7 +215,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
+  <dl class="simple">
+<dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a writer.
+Points that don’t pass the
+expression skip the stage but are available to subsequent stages in a pipeline.
+[Default: no filtering]</p>
+</dd>
+<dt>where_merge</dt><dd><p>A strategy for merging points skipped by a ‘<cite>where’</cite> option when running in standard mode.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the skipped points are added to the first point view returned by the skipped
+filter. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, skipped points are placed in their own point view. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>,
+skipped points are merged into the returned point view provided that only one point view
+is returned and it has the same point count as it did when the writer was run.
+[Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
+</dd>
+</dl>
+
 
            </div>
            
@@ -236,7 +255,7 @@
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -267,7 +286,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

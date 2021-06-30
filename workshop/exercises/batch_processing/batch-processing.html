@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Batch Processing &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../stages/filters.html">Filters</a></li>
@@ -244,13 +249,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="batch-processing">
+  <section id="batch-processing">
 <span id="workshop-batch-processing"></span><h1>Batch Processing<a class="headerlink" href="#batch-processing" title="Permalink to this headline">¶</a></h1>
 <p>PDAL doesn’t handle matching multiple file inputs except for glob handling for merge operations,
 but does allow for command line substitution parameters to make batch processing simpler,
 substitutions. Substitutions work with both <a class="reference internal" href="../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> operations as well as with
 other applications such as <a class="reference internal" href="../../../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a>.</p>
-<div class="section" id="operating-system-variations">
+<section id="operating-system-variations">
 <h2>Operating system variations<a class="headerlink" href="#operating-system-variations" title="Permalink to this headline">¶</a></h2>
 <p>How substitutions are passed generally depends on the operating system and tools available.
 In the unix/linux environments, this is primarily using the <cite>find</cite> and <cite>ls</cite> programs to get
@@ -261,14 +266,14 @@ are also available under Windows one installs <cite>Cygwin</cite> or <cite>MinGW
 Git for Windows is installed. They are also available as win32 command line programs installed
 from the GNU Findutils (<a class="reference external" href="https://www.gnu.org/software/findutils/findutils.html">https://www.gnu.org/software/findutils/findutils.html</a>). They are
 available for MacOS and Linux.</p>
-</div>
-<div class="section" id="windows-native-tools">
+</section>
+<section id="windows-native-tools">
 <h2>Windows native tools<a class="headerlink" href="#windows-native-tools" title="Permalink to this headline">¶</a></h2>
 <p>Subtitions can be handled directly in windows using <cite>PowerShell</cite> syntax.</p>
 <p>While there are a number of ways to generate lists of files, the <cite>Get-ChildItem</cite> is used here,
 along with the <cite>foreach</cite> option to pass each separate filepath to the pdal application.</p>
-</div>
-<div class="section" id="example-batch-compression-of-las-files-to-laz-powershell">
+</section>
+<section id="example-batch-compression-of-las-files-to-laz-powershell">
 <h2>Example - Batch compression of LAS files to LAZ - PowerShell:<a class="headerlink" href="#example-batch-compression-of-las-files-to-laz-powershell" title="Permalink to this headline">¶</a></h2>
 <p>To compress a series of LAS files in one directory into compressed LAZ files in another
 directory, the <cite>PowerShell</cite> syntax would be:</p>
@@ -279,8 +284,8 @@ directory, the <cite>PowerShell</cite> syntax would be:</p>
 <p>Note the use of the <cite>$($_.BaseName)</cite> syntax for the files passed. This option on the <cite>$($_)</cite> shortcut for
 the full filename, removes the directory and the extension on the file and allows the user to set
 the path and extension manually.</p>
-</div>
-<div class="section" id="example-parallel-batch-compression-of-las-files-to-laz-powershell">
+</section>
+<section id="example-parallel-batch-compression-of-las-files-to-laz-powershell">
 <h2>Example - Parallel Batch compression of LAS files to LAZ - PowerShell:<a class="headerlink" href="#example-parallel-batch-compression-of-las-files-to-laz-powershell" title="Permalink to this headline">¶</a></h2>
 <p>This use of the <cite>PowerShell</cite> syntax doesn’t allow a user to execute more than one process at a
 time. There is a free download of the <cite>xargs</cite> program that provides parallel execution available
@@ -290,8 +295,8 @@ using the <cite>{}</cite> syntax.</p>
 <span class="p">|</span> <span class="p">.\</span><span class="n">ppx2</span><span class="p">.</span><span class="n">exe</span> <span class="n">-P</span> <span class="n">3</span> <span class="n">pdal</span> <span class="n">translate</span> <span class="n">-i</span> <span class="s2">&quot;.\dir1\{}.las&quot;</span> <span class="n">-o</span> <span class="s2">&quot;.\dir2\{}.laz&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-batch-compression-of-las-files-to-laz-bash">
+</section>
+<section id="example-batch-compression-of-las-files-to-laz-bash">
 <h2>Example - Batch compression of LAS files to LAZ - Bash:<a class="headerlink" href="#example-batch-compression-of-las-files-to-laz-bash" title="Permalink to this headline">¶</a></h2>
 <p>To compress a series of LAS files in one directory into compressed LAZ files in another
 directory, the <cite>Bash</cite> syntax would be:</p>
@@ -301,8 +306,8 @@ directory, the <cite>Bash</cite> syntax would be:</p>
 </div>
 <p>In <cite>Parallel</cite>, then  <cite>{/.}</cite> syntax means strip the directory and the extension and just use the
 basename of the file. This allows you to easily change the output format and the location.</p>
-</div>
-<div class="section" id="example-parallel-batch-compression-of-las-files-to-laz-bash">
+</section>
+<section id="example-parallel-batch-compression-of-las-files-to-laz-bash">
 <h2>Example - Parallel Batch compression of LAS files to LAZ - Bash:<a class="headerlink" href="#example-parallel-batch-compression-of-las-files-to-laz-bash" title="Permalink to this headline">¶</a></h2>
 <p>Parallel, as its name implies, allows parallel operations. Adding the <cite>-j</cite> syntax indicates the number simultaneous
 jobs to run</p>
@@ -310,8 +315,8 @@ jobs to run</p>
 <span class="go">pdal translate -i ./dir1/{/.}.las -o ./dir2/{/.}.laz</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="exercise-pipeline-substitions">
+</section>
+<section id="exercise-pipeline-substitions">
 <h2>Exercise - Pipeline Substitions:<a class="headerlink" href="#exercise-pipeline-substitions" title="Permalink to this headline">¶</a></h2>
 <p>For the most flexibility, pipelines are used to apply a series of operations to a file (or group
 of files). In this exercise, we build on the <a class="reference internal" href="../analysis/dtm/dtm.html#workshop-dtm"><span class="std std-ref">Generating a DTM</span></a> pipeline example, but run this pipeline over 4 files and
@@ -372,8 +377,8 @@ using the substitutions syntax to do this.</p>
 layer to hillshade. Set the upper layer to Singleband PseudoColor and choose a pleasing color ramp.
 Then set the transparency of the upper layer to 50% and you’ll get a nice display of the terrain.</p>
 <a class="reference external image-reference" href="../../../_images/batch-processing-dtm-qgis.png"><img alt="../../../_images/batch-processing-dtm-qgis.png" src="../../../_images/batch-processing-dtm-qgis.png" /></a>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -409,7 +414,7 @@ Then set the transparency of the upper layer to 50% and you’ll get a nice disp
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -440,7 +445,7 @@ Then set the transparency of the upper layer to 50% and you’ll get a nice disp
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Applying a grid shift to point clouds &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -253,9 +258,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="applying-a-grid-shift-to-point-clouds">
+  <section id="applying-a-grid-shift-to-point-clouds">
 <h1>Applying a grid shift to point clouds<a class="headerlink" href="#applying-a-grid-shift-to-point-clouds" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial first appeared on Land Information New Zealand’s <a class="reference external" href="https://medium.com/on-location">On-Location Blog</a>.</p>
 <p>It describes how to use <a class="reference external" href="https://conda.io">Conda</a>, <a class="reference external" href="https://pdal.io">PDAL</a>, and <a class="reference external" href="https://gdal.org">GDAL</a> to apply a grid shift to point cloud files. It uses PDAL’s <a class="reference external" href="https://pdal.io/stages/readers.las.html">readers.las</a> to fetch the data, <a class="reference external" href="https://pdal.io/stages/filters.reprojection.html">filters.reprojection</a> to apply the grid shift, and <a class="reference external" href="https://pdal.io/stages/writers.las.html">writers.las</a> to write the reprojected point cloud.</p>
@@ -266,32 +271,32 @@
 <li><p>New Zealand Geodetic Datum 2000 (NZGD2000) to NZVD2016.</p></li>
 <li><p>Finally, NZVD2016 to NZGD2000 or to a local vertical datum.</p></li>
 </ul>
-</div>
-<div class="section" id="background">
+</section>
+<section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>Historically in New Zealand, heights were defined in terms of 13 local vertical datums (LVD) referenced to an estimate of the local mean sea level (MSL).</p>
-<div class="figure align-default">
+<figure class="align-default">
 <img alt="../_images/nz_lvd.png" src="../_images/nz_lvd.png" />
-</div>
+</figure>
 <p>In 2016, New Zealand Vertical Datum 2016 (NZVD2016), which is defined by the NZGeoid2016 geoid, became the official national vertical datum for New Zealand. The general relationship between the different datums is shown in the diagram below.</p>
-<div class="figure align-default">
+<figure class="align-default">
 <img alt="../_images/nz_relationships.png" src="../_images/nz_relationships.png" />
-</div>
+</figure>
 <p>Available on the  <a class="reference external" href="https://data.linz.govt.nz">LINZ Data Service</a> (LDS) are <a class="reference external" href="https://data.linz.govt.nz/search/category/geodetic/vertical-datum-2016/?q=NZVD2016+Conversion+Raster">relationship grids</a> which model the difference between the local vertical datums and NZVD2016 (O in the above diagram).</p>
 <p>The <a class="reference external" href="https://data.linz.govt.nz/layer/53447-nz-quasigeoid-2016-raster/">NZ Quasigeoid 2016</a>, also a relationship grid, models the difference between the NZGD2000 ellipsoid and NZVD2016 (N in the above diagram).</p>
 <p>The equations to transform heights using the published values in the relationship grids are:</p>
-<div class="figure align-default">
+<figure class="align-default">
 <img alt="../_images/nz_formulas.png" src="../_images/nz_formulas.png" />
-</div>
-</div>
-<div class="section" id="before-we-begin">
+</figure>
+</section>
+<section id="before-we-begin">
 <h2>Before we begin<a class="headerlink" href="#before-we-begin" title="Permalink to this headline">¶</a></h2>
 <p>We will be using multiple tools to perform the reprojection. To retrieve these tools and have them all accessible in a nice self-contained environment we will be using a system called Conda. Conda is an open source package and environment management system that runs on Windows, macOS, and Linux. Essentially we will create an environment within Conda which will contain the packages we need: PDAL, GDAL and Python.</p>
-<div class="section" id="install-conda">
+<section id="install-conda">
 <h3>Install Conda<a class="headerlink" href="#install-conda" title="Permalink to this headline">¶</a></h3>
 <p>Download <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>, selecting the 64-bit installer for your platform and install it as directed.</p>
-</div>
-<div class="section" id="create-a-conda-environment">
+</section>
+<section id="create-a-conda-environment">
 <h3>Create a Conda Environment<a class="headerlink" href="#create-a-conda-environment" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>After installing, open the Anaconda Prompt from your start menu.</p></li>
@@ -322,12 +327,12 @@
 </ol>
 <p>When these packages are installed, they will also install the packages they’re dependent on to run. Python is one of these dependent packages, so we won’t need to install it ourselves as conda would’ve already done it for us.</p>
 <p>Now that the packages are installed, we are ready to begin.</p>
-</div>
-</div>
-<div class="section" id="step-1-create-a-datum-transformation-grid-gtx">
+</section>
+</section>
+<section id="step-1-create-a-datum-transformation-grid-gtx">
 <h2>Step 1: Create a Datum Transformation Grid (GTX)<a class="headerlink" href="#step-1-create-a-datum-transformation-grid-gtx" title="Permalink to this headline">¶</a></h2>
 <p>PDAL allows for the use of PROJ.4 strings to define the spatial reference system of the inputted or outputted data. This is great, because it gives us the ability to use <code class="docutils literal notranslate"><span class="pre">+geoidgrid</span></code> which is an option to add a grid shift file in the format of NOAA Vdatum’s GTX file format. But where to we get a GTX file from? We have two options:</p>
-<div class="section" id="option-1-linz-supplied-gtx-file">
+<section id="option-1-linz-supplied-gtx-file">
 <h3>Option 1 — LINZ supplied GTX file<a class="headerlink" href="#option-1-linz-supplied-gtx-file" title="Permalink to this headline">¶</a></h3>
 <p>LINZ has created GTX files for each of the relationship grids mentioned earlier. They can be downloaded from <a class="reference external" href="https://www.geodesy.linz.govt.nz/download/proj-datumgrid-nz">https://www.geodesy.linz.govt.nz/download/proj-datumgrid-nz</a></p>
 <p>Here is a list of which GTX file belongs to which Local Vertical Datum:</p>
@@ -350,15 +355,15 @@
 <ul class="simple">
 <li><p><strong>New Zealand Quasigeoid 2016</strong>: nzgeoid2016.gtx</p></li>
 </ul>
-</div>
-<div class="section" id="option-two-create-a-gtx-file">
+</section>
+<section id="option-two-create-a-gtx-file">
 <h3>Option two — Create a GTX file<a class="headerlink" href="#option-two-create-a-gtx-file" title="Permalink to this headline">¶</a></h3>
 <p>You can create your own GTX file using the relationship grids available on the LDS. For example, if you intend to convert from Moturiki 1953 to NZVD2016, you have to do the following:</p>
 <ol class="arabic">
 <li><p>Download the <strong>‘Moturiki 1953 to NZVD2016 Conversion Raster’</strong> as a TIFF from the LDS in <strong>‘WGS 84 (EPSG:4326 Geographic)’</strong> Map projection. <a class="reference external" href="https://data.linz.govt.nz/layer/103959-moturiki-1953-to-nzvd2016-conversion-raster/">https://data.linz.govt.nz/layer/103959-moturiki-1953-to-nzvd2016-conversion-raster/</a>.</p>
-<div class="figure align-default">
+<figure class="align-default">
 <img alt="../_images/nz_lds_screenshot.png" src="../_images/nz_lds_screenshot.png" />
-</div>
+</figure>
 </li>
 <li><p>Open the Anaconda Prompt from the start menu and activate the environment we created earlier:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">vd</span><span class="o">-</span><span class="n">reproject</span>
@@ -377,9 +382,9 @@
 </div>
 </li>
 </ol>
-</div>
-</div>
-<div class="section" id="step-2-prepare-a-json-pipeline-file">
+</section>
+</section>
+<section id="step-2-prepare-a-json-pipeline-file">
 <h2>Step 2: Prepare a JSON Pipeline file<a class="headerlink" href="#step-2-prepare-a-json-pipeline-file" title="Permalink to this headline">¶</a></h2>
 <p>We will be using a <a class="reference external" href="https://pdal.io/pipeline.html">PDAL pipeline</a> to transmit a chain of processing elements into PDAL. These elements will be represented in a JSON file.</p>
 <p>Using a text editor, create a JSON file named pipeline.json containing the contents as below.</p>
@@ -410,10 +415,10 @@
 <p class="admonition-title">Warning</p>
 <p>Be aware <code class="docutils literal notranslate"><span class="pre">&quot;forward&quot;:</span> <span class="pre">&quot;all&quot;</span></code> under the writers.las section represents the header fields whose values should be preserved from the source LAS file. <code class="docutils literal notranslate"><span class="pre">all</span></code> will transfer all header fields, including scale and offset values, as well as VLRs. If you desire to transfer only specific header fields, refer to <a class="reference external" href="https://pdal.io/stages/writers.las.html">https://pdal.io/stages/writers.las.html</a> for more information about this option.</p>
 </div>
-</div>
-<div class="section" id="step-3-use-pdal-to-reproject">
+</section>
+<section id="step-3-use-pdal-to-reproject">
 <h2>Step 3: Use PDAL to reproject<a class="headerlink" href="#step-3-use-pdal-to-reproject" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="reprojecting-one-file-from-lvd-to-nzvd2016">
+<section id="reprojecting-one-file-from-lvd-to-nzvd2016">
 <h3>Reprojecting one file from LVD to NZVD2016<a class="headerlink" href="#reprojecting-one-file-from-lvd-to-nzvd2016" title="Permalink to this headline">¶</a></h3>
 <p>Using the Anaconda Prompt, activate the <code class="docutils literal notranslate"><span class="pre">vd-reproject</span></code> environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">vd</span><span class="o">-</span><span class="n">reproject</span>
@@ -423,8 +428,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pdal pipeline &quot;path/to/your/pipeline.json&quot; — readers.las.filename=&quot;path/to/source_las_file.las&quot; — writers.las.filename=&quot;path/to/reprojected_las_file.las&quot; — filters.reprojection.out_srs=&quot;+init=EPSG:2193 +geoidgrids=path/to/your/gtx_file.gtx&quot;
 </pre></div>
 </div>
-</div>
-<div class="section" id="reprojecting-multiple-files-from-lvd-to-nzvd2016">
+</section>
+<section id="reprojecting-multiple-files-from-lvd-to-nzvd2016">
 <h3>Reprojecting multiple files from LVD to NZVD2016<a class="headerlink" href="#reprojecting-multiple-files-from-lvd-to-nzvd2016" title="Permalink to this headline">¶</a></h3>
 <p>Below is a python script which executes multiple LAS files. Save to your computer as <code class="docutils literal notranslate"><span class="pre">lvd_to_nzvd2016.py</span></code>, then open in a text editor and update <code class="docutils literal notranslate"><span class="pre">src_directory</span></code>, <code class="docutils literal notranslate"><span class="pre">gtxfile</span></code>, <code class="docutils literal notranslate"><span class="pre">jsonfile</span></code>, <code class="docutils literal notranslate"><span class="pre">horizontal_srs</span></code> with the necessary information.</p>
 <div class="admonition note">
@@ -437,19 +442,19 @@
 </div>
 <p>This script creates a new directory called ‘reprojected’ in the same location as the LAS files. On completion the reprojected LAS files will be located in this directory, ready for your GIS needs.</p>
 <p>You can spot check the accuracy of the conversion by using the LINZ Online converter: www.geodesy.linz.govt.nz/concord</p>
-</div>
-<div class="section" id="reprojecting-from-nzgd2000-to-nzvd2016">
+</section>
+<section id="reprojecting-from-nzgd2000-to-nzvd2016">
 <h3>Reprojecting from NZGD2000 to NZVD2016<a class="headerlink" href="#reprojecting-from-nzgd2000-to-nzvd2016" title="Permalink to this headline">¶</a></h3>
 <p>The steps to do this reprojection are the same as above except for one change:</p>
 <p>In <strong>Step 1</strong>, for option one, the GTX file required will be <code class="docutils literal notranslate"><span class="pre">nzgeoid2016.gtx</span></code>. Or, if you are following option two, the relationship grid on the LDS is the <a class="reference external" href="https://data.linz.govt.nz/layer/53447-nz-quasigeoid-2016-raster/">NZ Quasigeoid 2016</a>.</p>
-</div>
-<div class="section" id="nzvd2016-to-nzgd2000-or-lvd">
+</section>
+<section id="nzvd2016-to-nzgd2000-or-lvd">
 <h3>NZVD2016 to NZGD2000 or LVD<a class="headerlink" href="#nzvd2016-to-nzgd2000-or-lvd" title="Permalink to this headline">¶</a></h3>
 <p>Previously, the grid values are being <em>subtracted</em> from the point cloud value in <strong>Step 3</strong>. To reproject to NZGD2000 or an LVD, the grid values need to be <em>added</em> to the NZVD2016 value.</p>
 <p>To accommodate this change in PDAL, you need to alter the following text in the PDAL command from <code class="docutils literal notranslate"><span class="pre">filters.reprojection.out_srs</span></code> to <code class="docutils literal notranslate"><span class="pre">filters.reprojection.in_srs</span></code>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -485,7 +490,7 @@
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -516,7 +521,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

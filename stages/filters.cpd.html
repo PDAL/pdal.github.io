@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.cpd &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -243,13 +248,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-cpd">
+  <section id="filters-cpd">
 <span id="id1"></span><h1>filters.cpd<a class="headerlink" href="#filters-cpd" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>Coherent Point Drift (CPD) filter</strong> uses the algorithm of
-<span id="id2">[<a class="reference internal" href="#id5">MS10</a>]</span> algorithm to
+<span id="id2">[<a class="reference internal" href="#id5" title="Andriy Myronenko and Xubo Song. Point set registration: coherent point drift. IEEE transactions on pattern analysis and machine intelligence, 32(12):2262–75, dec 2010.">MS10</a>]</span> algorithm to
 compute a rigid, nonrigid, or affine transformation between datasets.  The
 rigid and affine are what you’d expect; the nonrigid transformation uses Motion
-Coherence Theory <span id="id3">[<a class="reference internal" href="#id6">YG88</a>]</span> to “bend” the points to find a best
+Coherence Theory <span id="id3">[<a class="reference internal" href="#id6" title="Alan L. Yuille and Norberto M. Grzywacz. The Motion Coherence Theory. Second International Conference on Computer Vision, 1988.">YG88</a>]</span> to “bend” the points to find a best
 alignment.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -262,7 +267,7 @@ subsequent inputs are “moving” points.  The output from the change filter ar
 the “moving” points after the calculated transformation has been applied, one
 point view per input.  Any additional information about the cpd registration,
 e.g. the rigid transformation matrix, will be placed in the stage’s metadata.</p>
-<div class="section" id="when-to-use-cpd-vs-icp">
+<section id="when-to-use-cpd-vs-icp">
 <h2>When to use CPD vs ICP<a class="headerlink" href="#when-to-use-cpd-vs-icp" title="Permalink to this headline">¶</a></h2>
 <p>Summarized from the <a class="reference external" href="http://graphics.stanford.edu/courses/cs468-07-winter/Papers/nips2006_0613.pdf">Non-rigid point set registration: Coherent Point Drift</a> paper.</p>
 <ul class="simple">
@@ -278,8 +283,8 @@ CPD algorithm is carried out</p></li>
 <p class="admonition-title">Dynamic Plugin</p>
 <p>This stage requires a dynamic plugin to operate</p>
 </div>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;fixed.las&quot;</span><span class="p">,</span>
@@ -318,8 +323,8 @@ use the “metadata” option of the pipeline command:</p>
 <p><a class="reference internal" href="filters.transformation.html#filters-transformation"><span class="std std-ref">filters.transformation</span></a> to apply a transform to other points.
 <a class="reference internal" href="filters.icp.html#filters-icp"><span class="std std-ref">filters.icp</span></a> for deterministic binary point pair assignments.</p>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt><span class="target" id="method">method</span></dt><dd><p>Change detection method to use.
@@ -353,8 +358,8 @@ is returned and it has the same point count as it did when the filter was run.
 </dd>
 </dl>
 </p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -390,7 +395,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -421,7 +426,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

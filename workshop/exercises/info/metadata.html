@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Printing file metadata &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../stages/filters.html">Filters</a></li>
@@ -246,15 +251,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="printing-file-metadata">
+  <section id="printing-file-metadata">
 <span id="workshop-metadata"></span><h1>Printing file metadata<a class="headerlink" href="#printing-file-metadata" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exercise">
+<section id="exercise">
 <span id="index-0"></span><h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>This exercise uses PDAL to print metadata information. Issue the
 following command in your <cite>Conda Shell</cite>.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <img alt="../../../_images/info-interesting-metadata.png" src="../../../_images/info-interesting-metadata.png" />
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -273,7 +278,7 @@ software to selectively access and manipulate values.</p>
 <li><p><a class="reference external" href="http://ruby-doc.org/stdlib-2.0.0/libdoc/json/rdoc/JSON.html">Ruby JSON library</a></p></li>
 </ul>
 </div>
-<div class="section" id="structured-metadata-output">
+<section id="structured-metadata-output">
 <h3>Structured Metadata Output<a class="headerlink" href="#structured-metadata-output" title="Permalink to this headline">¶</a></h3>
 <p>Many command-line utilities output their data in a human-readable custom
 format. The downsides to this approach are significant. PDAL was designed to be
@@ -289,18 +294,16 @@ JSON parsing tool like <code class="docutils literal notranslate"><span class="p
 <p>For example, we might only care about the <code class="docutils literal notranslate"><span class="pre">system_id</span></code> and <code class="docutils literal notranslate"><span class="pre">compressed</span></code>
 flag for this particular file. Our simple <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--metadata</span></code> command
 gives us that, but it also gives us a bunch of other stuff we don’t need
-at the moment either. Let’s focus on extracting what we want using the
+at the moment. Let’s focus on extracting what we want using the
 <code class="docutils literal notranslate"><span class="pre">jq</span></code> command.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> \
-<span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> \
+<span class="linenos">2</span><span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> <span class="o">^</span>
-<span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">info</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">info</span><span class="o">/</span><span class="n">interesting</span><span class="o">.</span><span class="n">las</span> <span class="o">--</span><span class="n">metadata</span> <span class="o">^</span>
+<span class="linenos">2</span><span class="o">|</span> <span class="n">jq</span>  <span class="s2">&quot;.metadata.compressed, .metadata.system_id&quot;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <img alt="../../../_images/info-interesting-metadata-jq.png" src="../../../_images/info-interesting-metadata-jq.png" />
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -312,9 +315,9 @@ with the data inside the data structures. As we will see later
 in the workshop, this PDAL feature is one that makes construction
 of custom data processing workflows with PDAL very convenient.</p>
 </div>
-</div>
-</div>
-<div class="section" id="notes">
+</section>
+</section>
+<section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>PDAL uses <a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON</a> as the exchange format when printing information from <a class="reference internal" href="../../../apps/info.html#info-command"><span class="std std-ref">info</span></a>.  JSON provides human and machine-readable text data.</p></li>
@@ -328,8 +331,8 @@ common that variables are different. <a class="reference internal" href="../../.
 special metadata.  Spatial references are come directly from source data
 or are provided via options in PDAL.</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -365,7 +368,7 @@ or are provided via options in PDAL.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -396,7 +399,7 @@ or are provided via options in PDAL.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

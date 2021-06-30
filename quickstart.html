@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Quickstart &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -125,6 +129,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages/filters.html">Filters</a></li>
@@ -233,9 +238,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quickstart">
+  <section id="quickstart">
 <span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <span id="index-0"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The quickest way to start using PDAL is to leverage builds that were
 constructed by the PDAL development team using <a class="reference external" href="https://conda.io/docs/">Conda</a>.</p>
@@ -255,8 +260,8 @@ inspect the file.</p>
 <p>If you need to compile your own copy of PDAL, see <a class="reference internal" href="development/compilation/index.html#building"><span class="std std-ref">Compilation</span></a> for
 more details.</p>
 </div>
-</div>
-<div class="section" id="install-conda">
+</section>
+<section id="install-conda">
 <h2>Install Conda<a class="headerlink" href="#install-conda" title="Permalink to this headline">¶</a></h2>
 <p>Conda installation instructions can be found at the following links. Read
 through them a bit for your platform so you have an idea what to expect.</p>
@@ -271,19 +276,19 @@ through them a bit for your platform so you have an idea what to expect.</p>
 work in macOS or Linux too – though definition of file paths might provide
 a significant difference.</p>
 </div>
-<div class="section" id="run-conda">
+<section id="run-conda">
 <h3>Run Conda<a class="headerlink" href="#run-conda" title="Permalink to this headline">¶</a></h3>
 <p>On macOS and Linux, all Conda commands are typed into a terminal window. On
 Windows, commands are typed into the Anaconda Prompt window. Instructions can
 be found in the Conda <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#starting-conda">Getting Started</a> guide.</p>
-</div>
-<div class="section" id="test-installation">
+</section>
+<section id="test-installation">
 <h3>Test Installation<a class="headerlink" href="#test-installation" title="Permalink to this headline">¶</a></h3>
 <p>To test your installation, simply run the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> from your
 terminal window or the Anaconda Prompt. A list of installed packages should
 appear.</p>
-</div>
-<div class="section" id="install-the-pdal-package">
+</section>
+<section id="install-the-pdal-package">
 <h3>Install the PDAL Package<a class="headerlink" href="#install-the-pdal-package" title="Permalink to this headline">¶</a></h3>
 <p>A PDAL package based on the latest release, including all recent patches, is
 pushed to the <a class="reference external" href="https://anaconda.org/conda-forge/pdal">conda-forge</a> channel on anaconda.org with every code change on
@@ -317,75 +322,75 @@ output should look something like:</p>
 
     <span class="n">package</span>                    <span class="o">|</span>            <span class="n">build</span>
     <span class="o">---------------------------|-----------------</span>
-    <span class="n">pdal</span><span class="o">-</span><span class="mf">1.7</span><span class="o">.</span><span class="mi">2</span>                 <span class="o">|</span>   <span class="n">py35h33f895e_1</span>         <span class="mf">8.6</span> <span class="n">MB</span>  <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">setuptools</span><span class="o">-</span><span class="mf">39.2</span><span class="o">.</span><span class="mi">0</span>          <span class="o">|</span>           <span class="n">py35_0</span>         <span class="mi">591</span> <span class="n">KB</span>  <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">numpy</span><span class="o">-</span><span class="mf">1.14</span><span class="o">.</span><span class="mi">3</span>               <span class="o">|</span>   <span class="n">py35h9fa60d3_2</span>          <span class="mi">42</span> <span class="n">KB</span>
+    <span class="n">pdal</span><span class="o">-</span><span class="mf">1.7.2</span>                 <span class="o">|</span>   <span class="n">py35h33f895e_1</span>         <span class="mf">8.6</span> <span class="n">MB</span>  <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">setuptools</span><span class="o">-</span><span class="mf">39.2.0</span>          <span class="o">|</span>           <span class="n">py35_0</span>         <span class="mi">591</span> <span class="n">KB</span>  <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">numpy</span><span class="o">-</span><span class="mf">1.14.3</span>               <span class="o">|</span>   <span class="n">py35h9fa60d3_2</span>          <span class="mi">42</span> <span class="n">KB</span>
     <span class="o">------------------------------------------------------------</span>
                                            <span class="n">Total</span><span class="p">:</span>         <span class="mf">9.2</span> <span class="n">MB</span>
 
 <span class="n">The</span> <span class="n">following</span> <span class="n">NEW</span> <span class="n">packages</span> <span class="n">will</span> <span class="n">be</span> <span class="n">INSTALLED</span><span class="p">:</span>
 
-    <span class="n">boost</span><span class="p">:</span>           <span class="mf">1.66</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">py35_vc14_1</span>    <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">boost</span><span class="o">-</span><span class="n">cpp</span><span class="p">:</span>       <span class="mf">1.66</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_1</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span><span class="p">:</span> <span class="mf">2018.4</span><span class="o">.</span><span class="mi">16</span><span class="o">-</span><span class="mi">0</span>           <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">cairo</span><span class="p">:</span>           <span class="mf">1.14</span><span class="o">.</span><span class="mi">10</span><span class="o">-</span><span class="n">vc14_0</span>        <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">certifi</span><span class="p">:</span>         <span class="mf">2018.4</span><span class="o">.</span><span class="mi">16</span><span class="o">-</span><span class="n">py35_0</span>      <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">curl</span><span class="p">:</span>            <span class="mf">7.60</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">expat</span><span class="p">:</span>           <span class="mf">2.2</span><span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">flann</span><span class="p">:</span>           <span class="mf">1.9</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">h0953f56_2</span>      <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">freexl</span><span class="p">:</span>          <span class="mf">1.0</span><span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">geotiff</span><span class="p">:</span>         <span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">vc14_1</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">hdf4</span><span class="p">:</span>            <span class="mf">4.2</span><span class="o">.</span><span class="mi">13</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">hdf5</span><span class="p">:</span>            <span class="mf">1.10</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">vc14_2</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">hexer</span><span class="p">:</span>           <span class="mf">1.4</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_1</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">icc_rt</span><span class="p">:</span>          <span class="mf">2017.0</span><span class="o">.</span><span class="mi">4</span><span class="o">-</span><span class="n">h97af966_0</span>
+    <span class="n">boost</span><span class="p">:</span>           <span class="mf">1.66.0</span><span class="o">-</span><span class="n">py35_vc14_1</span>    <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">boost</span><span class="o">-</span><span class="n">cpp</span><span class="p">:</span>       <span class="mf">1.66.0</span><span class="o">-</span><span class="n">vc14_1</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span><span class="p">:</span> <span class="mf">2018.4.16</span><span class="o">-</span><span class="mi">0</span>           <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">cairo</span><span class="p">:</span>           <span class="mf">1.14.10</span><span class="o">-</span><span class="n">vc14_0</span>        <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">certifi</span><span class="p">:</span>         <span class="mf">2018.4.16</span><span class="o">-</span><span class="n">py35_0</span>      <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">curl</span><span class="p">:</span>            <span class="mf">7.60.0</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">expat</span><span class="p">:</span>           <span class="mf">2.2.5</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">flann</span><span class="p">:</span>           <span class="mf">1.9.1</span><span class="o">-</span><span class="n">h0953f56_2</span>      <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">freexl</span><span class="p">:</span>          <span class="mf">1.0.5</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">geotiff</span><span class="p">:</span>         <span class="mf">1.4.2</span><span class="o">-</span><span class="n">vc14_1</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">hdf4</span><span class="p">:</span>            <span class="mf">4.2.13</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">hdf5</span><span class="p">:</span>            <span class="mf">1.10.1</span><span class="o">-</span><span class="n">vc14_2</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">hexer</span><span class="p">:</span>           <span class="mf">1.4.0</span><span class="o">-</span><span class="n">vc14_1</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">icc_rt</span><span class="p">:</span>          <span class="mf">2017.0.4</span><span class="o">-</span><span class="n">h97af966_0</span>
     <span class="n">icu</span><span class="p">:</span>             <span class="mf">58.2</span><span class="o">-</span><span class="n">vc14_0</span>           <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">intel</span><span class="o">-</span><span class="n">openmp</span><span class="p">:</span>    <span class="mf">2018.0</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">0</span>
+    <span class="n">intel</span><span class="o">-</span><span class="n">openmp</span><span class="p">:</span>    <span class="mf">2018.0.3</span><span class="o">-</span><span class="mi">0</span>
     <span class="n">jpeg</span><span class="p">:</span>            <span class="mi">9</span><span class="n">b</span><span class="o">-</span><span class="n">vc14_2</span>             <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">kealib</span><span class="p">:</span>          <span class="mf">1.4</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">vc14_4</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">krb5</span><span class="p">:</span>            <span class="mf">1.14</span><span class="o">.</span><span class="mi">6</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">laszip</span><span class="p">:</span>          <span class="mf">3.2</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">laz</span><span class="o">-</span><span class="n">perf</span><span class="p">:</span>        <span class="mf">1.2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_1</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libgdal</span><span class="p">:</span>         <span class="mf">2.2</span><span class="o">.</span><span class="mi">4</span><span class="o">-</span><span class="n">vc14_4</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">kealib</span><span class="p">:</span>          <span class="mf">1.4.7</span><span class="o">-</span><span class="n">vc14_4</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">krb5</span><span class="p">:</span>            <span class="mf">1.14.6</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">laszip</span><span class="p">:</span>          <span class="mf">3.2.2</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">laz</span><span class="o">-</span><span class="n">perf</span><span class="p">:</span>        <span class="mf">1.2.0</span><span class="o">-</span><span class="n">vc14_1</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libgdal</span><span class="p">:</span>         <span class="mf">2.2.4</span><span class="o">-</span><span class="n">vc14_4</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
     <span class="n">libiconv</span><span class="p">:</span>        <span class="mf">1.15</span><span class="o">-</span><span class="n">vc14_0</span>           <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libnetcdf</span><span class="p">:</span>       <span class="mf">4.6</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">vc14_2</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libpng</span><span class="p">:</span>          <span class="mf">1.6</span><span class="o">.</span><span class="mi">34</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libpq</span><span class="p">:</span>           <span class="mf">9.6</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libspatialite</span><span class="p">:</span>   <span class="mf">4.3</span><span class="o">.</span><span class="mi">0</span><span class="n">a</span><span class="o">-</span><span class="n">vc14_19</span>        <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libssh2</span><span class="p">:</span>         <span class="mf">1.8</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_2</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libtiff</span><span class="p">:</span>         <span class="mf">4.0</span><span class="o">.</span><span class="mi">9</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libxml2</span><span class="p">:</span>         <span class="mf">2.9</span><span class="o">.</span><span class="mi">8</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">libxslt</span><span class="p">:</span>         <span class="mf">1.1</span><span class="o">.</span><span class="mi">32</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">mkl</span><span class="p">:</span>             <span class="mf">2018.0</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">mkl_fft</span><span class="p">:</span>         <span class="mf">1.0</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">py35_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">mkl_random</span><span class="p">:</span>      <span class="mf">1.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">py35_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">libnetcdf</span><span class="p">:</span>       <span class="mf">4.6.1</span><span class="o">-</span><span class="n">vc14_2</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libpng</span><span class="p">:</span>          <span class="mf">1.6.34</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libpq</span><span class="p">:</span>           <span class="mf">9.6.3</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libspatialite</span><span class="p">:</span>   <span class="mf">4.3.0</span><span class="n">a</span><span class="o">-</span><span class="n">vc14_19</span>        <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libssh2</span><span class="p">:</span>         <span class="mf">1.8.0</span><span class="o">-</span><span class="n">vc14_2</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libtiff</span><span class="p">:</span>         <span class="mf">4.0.9</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libxml2</span><span class="p">:</span>         <span class="mf">2.9.8</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">libxslt</span><span class="p">:</span>         <span class="mf">1.1.32</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">mkl</span><span class="p">:</span>             <span class="mf">2018.0.3</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">mkl_fft</span><span class="p">:</span>         <span class="mf">1.0.2</span><span class="o">-</span><span class="n">py35_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">mkl_random</span><span class="p">:</span>      <span class="mf">1.0.1</span><span class="o">-</span><span class="n">py35_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
     <span class="n">nitro</span><span class="p">:</span>           <span class="mf">2.7</span><span class="o">.</span><span class="n">dev2</span><span class="o">-</span><span class="n">vc14_0</span>       <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">numpy</span><span class="p">:</span>           <span class="mf">1.14</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">py35h9fa60d3_2</span>
-    <span class="n">numpy</span><span class="o">-</span><span class="n">base</span><span class="p">:</span>      <span class="mf">1.14</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">py35h5c71026_0</span>
-    <span class="n">openjpeg</span><span class="p">:</span>        <span class="mf">2.3</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_2</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">openssl</span><span class="p">:</span>         <span class="mf">1.0</span><span class="o">.</span><span class="mi">2</span><span class="n">o</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">pcl</span><span class="p">:</span>             <span class="mf">1.8</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">hd76163c_1</span>      <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">pdal</span><span class="p">:</span>            <span class="mf">1.7</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">py35h33f895e_1</span>  <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">pip</span><span class="p">:</span>             <span class="mf">9.0</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">py35_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">pixman</span><span class="p">:</span>          <span class="mf">0.34</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_2</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">numpy</span><span class="p">:</span>           <span class="mf">1.14.3</span><span class="o">-</span><span class="n">py35h9fa60d3_2</span>
+    <span class="n">numpy</span><span class="o">-</span><span class="n">base</span><span class="p">:</span>      <span class="mf">1.14.3</span><span class="o">-</span><span class="n">py35h5c71026_0</span>
+    <span class="n">openjpeg</span><span class="p">:</span>        <span class="mf">2.3.0</span><span class="o">-</span><span class="n">vc14_2</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">openssl</span><span class="p">:</span>         <span class="mf">1.0.2</span><span class="n">o</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">pcl</span><span class="p">:</span>             <span class="mf">1.8.1</span><span class="o">-</span><span class="n">hd76163c_1</span>      <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">pdal</span><span class="p">:</span>            <span class="mf">1.7.2</span><span class="o">-</span><span class="n">py35h33f895e_1</span>  <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">pip</span><span class="p">:</span>             <span class="mf">9.0.3</span><span class="o">-</span><span class="n">py35_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">pixman</span><span class="p">:</span>          <span class="mf">0.34.0</span><span class="o">-</span><span class="n">vc14_2</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
     <span class="n">postgresql</span><span class="p">:</span>      <span class="mf">10.3</span><span class="o">-</span><span class="n">py35_vc14_0</span>      <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">proj4</span><span class="p">:</span>           <span class="mf">4.9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">vc14_5</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">python</span><span class="p">:</span>          <span class="mf">3.5</span><span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span>               <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">setuptools</span><span class="p">:</span>      <span class="mf">39.2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">py35_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">sqlite</span><span class="p">:</span>          <span class="mf">3.20</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">vc14_2</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">tiledb</span><span class="p">:</span>          <span class="mf">1.4</span><span class="o">.</span><span class="mi">1</span>                 <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">proj4</span><span class="p">:</span>           <span class="mf">4.9.3</span><span class="o">-</span><span class="n">vc14_5</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">python</span><span class="p">:</span>          <span class="mf">3.5.5</span><span class="o">-</span><span class="mi">1</span>               <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">setuptools</span><span class="p">:</span>      <span class="mf">39.2.0</span><span class="o">-</span><span class="n">py35_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">sqlite</span><span class="p">:</span>          <span class="mf">3.20.1</span><span class="o">-</span><span class="n">vc14_2</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">tiledb</span><span class="p">:</span>          <span class="mf">1.4.1</span>                 <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
     <span class="n">vc</span><span class="p">:</span>              <span class="mi">14</span><span class="o">-</span><span class="mi">0</span>                  <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">vs2015_runtime</span><span class="p">:</span>  <span class="mf">14.0</span><span class="o">.</span><span class="mi">25420</span><span class="o">-</span><span class="mi">0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">wheel</span><span class="p">:</span>           <span class="mf">0.31</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">py35_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">vs2015_runtime</span><span class="p">:</span>  <span class="mf">14.0.25420</span><span class="o">-</span><span class="mi">0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">wheel</span><span class="p">:</span>           <span class="mf">0.31.0</span><span class="o">-</span><span class="n">py35_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
     <span class="n">wincertstore</span><span class="p">:</span>    <span class="mf">0.2</span><span class="o">-</span><span class="n">py35_0</span>            <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">xerces</span><span class="o">-</span><span class="n">c</span><span class="p">:</span>        <span class="mf">3.2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
-    <span class="n">xz</span><span class="p">:</span>              <span class="mf">5.2</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">0</span>               <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-    <span class="n">zlib</span><span class="p">:</span>            <span class="mf">1.2</span><span class="o">.</span><span class="mi">11</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">xerces</span><span class="o">-</span><span class="n">c</span><span class="p">:</span>        <span class="mf">3.2.0</span><span class="o">-</span><span class="n">vc14_0</span>          <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
+    <span class="n">xz</span><span class="p">:</span>              <span class="mf">5.2.3</span><span class="o">-</span><span class="mi">0</span>               <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+    <span class="n">zlib</span><span class="p">:</span>            <span class="mf">1.2.11</span><span class="o">-</span><span class="n">vc14_0</span>         <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="p">[</span><span class="n">vc14</span><span class="p">]</span>
 
 <span class="n">Downloading</span> <span class="ow">and</span> <span class="n">Extracting</span> <span class="n">Packages</span>
-<span class="n">pdal</span><span class="o">-</span><span class="mf">1.7</span><span class="o">.</span><span class="mi">2</span>           <span class="o">|</span>  <span class="mf">8.6</span> <span class="n">MB</span> <span class="o">|</span> <span class="c1">###################################### | 100%</span>
-<span class="n">setuptools</span><span class="o">-</span><span class="mf">39.2</span><span class="o">.</span><span class="mi">0</span>    <span class="o">|</span>  <span class="mi">591</span> <span class="n">KB</span> <span class="o">|</span> <span class="c1">###################################### | 100%</span>
-<span class="n">numpy</span><span class="o">-</span><span class="mf">1.14</span><span class="o">.</span><span class="mi">3</span>         <span class="o">|</span>   <span class="mi">42</span> <span class="n">KB</span> <span class="o">|</span> <span class="c1">###################################### | 100%</span>
+<span class="n">pdal</span><span class="o">-</span><span class="mf">1.7.2</span>           <span class="o">|</span>  <span class="mf">8.6</span> <span class="n">MB</span> <span class="o">|</span> <span class="c1">###################################### | 100%</span>
+<span class="n">setuptools</span><span class="o">-</span><span class="mf">39.2.0</span>    <span class="o">|</span>  <span class="mi">591</span> <span class="n">KB</span> <span class="o">|</span> <span class="c1">###################################### | 100%</span>
+<span class="n">numpy</span><span class="o">-</span><span class="mf">1.14.3</span>         <span class="o">|</span>   <span class="mi">42</span> <span class="n">KB</span> <span class="o">|</span> <span class="c1">###################################### | 100%</span>
 <span class="n">Preparing</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">done</span>
 <span class="n">Verifying</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">done</span>
 <span class="n">Executing</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">done</span>
@@ -415,9 +420,9 @@ following command.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">update</span> <span class="n">pdal</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="fetch-sample-data">
+</section>
+</section>
+<section id="fetch-sample-data">
 <h2>Fetch Sample Data<a class="headerlink" href="#fetch-sample-data" title="Permalink to this headline">¶</a></h2>
 <p>We need some sample data to play with, so we’re going to download the
 <code class="docutils literal notranslate"><span class="pre">autzen.laz</span></code> file. Inside your terminal (assuming Windows), issue the
@@ -427,8 +432,8 @@ following command:</p>
 </div>
 <p>In the download dialog, save the file to your <code class="docutils literal notranslate"><span class="pre">Downloads</span></code> folder, e.g.,
 <code class="docutils literal notranslate"><span class="pre">C:\Users\hobu\Downloads</span></code>.</p>
-</div>
-<div class="section" id="print-the-first-point">
+</section>
+<section id="print-the-first-point">
 <h2>Print the first point<a class="headerlink" href="#print-the-first-point" title="Permalink to this headline">¶</a></h2>
 <p>To print the first point only, issue the following command (replacing of course
 <code class="docutils literal notranslate"><span class="pre">hobu</span></code> with your user name, or another path altogether, depending on where
@@ -473,8 +478,8 @@ you saved the file).</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="what-s-next">
+</section>
+<section id="what-s-next">
 <h2>What’s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Visit <a class="reference internal" href="apps/index.html#apps"><span class="std std-ref">Applications</span></a> to find out how to utilize PDAL applications to process
@@ -496,8 +501,8 @@ how you can leverage these capabilities in your own programs.</p></li>
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="community.html#community"><span class="std std-ref">Community</span></a> is a good source to reach out to when you’re stuck.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -533,7 +538,7 @@ how you can leverage these capabilities in your own programs.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -564,7 +569,7 @@ how you can leverage these capabilities in your own programs.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

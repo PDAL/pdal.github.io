@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.julia &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -245,7 +250,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-julia">
+  <section id="filters-julia">
 <span id="id1"></span><h1>filters.julia<a class="headerlink" href="#filters-julia" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>Julia Filter</strong> allows <a class="reference external" href="https://julialang.org/">Julia</a> software to be embedded in a
 <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> that allows modification of PDAL points through a <a class="reference external" href="https://github.com/JuliaData/TypedTables.jl">TypedTables</a>
@@ -264,8 +269,8 @@ and return the same object (with modifications).</p>
    <span class="k">using</span> <span class="n">TypedTables</span>
 
    <span class="k">function</span> <span class="n">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-     <span class="k">for</span> <span class="n">n</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-       <span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="p">(;</span> <span class="o">:</span><span class="n">Z</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">.</span><span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
+       <span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="p">(;</span> <span class="ss">:Z</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">.</span><span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span>
      <span class="k">end</span>
      <span class="k">return</span> <span class="n">ins</span>
    <span class="k">end</span>
@@ -292,7 +297,7 @@ and return the same object (with modifications).</p>
       <span class="s">&quot;add_dimension&quot;</span><span class="o">:</span> <span class="s">&quot;NewDimensionOne=uint8&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="filter-example">
+<section id="filter-example">
 <h2>Filter Example<a class="headerlink" href="#filter-example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file-input.las&quot;</span><span class="p">,</span>
@@ -323,8 +328,8 @@ which removes points with the <code class="docutils literal notranslate"><span c
 <span class="k">end</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="modification-example">
+</section>
+<section id="modification-example">
 <h2>Modification Example<a class="headerlink" href="#modification-example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file-input.las&quot;</span><span class="p">,</span>
@@ -350,16 +355,16 @@ which scales the <code class="docutils literal notranslate"><span class="pre">Z<
   <span class="k">using</span> <span class="n">TypedTables</span>
 
   <span class="k">function</span> <span class="n">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-      <span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="p">(;</span> <span class="o">:</span><span class="n">Z</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">.</span><span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
+      <span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="p">(;</span> <span class="ss">:Z</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">.</span><span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span>
     <span class="k">end</span>
     <span class="k">return</span> <span class="n">ins</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>script</dt><dd><p>When reading a function from a separate <a class="reference external" href="https://julialang.org/">Julia</a> file, the file name to read
@@ -389,8 +394,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -426,7 +431,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -457,7 +462,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

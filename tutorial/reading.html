@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Reading with PDAL &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -243,7 +248,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="reading-with-pdal">
+  <section id="reading-with-pdal">
 <span id="reading"></span><h1>Reading with PDAL<a class="headerlink" href="#reading-with-pdal" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -279,7 +284,7 @@
 </div>
 <p>This tutorial is an introduction to using PDAL to read data using pdal
 from the command line.</p>
-<div class="section" id="a-basic-inquiry-example">
+<section id="a-basic-inquiry-example">
 <h2>A basic inquiry example<a class="headerlink" href="#a-basic-inquiry-example" title="Permalink to this headline">¶</a></h2>
 <p>Our first example to demonstrate PDAL’s utility will be to simply query an
 <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">LAS</a> file to determine the data that are in it in the very first point.</p>
@@ -320,8 +325,8 @@ from the command line.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="a-conversion-example">
+</section>
+<section id="a-conversion-example">
 <h2>A conversion example<a class="headerlink" href="#a-conversion-example" title="Permalink to this headline">¶</a></h2>
 <p>Conversion of data from one format to another may be lossy, in that some
 data in the source format may not be representable in the same format or
@@ -350,7 +355,7 @@ metadata such as the input spatial reference system or the <a class="reference e
 fields, such as <a class="reference external" href="http://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.
 You may need to preserve some more information as part of
 your conversion to make it useful down the road.</p>
-<div class="section" id="metadata">
+<section id="metadata">
 <h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h3>
 <p>PDAL carries <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">metadata</span></a> for each stage through the PDAL
 <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">processing pipeline</span></a>.  The metadata can be written in
@@ -364,9 +369,9 @@ your <a class="reference external" href="http://www.json.org/">JSON</a> manipula
 For formats that do not have the ability to
 preserve this metadata internally, you can keep a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file
 alongside the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file as auxiliary information.</p>
-</div>
-</div>
-<div class="section" id="a-pipeline-example">
+</section>
+</section>
+<section id="a-pipeline-example">
 <h2>A Pipeline Example<a class="headerlink" href="#a-pipeline-example" title="Permalink to this headline">¶</a></h2>
 <p>The full power of PDAL comes in the form of <a class="reference internal" href="../apps/pipeline.html#pipeline-command"><span class="std std-ref">pipeline</span></a> invocations.
 Pipelines allow you to take advantage of PDAL’s ability to manipulate data
@@ -382,7 +387,7 @@ are executed in a linear order.  Some stages support what is known as
 is run using using stream mode to reduce the memory processing footprint.
 Even when run in stream mode, execution is single-threaded and can be
 thought of as linear.</p>
-<div class="section" id="simple-conversion">
+<section id="simple-conversion">
 <h3>Simple conversion<a class="headerlink" href="#simple-conversion" title="Permalink to this headline">¶</a></h3>
 <p>The following <a class="reference external" href="http://www.json.org/">JSON</a> document defines a pipeline that takes the <code class="docutils literal notranslate"><span class="pre">file.las</span></code>
 <a class="reference external" href="http://www.asprs.org/a/society/committees/standards/lidar_exchange_format.html">LAS</a> file and converts it to a new file called <code class="docutils literal notranslate"><span class="pre">output.las</span></code>.</p>
@@ -392,8 +397,8 @@ thought of as linear.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loop-a-directory-and-filter-it-through-a-pipeline">
+</section>
+<section id="loop-a-directory-and-filter-it-through-a-pipeline">
 <h3>Loop a directory and filter it through a pipeline<a class="headerlink" href="#loop-a-directory-and-filter-it-through-a-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>This bash script loops through a directory and pushes the las files through
 a pipeline, substituting the input and output as it goes.</p>
@@ -413,9 +418,9 @@ foreach-object {
 }
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -451,7 +456,7 @@ foreach-object {
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -482,7 +487,7 @@ foreach-object {
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

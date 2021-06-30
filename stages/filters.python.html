@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.python &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -246,7 +251,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-python">
+  <section id="filters-python">
 <span id="id1"></span><h1>filters.python<a class="headerlink" href="#filters-python" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>Python Filter</strong> allows <a class="reference external" href="http://python.org/">Python</a> software to be embedded in a
 <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> that allows modification of PDAL points through a <a class="reference external" href="http://www.numpy.org/">NumPy</a>
@@ -300,7 +305,7 @@ it with the <a class="reference internal" href="#add-dimension">add_dimension</a
 </div>
 </li>
 </ol>
-<div class="section" id="modification-example">
+<section id="modification-example">
 <h2>Modification Example<a class="headerlink" href="#modification-example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file-input.las&quot;</span><span class="p">,</span>
@@ -331,8 +336,8 @@ which scales the <code class="docutils literal notranslate"><span class="pre">Z<
     <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="predicates">
+</section>
+<section id="predicates">
 <h2>Predicates<a class="headerlink" href="#predicates" title="Permalink to this headline">¶</a></h2>
 <p>Points can be retained/removed from the stream by setting true/false values
 into a special “Mask” dimension in the output point array.</p>
@@ -372,7 +377,7 @@ you can use for prototyping point stream processing operations.</p>
 array, the <a class="reference external" href="https://pypi.python.org/pypi/PDAL">PDAL Python extension</a>
 is available.</p>
 </div>
-<div class="section" id="example-pipeline">
+<section id="example-pipeline">
 <h3>Example pipeline<a class="headerlink" href="#example-pipeline" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="s2">&quot;file-input.las&quot;</span><span class="p">,</span>
@@ -392,9 +397,9 @@ is available.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="module-globals">
+</section>
+</section>
+<section id="module-globals">
 <h2>Module Globals<a class="headerlink" href="#module-globals" title="Permalink to this headline">¶</a></h2>
 <p>Three global variables are added to the Python module as it is run to allow
 you to get <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a>, <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a>, and coordinate system
@@ -410,20 +415,25 @@ for the in-scope <a class="reference internal" href="#filters-python"><span clas
     <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<div class="section" id="updating-metadata">
-<h3>Updating metadata<a class="headerlink" href="#updating-metadata" title="Permalink to this headline">¶</a></h3>
-<p>The filter can update the global <code class="docutils literal notranslate"><span class="pre">metadata</span></code> dictionary as needed,
-define it as a
-<strong>global</strong> Python variable for the function’s scope, and the updates will be
-reflected back into the pipeline from that stage forward.</p>
+<section id="setting-stage-metadata">
+<h3>Setting stage metadata<a class="headerlink" href="#setting-stage-metadata" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The name of the output metadata variable has changed from <code class="docutils literal notranslate"><span class="pre">metadata</span></code> to <code class="docutils literal notranslate"><span class="pre">out_metadata</span></code>.</p>
+</div>
+<p>Stage metadata can be created by using the <code class="docutils literal notranslate"><span class="pre">out_metadata</span></code> dictionary <strong>global</strong> variable.
+The <code class="docutils literal notranslate"><span class="pre">name</span></code> key must be set. The type of the <code class="docutils literal notranslate"><span class="pre">value</span></code> can usually be inferred, but
+can be set to one of <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">nonNegativeInteger</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>, <code class="docutils literal notranslate"><span class="pre">bounds</span></code>,
+<code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">spatialreference</span></code>, <code class="docutils literal notranslate"><span class="pre">uuid</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<p>Children may be set using the <code class="docutils literal notranslate"><span class="pre">children</span></code> key whose value is a list of dictionaries.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">ins</span><span class="p">,</span><span class="n">outs</span><span class="p">):</span>
-  <span class="k">global</span> <span class="n">metadata</span>
-  <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;a string&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;filters.python&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a filter description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;readers.faux&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;another string&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a reader description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[]}]}</span>
+  <span class="k">global</span> <span class="n">out_metadata</span>
+  <span class="n">out_metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;a string&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;somekey&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a filter description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;readers.faux&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;another string&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;a reader description&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[]}]}</span>
   <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="passing-python-objects">
+</section>
+<section id="passing-python-objects">
 <h3>Passing Python objects<a class="headerlink" href="#passing-python-objects" title="Permalink to this headline">¶</a></h3>
 <p>An JSON-formatted option can be passed to the filter representing a
 Python dictionary containing objects you want to use in your function.
@@ -458,17 +468,17 @@ Python script and use it:</p>
     <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="standard-output-and-error">
+</section>
+<section id="standard-output-and-error">
 <h3>Standard output and error<a class="headerlink" href="#standard-output-and-error" title="Permalink to this headline">¶</a></h3>
 <p>A <code class="docutils literal notranslate"><span class="pre">redirector</span></code> module is available for scripts to output to PDAL’s log stream
 explicitly. The module handles redirecting <code class="docutils literal notranslate"><span class="pre">sys.stderr</span></code> and
 <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code> for you
 transparently, but it can be used directly by scripts. See the PDAL source
 code for more details.</p>
-</div>
-</div>
-<div class="section" id="options">
+</section>
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>script</dt><dd><p>When reading a function from a separate <a class="reference external" href="http://python.org/">Python</a> file, the file name to read
@@ -501,8 +511,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -538,7 +548,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -569,7 +579,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

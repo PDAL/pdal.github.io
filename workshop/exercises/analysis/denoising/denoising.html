@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Removing noise &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
 
   
@@ -35,10 +38,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -72,7 +76,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -114,6 +118,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../stages/filters.html">Filters</a></li>
@@ -254,10 +259,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="removing-noise">
+  <section id="removing-noise">
 <span id="workshop-denoising"></span><h1>Removing noise<a class="headerlink" href="#removing-noise" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This exercise uses PDAL to remove unwanted noise in an airborne LiDAR collection.</p>
-<div class="section" id="exercise">
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>PDAL provides the <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">outlier filter</span></a> to apply a statistical
 filter to data.</p>
@@ -292,17 +297,17 @@ define it.</p>
 <p>This pipeline is available in your workshop materials in the
 <code class="docutils literal notranslate"><span class="pre">./exercises/analysis/denoising/denoise.json</span></code> file.</p>
 </div>
-<div class="section" id="pipeline-breakdown">
+<section id="pipeline-breakdown">
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="reader">
+<section id="reader">
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
 <p>After our pipeline errata, the first item we define in the pipeline is the
 point cloud file we’re going to read.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;./exercises/analysis/denoising/18TWK820985.laz&quot;</span><span class="p">,</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="filters-outlier">
+</section>
+<section id="filters-outlier">
 <h4>2. <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a><a class="headerlink" href="#filters-outlier" title="Permalink to this headline">¶</a></h4>
 <p>The PDAL <a class="reference internal" href="../../../../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">outlier filter</span></a> does most of the work for this
 operation.</p>
@@ -314,8 +319,8 @@ operation.</p>
 <span class="p">},</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="filters-range">
+</section>
+<section id="filters-range">
 <h4>3. <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a><a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h4>
 <p>At this point, the outliers have been classified per the LAS specification as
 low/noise points with a classification value of 7. The <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">range
@@ -335,8 +340,8 @@ another <a class="reference internal" href="../../../../stages/filters.range.htm
 <span class="p">},</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="writers-las">
+</section>
+<section id="writers-las">
 <span id="index-1"></span><h4>4. <a class="reference internal" href="../../../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a><a class="headerlink" href="#writers-las" title="Permalink to this headline">¶</a></h4>
 <p>We could just define the <code class="docutils literal notranslate"><span class="pre">clean.laz</span></code> filename, but we want to
 add a few options to have finer control over what is written. These include:</p>
@@ -361,9 +366,9 @@ consume LAS.</p></li>
 <p><a class="reference internal" href="../../../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> provides a number of possible options to control
 how your LAS files are written.</p>
 </div>
-</div>
-</div>
-<div class="section" id="execution">
+</section>
+</section>
+<section id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
 <p>Invoke the following command, substituting accordingly, in your ` Shell`:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">denoising</span><span class="o">/</span><span class="n">denoise</span><span class="o">.</span><span class="n">json</span>
@@ -371,16 +376,16 @@ how your LAS files are written.</p>
 </pre></div>
 </div>
 <a class="reference external image-reference" href="../../../../_images/denoise-run-command.png"><img alt="../../../../_images/denoise-run-command.png" src="../../../../_images/denoise-run-command.png" /></a>
-</div>
-<div class="section" id="visualization">
+</section>
+<section id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
 <p>Use one of the point cloud visualization tools you installed to take a look at
 your <code class="docutils literal notranslate"><span class="pre">clean.laz</span></code> output. In the example below, we simply
 opened the file using the <a class="reference external" href="http://www.fugroviewer.com/">Fugro Viewer</a></p>
 <a class="reference external image-reference" href="../../../../_images/denoise-fugro.png"><img alt="../../../../_images/denoise-fugro.png" src="../../../../_images/denoise-fugro.png" /></a>
-</div>
-</div>
-<div class="section" id="notes">
+</section>
+</section>
+<section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Control the aggressiveness of the algorithm with the <code class="docutils literal notranslate"><span class="pre">mean_k</span></code> parameter.</p></li>
@@ -388,8 +393,8 @@ opened the file using the <a class="reference external" href="http://www.fugrovi
 process. If you have really large files, you are going to need to
 <a class="reference internal" href="../../../../stages/filters.splitter.html#filters-splitter"><span class="std std-ref">split</span></a> them in some way.</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -425,7 +430,7 @@ process. If you have really large files, you are going to need to
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -456,7 +461,7 @@ process. If you have really large files, you are going to need to
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

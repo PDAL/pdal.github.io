@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Continuous Integration &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -146,8 +151,12 @@
 <li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Continuous Integration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#status">Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#travis">Travis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#appveyor">AppVeyor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docs">Docs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#push-to-pdal-io">Push to pdal.io</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -237,42 +246,56 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="continuous-integration">
+  <section id="continuous-integration">
 <span id="integration"></span><h1>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h1>
-<p>PDAL <a class="reference internal" href="testing.html#pdal-test"><span class="std std-ref">regression tests</span></a> are run on a per-commit basis by at
-least two continuous integration platforms.</p>
-<div class="section" id="status">
+<p>PDAL <a class="reference internal" href="testing.html#pdal-test"><span class="std std-ref">regression tests</span></a> are run on a per-commit basis using
+<a class="reference external" href="https://github.com/features/actions">GitHub Actions</a></p>
+<section id="status">
 <h2>Status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://travis-ci.org/PDAL/PDAL"><img alt="travisstatus" src="https://travis-ci.org/PDAL/PDAL.png?branch=master" /></a>
-<a class="reference external" href="https://ci.appveyor.com/project/hobu/pdal"><img alt="appveyorstatus" src="https://ci.appveyor.com/api/projects/status/6dehrm0v22cw58d3" /></a></p>
-</div>
-<div class="section" id="travis">
-<span id="id1"></span><h2>Travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h2>
-<p>The Travis continuous integration platform runs the PDAL test suite on Alpine
-Linux. The build status and other supporting information can be found at
-<a class="reference external" href="https://travis-ci.org/PDAL/PDAL">https://travis-ci.org/PDAL/PDAL</a> Its configuration can be found at
-<a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/.travis.yml">https://github.com/PDAL/PDAL/blob/master/.travis.yml</a> All administrators of the
-GitHub <cite>PDAL</cite> group have rights to modify the Travis configuration.</p>
-<p>It uses the <code class="docutils literal notranslate"><span class="pre">alpine:edge</span></code> Docker image found at
-<a class="reference external" href="https://hub.docker.com/_/alpine/">https://hub.docker.com/_/alpine/</a> as a base platform. If you want to add new
-functionality based on a dependency, you will need to ensure that the dependency
-is available in <a class="reference external" href="https://pkgs.alpinelinux.org/packages">https://pkgs.alpinelinux.org/packages</a> and update the Travis
-configuration YAML accordingly.</p>
-</div>
-<div class="section" id="appveyor">
-<span id="id2"></span><h2>AppVeyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h2>
-<p>PDAL uses the AppVeyor continuous integration platform to run the PDAL
-compilation and test suite on Windows. The build status and other supporting
-information can be found at <a class="reference external" href="https://ci.appveyor.com/project/hobu/pdal">https://ci.appveyor.com/project/hobu/pdal</a> Its
-configuration can be found at
-<a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/appveyor.yml">https://github.com/PDAL/PDAL/blob/master/appveyor.yml</a> All administrators of the
-GitHub <cite>PDAL</cite> group have rights to modify the AppVeyor configuration.</p>
-<p><a class="reference external" href="http://github.com/hobu">Howard Butler</a> currently pays the bill to run in the AppVeyor upper
-performance processing tier. The AppVeyor configuration depends on <a class="reference internal" href="../download.html#conda"><span class="std std-ref">Conda</span></a>
-for dependencies. If you want to add new test functionality based on a
-dependency, you will need to update <a class="reference internal" href="../download.html#conda"><span class="std std-ref">Conda</span></a> with a new package to do so.</p>
-</div>
-</div>
+<p><a class="reference external" href="https://github.com/PDAL/PDAL/actions?query=workflow%3AAlpine"><img alt="alpinestatus" src="https://github.com/PDAL/PDAL/workflows/Alpine/badge.svg" /></a>
+<a class="reference external" href="https://github.com/PDAL/PDAL/actions?query=workflow%3ALinux"><img alt="linuxstatus" src="https://github.com/PDAL/PDAL/workflows/Linux/badge.svg" /></a>
+<a class="reference external" href="https://github.com/PDAL/PDAL/actions?query=workflow%3AOSX"><img alt="osxstatus" src="https://github.com/PDAL/PDAL/workflows/OSX/badge.svg" /></a>
+<a class="reference external" href="https://github.com/PDAL/PDAL/actions?query=workflow%3AWindows"><img alt="windowstatus" src="https://github.com/PDAL/PDAL/workflows/Windows/badge.svg" /></a>
+<a class="reference external" href="https://github.com/PDAL/PDAL/actions?query=workflow%3ADocs"><img alt="docsstatus" src="https://github.com/PDAL/PDAL/workflows/Docs/badge.svg" /></a>
+<a class="reference external" href="https://github.com/PDAL/PDAL/actions?query=workflow%3ADocker"><img alt="dockerstatus" src="https://github.com/PDAL/PDAL/workflows/Docker/badge.svg" /></a></p>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Continuous integration configuration is modified by manipulating configuration
+files in to locations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">./github/workflows</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./scripts/ci</span></code></p></li>
+</ul>
+<p>Linux, OSX, and Windows builds are all configured separately with scripts in the
+<code class="docutils literal notranslate"><span class="pre">./scripts/ci</span></code> directory.</p>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>All of the tests use Conda Forge for dependencies.</p>
+<p>The Linux builder has a “fixed” configuration that pins GDAL to a specific
+version to prevent the rest of the dependency tree from floating according to
+Conda Forge’s package dependency rules.</p>
+</section>
+<section id="docs">
+<h2>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h2>
+<p>Docs are always built and doc artifacts are attached to the build:</p>
+<ul class="simple">
+<li><p>HTML</p></li>
+<li><p>PDF</p></li>
+<li><p>Misspelled words</p></li>
+</ul>
+<section id="push-to-pdal-io">
+<h3>Push to pdal.io<a class="headerlink" href="#push-to-pdal-io" title="Permalink to this headline">¶</a></h3>
+<p>Docs are pushed to pdal.io under the following conditions:</p>
+<ul class="simple">
+<li><p>Doc building succeeds</p></li>
+<li><p>The push branch denoted in <code class="docutils literal notranslate"><span class="pre">./github/workflows/docs.yaml</span></code> matches the current
+<code class="docutils literal notranslate"><span class="pre">*-maintenance</span></code> branch.</p></li>
+</ul>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -308,7 +331,7 @@ dependency, you will need to update <a class="reference internal" href="../downl
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -339,7 +362,7 @@ dependency, you will need to update <a class="reference internal" href="../downl
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

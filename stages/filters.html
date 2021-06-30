@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Filters &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Filters</a><ul>
@@ -198,7 +203,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#resampling">Resampling</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="filters.decimation.html">filters.decimation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="filters.farthestpointsampling.html">filters.farthestpointsampling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.fps.html">filters.fps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.relaxationdartthrowing.html">filters.relaxationdartthrowing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="filters.sample.html">filters.sample</a></li>
 </ul>
 </li>
@@ -372,14 +378,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters">
+  <section id="filters">
 <span id="id1"></span><h1>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h1>
 <p>Filters operate on data as inline operations. They can remove, modify,
 reorganize, and add points to the data stream as it goes by. Some filters can
 only operate on dimensions they understand (consider <a class="reference internal" href="filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a>
 doing geographic reprojection on XYZ coordinates), while others do not
 interrogate the point data at all and simply reorganize or split data.</p>
-<div class="section" id="create">
+<section id="create">
 <h2>Create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h2>
 <p>PDAL filters commonly create new dimensions (e.g., <code class="docutils literal notranslate"><span class="pre">HeightAboveGround</span></code>) or
 alter existing ones (e.g., <code class="docutils literal notranslate"><span class="pre">Classification</span></code>). These filters will not
@@ -394,9 +400,9 @@ invalidate an existing KD-tree.</p>
 whether or not the custom dimension can be written to disk if that is the
 desired behavior.</p>
 </div>
-<div class="section" id="classification">
+<section id="classification">
 <h3>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="ground-unclassified">
+<section id="ground-unclassified">
 <h4>Ground/Unclassified<a class="headerlink" href="#ground-unclassified" title="Permalink to this headline">¶</a></h4>
 <div class="toctree-wrapper compound">
 </div>
@@ -410,8 +416,8 @@ desired behavior.</p>
 <dt><a class="reference internal" href="filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a></dt><dd><p>Label ground/non-ground returns using <a class="reference internal" href="../references.html#pingel2013" id="id5"><span>[Pingel2013]</span></a>.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="noise">
+</section>
+<section id="noise">
 <h4>Noise<a class="headerlink" href="#noise" title="Permalink to this headline">¶</a></h4>
 <div class="toctree-wrapper compound">
 </div>
@@ -421,8 +427,8 @@ desired behavior.</p>
 <dt><a class="reference internal" href="filters.outlier.html#filters-outlier"><span class="std std-ref">filters.outlier</span></a></dt><dd><p>Label noise points using either a statistical or radius outlier detection.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="consensus">
+</section>
+<section id="consensus">
 <h4>Consensus<a class="headerlink" href="#consensus" title="Permalink to this headline">¶</a></h4>
 <div class="toctree-wrapper compound">
 </div>
@@ -430,9 +436,9 @@ desired behavior.</p>
 <dt><a class="reference internal" href="filters.neighborclassifier.html#filters-neighborclassifier"><span class="std std-ref">filters.neighborclassifier</span></a></dt><dd><p>Update pointwise classification using k-nearest neighbor consensus voting.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="height-above-ground">
+</section>
+</section>
+<section id="height-above-ground">
 <h3>Height Above Ground<a class="headerlink" href="#height-above-ground" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -446,8 +452,8 @@ classified as ground/non-ground prior to estimating.</p>
 classified as ground/non-ground prior to estimating.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="colorization">
+</section>
+<section id="colorization">
 <h3>Colorization<a class="headerlink" href="#colorization" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -457,8 +463,8 @@ classified as ground/non-ground prior to estimating.</p>
 <dt><a class="reference internal" href="filters.colorization.html#filters-colorization"><span class="std std-ref">filters.colorization</span></a></dt><dd><p>Fetch and assign RGB color information from a GDAL-readable datasource.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="clustering">
+</section>
+<section id="clustering">
 <h3>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -479,8 +485,8 @@ non-tree points given a <code class="docutils literal notranslate"><span class="
 starts at 0. <a class="reference internal" href="../references.html#lloyd1982" id="id8"><span>[Lloyd1982]</span></a>.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="pointwise-features">
+</section>
+<section id="pointwise-features">
 <h3>Pointwise Features<a class="headerlink" href="#pointwise-features" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -517,8 +523,8 @@ pointwise eigenentropy. Creates two new dimensions <code class="docutils literal
 neighbors of a point.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="assignment">
+</section>
+<section id="assignment">
 <h3>Assignment<a class="headerlink" href="#assignment" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -529,8 +535,8 @@ neighbors of a point.</p>
 source or an OGR SQL query.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="dimension-create-copy">
+</section>
+<section id="dimension-create-copy">
 <h3>Dimension Create/Copy<a class="headerlink" href="#dimension-create-copy" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -538,9 +544,9 @@ source or an OGR SQL query.</p>
 <dt><a class="reference internal" href="filters.ferry.html#filters-ferry"><span class="std std-ref">filters.ferry</span></a></dt><dd><p>Copy data from one dimension to another.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="order">
+</section>
+</section>
+<section id="order">
 <h2>Order<a class="headerlink" href="#order" title="Permalink to this headline">¶</a></h2>
 <p>There are currently three PDAL filters that can be used to reorder points. These
 filters will invalidate an existing KD-tree.</p>
@@ -554,11 +560,11 @@ filters will invalidate an existing KD-tree.</p>
 <dt><a class="reference internal" href="filters.sort.html#filters-sort"><span class="std std-ref">filters.sort</span></a></dt><dd><p>Sort data based on a given dimension.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="move">
+</section>
+<section id="move">
 <h2>Move<a class="headerlink" href="#move" title="Permalink to this headline">¶</a></h2>
 <p>PDAL filters that move XYZ coordinates will invalidate an existing KD-tree.</p>
-<div class="section" id="registration">
+<section id="registration">
 <h3>Registration<a class="headerlink" href="#registration" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -570,8 +576,8 @@ Coherent Point Drift algorithm.</p>
 Iterative Closest Point algorithm.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="predefined">
+</section>
+<section id="predefined">
 <h3>Predefined<a class="headerlink" href="#predefined" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -584,13 +590,13 @@ WKT2 coordinates operations or URN definitions.</p>
 <dt><a class="reference internal" href="filters.transformation.html#filters-transformation"><span class="std std-ref">filters.transformation</span></a></dt><dd><p>Transform each point using a 4x4 transformation matrix.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="cull">
+</section>
+</section>
+<section id="cull">
 <h2>Cull<a class="headerlink" href="#cull" title="Permalink to this headline">¶</a></h2>
 <p>Some PDAL filters will cull points, returning a point cloud that is smaller than
 the input. These filters will invalidate an existing KD-tree.</p>
-<div class="section" id="spatial">
+<section id="spatial">
 <h3>Spatial<a class="headerlink" href="#spatial" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -598,23 +604,27 @@ the input. These filters will invalidate an existing KD-tree.</p>
 <dt><a class="reference internal" href="filters.crop.html#filters-crop"><span class="std std-ref">filters.crop</span></a></dt><dd><p>Filter points inside or outside a bounding box or a polygon</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="resampling">
+</section>
+<section id="resampling">
 <h3>Resampling<a class="headerlink" href="#resampling" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="simple">
 <dt><a class="reference internal" href="filters.decimation.html#filters-decimation"><span class="std std-ref">filters.decimation</span></a></dt><dd><p>Keep every Nth point.</p>
 </dd>
-<dt><a class="reference internal" href="filters.farthestpointsampling.html#filters-farthestpointsampling"><span class="std std-ref">filters.farthestpointsampling</span></a></dt><dd><p>The Farthest Point Sampling Filter adds points from the input to the output
+<dt><a class="reference internal" href="filters.fps.html#filters-fps"><span class="std std-ref">filters.fps</span></a></dt><dd><p>The Farthest Point Sampling Filter adds points from the input to the output
 PointView one at a time by selecting the point from the input cloud that is
 farthest from any point currently in the output.</p>
+</dd>
+<dt><a class="reference internal" href="filters.relaxationdartthrowing.html#filters-relaxationdartthrowing"><span class="std std-ref">filters.relaxationdartthrowing</span></a></dt><dd><p>Relaxation dart throwing is a hierarchical variant of Poisson disk
+sampling, shrinking the minimum radius between iterations until the target
+number of output points is achieved.</p>
 </dd>
 <dt><a class="reference internal" href="filters.sample.html#filters-sample"><span class="std std-ref">filters.sample</span></a></dt><dd><p>Perform Poisson sampling and return only a subset of the input points.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="conditional">
+</section>
+<section id="conditional">
 <h3>Conditional<a class="headerlink" href="#conditional" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -629,8 +639,8 @@ dimension.</p>
 given dimension.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="voxel">
+</section>
+<section id="voxel">
 <h3>Voxel<a class="headerlink" href="#voxel" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -643,8 +653,8 @@ given dimension.</p>
 voxel, depending on mode argument.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="position">
+</section>
+<section id="position">
 <h3>Position<a class="headerlink" href="#position" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -660,13 +670,13 @@ voxel, depending on mode argument.</p>
 <dt><a class="reference internal" href="filters.tail.html#filters-tail"><span class="std std-ref">filters.tail</span></a></dt><dd><p>Return N points from end of the point cloud.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="new">
+</section>
+</section>
+<section id="new">
 <h2>New<a class="headerlink" href="#new" title="Permalink to this headline">¶</a></h2>
 <p>PDAL filters can be used to split the incoming point cloud into subsets. These
 filters will invalidate an existing KD-tree.</p>
-<div class="section" id="id9">
+<section id="id9">
 <h3>Spatial<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -680,8 +690,8 @@ scheme.</p>
 <dt><a class="reference internal" href="filters.splitter.html#filters-splitter"><span class="std std-ref">filters.splitter</span></a></dt><dd><p>Split data based on a X/Y box length.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="dimension">
+</section>
+<section id="dimension">
 <h3>Dimension<a class="headerlink" href="#dimension" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 </div>
@@ -693,9 +703,9 @@ scheme.</p>
 <dt><a class="reference internal" href="filters.separatescanline.html#filters-separatescanline"><span class="std std-ref">filters.separatescanline</span></a></dt><dd><p>Split data based on scan lines.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="join">
+</section>
+</section>
+<section id="join">
 <h2>Join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h2>
 <p>Multiple point clouds can be joined to form a single point cloud. These filters
 will invalidate an existing KD-tree.</p>
@@ -705,8 +715,8 @@ will invalidate an existing KD-tree.</p>
 <dt><a class="reference internal" href="filters.merge.html#filters-merge"><span class="std std-ref">filters.merge</span></a></dt><dd><p>Merge data from two different readers into a single stream.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="metadata">
+</section>
+<section id="metadata">
 <h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
 <p>PDAL filters can be used to create new metadata. These filters will not
 invalidate an existing KD-tree.</p>
@@ -726,8 +736,8 @@ spatial reference information.</p>
 <dt><a class="reference internal" href="filters.stats.html#filters-stats"><span class="std std-ref">filters.stats</span></a></dt><dd><p>Compute statistics about each dimension (mean, min, max, etc.).</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="mesh">
+</section>
+<section id="mesh">
 <h2>Mesh<a class="headerlink" href="#mesh" title="Permalink to this headline">¶</a></h2>
 <p>Meshes can be computed from point clouds. These filters will invalidate an
 existing KD-tree.</p>
@@ -742,8 +752,8 @@ existing KD-tree.</p>
 <a class="reference internal" href="../references.html#kazhdan2006" id="id10"><span>[Kazhdan2006]</span></a>.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="languages">
+</section>
+<section id="languages">
 <h2>Languages<a class="headerlink" href="#languages" title="Permalink to this headline">¶</a></h2>
 <p>PDAL has three filters than can be used to pass point clouds to other
 languages. These filters will invalidate an existing KD-tree.</p>
@@ -757,8 +767,8 @@ languages. These filters will invalidate an existing KD-tree.</p>
 <dt><a class="reference internal" href="filters.julia.html#filters-julia"><span class="std std-ref">filters.julia</span></a></dt><dd><p>Embed Julia software in a pipeline.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="other">
+</section>
+<section id="other">
 <h2>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
@@ -766,8 +776,8 @@ languages. These filters will invalidate an existing KD-tree.</p>
 <dt><a class="reference internal" href="filters.streamcallback.html#filters-streamcallback"><span class="std std-ref">filters.streamcallback</span></a></dt><dd><p>Provide a hook for a simple point-by-point callback.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -803,7 +813,7 @@ languages. These filters will invalidate an existing KD-tree.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -834,7 +844,7 @@ languages. These filters will invalidate an existing KD-tree.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

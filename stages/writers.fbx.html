@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>writers.fbx &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -69,7 +73,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -111,6 +115,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
@@ -210,7 +215,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="writers-fbx">
+  <section id="writers-fbx">
 <span id="id1"></span><h1>writers.fbx<a class="headerlink" href="#writers-fbx" title="Permalink to this headline">¶</a></h1>
 <p>Output to the Autodesk FBX format. The pipeline requires the mesh
 to be built, as only mesh output is created. You must us
@@ -220,7 +225,7 @@ a mesh for the point cloud before outputting the FBX.</p>
 <p class="admonition-title">Dynamic Plugin</p>
 <p>This stage requires a dynamic plugin to operate</p>
 </div>
-<div class="section" id="compilation">
+<section id="compilation">
 <h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
 <p>You must download and install the Autodesk SDK
 and then compile the PDAL FBX plugin against it. Visit
@@ -232,8 +237,8 @@ to obtain a current copy of the SDK.</p>
 -DBUILD_PLUGIN_FBX=ON ^</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="example">
+</section>
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
@@ -254,8 +259,8 @@ to obtain a current copy of the SDK.</p>
 <blockquote>
 <div><p>pdal translate autzen.las autzen.fbx -f poisson</p>
 </div></blockquote>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>filename</dt><dd><p>FBX filename to write
@@ -264,8 +269,22 @@ to obtain a current copy of the SDK.</p>
 <dt>ascii</dt><dd><p>Write ASCII FBX format.  [Default: false]</p>
 </dd>
 </dl>
-</div>
-</div>
+<dl class="simple">
+<dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a writer.
+Points that don’t pass the
+expression skip the stage but are available to subsequent stages in a pipeline.
+[Default: no filtering]</p>
+</dd>
+<dt>where_merge</dt><dd><p>A strategy for merging points skipped by a ‘<cite>where’</cite> option when running in standard mode.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the skipped points are added to the first point view returned by the skipped
+filter. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, skipped points are placed in their own point view. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>,
+skipped points are merged into the returned point view provided that only one point view
+is returned and it has the same point count as it did when the writer was run.
+[Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
+</dd>
+</dl>
+</section>
+</section>
 
 
            </div>
@@ -292,7 +311,7 @@ to obtain a current copy of the SDK.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -323,7 +342,7 @@ to obtain a current copy of the SDK.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

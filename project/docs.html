@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Docs &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stages/stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/writers.html">Writers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stages/filters.html">Filters</a></li>
@@ -243,9 +248,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="docs">
+  <section id="docs">
 <span id="development-docs"></span><h1>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="requirements">
+<section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>To build the PDAL documentation yourself, you need to install the following
 items:</p>
@@ -256,7 +261,7 @@ items:</p>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/LaTeX">Latex</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Dvipng">dvipng</a></p></li>
 </ul>
-<div class="section" id="sphinx-and-breathe">
+<section id="sphinx-and-breathe">
 <h3><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> and <a class="reference external" href="https://github.com/michaeljones/breathe">Breathe</a><a class="headerlink" href="#sphinx-and-breathe" title="Permalink to this headline">¶</a></h3>
 <p>Python dependencies should be installed from <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a> with <code class="docutils literal notranslate"><span class="pre">pip</span></code> or
 <code class="docutils literal notranslate"><span class="pre">easy_install</span></code>.</p>
@@ -269,24 +274,24 @@ items:</p>
 the <strong>sudo</strong> in front of the <strong>pip</strong>, though it might be better that instead
 you use <a class="reference external" href="https://pypi.python.org/pypi/virtualenv">virtual environments</a> instead of installing the packages system-wide.</p>
 </div>
-</div>
-<div class="section" id="doxygen">
+</section>
+<section id="doxygen">
 <h3>Doxygen<a class="headerlink" href="#doxygen" title="Permalink to this headline">¶</a></h3>
 <p>The PDAL documentation also depends on <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a>, which can be installed from
 source or from binaries from the <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/download.html">doxygen website</a>.  If you are on Max OS X
 and use <a class="reference external" href="http://mxcl.github.io/homebrew/">homebrew</a>, you can install doxygen with a simple <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span>
 <span class="pre">doxygen</span></code>.</p>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h3>Latex<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/LaTeX">Latex</a> and <a class="reference external" href="https://www.tug.org/applications/pdftex/">pdflatex</a> are used to generate the companion PDF of the website.</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>dvipng<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>For math output, we depend on <a class="reference external" href="https://en.wikipedia.org/wiki/Dvipng">dvipng</a> to turn <a class="reference external" href="https://en.wikipedia.org/wiki/LaTeX">Latex</a> output into math PNGs.</p>
-</div>
-</div>
-<div class="section" id="generation">
+</section>
+</section>
+<section id="generation">
 <h2>Generation<a class="headerlink" href="#generation" title="Permalink to this headline">¶</a></h2>
 <p>Once you have installed all the doc dependencies, you can then build the
 documentation itself.  The <code class="file docutils literal notranslate"><span class="pre">doc/</span></code> directory in the PDAL source tree
@@ -306,20 +311,15 @@ is necessary to re-generate the API documentation from the source code using
 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">doxygen</span></code> to have it build its XML output which is consumed
 by <a class="reference external" href="https://github.com/michaeljones/breathe">Breathe</a> before <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> can be issued.</p>
 </div>
-</div>
-<div class="section" id="website">
+</section>
+<section id="website">
 <h2>Website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="http://pdal.io">http://pdal.io</a> website is regenerated from the <code class="docutils literal notranslate"><span class="pre">*-maintenance</span></code> branch using
-<a class="reference internal" href="integration.html#travis"><span class="std std-ref">Travis</span></a>. It will be committed by the <code class="docutils literal notranslate"><span class="pre">PDAL-docs</span></code> <a class="reference external" href="http://github.com/PDAL/PDAL">GitHub</a> user and pushed
+Github Actions. It will be committed by the <code class="docutils literal notranslate"><span class="pre">PDAL-docs</span></code> <a class="reference external" href="http://github.com/PDAL/PDAL">GitHub</a> user and pushed
 to the <a class="reference external" href="https://github.com/PDAL/pdal.github.io">https://github.com/PDAL/pdal.github.io</a> repository. The website
 is then served via <a class="reference external" href="https://pages.github.com/">GitHub Pages</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The website is regenerated and pushed only on the <code class="docutils literal notranslate"><span class="pre">after_success</span></code> <a class="reference internal" href="integration.html#travis"><span class="std std-ref">Travis</span></a>
-call. If the tests aren’t passing, the website won’t be updated.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -355,7 +355,7 @@ call. If the tests aren’t passing, the website won’t be updated.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -386,7 +386,7 @@ call. If the tests aren’t passing, the website won’t be updated.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

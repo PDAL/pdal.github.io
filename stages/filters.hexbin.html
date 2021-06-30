@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.hexbin &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -245,17 +250,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-hexbin">
+  <section id="filters-hexbin">
 <span id="id1"></span><h1>filters.hexbin<a class="headerlink" href="#filters-hexbin" title="Permalink to this headline">¶</a></h1>
 <p>A common questions for users of point clouds is what the spatial extent of a
 point cloud collection is. Files generally provide only rectangular bounds, but
 often the points inside the files only fill up a small percentage of the area
 within the bounds.</p>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/filters.hexbin.img1.jpg"><img alt="Hexbin derived from input point buffer" src="../_images/filters.hexbin.img1.jpg" style="width: 464.0px; height: 456.5px;" /></a>
-<p class="caption"><span class="caption-text">Hexbin output shows boundary of actual points in point buffer, not
+<figcaption>
+<p><span class="caption-text">Hexbin output shows boundary of actual points in point buffer, not
 just rectangular extents.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>The hexbin filter reads a point stream and writes out a metadata record that
 contains a boundary, expressed as a well-known text polygon. The filter counts
 the points in each hexagonal area to determine if that area should be included
@@ -266,7 +273,7 @@ invoked using the “–pipeline-serialization” option:</p>
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-<div class="section" id="example-1">
+<section id="example-1">
 <h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <p>The following pipeline file and command produces an JSON output file
 containing the pipeline’s metadata, which includes the result of running
@@ -303,8 +310,8 @@ the hexbin filter:</p>
 ...
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-2">
+</section>
+<section id="example-2">
 <h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <p>As a convenience, the <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span></code> command will produce similar output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pdal info --boundary /Users/me/test/data/las/autzen_trim.las
@@ -330,8 +337,8 @@ the hexbin filter:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt><span class="target" id="edge-size">edge_size</span></dt><dd><p>If not set, the hexbin filter will estimate a hex size based on a sample of
@@ -366,8 +373,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -403,7 +410,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -434,7 +441,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

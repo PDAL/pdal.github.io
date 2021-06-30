@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>filters.transformation &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,10 +38,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -72,7 +76,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -114,6 +118,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
@@ -245,7 +250,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="filters-transformation">
+  <section id="filters-transformation">
 <span id="id1"></span><h1>filters.transformation<a class="headerlink" href="#filters-transformation" title="Permalink to this headline">¶</a></h1>
 <p>The transformation filter applies an arbitrary rotation+translation
 transformation, represented as a 4x4 <a class="reference internal" href="#matrix">matrix</a>, to each xyz triplet.</p>
@@ -264,7 +269,7 @@ reference information.</p>
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-<div class="section" id="example">
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This example rotates the points around the z-axis while translating them.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
@@ -280,8 +285,8 @@ reference information.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>invert</dt><dd><p>If set to true, applies the inverse of the provided transformation matrix.
@@ -306,8 +311,8 @@ is returned and it has the same point count as it did when the filter was run.
 [Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="further-details">
+</section>
+<section id="further-details">
 <h2>Further details<a class="headerlink" href="#further-details" title="Permalink to this headline">¶</a></h2>
 <p>A full tutorial about transformation matrices is beyond the scope of this
 documentation. Instead, we will provide a few pointers to introduce core
@@ -324,7 +329,7 @@ transformation matrix and so on).</p>
 transformation matrix, we provide some simple examples in the form of pure
 translations, rotations, and scaling, and show the corresponding <code class="docutils literal notranslate"><span class="pre">matrix</span></code>
 string.</p>
-<div class="section" id="translation">
+<section id="translation">
 <h3>Translation<a class="headerlink" href="#translation" title="Permalink to this headline">¶</a></h3>
 <p>A pure translation by <span class="math notranslate nohighlight">\(t_x\)</span>, <span class="math notranslate nohighlight">\(t_y\)</span>, and <span class="math notranslate nohighlight">\(t_z\)</span> in the X, Y,
 and Z dimensions is represented by the following matrix.</p>
@@ -344,8 +349,8 @@ and Z dimensions is represented by the following matrix.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="scaling">
+</section>
+<section id="scaling">
 <h3>Scaling<a class="headerlink" href="#scaling" title="Permalink to this headline">¶</a></h3>
 <p>Scaling of coordinates is also possible using a transformation matrix. The
 matrix shown below will scale the X coordinates by <span class="math notranslate nohighlight">\(s_x\)</span>, the Y
@@ -368,8 +373,8 @@ transformation. In the example, X and Y are not scaled at all (i.e.,
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="rotation">
+</section>
+<section id="rotation">
 <h3>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">¶</a></h3>
 <p>A rotation of coordinates by <span class="math notranslate nohighlight">\(\theta\)</span> radians counter-clockwise about
 the z-axis is accomplished with the following matrix.</p>
@@ -426,9 +431,9 @@ with the matrix</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -464,7 +469,7 @@ with the matrix</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -495,7 +500,7 @@ with the matrix</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 

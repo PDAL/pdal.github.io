@@ -5,7 +5,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>writers.gdal &mdash; pdal.io</title>
@@ -14,6 +15,8 @@
   
   <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
   <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
 
   
@@ -35,6 +38,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -46,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="writers.geowave" href="writers.geowave.html" />
+    <link rel="next" title="writers.gltf" href="writers.gltf.html" />
     <link rel="prev" title="writers.e57" href="writers.e57.html" /> 
 </head>
 
@@ -71,7 +75,7 @@
             
             
               <div class="version">
-                2.2.0
+                2.3.0
               </div>
             
           
@@ -113,6 +117,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
@@ -123,13 +128,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="writers.geowave.html">writers.geowave</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gltf.html">writers.gltf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.matlab.html">writers.matlab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.nitf.html">writers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.null.html">writers.null</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.oci.html">writers.oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ogr.html">writers.ogr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pcd.html">writers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.pgpointcloud.html">writers.pgpointcloud</a></li>
@@ -237,7 +240,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="writers.geowave.html" class="btn btn-neutral float-right" title="writers.geowave" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="writers.gltf.html" class="btn btn-neutral float-right" title="writers.gltf" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="writers.e57.html" class="btn btn-neutral float-left" title="writers.e57" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -249,7 +252,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="writers-gdal">
+  <section id="writers-gdal">
 <span id="id1"></span><h1>writers.gdal<a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h1>
 <p>The <strong>GDAL writer</strong> creates a raster from a point cloud using an interpolation
 algorithm.  Output is produced using <a class="reference external" href="http://gdal.org">GDAL</a> and can use any <a class="reference external" href="http://www.gdal.org/formats_list.html">driver
@@ -304,7 +307,7 @@ the <a class="reference internal" href="#nodata">nodata</a> option.</p>
 <p class="admonition-title">Streamable Stage</p>
 <p>This stage supports streaming operations</p>
 </div>
-<div class="section" id="basic-example">
+<section id="basic-example">
 <h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
 <p>This  pipeline reads the file autzen_trim.las and creates a Geotiff dataset
 called outputfile.tif.  Since output_type isn’t specified, it creates six
@@ -321,8 +324,8 @@ whose values contribute to the cell value is 14.14.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
+</section>
+<section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>filename</dt><dd><p>Name of output file. The writer will accept a filename containing
@@ -401,14 +404,37 @@ The format is ([minx, maxx],[miny,maxy]). [Optional]</p>
 </dd>
 <dt>height</dt><dd><p>Number of cells in the Y direction. [Default: None]</p>
 </dd>
+<dt>override_srs</dt><dd><p>Write the raster with the provided SRS. [Default: None]</p>
+</dd>
+<dt>default_srs</dt><dd><p>Write the raster with the provided SRS if none exists. [Default: None]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a writer.
+Points that don’t pass the
+expression skip the stage but are available to subsequent stages in a pipeline.
+[Default: no filtering]</p>
+</dd>
+<dt>where_merge</dt><dd><p>A strategy for merging points skipped by a ‘<cite>where’</cite> option when running in standard mode.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the skipped points are added to the first point view returned by the skipped
+filter. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, skipped points are placed in their own point view. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>,
+skipped points are merged into the returned point view provided that only one point view
+is returned and it has the same point count as it did when the writer was run.
+[Default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>]</p>
+</dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You may use the ‘bounds’ option, or ‘origin_x’, ‘origin_y’, ‘width’
 and ‘height’, but not both.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unless the raster being written is empty, the spatial reference will automatically
+come from the data and does not need to be set with ‘override_srs’ or ‘default_srs’.</p>
 </div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -418,7 +444,7 @@ and ‘height’, but not both.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="writers.geowave.html" class="btn btn-neutral float-right" title="writers.geowave" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="writers.gltf.html" class="btn btn-neutral float-right" title="writers.gltf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="writers.e57.html" class="btn btn-neutral float-left" title="writers.e57" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -444,7 +470,7 @@ and ‘height’, but not both.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 12, 2021.
+      Last updated on Jun 30, 2021.
       </div>
     </div>
 </footer>
@@ -475,7 +501,7 @@ and ‘height’, but not both.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 12, 2021.
+                    on Jun 30, 2021.
         </div>
     </div>
 
