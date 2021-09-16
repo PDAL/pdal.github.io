@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Writing with PDAL &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/development/writing.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Metadata" href="metadata.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
@@ -167,28 +113,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -243,9 +178,9 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="writing-with-pdal">
-<span id="writing"></span><h1>Writing with PDAL<a class="headerlink" href="#writing-with-pdal" title="Permalink to this headline">¶</a></h1>
+<span id="writing"></span><h1>Writing with PDAL<a class="headerlink" href="#writing-with-pdal" title="Permalink to this headline"></a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
 <dd class="field-odd"><p>Bradley Chambers</p>
@@ -268,82 +203,82 @@ read-filter-write pipeline using <a class="reference internal" href="../pipeline
 code anything explicit yourself.</p>
 </div>
 <section id="includes">
-<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline"></a></h2>
 <p>First, our code.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;io/BufferReader.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;io/BufferReader.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
 
-<span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">struct</span> <span class="nc">Point</span>
-    <span class="p">{</span>
-        <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
-        <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
-        <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
-    <span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span><span class="w"> </span><span class="n">view</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">Point</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Point</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
 
-        <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">-93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
-        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
-        <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-93.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">106.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
 
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">pdal</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
-    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">options</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;myfile.las&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+<span class="w">    </span><span class="n">PointTable</span><span class="w"> </span><span class="n">table</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+<span class="w">    </span><span class="n">PointViewPtr</span><span class="w"> </span><span class="nf">view</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span><span class="w"></span>
 
-    <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
-    <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BufferReader</span><span class="w"> </span><span class="n">reader</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
+<span class="w">    </span><span class="n">StageFactory</span><span class="w"> </span><span class="n">factory</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
-    <span class="c1">// stage and facilitate clean up.</span>
-    <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
+<span class="w">    </span><span class="c1">// stage and facilitate clean up.</span>
+<span class="w">    </span><span class="n">Stage</span><span class="w"> </span><span class="o">*</span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Take a closer look. We will need to include several PDAL headers.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/PointView.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Dimension.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/StageFactory.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;io/BufferReader.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;io/BufferReader.hpp&gt;</span><span class="cp"></span>
 </pre></div>
 </div>
 <p><cite>BufferReader</cite> will not be required by all users. Here is it used to populate a
@@ -353,75 +288,75 @@ we rely on the <cite>StageFactory</cite> which has the ability to query availabl
 at runtime and return pointers to the created stages.</p>
 <p>We proceed by providing a mechanism for generating dummy data for the x, y, and
 z dimensions.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span> <span class="n">view</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">struct</span> <span class="nc">Point</span>
-    <span class="p">{</span>
-        <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
-        <span class="kt">double</span> <span class="n">y</span><span class="p">;</span>
-        <span class="kt">double</span> <span class="n">z</span><span class="p">;</span>
-    <span class="p">};</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span><span class="w"> </span><span class="n">view</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">Point</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Point</span> <span class="n">p</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Point</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
 
-        <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">-93.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
-        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">42.0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span>
-        <span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">106.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-93.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">106.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
 
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">setField</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">pdal</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
-    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">options</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;myfile.las&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+<span class="w">    </span><span class="n">PointTable</span><span class="w"> </span><span class="n">table</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Finally, the main code which creates the dummy data, puts it into a BufferReader
 and sends it to a writer.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">pdal</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">Options</span> <span class="n">options</span><span class="p">;</span>
-    <span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;myfile.las&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">options</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;myfile.las&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
-    <span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+<span class="w">    </span><span class="n">PointTable</span><span class="w"> </span><span class="n">table</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">X</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">table</span><span class="p">.</span><span class="n">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDim</span><span class="p">(</span><span class="n">Dimension</span><span class="o">::</span><span class="n">Id</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">PointViewPtr</span> <span class="nf">view</span><span class="p">(</span><span class="k">new</span> <span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+<span class="w">    </span><span class="n">PointViewPtr</span><span class="w"> </span><span class="nf">view</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PointView</span><span class="p">(</span><span class="n">table</span><span class="p">));</span><span class="w"></span>
 
-    <span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fillView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">BufferReader</span> <span class="n">reader</span><span class="p">;</span>
-    <span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BufferReader</span><span class="w"> </span><span class="n">reader</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">reader</span><span class="p">.</span><span class="n">addView</span><span class="p">(</span><span class="n">view</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">StageFactory</span> <span class="n">factory</span><span class="p">;</span>
+<span class="w">    </span><span class="n">StageFactory</span><span class="w"> </span><span class="n">factory</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
-    <span class="c1">// stage and facilitate clean up.</span>
-    <span class="n">Stage</span> <span class="o">*</span><span class="n">writer</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Set second argument to &#39;true&#39; to let factory take ownership of</span>
+<span class="w">    </span><span class="c1">// stage and facilitate clean up.</span>
+<span class="w">    </span><span class="n">Stage</span><span class="w"> </span><span class="o">*</span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="n">createStage</span><span class="p">(</span><span class="s">&quot;writers.las&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">setOptions</span><span class="p">(</span><span class="n">options</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
 <section id="compiling-and-running-the-program">
-<h2>Compiling and running the program<a class="headerlink" href="#compiling-and-running-the-program" title="Permalink to this headline">¶</a></h2>
+<h2>Compiling and running the program<a class="headerlink" href="#compiling-and-running-the-program" title="Permalink to this headline"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Refer to <a class="reference internal" href="compilation/index.html#building"><span class="std std-ref">Compilation</span></a> for information on how to build PDAL.</p>
@@ -465,7 +400,6 @@ $ make
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -497,29 +431,20 @@ $ make
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -528,7 +453,7 @@ $ make
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

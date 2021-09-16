@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>readers.text &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/stages/readers.text.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="readers.terrasolid" href="readers.terrasolid.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
@@ -193,28 +139,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -269,9 +204,9 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="readers-text">
-<span id="id1"></span><h1>readers.text<a class="headerlink" href="#readers-text" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>readers.text<a class="headerlink" href="#readers-text" title="Permalink to this headline"></a></h1>
 <p>The <strong>text reader</strong> reads data from ASCII text files.  Each point is
 represented in the file as a single line.  Each line is expected to be divided
 into a number of fields by a separator.  Each field represents a value for
@@ -280,7 +215,7 @@ C++ language double-precision values.</p>
 <p>The text reader expects a header line to indicate the dimensions are
 in each subsequent line.  There are two types of header lines.</p>
 <section id="quoted-dimension-names">
-<h2>Quoted dimension names<a class="headerlink" href="#quoted-dimension-names" title="Permalink to this headline">¶</a></h2>
+<h2>Quoted dimension names<a class="headerlink" href="#quoted-dimension-names" title="Permalink to this headline"></a></h2>
 <p>When the first character of the header is a double quote, each dimension name
 is assumed to be surrounded by double quotes.  A single separator character
 is expected between the dimension names (spaces are stripped).  If no separator
@@ -291,7 +226,7 @@ the header line or use the <a class="reference internal" href="#header">header</
 ones that PDAL understands.</p>
 </section>
 <section id="unquoted-dimension-names">
-<h2>Unquoted dimension names<a class="headerlink" href="#unquoted-dimension-names" title="Permalink to this headline">¶</a></h2>
+<h2>Unquoted dimension names<a class="headerlink" href="#unquoted-dimension-names" title="Permalink to this headline"></a></h2>
 <p>The first non alpha-numeric character encountered is treated as a separator
 between dimension names.  The separator in the header line can be overridden
 by the <a class="reference internal" href="#separator">separator</a> option.</p>
@@ -312,7 +247,7 @@ leading/trailing spaces are ignored.</p>
 </div>
 </section>
 <section id="example-input-file">
-<h2>Example Input File<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
+<h2>Example Input File<a class="headerlink" href="#example-input-file" title="Permalink to this headline"></a></h2>
 <p>This input file contains X, Y and Z value for 10 points.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span>
 <span class="mf">289814.15</span><span class="p">,</span><span class="mf">4320978.61</span><span class="p">,</span><span class="mf">170.76</span>
@@ -329,7 +264,7 @@ leading/trailing spaces are ignored.</p>
 </div>
 </section>
 <section id="example-1">
-<h2>Example #1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<h2>Example #1<a class="headerlink" href="#example-1" title="Permalink to this headline"></a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.text&quot;</span><span class="p">,</span>
@@ -344,7 +279,7 @@ leading/trailing spaces are ignored.</p>
 </div>
 </section>
 <section id="example-2">
-<h2>Example #2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<h2>Example #2<a class="headerlink" href="#example-2" title="Permalink to this headline"></a></h2>
 <p>This reads the data in the input file as Red, Green and Blue instead of
 as X, Y and Z.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
@@ -363,7 +298,7 @@ as X, Y and Z.</p>
 </div>
 </section>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
 <dl class="simple">
 <dt>filename</dt><dd><p>text file to read [Required]</p>
 </dd>
@@ -393,7 +328,6 @@ records containing point data unless skipped with the <a class="reference intern
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -425,29 +359,20 @@ records containing point data unless skipped with the <a class="reference intern
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -456,7 +381,7 @@ records containing point data unless skipped with the <a class="reference intern
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

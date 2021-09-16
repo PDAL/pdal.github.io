@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Generating a DTM &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/workshop/exercises/analysis/dtm/dtm.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../../about.html" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Identifying ground" href="../ground/ground.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
 </ul>
@@ -179,28 +125,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -257,15 +192,15 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="generating-a-dtm">
-<span id="workshop-dtm"></span><h1>Generating a DTM<a class="headerlink" href="#generating-a-dtm" title="Permalink to this headline">¶</a></h1>
+<span id="workshop-dtm"></span><h1>Generating a DTM<a class="headerlink" href="#generating-a-dtm" title="Permalink to this headline"></a></h1>
 <p id="index-0">This exercise uses PDAL to generate an elevation model surface using the
 output from the <a class="reference internal" href="../ground/ground.html#workshop-ground"><span class="std std-ref">Identifying ground</span></a> exercise, PDAL’s <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 operation, and <a class="reference external" href="http://gdal.org/">GDAL</a> to generate an elevation and hillshade surface from
 point cloud data.</p>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The primary input for <a class="reference external" href="https://en.wikipedia.org/wiki/Digital_elevation_model">Digital Terrain Model</a> generation is a point cloud
@@ -274,14 +209,14 @@ with ground classifications. We created this file, called
 file by following that exercise before starting this one.</p>
 </div>
 <section id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>
 stage. There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we
 must use a pipeline.</p>
 </section>
 <section id="pipeline-breakdown">
-<h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
+<h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;./exercises/analysis/ground/denoised-ground-only.laz&quot;</span><span class="p">,</span>
@@ -304,25 +239,25 @@ must use a pipeline.</p>
 filenames to match your paths.</p>
 </div>
 <section id="reader">
-<h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
+<h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">denoised-ground-only</span></code> is the <a class="reference external" href="http://laszip.org">LASzip</a> file we will clip. You should have
 created this output as part of the <a class="reference internal" href="../ground/ground.html#workshop-ground"><span class="std std-ref">Identifying ground</span></a> exercise.</p>
 </section>
 <section id="writers-gdal">
-<h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h4>
+<h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline"></a></h4>
 <p>The <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer that bins the point cloud data into an elevation
 surface.</p>
 </section>
 </section>
 <section id="execution">
-<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">dtm</span><span class="o">/</span><span class="n">gdal</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
 <a class="reference external image-reference" href="../../../../_images/dtm-run-command.png"><img alt="../../../../_images/dtm-run-command.png" src="../../../../_images/dtm-run-command.png" /></a>
 </section>
 <section id="visualization">
-<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
+<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline"></a></h3>
 <p>Something happened, and some files were written, but we cannot really
 see what was produced. Let us use <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> to visualize the output.</p>
 <ol class="arabic">
@@ -368,7 +303,7 @@ to save the <code class="docutils literal notranslate"><span class="pre">hillsha
 </section>
 </section>
 <section id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a>, which powers the <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> DEM tools, is a very powerful
 command line utility you can use for processing data.</p></li>
@@ -380,7 +315,6 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -412,29 +346,20 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -443,7 +368,7 @@ typical <a class="reference external" href="https://en.wikipedia.org/wiki/Triang
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

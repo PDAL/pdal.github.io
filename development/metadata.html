@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Metadata &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/development/metadata.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Errors and Error Handling" href="errorhandling.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
@@ -167,28 +113,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -243,9 +178,9 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="metadata">
-<span id="id1"></span><h1>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline"></a></h1>
 <p>In addition to point data, PDAL stores metadata during the processing of
 a pipeline.  Metadata is stored internally as strings, though the API
 accepts a variety of types that are automatically converted as necessary.
@@ -257,7 +192,7 @@ such as <a class="reference internal" href="../apps/pipeline.html#pipeline-comma
 <a class="reference internal" href="../apps/translate.html#translate-command"><span class="std std-ref">pdal translate</span></a> provide options to allow
 the JSON-formatted metadata created by PDAL to be written to a file.</p>
 <section id="metadata-nodes">
-<h2>Metadata Nodes<a class="headerlink" href="#metadata-nodes" title="Permalink to this headline">¶</a></h2>
+<h2>Metadata Nodes<a class="headerlink" href="#metadata-nodes" title="Permalink to this headline"></a></h2>
 <p>Each item of metadata is stored in an object known as a <code class="docutils literal notranslate"><span class="pre">MetadataNode</span></code>.
 Metadata nodes are reference types that can be copied cheaply.  Metadata nodes
 are annotated with the original data type to allow better interpretation of
@@ -286,21 +221,21 @@ square brackets.  Single nodes can be forced to be treated as JSON lists
 by calling addList() instead of add() on a parent node.</p>
 </section>
 <section id="metadata-and-stages">
-<h2>Metadata and Stages<a class="headerlink" href="#metadata-and-stages" title="Permalink to this headline">¶</a></h2>
+<h2>Metadata and Stages<a class="headerlink" href="#metadata-and-stages" title="Permalink to this headline"></a></h2>
 <p>Stages in PDAL each have a base metadata node.  You can retrieve a stage’s
 metadata node by calling getMetadata().  When a PDAL pipeline is run, its
 metadata is organized as a list of stage nodes to which subnodes have been
 added.  From within the implementation of a stage, metadata is typically
 added similarly to the following:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MetadataNode</span> <span class="n">root</span> <span class="o">=</span> <span class="n">getMetadata</span><span class="p">();</span>
-<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;nodename&quot;</span><span class="p">,</span> <span class="s">&quot;Some string data&quot;</span><span class="p">);</span>
-<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;intlist&quot;</span><span class="p">,</span> <span class="mi">45</span><span class="p">);</span>
-<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;intlist&quot;</span><span class="p">,</span> <span class="mi">55</span><span class="p">);</span>
-<span class="n">Uuid</span> <span class="n">nullUuid</span><span class="p">;</span>
-<span class="n">MetadataNode</span> <span class="nf">pnode</span><span class="p">(</span><span class="s">&quot;parent&quot;</span><span class="p">);</span>
-<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">pnode</span><span class="p">);</span>
-<span class="n">pnode</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;nulluuidnode&quot;</span><span class="p">,</span> <span class="n">nullUuid</span><span class="p">);</span>
-<span class="n">pnode</span><span class="p">.</span><span class="n">addList</span><span class="p">(</span><span class="s">&quot;num_in_list&quot;</span><span class="p">,</span> <span class="mi">66</span><span class="p">);</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MetadataNode</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getMetadata</span><span class="p">();</span><span class="w"></span>
+<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;nodename&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Some string data&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;intlist&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">);</span><span class="w"></span>
+<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;intlist&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">);</span><span class="w"></span>
+<span class="n">Uuid</span><span class="w"> </span><span class="n">nullUuid</span><span class="p">;</span><span class="w"></span>
+<span class="n">MetadataNode</span><span class="w"> </span><span class="nf">pnode</span><span class="p">(</span><span class="s">&quot;parent&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">root</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">pnode</span><span class="p">);</span><span class="w"></span>
+<span class="n">pnode</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;nulluuidnode&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nullUuid</span><span class="p">);</span><span class="w"></span>
+<span class="n">pnode</span><span class="p">.</span><span class="n">addList</span><span class="p">(</span><span class="s">&quot;num_in_list&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If the above code was part of a stage “writers.test”, a transformation to JSON
@@ -331,7 +266,6 @@ would produce the following output:</p>
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -363,29 +297,20 @@ would produce the following output:</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -394,7 +319,7 @@ would produce the following output:</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

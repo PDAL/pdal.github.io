@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Rasterizing Attributes &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/workshop/exercises/analysis/rasterize/rasterize.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../../about.html" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Creating surface meshes" href="../meshing/meshing.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
 </ul>
@@ -179,28 +125,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -257,13 +192,13 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="rasterizing-attributes">
-<span id="workshop-rasterize"></span><h1>Rasterizing Attributes<a class="headerlink" href="#rasterizing-attributes" title="Permalink to this headline">¶</a></h1>
+<span id="workshop-rasterize"></span><h1>Rasterizing Attributes<a class="headerlink" href="#rasterizing-attributes" title="Permalink to this headline"></a></h1>
 <p id="index-0">This exercise uses PDAL to generate a raster surface using a fully classified
 point cloud with PDAL’s <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>.</p>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The exercise fetches its data from a <a class="reference external" href="https://entwine.io">Entwine</a> service that organizes the
@@ -271,12 +206,12 @@ point cloud collection for the entire country of Denmark. You can view the
 data online at <a class="reference external" href="http://potree.entwine.io/data/denmark.html">http://potree.entwine.io/data/denmark.html</a></p>
 </div>
 <section id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
 <p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> stage.
 There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we must use a pipeline.</p>
 </section>
 <section id="pipeline-breakdown">
-<h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
+<h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
@@ -305,7 +240,7 @@ There is no <a class="reference internal" href="../../../../apps/index.html#apps
 filenames to match your paths.</p>
 </div>
 <section id="reader">
-<h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
+<h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="p">{</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
         <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ept://http://na-c.entwine.io/dk/ept.json&quot;</span><span class="p">,</span>
@@ -319,7 +254,7 @@ We’re going to download a small patch of data by the Copenhagen airport area t
 the limited to a spatial resolution of 5m.</p>
 </section>
 <section id="writers-gdal">
-<h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline">¶</a></h4>
+<h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline"></a></h4>
 <p>The <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer that bins the point cloud data with classification
 values.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="p">{</span>
@@ -335,7 +270,7 @@ values.</p>
 </section>
 </section>
 <section id="execution">
-<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline"></a></h3>
 <p>Issue the <a class="reference internal" href="../../../../pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> operation to execute the interpolation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">v</span> <span class="mi">3</span>
 </pre></div>
@@ -364,7 +299,7 @@ values.</p>
 <a class="reference external image-reference" href="../../../../_images/rasterization-classification-run-command.png"><img alt="../../../../_images/rasterization-classification-run-command.png" src="../../../../_images/rasterization-classification-run-command.png" /></a>
 </section>
 <section id="visualization">
-<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
+<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline"></a></h3>
 <a class="reference external image-reference" href="../../../../_images/rasterization-denmark-no-ramp.png"><img alt="../../../../_images/rasterization-denmark-no-ramp.png" src="../../../../_images/rasterization-denmark-no-ramp.png" /></a>
 <p>Basic interpolation of data with <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> will output raw
 classification values into the resulting raster file. We will need to add a
@@ -410,7 +345,7 @@ change the layer to Palatted/Unique Values, and then load the color ramp file:</
 </div>
 <a class="reference external image-reference" href="../../../../_images/rasterization-colored-classification.png"><img alt="../../../../_images/rasterization-colored-classification.png" src="../../../../_images/rasterization-colored-classification.png" /></a>
 <section id="intensity">
-<h4>Intensity<a class="headerlink" href="#intensity" title="Permalink to this headline">¶</a></h4>
+<h4>Intensity<a class="headerlink" href="#intensity" title="Permalink to this headline"></a></h4>
 <p>With PDAL’s ability to override pipeline via commands, we can generate a
 relative intensity image:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> \
@@ -438,7 +373,7 @@ channel of the data by overriding pipeline arguments at the command line.</p>
 </section>
 </section>
 <section id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>  can output any dimension PDAL can provide, but it is is
 up to the user to interpolate the values. For categorical data, neighborhood
@@ -450,7 +385,6 @@ smoothing might produce undesirable results, for example.</p></li>
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -482,29 +416,20 @@ smoothing might produce undesirable results, for example.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -513,7 +438,7 @@ smoothing might produce undesirable results, for example.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

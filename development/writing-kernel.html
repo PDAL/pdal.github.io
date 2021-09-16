@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Writing a kernel &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/development/writing-kernel.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Writing a filter" href="writing-filter.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
@@ -170,28 +116,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -246,9 +181,9 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="writing-a-kernel">
-<span id="writing-kernel"></span><h1>Writing a kernel<a class="headerlink" href="#writing-a-kernel" title="Permalink to this headline">¶</a></h1>
+<span id="writing-kernel"></span><h1>Writing a kernel<a class="headerlink" href="#writing-a-kernel" title="Permalink to this headline"></a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
 <dd class="field-odd"><p>Bradley Chambers</p>
@@ -263,128 +198,128 @@
 <p>PDAL’s command-line application can be extended through the development of
 kernel functions. In this tutorial, we will give a brief example.</p>
 <section id="the-header">
-<h2>The header<a class="headerlink" href="#the-header" title="Permalink to this headline">¶</a></h2>
+<h2>The header<a class="headerlink" href="#the-header" title="Permalink to this headline"></a></h2>
 <p>First, we provide a full listing of the kernel header.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// MyKernel.hpp</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="cp">#pragma once</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="cp">#include</span> <span class="cpf">&lt;pdal/Kernel.hpp&gt;</span><span class="cp"></span>
+<span class="linenos"> 5</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Kernel.hpp&gt;</span><span class="cp"></span>
 <span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="linenos"> 7</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
 <span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="k">namespace</span> <span class="nn">pdal</span>
-<span class="linenos">10</span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="w"></span>
+<span class="linenos">10</span><span class="p">{</span><span class="w"></span>
 <span class="linenos">11</span>
-<span class="linenos">12</span><span class="k">class</span> <span class="nc">PDAL_DLL</span> <span class="nl">MyKernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">Kernel</span>
-<span class="linenos">13</span><span class="p">{</span>
-<span class="linenos">14</span><span class="k">public</span><span class="o">:</span>
-<span class="linenos">15</span>    <span class="n">MyKernel</span><span class="p">();</span>
+<span class="linenos">12</span><span class="k">class</span> <span class="nc">PDAL_DLL</span><span class="w"> </span><span class="nl">MyKernel</span> <span class="p">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Kernel</span><span class="w"></span>
+<span class="linenos">13</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">14</span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">    </span><span class="n">MyKernel</span><span class="p">();</span><span class="w"></span>
 <span class="linenos">16</span>
-<span class="linenos">17</span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="nf">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
-<span class="linenos">18</span>    <span class="kt">int</span> <span class="nf">execute</span><span class="p">();</span> <span class="c1">// override</span>
+<span class="linenos">17</span><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">execute</span><span class="p">();</span><span class="w"> </span><span class="c1">// override</span>
 <span class="linenos">19</span>
-<span class="linenos">20</span><span class="k">private</span><span class="o">:</span>
-<span class="linenos">21</span>    <span class="kt">void</span> <span class="n">addSwitches</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">);</span>
+<span class="linenos">20</span><span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">addSwitches</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">22</span>
-<span class="linenos">23</span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_input_file</span><span class="p">;</span>
-<span class="linenos">24</span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_output_file</span><span class="p">;</span>
-<span class="linenos">25</span><span class="p">};</span>
+<span class="linenos">23</span><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_input_file</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_output_file</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">25</span><span class="p">};</span><span class="w"></span>
 <span class="linenos">26</span>
-<span class="linenos">27</span><span class="p">}</span> <span class="c1">// namespace pdal</span>
+<span class="linenos">27</span><span class="p">}</span><span class="w"> </span><span class="c1">// namespace pdal</span>
 </pre></div>
 </div>
 <p>As with other plugins, the MyKernel class needs to return a name.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="nf">getName</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
 <section id="the-source">
-<h2>The source<a class="headerlink" href="#the-source" title="Permalink to this headline">¶</a></h2>
+<h2>The source<a class="headerlink" href="#the-source" title="Permalink to this headline"></a></h2>
 <p>Again, we start with a full listing of the kernel source.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// MyKernel.cpp</span>
 <span class="linenos"> 2</span>
-<span class="linenos"> 3</span><span class="cp">#include</span> <span class="cpf">&quot;MyKernel.hpp&quot;</span><span class="cp"></span>
+<span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;MyKernel.hpp&quot;</span><span class="cp"></span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="cp">#include</span> <span class="cpf">&lt;pdal/Filter.hpp&gt;</span><span class="cp"></span>
-<span class="linenos"> 6</span><span class="cp">#include</span> <span class="cpf">&lt;pdal/Kernel.hpp&gt;</span><span class="cp"></span>
-<span class="linenos"> 7</span><span class="cp">#include</span> <span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
-<span class="linenos"> 8</span><span class="cp">#include</span> <span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
+<span class="linenos"> 5</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Filter.hpp&gt;</span><span class="cp"></span>
+<span class="linenos"> 6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Kernel.hpp&gt;</span><span class="cp"></span>
+<span class="linenos"> 7</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/Options.hpp&gt;</span><span class="cp"></span>
+<span class="linenos"> 8</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pdal/PointTable.hpp&gt;</span><span class="cp"></span>
 <span class="linenos"> 9</span>
-<span class="linenos">10</span><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
-<span class="linenos">11</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="linenos">10</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+<span class="linenos">11</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
 <span class="linenos">12</span>
 <span class="linenos">13</span>
-<span class="linenos">14</span><span class="k">namespace</span> <span class="nn">pdal</span> <span class="p">{</span>
+<span class="linenos">14</span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="linenos">15</span>
-<span class="linenos">16</span>  <span class="k">static</span> <span class="n">PluginInfo</span> <span class="k">const</span> <span class="n">s_info</span>
-<span class="linenos">17</span>  <span class="p">{</span>
-<span class="linenos">18</span>    <span class="s">&quot;kernels.mykernel&quot;</span><span class="p">,</span>
-<span class="linenos">19</span>    <span class="s">&quot;MyKernel&quot;</span><span class="p">,</span>
-<span class="linenos">20</span>    <span class="s">&quot;http://link/to/documentation&quot;</span>
-<span class="linenos">21</span>  <span class="p">};</span>
+<span class="linenos">16</span><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">PluginInfo</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">s_info</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">    </span><span class="s">&quot;kernels.mykernel&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">    </span><span class="s">&quot;MyKernel&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">    </span><span class="s">&quot;http://link/to/documentation&quot;</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">  </span><span class="p">};</span><span class="w"></span>
 <span class="linenos">22</span>
-<span class="linenos">23</span>  <span class="n">CREATE_SHARED_KERNEL</span><span class="p">(</span><span class="n">MyKernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
-<span class="linenos">24</span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="nf">MyKernel::getName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">23</span><span class="w">  </span><span class="n">CREATE_SHARED_KERNEL</span><span class="p">(</span><span class="n">MyKernel</span><span class="p">,</span><span class="w"> </span><span class="n">s_info</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">MyKernel::getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="linenos">25</span>
-<span class="linenos">26</span>  <span class="n">MyKernel</span><span class="o">::</span><span class="n">MyKernel</span><span class="p">()</span> <span class="o">:</span> <span class="n">Kernel</span><span class="p">()</span>
-<span class="linenos">27</span>  <span class="p">{}</span>
+<span class="linenos">26</span><span class="w">  </span><span class="n">MyKernel</span><span class="o">::</span><span class="n">MyKernel</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Kernel</span><span class="p">()</span><span class="w"></span>
+<span class="linenos">27</span><span class="w">  </span><span class="p">{}</span><span class="w"></span>
 <span class="linenos">28</span>
-<span class="linenos">29</span>  <span class="kt">void</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">addSwitches</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span> <span class="n">args</span><span class="p">)</span>
-<span class="linenos">30</span>  <span class="p">{</span>
-<span class="linenos">31</span>      <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;input,i&quot;</span><span class="p">,</span> <span class="s">&quot;Input filename&quot;</span><span class="p">,</span> <span class="n">m_input_file</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>
-<span class="linenos">32</span>      <span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;output,o&quot;</span><span class="p">,</span> <span class="s">&quot;Output filename&quot;</span><span class="p">,</span> <span class="n">m_output_file</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span>
-<span class="linenos">33</span>  <span class="p">}</span>
+<span class="linenos">29</span><span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">MyKernel</span><span class="o">::</span><span class="n">addSwitches</span><span class="p">(</span><span class="n">ProgramArgs</span><span class="o">&amp;</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">30</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">31</span><span class="w">      </span><span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;input,i&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Input filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">m_input_file</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">32</span><span class="w">      </span><span class="n">args</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;output,o&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Output filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">m_output_file</span><span class="p">).</span><span class="n">setPositional</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">33</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="linenos">34</span>
-<span class="linenos">35</span>  <span class="kt">int</span> <span class="n">MyKernel</span><span class="o">::</span><span class="n">execute</span><span class="p">()</span>
-<span class="linenos">36</span>  <span class="p">{</span>
-<span class="linenos">37</span>    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+<span class="linenos">35</span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">MyKernel</span><span class="o">::</span><span class="n">execute</span><span class="p">()</span><span class="w"></span>
+<span class="linenos">36</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">37</span><span class="w">    </span><span class="n">PointTable</span><span class="w"> </span><span class="n">table</span><span class="p">;</span><span class="w"></span>
 <span class="linenos">38</span>
-<span class="linenos">39</span>    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">makeReader</span><span class="p">(</span><span class="n">m_input_file</span><span class="p">,</span> <span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
+<span class="linenos">39</span><span class="w">    </span><span class="n">Stage</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">makeReader</span><span class="p">(</span><span class="n">m_input_file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;readers.las&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">40</span>
-<span class="linenos">41</span>    <span class="c1">// Options should be added in the call to makeFilter, makeReader,</span>
-<span class="linenos">42</span>    <span class="c1">// or makeWriter so that the system can override them with those</span>
-<span class="linenos">43</span>    <span class="c1">// provided on the command line when applicable.</span>
-<span class="linenos">44</span>    <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
-<span class="linenos">45</span>    <span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="linenos">46</span>    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">makeFilter</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="p">,</span> <span class="n">filterOptions</span><span class="p">);</span>
+<span class="linenos">41</span><span class="w">    </span><span class="c1">// Options should be added in the call to makeFilter, makeReader,</span>
+<span class="linenos">42</span><span class="w">    </span><span class="c1">// or makeWriter so that the system can override them with those</span>
+<span class="linenos">43</span><span class="w">    </span><span class="c1">// provided on the command line when applicable.</span>
+<span class="linenos">44</span><span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">filterOptions</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">45</span><span class="w">    </span><span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">46</span><span class="w">    </span><span class="n">Stage</span><span class="o">&amp;</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">makeFilter</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="n">filterOptions</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">47</span>
-<span class="linenos">48</span>    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">makeWriter</span><span class="p">(</span><span class="n">m_output_file</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
-<span class="linenos">49</span>    <span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-<span class="linenos">50</span>    <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<span class="linenos">48</span><span class="w">    </span><span class="n">Stage</span><span class="o">&amp;</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">makeWriter</span><span class="p">(</span><span class="n">m_output_file</span><span class="p">,</span><span class="w"> </span><span class="n">filter</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">49</span><span class="w">    </span><span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">50</span><span class="w">    </span><span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">51</span>
-<span class="linenos">52</span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="linenos">53</span>  <span class="p">}</span>
+<span class="linenos">52</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">53</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="linenos">54</span>
-<span class="linenos">55</span><span class="p">}</span> <span class="c1">// namespace pdal</span>
+<span class="linenos">55</span><span class="p">}</span><span class="w"> </span><span class="c1">// namespace pdal</span>
 </pre></div>
 </div>
 <p>In your kernel implementation, you will use a macro defined in pdal_macros.
 This macro registers the plugin with the PluginManager.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="n">CREATE_SHARED_KERNEL</span><span class="p">(</span><span class="n">MyKernel</span><span class="p">,</span> <span class="n">s_info</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">CREATE_SHARED_KERNEL</span><span class="p">(</span><span class="n">MyKernel</span><span class="p">,</span><span class="w"> </span><span class="n">s_info</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>To build up a processing pipeline in this example, we need to create two
 objects: the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pdal::PointTable</span></code>.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="kt">int</span> <span class="nf">MyKernel::execute</span><span class="p">()</span>
-  <span class="p">{</span>
-    <span class="n">PointTable</span> <span class="n">table</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">MyKernel::execute</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">PointTable</span><span class="w"> </span><span class="n">table</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">makeReader</span><span class="p">(</span><span class="n">m_input_file</span><span class="p">,</span> <span class="s">&quot;readers.las&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Stage</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">makeReader</span><span class="p">(</span><span class="n">m_input_file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;readers.las&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// Options should be added in the call to makeFilter, makeReader,</span>
-    <span class="c1">// or makeWriter so that the system can override them with those</span>
-    <span class="c1">// provided on the command line when applicable.</span>
-    <span class="n">Options</span> <span class="n">filterOptions</span><span class="p">;</span>
-    <span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">makeFilter</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="p">,</span> <span class="n">filterOptions</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Options should be added in the call to makeFilter, makeReader,</span>
+<span class="w">    </span><span class="c1">// or makeWriter so that the system can override them with those</span>
+<span class="w">    </span><span class="c1">// provided on the command line when applicable.</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">filterOptions</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">filterOptions</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;step&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Stage</span><span class="o">&amp;</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">makeFilter</span><span class="p">(</span><span class="s">&quot;filters.decimation&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="n">filterOptions</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">Stage</span><span class="o">&amp;</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">makeWriter</span><span class="p">(</span><span class="n">m_output_file</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="s">&quot;writers.text&quot;</span><span class="p">);</span>
-    <span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
-    <span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Stage</span><span class="o">&amp;</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">makeWriter</span><span class="p">(</span><span class="n">m_output_file</span><span class="p">,</span><span class="w"> </span><span class="n">filter</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;writers.text&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">writer</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>To implement the actual kernel logic we implement execute().  In this case,
@@ -401,7 +336,7 @@ possible commands.</p>
 <p>To run this kernel, you would use <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">mykernel</span> <span class="pre">-i</span> <span class="pre">&lt;input</span> <span class="pre">las</span> <span class="pre">file&gt;</span> <span class="pre">-o</span>
 <span class="pre">&lt;output</span> <span class="pre">text</span> <span class="pre">file&gt;</span></code>.</p>
 <section id="compilation">
-<h3>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h3>
+<h3>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline"></a></h3>
 <p>Set up a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to compile your kernel against PDAL:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="nb">project</span><span class="p">(</span><span class="s">KernelTutorial</span><span class="p">)</span>
@@ -423,7 +358,6 @@ possible commands.</p>
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -455,29 +389,20 @@ possible commands.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -486,7 +411,7 @@ possible commands.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

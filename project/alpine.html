@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Alpine &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/project/alpine.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Building Docker Containers for PDAL" href="docker.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
@@ -165,28 +111,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -241,13 +176,13 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="alpine">
-<span id="development-alpine"></span><h1>Alpine<a class="headerlink" href="#alpine" title="Permalink to this headline">¶</a></h1>
+<span id="development-alpine"></span><h1>Alpine<a class="headerlink" href="#alpine" title="Permalink to this headline"></a></h1>
 <p>This page is intended to provide information about Alpine that may be useful
 for PDAL developers, especially when it comes to adding new PDAL dependencies.</p>
 <section id="packages">
-<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
+<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline"></a></h2>
 <p>When adding a dependency to PDAL, you will need to update our Travis
 configuration for continuous integration and testing, and Dockerfiles for
 automated builds. Begin by checking for your package in
@@ -262,14 +197,14 @@ contents to determine exactly what you are getting with a particular package.</p
 Alpine developers can frequently be found on the IRC channel #alpine-devel.</p>
 </section>
 <section id="travis">
-<h2>Travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h2>
+<h2>Travis<a class="headerlink" href="#travis" title="Permalink to this headline"></a></h2>
 <p>We currently run our Travis CI builds by first pulling <code class="docutils literal notranslate"><span class="pre">alpine:3.6</span></code> and then
 running a script within the Alpine container. Any new dependencies that are
 required for PDAL to be built and tested will need to be added to
 <a class="reference external" href="https://github.com/PDAL/PDAL/blob/master/scripts/ci/script.sh">https://github.com/PDAL/PDAL/blob/master/scripts/ci/script.sh</a>.</p>
 </section>
 <section id="docker">
-<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h2>
 <p>Our Docker automated builds are built from the Dockerfiles located in
 <a class="reference external" href="https://github.com/PDAL/PDAL/tree/master/scripts/docker">https://github.com/PDAL/PDAL/tree/master/scripts/docker</a>. There are folders for
 each supported release as well as master, and there are variants for Alpine and
@@ -282,7 +217,6 @@ added to the regular <code class="docutils literal notranslate"><span class="pre
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -314,29 +248,20 @@ added to the regular <code class="docutils literal notranslate"><span class="pre
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -345,7 +270,7 @@ added to the regular <code class="docutils literal notranslate"><span class="pre
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

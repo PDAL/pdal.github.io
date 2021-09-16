@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Colorizing points with imagery &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/workshop/exercises/analysis/colorization/colorization.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../../about.html" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Clipping data with polygons" href="../clipping/clipping.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
 </ul>
@@ -179,28 +125,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -257,15 +192,15 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="colorizing-points-with-imagery">
-<span id="colorization"></span><h1>Colorizing points with imagery<a class="headerlink" href="#colorizing-points-with-imagery" title="Permalink to this headline">¶</a></h1>
+<span id="colorization"></span><h1>Colorizing points with imagery<a class="headerlink" href="#colorizing-points-with-imagery" title="Permalink to this headline"></a></h1>
 <p id="index-0">This exercise uses PDAL to apply color information from a raster onto point
 data. Point cloud data, especially <a class="reference external" href="https://en.wikipedia.org/wiki/Lidar">LiDAR</a>, do not often have coincident color
 information. It is possible to project color information onto the points from
 an imagery source. This makes it convenient to see data in a larger context.</p>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
 <p>PDAL provides a <a class="reference internal" href="../../../../stages/filters.html#filters"><span class="std std-ref">filter</span></a> to apply color information from
 raster files onto point cloud data. Think of this operation as a top-down
 projection of RGB color values on the points.</p>
@@ -301,9 +236,9 @@ open this file and replace each occurrence of <code class="docutils literal notr
 with the correct path for your machine.</p>
 </div>
 <section id="pipeline-breakdown">
-<h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline">¶</a></h3>
+<h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline"></a></h3>
 <section id="reader">
-<h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h4>
+<h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline"></a></h4>
 <p>After our pipeline errata, the first item we define in the pipeline is the
 point cloud file we’re going to read.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;./exercises/analysis/thinning/uncompahgre.laz&quot;</span><span class="p">,</span>
@@ -311,7 +246,7 @@ point cloud file we’re going to read.</p>
 </div>
 </section>
 <section id="filters-colorization">
-<h4>2. <a class="reference internal" href="../../../../stages/filters.colorization.html#filters-colorization"><span class="std std-ref">filters.colorization</span></a><a class="headerlink" href="#filters-colorization" title="Permalink to this headline">¶</a></h4>
+<h4>2. <a class="reference internal" href="../../../../stages/filters.colorization.html#filters-colorization"><span class="std std-ref">filters.colorization</span></a><a class="headerlink" href="#filters-colorization" title="Permalink to this headline"></a></h4>
 <p>The <a class="reference internal" href="../../../../stages/filters.colorization.html#filters-colorization"><span class="std std-ref">filters.colorization</span></a> PDAL filter does most of the work for this
 operation. We’re going to use the default data scaling options. This
 filter will create PDAL dimensions <code class="docutils literal notranslate"><span class="pre">Red</span></code>, <code class="docutils literal notranslate"><span class="pre">Green</span></code>, and <code class="docutils literal notranslate"><span class="pre">Blue</span></code>.</p>
@@ -323,7 +258,7 @@ filter will create PDAL dimensions <code class="docutils literal notranslate"><s
 </div>
 </section>
 <section id="filters-range">
-<h4>3. <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a><a class="headerlink" href="#filters-range" title="Permalink to this headline">¶</a></h4>
+<h4>3. <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a><a class="headerlink" href="#filters-range" title="Permalink to this headline"></a></h4>
 <p>A small challenge is the raster will colorize many points with NODATA values.
 We are going to use the <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> to filter keep any points that
 have <code class="docutils literal notranslate"><span class="pre">Red</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p>
@@ -335,7 +270,7 @@ have <code class="docutils literal notranslate"><span class="pre">Red</span> <sp
 </div>
 </section>
 <section id="writers-las">
-<h4>4. <a class="reference internal" href="../../../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a><a class="headerlink" href="#writers-las" title="Permalink to this headline">¶</a></h4>
+<h4>4. <a class="reference internal" href="../../../../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a><a class="headerlink" href="#writers-las" title="Permalink to this headline"></a></h4>
 <p>We could just define the <code class="docutils literal notranslate"><span class="pre">uncompahgre-colored.laz</span></code> filename, but we want to
 add a few options to have finer control over what is written. These include:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -362,7 +297,7 @@ how your LAS files are written.</p>
 </section>
 </section>
 <section id="execution">
-<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">colorization</span><span class="o">/</span><span class="n">colorize</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
@@ -370,7 +305,7 @@ how your LAS files are written.</p>
 <img alt="../../../../_images/colorize-run-command.png" src="../../../../_images/colorize-run-command.png" />
 </section>
 <section id="visualization">
-<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
+<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline"></a></h3>
 <p>Use one of the point cloud visualization tools you installed to take a look at
 your <code class="docutils literal notranslate"><span class="pre">uncompahgre-colored.laz</span></code> output. In the example below, we simply
 opened the file using the <a class="reference external" href="http://plas.io">http://plas.io</a> website.</p>
@@ -378,7 +313,7 @@ opened the file using the <a class="reference external" href="http://plas.io">ht
 </section>
 </section>
 <section id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>Applying color information that is not time-coincident with the point cloud
 data will mean you will see discontinuities.</p></li>
@@ -394,7 +329,6 @@ for more information.</p></li>
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -426,29 +360,20 @@ for more information.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -457,7 +382,7 @@ for more information.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

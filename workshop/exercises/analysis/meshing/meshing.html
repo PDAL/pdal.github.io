@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Creating surface meshes &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/workshop/exercises/analysis/meshing/meshing.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../../about.html" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Generating a DTM" href="../dtm/dtm.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
 </ul>
@@ -179,28 +125,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -257,9 +192,9 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="creating-surface-meshes">
-<span id="workshop-meshing"></span><h1>Creating surface meshes<a class="headerlink" href="#creating-surface-meshes" title="Permalink to this headline">¶</a></h1>
+<span id="workshop-meshing"></span><h1>Creating surface meshes<a class="headerlink" href="#creating-surface-meshes" title="Permalink to this headline"></a></h1>
 <p id="index-0">This exercise uses PDAL to create surface meshes. PDAL is able to use a number of
 meshing filters: <a class="reference external" href="https://pdal.io/stages/filters.html#mesh">https://pdal.io/stages/filters.html#mesh</a>. Three of these are ‘in
 the box’, without needing plugins compiled. These are 2D Delaunay triangulation,
@@ -267,7 +202,7 @@ Greedy projection meshing and Poisson surface meshing.</p>
 <p>In this exercise we’ll create a Poisson surface mesh - a watertight isosurface -
 from our input point cloud.</p>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
 <p>We will create mesh models of a building and its surrounds using an entwine data
 input source.</p>
 <p>After running each command, the output <cite>.ply</cite> file can be viewed in Meshlab or
@@ -285,7 +220,7 @@ if you’re using a machine with a lot of processing power, try increasing the
 <cite>depth</cite> parameter for a more detailed mesh.</p>
 </div>
 <section id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
 <span class="linenos">2</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="n">mesh</span><span class="o">.</span><span class="n">ply</span> \
@@ -306,7 +241,7 @@ if you’re using a machine with a lot of processing power, try increasing the
 <a class="reference external image-reference" href="../../../../_images/first-mesh.png"><img alt="../../../../_images/first-mesh.png" src="../../../../_images/first-mesh.png" /></a>
 </section>
 <section id="filtering">
-<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
+<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline"></a></h3>
 <p>If we want to just mesh a building, or just terrain, or both we can apply a <cite>range</cite>
 filter based on point classification. These data have ground labeled as class 2,
 and buildings as 6.</p>
@@ -315,7 +250,7 @@ surrounding it, using the same data subset as above and adding a <a class="refer
 stage to limit the set of points used in mesh creation.</p>
 </section>
 <section id="id1">
-<h3>Command<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>Command<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
 <span class="linenos">2</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">building</span><span class="o">-</span><span class="n">exercise</span><span class="o">.</span><span class="n">ply</span> \
@@ -342,7 +277,6 @@ stage to limit the set of points used in mesh creation.</p>
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -374,29 +308,20 @@ stage to limit the set of points used in mesh creation.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -405,7 +330,7 @@ stage to limit the set of points used in mesh creation.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

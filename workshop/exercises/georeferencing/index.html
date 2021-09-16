@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Georeferencing &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/workshop/exercises/georeferencing/index.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="Plotting a histogram" href="../python/histogram.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
 </ul>
@@ -170,28 +116,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -248,9 +183,9 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="georeferencing">
-<span id="id1"></span><h1>Georeferencing<a class="headerlink" href="#georeferencing" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Georeferencing<a class="headerlink" href="#georeferencing" title="Permalink to this headline"></a></h1>
 <span class="target" id="index-0"></span><p>As discussed <a class="reference internal" href="../../lidar-introduction.html#georeferencing-introduction"><span class="std std-ref">in the introduction</span></a>, laser
 returns from a mobile <a class="reference external" href="https://en.wikipedia.org/wiki/Lidar">LiDAR</a> system must be georeferenced, i.e. placed into a
 local or global coordinate system by combining data from the laser and from a
@@ -268,7 +203,7 @@ files directly from <a class="reference external" href="http://riegl.com/">RIEGL
 government platforms.</p>
 </div>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
 <p>The file <cite>S1C1_csd_004.csd</cite> contains airborne data from an <a class="reference external" href="http://www.teledyneoptech.com/">Optech</a> sensor.
 Without georeferencing these points, they would be impossible to interpret —
 once they are georeferenced, we will be able to inspect and analyze these
@@ -292,7 +227,7 @@ to drop all points with very high intensity values.</p></li>
 is southwest of Austin, TX.</p>
 </div>
 <section id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
 <p>Invoke the following command, substituting accordingly, into your ` Conda Shell`:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> \
 <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">georeferencing</span><span class="o">/</span><span class="n">S1C1_csd_004</span><span class="o">.</span><span class="n">csd</span> \
@@ -313,13 +248,13 @@ is southwest of Austin, TX.</p>
 <a class="reference external image-reference" href="../../../_images/georeferencing-run-command.png"><img alt="../../../_images/georeferencing-run-command.png" src="../../../_images/georeferencing-run-command.png" /></a>
 </section>
 <section id="visualization">
-<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
+<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline"></a></h3>
 <p>View your georeferenced point cloud in <a class="reference external" href="http://plas.io">http://plas.io</a>.</p>
 <figure class="align-default" id="id2">
 <a class="reference external image-reference" href="../../../_images/georeference-plasio.png"><img alt="../../../_images/georeference-plasio.png" src="../../../_images/georeference-plasio.png" /></a>
 <figcaption>
 <p><span class="caption-text">Our airborne laser point cloud after georeferencing, reprojection, and
-intensity filtering.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+intensity filtering.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -328,7 +263,6 @@ intensity filtering.</span><a class="headerlink" href="#id2" title="Permalink to
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -360,29 +294,20 @@ intensity filtering.</span><a class="headerlink" href="#id2" title="Permalink to
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -391,7 +316,7 @@ intensity filtering.</span><a class="headerlink" href="#id2" title="Permalink to
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 

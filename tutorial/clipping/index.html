@@ -1,51 +1,25 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Clipping with Geometries &mdash; pdal.io</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/pdal.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
     <link rel="canonical" href="https://pdal.io/tutorial/clipping/index.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -54,33 +28,16 @@
     <link rel="prev" title="LAS Reading and Writing with PDAL" href="../las.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> PDAL
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 2.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,18 +45,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
 </ul>
@@ -168,28 +114,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">PDAL</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -244,9 +179,9 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="clipping-with-geometries">
-<span id="clipping"></span><h1>Clipping with Geometries<a class="headerlink" href="#clipping-with-geometries" title="Permalink to this headline">¶</a></h1>
+<span id="clipping"></span><h1>Clipping with Geometries<a class="headerlink" href="#clipping-with-geometries" title="Permalink to this headline"></a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
 <dd class="field-odd"><p>Howard Butler</p>
@@ -259,7 +194,7 @@
 </dd>
 </dl>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>This tutorial describes how to construct a pipeline that takes in geometries
 and clips out data with given geometry attributes.  It is common to desire
 to cut or clip point cloud data with 2D geometries, often from
@@ -284,7 +219,7 @@ point cloud data inside geometries with matching attributes.</p>
 </div>
 </section>
 <section id="example-data">
-<h2>Example Data<a class="headerlink" href="#example-data" title="Permalink to this headline">¶</a></h2>
+<h2>Example Data<a class="headerlink" href="#example-data" title="Permalink to this headline"></a></h2>
 <p>This tutorial utilizes the Autzen dataset. In addition to typical PDAL
 software (fetch it from <a class="reference internal" href="../../download.html#download"><span class="std std-ref">Download</span></a>), you will need to download the
 following two files:</p>
@@ -294,7 +229,7 @@ following two files:</p>
 </ul>
 </section>
 <section id="stage-operations">
-<h2>Stage Operations<a class="headerlink" href="#stage-operations" title="Permalink to this headline">¶</a></h2>
+<h2>Stage Operations<a class="headerlink" href="#stage-operations" title="Permalink to this headline"></a></h2>
 <p>This operation depends on two stages PDAL provides.
 The first is the <a class="reference internal" href="../../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a> stage, which allows you to assign
 point values based on polygons read from <a class="reference external" href="http://www.gdal.org">OGR</a>. The second is
@@ -307,11 +242,11 @@ for keeping or rejecting points in a more expressive environment.</p>
 </div>
 </section>
 <section id="data-preparation">
-<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline"></a></h2>
 <figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-point-cloud.png"><img alt="../../_images/autzen-shapes-point-cloud.png" src="../../_images/autzen-shapes-point-cloud.png" style="width: 677.4px; height: 400.8px;" /></a>
 <figcaption>
-<p><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Autzen Stadium, a 100 million+ point cloud file.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The data are mixed in two different coordinate systems. The <a class="reference internal" href="../../stages/readers.las.html#readers-las"><span class="std std-ref">LAZ</span></a> file is in <a class="reference external" href="http://www.oregon.gov/DAS/CIO/GEO/pages/coordination/projections/projections.aspx">Oregon State Plane Ft.</a> and the <a class="reference external" href="http://geojson.org">GeoJSON</a> defining
@@ -349,12 +284,12 @@ in the upper right hand corner.</p>
 <a class="reference internal image-reference" href="../../_images/autzen-shapes-to-clip.png"><img alt="../../_images/autzen-shapes-to-clip.png" src="../../_images/autzen-shapes-to-clip.png" style="width: 693.6px; height: 381.0px;" /></a>
 <figcaption>
 <p><span class="caption-text">We want to clip out the polygon in the upper right hand corner. We can
-view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geometry using something like <a class="reference external" href="http://qgis.org">QGIS</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geometry using something like <a class="reference external" href="http://qgis.org">QGIS</a></span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 <section id="pipeline">
-<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
+<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline"></a></h2>
 <p>A PDAL <a class="reference internal" href="../../pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> is how you define a set of actions to
 apply to data as they are read, filtered, and written.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
@@ -396,7 +331,7 @@ scenario.</p>
 </div>
 </section>
 <section id="processing">
-<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>Save the pipeline to a file called <code class="docutils literal notranslate"><span class="pre">shape-clip.json</span></code> in the</p></li>
 </ol>
@@ -420,7 +355,7 @@ scenario.</p>
 </ol>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline"></a></h2>
 <p>PDAL allows the composition of point cloud operations. This tutorial demonstrated
 how to use the <a class="reference internal" href="../../stages/filters.overlay.html#filters-overlay"><span class="std std-ref">filters.overlay</span></a> and <a class="reference internal" href="../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> stages to clip
 points with shapefiles.</p>
@@ -429,7 +364,6 @@ points with shapefiles.</p>
 
 
            </div>
-           
           </div>
           <footer>
   
@@ -461,29 +395,20 @@ points with shapefiles.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Aug 04, 2021.
+      Last updated on Sep 16, 2021.
       </div>
     </div>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
   
-
-
-  <script type="text/javascript">
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
     <div class="footer">
         <div class="container">
                     &copy;  2021
@@ -492,7 +417,7 @@ points with shapefiles.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Aug 04, 2021.
+                    on Sep 16, 2021.
         </div>
     </div>
 
