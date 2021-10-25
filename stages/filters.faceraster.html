@@ -23,7 +23,9 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="copyright" title="Copyright" href="../copyright.html" /> 
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="filters.matlab" href="filters.matlab.html" />
+    <link rel="prev" title="filters.poisson" href="filters.poisson.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -59,12 +61,34 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stages.html">Stages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writers.html">Writers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="filters.html">Filters</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="filters.html#create">Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#order">Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#move">Move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#cull">Cull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#new">New</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#join">Join</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#metadata">Metadata</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="filters.html#mesh">Mesh</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="filters.delaunay.html">filters.delaunay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.greedyprojection.html">filters.greedyprojection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.poisson.html">filters.poisson</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">filters.faceraster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-example">Basic Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#languages">Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#other">Other</a></li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dimensions.html">Dimensions</a></li>
@@ -128,6 +152,8 @@
     
       <li><a href="../index.html"> Documentation </a> &raquo;</li>
       
+          <li><a href="filters.html">Filters</a> &raquo;</li>
+      
       <li>filters.faceraster</li>
     
 
@@ -145,6 +171,15 @@
   </ul>
 
   
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="filters.matlab.html" class="btn btn-neutral float-right" title="filters.matlab" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="filters.poisson.html" class="btn btn-neutral float-left" title="filters.poisson" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -154,7 +189,7 @@
 <span id="id1"></span><h1>filters.faceraster<a class="headerlink" href="#filters-faceraster" title="Permalink to this headline"></a></h1>
 <p>The <strong>FaceRaster filter</strong> creates a raster from a point cloud using an
 algorithm based on an existing triangulation.  Each raster cell
-is given a value that is an interpolation of the known values of containing
+is given a value that is an interpolation of the known values of the containing
 triangle.  If the raster cell center is outside of the triangulation, it is
 assigned the <a class="reference internal" href="#nodata">nodata</a> value.  Use <cite>writers.raster</cite> to write the output.</p>
 <p>The extent of the raster can be defined by using the <a class="reference internal" href="#origin-x">origin_x</a>, origin_y, <a class="reference internal" href="#width">width</a> and
@@ -230,6 +265,15 @@ is returned and it has the same point count as it did when the filter was run.
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="filters.matlab.html" class="btn btn-neutral float-right" title="filters.matlab" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="filters.poisson.html" class="btn btn-neutral float-left" title="filters.poisson" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -249,7 +293,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Sep 26, 2021.
+      Last updated on Oct 25, 2021.
       </div>
     </div>
 </footer>
@@ -271,7 +315,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Sep 26, 2021.
+                    on Oct 25, 2021.
         </div>
     </div>
 
