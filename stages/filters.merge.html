@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -204,15 +204,15 @@ compatible.</p>
 the points from “file1”, “file2” and “file3”.  Note that the explicit
 use of the merge filter is unnecessary in this case (removing the merge
 filter will yield the same result).</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;file1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;file2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;file3&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.merge&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;output.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;file1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;file2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;file3&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;filters.merge&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;output.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -225,12 +225,12 @@ carried separately through the pipeline, three files are created as output,
 “out1.las”, “out2.las” and “out3.las”.  “out1.las” contains the points
 in “utm1.las”.  “out2.las” contains the points in “utm2.las” and “out3.las”
 contains the points in “utm3.las”.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;utm1.las&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;out#.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;utm1.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;out#.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Here is the same pipeline with a merge filter added.  The merge filter will
@@ -238,15 +238,15 @@ combine the points in its input: “utm1.las” and “utm2.las”.  Then the re
 of the merge filter is passed to the writer along with “utm3.las”.  This
 results in two output files: “out1.las” contains the points from “utm1.las”
 and “utm2.las”, while “out2.las” contains the points from “utm3.las”.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;utm1.las&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;filters.merge&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;out#.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;utm1.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;utm2.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;filters.merge&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;utm3.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;out#.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -294,7 +294,7 @@ is returned and it has the same point count as it did when the filter was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -302,7 +302,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -318,13 +318,13 @@ is returned and it has the same point count as it did when the filter was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

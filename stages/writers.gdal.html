@@ -25,7 +25,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="writers.gltf" href="writers.gltf.html" />
-    <link rel="prev" title="writers.e57" href="writers.e57.html" /> 
+    <link rel="prev" title="writers.fbx" href="writers.fbx.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,8 +67,11 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.copc.html">writers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.draco.html">writers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.e57.html">writers.e57</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.fbx.html">writers.fbx</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.gdal</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-example">Basic Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
@@ -85,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.raster.html">writers.raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">writers.tiledb</a></li>
 </ul>
@@ -178,7 +180,7 @@
         <a href="writers.gltf.html" class="btn btn-neutral float-right" title="writers.gltf" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writers.e57.html" class="btn btn-neutral float-left" title="writers.e57" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="writers.fbx.html" class="btn btn-neutral float-left" title="writers.fbx" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -249,14 +251,14 @@ called outputfile.tif.  Since output_type isn’t specified, it creates six
 raster bands (“min”, “max”, “mean”, “idx”, “count” and “stdev”) in the output
 dataset.  The raster cells are 10x10 and the radius used to locate points
 whose values contribute to the cell value is 14.14.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;pdal/test/data/las/autzen_trim.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="nt">&quot;radius&quot;</span><span class="p">:</span> <span class="mf">14.14</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.tif&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;pdal/test/data/las/autzen_trim.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;resolution&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">14.14</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;outputfile.tif&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -343,6 +345,11 @@ The format is ([minx, maxx],[miny,maxy]). [Optional]</p>
 </dd>
 <dt>default_srs</dt><dd><p>Write the raster with the provided SRS if none exists. [Default: None]</p>
 </dd>
+<dt>metadata:</dt><dd><p>Add or set GDAL metadata to set on the raster, in the form
+<code class="docutils literal notranslate"><span class="pre">NAME=VALUE,NAME2=VALUE2,NAME3=VALUE3</span></code> [Default: None]</p>
+</dd>
+<dt>pdal_metadata:</dt><dd><p>Write PDAL’s pipeline and metadata as base64 to the GDAL PAM metadata [Default: False]</p>
+</dd>
 </dl>
 <dl class="simple">
 <dt>where</dt><dd><p>An <a class="reference internal" href="expression.html#pdal-expression"><span class="std std-ref">expression</span></a> that limits points passed to a writer.
@@ -381,7 +388,7 @@ come from the data and does not need to be set with ‘override_srs’ or ‘def
         <a href="writers.gltf.html" class="btn btn-neutral float-right" title="writers.gltf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writers.e57.html" class="btn btn-neutral float-left" title="writers.e57" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="writers.fbx.html" class="btn btn-neutral float-left" title="writers.fbx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -396,7 +403,7 @@ come from the data and does not need to be set with ‘override_srs’ or ‘def
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -404,7 +411,7 @@ come from the data and does not need to be set with ‘override_srs’ or ‘def
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -420,13 +427,13 @@ come from the data and does not need to be set with ‘override_srs’ or ‘def
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

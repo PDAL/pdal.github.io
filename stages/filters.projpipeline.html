@@ -25,7 +25,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="filters.reprojection" href="filters.reprojection.html" />
-    <link rel="prev" title="filters.icp" href="filters.icp.html" /> 
+    <link rel="prev" title="filters.teaser" href="filters.teaser.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -175,7 +175,7 @@
         <a href="filters.reprojection.html" class="btn btn-neutral float-right" title="filters.reprojection" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.icp.html" class="btn btn-neutral float-left" title="filters.icp" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.teaser.html" class="btn btn-neutral float-left" title="filters.teaser" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -204,34 +204,34 @@ the compliance with the provided transformation pipeline.</p>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
 <p>This example shift point on the z-axis.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;untransformed.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.projpipeline&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;coord_op&quot;</span><span class="p">:</span><span class="s2">&quot;+proj=affine +zoff=100&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;transformed.las&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;untransformed.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.projpipeline&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;coord_op&quot;</span><span class="p">:</span><span class="s2">&quot;+proj=affine +zoff=100&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;transformed.las&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This example apply a shift on the z-axis then reproject from utm 10
 to WGS84, using the <code class="docutils literal notranslate"><span class="pre">reverse_transfo</span></code> flag. It also set the output srs</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;utm10.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.projpipeline&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;coord_op&quot;</span><span class="p">:</span><span class="s2">&quot;+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=10 +step +proj=affine +zoff=100&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;reverse_transfo&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;out_srs&quot;</span><span class="p">:</span> <span class="s2">&quot;EPSG:4326&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;wgs84.las&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;utm10.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.projpipeline&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;coord_op&quot;</span><span class="p">:</span><span class="s2">&quot;+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=10 +step +proj=affine +zoff=100&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;reverse_transfo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;out_srs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPSG:4326&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;wgs84.las&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -286,7 +286,7 @@ is returned and it has the same point count as it did when the filter was run.
         <a href="filters.reprojection.html" class="btn btn-neutral float-right" title="filters.reprojection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.icp.html" class="btn btn-neutral float-left" title="filters.icp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.teaser.html" class="btn btn-neutral float-left" title="filters.teaser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -301,7 +301,7 @@ is returned and it has the same point count as it did when the filter was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -309,7 +309,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -325,13 +325,13 @@ is returned and it has the same point count as it did when the filter was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

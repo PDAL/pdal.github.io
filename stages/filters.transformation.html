@@ -37,7 +37,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -187,10 +187,8 @@
              
   <section id="filters-transformation">
 <span id="id1"></span><h1>filters.transformation<a class="headerlink" href="#filters-transformation" title="Permalink to this headline"></a></h1>
-<p>The transformation filter applies an arbitrary rotation+translation
+<p>The transformation filter applies an arbitrary homography
 transformation, represented as a 4x4 <a class="reference internal" href="#matrix">matrix</a>, to each xyz triplet.</p>
-<p>The filter does <em>no</em> checking to ensure the matrix is a valid affine
-transformation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The transformation filter does not apply or consider any spatial
@@ -207,17 +205,17 @@ reference information.</p>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
 <p>This example rotates the points around the z-axis while translating them.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;untransformed.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0 -1  0  1  1  0  0  2  0  0  1  3  0  0  0  1&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;transformed.las&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;untransformed.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0 -1  0  1  1  0  0  2  0  0  1  3  0  0  0  1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;transformed.las&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -252,10 +250,11 @@ is returned and it has the same point count as it did when the filter was run.
 <p>A full tutorial about transformation matrices is beyond the scope of this
 documentation. Instead, we will provide a few pointers to introduce core
 concepts, especially as pertains to PDAL’s handling of the <code class="docutils literal notranslate"><span class="pre">matrix</span></code> argument.</p>
-<p>Transformations in a 3-dimensional coordinate system can be represented as an
-affine transformation using homogeneous coordinates. This 4x4 matrix can
-represent transformations describing operations like translation, rotation, and
-scaling of coordinates.</p>
+<p>Transformations in a 3-dimensional coordinate system can be represented
+as a homography transformation using homogeneous coordinates. This 4x4
+matrix can represent affine transformations describing operations like
+translation, rotation, and scaling of coordinates.  In addition it can
+represent perspective transformations modeling a pinhole camera.</p>
 <p>The transformation filter’s <code class="docutils literal notranslate"><span class="pre">matrix</span></code> argument is a space delimited, 16
 element string. This string is simply a row-major representation of the 4x4
 matrix (i.e., first four elements correspond to the top row of the
@@ -276,12 +275,12 @@ and Z dimensions is represented by the following matrix.</p>
     0 &amp; 0 &amp; 0 &amp; 1
 \end{matrix}\end{split}\]</div>
 <p>The JSON syntax required for such a translation is written as follows for <span class="math notranslate nohighlight">\(t_x=7\)</span>, <span class="math notranslate nohighlight">\(t_y=8\)</span>, and <span class="math notranslate nohighlight">\(t_z=9\)</span>.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;1  0  0  7  0  1  0  8  0  0  1  9  0  0  0  1&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;1  0  0  7  0  1  0  8  0  0  1  9  0  0  0  1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -300,12 +299,12 @@ coordinates by <span class="math notranslate nohighlight">\(s_y\)</span>, and Z 
 <p>We again provide an example JSON snippet to demonstrate the scaling
 transformation. In the example, X and Y are not scaled at all (i.e.,
 <span class="math notranslate nohighlight">\(s_x=s_y=1\)</span>) and Z is magnified by a factor of 2 (<span class="math notranslate nohighlight">\(s_z=2\)</span>).</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;1  0  0  0  0  1  0  0  0  0  2  0  0  0  0  1&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;1  0  0  0  0  1  0  0  0  0  2  0  0  0  0  1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -322,12 +321,12 @@ the z-axis is accomplished with the following matrix.</p>
 \end{matrix}\end{split}\]</div>
 <p>In JSON, a rotation of 90 degrees (<span class="math notranslate nohighlight">\(\theta=1.57\)</span> radians) takes the form
 shown below.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0  0  -1  0  1  0  0  0  0  0  1  0  0  0  0  1&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0  0  -1  0  1  0  0  0  0  0  1  0  0  0  0  1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Similarly, a rotation about the x-axis by <span class="math notranslate nohighlight">\(\theta\)</span> radians is represented
@@ -340,12 +339,12 @@ as</p>
     0 &amp;            0 &amp;             0 &amp; 1
 \end{matrix}\end{split}\]</div>
 <p>which takes the following form in JSON for a rotation of 45 degrees (<span class="math notranslate nohighlight">\(\theta=0.785\)</span> radians)</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;1  0  0  0  0  0.707  -0.707  0  0  0.707  0.707  0  0  0  0  1&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;1  0  0  0  0  0.707  -0.707  0  0  0.707  0.707  0  0  0  0  1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Finally, a rotation by <span class="math notranslate nohighlight">\(\theta\)</span> radians about the y-axis is accomplished
@@ -358,12 +357,12 @@ with the matrix</p>
                 0 &amp; 0 &amp;            0 &amp; 1
 \end{matrix}\end{split}\]</div>
 <p>and the JSON string for a rotation of 10 degrees (<span class="math notranslate nohighlight">\(\theta=0.175\)</span> radians) becomes</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0.985  0  0.174  0  0  1  0  0  -0.174  0  0.985  0  0  0  0  1&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.transformation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="s2">&quot;0.985  0  0.174  0  0  1  0  0  -0.174  0  0.985  0  0  0  0  1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -395,7 +394,7 @@ with the matrix</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -403,7 +402,7 @@ with the matrix</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -419,13 +418,13 @@ with the matrix</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

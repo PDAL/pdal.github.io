@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -205,32 +205,32 @@ point cloud attributes.</p>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
 <p>This example passes through only the points whose Classification is non-zero.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.mongo&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;expression&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$ne&quot;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;filtered.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;filters.mongo&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;expression&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$ne&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;filtered.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This example passes through only the points whose <code class="docutils literal notranslate"><span class="pre">ReturnNumber</span></code>
 is equal to the <code class="docutils literal notranslate"><span class="pre">NumberOfReturns</span></code> and the <code class="docutils literal notranslate"><span class="pre">NumberOfReturns</span></code>
 is greater than 1.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.mongo&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;expression&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$and&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span> <span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;NumberOfReturns&quot;</span> <span class="p">},</span>
-            <span class="p">{</span> <span class="nt">&quot;NumberOfReturns&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$gt&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">}</span>
-        <span class="p">]</span> <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;filtered.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;filters.mongo&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;expression&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$and&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NumberOfReturns&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;NumberOfReturns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;filtered.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -283,18 +283,18 @@ and <code class="docutils literal notranslate"><span class="pre">$nin</span></co
 <code class="docutils literal notranslate"><span class="pre">$nin</span></code>, the value must be an array of operands.</p>
 <p>Comparison operator specifications must be contained within an object whose key
 is the dimension name to be compared.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$eq&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$eq&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;Intensity&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$gt&quot;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Intensity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$in&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span> <span class="p">}</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$in&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">$eq</span></code> comparison operator may be implicitly invoked by setting an
 attribute name directly to a value.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -317,35 +317,35 @@ operators except for <code class="docutils literal notranslate"><span class="pre
 <code class="docutils literal notranslate"><span class="pre">$not</span></code> is applied to a single expression and negates its result.</p>
 <p>Logical operators may be applied directly to comparison expressions or may
 contain further nested logical operators.  For example:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;$or&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="nt">&quot;Intensity&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$gt&quot;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">}</span>
-<span class="p">]</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$or&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Intensity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;$or&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="nt">&quot;$and&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span> <span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;NumberOfReturns&quot;</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="nt">&quot;NumberOfReturns&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$gt&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">}</span>
-    <span class="p">]</span> <span class="p">}</span>
-<span class="p">]</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$or&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$and&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NumberOfReturns&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;NumberOfReturns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;$not&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;$or&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="nt">&quot;$and&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span> <span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$gt&quot;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">},</span>
-            <span class="p">{</span> <span class="nt">&quot;Z&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$lte&quot;</span><span class="p">:</span> <span class="mi">42</span> <span class="p">}</span> <span class="p">}</span>
-        <span class="p">]</span> <span class="p">}</span>
-    <span class="p">]</span> <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;$or&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$and&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Z&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$lte&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For any individual dimension, the logical <strong>and</strong> may be implicitly invoked
 via multiple comparisons within the comparison object.  For example:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;X&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;$gt&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nt">&quot;$lt&quot;</span><span class="p">:</span> <span class="mi">42</span> <span class="p">}</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;X&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$gt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;$lt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -377,7 +377,7 @@ via multiple comparisons within the comparison object.  For example:</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -385,7 +385,7 @@ via multiple comparisons within the comparison object.  For example:</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -401,13 +401,13 @@ via multiple comparisons within the comparison object.  For example:</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

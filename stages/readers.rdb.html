@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.copc.html">readers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.draco.html">readers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
@@ -82,6 +84,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -104,7 +107,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.smrmsg.html">readers.smrmsg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
@@ -244,17 +247,17 @@ the tests: 2.1.6</p></li>
 <p>This example pipeline reads points from a RDB file and stores them in LAS
 format. Only points classified as “ground points” are read since option
 <code class="docutils literal notranslate"><span class="pre">filter</span></code> is set to “riegl.class == 2” (see line 5).</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">[</span>
-<span class="linenos"> 2</span>    <span class="p">{</span>
-<span class="linenos"> 3</span>        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rdb&quot;</span><span class="p">,</span>
-<span class="linenos"> 4</span>        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span><span class="p">,</span>
-<span class="hll"><span class="linenos"> 5</span>        <span class="nt">&quot;filter&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.class == 2&quot;</span>
-</span><span class="linenos"> 6</span>    <span class="p">},</span>
-<span class="linenos"> 7</span>    <span class="p">{</span>
-<span class="linenos"> 8</span>        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-<span class="linenos"> 9</span>        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span>
-<span class="linenos">10</span>    <span class="p">}</span>
-<span class="linenos">11</span><span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">[</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;readers.rdb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 5</span><span class="w">        </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;riegl.class == 2&quot;</span><span class="w"></span>
+</span><span class="linenos"> 6</span><span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;autzen-thin-srs.rdbx&quot;</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">11</span><span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -270,11 +273,11 @@ format. Only points classified as “ground points” are read since option
 </dd>
 <dt>override_srs</dt><dd><p>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘default_srs’ [Default: none]</p>
+with ‘default_srs’. [Default: none]</p>
 </dd>
 <dt>default_srs</dt><dd><p>Spatial reference to apply to the data if the input does not specify
 one.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘override_srs’ [Default: none]</p>
+with ‘override_srs’. [Default: none]</p>
 </dd>
 <dt>filter</dt><dd><p>Point filter expression string (see RDB SDK documentation for details)
 [Optional]
@@ -382,22 +385,22 @@ file metadata object <code class="docutils literal notranslate"><span class="pre
 number of points and the file ID.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="p">{</span>
-<span class="linenos"> 2</span>   <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos"> 3</span>     <span class="nt">&quot;maximum&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos"> 4</span>       <span class="nt">&quot;X&quot;</span><span class="p">:</span> <span class="mf">-2504493.762</span><span class="p">,</span>
-<span class="linenos"> 5</span>       <span class="nt">&quot;Y&quot;</span><span class="p">:</span> <span class="mf">-3846841.252</span><span class="p">,</span>
-<span class="linenos"> 6</span>       <span class="nt">&quot;Z&quot;</span><span class="p">:</span>  <span class="mf">4413210.394</span>
-<span class="linenos"> 7</span>     <span class="p">},</span>
-<span class="linenos"> 8</span>     <span class="nt">&quot;minimum&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos"> 9</span>       <span class="nt">&quot;X&quot;</span><span class="p">:</span> <span class="mf">-2505882.459</span><span class="p">,</span>
-<span class="linenos">10</span>       <span class="nt">&quot;Y&quot;</span><span class="p">:</span> <span class="mf">-3848231.393</span><span class="p">,</span>
-<span class="linenos">11</span>       <span class="nt">&quot;Z&quot;</span><span class="p">:</span>  <span class="mf">4412172.548</span>
-<span class="linenos">12</span>     <span class="p">}</span>
-<span class="linenos">13</span>   <span class="p">},</span>
-<span class="linenos">14</span>   <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="mi">10653</span><span class="p">,</span>
-<span class="linenos">15</span>   <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;637de54d-7e6b-4004-b6ab-b6bc588ec9ea&quot;</span>
-<span class="linenos">16</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">   </span><span class="nt">&quot;bounds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">     </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">       </span><span class="nt">&quot;X&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-2504493.762</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">       </span><span class="nt">&quot;Y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-3846841.252</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">       </span><span class="nt">&quot;Z&quot;</span><span class="p">:</span><span class="w">  </span><span class="mf">4413210.394</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">     </span><span class="p">},</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">     </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">       </span><span class="nt">&quot;X&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-2505882.459</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">       </span><span class="nt">&quot;Y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-3848231.393</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">       </span><span class="nt">&quot;Z&quot;</span><span class="p">:</span><span class="w">  </span><span class="mf">4412172.548</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">   </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">   </span><span class="nt">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10653</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">   </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;637de54d-7e6b-4004-b6ab-b6bc588ec9ea&quot;</span><span class="w"></span>
+<span class="linenos">16</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -407,36 +410,36 @@ number of points and the file ID.</p>
 <p>List of point attribute description objects.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="p">[{</span>
-<span class="linenos"> 2</span>   <span class="nt">&quot;compression_options&quot;</span><span class="p">:</span> <span class="s2">&quot;shuffle&quot;</span><span class="p">,</span>
-<span class="linenos"> 3</span>   <span class="nt">&quot;default_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 4</span>   <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Cartesian point coordinates wrt. application coordinate system (0: X, 1: Y, 2: Z)&quot;</span><span class="p">,</span>
-<span class="linenos"> 5</span>   <span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos"> 6</span>   <span class="nt">&quot;length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-<span class="linenos"> 7</span>   <span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span> <span class="mi">535000</span><span class="p">,</span>
-<span class="linenos"> 8</span>   <span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span> <span class="mi">-535000</span><span class="p">,</span>
-<span class="linenos"> 9</span>   <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.xyz&quot;</span><span class="p">,</span>
-<span class="linenos">10</span>   <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
-<span class="linenos">11</span>   <span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="linenos">12</span>   <span class="nt">&quot;storage_class&quot;</span><span class="p">:</span> <span class="s2">&quot;variable&quot;</span><span class="p">,</span>
-<span class="linenos">13</span>   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">,</span>
-<span class="linenos">14</span>   <span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span>
-<span class="linenos">15</span> <span class="p">},</span>
-<span class="linenos">16</span> <span class="p">{</span>
-<span class="linenos">17</span>   <span class="nt">&quot;compression_options&quot;</span><span class="p">:</span> <span class="s2">&quot;shuffle&quot;</span><span class="p">,</span>
-<span class="linenos">18</span>   <span class="nt">&quot;default_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos">19</span>   <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Target surface reflectance&quot;</span><span class="p">,</span>
-<span class="linenos">20</span>   <span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">21</span>   <span class="nt">&quot;length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="linenos">22</span>   <span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span> <span class="mf">327.67</span><span class="p">,</span>
-<span class="linenos">23</span>   <span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span> <span class="mf">-327.68</span><span class="p">,</span>
-<span class="linenos">24</span>   <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.reflectance&quot;</span><span class="p">,</span>
-<span class="linenos">25</span>   <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
-<span class="linenos">26</span>   <span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="linenos">27</span>   <span class="nt">&quot;storage_class&quot;</span><span class="p">:</span> <span class="s2">&quot;variable&quot;</span><span class="p">,</span>
-<span class="linenos">28</span>   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Reflectance&quot;</span><span class="p">,</span>
-<span class="linenos">29</span>   <span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;dB&quot;</span>
-<span class="linenos">30</span> <span class="p">}]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">   </span><span class="nt">&quot;compression_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shuffle&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">   </span><span class="nt">&quot;default_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">   </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cartesian point coordinates wrt. application coordinate system (0: X, 1: Y, 2: Z)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">   </span><span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">   </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">   </span><span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">535000</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">   </span><span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-535000</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">   </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;riegl.xyz&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">   </span><span class="nt">&quot;resolution&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00025</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">   </span><span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">   </span><span class="nt">&quot;storage_class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;variable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;XYZ&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">   </span><span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="w"></span>
+<span class="linenos">15</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">16</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">   </span><span class="nt">&quot;compression_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shuffle&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">   </span><span class="nt">&quot;default_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">   </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Target surface reflectance&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">   </span><span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">   </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">   </span><span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">327.67</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">   </span><span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-327.68</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">   </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;riegl.reflectance&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">   </span><span class="nt">&quot;resolution&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">26</span><span class="w">   </span><span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">27</span><span class="w">   </span><span class="nt">&quot;storage_class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;variable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">28</span><span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reflectance&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">29</span><span class="w">   </span><span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dB&quot;</span><span class="w"></span>
+<span class="linenos">30</span><span class="w"> </span><span class="p">}]</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -447,33 +450,33 @@ number of points and the file ID.</p>
 <p>Contains one sub-object for each metadata object stored in the RDB file.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="p">{</span>
-<span class="linenos"> 2</span>   <span class="nt">&quot;riegl.scan_pattern&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos"> 3</span>     <span class="nt">&quot;rectangular&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos"> 4</span>       <span class="nt">&quot;phi_start&quot;</span><span class="p">:</span> <span class="mf">45.0</span><span class="p">,</span>
-<span class="linenos"> 5</span>       <span class="nt">&quot;phi_stop&quot;</span><span class="p">:</span> <span class="mf">270.0</span><span class="p">,</span>
-<span class="linenos"> 6</span>       <span class="nt">&quot;phi_increment&quot;</span><span class="p">:</span> <span class="mf">0.040</span><span class="p">,</span>
-<span class="linenos"> 7</span>       <span class="nt">&quot;theta_start&quot;</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
-<span class="linenos"> 8</span>       <span class="nt">&quot;theta_stop&quot;</span><span class="p">:</span> <span class="mf">130.0</span><span class="p">,</span>
-<span class="linenos"> 9</span>       <span class="nt">&quot;theta_increment&quot;</span><span class="p">:</span> <span class="mf">0.040</span><span class="p">,</span>
-<span class="linenos">10</span>       <span class="nt">&quot;program&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos">11</span>         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;High Speed&quot;</span>
-<span class="linenos">12</span>       <span class="p">}</span>
-<span class="linenos">13</span>     <span class="p">}</span>
-<span class="linenos">14</span>   <span class="p">},</span>
-<span class="linenos">15</span>   <span class="nt">&quot;riegl.geo_tag&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos">16</span>     <span class="nt">&quot;crs&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos">17</span>       <span class="nt">&quot;epsg&quot;</span><span class="p">:</span> <span class="mi">4956</span><span class="p">,</span>
-<span class="linenos">18</span>       <span class="nt">&quot;wkt&quot;</span><span class="p">:</span> <span class="s2">&quot;GEOCCS[\&quot;NAD83(HARN) \/ Geocentric\&quot;,DATUM[\&quot;NAD83(HARN)\&quot;,SPHEROID[\&quot;GRS 1980\&quot;,6378137.000,298.257222101,AUTHORITY[\&quot;EPSG\&quot;,\&quot;7019\&quot;]],AUTHORITY[\&quot;EPSG\&quot;,\&quot;6152\&quot;]],PRIMEM[\&quot;Greenwich\&quot;,0.0000000000000000,AUTHORITY[\&quot;EPSG\&quot;,\&quot;8901\&quot;]],UNIT[\&quot;Meter\&quot;,1.00000000000000000000,AUTHORITY[\&quot;EPSG\&quot;,\&quot;9001\&quot;]],AXIS[\&quot;X\&quot;,OTHER],AXIS[\&quot;Y\&quot;,EAST],AXIS[\&quot;Z\&quot;,NORTH],AUTHORITY[\&quot;EPSG\&quot;,\&quot;4956\&quot;]]&quot;</span>
-<span class="linenos">19</span>     <span class="p">},</span>
-<span class="linenos">20</span>     <span class="nt">&quot;pose&quot;</span><span class="p">:</span> <span class="p">[</span>
-<span class="linenos">21</span>        <span class="mf">0.837957447</span><span class="p">,</span> <span class="mf">0.379440385</span><span class="p">,</span> <span class="mf">-0.392240121</span><span class="p">,</span> <span class="mf">-2505819.156</span><span class="p">,</span>
-<span class="linenos">22</span>       <span class="mf">-0.545735575</span><span class="p">,</span> <span class="mf">0.582617132</span><span class="p">,</span> <span class="mf">-0.602270669</span><span class="p">,</span> <span class="mf">-3847595.645</span><span class="p">,</span>
-<span class="linenos">23</span>        <span class="mf">0.000000000</span><span class="p">,</span> <span class="mf">0.718736580</span><span class="p">,</span>  <span class="mf">0.695282481</span><span class="p">,</span>  <span class="mf">4412064.882</span><span class="p">,</span>
-<span class="linenos">24</span>        <span class="mf">0.000000000</span><span class="p">,</span> <span class="mf">0.000000000</span><span class="p">,</span>  <span class="mf">0.000000000</span><span class="p">,</span>        <span class="mf">1.000</span>
-<span class="linenos">25</span>     <span class="p">]</span>
-<span class="linenos">26</span>   <span class="p">}</span>
-<span class="linenos">27</span> <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">   </span><span class="nt">&quot;riegl.scan_pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">     </span><span class="nt">&quot;rectangular&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">       </span><span class="nt">&quot;phi_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">45.0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">       </span><span class="nt">&quot;phi_stop&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">270.0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">       </span><span class="nt">&quot;phi_increment&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.040</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">       </span><span class="nt">&quot;theta_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">30.0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">       </span><span class="nt">&quot;theta_stop&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">130.0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">       </span><span class="nt">&quot;theta_increment&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.040</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">       </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">         </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High Speed&quot;</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">       </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">   </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">   </span><span class="nt">&quot;riegl.geo_tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">     </span><span class="nt">&quot;crs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">       </span><span class="nt">&quot;epsg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4956</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">       </span><span class="nt">&quot;wkt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GEOCCS[\&quot;NAD83(HARN) \/ Geocentric\&quot;,DATUM[\&quot;NAD83(HARN)\&quot;,SPHEROID[\&quot;GRS 1980\&quot;,6378137.000,298.257222101,AUTHORITY[\&quot;EPSG\&quot;,\&quot;7019\&quot;]],AUTHORITY[\&quot;EPSG\&quot;,\&quot;6152\&quot;]],PRIMEM[\&quot;Greenwich\&quot;,0.0000000000000000,AUTHORITY[\&quot;EPSG\&quot;,\&quot;8901\&quot;]],UNIT[\&quot;Meter\&quot;,1.00000000000000000000,AUTHORITY[\&quot;EPSG\&quot;,\&quot;9001\&quot;]],AXIS[\&quot;X\&quot;,OTHER],AXIS[\&quot;Y\&quot;,EAST],AXIS[\&quot;Z\&quot;,NORTH],AUTHORITY[\&quot;EPSG\&quot;,\&quot;4956\&quot;]]&quot;</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">     </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">     </span><span class="nt">&quot;pose&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">        </span><span class="mf">0.837957447</span><span class="p">,</span><span class="w"> </span><span class="mf">0.379440385</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.392240121</span><span class="p">,</span><span class="w"> </span><span class="mf">-2505819.156</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">       </span><span class="mf">-0.545735575</span><span class="p">,</span><span class="w"> </span><span class="mf">0.582617132</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.602270669</span><span class="p">,</span><span class="w"> </span><span class="mf">-3847595.645</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">        </span><span class="mf">0.000000000</span><span class="p">,</span><span class="w"> </span><span class="mf">0.718736580</span><span class="p">,</span><span class="w">  </span><span class="mf">0.695282481</span><span class="p">,</span><span class="w">  </span><span class="mf">4412064.882</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">        </span><span class="mf">0.000000000</span><span class="p">,</span><span class="w"> </span><span class="mf">0.000000000</span><span class="p">,</span><span class="w">  </span><span class="mf">0.000000000</span><span class="p">,</span><span class="w">        </span><span class="mf">1.000</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">     </span><span class="p">]</span><span class="w"></span>
+<span class="linenos">26</span><span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">27</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -491,56 +494,56 @@ by the reader.</p>
 <p>List of transaction objects describing the history of the file.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="p">[{</span>
-<span class="linenos"> 2</span>   <span class="nt">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
-<span class="linenos"> 3</span>   <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos"> 4</span>   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="linenos"> 5</span>   <span class="nt">&quot;rdb&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
-<span class="linenos"> 6</span>   <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos"> 7</span>     <span class="nt">&quot;cache_size&quot;</span><span class="p">:</span> <span class="mi">524288000</span><span class="p">,</span>
-<span class="linenos"> 8</span>     <span class="nt">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-<span class="linenos"> 9</span>     <span class="nt">&quot;chunk_size_lod&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-<span class="linenos">10</span>     <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-<span class="linenos">11</span>     <span class="nt">&quot;primary_attribute&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos">12</span>       <span class="nt">&quot;compression_options&quot;</span><span class="p">:</span> <span class="s2">&quot;shuffle&quot;</span><span class="p">,</span>
-<span class="linenos">13</span>       <span class="nt">&quot;default_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos">14</span>       <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Cartesian point coordinates wrt. application coordinate system (0: X, 1: Y, 2: Z)&quot;</span><span class="p">,</span>
-<span class="linenos">15</span>       <span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">16</span>       <span class="nt">&quot;length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-<span class="linenos">17</span>       <span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span> <span class="mi">535000</span><span class="p">,</span>
-<span class="linenos">18</span>       <span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span> <span class="mi">-535000</span><span class="p">,</span>
-<span class="linenos">19</span>       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;riegl.xyz&quot;</span><span class="p">,</span>
-<span class="linenos">20</span>       <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
-<span class="linenos">21</span>       <span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="linenos">22</span>       <span class="nt">&quot;storage_class&quot;</span><span class="p">:</span> <span class="s2">&quot;variable&quot;</span><span class="p">,</span>
-<span class="linenos">23</span>       <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">,</span>
-<span class="linenos">24</span>       <span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span>
-<span class="linenos">25</span>     <span class="p">}</span>
-<span class="linenos">26</span>   <span class="p">},</span>
-<span class="linenos">27</span>   <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.336&quot;</span><span class="p">,</span>
-<span class="linenos">28</span>   <span class="nt">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.336&quot;</span><span class="p">,</span>
-<span class="linenos">29</span>   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Database creation&quot;</span>
-<span class="linenos">30</span> <span class="p">},</span>
-<span class="linenos">31</span> <span class="p">{</span>
-<span class="linenos">32</span>   <span class="nt">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;rdbconvert&quot;</span><span class="p">,</span>
-<span class="linenos">33</span>   <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">34</span>   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-<span class="linenos">35</span>   <span class="nt">&quot;rdb&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
-<span class="linenos">36</span>   <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">37</span>   <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.339&quot;</span><span class="p">,</span>
-<span class="linenos">38</span>   <span class="nt">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:39.380&quot;</span><span class="p">,</span>
-<span class="linenos">39</span>   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Import&quot;</span>
-<span class="linenos">40</span> <span class="p">},</span>
-<span class="linenos">41</span> <span class="p">{</span>
-<span class="linenos">42</span>   <span class="nt">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;RiSCAN PRO 64 bit v2.6.3&quot;</span><span class="p">,</span>
-<span class="linenos">43</span>   <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">44</span>   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-<span class="linenos">45</span>   <span class="nt">&quot;rdb&quot;</span><span class="p">:</span> <span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span>
-<span class="linenos">46</span>   <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">47</span>   <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:41.666&quot;</span><span class="p">,</span>
-<span class="linenos">48</span>   <span class="nt">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-06 10:10:41.666&quot;</span><span class="p">,</span>
-<span class="linenos">49</span>   <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Meta data saved&quot;</span>
-<span class="linenos">50</span> <span class="p">}]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">   </span><span class="nt">&quot;agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">   </span><span class="nt">&quot;comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">   </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">   </span><span class="nt">&quot;rdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">   </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">     </span><span class="nt">&quot;cache_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">524288000</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">     </span><span class="nt">&quot;chunk_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">65536</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">     </span><span class="nt">&quot;chunk_size_lod&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">     </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">     </span><span class="nt">&quot;primary_attribute&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">       </span><span class="nt">&quot;compression_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shuffle&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">       </span><span class="nt">&quot;default_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">       </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cartesian point coordinates wrt. application coordinate system (0: X, 1: Y, 2: Z)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">       </span><span class="nt">&quot;invalid_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">       </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">       </span><span class="nt">&quot;maximum_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">535000</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">       </span><span class="nt">&quot;minimum_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-535000</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">       </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;riegl.xyz&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">       </span><span class="nt">&quot;resolution&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00025</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">       </span><span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">       </span><span class="nt">&quot;storage_class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;variable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">       </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;XYZ&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">       </span><span class="nt">&quot;unit_symbol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">26</span><span class="w">   </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">27</span><span class="w">   </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-04-06 10:10:39.336&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">28</span><span class="w">   </span><span class="nt">&quot;stop&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-04-06 10:10:39.336&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">29</span><span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Database creation&quot;</span><span class="w"></span>
+<span class="linenos">30</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">31</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">32</span><span class="w">   </span><span class="nt">&quot;agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdbconvert&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">33</span><span class="w">   </span><span class="nt">&quot;comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">34</span><span class="w">   </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">35</span><span class="w">   </span><span class="nt">&quot;rdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">36</span><span class="w">   </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">37</span><span class="w">   </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-04-06 10:10:39.339&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">38</span><span class="w">   </span><span class="nt">&quot;stop&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-04-06 10:10:39.380&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">39</span><span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Import&quot;</span><span class="w"></span>
+<span class="linenos">40</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">41</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">42</span><span class="w">   </span><span class="nt">&quot;agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RiSCAN PRO 64 bit v2.6.3&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">43</span><span class="w">   </span><span class="nt">&quot;comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">44</span><span class="w">   </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">45</span><span class="w">   </span><span class="nt">&quot;rdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RDB Library 2.1.6-1677 (x86_64-windows, Apr  5 2018, 10:58:39)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">46</span><span class="w">   </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">47</span><span class="w">   </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-04-06 10:10:41.666&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">48</span><span class="w">   </span><span class="nt">&quot;stop&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-04-06 10:10:41.666&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">49</span><span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Meta data saved&quot;</span><span class="w"></span>
+<span class="linenos">50</span><span class="w"> </span><span class="p">}]</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -574,7 +577,7 @@ by the reader.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -582,7 +585,7 @@ by the reader.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -598,13 +601,13 @@ by the reader.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Writing and building a PDAL Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-reader.html">Writing a reader</a></li>
@@ -210,7 +211,7 @@ writer functions. In this tutorial, we will give a brief example.</p>
 <span class="linenos">10</span>
 <span class="linenos">11</span><span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&gt;</span><span class="w"> </span><span class="n">FileStreamPtr</span><span class="p">;</span><span class="w"></span>
 <span class="linenos">12</span>
-<span class="linenos">13</span><span class="w">  </span><span class="k">class</span> <span class="nc">MyWriter</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Writer</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">MyWriter</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Writer</span><span class="w"></span>
 <span class="linenos">14</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="linenos">15</span><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
 <span class="linenos">16</span><span class="w">    </span><span class="n">MyWriter</span><span class="p">()</span><span class="w"></span>
@@ -294,9 +295,9 @@ that corresponds to the data field for easier lookup.</p>
 <span class="linenos">17</span>
 <span class="linenos">18</span><span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">MyWriter::getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="linenos">19</span>
-<span class="linenos">20</span><span class="w">  </span><span class="k">struct</span> <span class="nc">FileStreamDeleter</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">FileStreamDeleter</span><span class="w"></span>
 <span class="linenos">21</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="linenos">22</span><span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
 <span class="linenos">23</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
 <span class="linenos">24</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="linenos">25</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
@@ -399,9 +400,9 @@ provided here.  The name of the generated shared object must be</p>
 <dt>::</dt><dd><p>libpdal_plugin_writer_&lt;writer name&gt;.&lt;shared library extension&gt;</p>
 </dd>
 </dl>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">  </span><span class="k">struct</span> <span class="nc">FileStreamDeleter</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">FileStreamDeleter</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="linenos"> 3</span><span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
 <span class="linenos"> 4</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
 <span class="linenos"> 5</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 6</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
@@ -566,7 +567,7 @@ in the previous tutorial, as well.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -574,7 +575,7 @@ in the previous tutorial, as well.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -590,13 +591,13 @@ in the previous tutorial, as well.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

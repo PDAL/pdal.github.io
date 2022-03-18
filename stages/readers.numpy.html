@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="readers.optech" href="readers.optech.html" />
+    <link rel="next" title="readers.obj" href="readers.obj.html" />
     <link rel="prev" title="readers.nitf" href="readers.nitf.html" /> 
 </head>
 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.copc.html">readers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.draco.html">readers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
@@ -95,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -104,7 +107,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.smrmsg.html">readers.smrmsg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
@@ -198,7 +201,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="readers.optech.html" class="btn btn-neutral float-right" title="readers.optech" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.obj.html" class="btn btn-neutral float-right" title="readers.obj" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.nitf.html" class="btn btn-neutral float-left" title="readers.nitf" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -357,7 +360,7 @@ a Numpy array from a Python script</p>
 <section id="command-line-invocation">
 <h4>Command Line Invocation<a class="headerlink" href="#command-line-invocation" title="Permalink to this headline"></a></h4>
 <p>Using the above Python file with its <code class="docutils literal notranslate"><span class="pre">load</span></code> function, the following
-<span class="xref std std-ref">pdal_info</span> invocation passes in the reference to the filename to load.</p>
+<a class="reference internal" href="../apps/info.html#info-command"><span class="std std-ref">pdal info</span></a> invocation passes in the reference to the filename to load.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">threedim</span><span class="o">.</span><span class="n">py</span>  \
     <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">function</span><span class="o">=</span><span class="n">load</span> \
     <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">fargs</span><span class="o">=</span><span class="n">threedim</span><span class="o">.</span><span class="n">npy</span> \
@@ -368,16 +371,15 @@ a Numpy array from a Python script</p>
 <section id="pipeline">
 <h4>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline"></a></h4>
 <p>An example <a class="reference internal" href="../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> definition would follow:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>[
-    {
-        &quot;function&quot;: &quot;load&quot;,
-        &quot;filename&quot;: &quot;threedim.py&quot;,
-        &quot;fargs&quot;: &quot;threedim.npy&quot;,
-        &quot;type&quot;: &quot;readers.numpy&quot;
-    },
-
-    ...
-]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;threedim.py&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fargs&quot;</span><span class="p">:</span> <span class="s2">&quot;threedim.npy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.numpy&quot;</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -396,11 +398,11 @@ a function that returns a Numpy array using the
 </dd>
 <dt>override_srs</dt><dd><p>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘default_srs’ [Default: none]</p>
+with ‘default_srs’. [Default: none]</p>
 </dd>
 <dt>default_srs</dt><dd><p>Spatial reference to apply to the data if the input does not specify
 one.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘override_srs’ [Default: none]</p>
+with ‘override_srs’. [Default: none]</p>
 </dd>
 <dt>dimension</dt><dd><p><a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimension</span></a> name to map raster values</p>
 </dd>
@@ -432,7 +434,7 @@ are generally handled with the current ‘order’ option.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="readers.optech.html" class="btn btn-neutral float-right" title="readers.optech" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="readers.obj.html" class="btn btn-neutral float-right" title="readers.obj" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="readers.nitf.html" class="btn btn-neutral float-left" title="readers.nitf" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -450,7 +452,7 @@ are generally handled with the current ‘order’ option.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -458,7 +460,7 @@ are generally handled with the current ‘order’ option.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -474,13 +476,13 @@ are generally handled with the current ‘order’ option.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

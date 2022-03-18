@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -73,6 +73,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="filters.html#registration">Registration</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">filters.cpd</a></li>
 <li class="toctree-l4"><a class="reference internal" href="filters.icp.html">filters.icp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.teaser.html">filters.teaser</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="filters.html#predefined">Predefined</a></li>
@@ -221,15 +222,15 @@ CPD algorithm is carried out</p></li>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;fixed.las&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;moving.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.cpd&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;rigid&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;output.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;fixed.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;moving.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;filters.cpd&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rigid&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;output.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If <a class="reference internal" href="#method">method</a> is not provided, the cpd filter will default to using the
@@ -239,18 +240,18 @@ use the “metadata” option of the pipeline command:</p>
 </pre></div>
 </div>
 <p>The metadata output might start something like:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;stages&quot;</span><span class="p">:</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;filters.cpd&quot;</span><span class="p">:</span>
-        <span class="p">{</span>
-            <span class="nt">&quot;iterations&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-            <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;rigid&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;runtime&quot;</span><span class="p">:</span> <span class="mf">0.003839</span><span class="p">,</span>
-            <span class="nt">&quot;sigma2&quot;</span><span class="p">:</span> <span class="mf">5.684342128e-16</span><span class="p">,</span>
-            <span class="nt">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;           1 -6.21722e-17  1.30104e-18  5.29303e-11-8.99346e-17            1  2.60209e-18 -3.49247e-10 -2.1684e-19  1.73472e-18            1 -1.53477e-12           0            0            0            1&quot;</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stages&quot;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filters.cpd&quot;</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;iterations&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rigid&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;runtime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.003839</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;sigma2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.684342128e-16</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;transform&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;           1 -6.21722e-17  1.30104e-18  5.29303e-11-8.99346e-17            1  2.60209e-18 -3.49247e-10 -2.1684e-19  1.73472e-18            1 -1.53477e-12           0            0            0            1&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -283,7 +284,7 @@ is returned and it has the same point count as it did when the filter was run.
 </dl>
 <p id="id4"><dl class="citation">
 <dt class="label" id="id7"><span class="brackets">LLW+19</span></dt>
-<dd><p><strong>missing journal in Xuechen2019</strong></p>
+<dd><p>Xuechen Li, Yinlong Liu, Yiru Wang, Chen Wang, Manning Wang, and Zhijian Song. Fast and Globally Optimal Rigid Registration of 3D Point Sets by Transformation Decomposition. <em>unknown</em>, 2019. Available at <a class="reference external" href="https://arxiv.org/pdf/1812.11307.pdf">https://arxiv.org/pdf/1812.11307.pdf</a>.</p>
 </dd>
 <dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">MS10</a></span></dt>
 <dd><p>Andriy Myronenko and Xubo Song. Point set registration: coherent point drift. <em>IEEE transactions on pattern analysis and machine intelligence</em>, 32(12):2262–75, dec 2010.</p>
@@ -321,7 +322,7 @@ is returned and it has the same point count as it did when the filter was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -329,7 +330,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -345,13 +346,13 @@ is returned and it has the same point count as it did when the filter was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Writing and building a PDAL Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-reader.html">Writing a reader</a></li>
@@ -202,21 +203,21 @@ more complete, working example can be found <a class="reference internal" href="
 <section id="basic-cmake-configuration">
 <h2>Basic CMake configuration<a class="headerlink" href="#basic-cmake-configuration" title="Permalink to this headline"></a></h2>
 <p>Begin by creating a file named CMakeLists.txt that contains:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">2.8</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">MY_PDAL_PROJECT</span><span class="p">)</span>
-<span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span><span class="w"> </span><span class="s">1.0.0</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">CONFIG</span><span class="p">)</span>
 <span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
 <span class="nb">link_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
 <span class="nb">add_definitions</span><span class="p">(</span><span class="o">${</span><span class="nv">PDAL_DEFINITIONS</span><span class="o">}</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span> <span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
-<span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">tutorial.cpp</span><span class="p">)</span>
-<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span><span class="w"> </span><span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span><span class="w"> </span><span class="s">tutorial.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="cmakelists-explained">
 <h2>CMakeLists explained<a class="headerlink" href="#cmakelists-explained" title="Permalink to this headline"></a></h2>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">2.8.12</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <cite>cmake_minimum_required</cite> command specifies the minimum required version of
@@ -227,7 +228,7 @@ CMake. We use some recent additions to CMake in PDAL that require version
 </div>
 <p>The CMake <cite>project</cite> command names your project and sets a number of useful
 CMake variables.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span><span class="w"> </span><span class="s">1.0.0</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">CONFIG</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We next ask CMake to locate the PDAL package, requiring version 1.0.0 or higher.</p>
@@ -245,18 +246,18 @@ CMake variables.</p>
 <li><p><em>PDAL_VERSION</em>: the detected version of PDAL</p></li>
 <li><p><em>PDAL_DEFINITIONS</em>: list the needed preprocessor definitions and compiler flags</p></li>
 </ul>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span> <span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span><span class="w"> </span><span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We haven’t quite implemented the setting of <em>PDAL_DEFINITIONS</em> within the
 <cite>PDALConfig.cmake</cite> file, so for now you should specify the c++11 compiler flag,
 as we use it extensively throughout PDAL.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">tutorial.cpp</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span><span class="w"> </span><span class="s">tutorial.cpp</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We use the <cite>add_executable</cite> command to tell CMake to create an executable named
 <cite>tutorial</cite> from the source file <cite>tutorial.cpp</cite>.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We assume that the tutorial executable makes calls to PDAL functions. To make
@@ -311,7 +312,7 @@ $ cmake ..
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -319,7 +320,7 @@ $ cmake ..
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -335,13 +336,13 @@ $ cmake ..
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.copc.html">readers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.draco.html">readers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
@@ -86,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -95,7 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.smrmsg.html">readers.smrmsg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
@@ -209,31 +212,31 @@ file structure/format.</p>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
 <p>This example will download the Autzen dataset from the ArcGIS scene server and output it to a las file. This is done through PDAL’s command line interface or through the pipeline.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.i3s&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;https://tiles.arcgis.com/tiles/8cv2FuXuWSfF0nbL/arcgis/rest/services/AUTZEN_LiDAR/SceneServer&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;obb&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">636590</span><span class="p">,</span>
-                <span class="mi">849216</span><span class="p">,</span>
-                <span class="mi">460</span>
-            <span class="p">],</span>
-            <span class="nt">&quot;halfSize&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">590</span><span class="p">,</span>
-                <span class="mi">281</span><span class="p">,</span>
-                <span class="mi">60</span>
-            <span class="p">],</span>
-            <span class="nt">&quot;quaternion&quot;</span><span class="p">:</span>
-            <span class="p">[</span>
-                <span class="mi">0</span><span class="p">,</span>
-                <span class="mi">0</span><span class="p">,</span>
-                <span class="mi">0</span><span class="p">,</span>
-                <span class="mi">1</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;readers.i3s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://tiles.arcgis.com/tiles/8cv2FuXuWSfF0nbL/arcgis/rest/services/AUTZEN_LiDAR/SceneServer&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;obb&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;center&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="mi">636590</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">849216</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">460</span><span class="w"></span>
+<span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;halfSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="mi">590</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">281</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">60</span><span class="w"></span>
+<span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;quaternion&quot;</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">1</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">translate</span> <span class="n">i3s</span><span class="p">:</span><span class="o">//</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">tiles</span><span class="o">.</span><span class="n">arcgis</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tiles</span><span class="o">/</span><span class="mi">8</span><span class="n">cv2FuXuWSfF0nbL</span><span class="o">/</span><span class="n">arcgis</span><span class="o">/</span><span class="n">rest</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">AUTZEN_LiDAR</span><span class="o">/</span><span class="n">SceneServer</span> \
@@ -249,11 +252,11 @@ file structure/format.</p>
 </dd>
 <dt>override_srs</dt><dd><p>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘default_srs’ [Default: none]</p>
+with ‘default_srs’. [Default: none]</p>
 </dd>
 <dt>default_srs</dt><dd><p>Spatial reference to apply to the data if the input does not specify
 one.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘override_srs’ [Default: none]</p>
+with ‘override_srs’. [Default: none]</p>
 </dd>
 <dt>filename</dt><dd><p>I3S file stored remotely. These must be prefaced with an “i3s://”.</p>
 <p>Example remote file: <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">translate</span> <span class="pre">i3s://https://tiles.arcgis.com/tiles/arcgis/rest/services/AUTZEN_LiDAR/SceneServer</span> <span class="pre">autzen.las</span></code></p>
@@ -344,7 +347,7 @@ Esri name, rather than the PDAL dimension name.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -352,7 +355,7 @@ Esri name, rather than the PDAL dimension name.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -368,13 +371,13 @@ Esri name, rather than the PDAL dimension name.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

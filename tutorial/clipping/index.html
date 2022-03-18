@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -292,21 +292,21 @@ view the <a class="reference external" href="http://geojson.org">GeoJSON</a> geo
 <h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline"></a></h2>
 <p>A PDAL <a class="reference internal" href="../../pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> is how you define a set of actions to
 apply to data as they are read, filtered, and written.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;autzen.laz&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.vrt&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;CLS&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[5:5]&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;output.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;autzen.laz&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.overlay&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;datasource&quot;</span><span class="p">:</span><span class="s2">&quot;attributes.vrt&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="s2">&quot;OGRGeoJSON&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="s2">&quot;CLS&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Classification[5:5]&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;output.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -332,13 +332,9 @@ scenario.</p>
 </section>
 <section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline"></a></h2>
-<ol class="arabic simple">
-<li><p>Save the pipeline to a file called <code class="docutils literal notranslate"><span class="pre">shape-clip.json</span></code> in the</p></li>
-</ol>
-<blockquote>
-<div><p>same directory as your <code class="docutils literal notranslate"><span class="pre">attributes.json</span></code> and <code class="docutils literal notranslate"><span class="pre">autzen.laz</span></code> files.</p>
-</div></blockquote>
-<ol class="arabic" start="2">
+<ol class="arabic">
+<li><p>Save the pipeline to a file called <code class="docutils literal notranslate"><span class="pre">shape-clip.json</span></code> in the same directory
+as your <code class="docutils literal notranslate"><span class="pre">attributes.json</span></code> and <code class="docutils literal notranslate"><span class="pre">autzen.laz</span></code> files.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">pipeline</span></code> on the json file.</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pdal pipeline shape-clip.json
@@ -387,7 +383,7 @@ points with shapefiles.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -395,7 +391,7 @@ points with shapefiles.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -411,13 +407,13 @@ points with shapefiles.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

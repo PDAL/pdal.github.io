@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.copc.html">readers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.draco.html">readers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
@@ -82,6 +84,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -96,7 +99,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.smrmsg.html">readers.smrmsg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
@@ -228,8 +231,7 @@ This driver has been tested against RiVLib version 1.39 on a Ubuntu
 RiVLib installation.  RiVLib can be obtained from the <a class="reference external" href="http://www.riegl.com/members-area/software-downloads/libraries/">RIEGL download pages</a>
 with a properly enabled user account.  The RiVLib files do not need to be
 in a system-level directory, though they could be (e.g. they could be
-in <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>, or just in your home directory somewhere).  For help
-building PDAL with optional libraries, see <span class="xref std std-ref">the optional library documentation</span>.</p>
+in <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>, or just in your home directory somewhere).</p>
 </section>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
@@ -238,19 +240,19 @@ system, to values that can be written to a las file.  Only points with a
 valid gps time, as determined by a pps pulse, are read from the rxp, since
 the <code class="docutils literal notranslate"><span class="pre">sync_to_pps</span></code> option is “true”.  Reflectance values are mapped to
 intensity values using sensible defaults.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;120304_204030.rxp&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;sync_to_pps&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;reflectance_as_intensity&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;outputfile.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;discard_high_return_numbers&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;readers.rxp&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;120304_204030.rxp&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;sync_to_pps&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;reflectance_as_intensity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;outputfile.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;discard_high_return_numbers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>We set the <code class="docutils literal notranslate"><span class="pre">discard_high_return_numbers</span></code> option to <code class="docutils literal notranslate"><span class="pre">true</span></code> on the
@@ -270,11 +272,11 @@ to filter those points earlier in the pipeline.</p>
 </dd>
 <dt>override_srs</dt><dd><p>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘default_srs’ [Default: none]</p>
+with ‘default_srs’. [Default: none]</p>
 </dd>
 <dt>default_srs</dt><dd><p>Spatial reference to apply to the data if the input does not specify
 one.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘override_srs’ [Default: none]</p>
+with ‘override_srs’. [Default: none]</p>
 </dd>
 <dt>rdtp</dt><dd><p>Boolean to switch from file-based reading to RDTP-based. [Default: false]</p>
 </dd>
@@ -322,7 +324,7 @@ Values greater <cite>max_reflectance</cite> are assigned the value 65535.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -330,7 +332,7 @@ Values greater <cite>max_reflectance</cite> are assigned the value 65535.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -346,13 +348,13 @@ Values greater <cite>max_reflectance</cite> are assigned the value 65535.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

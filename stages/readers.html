@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Readers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.copc.html">readers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.draco.html">readers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
@@ -82,6 +84,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -91,7 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.smrmsg.html">readers.smrmsg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
@@ -212,6 +215,8 @@ for point cloud data.</p>
 <dt><a class="reference internal" href="readers.buffer.html#readers-buffer"><span class="std std-ref">readers.buffer</span></a></dt><dd><p>Special stage that allows you to read data from your own PointView rather
 than fetching data from a specific reader.</p>
 </dd>
+<dt><a class="reference internal" href="readers.draco.html#readers-draco"><span class="std std-ref">readers.draco</span></a></dt><dd><p>Read a buffer in Google Draco format</p>
+</dd>
 <dt><a class="reference internal" href="readers.ept.html#readers-ept"><span class="std std-ref">readers.ept</span></a></dt><dd><p>Used for reading <a class="reference external" href="https://entwine.io">Entwine Point Tile</a> format.</p>
 </dd>
 <dt><a class="reference internal" href="readers.e57.html#readers-e57"><span class="std std-ref">readers.e57</span></a></dt><dd><p>Read point clouds in the E57 format.</p>
@@ -247,6 +252,8 @@ LizardTech Lidar_DSDK.</p>
 </dd>
 <dt><a class="reference internal" href="readers.numpy.html#readers-numpy"><span class="std std-ref">readers.numpy</span></a></dt><dd><p>Read point cloud data from Numpy <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files.</p>
 </dd>
+<dt><a class="reference internal" href="readers.obj.html#readers-obj"><span class="std std-ref">readers.obj</span></a></dt><dd><p>Read points and a mesh from Wavefront OBJ files.</p>
+</dd>
 <dt><a class="reference internal" href="readers.optech.html#readers-optech"><span class="std std-ref">readers.optech</span></a></dt><dd><p>Read Optech Corrected Sensor Data (.csd) files.</p>
 </dd>
 <dt><a class="reference internal" href="readers.pcd.html#readers-pcd"><span class="std std-ref">readers.pcd</span></a></dt><dd><p>Read files in the PCD format.</p>
@@ -268,8 +275,6 @@ The reader requires a copy of RiVLib during compilation.</p>
 The reader requires a copy of rdblib during compilation and usage.</p>
 </dd>
 <dt><a class="reference internal" href="readers.sbet.html#readers-sbet"><span class="std std-ref">readers.sbet</span></a></dt><dd><p>Read the SBET format.</p>
-</dd>
-<dt><a class="reference internal" href="readers.sqlite.html#readers-sqlite"><span class="std std-ref">readers.sqlite</span></a></dt><dd><p>Read data stored in a SQLite database.</p>
 </dd>
 <dt><a class="reference internal" href="readers.slpk.html#readers-slpk"><span class="std std-ref">readers.slpk</span></a></dt><dd><p>Read data stored in an Esri SLPK file.</p>
 </dd>
@@ -311,7 +316,7 @@ tindex command.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -319,7 +324,7 @@ tindex command.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -335,13 +340,13 @@ tindex command.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

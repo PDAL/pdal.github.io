@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="Writing a filter" href="writing-filter.html" />
+    <link rel="next" title="Writing and building a PDAL Plugin" href="plugins.html" />
     <link rel="prev" title="Metadata" href="metadata.html" /> 
 </head>
 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#compiling-and-running-the-program">Compiling and running the program</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Writing and building a PDAL Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-reader.html">Writing a reader</a></li>
@@ -167,7 +168,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="writing-filter.html" class="btn btn-neutral float-right" title="Writing a filter" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="plugins.html" class="btn btn-neutral float-right" title="Writing and building a PDAL Plugin" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metadata.html" class="btn btn-neutral float-left" title="Metadata" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -217,7 +218,7 @@ code anything explicit yourself.</p>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span><span class="w"> </span><span class="n">view</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">struct</span> <span class="nc">Point</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Point</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
@@ -290,7 +291,7 @@ at runtime and return pointers to the created stages.</p>
 z dimensions.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">fillView</span><span class="p">(</span><span class="n">pdal</span><span class="o">::</span><span class="n">PointViewPtr</span><span class="w"> </span><span class="n">view</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">struct</span> <span class="nc">Point</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Point</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
@@ -363,19 +364,19 @@ and sends it to a writer.</p>
 </div>
 <p>To build this example, simply copy the files tutorial.cpp and CMakeLists.txt
 from the examples/writing directory of the PDAL source tree.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.6</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.6</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">WritingTutorial</span><span class="p">)</span>
 
-<span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">2.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span><span class="w"> </span><span class="s">2.0.0</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">CONFIG</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">11</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
 
-<span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">tutorial.cpp</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">tutorial</span><span class="w"> </span><span class="s">tutorial.cpp</span><span class="p">)</span>
 
-<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
-<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">PRIVATE</span>
-    <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span>
-    <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="s">/pdal</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">tutorial</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="s">/pdal</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -405,7 +406,7 @@ $ make
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="writing-filter.html" class="btn btn-neutral float-right" title="Writing a filter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="plugins.html" class="btn btn-neutral float-right" title="Writing and building a PDAL Plugin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metadata.html" class="btn btn-neutral float-left" title="Metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -423,7 +424,7 @@ $ make
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -431,7 +432,7 @@ $ make
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -447,13 +448,13 @@ $ make
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

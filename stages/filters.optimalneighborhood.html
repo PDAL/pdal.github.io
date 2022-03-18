@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -85,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="filters.planefit.html">filters.planefit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="filters.radialdensity.html">filters.radialdensity</a></li>
 <li class="toctree-l4"><a class="reference internal" href="filters.reciprocity.html">filters.reciprocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.zsmooth.html">filters.zsmooth</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="filters.html#assignment">Assignment</a></li>
@@ -213,21 +214,21 @@ be written to an output file or utilized directly by
 </div>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.optimalneighborhood&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;min_k&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>
-        <span class="nt">&quot;max_k&quot;</span><span class="p">:</span> <span class="mi">50</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;minor_version&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
-        <span class="nt">&quot;extra_dims&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;forward&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.optimalneighborhood&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;min_k&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;max_k&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;minor_version&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;extra_dims&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;forward&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.las&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -238,7 +239,7 @@ be written to an output file or utilized directly by
 neighborhood selection. [Default: 10]</p>
 </dd>
 <dt>max_k</dt><dd><p>The maximum number of k nearest neighbors to consider for optimal
-neighborhood selection. [Default: 100]</p>
+neighborhood selection. [Default: 14]</p>
 </dd>
 </dl>
 </section>
@@ -269,7 +270,7 @@ neighborhood selection. [Default: 100]</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -277,7 +278,7 @@ neighborhood selection. [Default: 100]</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -293,13 +294,13 @@ neighborhood selection. [Default: 100]</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

@@ -25,7 +25,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="readers.e57" href="readers.e57.html" />
-    <link rel="prev" title="readers.buffer" href="readers.buffer.html" /> 
+    <link rel="prev" title="readers.draco" href="readers.draco.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.copc.html">readers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.draco.html">readers.draco</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.ept</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
@@ -86,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -95,7 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.smrmsg.html">readers.smrmsg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.slpk.html">readers.slpk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.terrasolid.html">readers.terrasolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.text.html">readers.text</a></li>
@@ -192,7 +195,7 @@
         <a href="readers.e57.html" class="btn btn-neutral float-right" title="readers.e57" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.buffer.html" class="btn btn-neutral float-left" title="readers.buffer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.draco.html" class="btn btn-neutral float-left" title="readers.draco" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -209,7 +212,7 @@ producer of this format.  The EPT Reader supports reading data from the
 EPT format, including spatially accelerated queries and file reconstruction
 queries.</p>
 <p>Sample EPT datasets of hundreds of billions of points in size may be viewed
-with <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a> or <a href="#id2"><span class="problematic" id="id3">`Plasio`_</span></a>.</p>
+with <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a>.</p>
 <div class="admonition embed" id="embed-0">
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
@@ -221,29 +224,29 @@ with <a class="reference external" href="http://potree.entwine.io/data/nyc.html"
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
 <p>This example downloads a small area around the the Statue of Liberty from the New York City data set (4.7 billion points) which can be viewed in its entirety in <a class="reference external" href="http://potree.entwine.io/data/nyc.html">Potree</a>.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-   <span class="p">{</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/nyc/ept.json&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="s2">&quot;([-8242669, -8242529], [4966549, 4966674])&quot;</span>
-   <span class="p">},</span>
-   <span class="s2">&quot;statue-of-liberty.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://na.entwine.io/nyc/ept.json&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;bounds&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;([-8242669, -8242529], [4966549, 4966674])&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="p">},</span><span class="w"></span>
+<span class="w">   </span><span class="s2">&quot;statue-of-liberty.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Additional attributes created by the
 <a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">EPT addon writer</span></a> can be referenced with the <code class="docutils literal notranslate"><span class="pre">addon</span></code> option.  Here is an example that overrides the <code class="docutils literal notranslate"><span class="pre">Classification</span></code> dimension with an addon dimension derived from the original dataset:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;addons&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="s2">&quot;~/entwine/addons/autzen/smrf&quot;</span> <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;autzen-ept-smrf.las&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://na.entwine.io/autzen/ept.json&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;addons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/entwine/addons/autzen/smrf&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;autzen-ept-smrf.las&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For more details about addon dimensions and how to produce them, see <a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">writers.ept_addon</span></a>.</p>
@@ -251,15 +254,25 @@ with <a class="reference external" href="http://potree.entwine.io/data/nyc.html"
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
 <dl>
-<dt>filename</dt><dd><p>Path to the EPT resource from which to read, ending with <code class="docutils literal notranslate"><span class="pre">ept.json</span></code>.  For example, <code class="docutils literal notranslate"><span class="pre">/Users/connor/entwine/autzen/ept.json</span></code> or <code class="docutils literal notranslate"><span class="pre">http://na.entwine.io/autzen/ept.json</span></code>. [Required]</p>
+<dt>filename</dt><dd><p>Path to the EPT resource from which to read, ending with <code class="docutils literal notranslate"><span class="pre">ept.json</span></code>.
+For example, <code class="docutils literal notranslate"><span class="pre">/Users/connor/entwine/autzen/ept.json</span></code> or
+<code class="docutils literal notranslate"><span class="pre">http://na.entwine.io/autzen/ept.json</span></code>. [Required]</p>
 </dd>
 <dt>spatialreference</dt><dd><p>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. [Default: none]</p>
 </dd>
-<dt>bounds</dt><dd><p>The extents of the resource to select in 2 or 3 dimensions, expressed as a string, e.g.: <code class="docutils literal notranslate"><span class="pre">([xmin,</span> <span class="pre">xmax],</span> <span class="pre">[ymin,</span> <span class="pre">ymax],</span> <span class="pre">[zmin,</span> <span class="pre">zmax])</span></code>.  If omitted, the entire dataset will be selected.</p>
+<dt>bounds</dt><dd><p>The extents of the resource to select in 2 or 3 dimensions, expressed as a string,
+e.g.: <code class="docutils literal notranslate"><span class="pre">([xmin,</span> <span class="pre">xmax],</span> <span class="pre">[ymin,</span> <span class="pre">ymax],</span> <span class="pre">[zmin,</span> <span class="pre">zmax])</span></code>.  If omitted, the entire dataset
+will be selected. The bounds can be followed by a slash (‘/’) and a spatial reference
+specification to apply to the bounds.</p>
 </dd>
-<dt>resolution</dt><dd><p>A point resolution limit to select, expressed as a grid cell edge length.  Units correspond to resource coordinate system units.  For example, for a coordinate system expressed in meters, a <code class="docutils literal notranslate"><span class="pre">resolution</span></code> value of <code class="docutils literal notranslate"><span class="pre">0.1</span></code> will select points up to a ground resolution of 100 points per square meter.</p>
-<p>The resulting resolution may not be exactly this value: the minimum possible resolution that is at <em>least</em> as precise as the requested resolution will be selected.  Therefore the result may be a bit more precise than requested.</p>
+<dt>resolution</dt><dd><p>A point resolution limit to select, expressed as a grid cell edge length.  Units
+correspond to resource coordinate system units.  For example, for a coordinate system
+expressed in meters, a <code class="docutils literal notranslate"><span class="pre">resolution</span></code> value of <code class="docutils literal notranslate"><span class="pre">0.1</span></code> will select points up to a
+ground resolution of 100 points per square meter.</p>
+<p>The resulting resolution may not be exactly this value: the minimum possible resolution
+that is at <em>least</em> as precise as the requested resolution will be selected.  Therefore
+the result may be a bit more precise than requested.</p>
 </dd>
 <dt>addons</dt><dd><p>A mapping of assignments of the form <code class="docutils literal notranslate"><span class="pre">DimensionName:</span> <span class="pre">AddonPath</span></code>, which
 assigns dimensions from the specified paths to the named dimensions.
@@ -267,10 +280,12 @@ These addon dimensions are created by the
 <a class="reference internal" href="writers.ept_addon.html#writers-ept-addon"><span class="std std-ref">EPT addon writer</span></a>.  If the dimension names
 already exist in the EPT <a class="reference external" href="https://entwine.io/entwine-point-tile.html#schema">Schema</a> for the given resource, then their
 values will be overwritten with those from the appropriate addon.</p>
-<p>Addons may used to override well-known <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a>.  For example, an addon assignment of <code class="docutils literal notranslate"><span class="pre">&quot;Classification&quot;:</span> <span class="pre">&quot;~/addons/autzen/MyGroundDimension/&quot;</span></code> will override an existing EPT <code class="docutils literal notranslate"><span class="pre">Classification</span></code> dimension with the custom dimension.</p>
+<p>Addons may used to override well-known <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimension</span></a>.  For example,
+an addon assignment of <code class="docutils literal notranslate"><span class="pre">&quot;Classification&quot;:</span> <span class="pre">&quot;~/addons/autzen/MyGroundDimension/&quot;</span></code>
+will override an existing EPT <code class="docutils literal notranslate"><span class="pre">Classification</span></code> dimension with the custom dimension.</p>
 </dd>
 <dt>origin</dt><dd><p>EPT datasets are lossless aggregations of potentially multiple source
-files.  The <em>origin</em> options can be used to select all points from a
+files.  The <em>origin</em> option can be used to select all points from a
 single source file.  This option may be specified as a string or an
 integral ID.</p>
 <p>The string form of this option selects a source file by its original
@@ -286,32 +301,45 @@ metadata file <code class="docutils literal notranslate"><span class="pre">entwi
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When using <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--summary</span></code>, using the <code class="docutils literal notranslate"><span class="pre">origin</span></code> option will cause the resulting bounds to be clipped to those of the selected origin, and the resulting number of points to be an upper bound for this selection.</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--summary</span></code>, using the <code class="docutils literal notranslate"><span class="pre">origin</span></code> option will cause the
+resulting bounds to be clipped to those of the selected origin, and the resulting
+number of points to be an upper bound for this selection.</p>
 </div>
 <dl class="simple">
 <dt>polygon</dt><dd><p>The clipping polygon, expressed in a well-known text string,
-eg: “POLYGON((0 0, 5000 10000, 10000 0, 0 0))”.  This option can be
-specified more than once by placing values in an array.</p>
+e.g.: <code class="docutils literal notranslate"><span class="pre">POLYGON((0</span> <span class="pre">0,</span> <span class="pre">5000</span> <span class="pre">10000,</span> <span class="pre">10000</span> <span class="pre">0,</span> <span class="pre">0</span> <span class="pre">0))</span></code>.  This option can be
+specified more than once by placing values in an array, in which case all of
+them will be unioned together, acting as a single multipolygon. The polygon definition
+can be followed by a slash (‘/’) and a spatial reference specification to apply to
+the polygon.</p>
 </dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When using <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--summary</span></code>, using the <code class="docutils literal notranslate"><span class="pre">polygon</span></code> option will cause the resulting bounds to be clipped to the maximal extents of all provided polygons, and the resulting number of points to be an upper bound for this polygon selection.</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">info</span> <span class="pre">--summary</span></code>, using the <code class="docutils literal notranslate"><span class="pre">polygon</span></code> option will cause the
+resulting bounds to be clipped to the maximal extents of all provided polygons,
+and the resulting number of points to be an upper bound for this polygon selection.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When both the <code class="docutils literal notranslate"><span class="pre">bounds</span></code> and <code class="docutils literal notranslate"><span class="pre">polygon</span></code> options are specified, only
+the points that fall within <em>both</em> the bounds and the polygon(s) will be
+returned.</p>
 </div>
 <dl>
 <dt>ogr</dt><dd><p>A JSON object representing an OGR query to fetch polygons to use for filtering. The polygons
 fetched from the query are treated exactly like those specified in the <code class="docutils literal notranslate"><span class="pre">polygon</span></code> option.
-The JSON object takes the looks like the following:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;drivers&quot;</span><span class="p">:</span> <span class="s2">&quot;OGR drivers to use&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;openoptions&quot;</span><span class="p">:</span> <span class="s2">&quot;Options to pass to the OGR open function [optional]&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;layer&quot;</span><span class="p">:</span> <span class="s2">&quot;OGR layer from which to fetch polygons [optional]&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;sql&quot;</span><span class="p">:</span> <span class="s2">&quot;SQL query to use to filter the polygons in the layer [optional]&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;options&quot;</span><span class="p">:</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;WKT or GeoJSON geomtry used to filter query [optional]&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+The JSON object is specified as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;drivers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OGR drivers to use&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;openoptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Options to pass to the OGR open function [optional]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OGR layer from which to fetch polygons [optional]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;sql&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SQL query to use to filter the polygons in the layer [optional]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WKT or GeoJSON geomtry used to filter query [optional]&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -319,10 +347,10 @@ The JSON object takes the looks like the following:</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>header</dt><dd><p>HTTP headers to forward for remote EPT endpoints, structured as a JSON
+<dt>header</dt><dd><p>HTTP headers to forward for remote EPT endpoints, specified as a JSON
 object of key/value string pairs.</p>
 </dd>
-<dt>query</dt><dd><p>HTTP query parameters to forward for remote EPT endpoints, structured as a
+<dt>query</dt><dd><p>HTTP query parameters to forward for remote EPT endpoints, specified as a
 JSON object of key/value string pairs.</p>
 </dd>
 </dl>
@@ -339,7 +367,7 @@ JSON object of key/value string pairs.</p>
         <a href="readers.e57.html" class="btn btn-neutral float-right" title="readers.e57" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.buffer.html" class="btn btn-neutral float-left" title="readers.buffer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.draco.html" class="btn btn-neutral float-left" title="readers.draco" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -354,7 +382,7 @@ JSON object of key/value string pairs.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -362,7 +390,7 @@ JSON object of key/value string pairs.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -378,13 +406,13 @@ JSON object of key/value string pairs.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

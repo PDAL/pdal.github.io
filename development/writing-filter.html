@@ -25,7 +25,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="Writing a kernel" href="writing-kernel.html" />
-    <link rel="prev" title="Writing with PDAL" href="writing.html" /> 
+    <link rel="prev" title="Writing and building a PDAL Plugin" href="plugins.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Writing and building a PDAL Plugin</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Writing a filter</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-header">The header</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-source">The source</a></li>
@@ -171,7 +172,7 @@
         <a href="writing-kernel.html" class="btn btn-neutral float-right" title="Writing a kernel" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writing.html" class="btn btn-neutral float-left" title="Writing with PDAL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="plugins.html" class="btn btn-neutral float-left" title="Writing and building a PDAL Plugin" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -210,7 +211,7 @@ to make it static or shared.</p>
 <span class="linenos"> 8</span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="w"></span>
 <span class="linenos"> 9</span><span class="p">{</span><span class="w"></span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="k">class</span> <span class="nc">PDAL_DLL</span><span class="w"> </span><span class="nl">MyFilter</span> <span class="p">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Filter</span><span class="w"></span>
+<span class="linenos">11</span><span class="k">class</span><span class="w"> </span><span class="nc">PDAL_DLL</span><span class="w"> </span><span class="n">MyFilter</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Filter</span><span class="w"></span>
 <span class="linenos">12</span><span class="p">{</span><span class="w"></span>
 <span class="linenos">13</span><span class="k">public</span><span class="o">:</span><span class="w"></span>
 <span class="linenos">14</span><span class="w">    </span><span class="n">MyFilter</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Filter</span><span class="p">()</span><span class="w"></span>
@@ -352,17 +353,17 @@ power of the <code class="docutils literal notranslate"><span class="pre">Filter
 <section id="compilation">
 <h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline"></a></h2>
 <p>Set up a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to compile your filter against PDAL:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">2.8.12</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="nb">project</span><span class="p">(</span><span class="s">FilterTutorial</span><span class="p">)</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">1.9.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span><span class="w"> </span><span class="s">1.9.0</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">CONFIG</span><span class="p">)</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span>
-<span class="linenos"> 7</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span>
-<span class="linenos"> 8</span><span class="nb">add_library</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">SHARED</span> <span class="s">MyFilter.cpp</span><span class="p">)</span>
-<span class="linenos"> 9</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
-<span class="linenos">10</span><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
-<span class="linenos">11</span><span class="nb">target_link_directories</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">11</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="nb">add_library</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="s">MyFilter.cpp</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<span class="linenos">10</span><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+<span class="linenos">11</span><span class="nb">target_link_directories</span><span class="p">(</span><span class="s">pdal_plugin_filter_myfilter</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -383,7 +384,7 @@ requirements, operating system, and compilter.</p>
         <a href="writing-kernel.html" class="btn btn-neutral float-right" title="Writing a kernel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="writing.html" class="btn btn-neutral float-left" title="Writing with PDAL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="plugins.html" class="btn btn-neutral float-left" title="Writing and building a PDAL Plugin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -398,7 +399,7 @@ requirements, operating system, and compilter.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -406,7 +407,7 @@ requirements, operating system, and compilter.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -422,13 +423,13 @@ requirements, operating system, and compilter.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

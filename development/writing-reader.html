@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Writing and building a PDAL Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-kernel.html">Writing a kernel</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Writing a reader</a><ul>
@@ -208,7 +209,7 @@ reader functions. In this tutorial, we will give a brief example.</p>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="w"></span>
 <span class="linenos">10</span><span class="p">{</span><span class="w"></span>
-<span class="linenos">11</span><span class="w">  </span><span class="k">class</span> <span class="nc">MyReader</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Reader</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">MyReader</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Reader</span><span class="w"></span>
 <span class="linenos">12</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="linenos">13</span><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
 <span class="linenos">14</span><span class="w">    </span><span class="n">MyReader</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Reader</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
@@ -292,7 +293,7 @@ that a reader can override or implement.</p>
 <span class="linenos"> 36</span><span class="w">    </span><span class="n">setSpatialReference</span><span class="p">(</span><span class="n">ref</span><span class="p">);</span><span class="w"></span>
 <span class="linenos"> 37</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="linenos"> 38</span>
-<span class="linenos"> 39</span><span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="linenos"> 39</span><span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
 <span class="linenos"> 40</span><span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="n">convert</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StringList</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">fieldno</span><span class="p">)</span><span class="w"></span>
 <span class="linenos"> 41</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 42</span><span class="w">      </span><span class="n">T</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
@@ -331,7 +332,7 @@ that a reader can override or implement.</p>
 <span class="linenos"> 75</span><span class="w">      </span><span class="c1">// MyReader format:  X::Y::Z::Data</span>
 <span class="linenos"> 76</span><span class="w">      </span><span class="n">StringList</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Utils</span><span class="o">::</span><span class="n">split2</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;:&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="linenos"> 77</span>
-<span class="linenos"> 78</span><span class="w">      </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">u64</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 78</span><span class="w">      </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">u64</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 <span class="linenos"> 79</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
 <span class="linenos"> 80</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 81</span><span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="w"> </span><span class="n">oss</span><span class="p">;</span><span class="w"></span>
@@ -434,7 +435,7 @@ processed.</p>
 <p>This is a helper function, which will convert a string value into the type
 specified when it’s called.  In our example, it will be used to convert
 strings to doubles when reading from the input stream.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="n">convert</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StringList</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">fieldno</span><span class="p">)</span><span class="w"></span>
 <span class="linenos"> 3</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 4</span><span class="w">      </span><span class="n">T</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
@@ -487,7 +488,7 @@ that we have the proper number of fields.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">      </span><span class="c1">// MyReader format:  X::Y::Z::Data</span>
 <span class="linenos"> 2</span><span class="w">      </span><span class="n">StringList</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Utils</span><span class="o">::</span><span class="n">split2</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;:&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="w">      </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">u64</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">      </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">u64</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 <span class="linenos"> 5</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
 <span class="linenos"> 6</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 7</span><span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="w"> </span><span class="n">oss</span><span class="p">;</span><span class="w"></span>
@@ -598,7 +599,7 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -606,7 +607,7 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -622,13 +623,13 @@ except in a CSV style format, and with the Z values scaled by .001.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

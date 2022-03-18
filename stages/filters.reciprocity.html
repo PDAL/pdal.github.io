@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="filters.assign" href="filters.assign.html" />
+    <link rel="next" title="filters.zsmooth" href="filters.zsmooth.html" />
     <link rel="prev" title="filters.radialdensity" href="filters.radialdensity.html" /> 
 </head>
 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -85,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="filters.planefit.html">filters.planefit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="filters.radialdensity.html">filters.radialdensity</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">filters.reciprocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.zsmooth.html">filters.zsmooth</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="filters.html#assignment">Assignment</a></li>
@@ -186,7 +187,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="filters.assign.html" class="btn btn-neutral float-right" title="filters.assign" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.zsmooth.html" class="btn btn-neutral float-right" title="filters.zsmooth" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="filters.radialdensity.html" class="btn btn-neutral float-left" title="filters.radialdensity" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -225,18 +226,18 @@ output format that can support arbitrary dimensions, such as BPF.</p>
 <p>The sample pipeline below computes reciprocity with a neighborhood of 8
 neighbors, followed by a range filter to crop out points whose <code class="docutils literal notranslate"><span class="pre">Reciprocity</span></code>
 percentage is less than 98% before writing the output.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reciprocity&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Reciprocity[:98.0]&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;output.laz&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.reciprocity&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="mi">8</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.range&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;limits&quot;</span><span class="p">:</span><span class="s2">&quot;Reciprocity[:98.0]&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;output.laz&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -270,7 +271,7 @@ is returned and it has the same point count as it did when the filter was run.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filters.assign.html" class="btn btn-neutral float-right" title="filters.assign" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filters.zsmooth.html" class="btn btn-neutral float-right" title="filters.zsmooth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="filters.radialdensity.html" class="btn btn-neutral float-left" title="filters.radialdensity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -288,7 +289,7 @@ is returned and it has the same point count as it did when the filter was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -296,7 +297,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -312,13 +313,13 @@ is returned and it has the same point count as it did when the filter was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

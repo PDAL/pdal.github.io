@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,8 +67,11 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.copc.html">writers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.draco.html">writers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.e57.html">writers.e57</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.fbx.html">writers.fbx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.gltf</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
@@ -85,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.raster.html">writers.raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.tiledb.html">writers.tiledb</a></li>
 </ul>
@@ -193,26 +195,26 @@
 If a mesh has been generated
 for a PDAL point view, the <strong>GLTF Writer</strong> will produce simple output in
 the GLTF format.  PDAL does not currently support many of the attributes
-that can be found in a GLTF file.  This writer creates a <em>binary</em> GLTF.</p>
+that can be found in a GLTF file.  This writer creates a <em>binary</em> GLTF (extension ‘.glb’).</p>
 <div class="admonition embed" id="embed-0">
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;infile.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filters.poisson&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">12</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gltf&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.glb&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;red&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-        <span class="nt">&quot;metallic&quot;</span><span class="p">:</span> <span class="mf">0.5</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;infile.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;filters.poisson&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gltf&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.glb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;red&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;metallic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -225,17 +227,23 @@ that can be found in a GLTF file.  This writer creates a <em>binary</em> GLTF.</
 </dd>
 <dt>roughness</dt><dd><p>The roughness factor of the faces. [Default: 0]</p>
 </dd>
-<dt>red</dt><dd><p>The red component of the color applied to the faces. [Default: 0]</p>
+<dt>red</dt><dd><p>The base red component of the color applied to the faces. [Default: 0]</p>
 </dd>
-<dt>green</dt><dd><p>The green component of the color applied to the faces. [Default: 0]</p>
+<dt>green</dt><dd><p>The base green component of the color applied to the faces. [Default: 0]</p>
 </dd>
-<dt>blue</dt><dd><p>The blue component of the color applied to the faces. [Default: 0]</p>
+<dt>blue</dt><dd><p>The base blue component of the color applied to the faces. [Default: 0]</p>
 </dd>
 <dt>alpha</dt><dd><p>The alpha component to be applied to the faces. [Default: 1.0]</p>
 </dd>
 <dt>double_sided</dt><dd><p>Whether the faces are colored on both sides, or just the side
 visible from the initial observation point (positive normal vector).
 [Default: false]</p>
+</dd>
+<dt>colors</dt><dd><p>Write color data for each vertex.  Red, Green and Blue dimensions must exist.
+Note that most renderers will “interpolate the
+color of each vertex across a face, so this may look odd.” [Default: false]</p>
+</dd>
+<dt>normals</dt><dd><p>Write vertex normals. NormalX, NormalY and NormalZ dimensions must exist. [Default: false]</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -280,7 +288,7 @@ is returned and it has the same point count as it did when the writer was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -288,7 +296,7 @@ is returned and it has the same point count as it did when the writer was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -304,13 +312,13 @@ is returned and it has the same point count as it did when the writer was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

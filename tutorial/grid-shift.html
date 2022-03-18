@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -371,6 +371,24 @@
 <p class="admonition-title">Note</p>
 <p>The file is also available from  <a class="reference external" href="https://gist.github.com/rclarkelinz/d48de5c0432f5c00d02a452e6d1d3bc3">https://gist.github.com/rclarkelinz/d48de5c0432f5c00d02a452e6d1d3bc3</a></p>
 </div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">src_directory</span><span class="o">=</span><span class="s1">&#39;/path/to/diretory/with/las/files&#39;</span>
+<span class="n">gtxfile</span><span class="o">=</span><span class="s1">&#39;/path/to/yourgridfile.gtx&#39;</span>
+<span class="n">jsonfile</span><span class="o">=</span><span class="s1">&#39;/path/to/pipeline.json&#39;</span>
+<span class="n">horizontal_srs</span><span class="o">=</span><span class="s1">&#39;EPSG:2193&#39;</span>
+
+<span class="n">dest_directory</span> <span class="o">=</span> <span class="n">src_directory</span> <span class="o">+</span> <span class="s1">&#39;/reprojected&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest_directory</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dest_directory</span><span class="p">)</span>         
+   
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">src_directory</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.las&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.laz&#39;</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reprojecting &#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">pdal_cmd</span> <span class="o">=</span><span class="s1">&#39;pdal pipeline </span><span class="si">{}</span><span class="s1"> --readers.las.filename=</span><span class="si">{}</span><span class="s1">  --writers.las.filename=</span><span class="si">{}</span><span class="s1"> --filters.reprojection.out_srs=&quot;+init=</span><span class="si">{}</span><span class="s1"> +geoidgrids=</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">,</span> <span class="n">src_directory</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">dest_directory</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">horizontal_srs</span><span class="p">,</span><span class="n">gtxfile</span><span class="p">)</span>       
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">pdal_cmd</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>To execute the script, open the Anaconda Prompt, activate the <code class="docutils literal notranslate"><span class="pre">vd-reproject</span></code> environment and then navigate to where you have saved the script and issue this command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">lvd_to_nzvd2016</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
@@ -416,7 +434,7 @@
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -424,7 +442,7 @@
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -440,13 +458,13 @@
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

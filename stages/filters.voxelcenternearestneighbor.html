@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -195,36 +195,29 @@ cloud is divided into 3D voxels at the given cell size. For each populated
 voxel, the coordinates of the voxel center are used as the query point in a 3D
 nearest neighbor search. The nearest neighbor is then added to the output point
 cloud, along with any existing dimensions.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is similar to the existing <span class="xref std std-ref">filters.voxelgrid</span>. However, in the
-case of the VoxelGrid, the centroid of the points falling within the voxel
-is added to the output point cloud. The drawback with this approach is that
-all dimensional data is lost, and the sampled cloud now consists of only
-XYZ coordinates.</p>
-</div>
 <div class="admonition embed" id="embed-0">
 <p class="admonition-title">Default Embedded Stage </p>
 <p>This stage is enabled by default</p>
 </div>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.voxelcenternearestneighbor&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;cell&quot;</span><span class="p">:</span><span class="mf">10.0</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;output.las&quot;</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.voxelcenternearestneighbor&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;cell&quot;</span><span class="p">:</span><span class="mf">10.0</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;output.las&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="filters.voxelcentroidnearestneighbor.html#filters-voxelcentroidnearestneighbor"><span class="std std-ref">filters.voxelcentroidnearestneighbor</span></a> offers a similar solution,
-using
-as the query point the centroid of all points falling within the voxel as
-opposed to the voxel center coordinates.</p>
+using as the query point the centroid of all points falling within the voxel as
+opposed to the voxel center coordinates.  The drawback with this approach is that
+all dimensional data is lost, leaving the the sampled cloud consisting of only
+XYZ coordinates.</p>
 </div>
 </section>
 <section id="options">
@@ -275,7 +268,7 @@ is returned and it has the same point count as it did when the filter was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -283,7 +276,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -299,13 +292,13 @@ is returned and it has the same point count as it did when the filter was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

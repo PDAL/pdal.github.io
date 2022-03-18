@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,8 +67,11 @@
 <li class="toctree-l1"><a class="reference internal" href="readers.html">Readers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="writers.html">Writers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="writers.bpf.html">writers.bpf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.copc.html">writers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.draco.html">writers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.ept_addon.html">writers.ept_addon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.e57.html">writers.e57</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.fbx.html">writers.fbx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gdal.html">writers.gdal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.gltf.html">writers.gltf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.las.html">writers.las</a></li>
@@ -81,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="writers.ply.html">writers.ply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.raster.html">writers.raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.sbet.html">writers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writers.sqlite.html">writers.sqlite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writers.text.html">writers.text</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">writers.tiledb</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
@@ -200,16 +202,19 @@
 </div>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;array_name&quot;</span><span class="p">:</span><span class="s2">&quot;input.las&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.tiledb&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;array_name&quot;</span><span class="p">:</span><span class="s2">&quot;output_array&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;array_name&quot;</span><span class="p">:</span><span class="s2">&quot;input.las&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.stats&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.tiledb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;array_name&quot;</span><span class="p">:</span><span class="s2">&quot;output_array&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -220,13 +225,35 @@
 </dd>
 <dt>config_file</dt><dd><p><a class="reference external" href="https://tiledb.io">TileDB</a> configuration file [Optional]</p>
 </dd>
-<dt>tile_data_capacity</dt><dd><p>Number of points per tile [Optional]</p>
+<dt>data_tile_capacity</dt><dd><p>Number of points per tile [Optional]</p>
 </dd>
-<dt>x_tile_size</dt><dd><p>Tile size (x) in a Cartesian projection [Optional]</p>
+<dt>x_tile_size</dt><dd><p>Tile size (x) [Optional]</p>
 </dd>
-<dt>y_tile_size</dt><dd><p>Tile size (y) in a Cartesian projection [Optional]</p>
+<dt>y_tile_size</dt><dd><p>Tile size (y) [Optional]</p>
 </dd>
-<dt>z_tile_size</dt><dd><p>Tile size (z) in a Cartesian projection [Optional]</p>
+<dt>z_tile_size</dt><dd><p>Tile size (z) [Optional]</p>
+</dd>
+<dt>time_tile_size</dt><dd><p>Tile size (time) [Optional]</p>
+</dd>
+<dt>x_domain_st</dt><dd><p>Domain minimum in x [Optional]</p>
+</dd>
+<dt>x_domain_end</dt><dd><p>Domain maximum in x [Optional]</p>
+</dd>
+<dt>y_domain_st</dt><dd><p>Domain minimum in y [Optional]</p>
+</dd>
+<dt>y_domain_end</dt><dd><p>Domain maximum in y [Optional]</p>
+</dd>
+<dt>z_domain_st</dt><dd><p>Domain minimum in z [Optional]</p>
+</dd>
+<dt>z_domain_end</dt><dd><p>Domain maximum in z [Optional]</p>
+</dd>
+<dt>time_domain_st</dt><dd><p>Domain minimum in GpsTime [Optional]</p>
+</dd>
+<dt>time_domain_end</dt><dd><p>Domain maximum in GpsTime [Optional]</p>
+</dd>
+<dt>use_time_dim</dt><dd><p>Use GpsTime coordinate data as array dimension [Optional]</p>
+</dd>
+<dt>time_first</dt><dd><p>If writing 4D array with XYZ and Time, choose to put time dim first or last (default) [Optional]</p>
 </dd>
 <dt>chunk_size</dt><dd><p>Point cache size for chunked writes [Optional]</p>
 </dd>
@@ -239,6 +266,8 @@
 <dt>stats</dt><dd><p>Dump query stats to stdout [Optional]</p>
 </dd>
 <dt>filters</dt><dd><p>JSON array or object of compression filters for either <cite>coords</cite> or <cite>attributes</cite> of the form {coords/attributename : {“compression”: name, compression_options: value, …}} [Optional]</p>
+</dd>
+<dt>timestamp</dt><dd><p>Sets the TileDB timestamp for this write</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -256,28 +285,26 @@ is returned and it has the same point count as it did when the writer was run.
 </dd>
 </dl>
 <p>By default TileDB will use the following set of compression filters for coordinates and attributes;</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;coords&quot;</span><span class="p">:[</span>
-        <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;bit-shuffle&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">}</span>
-    <span class="p">],</span>
-    <span class="nt">&quot;Intensity&quot;</span><span class="p">:{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;bzip2&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
-    <span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;zstd&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">},</span>
-    <span class="nt">&quot;NumberOfReturns&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;zstd&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">},</span>
-    <span class="nt">&quot;ScanDirectionFlag&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;bzip2&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
-    <span class="nt">&quot;EdgeOfFlightLine&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;bzip2&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
-    <span class="nt">&quot;Classification&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
-    <span class="nt">&quot;ScanAngleRank&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;bzip2&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
-    <span class="nt">&quot;UserData&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
-    <span class="nt">&quot;PointSourceId&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;bzip2&quot;</span><span class="p">},</span>
-    <span class="nt">&quot;Red&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;rle&quot;</span><span class="p">},</span>
-    <span class="nt">&quot;Green&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;rle&quot;</span><span class="p">},</span>
-    <span class="nt">&quot;Blue&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;rle&quot;</span><span class="p">},</span>
-    <span class="nt">&quot;GpsTime&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;bit-shuffle&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span> <span class="s2">&quot;zstd&quot;</span><span class="p">,</span> <span class="nt">&quot;compression_level&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;coords&quot;</span><span class="p">:[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Intensity&quot;</span><span class="p">:{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bzip2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;ReturnNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;NumberOfReturns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;ScanDirectionFlag&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bzip2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;EdgeOfFlightLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bzip2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;ScanAngleRank&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bzip2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;UserData&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;PointSourceId&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bzip2&quot;</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Red&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Green&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Blue&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;GpsTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;compression_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -308,7 +335,7 @@ is returned and it has the same point count as it did when the writer was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -316,7 +343,7 @@ is returned and it has the same point count as it did when the writer was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -332,13 +359,13 @@ is returned and it has the same point count as it did when the writer was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

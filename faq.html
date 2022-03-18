@@ -36,7 +36,7 @@
             <a href="index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -164,12 +164,7 @@
   <section id="faq">
 <span id="id1"></span><h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline"></a></h1>
 <span class="target" id="index-0"></span><ul>
-<li><p>How do you pronounce PDAL?</p>
-<p>The proper spelling of the project name is PDAL, in uppercase. It is
-pronounced to rhyme with “GDAL”.</p>
-<p> </p>
-</li>
-<li><p>Why do I get the error “Couldn’t create … stage of type …”?</p>
+<li><p>Why do I get the error <code class="docutils literal notranslate"><span class="pre">Couldn't</span> <span class="pre">create</span> <span class="pre">...</span> <span class="pre">stage</span> <span class="pre">of</span> <span class="pre">type</span> <span class="pre">...</span></code>?</p>
 <p>In almost all cases this error occurs because you’re trying to run a stage
 that is built as a plugin and the plugin (a shared library file or DLL)
 can’t be found by pdal.  You can verify whether the plugin can
@@ -191,7 +186,12 @@ variable <code class="docutils literal notranslate"><span class="pre">PDAL_DRIVE
 for plugins.</p>
 <p> </p>
 </li>
-<li><p>Why do I get the error <a href="#id2"><span class="problematic" id="id3">``</span></a>Unable to convert scaled value … “</p>
+<li><p>I’m missing the python filter/numpy reader. Where is it?</p>
+<p>If you’re building PDAL from source, you’ll find the python filter and numpy
+reader in a separate repository, <a class="reference external" href="https://github.com/PDAL/python-plugins">https://github.com/PDAL/python-plugins</a>. If you’re
+using a package, Python support may be in a separate package, often called “python-pdal”.</p>
+</li>
+<li><p>Why do I get the error <code class="docutils literal notranslate"><span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">convert</span> <span class="pre">scaled</span> <span class="pre">value</span> <span class="pre">...</span></code></p>
 <p>This error usually occurs when writing LAS files, but can occur with other
 formats.</p>
 <p>Simply, the output format you’ve chosen doesn’t support values as large
@@ -218,8 +218,14 @@ sizes before PDAL can process the data. Furthermore, some operations
 (notably <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">DEM creation</span></a>) can use large amounts of
 additional memory during processing before the output can be written.
 Depending on the operation, PDAL will attempt operate in
-<a class="reference internal" href="pipeline.html#processing-modes"><span class="std std-ref">stream mode</span></a> to
-limit memory consumption when possible.</p>
+<a class="reference internal" href="pipeline.html#processing-modes"><span class="std std-ref">stream mode</span></a> to limit memory consumption when possible.
+If you want to limit the dimensions loaded, you may be able to use the <code class="docutils literal notranslate"><span class="pre">dims</span></code> option
+that is available with some PDAL commands.</p>
+<p> </p>
+</li>
+<li><p>How do you pronounce PDAL?</p>
+<p>The proper spelling of the project name is PDAL, in uppercase. It is
+pronounced to rhyme with “GDAL”.</p>
 <p> </p>
 </li>
 <li><p>What is PDAL’s relationship to PCL?</p>
@@ -302,7 +308,7 @@ readable by <a class="reference external" href="https://trac.osgeo.org/geotif">l
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -310,7 +316,7 @@ readable by <a class="reference external" href="https://trac.osgeo.org/geotif">l
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -326,13 +332,13 @@ readable by <a class="reference external" href="https://trac.osgeo.org/geotif">l
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

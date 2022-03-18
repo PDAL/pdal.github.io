@@ -25,7 +25,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
     <link rel="next" title="readers.terrasolid" href="readers.terrasolid.html" />
-    <link rel="prev" title="readers.sqlite" href="readers.sqlite.html" /> 
+    <link rel="prev" title="readers.smrmsg" href="readers.smrmsg.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="readers.html">Readers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="readers.bpf.html">readers.bpf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.buffer.html">readers.buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.copc.html">readers.copc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.draco.html">readers.draco</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.ept.html">readers.ept</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.e57.html">readers.e57</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.faux.html">readers.faux</a></li>
@@ -82,6 +84,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.mrsid.html">readers.mrsid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.nitf.html">readers.nitf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.numpy.html">readers.numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.obj.html">readers.obj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.optech.html">readers.optech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pcd.html">readers.pcd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.pgpointcloud.html">readers.pgpointcloud</a></li>
@@ -91,7 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="readers.rdb.html">readers.rdb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.rxp.html">readers.rxp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readers.sbet.html">readers.sbet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readers.sqlite.html">readers.sqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers.smrmsg.html">readers.smrmsg</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">readers.slpk</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
@@ -192,7 +195,7 @@
         <a href="readers.terrasolid.html" class="btn btn-neutral float-right" title="readers.terrasolid" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.sqlite.html" class="btn btn-neutral float-left" title="readers.sqlite" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.smrmsg.html" class="btn btn-neutral float-left" title="readers.smrmsg" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -212,31 +215,31 @@ than find information through REST.</p>
 <p>This example will unarchive the slpk file, store it in a temp directory,
 and traverse it. The data will be output to a las file. This is done
 through PDAL’s command line interface or through the pipeline.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.slpk&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;PDAL/test/data/i3s/SMALL_AUTZEN_LAS_All.slpk&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;obb&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">636590</span><span class="p">,</span>
-                <span class="mi">849216</span><span class="p">,</span>
-                <span class="mi">460</span>
-            <span class="p">],</span>
-            <span class="nt">&quot;halfSize&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">590</span><span class="p">,</span>
-                <span class="mi">281</span><span class="p">,</span>
-                <span class="mi">60</span>
-            <span class="p">],</span>
-            <span class="nt">&quot;quaternion&quot;</span><span class="p">:</span>
-            <span class="p">[</span>
-                <span class="mi">0</span><span class="p">,</span>
-                <span class="mi">0</span><span class="p">,</span>
-                <span class="mi">0</span><span class="p">,</span>
-                <span class="mi">1</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;readers.slpk&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PDAL/test/data/i3s/SMALL_AUTZEN_LAS_All.slpk&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;obb&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;center&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="mi">636590</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">849216</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">460</span><span class="w"></span>
+<span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;halfSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="mi">590</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">281</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">60</span><span class="w"></span>
+<span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;quaternion&quot;</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="mi">1</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">traslate</span>  <span class="n">PDAL</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">i3s</span><span class="o">/</span><span class="n">SMALL_AUTZEN_LAS_All</span><span class="o">.</span><span class="n">slpk</span> <span class="n">autzen</span><span class="o">.</span><span class="n">las</span>
@@ -255,11 +258,11 @@ Example: <code class="docutils literal notranslate"><span class="pre">pdal</span
 </dd>
 <dt>override_srs</dt><dd><p>Spatial reference to apply to the data.  Overrides any SRS in the input
 itself.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘default_srs’ [Default: none]</p>
+with ‘default_srs’. [Default: none]</p>
 </dd>
 <dt>default_srs</dt><dd><p>Spatial reference to apply to the data if the input does not specify
 one.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
-with ‘override_srs’ [Default: none]</p>
+with ‘override_srs’. [Default: none]</p>
 </dd>
 <dt>obb</dt><dd><p>An oriented bounding box used to filter the data being retrieved.  The obb
 is specified as JSON exactly as described by the <a class="reference external" href="https://github.com/Esri/i3s-spec/blob/master/docs/2.0/obb.cmn.md">I3S specification</a>.</p>
@@ -332,7 +335,7 @@ parameters will select all leaf nodes (the highest resolution).</p>
         <a href="readers.terrasolid.html" class="btn btn-neutral float-right" title="readers.terrasolid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="readers.sqlite.html" class="btn btn-neutral float-left" title="readers.sqlite" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="readers.smrmsg.html" class="btn btn-neutral float-left" title="readers.smrmsg" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -347,7 +350,7 @@ parameters will select all leaf nodes (the highest resolution).</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -355,7 +358,7 @@ parameters will select all leaf nodes (the highest resolution).</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -371,13 +374,13 @@ parameters will select all leaf nodes (the highest resolution).</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

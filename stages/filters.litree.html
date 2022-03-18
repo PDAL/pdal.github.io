@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -213,21 +213,34 @@ flexible radius for non-tree seed insertion.</p>
 </div>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="s2">&quot;input.las&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.litree&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;min_points&quot;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span>
-        <span class="nt">&quot;min_height&quot;</span><span class="p">:</span><span class="mf">10.0</span><span class="p">,</span>
-        <span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="mf">200.0</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.laz&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;minor_version&quot;</span><span class="p">:</span><span class="mf">1.4</span><span class="p">,</span>
-        <span class="nt">&quot;extra_dims&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<p>The Li tree algorithm expects to visit points in descending order of
+<code class="docutils literal notranslate"><span class="pre">HeightAboveGround</span></code>, which is also used in determining the minimum tree
+height to consider. As such, the following pipeline precomputes
+<code class="docutils literal notranslate"><span class="pre">HeightAboveGround</span></code> using <a class="reference internal" href="filters.hag_delaunay.html#filters-hag-delaunay"><span class="std std-ref">filters.hag_delaunay</span></a> and subsequently sorts
+the <code class="docutils literal notranslate"><span class="pre">PointView</span></code> using this dimension.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;input.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.hag_delaunay&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.sort&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;HeightAboveGround&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="s2">&quot;DESC&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;filters.litree&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;min_points&quot;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;min_height&quot;</span><span class="p">:</span><span class="mf">10.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="mf">200.0</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;output.laz&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;minor_version&quot;</span><span class="p">:</span><span class="mf">1.4</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;extra_dims&quot;</span><span class="p">:</span><span class="s2">&quot;all&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -284,7 +297,7 @@ is returned and it has the same point count as it did when the filter was run.
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -292,7 +305,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -308,13 +321,13 @@ is returned and it has the same point count as it did when the filter was run.
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 

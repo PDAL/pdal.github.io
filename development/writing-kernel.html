@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> PDAL
           </a>
               <div class="version">
-                2.3.0
+                2.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="errorhandling.html">Errors and Error Handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing.html">Writing with PDAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Writing and building a PDAL Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing-filter.html">Writing a filter</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Writing a kernel</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-header">The header</a></li>
@@ -211,7 +212,7 @@ kernel functions. In this tutorial, we will give a brief example.</p>
 <span class="linenos"> 9</span><span class="k">namespace</span><span class="w"> </span><span class="nn">pdal</span><span class="w"></span>
 <span class="linenos">10</span><span class="p">{</span><span class="w"></span>
 <span class="linenos">11</span>
-<span class="linenos">12</span><span class="k">class</span> <span class="nc">PDAL_DLL</span><span class="w"> </span><span class="nl">MyKernel</span> <span class="p">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Kernel</span><span class="w"></span>
+<span class="linenos">12</span><span class="k">class</span><span class="w"> </span><span class="nc">PDAL_DLL</span><span class="w"> </span><span class="n">MyKernel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Kernel</span><span class="w"></span>
 <span class="linenos">13</span><span class="p">{</span><span class="w"></span>
 <span class="linenos">14</span><span class="k">public</span><span class="o">:</span><span class="w"></span>
 <span class="linenos">15</span><span class="w">    </span><span class="n">MyKernel</span><span class="p">();</span><span class="w"></span>
@@ -338,18 +339,18 @@ possible commands.</p>
 <section id="compilation">
 <h3>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline"></a></h3>
 <p>Set up a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to compile your kernel against PDAL:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">2.8.12</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="nb">project</span><span class="p">(</span><span class="s">KernelTutorial</span><span class="p">)</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span> <span class="s">2.0.0</span> <span class="s">REQUIRED</span> <span class="s">CONFIG</span><span class="p">)</span>
-<span class="linenos"> 5</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span>
-<span class="linenos"> 6</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="nb">find_package</span><span class="p">(</span><span class="s">PDAL</span><span class="w"> </span><span class="s">2.0.0</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">CONFIG</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">11</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
 <span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="nb">add_library</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">SHARED</span> <span class="s">MyKernel.cpp</span><span class="p">)</span>
-<span class="linenos"> 9</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
-<span class="linenos">10</span><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">PRIVATE</span>
-<span class="linenos">11</span>                            <span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
-<span class="linenos">12</span><span class="nb">target_link_directories</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="nb">add_library</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="s">MyKernel.cpp</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<span class="linenos">10</span><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="linenos">11</span><span class="w">                            </span><span class="o">${</span><span class="nv">PDAL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+<span class="linenos">12</span><span class="nb">target_link_directories</span><span class="p">(</span><span class="s">pdal_plugin_kernel_mykernel</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">PDAL_LIBRARY_DIRS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -381,7 +382,7 @@ possible commands.</p>
       <div class="copyright">
       
 
-                    &copy;  2021
+                    &copy;  2022
                         <a href="https://github.com/abellgithub">Andrew Bell</a>,
                         <a href="https://github.com/chambbj">Brad Chambers</a>,
                         <a href="http://github.com/hobu">Howard Butler</a>,
@@ -389,7 +390,7 @@ possible commands.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Oct 25, 2021.
+      Last updated on Mar 18, 2022.
       </div>
     </div>
 </footer>
@@ -405,13 +406,13 @@ possible commands.</p>
   </script>
     <div class="footer">
         <div class="container">
-                    &copy;  2021
+                    &copy;  2022
                         <a href="http://github.com/hobu">Howard Butler</a>,
                         <a href="http://github.com/mpgerlek">Michael Gerlek</a>,
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Oct 25, 2021.
+                    on Mar 18, 2022.
         </div>
     </div>
 
