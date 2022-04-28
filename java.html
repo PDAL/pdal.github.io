@@ -196,9 +196,9 @@ This mode of operation is useful if you are looking to have PDAL simply act as
 your data format and processing handler.</p>
 <p>Users are expected to construct their own PDAL <a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a>,
 execute it, and retrieve points into Java memory:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="n">_</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="n">_</span>
 
-<span class="kd">val</span> <span class="n">json</span> <span class="o">=</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
 <span class="s">&quot;&quot;&quot;</span>
 <span class="s">  |{</span>
 <span class="s">  |  &quot;pipeline&quot;:[</span>
@@ -215,86 +215,86 @@ execute it, and retrieve points into Java memory:</p>
 <span class="s">  |    }</span>
 <span class="s">  |  ]</span>
 <span class="s">  |}</span>
-<span class="s">&quot;&quot;&quot;</span><span class="p">.</span><span class="n">stripMargin</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">.</span><span class="n">stripMargin</span><span class="w"></span>
 
-<span class="kd">val</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="nc">Pipeline</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">validate</span><span class="p">()</span> <span class="c1">// check if our JSON and options were good</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="c1">// make it really noisy</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">execute</span><span class="p">()</span> <span class="c1">// execute the pipeline</span>
-<span class="kd">val</span> <span class="n">metadata</span><span class="p">:</span> <span class="nc">String</span>       <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">getMetadata</span><span class="p">()</span> <span class="c1">// retrieve metadata</span>
-<span class="kd">val</span> <span class="n">pvs</span><span class="p">:</span> <span class="nc">PointViewIterator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">getPointViews</span><span class="p">()</span> <span class="c1">// iterator over PointViews</span>
-<span class="kd">val</span> <span class="n">pv</span><span class="p">:</span> <span class="nc">PointView</span>          <span class="o">=</span> <span class="n">pvs</span><span class="p">.</span><span class="n">next</span><span class="p">()</span> <span class="c1">// let&#39;s take the first PointView</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Pipeline</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="w"></span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">validate</span><span class="p">()</span><span class="w"> </span><span class="c1">// check if our JSON and options were good</span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="c1">// make it really noisy</span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">execute</span><span class="p">()</span><span class="w"> </span><span class="c1">// execute the pipeline</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="n">getMetadata</span><span class="p">()</span><span class="w"> </span><span class="c1">// retrieve metadata</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pvs</span><span class="p">:</span><span class="w"> </span><span class="nc">PointViewIterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="n">getPointViews</span><span class="p">()</span><span class="w"> </span><span class="c1">// iterator over PointViews</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pv</span><span class="p">:</span><span class="w"> </span><span class="nc">PointView</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">pvs</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="c1">// let&#39;s take the first PointView</span>
 
 <span class="c1">// load all points into JVM memory</span>
 <span class="c1">// PointCloud provides operations on PDAL points that</span>
 <span class="c1">// are loaded in this case into JVM memory as a single Array[Byte]</span>
-<span class="kd">val</span> <span class="n">pointCloud</span><span class="p">:</span> <span class="nc">PointCloud</span> <span class="o">=</span> <span class="n">pv</span><span class="p">.</span><span class="n">getPointCloud</span><span class="p">()</span>
-<span class="kd">val</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Double</span> <span class="o">=</span> <span class="n">pointCloud</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nc">DimType</span><span class="p">.</span><span class="nc">X</span><span class="p">)</span> <span class="c1">// get a point with PointId = 0 and only a single dimensions</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pointCloud</span><span class="p">:</span><span class="w"> </span><span class="nc">PointCloud</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pv</span><span class="p">.</span><span class="n">getPointCloud</span><span class="p">()</span><span class="w"></span>
+<span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pointCloud</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nc">DimType</span><span class="p">.</span><span class="nc">X</span><span class="p">)</span><span class="w"> </span><span class="c1">// get a point with PointId = 0 and only a single dimensions</span>
 
 <span class="c1">// in some cases it is not neccesary to load everything into JVM memory</span>
 <span class="c1">// so it is possible to get only required points directly from the PointView</span>
-<span class="kd">val</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Double</span> <span class="o">=</span> <span class="n">pv</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nc">DimType</span><span class="p">.</span><span class="nc">Y</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pv</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nc">DimType</span><span class="p">.</span><span class="nc">Y</span><span class="p">)</span><span class="w"></span>
 
 <span class="c1">// it is also possible to get access to the triangular mesh generated via PDAL</span>
-<span class="kd">val</span> <span class="n">mesh</span><span class="p">:</span> <span class="nc">TriangularMesh</span>       <span class="o">=</span> <span class="n">pv</span><span class="p">.</span><span class="n">getTriangularMesh</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">mesh</span><span class="p">:</span><span class="w"> </span><span class="nc">TriangularMesh</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">pv</span><span class="p">.</span><span class="n">getTriangularMesh</span><span class="p">()</span><span class="w"></span>
 <span class="c1">// the output is an Array of Triangles</span>
 <span class="c1">// Each Triangle contains PointIds from the PDAL point table</span>
-<span class="kd">val</span> <span class="n">triangles</span><span class="p">:</span> <span class="nc">Array</span><span class="p">[</span><span class="nc">Triangle</span><span class="p">]</span> <span class="o">=</span> <span class="n">mesh</span><span class="p">.</span><span class="n">asArray</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">triangles</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">Triangle</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="p">.</span><span class="n">asArray</span><span class="w"></span>
 
-<span class="n">pv</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">pv</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"></span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
 <section id="using-pdal-scala">
 <h2>Using PDAL Scala<a class="headerlink" href="#using-pdal-scala" title="Permalink to this headline"></a></h2>
 <p>PDAL Scala project introduces a DSL to simplify PDAL Pipeline construction (this is the same pipeline from the section above):</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="n">_</span>
-<span class="k">import</span> <span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="nn">pipeline</span><span class="p">.</span><span class="n">_</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="n">_</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="nn">pipeline</span><span class="p">.</span><span class="n">_</span>
 
-<span class="kd">val</span> <span class="n">expression</span> <span class="o">=</span>
-  <span class="nc">ReadLas</span><span class="p">(</span><span class="s">&quot;1.2-with-color.las&quot;</span><span class="p">,</span> <span class="n">spatialreference</span> <span class="o">=</span> <span class="nc">Some</span><span class="p">(</span><span class="s">&quot;EPSG:2993&quot;</span><span class="p">))</span> <span class="o">~</span>
-  <span class="nc">FilterReprojection</span><span class="p">(</span><span class="s">&quot;EPSG:3857&quot;</span><span class="p">)</span> <span class="o">~</span>
-  <span class="nc">FilterDelaunay</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">expression</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">  </span><span class="nc">ReadLas</span><span class="p">(</span><span class="s">&quot;1.2-with-color.las&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">spatialreference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="s">&quot;EPSG:2993&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">~</span><span class="w"></span>
+<span class="w">  </span><span class="nc">FilterReprojection</span><span class="p">(</span><span class="s">&quot;EPSG:3857&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"></span>
+<span class="w">  </span><span class="nc">FilterDelaunay</span><span class="p">()</span><span class="w"></span>
 
-<span class="kd">val</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">expression</span><span class="p">.</span><span class="n">toPipeline</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">validate</span><span class="p">()</span> <span class="c1">// check if our JSON and options were good</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="c1">// make it really noisy</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">execute</span><span class="p">()</span> <span class="c1">// execute the pipeline</span>
-<span class="kd">val</span> <span class="n">metadata</span><span class="p">:</span> <span class="nc">String</span>       <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">getMetadata</span><span class="p">()</span> <span class="c1">// retrieve metadata</span>
-<span class="kd">val</span> <span class="n">pvs</span><span class="p">:</span> <span class="nc">PointViewIterator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">getPointViews</span><span class="p">()</span> <span class="c1">// iterator over PointViews</span>
-<span class="kd">val</span> <span class="n">pv</span><span class="p">:</span> <span class="nc">PointView</span>          <span class="o">=</span> <span class="n">pvs</span><span class="p">.</span><span class="n">next</span><span class="p">()</span> <span class="c1">// let&#39;s take the first PointView</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expression</span><span class="p">.</span><span class="n">toPipeline</span><span class="w"></span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">validate</span><span class="p">()</span><span class="w"> </span><span class="c1">// check if our JSON and options were good</span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="c1">// make it really noisy</span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">execute</span><span class="p">()</span><span class="w"> </span><span class="c1">// execute the pipeline</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="n">getMetadata</span><span class="p">()</span><span class="w"> </span><span class="c1">// retrieve metadata</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pvs</span><span class="p">:</span><span class="w"> </span><span class="nc">PointViewIterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="n">getPointViews</span><span class="p">()</span><span class="w"> </span><span class="c1">// iterator over PointViews</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pv</span><span class="p">:</span><span class="w"> </span><span class="nc">PointView</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">pvs</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="c1">// let&#39;s take the first PointView</span>
 
 <span class="c1">// load all points into JVM memory</span>
 <span class="c1">// PointCloud provides operations on PDAL points that</span>
 <span class="c1">// are loaded in this case into JVM memory as a single Array[Byte]</span>
-<span class="kd">val</span> <span class="n">pointCloud</span><span class="p">:</span> <span class="nc">PointCloud</span> <span class="o">=</span> <span class="n">pv</span><span class="p">.</span><span class="n">getPointCloud</span><span class="p">()</span>
-<span class="kd">val</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Double</span> <span class="o">=</span> <span class="n">pointCloud</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nc">DimType</span><span class="p">.</span><span class="nc">X</span><span class="p">)</span> <span class="c1">// get a point with PointId = 0 and only a single dimensions</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pointCloud</span><span class="p">:</span><span class="w"> </span><span class="nc">PointCloud</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pv</span><span class="p">.</span><span class="n">getPointCloud</span><span class="p">()</span><span class="w"></span>
+<span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pointCloud</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nc">DimType</span><span class="p">.</span><span class="nc">X</span><span class="p">)</span><span class="w"> </span><span class="c1">// get a point with PointId = 0 and only a single dimensions</span>
 
 <span class="c1">// in some cases it is not neccesary to load everything into JVM memory</span>
 <span class="c1">// so it is possible to get only required points directly from the PointView</span>
-<span class="kd">val</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Double</span> <span class="o">=</span> <span class="n">pv</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nc">DimType</span><span class="p">.</span><span class="nc">Y</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pv</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nc">DimType</span><span class="p">.</span><span class="nc">Y</span><span class="p">)</span><span class="w"></span>
 
 <span class="c1">// it is also possible to get access to the triangular mesh generated via PDAL</span>
-<span class="kd">val</span> <span class="n">mesh</span><span class="p">:</span> <span class="nc">TriangularMesh</span>       <span class="o">=</span> <span class="n">pv</span><span class="p">.</span><span class="n">getTriangularMesh</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">mesh</span><span class="p">:</span><span class="w"> </span><span class="nc">TriangularMesh</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">pv</span><span class="p">.</span><span class="n">getTriangularMesh</span><span class="p">()</span><span class="w"></span>
 <span class="c1">// the output is an Array of Triangles</span>
 <span class="c1">// Each Triangle contains PointIds from the PDAL point table</span>
-<span class="kd">val</span> <span class="n">triangles</span><span class="p">:</span> <span class="nc">Array</span><span class="p">[</span><span class="nc">Triangle</span><span class="p">]</span> <span class="o">=</span> <span class="n">mesh</span><span class="p">.</span><span class="n">asArray</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">triangles</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">Triangle</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="p">.</span><span class="n">asArray</span><span class="w"></span>
 
-<span class="n">pv</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">pv</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"></span>
+<span class="n">pipeline</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"></span>
 </pre></div>
 </div>
 <p>It covers PDAL 2.0.x, but to use any custom DSL that is not covered by the
 current Scala API you can use <code class="docutils literal notranslate"><span class="pre">RawExpr</span></code> type to build a <code class="docutils literal notranslate"><span class="pre">Pipeline</span> <span class="pre">Expression</span></code>:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="n">_</span>
-<span class="k">import</span> <span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="nn">pipeline</span><span class="p">.</span><span class="n">_</span>
-<span class="k">import</span> <span class="nn">io</span><span class="p">.</span><span class="nn">circe</span><span class="p">.</span><span class="nn">syntax</span><span class="p">.</span><span class="n">_</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="n">_</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io</span><span class="p">.</span><span class="nn">pdal</span><span class="p">.</span><span class="nn">pipeline</span><span class="p">.</span><span class="n">_</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io</span><span class="p">.</span><span class="nn">circe</span><span class="p">.</span><span class="nn">syntax</span><span class="p">.</span><span class="n">_</span>
 
-<span class="kd">val</span> <span class="n">pipelineWithRawExpr</span> <span class="o">=</span>
-  <span class="nc">ReadLas</span><span class="p">(</span><span class="s">&quot;1.2-with-color.las&quot;</span><span class="p">)</span> <span class="o">~</span>
-  <span class="nc">RawExpr</span><span class="p">(</span><span class="nc">Map</span><span class="p">(</span><span class="s">&quot;type&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;filters.crop&quot;</span><span class="p">).</span><span class="n">asJson</span><span class="p">)</span> <span class="o">~</span>
-  <span class="nc">WriteLas</span><span class="p">(</span><span class="s">&quot;1.2-with-color-out.las&quot;</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">pipelineWithRawExpr</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">  </span><span class="nc">ReadLas</span><span class="p">(</span><span class="s">&quot;1.2-with-color.las&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"></span>
+<span class="w">  </span><span class="nc">RawExpr</span><span class="p">(</span><span class="nc">Map</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;filters.crop&quot;</span><span class="p">).</span><span class="n">asJson</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"></span>
+<span class="w">  </span><span class="nc">WriteLas</span><span class="p">(</span><span class="s">&quot;1.2-with-color-out.las&quot;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <section id="installation">
@@ -303,16 +303,16 @@ current Scala API you can use <code class="docutils literal notranslate"><span c
 However, if it is not required, a separate artifact that has no Scala specific
 artifact postfix is published as well.</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// pdal is published to maven central, but you can use following repos in addition</span>
-<span class="n">resolvers</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="p">(</span>
-  <span class="nc">Resolver</span><span class="p">.</span><span class="n">sonatypeRepo</span><span class="p">(</span><span class="s">&quot;releases&quot;</span><span class="p">),</span>
-  <span class="nc">Resolver</span><span class="p">.</span><span class="n">sonatypeRepo</span><span class="p">(</span><span class="s">&quot;snapshots&quot;</span><span class="p">)</span> <span class="c1">// for snaphots</span>
-<span class="p">)</span>
+<span class="n">resolvers</span><span class="w"> </span><span class="o">++=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="nc">Resolver</span><span class="p">.</span><span class="n">sonatypeRepo</span><span class="p">(</span><span class="s">&quot;releases&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="nc">Resolver</span><span class="p">.</span><span class="n">sonatypeRepo</span><span class="p">(</span><span class="s">&quot;snapshots&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// for snaphots</span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="p">(</span>
-  <span class="s">&quot;io.pdal&quot;</span> <span class="o">%%</span> <span class="s">&quot;pdal&quot;</span> <span class="o">%</span> <span class="s">&quot;x.x.x&quot;</span><span class="p">,</span>        <span class="c1">// core library</span>
-  <span class="s">&quot;io.pdal&quot;</span> <span class="o">%</span>  <span class="s">&quot;pdal-native&quot;</span> <span class="o">%</span> <span class="s">&quot;x.x.x&quot;</span><span class="p">,</span> <span class="c1">// jni binaries</span>
-  <span class="s">&quot;io.pdal&quot;</span> <span class="o">%%</span> <span class="s">&quot;pdal-scala&quot;</span> <span class="o">%</span> <span class="s">&quot;x.x.x&quot;</span>   <span class="c1">// if scala core library (if required)</span>
-<span class="p">)</span>
+<span class="n">libraryDependencies</span><span class="w"> </span><span class="o">++=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;io.pdal&quot;</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="s">&quot;pdal&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;x.x.x&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1">// core library</span>
+<span class="w">  </span><span class="s">&quot;io.pdal&quot;</span><span class="w"> </span><span class="o">%</span><span class="w">  </span><span class="s">&quot;pdal-native&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;x.x.x&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// jni binaries</span>
+<span class="w">  </span><span class="s">&quot;io.pdal&quot;</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="s">&quot;pdal-scala&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;x.x.x&quot;</span><span class="w">   </span><span class="c1">// if scala core library (if required)</span>
+<span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The latest version is: <a class="reference external" href="https://search.maven.org/search?q=g:io.pdal">https://search.maven.org/search?q=g:io.pdal</a></p>
@@ -345,7 +345,7 @@ bindings repository, that can be used for a quick start.</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// Mac OS X example with manual JNI installation</span>
 <span class="c1">// cp -f native/target/resource_managed/main/native/x86_64-darwin/libpdaljni.2.1.dylib /usr/local/lib/libpdaljni.2.1.dylib</span>
 <span class="c1">// place built binary into /usr/local/lib, and pass java.library.path to your JVM</span>
-<span class="n">javaOptions</span> <span class="o">+=</span> <span class="s">&quot;-Djava.library.path=/usr/local/lib&quot;</span>
+<span class="n">javaOptions</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;-Djava.library.path=/usr/local/lib&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">pdal-native</span></code> dep in case you don’t have installed JNI bindings and to avoid steps described above.
@@ -387,7 +387,7 @@ Dependency contains bindings for <code class="docutils literal notranslate"><spa
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 22, 2022.
+      Last updated on Apr 28, 2022.
       </div>
     </div>
 </footer>
@@ -409,7 +409,7 @@ Dependency contains bindings for <code class="docutils literal notranslate"><spa
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 22, 2022.
+                    on Apr 28, 2022.
         </div>
     </div>
 

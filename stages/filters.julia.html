@@ -200,36 +200,36 @@ and return the same object (with modifications).</p>
 <p class="admonition-title">Dynamic Plugin</p>
 <p>This stage requires a dynamic plugin to operate</p>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span> <span class="k">module</span> <span class="n">MyModule</span>
-   <span class="k">using</span> <span class="n">TypedTables</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="n">MyModule</span><span class="w"></span>
+<span class="w">   </span><span class="k">using</span><span class="w"> </span><span class="n">TypedTables</span><span class="w"></span>
 
-   <span class="k">function</span> <span class="n">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-     <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-       <span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="p">(;</span> <span class="ss">:Z</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">.</span><span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span>
-     <span class="k">end</span>
-     <span class="k">return</span> <span class="n">ins</span>
-   <span class="k">end</span>
- <span class="k">end</span>
-
-
-<span class="n">If</span> <span class="n">you</span> <span class="n">want</span> <span class="n">write</span> <span class="n">a</span> <span class="n">dimension</span> <span class="n">that</span> <span class="n">might</span> <span class="n">not</span> <span class="n">be</span> <span class="n">available</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">specify</span>
-<span class="n">it</span> <span class="n">with</span> <span class="n">the</span> <span class="n">add_dimension_</span> <span class="n">option</span><span class="o">:</span>
-
-  <span class="o">::</span>
-
-      <span class="s">&quot;add_dimension&quot;</span><span class="o">:</span> <span class="s">&quot;NewDimensionOne&quot;</span>
-
-<span class="n">To</span> <span class="n">create</span> <span class="n">more</span> <span class="n">than</span> <span class="n">one</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">this</span> <span class="n">option</span> <span class="n">also</span> <span class="n">accepts</span> <span class="n">an</span> <span class="n">array</span><span class="o">:</span>
-
-  <span class="o">::</span>
-
-      <span class="s">&quot;add_dimension&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s">&quot;NewDimensionOne&quot;</span><span class="p">,</span> <span class="s">&quot;NewDimensionTwo&quot;</span><span class="p">,</span> <span class="s">&quot;NewDimensionThree&quot;</span> <span class="p">]</span>
+<span class="w">   </span><span class="k">function</span><span class="w"> </span><span class="n">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span><span class="w"></span>
+<span class="w">       </span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="ss">:Z</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="n">Z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">10.0</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="k">end</span><span class="w"></span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">ins</span><span class="w"></span>
+<span class="w">   </span><span class="k">end</span><span class="w"></span>
+<span class="w"> </span><span class="k">end</span><span class="w"></span>
 
 
-<span class="n">You</span> <span class="n">can</span> <span class="n">also</span> <span class="n">specify</span> <span class="n">the</span> <span class="o">:</span><span class="n">ref</span><span class="o">:</span><span class="sb">`type &lt;types&gt;`</span> <span class="n">of</span> <span class="n">the</span> <span class="n">dimension</span> <span class="k">using</span> <span class="n">an</span> <span class="sb">``</span><span class="o">=</span><span class="sb">``</span><span class="o">.</span>
-  <span class="o">::</span>
+<span class="n">If</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">dimension</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">might</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">available</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">specify</span><span class="w"></span>
+<span class="n">it</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">add_dimension_</span><span class="w"> </span><span class="n">option</span><span class="o">:</span><span class="w"></span>
 
-      <span class="s">&quot;add_dimension&quot;</span><span class="o">:</span> <span class="s">&quot;NewDimensionOne=uint8&quot;</span>
+<span class="w">  </span><span class="o">::</span><span class="w"></span>
+
+<span class="w">      </span><span class="s">&quot;add_dimension&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;NewDimensionOne&quot;</span><span class="w"></span>
+
+<span class="n">To</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">dimension</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">accepts</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">array</span><span class="o">:</span><span class="w"></span>
+
+<span class="w">  </span><span class="o">::</span><span class="w"></span>
+
+<span class="w">      </span><span class="s">&quot;add_dimension&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s">&quot;NewDimensionOne&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewDimensionTwo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewDimensionThree&quot;</span><span class="w"> </span><span class="p">]</span><span class="w"></span>
+
+
+<span class="n">You</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">specify</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="o">:</span><span class="n">ref</span><span class="o">:</span><span class="sb">`type &lt;types&gt;`</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">dimension</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="sb">``</span><span class="o">=</span><span class="sb">``</span><span class="o">.</span><span class="w"></span>
+<span class="w">  </span><span class="o">::</span><span class="w"></span>
+
+<span class="w">      </span><span class="s">&quot;add_dimension&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;NewDimensionOne=uint8&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <section id="filter-example">
@@ -254,13 +254,13 @@ and return the same object (with modifications).</p>
 </div>
 <p>The JSON pipeline file referenced the external <cite>filter_z.jl</cite> <a class="reference external" href="https://julialang.org/">Julia</a> script,
 which removes points with the <code class="docutils literal notranslate"><span class="pre">Z</span></code> coordinate by less than 420.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="n">MyModule</span>
-  <span class="k">using</span> <span class="n">TypedTables</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">MyModule</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">TypedTables</span><span class="w"></span>
 
-  <span class="k">function</span> <span class="n">filter_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">filter</span><span class="p">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="n">p</span><span class="o">.</span><span class="n">Z</span> <span class="o">&gt;</span> <span class="mi">420</span><span class="p">,</span> <span class="n">ins</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="n">filter_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">Z</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">420</span><span class="p">,</span><span class="w"> </span><span class="n">ins</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -286,16 +286,16 @@ which removes points with the <code class="docutils literal notranslate"><span c
 </div>
 <p>The JSON pipeline file referenced the external <cite>multiply_z.jl</cite> <a class="reference external" href="https://julialang.org/">Julia</a> script,
 which scales the <code class="docutils literal notranslate"><span class="pre">Z</span></code> coordinate by a factor of 10.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="n">MyModule</span>
-  <span class="k">using</span> <span class="n">TypedTables</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">MyModule</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">TypedTables</span><span class="w"></span>
 
-  <span class="k">function</span> <span class="n">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span>
-      <span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="p">(;</span> <span class="ss">:Z</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">.</span><span class="n">Z</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span>
-    <span class="k">end</span>
-    <span class="k">return</span> <span class="n">ins</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="n">multiply_z</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">ins</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">ins</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="ss">:Z</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="n">Z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">10.0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ins</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -365,7 +365,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 22, 2022.
+      Last updated on Apr 28, 2022.
       </div>
     </div>
 </footer>
@@ -387,7 +387,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 22, 2022.
+                    on Apr 28, 2022.
         </div>
     </div>
 

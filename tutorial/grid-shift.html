@@ -323,26 +323,26 @@
 <h2>Step 2: Prepare a JSON Pipeline file<a class="headerlink" href="#step-2-prepare-a-json-pipeline-file" title="Permalink to this headline"></a></h2>
 <p>We will be using a <a class="reference external" href="https://pdal.io/pipeline.html">PDAL pipeline</a> to transmit a chain of processing elements into PDAL. These elements will be represented in a JSON file.</p>
 <p>Using a text editor, create a JSON file named pipeline.json containing the contents as below.</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;pipeline&quot;</span><span class="o">:</span> 
-        <span class="p">[</span>
-            <span class="p">{</span>
-                 <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;readers.las&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;filename&quot;</span><span class="o">:</span> <span class="s2">&quot;#&quot;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                 <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;in_srs&quot;</span><span class="o">:</span> <span class="s2">&quot;EPSG:2193&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;out_srs&quot;</span><span class="o">:</span> <span class="s2">&quot;EPSG:2193&quot;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                 <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;writers.las&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;filename&quot;</span><span class="o">:</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;a_srs&quot;</span><span class="o">:</span> <span class="s2">&quot;EPSG:2193&quot;</span><span class="p">,</span> 
-                 <span class="s2">&quot;forward&quot;</span><span class="o">:</span> <span class="s2">&quot;all&quot;</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
-<span class="p">}</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;pipeline&quot;</span><span class="o">:</span><span class="w"> </span>
+<span class="w">        </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;readers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;filename&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;#&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;filters.reprojection&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;in_srs&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;EPSG:2193&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;out_srs&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;EPSG:2193&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;writers.las&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;filename&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;#&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="s2">&quot;a_srs&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;EPSG:2193&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="s2">&quot;forward&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Update the srs details for <code class="docutils literal notranslate"><span class="pre">in_srs</span></code>, <code class="docutils literal notranslate"><span class="pre">out_srs</span></code> and <code class="docutils literal notranslate"><span class="pre">a_srs</span></code> to the EPSG code of the horizontal map projection your source LAS files are in. In the example above we are using New Zealand Transverse Mercator 2000 (EPSG:2193).</p>
@@ -442,7 +442,7 @@
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on Apr 22, 2022.
+      Last updated on Apr 28, 2022.
       </div>
     </div>
 </footer>
@@ -464,7 +464,7 @@
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on Apr 22, 2022.
+                    on Apr 28, 2022.
         </div>
     </div>
 
