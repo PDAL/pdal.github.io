@@ -207,19 +207,20 @@ data online at <a class="reference external" href="http://potree.entwine.io/data
 </div>
 <section id="command">
 <h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
-<p>PDAL capability to generate rasterized output is provided by the <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> stage.
-There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this stage, and we must use a pipeline.</p>
+<p>PDAL capability to generate rasterized output is provided by the
+<a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> stage. There is no <a class="reference internal" href="../../../../apps/index.html#apps"><span class="std std-ref">application</span></a> to drive this
+stage, and we must use a pipeline.</p>
 </section>
 <section id="pipeline-breakdown">
 <h3>Pipeline breakdown<a class="headerlink" href="#pipeline-breakdown" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
-<span class="hll">        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ept://http://na-c.entwine.io/dk/ept.json&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([1401016, 1410670], [7476527, 7484590])&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">5</span> 
-</span>    <span class="p">},</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ept://http://na-c.entwine.io/dk&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([1401016, 1410670], [7476527, 7484590])&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">5</span> 
+    <span class="p">},</span>
     <span class="p">{</span>
       <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
       <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;denmark-classification.tif&quot;</span><span class="p">,</span>
@@ -236,27 +237,27 @@ There is no <a class="reference internal" href="../../../../apps/index.html#apps
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This pipeline is available in your workshop materials in the
-<code class="docutils literal notranslate"><span class="pre">./exercises/analysis/dtm/dtm.json</span></code> file. Make sure to edit the
-filenames to match your paths.</p>
+<code class="docutils literal notranslate"><span class="pre">./exercises/analysis/rasterize/classification.json</span></code> file. Make sure to
+edit the filenames to match your paths.</p>
 </div>
 <section id="reader">
 <h4>1. Reader<a class="headerlink" href="#reader" title="Permalink to this headline"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="p">{</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ept://http://na-c.entwine.io/dk/ept.json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ept://http://na-c.entwine.io/dk&quot;</span><span class="p">,</span>
         <span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([1401016, 1410670], [7476527, 7484590])&quot;</span><span class="p">,</span>
         <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">5</span> 
     <span class="p">},</span>
 </pre></div>
 </div>
 <p>The data is read from a EPT resource that contains the Denmark data.
-We’re going to download a small patch of data by the Copenhagen airport area that is
-the limited to a spatial resolution of 5m.</p>
+We’re going to download a small patch of data by the Copenhagen airport area
+that is the limited to a spatial resolution of 5m.</p>
 </section>
 <section id="writers-gdal">
 <h4>2. <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a><a class="headerlink" href="#writers-gdal" title="Permalink to this headline"></a></h4>
-<p>The <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer that bins the point cloud data with classification
-values.</p>
+<p>The <a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer that bins the point cloud data with
+classification values.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="p">{</span>
       <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
       <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;denmark-classification.tif&quot;</span><span class="p">,</span>
@@ -272,31 +273,17 @@ values.</p>
 <section id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline"></a></h3>
 <p>Issue the <a class="reference internal" href="../../../../pipeline.html#pipeline"><span class="std std-ref">pipeline</span></a> operation to execute the interpolation:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">v</span> <span class="mi">3</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal pipeline ./exercises/analysis/rasterize/classification.json -v <span class="m">3</span>
+<span class="gp gp-VirtualEnv">(PDAL Debug)</span> <span class="go">Debugging...</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline readers.ept Debug)</span> <span class="go">Root resolution: 3108.53</span>
+<span class="go">Query resolution:  5</span>
+<span class="go">Actual resolution: 3.03568</span>
+<span class="go">Depth end: 11</span>
+<span class="go">Query bounds: ([1402800, 1408800], [7478000, 7483000], [-1.797693134862316e+308, 1.797693134862316e+308])</span>
+<span class="go">Threads: 15</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline Debug)</span> <span class="go">Executing pipeline in stream mode.</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;pipeline&quot;</span><span class="p">:[</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ept://http://na-c.entwine.io/dk/ept.json&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="s2">&quot;([1401016, 1410670], [7476527, 7484590])&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">5</span> 
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;writers.gdal&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;denmark-classification.tif&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;dimension&quot;</span><span class="p">:</span><span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;data_type&quot;</span><span class="p">:</span><span class="s2">&quot;uint16_t&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;output_type&quot;</span><span class="p">:</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">5</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-
-</pre></div>
-</div>
-<a class="reference external image-reference" href="../../../../_images/rasterization-classification-run-command.png"><img alt="../../../../_images/rasterization-classification-run-command.png" src="../../../../_images/rasterization-classification-run-command.png" /></a>
 </section>
 <section id="visualization">
 <h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline"></a></h3>
@@ -308,9 +295,9 @@ color ramp to the data for a satisfactory preview.</p>
 reason is there is no color ramp associated with the file, and we’re looking at
 pixel values with values from 0-31 according to the ASPRS LAS specification.</p>
 <p>We want colors that correspond to the classification values a bit more
-directly. We can use a color ramp to assign explicit values. <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> allows us to
-create a text file color ramp that gdaldem can consume to apply colors to the
-data.</p>
+directly. We can use a color ramp to assign explicit values. <a class="reference internal" href="../../../qgis.html#qgis"><span class="std std-ref">QGIS</span></a> allows
+us to create a text file color ramp that gdaldem can consume to apply colors to
+the data.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># QGIS Generated Color Map Export File</span>
 <span class="linenos"> 2</span><span class="mi">2</span> <span class="mi">139</span> <span class="mi">51</span> <span class="mi">38</span> <span class="mi">255</span> <span class="n">Ground</span>
 <span class="linenos"> 3</span><span class="mi">3</span> <span class="mi">143</span> <span class="mi">201</span> <span class="mi">157</span> <span class="mi">255</span> <span class="n">Low</span> <span class="n">Veg</span>
@@ -340,7 +327,7 @@ data.</p>
 change the layer to Palatted/Unique Values, and then load the color ramp file:</p>
 <a class="reference external image-reference" href="../../../../_images/rasterization-qgis-load-color-palette.png"><img alt="../../../../_images/rasterization-qgis-load-color-palette.png" src="../../../../_images/rasterization-qgis-load-color-palette.png" /></a>
 <p>With the ramp, we can also use <a class="reference external" href="http://www.gdal.org/gdaldem.html">gdaldem</a> to apply it to a new image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">gdaldem</span> <span class="n">color</span><span class="o">-</span><span class="n">relief</span> <span class="n">denmark</span><span class="o">-</span><span class="n">classification</span><span class="o">.</span><span class="n">tif</span> <span class="n">ramp</span><span class="o">.</span><span class="n">txt</span> <span class="n">classified</span><span class="o">-</span><span class="n">color</span><span class="o">.</span><span class="n">png</span> <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>gdaldem color-relief denmark-classification.tif ramp.txt classified-color.png -of PNG
 </pre></div>
 </div>
 <a class="reference external image-reference" href="../../../../_images/rasterization-colored-classification.png"><img alt="../../../../_images/rasterization-colored-classification.png" src="../../../../_images/rasterization-colored-classification.png" /></a>
@@ -348,22 +335,44 @@ change the layer to Palatted/Unique Values, and then load the color ramp file:</
 <h4>Intensity<a class="headerlink" href="#intensity" title="Permalink to this headline"></a></h4>
 <p>With PDAL’s ability to override pipeline via commands, we can generate a
 relative intensity image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> \
-<span class="linenos">2</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">dimension</span><span class="o">=</span><span class="s2">&quot;Intensity&quot;</span> \
-<span class="linenos">3</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">data_type</span><span class="o">=</span><span class="s2">&quot;float&quot;</span> \
-<span class="linenos">4</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;intensity.tif&quot;</span> \
-<span class="linenos">5</span><span class="o">-</span><span class="n">v</span> <span class="mi">3</span>
-<span class="linenos">6</span>
-<span class="linenos">7</span><span class="n">gdal_translate</span> <span class="n">intensity</span><span class="o">.</span><span class="n">tif</span> <span class="n">intensity</span><span class="o">.</span><span class="n">png</span> <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal pipeline ./exercises/analysis/rasterize/classification.json <span class="se">\</span>
+--writers.gdal.dimension<span class="o">=</span><span class="s2">&quot;Intensity&quot;</span> <span class="se">\</span>
+--writers.gdal.data_type<span class="o">=</span><span class="s2">&quot;float&quot;</span> <span class="se">\</span>
+--writers.gdal.filename<span class="o">=</span><span class="s2">&quot;intensity.tif&quot;</span> <span class="se">\</span>
+-v <span class="m">3</span>
+<span class="gp gp-VirtualEnv">(PDAL Debug)</span> <span class="go">Debugging...</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline readers.ept Debug)</span> <span class="go">Root resolution: 3108.53</span>
+<span class="go">Query resolution:  5</span>
+<span class="go">Actual resolution: 3.03568</span>
+<span class="go">Depth end: 11</span>
+<span class="go">Query bounds: ([1402800, 1408800], [7478000, 7483000], [-1.797693134862316e+308, 1.797693134862316e+308])</span>
+<span class="go">Threads: 15</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline Debug)</span> <span class="go">Executing pipeline in stream mode.</span>
+<span class="gp">$ </span>gdal_translate intensity.tif intensity.png -of PNG
+<span class="go">Input file size is 1201, 1001</span>
+<span class="go">Warning 6: PNG driver doesn&#39;t support data type Float32. Only eight bit (Byte) and sixteen bit (UInt16) bands supported. Defaulting to Byte</span>
+
+<span class="go">0...10...20...30...40...50...60...70...80...90...100 - done.</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">rasterize</span><span class="o">/</span><span class="n">classification</span><span class="o">.</span><span class="n">json</span> <span class="o">^</span>
-<span class="linenos">2</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">dimension</span><span class="o">=</span><span class="s2">&quot;Intensity&quot;</span> <span class="o">^</span>
-<span class="linenos">3</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">data_type</span><span class="o">=</span><span class="s2">&quot;float&quot;</span> <span class="o">^</span>
-<span class="linenos">4</span><span class="o">--</span><span class="n">writers</span><span class="o">.</span><span class="n">gdal</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;intensity.tif&quot;</span> <span class="o">^</span>
-<span class="linenos">5</span><span class="o">-</span><span class="n">v</span> <span class="mi">3</span>
-<span class="linenos">6</span>
-<span class="linenos">7</span><span class="n">gdal_translate</span> <span class="n">intensity</span><span class="o">.</span><span class="n">tif</span> <span class="n">intensity</span><span class="o">.</span><span class="n">png</span> <span class="o">-</span><span class="n">of</span> <span class="n">PNG</span>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pdal pipeline ./exercises/analysis/rasterize/classification.json <span class="se">^</span>
+<span class="go">--writers.gdal.dimension=&quot;Intensity&quot; ^</span>
+<span class="go">--writers.gdal.data_type=&quot;float&quot; ^</span>
+<span class="go">--writers.gdal.filename=&quot;intensity.tif&quot; ^</span>
+<span class="go">-v 3</span>
+<span class="gp gp-VirtualEnv">(PDAL Debug)</span> <span class="go">Debugging...</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline readers.ept Debug)</span> <span class="go">Root resolution: 3108.53</span>
+<span class="go">Query resolution:  5</span>
+<span class="go">Actual resolution: 3.03568</span>
+<span class="go">Depth end: 11</span>
+<span class="go">Query bounds: ([1402800, 1408800], [7478000, 7483000], [-1.797693134862316e+308, 1.797693134862316e+308])</span>
+<span class="go">Threads: 15</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline Debug)</span> <span class="go">Executing pipeline in stream mode.</span>
+<span class="gp">&gt;</span> gdal_translate intensity.tif intensity.png -of PNG
+<span class="go">Input file size is 1201, 1001</span>
+<span class="go">Warning 6: PNG driver doesn&#39;t support data type Float32. Only eight bit (Byte) and sixteen bit (UInt16) bands supported. Defaulting to Byte</span>
+
+<span class="go">0...10...20...30...40...50...60...70...80...90...100 - done.</span>
 </pre></div>
 </div>
 <p>The same pipeline can be used to generate a preview image of the Intensity
@@ -378,7 +387,8 @@ channel of the data by overriding pipeline arguments at the command line.</p>
 <li><p><a class="reference internal" href="../../../../stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a>  can output any dimension PDAL can provide, but it is is
 up to the user to interpolate the values. For categorical data, neighborhood
 smoothing might produce undesirable results, for example.</p></li>
-<li><p><a class="reference internal" href="../../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> contains more information about overrides and organizing complex pipelines.</p></li>
+<li><p><a class="reference internal" href="../../../../pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> contains more information about overrides and organizing
+complex pipelines.</p></li>
 </ol>
 </section>
 </section>
@@ -416,7 +426,7 @@ smoothing might produce undesirable results, for example.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 19, 2022.
+      Last updated on May 31, 2022.
       </div>
     </div>
 </footer>
@@ -438,7 +448,7 @@ smoothing might produce undesirable results, for example.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 19, 2022.
+                    on May 31, 2022.
         </div>
     </div>
 

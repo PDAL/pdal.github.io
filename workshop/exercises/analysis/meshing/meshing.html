@@ -195,22 +195,28 @@
              
   <section id="creating-surface-meshes">
 <span id="workshop-meshing"></span><h1>Creating surface meshes<a class="headerlink" href="#creating-surface-meshes" title="Permalink to this headline"></a></h1>
-<p id="index-0">This exercise uses PDAL to create surface meshes. PDAL is able to use a number of
-meshing filters: <a class="reference external" href="https://pdal.io/stages/filters.html#mesh">https://pdal.io/stages/filters.html#mesh</a>. Three of these are ‘in
-the box’, without needing plugins compiled. These are 2D Delaunay triangulation,
-Greedy projection meshing and Poisson surface meshing.</p>
-<p>In this exercise we’ll create a Poisson surface mesh - a watertight isosurface -
-from our input point cloud.</p>
+<p id="index-0">This exercise uses PDAL to create surface meshes. PDAL is able to use a number
+of meshing filters: <a class="reference external" href="https://pdal.io/stages/filters.html#mesh">https://pdal.io/stages/filters.html#mesh</a>. Three of these
+are ‘in the box’, without needing plugins compiled. These are 2D Delaunay
+triangulation, Greedy projection meshing and Poisson surface meshing.</p>
+<p>In this exercise we’ll create a Poisson surface mesh - a watertight isosurface
+- from our input point cloud.</p>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
-<p>We will create mesh models of a building and its surrounds using an entwine data
-input source.</p>
+<p>We will create mesh models of a building and its surrounds using an entwine
+data input source.</p>
 <p>After running each command, the output <cite>.ply</cite> file can be viewed in Meshlab or
 CloudCompare.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>PDAL implements Mischa Kazhdan’s Poisson surface reconstruction algorithm. For
-details see <cite>[Kazhdan2006]_</cite></p>
+<p>PDAL implements Mischa Kazhdan’s Poisson surface reconstruction algorithm.
+For details see <cite>[Kazhdan2006]_</cite></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example will be using the output of using <a class="reference internal" href="../clipping/clipping.html#workshop-clipping"><span class="std std-ref">Clipping data with polygons</span></a>
+exercise, specifically using <code class="docutils literal notranslate"><span class="pre">stadium.las</span></code> file.  Please produce that
+file by following that exercise before starting this one.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -219,58 +225,62 @@ set the attribute <cite>faces=”true”</cite>. Try using the ply writer withou
 if you’re using a machine with a lot of processing power, try increasing the
 <cite>depth</cite> parameter for a more detailed mesh.</p>
 </div>
-<section id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
+<section id="mesh-command">
+<h3>Mesh Command<a class="headerlink" href="#mesh-command" title="Permalink to this headline"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
-<span class="linenos">2</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="n">mesh</span><span class="o">.</span><span class="n">ply</span> \
-<span class="linenos">3</span> <span class="n">poisson</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> \
-<span class="linenos">4</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> \
-<span class="linenos">5</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal translate -i ./exercises/analysis/clipping/stadium.las <span class="se">\</span>
+-o ./exercises/analysis/meshing/first-mesh.ply <span class="se">\</span>
+poisson --filters.poisson.depth<span class="o">=</span><span class="m">16</span> <span class="se">\</span>
+--verbose <span class="m">4</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
-<span class="linenos">2</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="n">mesh</span><span class="o">.</span><span class="n">ply</span> <span class="o">^</span>
-<span class="linenos">3</span> <span class="n">poisson</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> <span class="o">^</span>
-<span class="linenos">4</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> <span class="o">^</span>
-<span class="linenos">5</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pdal translate -i ./exercises/analysis/clipping/stadium.las <span class="se">^</span>
+<span class="go">-o ./exercises/analysis/meshing/first-mesh.ply ^</span>
+<span class="go">poisson --filters.poisson.depth=16 ^</span>
+<span class="go">--verbose 4</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="../../../../_images/meshing.png"><img alt="../../../../_images/meshing.png" src="../../../../_images/meshing.png" /></a>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(PDAL Debug)</span> <span class="go">Debugging...</span>
+<span class="gp gp-VirtualEnv">(pdal translate Debug)</span> <span class="go">Executing pipeline in standard mode.</span>
+<span class="gp gp-VirtualEnv">(pdal translate filters.poisson Debug)</span> <span class="go">Computing normal vectors</span>
+</pre></div>
+</div>
 <p>You can view the mesh in Cloud Compare, you should see something similar to</p>
 <a class="reference external image-reference" href="../../../../_images/first-mesh.png"><img alt="../../../../_images/first-mesh.png" src="../../../../_images/first-mesh.png" /></a>
 </section>
 <section id="filtering">
 <h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline"></a></h3>
-<p>If we want to just mesh a building, or just terrain, or both we can apply a <cite>range</cite>
-filter based on point classification. These data have ground labeled as class 2,
-and buildings as 6.</p>
-<p>In this exercise we will create a poisson mesh surface of a building and the ground
-surrounding it, using the same data subset as above and adding a <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a>
-stage to limit the set of points used in mesh creation.</p>
+<p>If we want to just mesh a building, or just terrain, or both we can apply a
+<cite>range</cite> filter based on point classification. These data have ground labeled as
+class 2, and buildings as 6.</p>
+<p>In this exercise we will create a poisson mesh surface of a building and the
+ground surrounding it, using the same data subset as above and adding a
+<a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> stage to limit the set of points used in mesh creation.</p>
 </section>
-<section id="id1">
-<h3>Command<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<section id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> \
-<span class="linenos">2</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">building</span><span class="o">-</span><span class="n">exercise</span><span class="o">.</span><span class="n">ply</span> \
-<span class="linenos">3</span> <span class="nb">range</span> <span class="n">poisson</span> \
-<span class="linenos">4</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2],Classification[6:6]&quot;</span> \
-<span class="linenos">5</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> \
-<span class="linenos">6</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> \
-<span class="linenos">7</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal translate -i ./exercises/analysis/clipping/stadium.las <span class="se">\</span>
+-o ./exercises/analysis/meshing/building-exercise.ply <span class="se">\</span>
+range poisson <span class="se">\</span>
+--filters.range.limits<span class="o">=</span><span class="s2">&quot;Classification[2:2],Classification[6:6]&quot;</span> <span class="se">\</span>
+--filters.poisson.depth<span class="o">=</span><span class="m">16</span> <span class="se">\</span>
+--verbose <span class="m">4</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">translate</span> <span class="o">-</span><span class="n">i</span> <span class="n">ept</span><span class="p">:</span><span class="o">//</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">act</span><span class="o">-</span><span class="mi">2015</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span> <span class="o">^</span>
-<span class="linenos">2</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">meshing</span><span class="o">/</span><span class="n">building</span><span class="o">-</span><span class="n">exercise</span><span class="o">.</span><span class="n">ply</span> <span class="o">^</span>
-<span class="linenos">3</span> <span class="nb">range</span> <span class="n">poisson</span> <span class="o">^</span>
-<span class="linenos">4</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">limits</span><span class="o">=</span><span class="s2">&quot;Classification[2:2],Classification[6:6]&quot;</span> <span class="o">^</span>
-<span class="linenos">5</span> <span class="o">--</span><span class="n">filters</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">depth</span><span class="o">=</span><span class="mi">16</span> <span class="o">^</span>
-<span class="linenos">6</span> <span class="o">--</span><span class="n">readers</span><span class="o">.</span><span class="n">ept</span><span class="o">.</span><span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;([692738, 692967], [6092255,6092562])&quot;</span> <span class="o">^</span>
-<span class="linenos">7</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">4</span>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pdal translate -i ept://http://act-2015-rgb.s3.amazonaws.com <span class="se">^</span>
+<span class="go">-o ./exercises/analysis/meshing/building-exercise.ply ^</span>
+<span class="go">range poisson ^</span>
+<span class="go">--filters.range.limits=&quot;Classification[2:2],Classification[6:6]&quot; ^</span>
+<span class="go">--filters.poisson.depth=16 ^</span>
+<span class="go">--verbose 4</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="../../../../_images/meshing-buildings.png"><img alt="../../../../_images/meshing-buildings.png" src="../../../../_images/meshing-buildings.png" /></a>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(PDAL Debug)</span> <span class="go">Debugging...</span>
+<span class="gp gp-VirtualEnv">(pdal translate Debug)</span> <span class="go">Executing pipeline in standard mode.</span>
+<span class="gp gp-VirtualEnv">(pdal translate filters.poisson Debug)</span> <span class="go">Computing normal vectors</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -308,7 +318,7 @@ stage to limit the set of points used in mesh creation.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 19, 2022.
+      Last updated on May 31, 2022.
       </div>
     </div>
 </footer>
@@ -330,7 +340,7 @@ stage to limit the set of points used in mesh creation.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 19, 2022.
+                    on May 31, 2022.
         </div>
     </div>
 

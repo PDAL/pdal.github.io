@@ -190,23 +190,24 @@
 <span id="workshop-entwine"></span><h1>Entwine<a class="headerlink" href="#entwine" title="Permalink to this headline"></a></h1>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
-<p>This exercise uses PDAL to fetch data from an Entwine index stored in an Amazon Web Services object store (bucket). Entwine is a point cloud indexing strategy, which rearranges points into a lossless octree structure known as EPT, for Entwine Point Tiles. The structure is described here: <a class="reference external" href="https://entwine.io/entwine-point-tile.html">https://entwine.io/entwine-point-tile.html</a>.</p>
-<p>EPT indexes can be used for visualization as well as analysis and data manipulation at any scale.</p>
-<p>Examples of Entwine usage can be found from very fine photogrammetric surveys to continental scale lidar management.</p>
+<p>This exercise uses PDAL to fetch data from an Entwine index stored in an Amazon
+Web Services object store (bucket). Entwine is a point cloud indexing strategy,
+which rearranges points into a lossless octree structure known as EPT, for
+Entwine Point Tiles. The structure is described here: <a class="reference external" href="https://entwine.io/entwine-point-tile.html">https://entwine.io/entwine-point-tile.html</a>.</p>
+<p>EPT indexes can be used for visualization as well as analysis and data
+manipulation at any scale.</p>
+<p>Examples of Entwine usage can be found from very fine photogrammetric surveys
+to continental scale lidar management.</p>
 <p id="index-0">US Geological Survey (USGS) example data is here: <a class="reference external" href="https://usgs.entwine.io/">https://usgs.entwine.io/</a></p>
-<dl class="simple">
-<dt>We will use a sample data set from Dublin, Ireland</dt><dd><p><a class="reference external" href="http://potree.entwine.io/data/view.html?r=%22http://na-c.entwine.io/dublin/ept.json%22">http://potree.entwine.io/data/view.html?r=%22http://na-c.entwine.io/dublin/ept.json%22</a></p>
-</dd>
-</dl>
+<p>We will use a sample data set from Dublin, Ireland <a class="reference external" href="https://viewer.copc.io/?r=https://na-c.entwine.io/dublin/ept.json">https://viewer.copc.io/?r=https://na-c.entwine.io/dublin/ept.json</a></p>
 <ol class="arabic" id="index-1">
-<li><p>View the <code class="docutils literal notranslate"><span class="pre">entwine.json</span></code> file in your editor. If the file does not exist, create
-it and paste the following JSON into it:</p>
+<li><p>View the <code class="docutils literal notranslate"><span class="pre">entwine.json</span></code> file in your editor.</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;pipeline&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;readers.ept&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;ept://https://na-c.entwine.io/dublin/ept.json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span><span class="s2">&quot;https://na-c.entwine.io/dublin/ept.json&quot;</span><span class="p">,</span>
             <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="mi">5</span>
         <span class="p">},</span>
         <span class="p">{</span>
@@ -231,22 +232,62 @@ browser making requests against the EPT resource at
 </li>
 <li><p>Issue the following command in your <cite>Conda Shell</cite>.</p>
 <blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">excercises</span><span class="o">/</span><span class="n">translation</span><span class="o">/</span><span class="n">entwine</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">v</span> <span class="mi">7</span>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal pipeline ./exercises/translation/entwine.json -v <span class="m">7</span>
+<span class="gp gp-VirtualEnv">(PDAL Debug)</span> <span class="go">Debugging...</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline readers.ept Debug)</span> <span class="go">Root resolution: 21.3828</span>
+<span class="go">Query resolution:  5</span>
+<span class="go">Actual resolution: 2.67285</span>
+<span class="go">Depth end: 4</span>
+<span class="go">Query bounds: ()</span>
+<span class="go">Threads: 15</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline Debug)</span> <span class="go">Executing pipeline in stream mode.</span>
+<span class="gp gp-VirtualEnv">(pdal pipeline writers.las Debug)</span> <span class="go">Wrote 8034506 points to the LAS file</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="../../../_images/entwine-command.png"><img alt="../../../_images/entwine-command.png" src="../../../_images/entwine-command.png" /></a>
 </div></blockquote>
 </li>
 </ol>
-<ol class="arabic" start="3">
+<ol class="arabic">
 <li><p>Verify that the data look ok:</p>
 <blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdal</span> <span class="n">info</span> <span class="n">dublin</span><span class="o">.</span><span class="n">laz</span> <span class="o">|</span> <span class="n">jq</span> <span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">native</span><span class="o">.</span><span class="n">bbox</span>
-
-<span class="n">pdal</span> <span class="n">info</span> <span class="n">dublin</span><span class="o">.</span><span class="n">laz</span> <span class="o">-</span><span class="n">p</span> <span class="mi">0</span>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal info dublin.laz <span class="p">|</span> jq .stats.bbox.native.bbox
+<span class="go">{</span>
+<span class="go">    &quot;maxx&quot;: -694128.96,</span>
+<span class="go">    &quot;maxy&quot;: 7049938.84,</span>
+<span class="go">    &quot;maxz&quot;: 385.37,</span>
+<span class="go">    &quot;minx&quot;: -699477.88,</span>
+<span class="go">    &quot;miny&quot;: 7044490.98,</span>
+<span class="go">    &quot;minz&quot;: -144.24</span>
+<span class="go">}</span>
+<span class="gp">$ </span>pdal info dublin.laz -p <span class="m">0</span>
+<span class="go">{</span>
+<span class="go">    &quot;file_size&quot;: 56441298,</span>
+<span class="go">    &quot;filename&quot;: &quot;dublin.laz&quot;,</span>
+<span class="go">    &quot;now&quot;: &quot;2022-05-16T09:57:45-0700&quot;,</span>
+<span class="go">    &quot;pdal_version&quot;: &quot;2.3.0 (git-version: Release)&quot;,</span>
+<span class="go">    &quot;points&quot;:</span>
+<span class="go">    {</span>
+<span class="go">        &quot;point&quot;:</span>
+<span class="go">        {</span>
+<span class="go">            &quot;Classification&quot;: 4,</span>
+<span class="go">            &quot;EdgeOfFlightLine&quot;: 0,</span>
+<span class="go">            &quot;Intensity&quot;: 265,</span>
+<span class="go">            &quot;NumberOfReturns&quot;: 2,</span>
+<span class="go">            &quot;PointId&quot;: 0,</span>
+<span class="go">            &quot;PointSourceId&quot;: 16,</span>
+<span class="go">            &quot;ReturnNumber&quot;: 1,</span>
+<span class="go">            &quot;ScanAngleRank&quot;: 2,</span>
+<span class="go">            &quot;ScanDirectionFlag&quot;: 1,</span>
+<span class="go">            &quot;UserData&quot;: 0,</span>
+<span class="go">            &quot;X&quot;: -695945.82,</span>
+<span class="go">            &quot;Y&quot;: 7046284.13,</span>
+<span class="go">            &quot;Z&quot;: 122.01</span>
+<span class="go">        }</span>
+<span class="go">    },</span>
+<span class="go">    &quot;reader&quot;: &quot;readers.las&quot;</span>
+<span class="go">}</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="../../../_images/entwine-info-verify.png"><img alt="../../../_images/entwine-info-verify.png" src="../../../_images/entwine-info-verify.png" /></a>
 </div></blockquote>
 </li>
 <li><p>Visualize the data in <a class="reference external" href="http://plas.io">http://plas.io</a></p>
@@ -298,7 +339,7 @@ use PDAL’s EPT reader .</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 19, 2022.
+      Last updated on May 31, 2022.
       </div>
     </div>
 </footer>
@@ -320,7 +361,7 @@ use PDAL’s EPT reader .</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 19, 2022.
+                    on May 31, 2022.
         </div>
     </div>
 

@@ -310,30 +310,28 @@ dictionaries.</p>
 <span class="linenos">60</span>    <span class="c1"># to filters.programmable and filters.predicate modules that contains</span>
 <span class="linenos">61</span>    <span class="c1"># a dictionary of arguments that can be explicitly passed into</span>
 <span class="linenos">62</span>    <span class="c1"># the module by the user. We passed in a filename arg in our `pdal pipeline` call</span>
-<span class="linenos">63</span>    <span class="k">if</span> <span class="s1">&#39;filename&#39;</span> <span class="ow">in</span> <span class="n">pdalargs</span><span class="p">:</span>
-<span class="linenos">64</span>        <span class="n">filename</span> <span class="o">=</span> <span class="n">pdalargs</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span>
-<span class="linenos">65</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">66</span>        <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;histogram.png&#39;</span>
-<span class="linenos">67</span>
-<span class="linenos">68</span>    <span class="c1"># open up the filename and write out the</span>
-<span class="linenos">69</span>    <span class="c1"># bytes of the PNG stored in the BytesIO instance</span>
-<span class="linenos">70</span>    <span class="n">o</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-<span class="linenos">71</span>    <span class="n">o</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
-<span class="linenos">72</span>    <span class="n">o</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="linenos">73</span>
-<span class="linenos">74</span>
-<span class="linenos">75</span>    <span class="c1"># filters.programmable scripts need to</span>
-<span class="linenos">76</span>    <span class="c1"># return True to tell the filter it was successful.</span>
-<span class="linenos">77</span>    <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">63</span>    <span class="n">filename</span> <span class="o">=</span> <span class="n">pdalargs</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;filename&#39;</span> <span class="ow">in</span> <span class="n">pdalargs</span> <span class="k">else</span> <span class="s1">&#39;histogram.png&#39;</span>
+<span class="linenos">64</span>    
+<span class="linenos">65</span>    <span class="c1"># open up the filename and write out the</span>
+<span class="linenos">66</span>    <span class="c1"># bytes of the PNG stored in the BytesIO instance</span>
+<span class="linenos">67</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">o</span><span class="p">:</span>
+<span class="linenos">68</span>        <span class="n">o</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span> 
+<span class="linenos">69</span>
+<span class="linenos">70</span>
+<span class="linenos">71</span>    <span class="c1"># filters.programmable scripts need to</span>
+<span class="linenos">72</span>    <span class="c1"># return True to tell the filter it was successful.</span>
+<span class="linenos">73</span>    <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
 </section>
 <section id="run-pdal-pipeline">
 <h3>Run <code class="docutils literal notranslate"><span class="pre">pdal</span> <span class="pre">pipeline</span></code><a class="headerlink" href="#run-pdal-pipeline" title="Permalink to this headline"></a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">pdal</span> <span class="n">pipeline</span> <span class="o">./</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">histogram</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal pipeline ./exercises/python/histogram.json
+<span class="go">anything:47: UserWarning: Attempting to set identical left == right == 0 results in singular transformations; automatically expanding.</span>
+
+<span class="gp">$</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="../../../_images/python-histogram-command.png"><img alt="../../../_images/python-histogram-command.png" src="../../../_images/python-histogram-command.png" /></a>
 </section>
 <section id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline"></a></h3>
@@ -384,7 +382,7 @@ dictionary entry isn’t always valid JSON.</p></li>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 19, 2022.
+      Last updated on May 31, 2022.
       </div>
     </div>
 </footer>
@@ -406,7 +404,7 @@ dictionary entry isn’t always valid JSON.</p></li>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 19, 2022.
+                    on May 31, 2022.
         </div>
     </div>
 
