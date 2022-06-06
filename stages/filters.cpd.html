@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>filters.cpd &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
@@ -185,7 +186,7 @@
            <div itemprop="articleBody">
              
   <section id="filters-cpd">
-<span id="id1"></span><h1>filters.cpd<a class="headerlink" href="#filters-cpd" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>filters.cpd<a class="headerlink" href="#filters-cpd" title="Permalink to this heading"></a></h1>
 <p>The <strong>Coherent Point Drift (CPD) filter</strong> uses the algorithm of
 <span id="id2">[<a class="reference internal" href="#id5" title="Andriy Myronenko and Xubo Song. Point set registration: coherent point drift. IEEE transactions on pattern analysis and machine intelligence, 32(12):2262–75, dec 2010.">MS10</a>]</span> algorithm to
 compute a rigid, nonrigid, or affine transformation between datasets.  The
@@ -204,7 +205,7 @@ the “moving” points after the calculated transformation has been applied, on
 point view per input.  Any additional information about the cpd registration,
 e.g. the rigid transformation matrix, will be placed in the stage’s metadata.</p>
 <section id="when-to-use-cpd-vs-icp">
-<h2>When to use CPD vs ICP<a class="headerlink" href="#when-to-use-cpd-vs-icp" title="Permalink to this headline"></a></h2>
+<h2>When to use CPD vs ICP<a class="headerlink" href="#when-to-use-cpd-vs-icp" title="Permalink to this heading"></a></h2>
 <p>Summarized from the <a class="reference external" href="http://graphics.stanford.edu/courses/cs468-07-winter/Papers/nips2006_0613.pdf">Non-rigid point set registration: Coherent Point Drift</a> paper.</p>
 <ul class="simple">
 <li><p>CPD outperforms the ICP in the presence of noise and outliers by the use of
@@ -221,7 +222,7 @@ CPD algorithm is carried out</p></li>
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="s2">&quot;fixed.las&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="s2">&quot;moving.las&quot;</span><span class="p">,</span><span class="w"></span>
@@ -261,7 +262,7 @@ use the “metadata” option of the pipeline command:</p>
 </div>
 </section>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt><span class="target" id="method">method</span></dt><dd><p>Change detection method to use.
 Valid values are “rigid”, “affine”, and “nonrigid”.
@@ -283,17 +284,19 @@ is returned and it has the same point count as it did when the filter was run.
 </dd>
 </dl>
 <div class="docutils container" id="id4">
-<dl class="citation">
-<dt class="label" id="id7"><span class="brackets">LLW+19</span></dt>
-<dd><p>Xuechen Li, Yinlong Liu, Yiru Wang, Chen Wang, Manning Wang, and Zhijian Song. Fast and Globally Optimal Rigid Registration of 3D Point Sets by Transformation Decomposition. <em>unknown</em>, 2019. Available at <a class="reference external" href="https://arxiv.org/pdf/1812.11307.pdf">https://arxiv.org/pdf/1812.11307.pdf</a>.</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">MS10</a></span></dt>
-<dd><p>Andriy Myronenko and Xubo Song. Point set registration: coherent point drift. <em>IEEE transactions on pattern analysis and machine intelligence</em>, 32(12):2262–75, dec 2010.</p>
-</dd>
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id3">YG88</a></span></dt>
-<dd><p>Alan L. Yuille and Norberto M. Grzywacz. The Motion Coherence Theory. <em>Second International Conference on Computer Vision</em>, 1988.</p>
-</dd>
-</dl>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LLW+19<span class="fn-bracket">]</span></span>
+<p>Xuechen Li, Yinlong Liu, Yiru Wang, Chen Wang, Manning Wang, and Zhijian Song. Fast and Globally Optimal Rigid Registration of 3D Point Sets by Transformation Decomposition. <em>unknown</em>, 2019. Available at <a class="reference external" href="https://arxiv.org/pdf/1812.11307.pdf">https://arxiv.org/pdf/1812.11307.pdf</a>.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">MS10</a><span class="fn-bracket">]</span></span>
+<p>Andriy Myronenko and Xubo Song. Point set registration: coherent point drift. <em>IEEE transactions on pattern analysis and machine intelligence</em>, 32(12):2262–75, dec 2010.</p>
+</div>
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">YG88</a><span class="fn-bracket">]</span></span>
+<p>Alan L. Yuille and Norberto M. Grzywacz. The Motion Coherence Theory. <em>Second International Conference on Computer Vision</em>, 1988.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -331,7 +334,7 @@ is returned and it has the same point count as it did when the filter was run.
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -353,7 +356,7 @@ is returned and it has the same point count as it did when the filter was run.
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 

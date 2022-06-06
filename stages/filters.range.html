@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>filters.range &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
@@ -190,7 +191,7 @@
            <div itemprop="articleBody">
              
   <section id="filters-range">
-<span id="id1"></span><h1>filters.range<a class="headerlink" href="#filters-range" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>filters.range<a class="headerlink" href="#filters-range" title="Permalink to this heading"></a></h1>
 <p>The <strong>Range Filter</strong> applies rudimentary filtering to the input point cloud
 based on a set of criteria on the given dimensions.</p>
 <div class="admonition embed" id="embed-0">
@@ -202,7 +203,7 @@ based on a set of criteria on the given dimensions.</p>
 <p>This stage supports streaming operations</p>
 </div>
 <section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
 <p>This example passes through all points whose <code class="docutils literal notranslate"><span class="pre">Z</span></code> value is in the
 range [0,100]
 and whose <code class="docutils literal notranslate"><span class="pre">Classification</span></code> equals 2 (corresponding to ground in LAS).</p>
@@ -225,7 +226,7 @@ and whose <code class="docutils literal notranslate"><span class="pre">Classific
 </div>
 </section>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
 <dl>
 <dt>limits</dt><dd><p>A comma-separated list of <a class="reference internal" href="#ranges"><span class="std std-ref">Ranges</span></a>.  If more than one range is
 specified for a dimension, the criteria are treated as being logically
@@ -256,7 +257,7 @@ is returned and it has the same point count as it did when the filter was run.
 </dl>
 </section>
 <section id="ranges">
-<span id="id2"></span><h2>Ranges<a class="headerlink" href="#ranges" title="Permalink to this headline"></a></h2>
+<span id="id2"></span><h2>Ranges<a class="headerlink" href="#ranges" title="Permalink to this heading"></a></h2>
 <p>A range specification is a dimension name, followed by an optional negation
 character (‘!’), and a starting and ending value separated by a colon,
 surrounded by parentheses or square brackets.  Either the starting or ending
@@ -264,21 +265,21 @@ values can be omitted.  Parentheses indicate an open endpoint that doesn’t
 include the adjacent value.  Square brackets indicate a closed endpoint
 that includes the adjacent value.</p>
 <section id="example-1">
-<h3>Example 1:<a class="headerlink" href="#example-1" title="Permalink to this headline"></a></h3>
+<h3>Example 1:<a class="headerlink" href="#example-1" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span><span class="p">[</span><span class="mi">10</span><span class="p">:]</span>
 </pre></div>
 </div>
 <p>Selects all points with a Z value greater than or equal to 10.</p>
 </section>
 <section id="example-2">
-<h3>Example 2:<a class="headerlink" href="#example-2" title="Permalink to this headline"></a></h3>
+<h3>Example 2:<a class="headerlink" href="#example-2" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Classification</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Selects all points with a classification of 2.</p>
 </section>
 <section id="example-3">
-<h3>Example 3:<a class="headerlink" href="#example-3" title="Permalink to this headline"></a></h3>
+<h3>Example 3:<a class="headerlink" href="#example-3" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Red!(20:40]
 </pre></div>
 </div>
@@ -286,14 +287,14 @@ that includes the adjacent value.</p>
 values greater than 40</p>
 </section>
 <section id="example-4">
-<h3>Example 4:<a class="headerlink" href="#example-4" title="Permalink to this headline"></a></h3>
+<h3>Example 4:<a class="headerlink" href="#example-4" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Blue</span><span class="p">[:</span><span class="mi">255</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Selects all points with a blue value less than 255.</p>
 </section>
 <section id="example-5">
-<h3>Example 5:<a class="headerlink" href="#example-5" title="Permalink to this headline"></a></h3>
+<h3>Example 5:<a class="headerlink" href="#example-5" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Intensity![25:25]
 </pre></div>
 </div>
@@ -335,7 +336,7 @@ values greater than 40</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -357,7 +358,7 @@ values greater than 40</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 

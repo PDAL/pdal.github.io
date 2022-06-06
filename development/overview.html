@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PDAL Architecture Overview &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
@@ -187,15 +188,15 @@
            <div itemprop="articleBody">
              
   <section id="pdal-architecture-overview">
-<span id="overview"></span><h1>PDAL Architecture Overview<a class="headerlink" href="#pdal-architecture-overview" title="Permalink to this headline"></a></h1>
+<span id="overview"></span><h1>PDAL Architecture Overview<a class="headerlink" href="#pdal-architecture-overview" title="Permalink to this heading"></a></h1>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Andrew Bell</p>
 </dd>
-<dt class="field-even">Contact</dt>
+<dt class="field-even">Contact<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="mailto:andrew&#37;&#52;&#48;hobu&#46;co">andrew<span>&#64;</span>hobu<span>&#46;</span>co</a></p>
 </dd>
-<dt class="field-odd">Date</dt>
+<dt class="field-odd">Date<span class="colon">:</span></dt>
 <dd class="field-odd"><p>5/15/2016</p>
 </dd>
 </dl>
@@ -207,7 +208,7 @@ provides point classification algorithms.
 PDAL provides an API that can be used by programmers for integration into their
 own projects or to allow extension of existing capabilities.</p>
 <section id="the-pdal-model">
-<span id="id1"></span><h2>The PDAL model<a class="headerlink" href="#the-pdal-model" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>The PDAL model<a class="headerlink" href="#the-pdal-model" title="Permalink to this heading"></a></h2>
 <p>PDAL reads data from a set of input sources using format-specific readers.
 Point data can be passed through various filters that transform data or create
 metadata.  If desired, points can be written to an output stream using a
@@ -223,13 +224,13 @@ that they may create more than one set of points to be further filtered or
 written.  The arrangement of readers, filters and writers is called a PDAL
 pipeline.  Pipelines can be specified using JSON as detailed later.</p>
 <section id="extending-pdal">
-<h3>Extending PDAL<a class="headerlink" href="#extending-pdal" title="Permalink to this headline"></a></h3>
+<h3>Extending PDAL<a class="headerlink" href="#extending-pdal" title="Permalink to this heading"></a></h3>
 <p>PDAL is simple to extend by implementing subclasses of existing stages.  All
 processing in PDAL is completely synchronous.  No parallel processing occurs,
 eliminating locking or other concurrency issues.  Understanding of several
 auxiliary classes is necessary to effectively create a new stage.</p>
 <section id="dimension">
-<h4>Dimension<a class="headerlink" href="#dimension" title="Permalink to this headline"></a></h4>
+<h4>Dimension<a class="headerlink" href="#dimension" title="Permalink to this heading"></a></h4>
 <p>Point cloud formats support various data elements.  In order to be useful, all
 formats must provide some notion of location for points (X, Y and perhaps Z),
 but beyond that, the data collected in formats may or may not have common data
@@ -260,14 +261,14 @@ requested type is a 16 bit unsigned integer (Unsigned16), PDAL will use a
 16 bit storage types can be successfully accommodated.</p>
 </section>
 <section id="point-layout">
-<h4>Point Layout<a class="headerlink" href="#point-layout" title="Permalink to this headline"></a></h4>
+<h4>Point Layout<a class="headerlink" href="#point-layout" title="Permalink to this heading"></a></h4>
 <p>PDAL stores the dimension information in a point layout structure
 (PointLayout object).  It stores information about the physical layout of
 data of each point in memory and also stores the type and name of each
 dimension.</p>
 </section>
 <section id="point-table">
-<h4>Point Table<a class="headerlink" href="#point-table" title="Permalink to this headline"></a></h4>
+<h4>Point Table<a class="headerlink" href="#point-table" title="Permalink to this heading"></a></h4>
 <p>PDAL stores points in what is called a point table (PointTable object).  Each
 point table has an associated point layout describing its format.  All
 points in a single point table have the same dimensions and all operations on
@@ -283,7 +284,7 @@ an attempt to run a pipeline with a stage that doesn’t support streaming
 will raise an exception.</p>
 </section>
 <section id="point-view">
-<h4>Point View<a class="headerlink" href="#point-view" title="Permalink to this headline"></a></h4>
+<h4>Point View<a class="headerlink" href="#point-view" title="Permalink to this heading"></a></h4>
 <p>A point view (PointView object) stores references to points.  Storage
 and retrieval of points is done through a point view rather than directly
 through a point table.  Point data is accessed from a point view through a
@@ -305,14 +306,14 @@ reference to an existing point.  There are currently no built-in facilities for
 creating copies of points.</p>
 </section>
 <section id="point-reference">
-<h4>Point Reference<a class="headerlink" href="#point-reference" title="Permalink to this headline"></a></h4>
+<h4>Point Reference<a class="headerlink" href="#point-reference" title="Permalink to this heading"></a></h4>
 <p>Some functions take a reference to a single point (PointRef object).
 In streaming mode, stages implement the processOne() function which operates
 on a point reference instead of a point view.</p>
 </section>
 </section>
 <section id="making-a-stage-reader-filter-or-writer">
-<h3>Making a Stage (Reader, Filter or Writer):<a class="headerlink" href="#making-a-stage-reader-filter-or-writer" title="Permalink to this headline"></a></h3>
+<h3>Making a Stage (Reader, Filter or Writer):<a class="headerlink" href="#making-a-stage-reader-filter-or-writer" title="Permalink to this heading"></a></h3>
 <p>All stages (Stage object) share a common interface, though readers, filters and
 writers each have a simplified interface if the generic stage interface is more
 complex than necessary.  One should create a new stage by creating a subclass of
@@ -322,7 +323,7 @@ constructor.</p>
 <p>When a pipeline is started, each of its stages is processed in two distinct
 steps.  First, all stages are prepared.</p>
 <section id="stage-preparation">
-<h4>Stage Preparation<a class="headerlink" href="#stage-preparation" title="Permalink to this headline"></a></h4>
+<h4>Stage Preparation<a class="headerlink" href="#stage-preparation" title="Permalink to this heading"></a></h4>
 <p>Preparation of a stage is done by calling the prepare() function of the stage
 at the end of the pipeline.  prepare() executes the following private virtual
 functions calls, none of which need to be implemented in a stage unless desired.
@@ -369,7 +370,7 @@ raise exceptions before stage execution.</p>
 </ol>
 </section>
 <section id="stage-execution">
-<h4>Stage Execution<a class="headerlink" href="#stage-execution" title="Permalink to this headline"></a></h4>
+<h4>Stage Execution<a class="headerlink" href="#stage-execution" title="Permalink to this heading"></a></h4>
 <p>After all stages are prepared, processing continues with the execution of each
 stage by calling execute().  Each stage will be executed only after all stages
 preceding it in a pipeline have been executed.  A stage is executed by
@@ -408,7 +409,7 @@ rewriting headers or closing or renaming files.</p>
 </ol>
 </section>
 <section id="streaming-stage-execution">
-<h4>Streaming Stage Execution<a class="headerlink" href="#streaming-stage-execution" title="Permalink to this headline"></a></h4>
+<h4>Streaming Stage Execution<a class="headerlink" href="#streaming-stage-execution" title="Permalink to this heading"></a></h4>
 <p>PDAL normally processes all points through each stage before passing the
 points to the next stage.  This means that all point data is held in memory
 during processing.  There are some situations that may make this undesirable.
@@ -430,7 +431,7 @@ to subsequent stages for processing.</p>
 </section>
 </section>
 <section id="implementing-a-reader">
-<h3>Implementing a Reader<a class="headerlink" href="#implementing-a-reader" title="Permalink to this headline"></a></h3>
+<h3>Implementing a Reader<a class="headerlink" href="#implementing-a-reader" title="Permalink to this heading"></a></h3>
 <p>A reader is a stage that takes input from a point cloud format supported by
 PDAL and loads points into a point table through a point view.</p>
 <p>A reader needs to register or assign those dimensions that it will reference
@@ -582,7 +583,7 @@ read.</p>
 </div></blockquote>
 </section>
 <section id="implementing-a-filter">
-<span id="id2"></span><h3>Implementing a Filter<a class="headerlink" href="#implementing-a-filter" title="Permalink to this headline"></a></h3>
+<span id="id2"></span><h3>Implementing a Filter<a class="headerlink" href="#implementing-a-filter" title="Permalink to this heading"></a></h3>
 <p>A filter is a stage that allows processing of data after it has been read into a
 pipeline’s point table.  In many filters, the only function that need be
 implemented is filter(), a simplified version of the stage’s run() method whose
@@ -639,7 +640,7 @@ output point views:</p>
 </div></blockquote>
 </section>
 <section id="implementing-a-writer">
-<h3>Implementing a Writer:<a class="headerlink" href="#implementing-a-writer" title="Permalink to this headline"></a></h3>
+<h3>Implementing a Writer:<a class="headerlink" href="#implementing-a-writer" title="Permalink to this heading"></a></h3>
 <p>Analogous to the filter() method in a filter is the write() method of a writer.
 This function is usually the appropriate one to override when implementing
 a writer – it would be unusual to need to implement run().  A
@@ -713,7 +714,7 @@ call to ready().</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -735,7 +736,7 @@ call to ready().</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 

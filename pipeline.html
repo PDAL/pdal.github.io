@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pipeline &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -188,7 +189,7 @@
            <div itemprop="articleBody">
              
   <section id="pipeline">
-<span id="id1"></span><h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this heading"></a></h1>
 <p>Pipelines define the processing of data within PDAL.  They describe how point
 cloud data are read, processed and written.
 PDAL internally constructs a pipeline to
@@ -208,7 +209,7 @@ facilities of whatever language you want.</p></li>
 via the command line.</p>
 </div>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>A PDAL processing pipeline is represented in JSON.  The structure may either:</p>
 <ul class="simple">
 <li><p>a JSON object, with a key called <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> whose value is an array of
@@ -217,7 +218,7 @@ inferred or explicit PDAL <a class="reference internal" href="#stage-object"><sp
 JSON object.</p></li>
 </ul>
 <section id="simple-example">
-<h3>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h3>
+<h3>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this heading"></a></h3>
 <p>A simple PDAL pipeline, inferring the appropriate drivers for the reader and
 writer from filenames, and able to be specified as a set of sequential steps:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
@@ -239,7 +240,7 @@ while only keeping points inside the box <span class="math notranslate nohighlig
 </figure>
 </section>
 <section id="reprojection-example">
-<h3>Reprojection Example<a class="headerlink" href="#reprojection-example" title="Permalink to this headline"></a></h3>
+<h3>Reprojection Example<a class="headerlink" href="#reprojection-example" title="Permalink to this heading"></a></h3>
 <p>A more complex PDAL pipeline reprojects the stage tagged <code class="docutils literal notranslate"><span class="pre">A1</span></code>, merges
 the result with <code class="docutils literal notranslate"><span class="pre">B</span></code>, and writes the merged output to a GeoTIFF file
 with the <a class="reference internal" href="stages/writers.gdal.html#writers-gdal"><span class="std std-ref">writers.gdal</span></a> writer:</p>
@@ -283,7 +284,7 @@ file <code class="docutils literal notranslate"><span class="pre">B.las</span></
 </figure>
 </section>
 <section id="point-views-and-multiple-outputs">
-<span id="processing-modes"></span><h3>Point Views and Multiple Outputs<a class="headerlink" href="#point-views-and-multiple-outputs" title="Permalink to this headline"></a></h3>
+<span id="processing-modes"></span><h3>Point Views and Multiple Outputs<a class="headerlink" href="#point-views-and-multiple-outputs" title="Permalink to this heading"></a></h3>
 <p>Some filters produce sets of points as output.  <a class="reference internal" href="stages/filters.splitter.html#filters-splitter"><span class="std std-ref">filters.splitter</span></a>,
 for example, creates a point set for each tile (rectangular area) in
 which input points exist.
@@ -309,7 +310,7 @@ files from a single pipeline.  The crop filter creates two output point views
 </section>
 </section>
 <section id="id2">
-<h2>Processing Modes<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<h2>Processing Modes<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
 <p>PDAL process data in one of two ways: standard mode or stream mode.  With
 standard mode, all input is read into memory before it is processed.  Many
 algorithms require standard mode processing because they need access to
@@ -327,9 +328,9 @@ choose to use standard mode by using the <code class="docutils literal notransla
 processing mode.</p>
 </section>
 <section id="pipelines">
-<h2>Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this headline"></a></h2>
+<h2>Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this heading"></a></h2>
 <section id="pipeline-array">
-<h3>Pipeline Array<a class="headerlink" href="#pipeline-array" title="Permalink to this headline"></a></h3>
+<h3>Pipeline Array<a class="headerlink" href="#pipeline-array" title="Permalink to this heading"></a></h3>
 <p>PDAL JSON pipelines are an array of stages.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -363,7 +364,7 @@ stage will only be created if the string is the final element in the array.</p><
 </ul>
 </section>
 <section id="stage-objects">
-<span id="stage-object"></span><h3>Stage Objects<a class="headerlink" href="#stage-objects" title="Permalink to this headline"></a></h3>
+<span id="stage-object"></span><h3>Stage Objects<a class="headerlink" href="#stage-objects" title="Permalink to this heading"></a></h3>
 <p>For more on PDAL stages and their options, check the PDAL documentation on
 <a class="reference internal" href="stages/readers.html#readers"><span class="std std-ref">Readers</span></a>, <a class="reference internal" href="stages/writers.html#writers"><span class="std std-ref">Writers</span></a>, and <a class="reference internal" href="stages/filters.html#filters"><span class="std std-ref">Filters</span></a>.</p>
 <ul class="simple">
@@ -400,7 +401,7 @@ places in a separate file. See <a class="reference internal" href="#option-files
 </ul>
 </section>
 <section id="filename-globbing">
-<h3>Filename Globbing<a class="headerlink" href="#filename-globbing" title="Permalink to this headline"></a></h3>
+<h3>Filename Globbing<a class="headerlink" href="#filename-globbing" title="Permalink to this heading"></a></h3>
 <ul>
 <li><p>A filename may contain the wildcard character <code class="docutils literal notranslate"><span class="pre">*</span></code> to match any string of
 characters. This can be useful if working with multiple input files in a
@@ -412,7 +413,7 @@ application like <code class="docutils literal notranslate"><span class="pre">pd
 </ul>
 </section>
 <section id="option-files">
-<span id="id3"></span><h3>Option Files<a class="headerlink" href="#option-files" title="Permalink to this headline"></a></h3>
+<span id="id3"></span><h3>Option Files<a class="headerlink" href="#option-files" title="Permalink to this heading"></a></h3>
 <p>All stages accept the <code class="docutils literal notranslate"><span class="pre">option</span> <span class="pre">file</span></code> option that allows extra options for a
 stage to be placed in a separate file.  The value of the option is the filename
 in which the additional options are located.</p>
@@ -434,9 +435,9 @@ the stage name:</p>
 </section>
 </section>
 <section id="extended-examples">
-<h2>Extended Examples<a class="headerlink" href="#extended-examples" title="Permalink to this headline"></a></h2>
+<h2>Extended Examples<a class="headerlink" href="#extended-examples" title="Permalink to this heading"></a></h2>
 <section id="bpf-to-las">
-<h3>BPF to LAS<a class="headerlink" href="#bpf-to-las" title="Permalink to this headline"></a></h3>
+<h3>BPF to LAS<a class="headerlink" href="#bpf-to-las" title="Permalink to this heading"></a></h3>
 <p>The following pipeline converts the input file from <a class="reference internal" href="stages/readers.bpf.html#readers-bpf"><span class="std std-ref">BPF</span></a> to
 <a class="reference internal" href="stages/writers.las.html#writers-las"><span class="std std-ref">LAS</span></a>, inferring both the reader and writer type, and
 setting a number of options on the writer stage.</p>
@@ -456,7 +457,7 @@ setting a number of options on the writer stage.</p>
 </div>
 </section>
 <section id="python-hag">
-<h3>Python HAG<a class="headerlink" href="#python-hag" title="Permalink to this headline"></a></h3>
+<h3>Python HAG<a class="headerlink" href="#python-hag" title="Permalink to this heading"></a></h3>
 <p>In our next example, the reader and writer types are once again inferred. After
 reading the input file, the ferry filter is used to copy the Z dimension into a
 new height above ground (HAG) dimension. Next, the <a class="reference internal" href="stages/filters.python.html#filters-python"><span class="std std-ref">filters.python</span></a>
@@ -487,7 +488,7 @@ this job in more detail.</p>
 </div>
 </section>
 <section id="dtm">
-<h3>DTM<a class="headerlink" href="#dtm" title="Permalink to this headline"></a></h3>
+<h3>DTM<a class="headerlink" href="#dtm" title="Permalink to this heading"></a></h3>
 <p>A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
 segmentation filter using <a class="reference internal" href="stages/filters.smrf.html#filters-smrf"><span class="std std-ref">filters.smrf</span></a>, filters out all points but the
@@ -519,7 +520,7 @@ then creates the DTM using the <a class="reference internal" href="stages/writer
 </div>
 </section>
 <section id="decimate-colorize">
-<h3>Decimate &amp; Colorize<a class="headerlink" href="#decimate-colorize" title="Permalink to this headline"></a></h3>
+<h3>Decimate &amp; Colorize<a class="headerlink" href="#decimate-colorize" title="Permalink to this heading"></a></h3>
 <p>This example still infers the reader and writer types while applying options on
 both. The pipeline decimates the input LAS file by keeping every other point,
 and then colorizes the points using the provided raster image. The output is
@@ -549,7 +550,7 @@ written as ASCII text.</p>
 </div>
 </section>
 <section id="reproject">
-<h3>Reproject<a class="headerlink" href="#reproject" title="Permalink to this headline"></a></h3>
+<h3>Reproject<a class="headerlink" href="#reproject" title="Permalink to this heading"></a></h3>
 <p>Our first example with multiple readers, this pipeline infers the reader types,
 and assigns spatial reference information to each.
 <a class="reference internal" href="stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a> filter reprojects data to the specified output
@@ -572,7 +573,7 @@ spatial reference system.</p>
 </div>
 </section>
 <section id="globbed-inputs">
-<h3>Globbed Inputs<a class="headerlink" href="#globbed-inputs" title="Permalink to this headline"></a></h3>
+<h3>Globbed Inputs<a class="headerlink" href="#globbed-inputs" title="Permalink to this heading"></a></h3>
 <p>Finally, we capture another merge pipeline demonstrating the ability to glob
 multiple input LAS files from a given directory.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
@@ -630,7 +631,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -652,7 +653,7 @@ stages and their options. See <a class="reference internal" href="apps/info.html
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 

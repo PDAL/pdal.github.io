@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ground Filter Tutorial &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
@@ -186,20 +187,20 @@
            <div itemprop="articleBody">
              
   <section id="ground-filter-tutorial">
-<span id="ground-filters"></span><h1>Ground Filter Tutorial<a class="headerlink" href="#ground-filter-tutorial" title="Permalink to this headline"></a></h1>
+<span id="ground-filters"></span><h1>Ground Filter Tutorial<a class="headerlink" href="#ground-filter-tutorial" title="Permalink to this heading"></a></h1>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Bradley Chambers</p>
 </dd>
-<dt class="field-even">Contact</dt>
+<dt class="field-even">Contact<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="mailto:brad&#46;chambers&#37;&#52;&#48;gmail&#46;com">brad<span>&#46;</span>chambers<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
 </dd>
-<dt class="field-odd">Date</dt>
+<dt class="field-odd">Date<span class="colon">:</span></dt>
 <dd class="field-odd"><p>04/17/2017</p>
 </dd>
 </dl>
 <section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline"></a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
 <p>In previous tutorials we introduced our implementation of the
 <a class="reference internal" href="../stages/filters.pmf.html#filters-pmf"><span class="std std-ref">Progressive Morphological Filter (PMF)</span></a>, a <a class="reference internal" href="../apps/ground.html#ground-command"><span class="std std-ref">ground kernel</span></a> to simplify command-line
 access to PMF, and a filter for <a class="reference internal" href="../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">removing outliers</span></a>.</p>
@@ -220,7 +221,7 @@ the context of a ground segmentation workflow. Specifically, we will discuss:</p
 </div>
 </section>
 <section id="the-pipeline">
-<h2>The Pipeline<a class="headerlink" href="#the-pipeline" title="Permalink to this headline"></a></h2>
+<h2>The Pipeline<a class="headerlink" href="#the-pipeline" title="Permalink to this heading"></a></h2>
 <p>Begin by creating a new file called <code class="docutils literal notranslate"><span class="pre">pipeline.json</span></code> with the following
 contents.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">{</span><span class="w"></span>
@@ -267,10 +268,10 @@ inserted into the pipeline by the application.</p>
 </div>
 </section>
 <section id="the-explanation">
-<h2>The Explanation<a class="headerlink" href="#the-explanation" title="Permalink to this headline"></a></h2>
+<h2>The Explanation<a class="headerlink" href="#the-explanation" title="Permalink to this heading"></a></h2>
 <p>We continue by explaining the various stages of the pipeline in order.</p>
 <section id="reprojecting-data">
-<h3>Reprojecting Data<a class="headerlink" href="#reprojecting-data" title="Permalink to this headline"></a></h3>
+<h3>Reprojecting Data<a class="headerlink" href="#reprojecting-data" title="Permalink to this heading"></a></h3>
 <p>Many of PDAL’s default parameters are specified in meters, and individual filter
 stages typically assume that units are at least uniform in X, Y, and Z. Because
 data will not always be provided in this way, PDAL pipelines should account for
@@ -286,7 +287,7 @@ to the next.</p>
 Z in meters.</p>
 </section>
 <section id="assigning-classification-values">
-<h3>Assigning Classification Values<a class="headerlink" href="#assigning-classification-values" title="Permalink to this headline"></a></h3>
+<h3>Assigning Classification Values<a class="headerlink" href="#assigning-classification-values" title="Permalink to this heading"></a></h3>
 <p>Let’s assume that you have been given an LAS file that contains per point
 classifications, but you’d like to start with a clean slate and derive your own
 classifications with your PDAL pipeline.</p>
@@ -309,7 +310,7 @@ into <a class="reference internal" href="../stages/filters.assign.html#filters-a
 </div>
 </section>
 <section id="extended-local-minimum">
-<h3>Extended Local Minimum<a class="headerlink" href="#extended-local-minimum" title="Permalink to this headline"></a></h3>
+<h3>Extended Local Minimum<a class="headerlink" href="#extended-local-minimum" title="Permalink to this heading"></a></h3>
 <p>The <a class="reference internal" href="../stages/filters.elm.html#filters-elm"><span class="std std-ref">Extended Local Minimum (ELM) method</span></a> helps to identify
 low noise points that can adversely affect ground segmentation algorithms. ELM
 was first published in <a class="reference internal" href="../references.html#chen2012" id="id1"><span>[Chen2012]</span></a> as part of the upward-fusion method of DTM
@@ -322,7 +323,7 @@ with the LAS specification.</p>
 </div>
 </section>
 <section id="outliers">
-<h3>Outliers<a class="headerlink" href="#outliers" title="Permalink to this headline"></a></h3>
+<h3>Outliers<a class="headerlink" href="#outliers" title="Permalink to this heading"></a></h3>
 <p>PDAL’s <a class="reference internal" href="../stages/filters.outlier.html#filters-outlier"><span class="std std-ref">outlier filter</span></a> provides two methods of outlier
 detection at the moment: <code class="docutils literal notranslate"><span class="pre">radius</span></code> and <code class="docutils literal notranslate"><span class="pre">statistical</span></code>. Both aim to identify
 points that are isolated and likely arise from noise sources. Noise points are
@@ -334,7 +335,7 @@ points that are isolated and likely arise from noise sources. Noise points are
 </div>
 </section>
 <section id="ground-segmentation">
-<h3>Ground Segmentation<a class="headerlink" href="#ground-segmentation" title="Permalink to this headline"></a></h3>
+<h3>Ground Segmentation<a class="headerlink" href="#ground-segmentation" title="Permalink to this heading"></a></h3>
 <p>The <a class="reference internal" href="../stages/filters.smrf.html#filters-smrf"><span class="std std-ref">Simple Morphological Filter (SMRF)</span></a> <a class="reference internal" href="../references.html#pingel2013" id="id2"><span>[Pingel2013]</span></a> is a
 newer addition to PDAL that has quietly existed in an alpha state since v1.3.
 With the release of PDAL v1.5, our SMRF implementation is much more complete,
@@ -402,7 +403,7 @@ structuring element.</p>
 </div>
 </section>
 <section id="extracting-ground-returns">
-<h3>Extracting Ground Returns<a class="headerlink" href="#extracting-ground-returns" title="Permalink to this headline"></a></h3>
+<h3>Extracting Ground Returns<a class="headerlink" href="#extracting-ground-returns" title="Permalink to this heading"></a></h3>
 <p>Any time we have points classified as ground, we may wish to extract just these
 points, e.g., to create a <em>digital terrain model</em> (DTM). In this case, we use a
 <a class="reference internal" href="../stages/filters.range.html#filters-range"><span class="std std-ref">range filter</span></a> as shown.</p>
@@ -427,7 +428,7 @@ range filter above.</p>
 </section>
 </section>
 <section id="running-the-pipeline">
-<h2>Running the Pipeline<a class="headerlink" href="#running-the-pipeline" title="Permalink to this headline"></a></h2>
+<h2>Running the Pipeline<a class="headerlink" href="#running-the-pipeline" title="Permalink to this heading"></a></h2>
 <p>Now let’s run our <code class="docutils literal notranslate"><span class="pre">pipeline.json</span></code> example, using it to
 <a class="reference internal" href="../apps/translate.html#translate-command"><span class="std std-ref">translate</span></a> <code class="docutils literal notranslate"><span class="pre">input.las</span></code> to <code class="docutils literal notranslate"><span class="pre">output.las</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pdal translate input.las output.las --json pipeline.json
@@ -469,7 +470,7 @@ range filter above.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -491,7 +492,7 @@ range filter above.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 

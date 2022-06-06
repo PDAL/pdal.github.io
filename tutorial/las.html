@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LAS Reading and Writing with PDAL &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
@@ -211,19 +212,19 @@
            <div itemprop="articleBody">
              
   <section id="las-reading-and-writing-with-pdal">
-<span id="las-tutorial"></span><h1><a class="toc-backref" href="#id2">LAS Reading and Writing with PDAL</a><a class="headerlink" href="#las-reading-and-writing-with-pdal" title="Permalink to this headline"></a></h1>
+<span id="las-tutorial"></span><h1><a class="toc-backref" href="#id2" role="doc-backlink">LAS Reading and Writing with PDAL</a><a class="headerlink" href="#las-reading-and-writing-with-pdal" title="Permalink to this heading"></a></h1>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Howard Butler</p>
 </dd>
-<dt class="field-even">Contact</dt>
+<dt class="field-even">Contact<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="mailto:howard&#37;&#52;&#48;hobu&#46;co">howard<span>&#64;</span>hobu<span>&#46;</span>co</a></p>
 </dd>
-<dt class="field-odd">Date</dt>
+<dt class="field-odd">Date<span class="colon">:</span></dt>
 <dd class="field-odd"><p>3/27/2017</p>
 </dd>
 </dl>
-<div class="contents topic" id="table-of-contents">
+<nav class="contents" id="table-of-contents">
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#las-reading-and-writing-with-pdal" id="id2">LAS Reading and Writing with PDAL</a></p>
@@ -240,12 +241,12 @@
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>This tutorial will describe reading and writing <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> data with PDAL,
 discuss the capabilities that PDAL <a class="reference internal" href="../stages/readers.las.html#readers-las"><span class="std std-ref">readers.las</span></a> and <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>
 can provide for this format.</p>
 <section id="introduction">
-<h2><a class="toc-backref" href="#id3">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> is probably the most commonly used <a class="reference external" href="https://en.wikipedia.org/wiki/Lidar">LiDAR</a> format, and PDAL’s support
 of LAS is important for many users of the library. This tutorial describes and
 demonstrates some of the capabilities the drivers provide, points out items to
@@ -253,7 +254,7 @@ be aware of when using the drivers, and hopefully provides some examples you
 can use to get what you need out of the LAS drivers.</p>
 </section>
 <section id="las-versions">
-<h2><a class="toc-backref" href="#id4">LAS Versions</a><a class="headerlink" href="#las-versions" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">LAS Versions</a><a class="headerlink" href="#las-versions" title="Permalink to this heading"></a></h2>
 <p>There are five LAS versions – 1.0 to 1.4. Each iteration added some
 complexity to the format in terms of capabilities it supports, possible data
 types it stores, and metadata. Users of LAS must balance the features they need
@@ -263,7 +264,7 @@ support every feature of each version.  PDAL works to provide many of
 these features, but it is also incomplete.  Specifically, PDAL doesn’t support
 point formats that store waveform data.</p>
 <section id="version-example">
-<h3>Version Example<a class="headerlink" href="#version-example" title="Permalink to this headline"></a></h3>
+<h3>Version Example<a class="headerlink" href="#version-example" title="Permalink to this heading"></a></h3>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">minor_version</span></code> option of <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> to set the
 version PDAL should output. The following example will write a 1.1 version LAS
 file. Depending on the features you need, this may or may not be what you want.</p>
@@ -290,7 +291,7 @@ a version from a previously read file.</p>
 </section>
 </section>
 <section id="spatial-reference-system">
-<h2><a class="toc-backref" href="#id5">Spatial Reference System</a><a class="headerlink" href="#spatial-reference-system" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Spatial Reference System</a><a class="headerlink" href="#spatial-reference-system" title="Permalink to this heading"></a></h2>
 <p>LAS 1.0 to 1.3 use <a class="reference external" href="https://trac.osgeo.org/geotiff/">GeoTIFF</a> keys for storing coordinate system information,
 while LAS 1.4 uses <a class="reference external" href="https://en.wikipedia.org/wiki/Well-known_text#Coordinate_reference_systems">Well Known Text</a>. GeoTIFF is well-supported by most software
 that read LAS, but it is not possible to express some coordinate system
@@ -298,7 +299,7 @@ specifics with GeoTIFF. WKT is supports
 more coordinate systems than GeoTIFF, but vendor-specific and later versions
 (WKT 2) may not be handled well.</p>
 <section id="assignment-example">
-<h3>Assignment Example<a class="headerlink" href="#assignment-example" title="Permalink to this headline"></a></h3>
+<h3>Assignment Example<a class="headerlink" href="#assignment-example" title="Permalink to this heading"></a></h3>
 <p>The PDAL <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> allows you to override or assign the coordinate
 system to an explicit value if you need. Often the coordinate system defined by
 a file might be incorrect or non-existent, and you can set this with PDAL.</p>
@@ -328,7 +329,7 @@ to prevent overdriving the precision of the data and disrupting
 </div>
 </section>
 <section id="vertical-datum-example">
-<h3>Vertical Datum Example<a class="headerlink" href="#vertical-datum-example" title="Permalink to this headline"></a></h3>
+<h3>Vertical Datum Example<a class="headerlink" href="#vertical-datum-example" title="Permalink to this heading"></a></h3>
 <p>Vertical coordinate control is important in <a class="reference external" href="https://en.wikipedia.org/wiki/Lidar">LiDAR</a> and PDAL supports
 assignment
 and reprojection/transform of vertical coordinates using <a class="reference external" href="http://proj4.org">Proj.4</a> and <a class="reference external" href="http://gdal.org/">GDAL</a>.
@@ -392,7 +393,7 @@ make it be valid JSON.</p>
 </div>
 </section>
 <section id="reprojection-example">
-<h3>Reprojection Example<a class="headerlink" href="#reprojection-example" title="Permalink to this headline"></a></h3>
+<h3>Reprojection Example<a class="headerlink" href="#reprojection-example" title="Permalink to this heading"></a></h3>
 <p>A common desire is to transform the coordinates of an <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> file
 from one coordinate system to another. The mechanism to do that with
 PDAL is <a class="reference internal" href="../stages/filters.reprojection.html#filters-reprojection"><span class="std std-ref">filters.reprojection</span></a>.</p>
@@ -422,7 +423,7 @@ point set.</p>
 </section>
 </section>
 <section id="point-formats">
-<h2><a class="toc-backref" href="#id6">Point Formats</a><a class="headerlink" href="#point-formats" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Point Formats</a><a class="headerlink" href="#point-formats" title="Permalink to this heading"></a></h2>
 <p>As each revision of LAS was released, more point formats were added. A point
 format is
 the fixed set of <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimensions</span></a> that a LAS file stores
@@ -433,12 +434,12 @@ interpretation changes based on LAS file version.  For example, a classification
 value of 11 in version 1.4 indicates “Road Surface”, while that value is
 reserved in version 1.1.</p>
 <section id="point-format-example">
-<h3>Point Format Example<a class="headerlink" href="#point-format-example" title="Permalink to this headline"></a></h3>
+<h3>Point Format Example<a class="headerlink" href="#point-format-example" title="Permalink to this heading"></a></h3>
 <p>Point format or <cite>dataformat_id</cite> is an integer that defines the set of fixed
 <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimensions</span></a> stored for each point in a LAS file.
 All point formats
 specify the following dimensions as part of a point record:</p>
-<table class="colwidths-auto docutils align-default" id="id1">
+<table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Base LAS <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">Dimensions</span></a></span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
 <tbody>
 <tr class="row-odd"><td><p>X</p></td>
@@ -489,7 +490,7 @@ data is perfectly efficient.</p>
 </section>
 </section>
 <section id="extra-dimensions">
-<h2><a class="toc-backref" href="#id7">Extra Dimensions</a><a class="headerlink" href="#extra-dimensions" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Extra Dimensions</a><a class="headerlink" href="#extra-dimensions" title="Permalink to this heading"></a></h2>
 <p>A LAS Point Format ID defines the fixed set of
 <a class="reference internal" href="../dimensions.html#dimensions"><span class="std std-ref">dimensions</span></a> a file must
 store, but programs are allowed to store extra data beyond that fixed set.
@@ -497,7 +498,7 @@ This feature of the format was regularized in LAS 1.4 as something called
 “extra bytes” or “extra dims”, but previous versions can
 also store these extra per-point attributes.</p>
 <section id="extra-dimension-example">
-<h3>Extra Dimension Example<a class="headerlink" href="#extra-dimension-example" title="Permalink to this headline"></a></h3>
+<h3>Extra Dimension Example<a class="headerlink" href="#extra-dimension-example" title="Permalink to this heading"></a></h3>
 <p>LAS 1.4 provides for the storage of dimensions not part of the chosen
 point format by appending them to each point record.  PDAL supports this
 feature when writing files with the “extra_dims” option.  The following
@@ -518,7 +519,7 @@ an “extra bytes” VLR:</p>
 </section>
 </section>
 <section id="required-header-fields">
-<h2><a class="toc-backref" href="#id8">Required Header Fields</a><a class="headerlink" href="#required-header-fields" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Required Header Fields</a><a class="headerlink" href="#required-header-fields" title="Permalink to this heading"></a></h2>
 <p>Readers of the ASPRS LAS Specification will see there are many fields that
 softwares are required to write, with their content mandated by various options
 and configurations in the format. PDAL does not assume responsibility for
@@ -533,7 +534,7 @@ this might matter include:</p>
 <li><p><cite>filesource_id</cite></p></li>
 </ul>
 <section id="header-fields-example">
-<h3>Header Fields Example<a class="headerlink" href="#header-fields-example" title="Permalink to this headline"></a></h3>
+<h3>Header Fields Example<a class="headerlink" href="#header-fields-example" title="Permalink to this heading"></a></h3>
 <p>The “forward” option of <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> is the easiest way to get most of
 what you might want in terms of header settings copied from an input to an
 output file upon processing. Imagine the scenario of zero’ing out the
@@ -576,7 +577,7 @@ data.</p>
 </section>
 </section>
 <section id="coordinate-scaling">
-<h2><a class="toc-backref" href="#id9">Coordinate Scaling</a><a class="headerlink" href="#coordinate-scaling" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Coordinate Scaling</a><a class="headerlink" href="#coordinate-scaling" title="Permalink to this heading"></a></h2>
 <p>LAS stores coordinates as 32 bit integers. It is the user’s responsibility to
 ensure that the coordinate domain required by the data in the file fits within
 the 32 bit integer domain.  Most coordinate values have digits to the right
@@ -590,7 +591,7 @@ the resolution of the data collection can mislead users as to the actual
 measurement precision of the data.  In addition, it can lead to larger files
 when writing <a class="reference external" href="Compression">compressed</a> data with <a class="reference external" href="http://laszip.org">LASzip</a>.</p>
 <section id="auto-offset-example">
-<h3>Auto Offset Example<a class="headerlink" href="#auto-offset-example" title="Permalink to this headline"></a></h3>
+<h3>Auto Offset Example<a class="headerlink" href="#auto-offset-example" title="Permalink to this heading"></a></h3>
 <p>Users can allow PDAL select scale and offset values for data with the <code class="docutils literal notranslate"><span class="pre">auto</span></code>
 option.  This can have some detrimental effects on downstream processing.
 <code class="docutils literal notranslate"><span class="pre">auto</span></code> for scale values will use the entire 32-bit integer domain.
@@ -621,14 +622,14 @@ artificial storage precision or maximal storage precision.</p>
 </section>
 </section>
 <section id="compression">
-<h2><a class="toc-backref" href="#id10">Compression</a><a class="headerlink" href="#compression" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Compression</a><a class="headerlink" href="#compression" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="http://laszip.org">LASzip</a> is an open source, lossless compression technique for <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> data.
 It is supported by two different software libraries, and it can be used in both
 the C/C++ and the JavaScript execution environments.  LAZ support is provided
 by both <a class="reference internal" href="../stages/readers.las.html#readers-las"><span class="std std-ref">readers.las</span></a> and <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a>.  It can be enabled by
 setting the <code class="docutils literal notranslate"><span class="pre">compression</span></code> option to <code class="docutils literal notranslate"><span class="pre">laszip</span></code>.</p>
 <section id="compression-example">
-<h3>Compression Example<a class="headerlink" href="#compression-example" title="Permalink to this headline"></a></h3>
+<h3>Compression Example<a class="headerlink" href="#compression-example" title="Permalink to this heading"></a></h3>
 <p>Providing a filename with a <code class="docutils literal notranslate"><span class="pre">.laz</span></code> extension will write compressed data.
 Compression can be turned on explicitly as well:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">[</span><span class="w"></span>
@@ -646,7 +647,7 @@ Compression can be turned on explicitly as well:</p>
 </div>
 </section>
 <section id="variable-length-records">
-<h3>Variable Length Records<a class="headerlink" href="#variable-length-records" title="Permalink to this headline"></a></h3>
+<h3>Variable Length Records<a class="headerlink" href="#variable-length-records" title="Permalink to this heading"></a></h3>
 <p>Variable Length Records, or VLRs, are binary data that the LAS format
 supports to allow applications to store their own data. Coordinate system
 information is one type of data stored in VLRs, and many different LAS-using
@@ -673,7 +674,7 @@ coordinate system of the data.</p>
 file, which could be up to 4gb in size.</p>
 </section>
 <section id="vlr-example">
-<h3>VLR Example<a class="headerlink" href="#vlr-example" title="Permalink to this headline"></a></h3>
+<h3>VLR Example<a class="headerlink" href="#vlr-example" title="Permalink to this heading"></a></h3>
 <p>You can add your own VLRs to files to store processing information or
 whatever you
 want by providing a JSON block via <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> <code class="docutils literal notranslate"><span class="pre">vlrs</span></code> option that
@@ -705,7 +706,7 @@ information and stored in the VLR when the file is written.</p>
 </section>
 </section>
 <section id="pdal-metadata">
-<h2><a class="toc-backref" href="#id11">PDAL Metadata</a><a class="headerlink" href="#pdal-metadata" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">PDAL Metadata</a><a class="headerlink" href="#pdal-metadata" title="Permalink to this heading"></a></h2>
 <p>The <a class="reference internal" href="../stages/writers.las.html#writers-las"><span class="std std-ref">writers.las</span></a> driver supports an option, <code class="docutils literal notranslate"><span class="pre">pdal_metadata</span></code>, that writes
 two <cite>PDAL</cite> VLRs to LAS files. The first is the equivalent of
 <a class="reference internal" href="../apps/info.html#info-command"><span class="std std-ref">info</span></a>’s
@@ -718,7 +719,7 @@ which versions of PDAL may have written a file and what filter options were set
 when it was written, and give you the ability to store metadata and other
 information via pipeline <code class="docutils literal notranslate"><span class="pre">user_data</span></code> from your own applications.</p>
 <section id="metadata-example">
-<h3>Metadata Example<a class="headerlink" href="#metadata-example" title="Permalink to this headline"></a></h3>
+<h3>Metadata Example<a class="headerlink" href="#metadata-example" title="Permalink to this heading"></a></h3>
 <p>The pipeline used to construct the file and all of its <a class="reference internal" href="../development/metadata.html#metadata"><span class="std std-ref">Metadata</span></a>
 can be written into VLRs in <a class="reference external" href="http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html">ASPRS LAS</a> files under the <cite>PDAL</cite> <a class="reference external" href="http://www.asprs.org/misc/las-key-list.html">VLR key</a>.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">[</span><span class="w"></span>
@@ -777,7 +778,7 @@ in the VLRs will not fit in that space.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -799,7 +800,7 @@ in the VLRs will not fit in that space.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 

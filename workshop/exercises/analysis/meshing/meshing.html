@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creating surface meshes &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../../about.html" />
@@ -194,7 +195,7 @@
            <div itemprop="articleBody">
              
   <section id="creating-surface-meshes">
-<span id="workshop-meshing"></span><h1>Creating surface meshes<a class="headerlink" href="#creating-surface-meshes" title="Permalink to this headline"></a></h1>
+<span id="workshop-meshing"></span><h1>Creating surface meshes<a class="headerlink" href="#creating-surface-meshes" title="Permalink to this heading"></a></h1>
 <p id="index-0">This exercise uses PDAL to create surface meshes. PDAL is able to use a number
 of meshing filters: <a class="reference external" href="https://pdal.io/stages/filters.html#mesh">https://pdal.io/stages/filters.html#mesh</a>. Three of these
 are ‘in the box’, without needing plugins compiled. These are 2D Delaunay
@@ -202,7 +203,7 @@ triangulation, Greedy projection meshing and Poisson surface meshing.</p>
 <p>In this exercise we’ll create a Poisson surface mesh - a watertight isosurface
 - from our input point cloud.</p>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline"></a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading"></a></h2>
 <p>We will create mesh models of a building and its surrounds using an entwine
 data input source.</p>
 <p>After running each command, the output <cite>.ply</cite> file can be viewed in Meshlab or
@@ -226,7 +227,7 @@ if you’re using a machine with a lot of processing power, try increasing the
 <cite>depth</cite> parameter for a more detailed mesh.</p>
 </div>
 <section id="mesh-command">
-<h3>Mesh Command<a class="headerlink" href="#mesh-command" title="Permalink to this headline"></a></h3>
+<h3>Mesh Command<a class="headerlink" href="#mesh-command" title="Permalink to this heading"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal translate -i ./exercises/analysis/clipping/stadium.las <span class="se">\</span>
 -o ./exercises/analysis/meshing/first-mesh.ply <span class="se">\</span>
@@ -249,7 +250,7 @@ poisson --filters.poisson.depth<span class="o">=</span><span class="m">16</span>
 <a class="reference external image-reference" href="../../../../_images/first-mesh.png"><img alt="../../../../_images/first-mesh.png" src="../../../../_images/first-mesh.png" /></a>
 </section>
 <section id="filtering">
-<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline"></a></h3>
+<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this heading"></a></h3>
 <p>If we want to just mesh a building, or just terrain, or both we can apply a
 <cite>range</cite> filter based on point classification. These data have ground labeled as
 class 2, and buildings as 6.</p>
@@ -258,7 +259,7 @@ ground surrounding it, using the same data subset as above and adding a
 <a class="reference internal" href="../../../../stages/filters.range.html#filters-range"><span class="std std-ref">filters.range</span></a> stage to limit the set of points used in mesh creation.</p>
 </section>
 <section id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline"></a></h3>
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this heading"></a></h3>
 <p>Invoke the following command, substituting accordingly, in your <cite>Conda Shell</cite>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdal translate -i ./exercises/analysis/clipping/stadium.las <span class="se">\</span>
 -o ./exercises/analysis/meshing/building-exercise.ply <span class="se">\</span>
@@ -318,7 +319,7 @@ range poisson <span class="se">\</span>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -340,7 +341,7 @@ range poisson <span class="se">\</span>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 

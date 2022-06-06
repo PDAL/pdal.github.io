@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>readers.rdb &mdash; pdal.io</title>
@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
@@ -214,7 +215,7 @@
            <div itemprop="articleBody">
              
   <section id="readers-rdb">
-<span id="id1"></span><h1>readers.rdb<a class="headerlink" href="#readers-rdb" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>readers.rdb<a class="headerlink" href="#readers-rdb" title="Permalink to this heading"></a></h1>
 <p>The <strong>RDB reader</strong> reads from files in the RDB format, the in-house format
 used by <a class="reference external" href="http://www.riegl.com">RIEGL Laser Measurement Systems GmbH</a>.</p>
 <div class="admonition plugin" id="plugin-0">
@@ -226,7 +227,7 @@ used by <a class="reference external" href="http://www.riegl.com">RIEGL Laser Me
 <p>This stage supports streaming operations</p>
 </div>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
 <p>To build PDAL with rdb support, <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">rdb_DIR</span></code> to the path of your local
 rdblib installation. rdblib can be obtained from the <a class="reference external" href="http://www.riegl.com/members-area/software-downloads/libraries/">RIEGL download pages</a>
 with a properly enabled user account. The rdblib files do not need to be
@@ -243,7 +244,7 @@ the tests: 2.1.6</p></li>
 </div>
 </section>
 <section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
 <p>This example pipeline reads points from a RDB file and stores them in LAS
 format. Only points classified as “ground points” are read since option
 <code class="docutils literal notranslate"><span class="pre">filter</span></code> is set to “riegl.class == 2” (see line 5).</p>
@@ -262,7 +263,7 @@ format. Only points classified as “ground points” are read since option
 </div>
 </section>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>filename</dt><dd><p>Name of file to read
 [Required]</p>
@@ -279,6 +280,8 @@ with ‘default_srs’. [Default: none]</p>
 one.  Can be specified as a WKT, proj.4 or EPSG string. Can’t use
 with ‘override_srs’. [Default: none]</p>
 </dd>
+</dl>
+<dl class="simple">
 <dt>filter</dt><dd><p>Point filter expression string (see RDB SDK documentation for details)
 [Optional]
 [Default: empty string (= no filter)]</p>
@@ -290,14 +293,10 @@ with ‘override_srs’. [Default: none]</p>
 </dl>
 </section>
 <section id="dimensions">
-<h2>Dimensions<a class="headerlink" href="#dimensions" title="Permalink to this headline"></a></h2>
+<h2>Dimensions<a class="headerlink" href="#dimensions" title="Permalink to this heading"></a></h2>
 <p>The reader maps following default RDB point attributes to PDAL dimensions
 (if they exist in the RDB file):</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 53%" />
-<col style="width: 47%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>RDB attribute</p></th>
 <th class="head"><p>PDAL dimension(s)</p></th>
@@ -377,10 +376,10 @@ file metadata object <code class="docutils literal notranslate"><span class="pre
 </div>
 </section>
 <section id="metadata">
-<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline"></a></h2>
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading"></a></h2>
 <p>The reader adds following objects to the stage’s metadata node:</p>
 <section id="object-database">
-<h3>Object “database”<a class="headerlink" href="#object-database" title="Permalink to this headline"></a></h3>
+<h3>Object “database”<a class="headerlink" href="#object-database" title="Permalink to this heading"></a></h3>
 <p>Contains basic information about the RDB file such as the bounding box,
 number of points and the file ID.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
@@ -406,7 +405,7 @@ number of points and the file ID.</p>
 </div>
 </section>
 <section id="list-dimensions">
-<h3>List “dimensions”<a class="headerlink" href="#list-dimensions" title="Permalink to this headline"></a></h3>
+<h3>List “dimensions”<a class="headerlink" href="#list-dimensions" title="Permalink to this heading"></a></h3>
 <p>List of point attribute description objects.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
@@ -446,7 +445,7 @@ number of points and the file ID.</p>
 <p>Details about the point attribute properties see RDB SDK documentation.</p>
 </section>
 <section id="object-metadata">
-<h3>Object “metadata”<a class="headerlink" href="#object-metadata" title="Permalink to this headline"></a></h3>
+<h3>Object “metadata”<a class="headerlink" href="#object-metadata" title="Permalink to this heading"></a></h3>
 <p>Contains one sub-object for each metadata object stored in the RDB file.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
@@ -490,7 +489,7 @@ by the reader.</p>
 <p>Details about the metadata objects see RDB SDK documentation.</p>
 </section>
 <section id="list-transactions">
-<h3>List “transactions”<a class="headerlink" href="#list-transactions" title="Permalink to this headline"></a></h3>
+<h3>List “transactions”<a class="headerlink" href="#list-transactions" title="Permalink to this heading"></a></h3>
 <p>List of transaction objects describing the history of the file.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Example:</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
@@ -585,7 +584,7 @@ by the reader.</p>
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>.
 
       
-      Last updated on May 31, 2022.
+      Last updated on Jun 06, 2022.
       </div>
     </div>
 </footer>
@@ -607,7 +606,7 @@ by the reader.</p>
                         and
                         <a href="https://github.com/PDAL/PDAL/graphs/contributors">others</a>,
                 Last updated
-                    on May 31, 2022.
+                    on Jun 06, 2022.
         </div>
     </div>
 
